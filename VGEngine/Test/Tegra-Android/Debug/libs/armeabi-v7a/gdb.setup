@@ -1,0 +1,5 @@
+# GENERATED FILE
+set solib-search-path C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Tegra-Android/Debug
+set directories C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Test/source;C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Test/source/scenes;C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Test/include/Test/Scenes;C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Test/include/Test;C:/NVPACK/android-ndk-r10c/sources/cxx-stl/system;C:/Users/Wez/Documents/SourceTree/VGEngine/VGEngine/Test;C:/NVPACK/android-ndk-r10c/platforms/android-9/arch-arm/usr/include
+# BEGIN USER COMMANDS
+# END USER COMMANDS

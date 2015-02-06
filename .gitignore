@@ -1,3 +1,4 @@
+
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +27,9 @@
 *.exe
 *.out
 *.app
+
+# Custom additions
+*.sdf
+*.tlog
+*.log
+*.apk

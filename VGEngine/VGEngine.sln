@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{E497E48B-462A-4C74-812F-932E5D53B835}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216} = {32691AED-FF9C-4E80-BA0E-65A9F2B75216}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{32691AED-FF9C-4E80-BA0E-65A9F2B75216}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Tegra-Android = Debug|Tegra-Android
+		Release|Tegra-Android = Release|Tegra-Android
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E497E48B-462A-4C74-812F-932E5D53B835}.Debug|Tegra-Android.ActiveCfg = Debug|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.Debug|Tegra-Android.Build.0 = Debug|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.Release|Tegra-Android.ActiveCfg = Release|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.Release|Tegra-Android.Build.0 = Release|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Debug|Tegra-Android.ActiveCfg = Debug|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Debug|Tegra-Android.Build.0 = Debug|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Release|Tegra-Android.ActiveCfg = Release|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Release|Tegra-Android.Build.0 = Release|Tegra-Android
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

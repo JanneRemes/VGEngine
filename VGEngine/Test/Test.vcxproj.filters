@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="res">
+      <UniqueIdentifier>bf494d27-7a8a-43af-a355-87b72f681f69</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\values">
+      <UniqueIdentifier>15a6b30b-38bb-4689-a986-c0c6d7558a78</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{554c0581-2cd4-4b52-8eab-cc56b9cdc1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{2d93c5aa-b212-4d4c-a452-678d3d2b020b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\scenes">
+      <UniqueIdentifier>{8337e6c0-9c19-4432-b7cb-43042cb72a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scenes">
+      <UniqueIdentifier>{5a00f74e-1fcc-4600-ae69-c2440c19d6b1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidBuild Include="AndroidManifest.xml" />
+    <AndroidBuild Include="res\values\strings.xml">
+      <Filter>res\values</Filter>
+    </AndroidBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Test\test.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Test\Scenes\testScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\scenes\testScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\dummy.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
