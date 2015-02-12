@@ -34,6 +34,7 @@
 *.tlog
 *.log
 *.apk
+Tegra-Android/
 
 # Doxygen
 docs/
