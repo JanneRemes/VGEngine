@@ -20,10 +20,7 @@ extern void test_dummy();
 
 // Define a dummy function that the external dummy can call
 #include "engine/engine.h"
-void main_dummy()
-{
-	__android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
-}
+
 
 //BEGIN_INCLUDE(all)
 #include <jni.h>
@@ -38,6 +35,13 @@ void main_dummy()
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
+#define MyLittleLog(severity, message) __android_log_print(ANDROID_LOG_DEBUG, severity, "%s, %d, %s: %s", __FILE__, __LINE__, __FUNCTION__, message)
+
+void main_dummy()
+{
+    __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
+}
 
 /**
  * Our saved state data.
@@ -268,6 +272,9 @@ void android_main(struct android_app* state) {
     // loop waiting for stuff to do.
 
     while (1) {
+
+        
+
         // Read all pending events.
         int ident;
         int events;
@@ -278,6 +285,8 @@ void android_main(struct android_app* state) {
         // to draw the next frame of animation.
         while ((ident=ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events,
                 (void**)&source)) >= 0) {
+
+            MyLittleLog("WTF", "Yes, quite so");
 
             // Process this event.
             if (source != NULL) {
@@ -290,9 +299,11 @@ void android_main(struct android_app* state) {
                     ASensorEvent event;
                     while (ASensorEventQueue_getEvents(engine.sensorEventQueue,
                             &event, 1) > 0) {
-                        LOGI("accelerometer: x=%f y=%f z=%f",
+                        /*LOGI("accelerometer: x=%f y=%f z=%f",
                                 event.acceleration.x, event.acceleration.y,
-                                event.acceleration.z);
+                                event.acceleration.z);*/
+
+                        
                     }
                 }
             }
