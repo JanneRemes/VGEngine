@@ -13,6 +13,12 @@
     <Filter Include="source\game">
       <UniqueIdentifier>{affd2ddc-b7ab-4d3a-b8ae-fe233b89bd3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\assets">
+      <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\assets">
+      <UniqueIdentifier>{cdd723d8-41ce-441a-b07e-a57857f93eaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -36,6 +42,12 @@
     <ClInclude Include="include\engine\game.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\assets\asset.h">
+      <Filter>include\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\assets\assetManager.h">
+      <Filter>include\assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -55,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="source\game\game.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\assets\asset.cpp">
+      <Filter>source\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\assets\assetManager.cpp">
+      <Filter>source\assets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

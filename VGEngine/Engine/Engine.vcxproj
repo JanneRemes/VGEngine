@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h" />
+    <ClInclude Include="include\engine\assets\asset.h" />
+    <ClInclude Include="include\engine\assets\assetManager.h" />
     <ClInclude Include="include\Engine\engine.h" />
     <ClInclude Include="include\engine\game.h" />
     <ClInclude Include="include\engine\game\component.h" />
@@ -24,6 +26,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\android_native_app_glue.cpp" />
+    <ClCompile Include="source\assets\asset.cpp" />
+    <ClCompile Include="source\assets\assetManager.cpp" />
     <ClCompile Include="source\game\component.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />

@@ -36,6 +36,7 @@
 *.apk
 
 # Doxygen
+docs/
 !doxyfile
 !doxygen.exe
 !doxywizard.exe
