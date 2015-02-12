@@ -30,6 +30,12 @@
 
 # Custom additions
 *.sdf
+*.opensdf
 *.tlog
 *.log
 *.apk
+
+# Doxygen
+!doxyfile
+!doxygen.exe
+!doxywizard.exe
