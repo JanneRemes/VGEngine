@@ -36,7 +36,7 @@ extern void test_dummy();
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
-#define MyLittleLog(severity, message) __android_log_print(ANDROID_LOG_DEBUG, severity, "%s, %d, %s: %s", __FILE__, __LINE__, __FUNCTION__, message)
+#define MLG(severity, message, ...) __android_log_print(ANDROID_LOG_DEBUG, severity, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 void main_dummy()
 {
@@ -286,7 +286,7 @@ void android_main(struct android_app* state) {
         while ((ident=ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events,
                 (void**)&source)) >= 0) {
 
-            MyLittleLog("WTF", "Yes, quite so");
+            MLG("WTF", "Yes, quite so '%d'", 5);
 
             // Process this event.
             if (source != NULL) {
