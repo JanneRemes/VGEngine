@@ -64,7 +64,7 @@ struct engine {
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
     
-    GraphicsContext graphicsContext;
+    vg::GraphicsContext graphicsContext;
 
     int animating;
     struct saved_state state;
@@ -78,7 +78,7 @@ static void engine_draw_frame(struct engine* engine)
 {
     if (!engine->graphicsContext.isInitialized())
     {
-        MLG("WARNING", "GraphicsContext not initialized", "");
+        Log("WARNING", "GraphicsContext not initialized", "");
         return;
     }
 
