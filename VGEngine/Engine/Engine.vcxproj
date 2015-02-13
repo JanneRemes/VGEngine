@@ -25,6 +25,9 @@
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
+    <ClInclude Include="include\engine\utility\math.h" />
+    <ClInclude Include="include\engine\utility\random.h" />
+    <ClInclude Include="include\engine\utility\timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\android_native_app_glue.cpp" />
@@ -37,6 +40,9 @@
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\utility\math.cpp" />
+    <ClCompile Include="source\utility\random.cpp" />
+    <ClCompile Include="source\utility\timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{32691AED-FF9C-4E80-BA0E-65A9F2B75216}</ProjectGuid>

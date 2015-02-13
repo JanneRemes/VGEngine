@@ -25,6 +25,12 @@
     <Filter Include="include\graphics">
       <UniqueIdentifier>{38720c96-66ba-4a95-a76e-3f0e7892025c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\utility">
+      <UniqueIdentifier>{b89fb21a-d599-4483-819c-7e4886a1b13e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\utility">
+      <UniqueIdentifier>{9120e300-ea9f-4d03-aa8f-1e4b63e6d60c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -60,6 +66,15 @@
     <ClInclude Include="include\engine\graphics\graphicsContext.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\utility\math.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\utility\random.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\utility\timer.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -79,7 +94,8 @@
     </ClCompile>
     <ClCompile Include="source\game\game.cpp">
       <Filter>source\game</Filter>
-    </ClCompile><ClInclude Include="include\engine\graphics\graphicsContext.h">
+    </ClCompile>
+    <ClInclude Include="include\engine\graphics\graphicsContext.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
     <ClCompile Include="source\assets\asset.cpp">
@@ -93,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="source\graphics\graphicsContext.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\math.cpp">
+      <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\random.cpp">
+      <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\timer.cpp">
+      <Filter>source\utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

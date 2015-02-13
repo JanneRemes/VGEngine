@@ -1,5 +1,5 @@
 #include "engine\graphics\GraphicsContext.h"
-
+using namespace vg;
 
 GraphicsContext::GraphicsContext()
 {
@@ -22,9 +22,7 @@ void GraphicsContext::initialize(ANativeWindow* window)
     if (!mInitialized)
     {
         initializeEGL(window);
-
-        // not used yet
-        //initializeOpenGL(); 
+        //initializeOpenGL(); // not used yet
         mInitialized = true;
     }
 }
@@ -52,9 +50,6 @@ void GraphicsContext::destroy()
     mDisplay = EGL_NO_DISPLAY;
     mContext = EGL_NO_CONTEXT;
     mSurface = EGL_NO_SURFACE;
-
-    //glDisableVertexAttribArray(mPositionIndex);
-    //glDeleteBuffers(2, mBuffers);
 
     mInitialized = false;
 }
@@ -99,9 +94,7 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
     mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
 
     if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
-    {
-        MLG("WARNING", "Unable to eglMakeCurrent", "");
-    }
+        Log("WARNING", "Unable to eglMakeCurrent", "");
 
     eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
     eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
@@ -110,48 +103,4 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
 
 void GraphicsContext::initializeOpenGL()
 {
-    /*
-    GLint result = 0;
-    mProgramId = glCreateProgram();
-    mVertexId = glCreateShader(GL_VERTEX_SHADER);
-    mFragmentId = glCreateShader(GL_FRAGMENT_SHADER);
-
-    // compile shader
-    glShaderSource(mFragmentId, 1, &FRAGMENT_SOURCE, NULL);
-    glShaderSource(mVertexId, 1, &VERTEX_SOURCE, NULL);
-    glCompileShader(mVertexId);
-    glCompileShader(mFragmentId);
-
-    // shader compile errors
-    glGetShaderiv(mVertexId, GL_COMPILE_STATUS, &result);
-    if (result != GL_TRUE)
-        LOGW("W", "Vertex shader compile error!");
-    glGetShaderiv(mFragmentId, GL_COMPILE_STATUS, &result);
-    if (result != GL_TRUE)
-        LOGW("W", "Fragment shader compile error!");
-
-    // link program
-    glAttachShader(mProgramId, mVertexId);
-    glAttachShader(mProgramId, mFragmentId);
-    glLinkProgram(mProgramId);
-    glGetProgramiv(mProgramId, GL_LINK_STATUS, &result);
-    if (result != GL_TRUE)
-        LOGW("W", "Shader program link error!");
-
-    //shader attributes
-    mPositionIndex = glGetAttribLocation(mProgramId, "attrPosition");
-    if (mPositionIndex < 0)
-        LOGW("W", "Attribute: positionIndex not found!");
-    glEnableVertexAttribArray(mPositionIndex);
-
-    // create vertex and index buffers
-    glGenBuffers(2, mBuffers);
-    glBindBuffer(GL_ARRAY_BUFFER, mBuffers[0]);
-    glBufferData(GL_ARRAY_BUFFER, 30 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0u);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mBuffers[1]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLuint), INDEX_DATA, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0u);
-    */
 }
