@@ -8,12 +8,22 @@
 class FileManager
 {
 public:
-	FileManager(android_app* application);
+	enum DataPath
+	{
+		Internal,
+		External
+	};
+
+	FileManager(android_app* app);
 	~FileManager() = default;
 
 	bool readAsset(const std::string& path, std::string& outData);
-	bool readFile(const std::string& path, std::string& outData);
-	bool writeFile(const std::string& path, const std::string& inData) const;
+	bool readFile(DataPath dataPath, const std::string& path, std::string& outData);
+	bool writeFile(DataPath dataPath, const std::string& path, const std::string& inData) const;
 private:
+	std::string getDataPath(DataPath dataPath) const;
+
 	AAssetManager* mAssetManager = nullptr;
+	std::string mInternalDataPath;
+	std::string mExternalDataPath;
 };

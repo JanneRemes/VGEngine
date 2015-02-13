@@ -163,28 +163,28 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
  */
 void android_main(struct android_app* state) {
     struct engine engine;
-	
+
+	// TEST
 	Log("-----", "----- -----", "");
 	Log("fm", "Begin", "");
 	{
 		char buffer[1024];
 		getcwd(buffer, sizeof(buffer));
 		Log("fm", "path = '%s'", buffer);
-
-		std::string path = "/storage/sdcard/Android/data/com.test.vgengine/files/";
+		const std::string file = "test.txt";
 
 		FileManager fm(state);
-		std::string line;
+		std::string str;
 
-		line = "Hello World!";
+		str = "Hello World!";
 		Log("fm", "Writing...", "");
-		fm.writeFile(path + "test.txt", line);
-		Log("fm", "line = '%s'", line.c_str());
+		Log("fm", "success? %s", fm.writeFile(FileManager::Internal, file, str) ? "true" : "false");
+		Log("fm", "line = '%s'", str.c_str());
 
-		line = "";
+		str = "";
 		Log("fm", "Reading...", "");
-		fm.readFile("test.txt", line);
-		Log("fm", "line = '%s'", line.c_str());
+		Log("fm", "success? %s", fm.readFile(FileManager::Internal, file, str) ? "true" : "false");
+		Log("fm", "line = '%s'", str.c_str());
 	}
 	Log("fm", "End", "");
 	Log("-----", "----- -----", "");
