@@ -48,6 +48,9 @@
     <ClInclude Include="include\engine\assets\assetManager.h">
       <Filter>include\assets</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\assets\fileManager.h">
+      <Filter>include\assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -72,6 +75,9 @@
       <Filter>source\assets</Filter>
     </ClCompile>
     <ClCompile Include="source\assets\assetManager.cpp">
+      <Filter>source\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\assets\fileManager.cpp">
       <Filter>source\assets</Filter>
     </ClCompile>
   </ItemGroup>

@@ -54,6 +54,9 @@
       <AdditionalDependencies>android;EGL;GLESv2;vgengine;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;</AdditionalLibraryDirectories>
     </Link>
+    <AntBuild>
+      <AssetsDirectories>$(ProjectDir)assets/;</AssetsDirectories>
+    </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <ClCompile>

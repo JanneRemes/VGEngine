@@ -36,7 +36,7 @@ extern void test_dummy();
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
 
-#define MLG(severity, message, ...) __android_log_print(ANDROID_LOG_DEBUG, severity, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define Log(tag, message, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 void main_dummy()
 {
@@ -237,6 +237,9 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
     }
 }
 
+#include "engine\assets\fileManager.h"
+#include <unistd.h>
+
 /**
  * This is the main entry point of a native application that is using
  * android_native_app_glue.  It runs in its own thread, with its own
@@ -244,6 +247,31 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
  */
 void android_main(struct android_app* state) {
     struct engine engine;
+	
+	Log("-----", "----- -----", "");
+	Log("fm", "Begin", "");
+	{
+		char buffer[1024];
+		getcwd(buffer, sizeof(buffer));
+		Log("fm", "path = '%s'", buffer);
+
+		std::string path = "/storage/sdcard/Android/data/com.test.vgengine/files/";
+
+		FileManager fm(state);
+		std::string line;
+
+		line = "Hello World!";
+		Log("fm", "Writing...", "");
+		fm.writeFile(path + "test.txt", line);
+		Log("fm", "line = '%s'", line.c_str());
+
+		line = "";
+		Log("fm", "Reading...", "");
+		fm.readFile("test.txt", line);
+		Log("fm", "line = '%s'", line.c_str());
+	}
+	Log("fm", "End", "");
+	Log("-----", "----- -----", "");
 
 	// Loop through the "test project", to make sure main isn't stripped.
 	test_dummy();
@@ -285,8 +313,6 @@ void android_main(struct android_app* state) {
         // to draw the next frame of animation.
         while ((ident=ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events,
                 (void**)&source)) >= 0) {
-
-            MLG("WTF", "Yes, quite so '%d'", 5);
 
             // Process this event.
             if (source != NULL) {
