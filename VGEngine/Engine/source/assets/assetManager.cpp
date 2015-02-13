@@ -76,3 +76,15 @@ Asset* AssetManager::find(size_t hash)
 
 	return nullptr;
 }
+
+Asset const* AssetManager::find(size_t hash) const
+{
+	auto it = mAssets.find(hash);
+
+	if (it != mAssets.end())
+	{
+		return it->second;
+	}
+
+	return nullptr;
+}

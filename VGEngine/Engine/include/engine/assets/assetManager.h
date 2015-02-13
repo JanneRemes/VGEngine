@@ -4,11 +4,10 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "engine\assets\asset.h"
 
 namespace vg
 {
-	class Asset;
-	
 	/**
 		Manages the lifetime of asset files and optimizes their (un)loading.
 	*/
@@ -104,6 +103,7 @@ namespace vg
 			@return <description>
 		*/
 		Asset* find(size_t hash);
+		Asset const* find(size_t hash) const;
 
 		std::hash<std::string> mHasher;
 		std::map<size_t, Asset*> mAssets;
