@@ -24,6 +24,7 @@
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
+    <ClInclude Include="include\engine\graphics\graphicsContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\android_native_app_glue.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
+    <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

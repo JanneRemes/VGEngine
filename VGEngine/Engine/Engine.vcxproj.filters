@@ -19,6 +19,12 @@
     <Filter Include="source\assets">
       <UniqueIdentifier>{cdd723d8-41ce-441a-b07e-a57857f93eaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\graphics">
+      <UniqueIdentifier>{63ab7c89-e5fd-44d0-86d4-6b30ff06377c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\graphics">
+      <UniqueIdentifier>{38720c96-66ba-4a95-a76e-3f0e7892025c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -51,6 +57,9 @@
     <ClInclude Include="include\engine\assets\fileManager.h">
       <Filter>include\assets</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\graphicsContext.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -70,7 +79,9 @@
     </ClCompile>
     <ClCompile Include="source\game\game.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
+    </ClCompile><ClInclude Include="include\engine\graphics\graphicsContext.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
     <ClCompile Include="source\assets\asset.cpp">
       <Filter>source\assets</Filter>
     </ClCompile>
@@ -79,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="source\assets\fileManager.cpp">
       <Filter>source\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\graphicsContext.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
