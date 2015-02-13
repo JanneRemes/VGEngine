@@ -17,9 +17,21 @@ public:
     void initialize(ANativeWindow* window);
     void destroy();
     void swapBuffers();
+
+    /**
+     * @return width of current context in pixels
+     */
     EGLint getWidth(){ return mWidth; };
+
+    /**
+    * @return height of current context in pixels
+    */
     EGLint getHeight(){ return mHeight; };
-    bool isDisplayAlive(){ return mDisplay != NULL; };
+
+    /**
+    * @return has graphicsContext been initialized
+    */
+    bool isInitialized(){ return mInitialized; };
 
 private:
     void initializeEGL(ANativeWindow* window);
@@ -33,4 +45,6 @@ private:
     //GLuint mProgramId, mVertexId, mFragmentId;
     //GLuint mBuffers[2];
     //GLint mPositionIndex;
+
+    bool mInitialized;
 };

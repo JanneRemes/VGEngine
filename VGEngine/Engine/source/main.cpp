@@ -76,9 +76,9 @@ struct engine {
  */
 static void engine_draw_frame(struct engine* engine) 
 {
-    if (!engine->graphicsContext.isDisplayAlive())
+    if (!engine->graphicsContext.isInitialized())
     {
-        MLG("WARNING", "GraphicsContext display not initialized", "");
+        MLG("WARNING", "GraphicsContext not initialized", "");
         return;
     }
 

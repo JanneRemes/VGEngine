@@ -3,6 +3,9 @@
 
 GraphicsContext::GraphicsContext()
 {
+    mInitialized = false;
+    mWidth = mHeight = 0;
+    mDisplay = mSurface = mContext = NULL;
 }
 
 GraphicsContext::~GraphicsContext()
@@ -12,14 +15,18 @@ GraphicsContext::~GraphicsContext()
 
 /**
  * Initializes EGL and openGL
- * @param window pointer to Android window mSurface
+ * @param window pointer to Android window surface
  */
 void GraphicsContext::initialize(ANativeWindow* window)
 {
-    initializeEGL(window);
+    if (!mInitialized)
+    {
+        initializeEGL(window);
 
-    // not used yet
-    //initializeOpenGL(); 
+        // not used yet
+        //initializeOpenGL(); 
+        mInitialized = true;
+    }
 }
 
 
@@ -48,12 +55,18 @@ void GraphicsContext::destroy()
 
     //glDisableVertexAttribArray(mPositionIndex);
     //glDeleteBuffers(2, mBuffers);
+
+    mInitialized = false;
 }
 
 
+/**
+ * Swaps draw buffers in the current context
+ */
 void GraphicsContext::swapBuffers()
 {
-    eglSwapBuffers(mDisplay, mSurface);
+    if (mInitialized)
+        eglSwapBuffers(mDisplay, mSurface);
 }
 
 
