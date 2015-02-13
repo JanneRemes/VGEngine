@@ -72,6 +72,9 @@
     <ClInclude Include="include\engine\utility\random.h">
       <Filter>include\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\utility\timer.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -111,6 +114,9 @@
       <Filter>source\utility</Filter>
     </ClCompile>
     <ClCompile Include="source\utility\random.cpp">
+      <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\timer.cpp">
       <Filter>source\utility</Filter>
     </ClCompile>
   </ItemGroup>
