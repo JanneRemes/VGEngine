@@ -6,6 +6,8 @@
 #include <map>
 #include "engine\assets\asset.h"
 
+/// @todo Fix comments in this file
+
 namespace vg
 {
 	/**
@@ -103,9 +105,15 @@ namespace vg
 			@return <description>
 		*/
 		Asset* find(size_t hash);
+
+		/**
+			<description>
+			@param hash <description>
+			@return <description>
+		*/
 		Asset const* find(size_t hash) const;
 
-		std::hash<std::string> mHasher;
-		std::map<size_t, Asset*> mAssets;
+		std::hash<std::string> mHasher;   ///< description
+		std::map<size_t, Asset*> mAssets; ///< description
 	};
 }

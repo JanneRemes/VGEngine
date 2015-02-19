@@ -3,6 +3,8 @@
 
 #include <string>
 
+/// @todo Fix comments in this file
+
 namespace vg
 {
 	/**
@@ -39,8 +41,8 @@ namespace vg
 		*/
 		bool isLoaded() const;
 	protected:
-		const std::string mPath;
-		size_t mUseCount = 1;
-		bool mIsLoaded = false;
+		const std::string mPath; ///< description
+		size_t mUseCount = 1;    ///< description
+		bool mIsLoaded = false;  ///< description
 	};
 }

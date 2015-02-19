@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 
+/// @todo Fix comments in this file
+
 namespace vg
 {
 	/**

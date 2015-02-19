@@ -3,19 +3,22 @@
 
 #include <vector>
 
+/// @todo Fix comments in this file
+
 namespace vg
 {
 	class GameObject;
 
+	/**
+		<description>
+	*/
 	class Scene
 	{
 	public:
 		Scene() = default;
 		virtual ~Scene() = default;
-
-		virtual void test();
 	private:
-		std::vector<GameObject*> mActivePool;
-		std::vector<GameObject*> mInactivePool;
+		std::vector<GameObject*> mActivePool;   ///< description
+		std::vector<GameObject*> mInactivePool; ///< description
 	};
 }

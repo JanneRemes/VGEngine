@@ -3,20 +3,22 @@
 
 #include <ctime>
 
+/// @todo Fix comments in this file
+
 namespace vg
 {
+	/**
+		<description>
+	*/
 	class Timer
 	{
 	public:
-		float restart()
-		{
-			clock_t now = clock();
-			float delta = (now - mBefore) / static_cast<float>(CLOCKS_PER_SEC);
-			mBefore = now;
-
-			return delta;
-		}
+		/**
+			<description>
+			@return The delta time
+		*/
+		float restart();
 	private:
-		clock_t mBefore = clock();
+		clock_t mBefore = clock(); ///< description
 	};
 }

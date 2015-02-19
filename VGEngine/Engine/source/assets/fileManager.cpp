@@ -2,6 +2,7 @@
 #include "engine\assets\fileManager.h"
 #include <vector>
 
+/// @todo Use the dedicated logger instead
 #include <android/log.h>
 #define Log(tag, message, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
