@@ -8,89 +8,75 @@
 #include "engine\android_native_app_glue.h"
 #include "engine/assets/fileManager.h"
 
-/// @todo Use the dedicated logger instead
-#define Log(severity, message, ...) __android_log_print(ANDROID_LOG_DEBUG, severity, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-
 /// @todo Fix comments in this file
 
 namespace vg
 {
-	/**
-		<description>
-	*/
+    /**
+    Initializes EGL and openGL, swaps buffers
+    */
     class GraphicsContext
     {
     public:
-		/**
-			<description>
-		*/
+        /**
+        Initializes default values
+        */
         GraphicsContext();
 
         ~GraphicsContext();
 
-		/**
-			<description>
-			@param window <description>
-		*/
+        /**
+        Initializes EGL and openGL
+        @param window pointer to Android window surface
+        */
         void initialize(ANativeWindow* window);
 
-		/**
-			<description>
-		*/
+        /**
+        Desroys EGL and disables openGL attributes and buffers
+        */
         void destroy();
 
-		/**
-			<description>
-		*/
+        /**
+        Swaps draw buffers in the current context
+        */
         void swapBuffers();
 
-		/// @todo Move function implementation to the .cpp file
-		/**
-			<description>
-			@return width of current context in pixels
-		*/
-        EGLint getWidth()
-		{
-			return mWidth;
-		}
+        /**
+        <description>
+        @return width of current screen in pixels
+        */
+        EGLint getWidth();
 
-		/// @todo Move function implementation to the .cpp file
-		/**
-			<description>
-			@return height of current context in pixels
-		*/
-        EGLint getHeight()
-		{
-			return mHeight;
-		}
+        /**
+        <description>
+        @return height of current screen in pixels
+        */
+        EGLint getHeight();
 
-		/// @todo Move function implementation to the .cpp file
-		/**
-			<description>
-			@return has graphicsContext been initialized
-		*/
-        bool isInitialized()
-		{
-			return mInitialized;
-		}
+        /**
+        <description>
+        @return has graphicsContext been initialized
+        */
+        bool isInitialized();
 
     private:
-		/**
-			<description>
-			@param window <description>
-		*/
+        /**
+        intializes EGL context for current device
+        @param window pointer to current devices window handle
+        */
         void initializeEGL(ANativeWindow* window);
 
-		/**
-			<description>
-		*/
+        /**
+        links shaders, creates buffers,
+        @todo not being used yet
+        */
         void initializeOpenGL();
 
-        EGLDisplay mDisplay;    ///< description
-        EGLSurface mSurface;    ///< description
-        EGLContext mContext;    ///< description
+        EGLDisplay mDisplay;    ///< handle to devices display
+        EGLSurface mSurface;    ///< handle to device surface
+        EGLContext mContext;    ///< handle to device context
 
-        EGLint mWidth, mHeight; ///< description
-        bool mInitialized;      ///< description
+        EGLint mWidth, mHeight; ///< screen size in pixels
+        bool mInitialized;      ///< has egl and openGL been initialized
     };
 }
