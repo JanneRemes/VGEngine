@@ -1,5 +1,6 @@
 
 #include "engine/game.h"
+#include "engine\utility\logger.h"
 
 using namespace vg;
 
@@ -93,9 +94,8 @@ void Game::update()
 			return;
 		}
 	}
-	//godbyevilkku
-	/*
-	if (mAnimating) {
+
+	if (engine.animating) {
 		// Done with events; draw next animation frame.
 		engine.state.angle += .01f;
 		if (engine.state.angle > 1) {
@@ -105,7 +105,7 @@ void Game::update()
 		// Drawing is throttled to the screen update rate, so there
 		// is no need to do timing here.
 		engine_draw_frame(&engine);
-	}*/
+	}
 }
 
 
