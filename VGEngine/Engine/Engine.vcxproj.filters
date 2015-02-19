@@ -75,6 +75,12 @@
     <ClInclude Include="include\engine\utility\timer.h">
       <Filter>include\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\shader.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\assets\shaderSource.h">
+      <Filter>include\assets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -118,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="source\utility\timer.cpp">
       <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\shader.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\assets\shaderSource.cpp">
+      <Filter>source\assets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

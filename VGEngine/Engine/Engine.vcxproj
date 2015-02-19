@@ -18,6 +18,7 @@
     <ClInclude Include="include\engine\assets\asset.h" />
     <ClInclude Include="include\engine\assets\assetManager.h" />
     <ClInclude Include="include\engine\assets\fileManager.h" />
+    <ClInclude Include="include\engine\assets\shaderSource.h" />
     <ClInclude Include="include\Engine\engine.h" />
     <ClInclude Include="include\engine\game.h" />
     <ClInclude Include="include\engine\game\component.h" />
@@ -25,6 +26,7 @@
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
+    <ClInclude Include="include\engine\graphics\shader.h" />
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
@@ -34,11 +36,13 @@
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
     <ClCompile Include="source\assets\fileManager.cpp" />
+    <ClCompile Include="source\assets\shaderSource.cpp" />
     <ClCompile Include="source\game\component.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
+    <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\utility\math.cpp" />
     <ClCompile Include="source\utility\random.cpp" />
