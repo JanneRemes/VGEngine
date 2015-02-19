@@ -8,8 +8,7 @@ namespace vg
 	class buffer
 	{
 	public:
-		buffer(){};
-		~buffer(){};
+
 
 
 		enum bufferType { GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER };
@@ -20,35 +19,35 @@ namespace vg
 		@param path <description>
 		@return <description>
 		*/
-		void generateBuffers(const unsigned int amount, unsigned int* buffers);
+		static void generateBuffers(const unsigned int amount, unsigned int* buffers);
 
 		/**
 		<description>
 		@param path <description>
 		@return <description>
 		*/
-		void deleteBuffers(const unsigned int amount, unsigned int* buffers);
+		static void deleteBuffers(const unsigned int amount, unsigned int* buffers);
 
 		/**
 		<description>
 		@param path <description>
 		@return <description>
 		*/
-		void bindBuffer(bufferType type, unsigned int buffer);
+		static void bindBuffer(bufferType type, unsigned int buffer);
 
 		/**
 		<description>
 		@param path <description>
 		@return <description>
 		*/
-		void unbindBuffer(bufferType type);
+		static void unbindBuffer(bufferType type);
 
 		/**
 		<description>
 		@param path <description>
 		@return <description>
 		*/
-		void setBufferData(bufferType type, unsigned int size, void* data, usageType usagetype);
+		static void setBufferData(bufferType type, unsigned int size, void* data, usageType usagetype);
 
 	private:
 	};
