@@ -1,7 +1,6 @@
 
-/// @todo Move the docs to the header file
-
 #include "engine\graphics\GraphicsContext.h"
+#include "engine\utility\logger.h"
 
 using namespace vg;
 
@@ -17,27 +16,21 @@ GraphicsContext::~GraphicsContext()
 
 }
 
-/**
- * Initializes EGL and openGL
- * @param window pointer to Android window surface
- */
+
 void GraphicsContext::initialize(ANativeWindow* window)
 {
     if (!mInitialized)
     {
         initializeEGL(window);
 
-		/// @todo Uncomment later, when relevant
-        //initializeOpenGL(); // not used yet
+        /// @todo Uncomment later, when relevant
+        //initializeOpenGL();
 
         mInitialized = true;
     }
 }
 
 
-/**
- * Desroys EGL and disables openGL attributes and buffers
- */
 void GraphicsContext::destroy()
 {
     if (mDisplay != EGL_NO_DISPLAY)
@@ -64,15 +57,31 @@ void GraphicsContext::destroy()
     mInitialized = false;
 }
 
-/**
- * Swaps draw buffers in the current context
- */
+
 void GraphicsContext::swapBuffers()
 {
-	if (mInitialized)
-	{
-		eglSwapBuffers(mDisplay, mSurface);
-	}
+    if (mInitialized)
+    {
+        eglSwapBuffers(mDisplay, mSurface);
+    }
+}
+
+
+GLint GraphicsContext::getWidth()
+{
+    return mWidth;
+}
+
+
+GLint GraphicsContext::getHeight()
+{
+    return mHeight;
+}
+
+
+bool GraphicsContext::isInitialized()
+{
+    return mInitialized;
 }
 
 
@@ -104,10 +113,10 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
     mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
     mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
 
-	if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
-	{
+    if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
+    {
         Log("WARNING", "Unable to eglMakeCurrent", "");
-	}
+    }
 
     eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
     eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
