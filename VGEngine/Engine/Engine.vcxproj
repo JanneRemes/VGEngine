@@ -25,8 +25,10 @@
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
+    <ClInclude Include="include\engine\graphics\buffer.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
     <ClInclude Include="include\engine\graphics\shader.h" />
+    <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
@@ -41,6 +43,7 @@
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
+    <ClCompile Include="source\graphics\buffer.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\main.cpp" />

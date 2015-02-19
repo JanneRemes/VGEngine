@@ -34,11 +34,9 @@ extern void test_dummy();
 #include "engine/android_native_app_glue.h"
 
 #include "engine\graphics\graphicsContext.h"
-
+#include "engine\utility\logger.h"
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
-
-#define Log(tag, message, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, "%s, %d, %s: " message, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 
 void main_dummy()
 {

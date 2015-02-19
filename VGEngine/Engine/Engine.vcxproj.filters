@@ -81,6 +81,12 @@
     <ClInclude Include="include\engine\assets\shaderSource.h">
       <Filter>include\assets</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\utility\logger.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\graphics\buffer.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -130,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="source\assets\shaderSource.cpp">
       <Filter>source\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\buffer.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
