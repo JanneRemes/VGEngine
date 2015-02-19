@@ -22,12 +22,14 @@ namespace vg
 
 		/**
 			<description>
+            @todo get FileManger instance
 			@return <description>
 		*/
         bool load();
 
 		/**
 			<description>
+            @todo get AssetManager instance
 			@return <description>
 		*/
         bool unLoad();

@@ -7,6 +7,5 @@
 class TestScene : public vg::Scene
 {
 public:
-	void test() override;
 private:
 };

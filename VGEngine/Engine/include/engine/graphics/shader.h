@@ -12,7 +12,7 @@
 namespace vg
 {
 	/**
-		class_description
+		list of supported shader types
 	*/
     enum ShaderType
     {
@@ -21,16 +21,17 @@ namespace vg
     };
 
 	/**
-		<description>
+        Holds shader attribute and  ids and links itself
+		@todo add map of shader attribute names and ids
 	*/
     class Shader
     {
     public:
 		/**
 			<description>
-			@param type <description>
-			@param programId <description>
-			@param fileName <description>
+			@param type shaders type
+			@param programId shader program id used for linking
+			@param fileName path needed by ShaderSource asset
 		*/
         Shader(ShaderType type, GLuint programId, std::string fileName);
 
@@ -41,11 +42,11 @@ namespace vg
 			<description>
 			@return shaders id used for linking
 		*/
-        GLuint getId(){ return mId; };
+        GLuint getId();
 
     private:
-		ShaderType mType;  ///< description
-		GLuint mId;        ///< description
-		GLuint mProgramId; ///< description
+		ShaderType mType;  ///< shaders type
+		GLuint mId;        ///< shaders own id used for linking
+		GLuint mProgramId; ///< shader program id used for linking
     };
 }
