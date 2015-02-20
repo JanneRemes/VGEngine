@@ -22,7 +22,7 @@ void GraphicsContext::initialize(ANativeWindow* window)
     if (!mInitialized)
     {
         initializeEGL(window);
-		glCreateProgram();
+		//glCreateProgram();
         /// @todo Uncomment later, when relevant
         //initializeOpenGL();
 
