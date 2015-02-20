@@ -1,13 +1,14 @@
 
 #include "engine/game.h"
 #include "engine\utility\logger.h"
-
+#include "engine\input\input.h"
 using namespace vg;
 
 Game::Game(android_app *app) : mFileManager(app)
 {
 	engine.app = app;
-
+	Input::setX(0);
+	Input::setY(0);
 	Log("-----", "----- -----", "");
 	Log("fm", "Begin", "");
 	{
@@ -37,7 +38,7 @@ Game::Game(android_app *app) : mFileManager(app)
 	memset(&engine, 0, sizeof(engine));
 	app->userData = &engine;
 	app->onAppCmd = engine_handle_cmd;
-	app->onInputEvent = engine_handle_input;
+	app->onInputEvent = Input::engine_handle_input;
 	engine.app = app;
 
 	// Prepare to monitor accelerometer
@@ -54,7 +55,7 @@ Game::Game(android_app *app) : mFileManager(app)
 }
 void Game::update()
 {
-
+	Log("App", "TARWAROAWRLARLWAR", "");
 
 	// Read all pending events.
 	int ident;
@@ -123,27 +124,16 @@ void Game::engine_draw_frame(struct engine* engine)
 	else
 		Log( "rwarwasad","DRAWING", "");
 	// Just fill the screen with a color.
-	glClearColor(((float)engine->state.x) / engine->graphicsContext.getWidth(), engine->state.angle,
-		((float)engine->state.y) / engine->graphicsContext.getHeight(), 1);
+	glClearColor((float)Input::getX() / engine->graphicsContext.getWidth(), engine->state.angle,
+		((float)Input::getY()) / engine->graphicsContext.getHeight(), 1);
+	Log("App", "[INPUT]%f %f", (float)Input::getX(), (float)Input::getY());
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	engine->graphicsContext.swapBuffers();
 }
 
 
-/**
-* Process the next input event.
-*/
-int32_t Game::engine_handle_input(struct android_app* app, AInputEvent* event) {
-	struct engine* engine = (struct engine*)app->userData;
-	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-		engine->animating = 1;
-		engine->state.x = AMotionEvent_getX(event, 0);
-		engine->state.y = AMotionEvent_getY(event, 0);
-		return 1;
-	}
-	return 0;
-}
+
 
 /**
 * Process the next main command.

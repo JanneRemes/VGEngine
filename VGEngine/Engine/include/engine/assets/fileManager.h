@@ -4,7 +4,7 @@
 #include "engine\android_native_app_glue.h"
 #include <android/asset_manager.h>
 #include <string>
-
+#include <vector>
 /// @todo Fix comments in this file
 
 namespace vg

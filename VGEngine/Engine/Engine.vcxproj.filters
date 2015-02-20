@@ -31,6 +31,12 @@
     <Filter Include="source\utility">
       <UniqueIdentifier>{9120e300-ea9f-4d03-aa8f-1e4b63e6d60c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\input">
+      <UniqueIdentifier>{84929e4c-7667-498b-89c1-39b6d490d489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\input">
+      <UniqueIdentifier>{a8fac462-ec76-4741-a9af-14d6e1256e5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -87,6 +93,9 @@
     <ClInclude Include="include\engine\graphics\texture.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\input\input.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -139,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="source\graphics\texture.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input\input.cpp">
+      <Filter>source\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

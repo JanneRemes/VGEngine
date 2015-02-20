@@ -30,8 +30,7 @@ namespace vg
 	{
 		struct saved_state {
 			float angle;
-			int32_t x;
-			int32_t y;
+
 		};
 
 		/**
