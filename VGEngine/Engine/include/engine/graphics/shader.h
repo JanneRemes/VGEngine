@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "engine\assets\asset.h"
+
 #include <GLES2\gl2.h>
 #include <string>
 
@@ -21,18 +23,32 @@ namespace vg
     Holds shader attribute and  ids and links itself
     @todo add map of shader attribute names and ids
     */
-    class Shader
+    class Shader: public Asset
     {
     public:
         /**
         <description>
+        @param path filepath
         @param type shaders type
         @param programId shader program id used for linking
-        @param fileName path needed by ShaderSource asset
         */
-        Shader(ShaderType type, GLuint programId, std::string fileName);
+        Shader(const std::string& path, FileManager* fileManager, ShaderType type, GLuint programId);
 
         ~Shader();
+
+        /**
+        Loads asset and adds it to AssetManager
+        @todo get FileManger instance
+        @return was loading successful
+        */
+        bool load(FileManager& fileManager) override; 
+
+        /**
+        Unloads asset and removes it from AssetManager
+        @todo get AssetManager instance
+        @return was unloading successful
+        */
+        bool unload() override;
 
         /**
             <description>

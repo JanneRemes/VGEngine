@@ -60,5 +60,6 @@ namespace vg
 		static int32_t engine_handle_input(struct android_app* app, AInputEvent* event);
 		static void engine_handle_cmd(struct android_app* app, int32_t cmd);
 		struct engine engine;
+        FileManager mFileManager;
 	};
 }

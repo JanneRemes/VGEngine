@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "engine\assets\asset.h"
+#include "engine\assets\fileManager.h"
 
 /// @todo Fix comments in this file
 
@@ -16,6 +17,13 @@ namespace vg
 	class AssetManager
 	{
 	public:
+        /**
+            <description>
+            @param fileManager
+            @return <description>
+        */
+        AssetManager(FileManager& fileManager);
+
 		/**
 			Retrieves an asset, returning a point to it, or null if it doesn't exist.
 			@param path Path to the asset
@@ -115,5 +123,6 @@ namespace vg
 
 		std::hash<std::string> mHasher;   ///< description
 		std::map<size_t, Asset*> mAssets; ///< description
+        FileManager& mFileManager;
 	};
 }

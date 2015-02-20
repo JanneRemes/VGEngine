@@ -4,6 +4,12 @@
 
 using namespace vg;
 
+AssetManager::AssetManager(FileManager& fileManager)
+    :mFileManager(fileManager)
+{
+
+}
+
 void AssetManager::unload(const std::string& path)
 {
 	const size_t hash = mHasher(path);
@@ -45,7 +51,7 @@ void AssetManager::commit()
 		if (asset->mUseCount > 0 &&
 			asset->mIsLoaded == false)
 		{
-			asset->mIsLoaded = asset->load();
+			asset->mIsLoaded = asset->load(mFileManager);
 		}
 		else if (asset->mUseCount == 0 &&
 			asset->mIsLoaded == true)

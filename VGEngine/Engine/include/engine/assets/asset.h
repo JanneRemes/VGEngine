@@ -7,6 +7,8 @@
 
 namespace vg
 {
+    class FileManager;
+
 	/**
 		<description>
 	*/
@@ -16,7 +18,8 @@ namespace vg
 	public:
 		/**
 			<description>
-			@param <param name> <description>
+			@param path <description>
+            @param fileManager <description>
 			@return <description>
 		*/
 		Asset(const std::string& path);
@@ -27,7 +30,7 @@ namespace vg
 			<description>
 			@return <description>
 		*/
-		virtual bool load() = 0;
+        virtual bool load(FileManager& fileManager) = 0;
 		
 		/**
 			<description>

@@ -4,9 +4,10 @@
 
 using namespace vg;
 
-Game::Game(android_app *app)
+Game::Game(android_app *app) : mFileManager(app)
 {
 	engine.app = app;
+
 	Log("-----", "----- -----", "");
 	Log("fm", "Begin", "");
 	{
@@ -15,17 +16,16 @@ Game::Game(android_app *app)
 		Log("fm", "path = '%s'", buffer);
 		const std::string file = "test.txt";
 
-		FileManager fm(app);
 		std::string str;
 
 		str = "Hello World!";
 		Log("fm", "Writing...", "");
-		Log("fm", "success? %s", fm.writeFile(FileManager::Internal, file, str) ? "true" : "false");
+        Log("fm", "success? %s", mFileManager.writeFile(FileManager::Internal, file, str) ? "true" : "false");
 		Log("fm", "line = '%s'", str.c_str());
 
 		str = "";
 		Log("fm", "Reading...", "");
-		Log("fm", "success? %s", fm.readFile(FileManager::Internal, file, str) ? "true" : "false");
+        Log("fm", "success? %s", mFileManager.readFile(FileManager::Internal, file, str) ? "true" : "false");
 		Log("fm", "line = '%s'", str.c_str());
 	}
 	Log("fm", "End", "");
