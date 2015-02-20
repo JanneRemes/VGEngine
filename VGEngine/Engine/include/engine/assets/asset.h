@@ -45,7 +45,8 @@ namespace vg
 		bool isLoaded() const;
 	protected:
 		const std::string mPath; ///< description
-		size_t mUseCount = 1;    ///< description
 		bool mIsLoaded = false;  ///< description
+	private:
+		size_t mUseCount = 1;    ///< description
 	};
 }

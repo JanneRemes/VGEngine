@@ -26,7 +26,7 @@ namespace vg
         ~GraphicsContext();
 
         /**
-        Initializes EGL and openGL
+        Initializes EGL and openGL and creates opengl program
         @param window pointer to Android window surface
         */
         void initialize(ANativeWindow* window);
@@ -59,12 +59,24 @@ namespace vg
         */
         bool isInitialized();
 
+		/**
+		<description>
+		@return returns mProgramId (opengl program id)
+		*/
+
+		GLuint getProgramId();
+
     private:
         /**
         intializes EGL context for current device
         @param window pointer to current devices window handle
         */
         void initializeEGL(ANativeWindow* window);
+
+		/**
+		Creates Opengl program and puts it in mProgramId
+		*/
+		void createGLProgram();
 
         /**
         links shaders, creates buffers,
@@ -78,5 +90,7 @@ namespace vg
 
         EGLint mWidth, mHeight; ///< screen size in pixels
         bool mInitialized;      ///< has egl and openGL been initialized
+
+		GLuint mProgramId; //< opengl program id
     };
 }

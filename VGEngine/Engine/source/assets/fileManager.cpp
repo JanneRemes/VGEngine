@@ -27,6 +27,17 @@ bool FileManager::readAsset(const std::string& path, std::string& outData)
 	return true;
 }
 
+bool FileManager::readAsset(const std::string& path, std::vector<unsigned char>& outData)
+{
+	AAsset* asset = AAssetManager_open(mAssetManager, path.c_str(), AASSET_MODE_UNKNOWN);
+	const size_t length = AAsset_getLength(asset);
+	outData.resize(length, 0);
+
+	AAsset_read(asset, &outData[0], outData.size());
+	AAsset_close(asset);
+	return true;
+}
+
 bool FileManager::readFile(DataPath dataPath, const std::string& path, std::string& outData)
 {
 	const std::string absolutePath = getDataPath(dataPath) + path;

@@ -22,7 +22,7 @@ void GraphicsContext::initialize(ANativeWindow* window)
     if (!mInitialized)
     {
         initializeEGL(window);
-
+		glCreateProgram();
         /// @todo Uncomment later, when relevant
         //initializeOpenGL();
 
@@ -122,7 +122,16 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
     eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
 }
 
+void GraphicsContext::createGLProgram()
+{
+	mProgramId = glCreateProgram();
+}
 
 void GraphicsContext::initializeOpenGL()
 {
+}
+
+GLuint GraphicsContext::getProgramId()
+{
+	return mProgramId;
 }
