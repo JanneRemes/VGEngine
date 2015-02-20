@@ -1,6 +1,7 @@
 
 #include "engine\assets\fileManager.h"
 #include <vector>
+using namespace vg;
 
 /// @todo Use the dedicated logger instead
 #include <android/log.h>
