@@ -5,10 +5,8 @@
 using namespace std;
 using namespace vg;
 
-Shader::Shader(NamesMap attributeNames, const string& vertexPath, const string& fragmentPath):
-    mVertexElementNames(attributeNames),
-    mVertexPath(vertexPath),
-    mFragmentPath(fragmentPath)
+Shader::Shader(NamesMap attributeNames):
+    mVertexElementNames(attributeNames)
 {
     mProgramId = glCreateProgram();
     mVertexId = glCreateShader(GL_VERTEX_SHADER);
@@ -21,23 +19,24 @@ Shader::Shader(NamesMap attributeNames, const string& vertexPath, const string& 
     }
 }
 
-Shader::~Shader()
-{
 
-}
-
-
-bool Shader::load(FileManager& fileManager)
+bool Shader::load(FileManager& fileManager, const string& vertexPath, const string& fragmentPath)
 {
     // compile shaders
     string buffer;
-    fileManager.readAsset(mSubFolder + mVertexPath, buffer);
+    fileManager.readAsset(mSubFolder + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
+    {
         Log("ERROR", "Vertex shader compile error!", "");
+        return false;
+    }
 
-    fileManager.readAsset(mSubFolder + mFragmentPath, buffer);
+    fileManager.readAsset(mSubFolder + fragmentPath, buffer);
     if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
+    {
         Log("ERROR", "Fragment shader compile error!", "");
+        return false;
+    }
 
     // link program
     GLint result = GL_FALSE;
@@ -46,9 +45,11 @@ bool Shader::load(FileManager& fileManager)
     glLinkProgram(mProgramId);
     glGetProgramiv(mProgramId, GL_LINK_STATUS, &result);
     if (result != GL_TRUE)
+    {
         Log("ERROR", "Shader program link error!", "");
-
-    return result == GL_TRUE;
+        return false;
+    }
+    return true;
 }
 
 
@@ -58,7 +59,13 @@ GLuint Shader::getProgramId()
 }
 
 
-NamesMap Shader::getDefaultAttribNames()
+const NamesMap& Shader::getmVertexElementNames()
+{
+    return mVertexElementNames;
+}
+
+
+NamesMap& Shader::getDefaultAttribNames()
 {
     NamesMap result;
     result[POSITION] = "attrPosition";
