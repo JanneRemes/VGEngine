@@ -25,6 +25,7 @@
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
+    <ClInclude Include="include\engine\graphics\gl.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
     <ClInclude Include="include\engine\graphics\indexBuffer.h" />
     <ClInclude Include="include\engine\graphics\shader.h" />
@@ -89,6 +90,7 @@
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">

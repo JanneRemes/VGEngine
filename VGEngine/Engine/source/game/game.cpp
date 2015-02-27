@@ -7,8 +7,6 @@ using namespace vg;
 Game::Game(android_app *app) : mFileManager(app)
 {
 	engine.app = app;
-	Input::setX(0);
-	Input::setY(0);
 	Log("-----", "----- -----", "");
 	Log("fm", "Begin", "");
 	{

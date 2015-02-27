@@ -1,8 +1,8 @@
 
 #include "engine\graphics\vertexBuffer.h"
-
+#include "engine\graphics\gl.h"
 using namespace vg;
-const std::vector<VertexElement> VertexBuffer::gDefaultFormat 
+const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
 {
 	{ Position, Vec2 },
 	{ Color, Vec4 },
@@ -36,7 +36,7 @@ VertexBuffer::VertexBuffer(const std::vector<float>& data)
 {
 }
 
-VertexBuffer::VertexBuffer(const std::vector<float>& data, const std::vector<VertexElement> format)
+VertexBuffer::VertexBuffer(const std::vector<float>& data, const std::vector<VertexElement>& format)
 	: Buffer(GL_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW)
 	, mFormat(format)
 	, mStride(countStride(format))
