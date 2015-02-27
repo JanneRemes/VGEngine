@@ -1,7 +1,7 @@
 
 #include "engine\assets\fileManager.h"
 #include <vector>
-#include "engine\Sound.h"
+#include "engine/sound/Sound.h"
 using namespace vg;
 
 /// @todo Use the dedicated logger instead
