@@ -79,7 +79,7 @@ namespace vg
 	private:
 		const uint32_t mStride;///< Stride used in bind. Calculated in constructor from format
 		//const size_t mFormatSize;///< Size of current formats
-		const std::vector<VertexElement> mFormat;///< Pointer to current formats
+		const std::vector<VertexElement> mFormat;///< vector that has format currently in use
 
 		static const std::vector<VertexElement>& gDefaultFormat;///< default vertexElement format
 	};

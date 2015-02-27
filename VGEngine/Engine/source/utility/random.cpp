@@ -28,7 +28,7 @@ namespace vg
 			return min;
 
 		const float phase = rand() / static_cast<float>(RAND_MAX);
-		return min + fabsf(min - max) * phase;
+		return min;// +fabsf(min - max) * phase;
 	}
 
 	void Random::seed(unsigned int newSeed)
