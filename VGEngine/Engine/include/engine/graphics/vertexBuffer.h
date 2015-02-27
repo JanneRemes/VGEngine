@@ -7,6 +7,11 @@
 
 namespace vg
 {
+	/**
+	<description>
+	@param fileManager <description>
+	@return <description>
+	*/
 	enum VertexElementUsage
 	{
 		Position,
@@ -15,7 +20,11 @@ namespace vg
 
 		UsageCOUNT
 	};
-
+	/**
+	<description>
+	@param fileManager <description>
+	@return <description>
+	*/
 	enum VertexElementType
 	{
 		Float = 1,
@@ -28,7 +37,11 @@ namespace vg
 
 		TypeCOUNT
 	};
-
+	/**
+	<description>
+	@param fileManager <description>
+	@return <description>
+	*/
 	struct VertexElement
 	{
 		uint32_t mUsage;
@@ -39,16 +52,36 @@ namespace vg
 		public Buffer<float>
 	{
 	public:
+		/**
+		Default constructor that uses default type format
+		*/
 		VertexBuffer();
+		/**
+		Constructor that uses default format
+		@param raw data in vector that you want to draw
+		*/
 		VertexBuffer(const std::vector<float>& data);
-		VertexBuffer(const std::vector<float>& data, const VertexElement* format, size_t formatSize);
-		VertexBuffer(const VertexElement* format, size_t formatSize);
-
+		/**
+		Constructor used if user wants custom type format
+		@param raw float data in vector
+		@param custom type format
+		*/
+		VertexBuffer(const std::vector<float>& data, const std::vector<VertexElement>& format);
+		/**
+		Constructor that takes in 
+		@param custom type format
+		*/
+		VertexBuffer(const std::vector<VertexElement>& format);
+		/**
+		Binds raw vertex data into buffer using format and stride
+		*/
 		void bind() override;
 	private:
-		const size_t mFormatSize;
-		const VertexElement* mFormat;
-		static const VertexElement gDefaultFormat[];
+		const uint32_t mStride;///< Stride used in bind. Calculated in constructor from format
+		//const size_t mFormatSize;///< Size of current formats
+		const std::vector<VertexElement> mFormat;///< Pointer to current formats
+
+		static const std::vector<VertexElement>& gDefaultFormat;///< default vertexElement format
 	};
 
 }

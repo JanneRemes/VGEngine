@@ -34,7 +34,7 @@ namespace vg
 		{
 			const size_t hash = mHasher(path);
 
-			Asset* asset = find(hash);
+			const Asset* asset = find(hash);
 
 			if (asset)
 			{
