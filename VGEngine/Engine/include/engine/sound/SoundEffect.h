@@ -1,6 +1,6 @@
 #pragma once
 #include "engine\assets\fileManager.h"
-#include "engine\Sound.h"
+#include "engine/sound/Sound.h"
 #include "engine/android_native_app_glue.h"
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>

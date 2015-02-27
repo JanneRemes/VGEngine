@@ -31,11 +31,17 @@
     <Filter Include="source\utility">
       <UniqueIdentifier>{9120e300-ea9f-4d03-aa8f-1e4b63e6d60c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\sound">
+      <UniqueIdentifier>{871cc067-2473-40e8-9c2d-361dc5e408f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\sound">
+      <UniqueIdentifier>{a94c76c0-cba0-47a9-a9bb-ce38494b50fe}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\input">
-      <UniqueIdentifier>{84929e4c-7667-498b-89c1-39b6d490d489}</UniqueIdentifier>
+      <UniqueIdentifier>{d82be4f7-5ac1-46dc-bb2b-75b6df447ee1}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\input">
-      <UniqueIdentifier>{a8fac462-ec76-4741-a9af-14d6e1256e5a}</UniqueIdentifier>
+      <UniqueIdentifier>{661e8dfc-cd9e-46a5-a9b3-c49e558ac81d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,22 +102,20 @@
     <ClInclude Include="include\engine\input\input.h">
       <Filter>include\input</Filter>
     </ClInclude>
-<<<<<<< origin/master
     <ClInclude Include="include\engine\graphics\indexBuffer.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\graphics\gl.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\vertexBuffer.h">
       <Filter>include\graphics</Filter>
-=======
-    <ClInclude Include="include\engine\SoundEffect.h">
-      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\Sound.h">
-      <Filter>include</Filter>
->>>>>>> local
+    <ClInclude Include="include\engine\sound\Sound.h">
+      <Filter>include\sound</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\graphics\gl.h">
-      <Filter>include\graphics</Filter>
+    <ClInclude Include="include\engine\sound\SoundEffect.h">
+      <Filter>include\sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,22 +167,20 @@
     <ClCompile Include="source\graphics\texture.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="source\input\input.cpp">
-      <Filter>source\input</Filter>
-    </ClCompile>
-<<<<<<< origin/master
     <ClCompile Include="source\graphics\indexBuffer.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="source\input\input.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
     <ClCompile Include="source\graphics\vertexBuffer.cpp">
       <Filter>source\graphics</Filter>
-=======
-    <ClCompile Include="source\SoundEffect.cpp">
-      <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="source\Sound.cpp">
-      <Filter>source</Filter>
->>>>>>> local
+    <ClCompile Include="source\sound\Sound.cpp">
+      <Filter>source\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\sound\SoundEffect.cpp">
+      <Filter>source\sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

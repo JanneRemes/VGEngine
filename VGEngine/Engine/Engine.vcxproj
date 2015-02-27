@@ -32,8 +32,8 @@
     <ClInclude Include="include\engine\graphics\texture.h" />
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\input\input.h" />
-    <ClInclude Include="include\engine\Sound.h" />
-    <ClInclude Include="include\engine\SoundEffect.h" />
+    <ClInclude Include="include\engine\sound\Sound.h" />
+    <ClInclude Include="include\engine\sound\SoundEffect.h" />
     <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
@@ -55,8 +55,8 @@
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\Sound.cpp" />
-    <ClCompile Include="source\SoundEffect.cpp" />
+    <ClCompile Include="source\sound\Sound.cpp" />
+    <ClCompile Include="source\sound\SoundEffect.cpp" />
     <ClCompile Include="source\utility\math.cpp" />
     <ClCompile Include="source\utility\random.cpp" />
     <ClCompile Include="source\utility\timer.cpp" />
