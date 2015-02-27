@@ -1,6 +1,7 @@
 
 #include "engine\assets\fileManager.h"
 #include <vector>
+#include "engine\Sound.h"
 using namespace vg;
 
 /// @todo Use the dedicated logger instead
@@ -36,6 +37,16 @@ bool FileManager::readAsset(const std::string& path, std::vector<unsigned char>&
 	AAsset_read(asset, &outData[0], outData.size());
 	AAsset_close(asset);
 	return true;
+}
+
+bool FileManager::readAsset(const std::string& path, SoundEffectData* soundOutDat)
+{
+	AAsset* asset = AAssetManager_open(mAssetManager, path.c_str(), AASSET_MODE_UNKNOWN);
+
+	off_t fileSize = AAsset_getLength(asset);
+	off_t start, length;
+	soundOutDat->fd = AAsset_openFileDescriptor(asset, &soundOutDat->start, &soundOutDat->length);
+	AAsset_close(asset);
 }
 
 bool FileManager::readFile(DataPath dataPath, const std::string& path, std::string& outData)

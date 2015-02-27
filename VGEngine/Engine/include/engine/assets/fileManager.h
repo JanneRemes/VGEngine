@@ -5,6 +5,7 @@
 #include <android/asset_manager.h>
 #include <string>
 #include <vector>
+
 /// @todo Fix comments in this file
 
 namespace vg
@@ -12,9 +13,13 @@ namespace vg
     /**
         <description>
     */
+	struct SoundEffectData;
+
     class FileManager
     {
     public:
+
+
         /**
             <description>
         */
@@ -49,6 +54,15 @@ namespace vg
         */
 		bool readAsset(const std::string& path, std::vector<unsigned char>& outData);
 
+		/**
+		<description>
+		@param path <description>
+		@param outData <description>
+		@param outData <description>
+		@param outData <description>
+		@return <description>
+		*/
+		bool readAsset(const std::string& path, SoundEffectData* soundOutDat);
         /**
             <description>
 			@param dataPath <description>
