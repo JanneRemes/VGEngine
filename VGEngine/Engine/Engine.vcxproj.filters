@@ -96,11 +96,19 @@
     <ClInclude Include="include\engine\input\input.h">
       <Filter>include\input</Filter>
     </ClInclude>
+<<<<<<< origin/master
     <ClInclude Include="include\engine\graphics\indexBuffer.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\vertexBuffer.h">
       <Filter>include\graphics</Filter>
+=======
+    <ClInclude Include="include\engine\SoundEffect.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\Sound.h">
+      <Filter>include</Filter>
+>>>>>>> local
     </ClInclude>
     <ClInclude Include="include\engine\graphics\gl.h">
       <Filter>include\graphics</Filter>
@@ -158,11 +166,19 @@
     <ClCompile Include="source\input\input.cpp">
       <Filter>source\input</Filter>
     </ClCompile>
+<<<<<<< origin/master
     <ClCompile Include="source\graphics\indexBuffer.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\graphics\vertexBuffer.cpp">
       <Filter>source\graphics</Filter>
+=======
+    <ClCompile Include="source\SoundEffect.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Sound.cpp">
+      <Filter>source</Filter>
+>>>>>>> local
     </ClCompile>
   </ItemGroup>
 </Project>
