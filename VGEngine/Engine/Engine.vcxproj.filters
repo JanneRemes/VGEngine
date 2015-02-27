@@ -117,6 +117,8 @@
     <ClInclude Include="include\engine\sound\SoundEffect.h">
       <Filter>include\sound</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\stb_truetype.h" />
+    <ClInclude Include="include\engine\graphics\text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -182,5 +184,6 @@
     <ClCompile Include="source\sound\SoundEffect.cpp">
       <Filter>source\sound</Filter>
     </ClCompile>
+    <ClCompile Include="source\graphics\text.cpp" />
   </ItemGroup>
 </Project>

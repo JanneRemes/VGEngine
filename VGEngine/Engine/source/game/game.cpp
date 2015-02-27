@@ -2,6 +2,7 @@
 #include "engine/game.h"
 #include "engine\utility\logger.h"
 #include "engine\input\input.h"
+#include "engine\graphics\text.h"
 using namespace vg;
 
 Game::Game(android_app *app) : mFileManager(app)
@@ -50,6 +51,9 @@ Game::Game(android_app *app) : mFileManager(app)
 		// We are starting with a previous saved state; restore from it.
 		engine.state = *(struct saved_state*)app->savedState;
 	}
+	vg::text myText = vg::text(0);
+	std::string doge = std::string("font.ttf");
+	myText.initialize(doge, &mFileManager);
 }
 void Game::update()
 {
