@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "engine/android_native_app_glue.h"
-#include "engine\graphics\graphicsContext.h"
+#include "engine/graphics/graphicsContext.h"
 #include <android/sensor.h>
-#include "engine\assets\fileManager.h"
+#include "engine/assets/fileManager.h"
 
 #include <unistd.h>
 

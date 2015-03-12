@@ -1,81 +1,70 @@
 
 #pragma once
 
-#include "engine\assets\fileManager.h"
+#include "engine/assets/fileManager.h"
+#include "engine/graphics/vertexBufferElement.h"
 
-#include <GLES2\gl2.h>
+#include <GLES2/gl2.h>
 #include <string>
 #include <map>
 
 namespace vg
 {
-    /// Shader attribute usage types
-    enum VertexElementUsage
-    {
-        POSITION,
-        COLOR,
-        UV
-    };
-
-    /// Type for map containing vertex element ids and names
-    typedef std::map<VertexElementUsage, std::string> NamesMap;
+    /// A map containing the usage and name of vertex attributes
+	typedef std::map<uint32_t, std::string> AttributeNameMap;
 
     /**
-    Holds shader attribute and  ids and links itself
-    @todo add map of shader attribute names and ids
+		Holds shader attribute and  ids and links itself
     */
     class Shader
     {
     public:
         /**
-        Creates a shader with default or custom vertex element attribute names
-        @param attributeNames map of vertex element usages and names
+			Creates a shader with default or custom vertex element attribute names
+			@param attributeNames map containing the usage and name of vertex attributes
         */
-        Shader(NamesMap attributeNames = getDefaultAttribNames());
+        Shader(const AttributeNameMap& attributeNames = getDefaultAttribNames());
 
 
         /**
-        Loads and compiles shader sources from assets
-        @param fileManager reference to an initialized FileManager
-        @param vertexPath path to glsl file containing vertex shader source
-        @param fragmentPath path to glsl file containing fragment shader source
-        @return was shader source loading succesful
+			Loads and compiles shader sources from assets
+			@param fileManager reference to an initialized FileManager
+			@param vertexPath path to glsl file containing vertex shader source
+			@param fragmentPath path to glsl file containing fragment shader source
+			@return was shader source loading succesful
         */
-        bool load(FileManager& fileManager,
-            const std::string& vertexPath = "default_vertex.glsl",
-            const std::string& fragmentPath = "default_fragment.glsl");
-
+        bool load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath);
 
         /**
-        Returns current shader program id
-        @return shader program id
+			Returns current shader program id
+			@return shader program id
         */
         GLuint getProgramId();
 
         /**
-        Returns current map of vertex element ids and names
-        @return map of vertex element ids and names
+			Returns current map of vertex element ids and names
+			@return map of vertex element ids and names
         */
-        const NamesMap& getmVertexElementNames();
+        const AttributeNameMap& getVertexElementNames();
 
 
     private:
         /**
-        Returns default map of vertex element ids and names
-        @return default map of vertex element usages and names
+			Returns default map of vertex element ids and names
+			@return default map of vertex element usages and names
         */
-        static NamesMap& getDefaultAttribNames();
+        static AttributeNameMap getDefaultAttribNames();
 
         /**
-        Compiles shader source code
-        @return GL_TRUE if compile was succesful
+			Compiles shader source code
+			@return GL_TRUE if compile was succesful
         */
-        GLint compileShaderSource(GLuint id, std::string source);
+        GLint compileShaderSource(GLuint id, const std::string& source);
         
         const std::string mSubFolder = "shaders/"; ///< subfolder for shader sources
         GLuint mVertexId;                          ///< vertex shader id used for linking
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking
-        NamesMap mVertexElementNames;              ///< map of vertex element ids and names
+        AttributeNameMap mVertexElementNames;      ///< map of vertex element ids and names
     };
 }

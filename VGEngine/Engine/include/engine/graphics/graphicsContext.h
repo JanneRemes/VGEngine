@@ -5,7 +5,7 @@
 #include <android/log.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
-#include "engine\android_native_app_glue.h"
+#include "engine/android_native_app_glue.h"
 #include "engine/assets/fileManager.h"
 
 /// @todo Fix comments in this file

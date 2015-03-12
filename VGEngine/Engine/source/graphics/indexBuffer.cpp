@@ -1,6 +1,8 @@
-#include "..\..\include\engine\graphics\indexBuffer.h"
+
+#include "engine/graphics/indexBuffer.h"
 
 using namespace vg;
+
 IndexBuffer::IndexBuffer()
 	: Buffer(GL_ELEMENT_ARRAY_BUFFER, GL_DYNAMIC_DRAW)
 {

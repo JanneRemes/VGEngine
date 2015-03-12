@@ -1,6 +1,6 @@
 
-#include "engine\input\input.h"
-#include "engine\utility\logger.h"
+#include "engine/input/input.h"
+#include "engine/utility/logger.h"
 
 /**
 * Process the next input event.

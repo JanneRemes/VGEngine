@@ -1,8 +1,8 @@
 
 #include "engine/game.h"
-#include "engine\utility\logger.h"
-#include "engine\input\input.h"
-#include "engine\graphics\text.h"
+#include "engine/utility/logger.h"
+#include "engine/input/input.h"
+
 using namespace vg;
 
 Game::Game(android_app *app) : mFileManager(app)
@@ -51,14 +51,9 @@ Game::Game(android_app *app) : mFileManager(app)
 		// We are starting with a previous saved state; restore from it.
 		engine.state = *(struct saved_state*)app->savedState;
 	}
-	vg::text myText = vg::text(0);
-	std::string doge = std::string("font.ttf");
-	myText.initialize(doge, &mFileManager);
 }
 void Game::update()
 {
-	Log("App", "TARWAROAWRLARLWAR", "");
-
 	// Read all pending events.
 	int ident;
 	int events;
@@ -84,8 +79,6 @@ void Game::update()
 					/*LOGI("accelerometer: x=%f y=%f z=%f",
 					event.acceleration.x, event.acceleration.y,
 					event.acceleration.z);*/
-
-
 				}
 			}
 		}
@@ -111,8 +104,6 @@ void Game::update()
 	}
 }
 
-
-
 /**
 * Just the current frame in the display.
 */
@@ -133,9 +124,6 @@ void Game::engine_draw_frame(struct engine* engine)
 
 	engine->graphicsContext.swapBuffers();
 }
-
-
-
 
 /**
 * Process the next main command.

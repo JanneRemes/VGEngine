@@ -1,29 +1,26 @@
 
-#include "engine\graphics\shader.h"
-#include "engine\utility\logger.h"
+#include "engine/graphics/shader.h"
+#include "engine/utility/logger.h"
 
-using namespace std;
 using namespace vg;
 
-Shader::Shader(NamesMap attributeNames):
+Shader::Shader(const AttributeNameMap& attributeNames) :
     mVertexElementNames(attributeNames)
 {
     mProgramId = glCreateProgram();
     mVertexId = glCreateShader(GL_VERTEX_SHADER);
     mFragmentId = glCreateShader(GL_FRAGMENT_SHADER);
 
-    NamesMap::iterator it;
-    for (it = mVertexElementNames.begin(); it != mVertexElementNames.end(); it++)
-    {
-        glBindAttribLocation(mProgramId, (*it).first, (*it).second.c_str());
-    }
+	for (auto& pair : mVertexElementNames)
+	{
+		glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
+	}
 }
 
-
-bool Shader::load(FileManager& fileManager, const string& vertexPath, const string& fragmentPath)
+bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
 {
     // compile shaders
-    string buffer;
+    std::string buffer;
     fileManager.readAsset(mSubFolder + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
     {
@@ -44,38 +41,36 @@ bool Shader::load(FileManager& fileManager, const string& vertexPath, const stri
     glAttachShader(mProgramId, mFragmentId);
     glLinkProgram(mProgramId);
     glGetProgramiv(mProgramId, GL_LINK_STATUS, &result);
+
     if (result != GL_TRUE)
     {
         Log("ERROR", "Shader program link error!", "");
         return false;
     }
+
     return true;
 }
-
 
 GLuint Shader::getProgramId()
 {
     return mProgramId;
 }
 
-
-const NamesMap& Shader::getmVertexElementNames()
+const AttributeNameMap& Shader::getVertexElementNames()
 {
     return mVertexElementNames;
 }
 
-
-NamesMap& Shader::getDefaultAttribNames()
+AttributeNameMap Shader::getDefaultAttribNames()
 {
-    NamesMap result;
-    result[POSITION] = "attrPosition";
-    result[COLOR] = "attrColor";
-    result[UV] = "varyTexCoord";
+    AttributeNameMap result;
+    result[Position] = "attrPosition";
+    result[Color] = "attrColor";
+    result[TexCoord] = "varyTexCoord";
     return result;
 }
 
-
-GLint Shader::compileShaderSource(GLuint id, std::string source)
+GLint Shader::compileShaderSource(GLuint id, const std::string& source)
 {
     GLint result = GL_FALSE;
     const char* temp = source.c_str();

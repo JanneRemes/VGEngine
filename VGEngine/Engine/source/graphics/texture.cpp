@@ -1,8 +1,8 @@
 
-#include "engine\graphics\texture.h"
-#include "engine\assets\fileManager.h"
-#include "lodepng\lodepng.h"
-//#include "engine\logger.h"
+#include "engine/graphics/texture.h"
+#include "engine/assets/fileManager.h"
+#include "lodepng/lodepng.h"
+//#include "engine/logger.h"
 #include <string>
 #include <vector>
 #include "engine/android_native_app_glue.h"

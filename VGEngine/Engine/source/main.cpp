@@ -33,9 +33,14 @@ extern void test_dummy();
 #include <android/log.h>
 #include "engine/android_native_app_glue.h"
 
-#include "engine\graphics\graphicsContext.h"
-#include "engine\utility\logger.h"
-#include "engine\game.h"
+#include "engine/graphics/graphicsContext.h"
+
+
+#include "engine/utility/logger.h"
+
+
+#include "engine/game.h"
+
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");

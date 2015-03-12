@@ -1,6 +1,6 @@
 
-#include "engine\graphics\GraphicsContext.h"
-#include "engine\utility\logger.h"
+#include "engine/graphics/GraphicsContext.h"
+#include "engine/utility/logger.h"
 
 using namespace vg;
 

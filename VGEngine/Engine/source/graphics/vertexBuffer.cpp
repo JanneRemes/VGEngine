@@ -1,7 +1,9 @@
 
-#include "engine\graphics\vertexBuffer.h"
-#include "engine\graphics\gl.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/opengl.h"
+
 using namespace vg;
+
 const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
 {
 	{ Position, Vec2 },
@@ -56,33 +58,3 @@ void VertexBuffer::bind()
 		offset += mFormat[i].mType * sizeof(float);
 	}
 }
-
-/**
-VertexBuffer::VertexBuffer()
-	: Buffer(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW)
-	, mFormat(gDefaultFormat)
-	, mFormatSize(sizeof(gDefaultFormat))
-{
-}
-
-VertexBuffer::VertexBuffer(const std::vector<GLfloat>& data)
-	: Buffer(GL_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW)
-	, mFormat(gDefaultFormat)
-	, mFormatSize(sizeof(gDefaultFormat))
-{
-}
-
-VertexBuffer::VertexBuffer(const VertexElement* format, size_t formatSize)
-	: Buffer(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW)
-	, mFormat(format)
-	, mFormatSize(formatSize)
-{
-}
-
-VertexBuffer::VertexBuffer(const std::vector<float>& data, const VertexElement* format, size_t formatSize)
-	: Buffer(GL_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW)
-	, mFormat(format)
-	, mFormatSize(formatSize)
-{
-}
-/**/

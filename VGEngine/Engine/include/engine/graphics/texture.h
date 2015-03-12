@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "engine\assets\asset.h"
+#include "engine/assets/asset.h"
 #include <GLES2/gl2.h>
 namespace vg
 {

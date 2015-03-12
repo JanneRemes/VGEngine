@@ -1,6 +1,6 @@
 #pragma once
-#include "engine\assets\fileManager.h"
-#include "engine\assets\asset.h"
+#include "engine/assets/fileManager.h"
+#include "engine/assets/asset.h"
 
 namespace vg
 {
