@@ -25,11 +25,13 @@
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
+    <ClInclude Include="include\engine\graphics\drawable.h" />
     <ClInclude Include="include\engine\graphics\opengl.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
     <ClInclude Include="include\engine\graphics\graphicsDevice.h" />
     <ClInclude Include="include\engine\graphics\indexBuffer.h" />
     <ClInclude Include="include\engine\graphics\shader.h" />
+    <ClInclude Include="include\engine\graphics\spriteBatch.h" />
     <ClInclude Include="include\engine\graphics\stb_truetype.h" />
     <ClInclude Include="include\engine\graphics\text.h" />
     <ClInclude Include="include\engine\graphics\texture.h" />
@@ -56,6 +58,7 @@
     <ClCompile Include="source\graphics\graphicsDevice.cpp" />
     <ClCompile Include="source\graphics\indexBuffer.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
+    <ClCompile Include="source\graphics\spriteBatch.cpp" />
     <ClCompile Include="source\graphics\text.cpp" />
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />

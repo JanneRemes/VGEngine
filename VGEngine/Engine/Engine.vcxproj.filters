@@ -129,6 +129,12 @@
     <ClInclude Include="include\engine\graphics\text.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\spriteBatch.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\graphics\drawable.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -198,6 +204,9 @@
       <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\graphics\text.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\spriteBatch.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
