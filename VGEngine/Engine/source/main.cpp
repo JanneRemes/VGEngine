@@ -40,37 +40,193 @@ extern void test_dummy();
 
 
 #include "engine/game.h"
+#include "engine/input/input.h"
+#include "engine/assets/fileManager.h"
 
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
 }
 
+static void  drawFrame(struct Engine* engine);
+static int32_t handleInput(struct android_app* app, AInputEvent* event);
+static void handleCommand(struct android_app* app, int32_t cmd);
+
+
 /**
- * Our saved state data.
- */
+* Our saved state data.
+*/
+struct SavedState
+{
+    vg::Game game;
+};
 
+/**
+* Shared state for our app.
+*/
+struct Engine
+{
+    struct android_app* app;
+
+    ASensorManager* sensorManager;
+    const ASensor* accelerometerSensor;
+    ASensorEventQueue* sensorEventQueue;
+    int animating;
+    vg::GraphicsContext graphicsContext;
+
+
+    struct SavedState state;
+};
 
 
 /**
- * This is the main entry point of a native application that is using
- * android_native_app_glue.  It runs in its own thread, with its own
- * event loop for receiving input events and doing other things.
- */
-void android_main(struct android_app* state) {
+* This is the main entry point of a native application that is using
+* android_native_app_glue.  It runs in its own thread, with its own
+* event loop for receiving input events and doing other things.
+*/
+void android_main(struct android_app* state)
+{
+    struct Engine engine;
+    memset(&engine, 0, sizeof(engine));
+    state->userData = &engine;
+    state->onAppCmd = handleCommand;
+    state->onInputEvent = vg::Input::engine_handle_input;
+    engine.app = state;
 
-	vg::Game game(state);
-	// TEST
-	test_dummy();
+    // Prepare to monitor accelerometer
+    engine.sensorManager = ASensorManager_getInstance();
+    engine.accelerometerSensor = ASensorManager_getDefaultSensor(engine.sensorManager,
+        ASENSOR_TYPE_ACCELEROMETER);
+    engine.sensorEventQueue = ASensorManager_createEventQueue(engine.sensorManager,
+        engine.app->looper, LOOPER_ID_USER, NULL, NULL);
 
-	// Make sure app_glue isn't stripped.
-	app_dummy();
+    if (engine.app->savedState != NULL)
+    {
+        // We are starting with a previous saved state; restore from it.
+        engine.state = *(struct SavedState*)engine.app->savedState;
+    }
+    // TEST
+    test_dummy();
+
+    // Make sure app_glue isn't stripped.
+    app_dummy();
+
 
     // loop waiting for stuff to do.
-	while (1)
-	{
-		game.update();
-	}
+    while (1)
+    {
+        // Read all pending events.
+        int ident;
+        int events;
+        struct android_poll_source* source;
+
+        // If not animating, we will block forever waiting for events.
+        // If animating, we loop until all events are read, then continue
+        // to draw the next frame of animation.
+        while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
+        {
+
+            // Process this event.
+            if (source != NULL)
+            {
+                source->process(engine.app, source);
+            }
+
+            // If a sensor has data, process it now.
+            if (ident == LOOPER_ID_USER)
+            {
+                if (engine.accelerometerSensor != NULL)
+                {
+                    ASensorEvent event;
+                    while (ASensorEventQueue_getEvents(engine.sensorEventQueue, &event, 1) > 0)
+                    {
+                        // Uncomment if needed
+                        //Log("DEBUG", "accelerometer: x=%f y=%f z=%f",event.acceleration.x, event.acceleration.y, event.acceleration.z);
+                    }
+                }
+            }
+
+            // Check if we are exiting.
+            if (engine.app->destroyRequested != 0)
+            {
+                engine.graphicsContext.destroy();
+                return;
+            }
+        }
+
+        if (engine.animating)
+        {
+            // Drawing is throttled to the screen update rate, so there
+            // is no need to do timing here.
+            drawFrame(&engine);
+        }
+
+        engine.state.game.update();
+    }
 }
 
-//END_INCLUDE(all)
+/**
+* Just the current frame in the display.
+*/
+void drawFrame(struct Engine* engine)
+{
+    engine->state.game.draw(&engine->graphicsContext);
+    engine->graphicsContext.swapBuffers();
+}
+
+
+
+
+/**
+* Process the next main command.
+*/
+void handleCommand(struct android_app* app, int32_t cmd)
+{
+    struct Engine* engine = (struct Engine*)app->userData;
+    switch (cmd)
+    {
+    case APP_CMD_SAVE_STATE:
+        // The system has asked us to save our current state.  Do so.
+        engine->app->savedState = malloc(sizeof(struct SavedState));
+        *((struct SavedState*)engine->app->savedState) = engine->state;
+        engine->app->savedStateSize = sizeof(struct SavedState);
+        break;
+
+    case APP_CMD_INIT_WINDOW:
+        // The window is being shown, get it ready.
+        if (engine->app->window != NULL)
+        {
+            engine->graphicsContext.initialize(engine->app->window);
+            engine->animating = true;
+            drawFrame(engine);
+        }
+        break;
+
+    case APP_CMD_TERM_WINDOW:
+        // The window is being hidden or closed, clean it up.
+        engine->graphicsContext.destroy();
+        break;
+
+    case APP_CMD_GAINED_FOCUS:
+        // When our app gains focus, we start monitoring the accelerometer.
+        if (engine->accelerometerSensor != NULL)
+        {
+            ASensorEventQueue_enableSensor(engine->sensorEventQueue, engine->accelerometerSensor);
+            // We'd like to get 60 events per second (in us).
+            ASensorEventQueue_setEventRate(engine->sensorEventQueue, engine->accelerometerSensor, (1000L / 60) * 1000);
+        }
+        break;
+
+    case APP_CMD_LOST_FOCUS:
+        // When our app loses focus, we stop monitoring the accelerometer.
+        // This is to avoid consuming battery while not being used.
+        if (engine->accelerometerSensor != NULL)
+        {
+            ASensorEventQueue_disableSensor(engine->sensorEventQueue, engine->accelerometerSensor);
+        }
+        // Also stop animating.
+        engine->animating = 0;
+        drawFrame(engine);
+        break;
+    }
+}
