@@ -38,6 +38,7 @@
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h" />
     <ClInclude Include="include\engine\input\input.h" />
+    <ClInclude Include="include\engine\sound\AudioManager.h" />
     <ClInclude Include="include\engine\sound\Sound.h" />
     <ClInclude Include="include\engine\sound\SoundEffect.h" />
     <ClInclude Include="include\engine\utility\logger.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\sound\AudioManager.cpp" />
     <ClCompile Include="source\sound\Sound.cpp" />
     <ClCompile Include="source\sound\SoundEffect.cpp" />
     <ClCompile Include="source\utility\math.cpp" />

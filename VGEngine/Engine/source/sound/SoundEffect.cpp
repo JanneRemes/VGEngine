@@ -1,18 +1,8 @@
-
 #include "engine/sound/SoundEffect.h"
 
 using namespace vg;
-SoundEffect::SoundEffect(Sound soundFile)
-{
-	LOGA("Im in soundeffect.cpp");
-	
-	// Audio player
-	
-	SLObjectItf engineObject = NULL;
-	SLObjectItf PlayerObject = NULL;
-	SLObjectItf outputObject = NULL;
-	
-	static SLEngineItf Engine;
+SoundEffect::SoundEffect(const Sound& soundFile)
+{	
 	// For error checking
 	SLresult result;
 
@@ -33,11 +23,11 @@ SoundEffect::SoundEffect(Sound soundFile)
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source
 	SLDataSource audioSource = { &loc_fd, &format_mime };
-
+	
 	// Outputmix
-	const SLInterfaceID outputInterfaces[1] = { SL_IID_VOLUME };
-	const SLboolean outputRequired[1] = { SL_BOOLEAN_TRUE };
-	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 0, outputInterfaces, outputRequired);
+	const SLInterfaceID outputInterfaces = SL_IID_VOLUME;
+	const SLboolean outputRequired = SL_BOOLEAN_TRUE;
+	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 0, &outputInterfaces, &outputRequired);
 	result = (*outputObject)->Realize(outputObject, SL_BOOLEAN_FALSE);
 
 	SLDataLocator_OutputMix loc_outmix = { SL_DATALOCATOR_OUTPUTMIX, outputObject };
@@ -60,13 +50,6 @@ SoundEffect::SoundEffect(Sound soundFile)
 	if (result != SL_RESULT_SUCCESS)
 		LOGA("Player realize failed");
 
-	/*
-	// Realize bufferqueue
-	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_BUFFERQUEUE, &BufferQueue);
-	if (result != SL_RESULT_SUCCESS)
-		LOGA("bufferqueue interface failed");
-		*/
-
 	// Get play interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAY, &PlayerPlay);
 	if (result != SL_RESULT_SUCCESS)
@@ -79,50 +62,7 @@ SoundEffect::SoundEffect(Sound soundFile)
 
 	// get seek interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_SEEK, &Seek);
-
-	// looping
-	result = (*Seek)->SetLoop(Seek, SL_BOOLEAN_TRUE, 0, SL_TIME_UNKNOWN);
-
-	result = (*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PLAYING);
-	if (result != SL_RESULT_SUCCESS)
-		LOGA("SetPlayState failed");
-	else
-		LOGA("SetPlayState success");
-
-	LOGA("Im out of soundeffect.cpp");
 }
-
-
-void SoundEffect::AddToQueue(android_app* app)
-{
-	// Loading file to buffer
-	SLresult result;
-
-	std::string buffer;
-	vg::FileManager f(app);
-
-	if (f.readAsset("test_loop.wav", buffer))
-		LOGA("Success loading the asset");
-
-	const char *tempBuf = buffer.c_str();
-	int fileSize = buffer.length();
-
-	nextBuffer = (short *)tempBuf;
-	nextSize = sizeof(tempBuf);
-
-	LOGA("->Enqueue");
-	result = (*BufferQueue)->Enqueue(BufferQueue, nextBuffer, nextSize);
-
-	if (result == SL_RESULT_SUCCESS)
-		LOGA("Adding to queue worked");
-	else if (result == SL_RESULT_BUFFER_INSUFFICIENT)
-		LOGA("Buffer insufficient");
-	else if (result == SL_RESULT_PARAMETER_INVALID)
-		LOGA("Invalid parameters");
-
-	LOGA("Out of AddToQueue");
-}
-
 
 void SoundEffect::setVolume(float volume)
 {
@@ -132,7 +72,7 @@ void SoundEffect::setVolume(float volume)
 
 void SoundEffect::Play()
 {
-
+	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PLAYING);
 }
 
 void SoundEffect::Pause()
@@ -140,12 +80,41 @@ void SoundEffect::Pause()
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PAUSED);
 }
 
+void SoundEffect::SetLoop(bool b)
+{
+	if (true)
+	(*Seek)->SetLoop(Seek, SL_BOOLEAN_TRUE, 0, SL_TIME_UNKNOWN);
+	else
+	(*Seek)->SetLoop(Seek, SL_BOOLEAN_FALSE, 0, SL_TIME_UNKNOWN);
+}
+
 void SoundEffect::Stop()
 {
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_STOPPED);
 }
+void SoundEffect::Destroy()
+{
+		if (PlayerObject != NULL)
+		{
+			(*PlayerObject)->Destroy(PlayerObject);
+			PlayerObject = NULL;
+			PlayerPlay = NULL;
+			PlayerVolume = NULL;
+			maxVolumeLevel = NULL;
+			Seek = NULL;
+		}
+		if (outputObject != NULL)
+		{
+			(*outputObject)->Destroy(outputObject);
+			outputObject = NULL;
 
-
+		}
+		if (engineObject != NULL)
+		{
+			(*engineObject)->Destroy(engineObject);
+			Engine = NULL;
+		}
+}
 SoundEffect::~SoundEffect()
 {
 }

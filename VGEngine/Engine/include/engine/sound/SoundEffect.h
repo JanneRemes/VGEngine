@@ -16,17 +16,24 @@ namespace vg
 class SoundEffect
 {
 public:
-	SoundEffect(Sound soundFile);
+	SoundEffect(const Sound& soundFile);
 	~SoundEffect();
 	
 	void Play();
 	void Stop();
 	void Pause();
 
-	void AddToQueue(android_app* app);
+	void SetLoop(bool b);
+	void Destroy();
 	void setVolume(float volume);
-	
 private:
+
+	SLEngineItf Engine;
+
+	SLObjectItf engineObject;
+	SLObjectItf PlayerObject;
+	SLObjectItf outputObject;
+
 	// Interfaces
 	SLPlayItf PlayerPlay;
 	SLVolumeItf PlayerVolume;
@@ -37,7 +44,5 @@ private:
 	SLAndroidSimpleBufferQueueItf BufferQueue;
 	short *nextBuffer;
 	unsigned nextSize;
-
 };
-
 }

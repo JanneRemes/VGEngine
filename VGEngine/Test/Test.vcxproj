@@ -53,7 +53,7 @@
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;vgengine;</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;</AdditionalLibraryDirectories>
     </Link>
     <AntBuild>
