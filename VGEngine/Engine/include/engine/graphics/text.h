@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine\graphics\stb_truetype.h"
+#include "../../external/stb_truetype.h"
 #include <GLES2/gl2.h>
 #include "engine\assets\fileManager.h"
 

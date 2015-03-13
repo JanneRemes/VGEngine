@@ -43,6 +43,9 @@
     <Filter Include="source\input">
       <UniqueIdentifier>{661e8dfc-cd9e-46a5-a9b3-c49e558ac81d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{08c84e93-0f1e-4f81-b366-e916baf2b441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -123,9 +126,6 @@
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\graphics\stb_truetype.h">
-      <Filter>include\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\graphics\text.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
@@ -137,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="include\engine\sound\AudioManager.h">
       <Filter>include\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\graphics\stb_truetype.h">
+      <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
