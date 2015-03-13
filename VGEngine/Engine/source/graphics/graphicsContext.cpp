@@ -6,7 +6,6 @@ using namespace vg;
 
 GraphicsContext::GraphicsContext()
 {
-    mInitialized = false;
     mWidth = mHeight = 0;
     mDisplay = mSurface = mContext = NULL;
 }
@@ -16,20 +15,13 @@ GraphicsContext::~GraphicsContext()
 
 }
 
-
 void GraphicsContext::initialize(ANativeWindow* window)
 {
-    if (!mInitialized)
-    {
-        initializeEGL(window);
-		//glCreateProgram();
-        /// @todo Uncomment later, when relevant
-        //initializeOpenGL();
-
-        mInitialized = true;
-    }
+    initializeEGL(window);
+	//glCreateProgram();
+    /// @todo Uncomment later, when relevant
+    //initializeOpenGL();
 }
-
 
 void GraphicsContext::destroy()
 {
@@ -53,37 +45,22 @@ void GraphicsContext::destroy()
     mDisplay = EGL_NO_DISPLAY;
     mContext = EGL_NO_CONTEXT;
     mSurface = EGL_NO_SURFACE;
-
-    mInitialized = false;
 }
-
 
 void GraphicsContext::swapBuffers()
 {
-    if (mInitialized)
-    {
-        eglSwapBuffers(mDisplay, mSurface);
-    }
+    eglSwapBuffers(mDisplay, mSurface);
 }
-
 
 GLint GraphicsContext::getWidth()
 {
     return mWidth;
 }
 
-
 GLint GraphicsContext::getHeight()
 {
     return mHeight;
 }
-
-
-bool GraphicsContext::isInitialized()
-{
-    return mInitialized;
-}
-
 
 void GraphicsContext::initializeEGL(ANativeWindow* window)
 {

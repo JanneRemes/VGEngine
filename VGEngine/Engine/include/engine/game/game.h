@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "engine/android_native_app_glue.h"
-#include "engine/graphics/graphicsContext.h"
+#include "engine/graphics/graphics.h"
 #include <android/sensor.h>
 #include "engine/assets/fileManager.h"
 
@@ -46,7 +46,7 @@ namespace vg
         /**
         <description>
         */
-        void draw(GraphicsContext* graphicsContext);
+        void draw(Graphics* graphics);
 
         /**
         <description>

@@ -33,7 +33,7 @@ extern void test_dummy();
 #include <android/log.h>
 #include "engine/android_native_app_glue.h"
 
-#include "engine/graphics/graphicsContext.h"
+#include "engine/graphics/graphics.h"
 
 
 #include "engine/utility/logger.h"
@@ -72,7 +72,7 @@ struct Engine
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
     int animating;
-    vg::GraphicsContext graphicsContext;
+    vg::Graphics graphics;
 
 
     struct SavedState state;
@@ -150,7 +150,7 @@ void android_main(struct android_app* state)
             // Check if we are exiting.
             if (engine.app->destroyRequested != 0)
             {
-                engine.graphicsContext.destroy();
+                engine.graphics.unInitialize();
                 return;
             }
         }
@@ -171,8 +171,8 @@ void android_main(struct android_app* state)
 */
 void drawFrame(struct Engine* engine)
 {
-    engine->state.game.draw(&engine->graphicsContext);
-    engine->graphicsContext.swapBuffers();
+    engine->state.game.draw(&engine->graphics);
+    engine->graphics.swapBuffers();
 }
 
 
@@ -197,7 +197,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
         // The window is being shown, get it ready.
         if (engine->app->window != NULL)
         {
-            engine->graphicsContext.initialize(engine->app->window);
+            engine->graphics.initialize(engine->app);
             engine->animating = true;
             drawFrame(engine);
         }
@@ -205,7 +205,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
 
     case APP_CMD_TERM_WINDOW:
         // The window is being hidden or closed, clean it up.
-        engine->graphicsContext.destroy();
+        engine->graphics.unInitialize();
         break;
 
     case APP_CMD_GAINED_FOCUS:

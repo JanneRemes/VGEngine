@@ -21,17 +21,17 @@ void Game::update()
 }
 
 
-void Game::draw(GraphicsContext* graphicsContext)
+void Game::draw(Graphics* graphics)
 {
-    if (!graphicsContext->isInitialized())
+    if (!graphics->isInitialized())
     {
         Log("WARNING", "GraphicsContext not initialized", "");
         return;
     }
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(Input::getX() / graphicsContext->getWidth(), mPulse,
-        (Input::getY()) / graphicsContext->getHeight(), 1);
+    glClearColor(Input::getX() / graphics->getScreenWidth(), mPulse,
+        (Input::getY()) / graphics->getScreenHeight(), 1);
 }
 
 

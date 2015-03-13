@@ -4,6 +4,8 @@
 
 using namespace vg;
 
+const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
+
 Shader::Shader(const AttributeNameMap& attributeNames) :
     mVertexElementNames(attributeNames)
 {
@@ -17,18 +19,26 @@ Shader::Shader(const AttributeNameMap& attributeNames) :
 	}
 }
 
+Shader::Shader(const Shader& shader)
+{
+    mVertexId = shader.mVertexId;
+    mFragmentId = shader.mFragmentId;
+    mProgramId = shader.mProgramId;
+    mVertexElementNames = shader.mVertexElementNames;
+}
+
 bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
 {
     // compile shaders
     std::string buffer;
-    fileManager.readAsset(mSubFolder + vertexPath, buffer);
+    fileManager.readAsset(FOLDER + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
     {
         Log("ERROR", "Vertex shader compile error!", "");
         return false;
     }
 
-    fileManager.readAsset(mSubFolder + fragmentPath, buffer);
+    fileManager.readAsset(FOLDER + fragmentPath, buffer);
     if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
     {
         Log("ERROR", "Fragment shader compile error!", "");

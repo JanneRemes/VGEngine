@@ -24,6 +24,7 @@ namespace vg
 			@param attributeNames map containing the usage and name of vertex attributes
         */
         Shader(const AttributeNameMap& attributeNames = getDefaultAttribNames());
+        Shader(const Shader& shader);
 
 
         /**
@@ -33,7 +34,9 @@ namespace vg
 			@param fragmentPath path to glsl file containing fragment shader source
 			@return was shader source loading succesful
         */
-        bool load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath);
+        bool load(FileManager& fileManager,
+            const std::string& vertexPath = "default_vertex.glsl",
+            const std::string& fragmentPath = "default_fragment.glsl");
 
         /**
 			Returns current shader program id
@@ -60,8 +63,7 @@ namespace vg
 			@return GL_TRUE if compile was succesful
         */
         GLint compileShaderSource(GLuint id, const std::string& source);
-        
-        const std::string mSubFolder = "shaders/"; ///< subfolder for shader sources
+
         GLuint mVertexId;                          ///< vertex shader id used for linking
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking

@@ -53,12 +53,6 @@ namespace vg
         */
         EGLint getHeight();
 
-        /**
-        <description>
-        @return has graphicsContext been initialized
-        */
-        bool isInitialized();
-
 		/**
 		<description>
 		@return returns mProgramId (opengl program id)
@@ -89,7 +83,6 @@ namespace vg
         EGLContext mContext;    ///< handle to device context
 
         EGLint mWidth, mHeight; ///< screen size in pixels
-        bool mInitialized;      ///< has egl and openGL been initialized
 
 		GLuint mProgramId; //< opengl program id
     };

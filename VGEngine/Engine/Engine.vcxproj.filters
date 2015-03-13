@@ -141,6 +141,9 @@
     <ClInclude Include="include\engine\graphics\stb_truetype.h">
       <Filter>external</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\graphics.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="source\sound\AudioManager.cpp">
       <Filter>source\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\graphics.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
