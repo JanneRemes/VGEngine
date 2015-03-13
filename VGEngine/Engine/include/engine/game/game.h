@@ -53,8 +53,25 @@ namespace vg
         */
         void readFiles(FileManager& fileManager);
 
+        /**
+        <description>
+        */
+        bool isRunning();
+
+        /**
+        <description>
+        */
+        void stop();
+
+        /**
+        <description>
+        */
+        void start();
+
+
     private:
         std::vector<Scene*> mScenes;    ///< description
         float mPulse;                   ///< description
+        bool mIsRunning;                ///< description
     };
 }

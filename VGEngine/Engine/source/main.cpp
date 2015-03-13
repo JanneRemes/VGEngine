@@ -111,9 +111,9 @@ void android_main(struct android_app* state)
     // Make sure app_glue isn't stripped.
     app_dummy();
 
-
+    engine.state.game.start();
     // loop waiting for stuff to do.
-    while (1)
+    while (engine.state.game.isRunning())
     {
         // Read all pending events.
         int ident;
@@ -206,6 +206,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
     case APP_CMD_TERM_WINDOW:
         // The window is being hidden or closed, clean it up.
         engine->graphics.unInitialize();
+        engine->state.game.stop();
         break;
 
     case APP_CMD_GAINED_FOCUS:

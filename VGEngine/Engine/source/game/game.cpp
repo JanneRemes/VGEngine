@@ -6,7 +6,7 @@
 using namespace vg;
 
 Game::Game()
-    : mPulse(0)
+    : mPulse(0), mIsRunning(true)
 {
 }
 
@@ -59,5 +59,22 @@ void readFiles(FileManager& fileManager)
     }
     Log("fm", "End", "");
     Log("-----", "----- -----", "");
+}
+
+
+bool Game::isRunning()
+{
+    return mIsRunning;
+}
+
+
+void Game::stop()
+{
+    mIsRunning = false;
+}
+
+void Game::start()
+{
+    mIsRunning = true;
 }
 
