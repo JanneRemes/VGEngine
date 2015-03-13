@@ -2,7 +2,7 @@
 
 using namespace vg;
 SoundEffect::SoundEffect(const Sound& soundFile)
-{	
+{
 	// For error checking
 	SLresult result;
 
@@ -23,27 +23,20 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source
 	SLDataSource audioSource = { &loc_fd, &format_mime };
-	
+
 	// Outputmix
-	const SLInterfaceID outputInterfaces = SL_IID_VOLUME;
-	const SLboolean outputRequired = SL_BOOLEAN_TRUE;
-	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 0, &outputInterfaces, &outputRequired);
+	const SLInterfaceID outputInterfaces[1] = { SL_IID_PLAYBACKRATE };
+	const SLboolean outputRequired[1] = {SL_BOOLEAN_FALSE};
+	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 1, outputInterfaces, outputRequired);
 	result = (*outputObject)->Realize(outputObject, SL_BOOLEAN_FALSE);
 
 	SLDataLocator_OutputMix loc_outmix = { SL_DATALOCATOR_OUTPUTMIX, outputObject };
 	SLDataSink audioSink = { &loc_outmix, NULL };
-
+	
 	// create audio player
-	const SLInterfaceID interfaces[2] = {  SL_IID_VOLUME, SL_IID_SEEK };
-	const SLboolean required[2] = { SL_BOOLEAN_TRUE, SL_BOOLEAN_TRUE };
-	result = (*Engine)->CreateAudioPlayer(Engine, &PlayerObject, &audioSource, &audioSink, 2, interfaces, required);
-
-	if (result == SL_RESULT_SUCCESS)
-		LOGA("Player creation success");
-	else if (result == SL_RESULT_CONTENT_NOT_FOUND)
-	LOGA("SL_RESULT_CONTENT_NOT_FOUND");
-	else if (result == SL_RESULT_PRECONDITIONS_VIOLATED)
-		LOGA("SL_RESULT_PRECONDITIONS_VIOLATED");
+	const SLInterfaceID interfaces[3] = { SL_IID_VOLUME, SL_IID_SEEK, SL_IID_PLAYBACKRATE };
+	const SLboolean required[3] = { SL_BOOLEAN_TRUE, SL_BOOLEAN_TRUE, SL_BOOLEAN_TRUE};
+	result = (*Engine)->CreateAudioPlayer(Engine, &PlayerObject, &audioSource, &audioSink, 3, interfaces, required);
 
 	// Realize player
 	result = (*PlayerObject)->Realize(PlayerObject, SL_BOOLEAN_FALSE);
@@ -62,12 +55,19 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 
 	// get seek interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_SEEK, &Seek);
+
+	// get playbackrate interface
+	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAYBACKRATE, &RateObject);
+	if (result != SL_RESULT_SUCCESS)
+		LOGA("Playback rate interface failed");
+
 }
 
-void SoundEffect::setVolume(float volume)
+void SoundEffect::SetVolume(float volume)
 {
-	SLmillibel vol = volume;
-	(*PlayerVolume)->SetVolumeLevel(PlayerVolume, vol);
+	SLmillibel maxVol = volume;
+	(*PlayerVolume)->GetMaxVolumeLevel(PlayerVolume, &maxVol);
+	(*PlayerVolume)->SetVolumeLevel(PlayerVolume, maxVol);
 }
 
 void SoundEffect::Play()
@@ -79,7 +79,14 @@ void SoundEffect::Pause()
 {
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PAUSED);
 }
-
+void SoundEffect::SetPitch(int pitch)
+{
+	SLpermille a = SLpermille(pitch);
+	SLpermille min = 0;
+	SLpermille max = 0;
+	(*RateObject)->GetRate(RateObject, &min);
+	(*RateObject)->SetRate(RateObject, pitch);
+}
 void SoundEffect::SetLoop(bool b)
 {
 	if (true)
