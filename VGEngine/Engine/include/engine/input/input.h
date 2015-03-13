@@ -12,7 +12,12 @@ namespace vg
 
 		static float getX();
 		static float getY();
+		static bool getIsTouched();
+		static bool getIsTouchReleased();
+		static void update();
 	private:
+		static bool isTouched;
+		static bool isTouchReleased;
 		static float mX;
 		static float mY;
 	};

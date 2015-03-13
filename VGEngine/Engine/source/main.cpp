@@ -42,7 +42,7 @@ extern void test_dummy();
 #include "engine/game.h"
 #include "engine/input/input.h"
 #include "engine/assets/fileManager.h"
-
+#include "engine/input/input.h"
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
@@ -123,6 +123,7 @@ void android_main(struct android_app* state)
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
+		vg::Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
 

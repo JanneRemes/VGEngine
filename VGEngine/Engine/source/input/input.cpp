@@ -9,7 +9,8 @@ using namespace vg;
 
 float Input::mX = 0;
 float Input::mY = 0;
-
+bool Input::isTouched = false;
+bool Input::isTouchReleased = false;
 int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 {
 	//struct engine* engine = (struct engine*)app->userData;
@@ -18,7 +19,7 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 	{
 		mX = AMotionEvent_getX(event, 0);
 		mY = AMotionEvent_getY(event, 0);
-
+		isTouched = true;
 		Log("debug", "movement %f %f", mX, mY);
 
 		/*
@@ -40,4 +41,22 @@ float Input::getX()
 float Input::getY()
 {
 	return mY;
+}
+bool Input::getIsTouched()
+{
+	return isTouched;
+}
+bool Input::getIsTouchReleased()
+{
+	return isTouchReleased;
+}
+void Input::update()
+{
+	if (isTouched)
+	{
+		isTouched = false;
+		isTouchReleased = true;
+	}
+	else if (isTouchReleased)
+		isTouchReleased = false;
 }
