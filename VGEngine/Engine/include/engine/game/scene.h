@@ -2,7 +2,7 @@
 #pragma once
 
 #include <vector>
-
+#include "objectPool.h"
 /// @todo Fix comments in this file
 
 namespace vg
@@ -18,7 +18,6 @@ namespace vg
 		Scene() = default;
 		virtual ~Scene() = default;
 	private:
-		std::vector<GameObject*> mActivePool;   ///< description
-		std::vector<GameObject*> mInactivePool; ///< description
+		ObjectPool mObjectPool;
 	};
 }
