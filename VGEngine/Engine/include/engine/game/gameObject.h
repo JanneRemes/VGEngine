@@ -17,7 +17,10 @@ namespace vg
 	public:
 		GameObject() = default;
 		virtual ~GameObject() = default;
+		void setIsPooled(bool isPooled);
+		bool getIsPooled();
 	private:
 		std::vector<Component*> mComponents; ///< description
+		bool mIsPooled;//does gameobject return to pooled list (ObjectPool class)
 	};
 }

@@ -15,13 +15,22 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 {
 	//struct engine* engine = (struct engine*)app->userData;
 
+
 	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
 	{
 		mX = AMotionEvent_getX(event, 0);
 		mY = AMotionEvent_getY(event, 0);
 		isTouched = true;
 		Log("debug", "movement %f %f", mX, mY);
-
+		if ((AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_UP)
+		{
+			Log("debug", "Released touch %d", 5);
+			if (isTouched)
+			{
+				isTouched = false;
+				isTouchReleased = true;
+			}
+		}
 		/*
 		engine->animating = 1;
 		engine->state.x = AMotionEvent_getX(event, 0);
@@ -30,6 +39,7 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 
 		return 1;
 	}
+
 	return 0;
 }
 
@@ -52,11 +62,6 @@ bool Input::getIsTouchReleased()
 }
 void Input::update()
 {
-	if (isTouched)
-	{
-		isTouched = false;
-		isTouchReleased = true;
-	}
-	else if (isTouchReleased)
+	if (isTouchReleased)
 		isTouchReleased = false;
 }
