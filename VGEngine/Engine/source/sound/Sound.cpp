@@ -8,7 +8,6 @@ Sound::Sound(const std::string& path)
 
 bool Sound::load(FileManager& fileManager)
 {
-	// Load sound file to SoundEffectData
 	fileManager.readAsset(mPath, &data);
 }
 

@@ -16,6 +16,9 @@ namespace vg
 	public:
 		Sound(const std::string& path);
 		~Sound();
+		/**
+		Load sound from file
+		*/
 		bool load(FileManager& fileManager);
 		bool unload();
 		SoundEffectData data;
