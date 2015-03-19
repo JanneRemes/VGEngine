@@ -23,11 +23,12 @@ public:
 	void Stop();
 	void Pause();
 
-	void SetPitch(int pitch);
-
 	void SetLoop(bool b);
 	void Destroy();
-	void SetVolume(float volume);
+
+	void SetPosition(float pos);
+	float GetPosition();
+	float GetLength();
 private:
 
 	SLEngineItf Engine;

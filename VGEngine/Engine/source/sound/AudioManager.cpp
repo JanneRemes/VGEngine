@@ -52,26 +52,7 @@ void AudioManager::Play(const std::string& name)
 		mapping->mSoundEffect->Play();
 	}
 }
-void AudioManager::SetPitch(const std::string& name, int pitch)
-{
-	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
-	if (mapping != nullptr)
-	{
-		mapping->mSoundEffect->SetPitch(pitch);
-	}
-}
-void AudioManager::SetVolume(const std::string& name, float vol)
-{
-	const size_t id = mStringHash(name);
-
-	SFXMapping* mapping = FindSFXMap(id);
-	if (mapping != nullptr)
-	{
-		mapping->mSoundEffect->SetVolume(vol);
-	}
-}
 void AudioManager::LoopEnabled(const std::string& name, bool b)
 {
 	const size_t id = mStringHash(name);
@@ -82,7 +63,37 @@ void AudioManager::LoopEnabled(const std::string& name, bool b)
 				mapping->mSoundEffect->SetLoop(b);
 			}
 }
+void AudioManager::SetPosition(const std::string& name, float pos)
+{
+	const size_t id = mStringHash(name);
 
+	SFXMapping* mapping = FindSFXMap(id);
+	if (mapping != nullptr)
+	{
+		mapping->mSoundEffect->SetPosition(pos);
+	}
+}
+
+float AudioManager::GetPosition(const std::string& name)
+{
+	const size_t id = mStringHash(name);
+
+	SFXMapping* mapping = FindSFXMap(id);
+	if (mapping != nullptr)
+	{
+		mapping->mSoundEffect->GetPosition();
+	}
+}
+float AudioManager::GetLength(const std::string& name)
+{
+	const size_t id = mStringHash(name);
+
+	SFXMapping* mapping = FindSFXMap(id);
+	if (mapping != nullptr)
+	{
+		mapping->mSoundEffect->GetLength();
+	}
+}
 void AudioManager::addSound(const std::string& name, const Sound& sound)
 {
 	mSoundEffectList.emplace_back(mStringHash(name), sound);
