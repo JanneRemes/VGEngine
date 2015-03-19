@@ -10,7 +10,7 @@ namespace vg
 		SFXMapping(size_t id, const Sound& sound);
 	
 		size_t mId;
-		SoundEffect mSoundEffect;
+		SoundEffect *mSoundEffect;
 	};
 
 	class AudioManager
@@ -21,7 +21,11 @@ namespace vg
 		void addSound(const std::string& name, const Sound& sound);
 		void Stop(const std::string& name);
 		void Play(const std::string& name);
+		void Pause(const std::string& name);
+		void SetPitch(const std::string& name, int pitch);
+		void SetVolume(const std::string& name, float vol);
 		void LoopEnabled(const std::string& name, bool b);
+		SFXMapping *FindSFXMap(int id);
 
 	private:
 		std::hash<std::string> mStringHash;

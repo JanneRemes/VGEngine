@@ -23,9 +23,11 @@ public:
 	void Stop();
 	void Pause();
 
+	void SetPitch(int pitch);
+
 	void SetLoop(bool b);
 	void Destroy();
-	void setVolume(float volume);
+	void SetVolume(float volume);
 private:
 
 	SLEngineItf Engine;
@@ -39,10 +41,6 @@ private:
 	SLVolumeItf PlayerVolume;
 	SLmillibel maxVolumeLevel;
 	SLSeekItf Seek;
-
-	// Buffer
-	SLAndroidSimpleBufferQueueItf BufferQueue;
-	short *nextBuffer;
-	unsigned nextSize;
+	SLPlaybackRateItf RateObject;
 };
 }
