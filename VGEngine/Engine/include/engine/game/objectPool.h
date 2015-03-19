@@ -5,9 +5,9 @@ namespace vg
 {
 	struct PoolObjectType
 	{
-		GameObject prefab;
+		GameObject *prefab;
 		int	   amount;
-		PoolObjectType(GameObject prefab, int amount)
+		PoolObjectType(GameObject *prefab, int amount)
 		{
 			this->prefab = prefab;
 			this->amount = amount;
@@ -19,16 +19,14 @@ namespace vg
 	public:
 		ObjectPool();
 		~ObjectPool();
-		GameObject getGameObject();//returns pooled object if available
-		void addPrefabType(GameObject gameObject, int amount);
-		void removePrefabType(GameObject gameObject, bool clear);//if clear then remove all pooled objects
-		void createGameObjectPool(); //creates empty gameobjects to InactivePool from mPoolPrefabList
-		void addPrefabToPool(PoolObjectType type); //Adds poolobjectype's amount of gameobjects to inactivepool
+		GameObject *getGameObjectFromPool(std::string name);//returns pooled object if available
+		void addGameObject(GameObject gObject);
+		void createGameObjectPool(std::vector<PoolObjectType> *prefabs); //creates empty gameobjects to InactivePool from mPoolPrefabList
 	private:
+		void addPrefabToPool(PoolObjectType type); //Adds poolobjectype's amount of gameobjects to inactivepool
 		bool loaded;
 		std::vector<GameObject> mActivePool;   ///< description
 		std::vector<GameObject> mInactivePool; ///< description
-		std::vector<PoolObjectType> mPoolPrefabs;
 	};
 
 }

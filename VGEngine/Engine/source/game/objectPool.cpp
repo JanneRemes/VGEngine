@@ -9,29 +9,10 @@ ObjectPool::ObjectPool()
 ObjectPool::~ObjectPool()
 {
 }
-void ObjectPool::addPrefabType(GameObject gameObject, int amount)
+
+void ObjectPool::createGameObjectPool(std::vector<PoolObjectType> *prefabs)
 {
-	PoolObjectType prefab(gameObject, amount);
-	mPoolPrefabs.push_back(prefab);
-	if (loaded)
-	{
-		addPrefabToPool(prefab);
-	}
-}
-void ObjectPool::removePrefabType(GameObject gameObject, bool clear)
-{
-	if (clear)
-	{
-		//TODO clear all gameobjects
-	}
-	else
-	{
-		//set all inactive gameobjects with type not pooled
-	}
-}
-void ObjectPool::createGameObjectPool()
-{
-	for (auto it = mPoolPrefabs.begin(); it != mPoolPrefabs.end(); it++)
+	for (auto it = prefabs->begin(); it != prefabs->end(); it++)
 	{
 		addPrefabToPool((*it));
 	}
@@ -40,5 +21,27 @@ void ObjectPool::createGameObjectPool()
 void ObjectPool::addPrefabToPool(PoolObjectType type)
 {
 	for (int i = 0; i < type.amount; i++)
-		mInactivePool.push_back(type.prefab);
+		mInactivePool.push_back(*type.prefab);
+}
+void ObjectPool::addGameObject(GameObject gObject)
+{
+	GameObject* pooledObject = getGameObjectFromPool(gObject.getName());
+	if (pooledObject == nullptr)
+	{
+		mActivePool.push_back(gObject);
+	}
+	else
+	{
+		mActivePool.push_back(*pooledObject);
+	}
+}
+GameObject *ObjectPool::getGameObjectFromPool(std::string name)
+{
+	for (auto it = mInactivePool.begin(); it != mInactivePool.end(); it++)
+	{
+		if ((*it).getName() == name)
+		{
+			return &(*it);
+		}
+	}
 }
