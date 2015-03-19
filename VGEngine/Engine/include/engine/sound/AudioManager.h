@@ -22,11 +22,28 @@ namespace vg
 		void Stop(const std::string& name);
 		void Play(const std::string& name);
 		void Pause(const std::string& name);
-		void SetPitch(const std::string& name, int pitch);
-		void SetVolume(const std::string& name, float vol);
-		void LoopEnabled(const std::string& name, bool b);
-		SFXMapping *FindSFXMap(int id);
 
+		/**
+		Set looping enabled or disabled for track
+		*/
+		void LoopEnabled(const std::string& name, bool b);
+
+		/**
+		Set the playing position in track
+		*/
+		void SetPosition(const std::string& name, float pos);
+
+		/**
+		Get playing position of track in milliseconds
+		*/
+		float GetPosition(const std::string& name);
+
+		/**
+		Get track length in milliseconds
+		*/
+		float GetLength(const std::string& name);
+
+		SFXMapping *FindSFXMap(int id);
 	private:
 		std::hash<std::string> mStringHash;
 		std::vector<SFXMapping> mSoundEffectList;

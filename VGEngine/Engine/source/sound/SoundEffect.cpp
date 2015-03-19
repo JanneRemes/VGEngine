@@ -5,7 +5,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 {
 	// For error checking
 	SLresult result;
-
+	
 	// Create engine, realize it, get interface
 	result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL);
 	result = (*engineObject)->Realize(engineObject, SL_BOOLEAN_FALSE);
@@ -63,13 +63,6 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 
 }
 
-void SoundEffect::SetVolume(float volume)
-{
-	SLmillibel maxVol = volume;
-	(*PlayerVolume)->GetMaxVolumeLevel(PlayerVolume, &maxVol);
-	(*PlayerVolume)->SetVolumeLevel(PlayerVolume, maxVol);
-}
-
 void SoundEffect::Play()
 {
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PLAYING);
@@ -79,14 +72,6 @@ void SoundEffect::Pause()
 {
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PAUSED);
 }
-void SoundEffect::SetPitch(int pitch)
-{
-	SLpermille a = SLpermille(pitch);
-	SLpermille min = 0;
-	SLpermille max = 0;
-	(*RateObject)->GetRate(RateObject, &min);
-	(*RateObject)->SetRate(RateObject, pitch);
-}
 void SoundEffect::SetLoop(bool b)
 {
 	if (true)
@@ -95,6 +80,22 @@ void SoundEffect::SetLoop(bool b)
 	(*Seek)->SetLoop(Seek, SL_BOOLEAN_FALSE, 0, SL_TIME_UNKNOWN);
 }
 
+void SoundEffect::SetPosition(float pos)
+{
+	(*Seek)->SetPosition(Seek, pos, SL_SEEKMODE_ACCURATE);
+}
+float SoundEffect::GetPosition()
+{
+	SLmillisecond position;
+	(*PlayerPlay)->GetPosition(PlayerPlay, &position);
+	return position;
+}
+float SoundEffect::GetLength()
+{
+	SLmillisecond length;
+	(*PlayerPlay)->GetDuration(PlayerPlay, &length);
+	return length;
+}
 void SoundEffect::Stop()
 {
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_STOPPED);

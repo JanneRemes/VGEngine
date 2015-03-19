@@ -145,6 +145,7 @@
       <Filter>include\graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\objectPool.h" />
+    <ClInclude Include="sceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -226,5 +227,6 @@
       <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\game\objectPool.cpp" />
+    <ClCompile Include="sceneManager.cpp" />
   </ItemGroup>
 </Project>

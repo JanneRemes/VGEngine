@@ -47,8 +47,10 @@
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
+    <ClInclude Include="sceneManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="source\android_native_app_glue.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />

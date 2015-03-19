@@ -16,7 +16,7 @@ namespace vg
     /**
     <description>
     */
-    class Scene;
+    class SceneManager;
 
 
     /**
@@ -70,7 +70,7 @@ namespace vg
 
 
     private:
-        std::vector<Scene*> mScenes;    ///< description
+		SceneManager mSceneManager();   ///< description
         float mPulse;                   ///< description
         bool mIsRunning;                ///< description
     };
