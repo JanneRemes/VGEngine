@@ -15,9 +15,17 @@ namespace vg
 	class Scene
 	{
 	public:
-		Scene() = default;
+		Scene() : paused(false){};
 		virtual ~Scene() = default;
+
+		void update(float dt) {};
+		void draw() {};
+
+		bool getPaused() { return paused; }
+
 	private:
 		ObjectPool mObjectPool;
+		bool paused;
+
 	};
 }
