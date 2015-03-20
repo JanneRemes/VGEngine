@@ -6,10 +6,7 @@
 #include <android/asset_manager_jni.h>
 #include <SLES/OpenSLES_Android.h>
 #include <SLES/OpenSLES.h>
-
-#include <android/log.h>
-
-#define LOGA(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SoundEffect", __VA_ARGS__))
+#include "engine/utility/logger.h"
 namespace vg 
 {
 

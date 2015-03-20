@@ -15,7 +15,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	int mFd = soundFile.data.fd;
 	off_t mStart = soundFile.data.start;
 	off_t mLength = soundFile.data.length;
-	LOGA("Sound data: %i %i %i", mStart, mLength, mFd);
+	Log("debug","Sound data: %i %i %i", mStart, mLength, mFd);
 
 	// Data location
 	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength };
@@ -41,17 +41,17 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	// Realize player
 	result = (*PlayerObject)->Realize(PlayerObject, SL_BOOLEAN_FALSE);
 	if (result != SL_RESULT_SUCCESS)
-		LOGA("Player realize failed");
+		Log("debug","Player realize failed","");
 
 	// Get play interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAY, &PlayerPlay);
 	if (result != SL_RESULT_SUCCESS)
-		LOGA("play interface failed");
+		Log("debug", "play interface failed","");
 
 	// Get volume interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_VOLUME, &PlayerVolume);
 	if (result != SL_RESULT_SUCCESS)
-		LOGA("volume interface failed");
+		Log("debug", "volume interface failed","");
 
 	// get seek interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_SEEK, &Seek);
@@ -59,7 +59,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	// get playbackrate interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAYBACKRATE, &RateObject);
 	if (result != SL_RESULT_SUCCESS)
-		LOGA("Playback rate interface failed");
+		Log("debug", "Playback rate interface failed","");
 
 }
 

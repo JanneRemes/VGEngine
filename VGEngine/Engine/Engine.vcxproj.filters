@@ -228,6 +228,8 @@
     </ClCompile>
     <ClCompile Include="source\game\objectPool.cpp" />
     <ClCompile Include="sceneManager.cpp" />
-    <ClCompile Include="..\external\lodepng\lodepng.cpp" />
+    <ClCompile Include="external\lodepng\lodepng.cpp">
+      <Filter>external</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

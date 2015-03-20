@@ -50,7 +50,7 @@
     <ClInclude Include="sceneManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\external\lodepng\lodepng.cpp" />
+    <ClCompile Include="external\lodepng\lodepng.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="source\android_native_app_glue.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />

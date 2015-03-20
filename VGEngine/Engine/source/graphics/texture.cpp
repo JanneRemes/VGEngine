@@ -1,7 +1,7 @@
 
 #include "engine/graphics/texture.h"
 #include "engine/assets/fileManager.h"
-#include "../../external/lodepng/lodepng.h"
+#include "../external/lodepng/lodepng.h"
 //#include "engine/logger.h"
 #include <string>
 #include <vector>
