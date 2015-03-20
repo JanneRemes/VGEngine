@@ -14,7 +14,7 @@ namespace vg
 		*/
 		Texture(const std::string& path);
 
-		~Texture();
+		~Texture() = default;
 
 		/**
 			<description>

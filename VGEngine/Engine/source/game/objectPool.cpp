@@ -33,6 +33,7 @@ void ObjectPool::addGameObject(GameObject gObject)
 	else
 	{
 		mActivePool.push_back(*pooledObject);
+		removeGameObjectInactivePool(*pooledObject);
 	}
 }
 GameObject *ObjectPool::getGameObjectFromPool(std::string name)
@@ -42,6 +43,16 @@ GameObject *ObjectPool::getGameObjectFromPool(std::string name)
 		if ((*it).getName() == name)
 		{
 			return &(*it);
+		}
+	}
+}
+void ObjectPool::removeGameObjectInactivePool(GameObject gObject)
+{
+	for (auto it = mInactivePool.begin(); it != mInactivePool.end(); it++)
+	{
+		if ((*it).getName() == gObject.getName())
+		{
+			mInactivePool.erase(it);
 		}
 	}
 }
