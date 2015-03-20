@@ -67,6 +67,7 @@
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\graphics\graphicsDevice.cpp" />
     <ClCompile Include="source\graphics\indexBuffer.cpp" />
+    <ClCompile Include="source\graphics\opengl.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\graphics\spriteBatch.cpp" />
     <ClCompile Include="source\graphics\text.cpp" />

@@ -245,5 +245,8 @@
     <ClCompile Include="sceneManager.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+    <ClCompile Include="source\graphics\opengl.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
