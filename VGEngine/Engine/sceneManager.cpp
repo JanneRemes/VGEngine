@@ -14,7 +14,7 @@ sceneManager::~sceneManager()
 void sceneManager::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	for (vector<Scene*>::iterator it = currentScenes.begin(); it != currentScenes.end(); it++)
+	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 	{
 		(*it)->draw();
 	}
@@ -22,15 +22,15 @@ void sceneManager::draw()
 
 void sceneManager::update(float dt)
 {
-	for (vector<Scene*>::iterator it = currentScenes.begin(); it != currentScenes.end(); it++)
+	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 	{
 		if (!(*it)->getPaused())
 		{
 			(*it)->update(dt);
 		}
-		if (sceneChanged)
+		if (mSceneChanged)
 		{
-			sceneChanged = false;
+			mSceneChanged = false;
 			break;
 		}
 	}
@@ -38,8 +38,8 @@ void sceneManager::update(float dt)
 
 void sceneManager::openScene(Scene *scene)
 {
-	currentScenes.push_back(scene);
-	sceneChanged = true;
+	mCurrentScenes.push_back(scene);
+	mSceneChanged = true;
 }
 
 void sceneManager::changeScene(Scene *scene)
@@ -50,20 +50,20 @@ void sceneManager::changeScene(Scene *scene)
 
 void sceneManager::emptyScenes()
 {
-	if (currentScenes.size() > 0)
+	if (mCurrentScenes.size() > 0)
 	{
-		for (vector<Scene*>::iterator it = currentScenes.begin(); it != currentScenes.end(); it++)
+		for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 			delete (*it);
 	}
-	currentScenes.clear();
+	mCurrentScenes.clear();
 }
 
 void sceneManager::closeCurrentScene()
 {
-	if (currentScenes.size() > 0)
+	if (mCurrentScenes.size() > 0)
 	{
-		delete currentScenes.back();
-		currentScenes.pop_back();
-		sceneChanged = true;
+		delete mCurrentScenes.back();
+		mCurrentScenes.pop_back();
+		mSceneChanged = true;
 	}
 }

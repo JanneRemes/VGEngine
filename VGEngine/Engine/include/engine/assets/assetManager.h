@@ -18,9 +18,8 @@ namespace vg
 	{
 	public:
         /**
-            <description>
-            @param fileManager
-            @return <description>
+            Constructor
+            @param fileManager Filemanager class used for loading assets
         */
         AssetManager(FileManager& fileManager);
 
@@ -45,9 +44,8 @@ namespace vg
 		}
 		
 		/**
-			<description>
-			@param path <description>
-			@return <description>
+			Loads an asset from given path
+			@param path The path for the asset we are trying to load
 		*/
 		template<class T>
 		void load(const std::string& path)
@@ -70,9 +68,8 @@ namespace vg
 		}
 		
 		/**
-			<description>
-			@param paths <description>
-			@return <description>
+			Loads multiple assets from the path
+			@param paths paths for the files we are trying to load
 		*/
 		template<class T>
 		void loadAll(const std::vector<std::string>& paths)
@@ -84,21 +81,19 @@ namespace vg
 		}
 		
 		/**
-			<description>
-			@param path <description>
-			@return <description>
+			Unloads an asset from the path
+			@param path path for the files we are trying to unload
 		*/
 		void unload(const std::string& path);
 
 		/**
-			<description>
-			@param paths <description>
-			@return <description>
+			Unloads multiple assets from the path
+			@param paths paths for the files we are trying to unload
 		*/
 		void unloadAll(const std::vector<std::string>& paths);
 
 		/**
-			<description>
+			Unloads every asset
 		*/
 		void unloadAll();
 
@@ -108,21 +103,21 @@ namespace vg
 		void commit();
 	private:
 		/**
-			<description>
-			@param hash <description>
-			@return <description>
+			Finds and returns an asset from the given hash
+			@param hash Hashcode that is given for every asset
+			@return Asset
 		*/
 		Asset* find(size_t hash);
 
 		/**
-			<description>
-			@param hash <description>
-			@return <description>
+		Finds and returns an asset from the given hash
+		@param hash Hashcode that is given for every asset
+		@return Asset
 		*/
 		Asset const* find(size_t hash) const;
 
-		std::hash<std::string> mHasher;   ///< description
-		std::map<size_t, Asset*> mAssets; ///< description
-        FileManager& mFileManager;
+		std::hash<std::string> mHasher;		///< Hash from a string
+		std::map<size_t, Asset*> mAssets;	///< description
+        FileManager& mFileManager;			///
 	};
 }

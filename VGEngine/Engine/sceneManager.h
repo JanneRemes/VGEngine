@@ -11,9 +11,9 @@ namespace vg
 	{
 	public:
 		/**
-		Initializes default values
+		Default constructor
 		*/
-		sceneManager();
+		sceneManager(){ mSceneChanged = false; };
 		~sceneManager();
 
 		/**
@@ -22,7 +22,7 @@ namespace vg
 		void draw();
 
 		/**
-		Draws the current scene that isnt paused
+		Updates the current scene that isnt paused
 		@param dt The elapsed time since the game last updated
 		*/
 		void update(float dt);
@@ -50,7 +50,7 @@ namespace vg
 		void closeCurrentScene();
 
 	private:
-		vector<Scene*> currentScenes; ///< Vector that includes all the scenes that we are currently using
-		bool sceneChanged = false; ///< Bool that is used for changing scenes.
+		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
+		bool mSceneChanged; ///< Bool that is used for changing scenes.
 	};
 }
