@@ -4,7 +4,7 @@
 #include "engine/input/input.h"
 
 using namespace vg;
-
+Game* Game::gameInstance;
 Game::Game(Graphics* graphics)
     : mPulse(0), mIsRunning(true)
 {
