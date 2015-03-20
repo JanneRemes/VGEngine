@@ -10,6 +10,7 @@ Game::Game(Graphics* graphics)
 {
     testSprite = DebugSprite();
     graphics->append(&testSprite);
+	gameInstance = this;
 }
 
 
