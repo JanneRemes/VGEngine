@@ -1,13 +1,12 @@
 
 #pragma once
 
+#include "engine/graphics/shader.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/indexBuffer.h"
 
 namespace vg
 {
-	class Shader;
-	class VertexBuffer;
-	class IndexBuffer;
-	
 	class GraphicsDevice
 	{
 	public:

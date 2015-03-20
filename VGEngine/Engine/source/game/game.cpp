@@ -5,9 +5,11 @@
 
 using namespace vg;
 
-Game::Game()
+Game::Game(Graphics* graphics)
     : mPulse(0), mIsRunning(true)
 {
+    testSprite = DebugSprite();
+    graphics->append(&testSprite);
 }
 
 
@@ -32,6 +34,8 @@ void Game::draw(Graphics* graphics)
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(Input::getX() / graphics->getScreenWidth(), mPulse,
         (Input::getY()) / graphics->getScreenHeight(), 1);
+
+    graphics->draw();
 }
 
 

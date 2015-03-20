@@ -30,7 +30,7 @@ namespace vg
         /**
         <description>
         */
-        Game();
+        Game(Graphics* graphics);
 
         /**
         <description>
@@ -73,5 +73,7 @@ namespace vg
 		SceneManager mSceneManager();   ///< description
         float mPulse;                   ///< description
         bool mIsRunning;                ///< description
+
+        DebugSprite testSprite;         ///< description
     };
 }

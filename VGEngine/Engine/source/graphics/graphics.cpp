@@ -81,17 +81,24 @@ void Graphics::switchShader(string vertexPath, string fragmentPath)
 }
 
 /*
-void Graphics::draw()
-{
-    vector<SpriteBatch*>::iterator i;
-    for (i = mBatches.begin(); i != mBatches.end(); i++)
-    {
-        (*i)->draw(mShader);
-    }
-}
-
 void Graphics::append(SpriteBatch* spriteBatch)
 {
     mBatches.push_back(spriteBatch);
 }
 */
+
+void Graphics::draw()
+{
+    /// @todo draw spriteBatches
+
+    vector<DebugSprite*>::iterator i;
+    for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
+    {
+        (*i)->draw(mShader);
+    }
+}
+
+void Graphics::append(DebugSprite* sprite)
+{
+    mDebugSprites.push_back(sprite);
+}

@@ -1,8 +1,5 @@
 
 #include "engine/graphics/graphicsDevice.h"
-#include "engine/graphics/shader.h"
-#include "engine/graphics/vertexBuffer.h"
-#include "engine/graphics/indexBuffer.h"
 #include "engine/graphics/opengl.h"
 
 using namespace vg;

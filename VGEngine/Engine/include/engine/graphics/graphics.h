@@ -5,6 +5,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/spriteBatch.h"
+#include "engine/graphics/debugSprite.h"
 
 #include <string>
 #include <vector>
@@ -66,8 +67,10 @@ namespace vg
         */
         void switchShader(std::string vertexPath, std::string fragmentPath);
         
-        //void draw();
+        void draw();
         //void append(SpriteBatch* spriteBatch);
+        
+        void append(DebugSprite* sprite);
 
     private:
         FileManager* mFileManager;  ///< pointer to FileManager
@@ -75,6 +78,8 @@ namespace vg
         Shader mShader;             ///< current Shader
         bool mInitialized;          ///< has Graphics been initialized
         //std::vector<SpriteBatch*> mBatches;
+
+        std::vector<DebugSprite*> mDebugSprites;
 
     };
 }

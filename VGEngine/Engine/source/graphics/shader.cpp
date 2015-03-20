@@ -76,7 +76,7 @@ AttributeNameMap Shader::getDefaultAttribNames()
     AttributeNameMap result;
     result[Position] = "attrPosition";
     result[Color] = "attrColor";
-    result[TexCoord] = "varyTexCoord";
+    result[TexCoord] = "attrTexCoord";
     return result;
 }
 

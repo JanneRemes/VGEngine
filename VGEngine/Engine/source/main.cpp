@@ -58,7 +58,7 @@ static void handleCommand(struct android_app* app, int32_t cmd);
 */
 struct SavedState
 {
-    vg::Game game;
+    vg::Game* game;
 };
 
 /**
@@ -111,9 +111,10 @@ void android_main(struct android_app* state)
     // Make sure app_glue isn't stripped.
     app_dummy();
 
-    engine.state.game.start();
+    engine.state.game = new vg::Game(&engine.graphics);
+    engine.state.game->start();
     // loop waiting for stuff to do.
-    while (engine.state.game.isRunning())
+    while (engine.state.game->isRunning())
     {
         // Read all pending events.
         int ident;
@@ -162,7 +163,7 @@ void android_main(struct android_app* state)
             drawFrame(&engine);
         }
 
-        engine.state.game.update();
+        engine.state.game->update();
     }
 }
 
@@ -171,7 +172,7 @@ void android_main(struct android_app* state)
 */
 void drawFrame(struct Engine* engine)
 {
-    engine->state.game.draw(&engine->graphics);
+    engine->state.game->draw(&engine->graphics);
     engine->graphics.swapBuffers();
 }
 
@@ -206,7 +207,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
     case APP_CMD_TERM_WINDOW:
         // The window is being hidden or closed, clean it up.
         engine->graphics.unInitialize();
-        engine->state.game.stop();
+        engine->state.game->stop();
         break;
 
     case APP_CMD_GAINED_FOCUS:

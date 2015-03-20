@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <GLES2/gl2.h>
 #include <stdint.h>
 
@@ -8,24 +10,12 @@ namespace vg
 {
 	namespace gl
 	{
-		void VertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data)
-		{
-			glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, data);
-		}
+        void VertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
 
-		void DrawArrays(GLenum primitiveType, GLint offset, GLsizei count)
-		{
-			glDrawArrays(primitiveType, offset, count);
-		}
+        void DrawArrays(GLenum primitiveType, GLint offset, GLsizei count);
 
-		void DrawElements(GLenum primitiveType, GLsizei count, GLenum indexType, GLvoid *indices = nullptr)
-		{
-			glDrawElements(primitiveType, count, indexType, indices);
-		}
+        void DrawElements(GLenum primitiveType, GLsizei count, GLenum indexType, GLvoid *indices = nullptr);
 
-		void UseProgram(GLuint programId = 0)
-		{
-			glUseProgram(programId);
-		}
+        void UseProgram(GLuint programId = 0);
 	}
 }
