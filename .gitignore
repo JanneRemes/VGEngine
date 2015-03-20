@@ -41,3 +41,6 @@ docs/
 !doxyfile
 !doxygen.exe
 !doxywizard.exe
+
+Debug/
+Release/

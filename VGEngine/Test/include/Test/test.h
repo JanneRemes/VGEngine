@@ -2,11 +2,12 @@
 #pragma once
 
 #include <engine/engine.h>
-#include <android\log.h>
+#include <android/log.h>
 
 class Test
 {
 public:
+	/*
 	bool doesItWork()
 	{
 		main_dummy();
@@ -14,6 +15,6 @@ public:
 		__android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "Test::doesItWork()");
 
 		return true;
-	}
+	}*/
 private:
 };
