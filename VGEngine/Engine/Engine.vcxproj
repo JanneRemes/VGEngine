@@ -26,6 +26,7 @@
     <ClInclude Include="include\engine\game\objectPool.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
+    <ClInclude Include="include\engine\graphics\debugSprite.h" />
     <ClInclude Include="include\engine\graphics\drawable.h" />
     <ClInclude Include="include\engine\graphics\graphics.h" />
     <ClInclude Include="include\engine\graphics\opengl.h" />
@@ -61,6 +62,7 @@
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\objectPool.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
+    <ClCompile Include="source\graphics\debugSprite.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\graphics\graphicsDevice.cpp" />

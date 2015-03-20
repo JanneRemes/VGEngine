@@ -144,8 +144,15 @@
     <ClInclude Include="include\engine\graphics\graphics.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\objectPool.h" />
-    <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="include\engine\graphics\debugSprite.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\objectPool.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneManager.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -226,10 +233,17 @@
     <ClCompile Include="source\graphics\graphics.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="source\game\objectPool.cpp" />
-    <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="external\lodepng\lodepng.cpp">
       <Filter>external</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\debugSprite.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\objectPool.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
