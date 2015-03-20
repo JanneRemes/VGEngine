@@ -2,11 +2,6 @@
 #include "engine/graphics/graphics.h"
 using namespace vg;
 
-sceneManager::sceneManager()
-{
-}
-
-
 sceneManager::~sceneManager()
 {
 }
