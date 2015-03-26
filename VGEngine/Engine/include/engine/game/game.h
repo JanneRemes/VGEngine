@@ -67,8 +67,6 @@ namespace vg
         <description>
         */
         void start();
-
-		static Game* gameInstance;
     private:
 		SceneManager mSceneManager();   ///< description
         float mPulse;                   ///< description

@@ -90,12 +90,12 @@ void Graphics::append(SpriteBatch* spriteBatch)
 void Graphics::draw()
 {
     /// @todo draw spriteBatches
-
+	/*
     vector<DebugSprite*>::iterator i;
     for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
     {
         (*i)->draw(mShader);
-    }
+    }*/
 }
 
 void Graphics::append(DebugSprite* sprite)

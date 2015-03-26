@@ -4,7 +4,6 @@
 using namespace vg;
 void test_dummy()
 {
-	Game *g = Game::gameInstance;
 	
 	main_dummy();
 }
