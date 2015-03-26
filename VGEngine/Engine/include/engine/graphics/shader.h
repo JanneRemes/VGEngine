@@ -7,6 +7,7 @@
 #include <GLES2/gl2.h>
 #include <string>
 #include <map>
+#include <vector>
 
 namespace vg
 {
@@ -26,6 +27,9 @@ namespace vg
         Shader(const AttributeNameMap& attributeNames = getDefaultAttribNames());
         Shader(const Shader& shader);
 
+        void initialize();
+
+        bool isInitialized();
 
         /**
 			Loads and compiles shader sources from assets
@@ -64,9 +68,12 @@ namespace vg
         */
         GLint compileShaderSource(GLuint id, const std::string& source);
 
+        void printErrorLog(GLuint shader);
+
         GLuint mVertexId;                          ///< vertex shader id used for linking
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking
         AttributeNameMap mVertexElementNames;      ///< map of vertex element ids and names
+        bool mInitialized;
     };
 }
