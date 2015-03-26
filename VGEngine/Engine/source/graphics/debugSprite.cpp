@@ -48,24 +48,24 @@ std::vector<float> DebugSprite::getVertices()
         // TexCoord Vec2
 
         //left up
-        -1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        0.0f, 1.0f,
+        -0.5f, 0.5f,
+        //1.0f, 1.0f, 1.0f, 1.0f,
+        //0.0f, 1.0f,
     
         //left down
-        -1.0f, -1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        0.0f, 0.0f,
+        -0.5f, -0.5f,
+        //1.0f, 1.0f, 1.0f, 1.0f,
+        //0.0f, 0.0f,
     
         //right down
-        1.0f, -1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 0.0f,
+        0.5f, -0.5f,
+        //1.0f, 1.0f, 1.0f, 1.0f,
+        //1.0f, 0.0f,
     
         //right up
-        1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f
+        0.5f, 0.5f,
+        //1.0f, 1.0f, 1.0f, 1.0f,
+        //1.0f, 1.0f
     
     };
     return vector<float>(result, result + sizeof(result) / sizeof(float));

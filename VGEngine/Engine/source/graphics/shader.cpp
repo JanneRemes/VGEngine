@@ -50,7 +50,7 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     fileManager.readAsset(FOLDER + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
     {
-        Log("ERROR", "Vertex shader compile error!", "");
+        Log("SHADER", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
         return false;
     }
@@ -58,7 +58,7 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     fileManager.readAsset(FOLDER + fragmentPath, buffer);
     if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
     {
-        Log("ERROR", "Fragment shader compile error!", "");
+        Log("SHADER", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
         return false;
     }
@@ -72,7 +72,7 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
 
     if (result != GL_TRUE)
     {
-        Log("ERROR", "Shader program link error!", "");
+        Log("SHADER", "Shader program link error!", "");
         return false;
     }
 
@@ -93,7 +93,7 @@ AttributeNameMap Shader::getDefaultAttribNames()
 {
     AttributeNameMap result;
     result[Position] = "attrPosition";
-    result[Color] = "attrColor";
+    //result[Color] = "attrColor";
     //result[TexCoord] = "attrTexCoord";
     return result;
 }
