@@ -92,13 +92,12 @@ void android_main(struct android_app* state)
     state->onAppCmd = handleCommand;
     state->onInputEvent = vg::Input::engine_handle_input;
     engine.app = state;
-
     // Prepare to monitor accelerometer
     engine.sensorManager = ASensorManager_getInstance();
     engine.accelerometerSensor = ASensorManager_getDefaultSensor(engine.sensorManager,
         ASENSOR_TYPE_ACCELEROMETER);
     engine.sensorEventQueue = ASensorManager_createEventQueue(engine.sensorManager,
-        engine.app->looper, LOOPER_ID_USER, NULL, NULL);
+        engine.app->looper, LOOPER_ID_USER,NULL, NULL);
 
     if (engine.app->savedState != NULL)
     {
@@ -116,6 +115,7 @@ void android_main(struct android_app* state)
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
     {
+		Log("fm", "%f %f %f SENSOR", vg::Input::getSensorX(), vg::Input::getSensorY(), vg::Input::getSensorZ());
         // Read all pending events.
         int ident;
         int events;
@@ -139,12 +139,7 @@ void android_main(struct android_app* state)
             {
                 if (engine.accelerometerSensor != NULL)
                 {
-                    ASensorEvent event;
-                    while (ASensorEventQueue_getEvents(engine.sensorEventQueue, &event, 1) > 0)
-                    {
-                        // Uncomment if needed
-                        //Log("DEBUG", "accelerometer: x=%f y=%f z=%f",event.acceleration.x, event.acceleration.y, event.acceleration.z);
-                    }
+					vg::Input::accelerometerEvent(engine.sensorEventQueue);
                 }
             }
 

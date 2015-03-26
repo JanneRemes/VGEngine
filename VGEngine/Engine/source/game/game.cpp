@@ -31,8 +31,8 @@ void Game::draw(Graphics* graphics)
     }
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(Input::getX() / graphics->getScreenWidth(), mPulse,
-        (Input::getY()) / graphics->getScreenHeight(), 1);
+    glClearColor(Input::getTouchX() / graphics->getScreenWidth(), mPulse,
+        (Input::getTouchY()) / graphics->getScreenHeight(), 1);
 
     graphics->draw();
 }
