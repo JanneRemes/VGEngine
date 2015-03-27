@@ -93,8 +93,8 @@ AttributeNameMap Shader::getDefaultAttribNames()
 {
     AttributeNameMap result;
     result[Position] = "attrPosition";
-    //result[Color] = "attrColor";
-    //result[TexCoord] = "attrTexCoord";
+    result[Color] = "attrColor";
+    result[TexCoord] = "attrTexCoord";
     return result;
 }
 

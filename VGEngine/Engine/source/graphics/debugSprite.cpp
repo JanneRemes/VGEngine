@@ -1,7 +1,5 @@
 
 #include "engine/graphics/debugSprite.h"
-#include "engine/graphics/vertexBuffer.h"
-#include "engine/graphics/indexBuffer.h"
 #include "engine/graphics/graphicsDevice.h"
 #include "engine/utility/logger.h"
 
@@ -11,7 +9,8 @@ using namespace std;
 DebugSprite::DebugSprite(/*const Texture& texture*/)
     //:mTexture(texture)
 {
-
+    //mVertexBuffer = new VertexBuffer(getVertices());
+    //mIndexBuffer = new IndexBuffer(getIndices());
 }
 
 DebugSprite::~DebugSprite()
@@ -49,22 +48,22 @@ std::vector<float> DebugSprite::getVertices()
 
         //left up
         -0.5f, 0.5f,
-        //1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 0.0f, 0.0f, 1.0f,
         //0.0f, 1.0f,
     
         //left down
         -0.5f, -0.5f,
-        //1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 0.0f, 0.0f, 1.0f,
         //0.0f, 0.0f,
     
         //right down
         0.5f, -0.5f,
-        //1.0f, 1.0f, 1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f,
         //1.0f, 0.0f,
     
         //right up
         0.5f, 0.5f,
-        //1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 0.0f, 1.0f
         //1.0f, 1.0f
     
     };

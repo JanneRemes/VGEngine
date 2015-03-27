@@ -3,6 +3,8 @@
 
 #include "engine/graphics/texture.h"
 #include "engine/graphics/shader.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/indexBuffer.h"
 
 #include <vector>
 
@@ -21,6 +23,7 @@ namespace vg
 
     private:
         //Texture mTexture;
-
+        //VertexBuffer* mVertexBuffer;
+        //IndexBuffer* mIndexBuffer;
     };
 }
