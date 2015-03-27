@@ -70,9 +70,6 @@ namespace vg
 
 		float mPulse;
     private:
-                 ///< description
-        bool mIsRunning;                ///< description
-
-        DebugSprite testSprite;         ///< description
+        bool mIsRunning;     ///< description
     };
 }

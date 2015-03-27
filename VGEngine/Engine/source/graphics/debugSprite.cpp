@@ -23,11 +23,6 @@ void DebugSprite::draw(Shader& shader)
     VertexBuffer vertexBuffer(getVertices());
     IndexBuffer indexBuffer(getIndices());
     GraphicsDevice::draw(shader, vertexBuffer, indexBuffer);
-
-    if (glGetError() != GL_NO_ERROR)
-        Log("DRAW", "gl error", "");
-
-    
 }
 
 
@@ -49,22 +44,22 @@ std::vector<float> DebugSprite::getVertices()
         //left up
         -0.5f, 0.5f,
         1.0f, 0.0f, 0.0f, 1.0f,
-        //0.0f, 1.0f,
+        0.0f, 1.0f,
     
         //left down
         -0.5f, -0.5f,
         1.0f, 0.0f, 0.0f, 1.0f,
-        //0.0f, 0.0f,
+        0.0f, 0.0f,
     
         //right down
         0.5f, -0.5f,
         0.0f, 0.0f, 1.0f, 1.0f,
-        //1.0f, 0.0f,
+        1.0f, 0.0f,
     
         //right up
         0.5f, 0.5f,
-        1.0f, 1.0f, 0.0f, 1.0f
-        //1.0f, 1.0f
+        1.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 1.0f
     
     };
     return vector<float>(result, result + sizeof(result) / sizeof(float));

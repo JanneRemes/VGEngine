@@ -7,8 +7,8 @@ using namespace vg;
 const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
 {
 	{ Position, Vec2 },
-	{ Color, Vec4 }
-	//{ TexCoord, Vec2 }
+	{ Color, Vec4 },
+	{ TexCoord, Vec2 }
 };
 
 static uint32_t countStride(const std::vector<VertexElement>& format)
@@ -49,23 +49,12 @@ VertexBuffer::VertexBuffer(const std::vector<float>& data, const std::vector<Ver
 void VertexBuffer::bind()
 {
 	Buffer::bind();
-
-    /*
 	uint32_t offset = 0;
 
 	for (int i = 0; i < mFormat.size(); i++)
 	{
 		glEnableVertexAttribArray(mFormat[i].mUsage);
-		glVertexAttribPointer(mFormat[i].mUsage, mFormat[i].mType, GL_FLOAT, false, mStride, (void*)(offset));
-		offset += mFormat[i].mType * sizeof(float);
+		glVertexAttribPointer(mFormat[i].mUsage, mFormat[i].mType, GL_FLOAT, GL_FALSE, mStride * sizeof(GLfloat), (GLvoid*)(offset));
+		offset += mFormat[i].mType * sizeof(GLfloat);
 	}
-    */
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
-        mStride * sizeof(GLfloat), reinterpret_cast<GLvoid*>(0));
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE,
-        mStride * sizeof(GLfloat), reinterpret_cast<GLvoid*>(2 * sizeof(GLfloat)));
-
 }

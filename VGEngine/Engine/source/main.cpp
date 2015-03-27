@@ -34,16 +34,16 @@ extern void test_dummy();
 #include "engine/android_native_app_glue.h"
 
 #include "engine/graphics/graphics.h"
-
-
 #include "engine/utility/logger.h"
-
-
 #include "engine/game.h"
 #include "engine/input/input.h"
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
-extern vg::Game* mainGame();
+#include "engine/graphics/debugSprite.h"
+
+using namespace vg;
+
+extern Game* mainGame();
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
@@ -59,7 +59,7 @@ static void handleCommand(struct android_app* app, int32_t cmd);
 */
 struct SavedState
 {
-    vg::Game* game;
+    Game* game;
 };
 
 /**
@@ -73,8 +73,7 @@ struct Engine
     const ASensor* accelerometerSensor;
     ASensorEventQueue* sensorEventQueue;
     int animating;
-    vg::Graphics graphics;
-
+    Graphics graphics;
 
     struct SavedState state;
 };
@@ -91,7 +90,7 @@ void android_main(struct android_app* state)
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;
     state->onAppCmd = handleCommand;
-    state->onInputEvent = vg::Input::engine_handle_input;
+    state->onInputEvent = Input::engine_handle_input;
     engine.app = state;
     // Prepare to monitor accelerometer
     engine.sensorManager = ASensorManager_getInstance();
@@ -113,10 +112,14 @@ void android_main(struct android_app* state)
 
 	engine.state.game = mainGame();
     engine.state.game->start();
+
+    DebugSprite testSprite;
+    engine.graphics.append(&testSprite);
+
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
     {
-		Log("fm", "%f %f %f SENSOR", vg::Input::getSensorX(), vg::Input::getSensorY(), vg::Input::getSensorZ());
+		//Log("fm", "%f %f %f SENSOR", vg::Input::getSensorX(), vg::Input::getSensorY(), vg::Input::getSensorZ());
         // Read all pending events.
         int ident;
         int events;
@@ -125,7 +128,7 @@ void android_main(struct android_app* state)
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-		vg::Input::update();
+		Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
 
@@ -140,7 +143,7 @@ void android_main(struct android_app* state)
             {
                 if (engine.accelerometerSensor != NULL)
                 {
-					vg::Input::accelerometerEvent(engine.sensorEventQueue);
+					Input::accelerometerEvent(engine.sensorEventQueue);
                 }
             }
 
@@ -168,8 +171,21 @@ void android_main(struct android_app* state)
 */
 void drawFrame(struct Engine* engine)
 {
-   // engine->state.game->draw(&engine->graphics);
-	glClearColor(1.0f, 0.0f,1.0f, 1.0f);
+    if (glGetError() != GL_NO_ERROR)
+        Log("DRAW", "gl error", "");
+
+    if (!engine->graphics.isInitialized())
+    {
+        Log("DRAW", "GraphicsContext not initialized", "");
+        return;
+    }
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
+        (Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
+
+    engine->graphics.draw();
+
     engine->graphics.swapBuffers();
 }
 
