@@ -169,6 +169,7 @@ void android_main(struct android_app* state)
 void drawFrame(struct Engine* engine)
 {
    // engine->state.game->draw(&engine->graphics);
+	glClearColor(1.0f, 0.0f,1.0f, 1.0f);
     engine->graphics.swapBuffers();
 }
 

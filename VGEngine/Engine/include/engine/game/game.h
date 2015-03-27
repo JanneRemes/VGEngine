@@ -67,9 +67,10 @@ namespace vg
 		/**
 		*/
 		SceneManager *mSceneManager;   ///< description
-    private:
 
-        float mPulse;                   ///< description
+		float mPulse;
+    private:
+                 ///< description
         bool mIsRunning;                ///< description
 
         DebugSprite testSprite;         ///< description

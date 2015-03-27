@@ -10,6 +10,7 @@ void test_dummy()
 }
 Game* mainGame()
 {
-	Game* game;
+	Game* game = new Game();
+	return game;
 	//game->mSceneManager->
 }

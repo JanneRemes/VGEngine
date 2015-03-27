@@ -22,7 +22,6 @@ void Game::update()
 
 
 
-
 void readFiles(FileManager& fileManager)
 {
     Log("-----", "----- -----", "");
