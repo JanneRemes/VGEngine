@@ -7,14 +7,14 @@ namespace vg
 	/**
 	Manages Scenes.
 	*/
-	class sceneManager
+	class SceneManager
 	{
 	public:
 		/**
 		Default constructor
 		*/
-		sceneManager(){ mSceneChanged = false; };
-		~sceneManager();
+		SceneManager(){ mSceneChanged = false; };
+		~SceneManager();
 
 		/**
 		Draws the current scene

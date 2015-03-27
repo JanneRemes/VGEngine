@@ -1,12 +1,12 @@
-#include "sceneManager.h"
+#include "engine/game/sceneManager.h"
 #include "engine/graphics/graphics.h"
 using namespace vg;
 
-sceneManager::~sceneManager()
+SceneManager::~SceneManager()
 {
 }
 
-void sceneManager::draw()
+void SceneManager::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
@@ -15,7 +15,7 @@ void sceneManager::draw()
 	}
 }
 
-void sceneManager::update(float dt)
+void SceneManager::update(float dt)
 {
 	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 	{
@@ -31,19 +31,19 @@ void sceneManager::update(float dt)
 	}
 }
 
-void sceneManager::openScene(Scene *scene)
+void SceneManager::openScene(Scene *scene)
 {
 	mCurrentScenes.push_back(scene);
 	mSceneChanged = true;
 }
 
-void sceneManager::changeScene(Scene *scene)
+void SceneManager::changeScene(Scene *scene)
 {
 	emptyScenes();
 	openScene(scene);
 }
 
-void sceneManager::emptyScenes()
+void SceneManager::emptyScenes()
 {
 	if (mCurrentScenes.size() > 0)
 	{
@@ -53,7 +53,7 @@ void sceneManager::emptyScenes()
 	mCurrentScenes.clear();
 }
 
-void sceneManager::closeCurrentScene()
+void SceneManager::closeCurrentScene()
 {
 	if (mCurrentScenes.size() > 0)
 	{

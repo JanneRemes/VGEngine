@@ -43,6 +43,7 @@ extern void test_dummy();
 #include "engine/input/input.h"
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
+extern vg::Game* mainGame();
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
@@ -110,7 +111,7 @@ void android_main(struct android_app* state)
     // Make sure app_glue isn't stripped.
     app_dummy();
 
-    engine.state.game = new vg::Game(&engine.graphics);
+	engine.state.game = mainGame();
     engine.state.game->start();
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
@@ -167,7 +168,7 @@ void android_main(struct android_app* state)
 */
 void drawFrame(struct Engine* engine)
 {
-    engine->state.game->draw(&engine->graphics);
+   // engine->state.game->draw(&engine->graphics);
     engine->graphics.swapBuffers();
 }
 

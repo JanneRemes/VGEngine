@@ -4,11 +4,10 @@
 #include "engine/input/input.h"
 
 using namespace vg;
-Game::Game(Graphics* graphics)
+Game::Game()
     : mPulse(0), mIsRunning(true)
 {
-    testSprite = DebugSprite();
-    graphics->append(&testSprite);
+	mSceneManager = new SceneManager();
 }
 
 
@@ -22,20 +21,6 @@ void Game::update()
 }
 
 
-void Game::draw(Graphics* graphics)
-{
-    if (!graphics->isInitialized())
-    {
-        Log("WARNING", "GraphicsContext not initialized", "");
-        return;
-    }
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(Input::getTouchX() / graphics->getScreenWidth(), mPulse,
-        (Input::getTouchY()) / graphics->getScreenHeight(), 1);
-
-    graphics->draw();
-}
 
 
 void readFiles(FileManager& fileManager)

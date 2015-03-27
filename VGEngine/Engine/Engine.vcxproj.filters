@@ -150,7 +150,7 @@
     <ClInclude Include="include\engine\game\objectPool.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="sceneManager.h">
+    <ClInclude Include="include\engine\game\sceneManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,11 +242,11 @@
     <ClCompile Include="source\game\objectPool.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="sceneManager.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
     <ClCompile Include="source\graphics\opengl.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\sceneManager.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

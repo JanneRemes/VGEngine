@@ -6,7 +6,7 @@
 #include "engine/graphics/graphics.h"
 #include <android/sensor.h>
 #include "engine/assets/fileManager.h"
-
+#include "engine/game/SceneManager.h"
 #include <unistd.h>
 
 /// @todo Fix comments in this file
@@ -16,7 +16,7 @@ namespace vg
     /**
     <description>
     */
-    class SceneManager;
+
 
 
     /**
@@ -30,7 +30,7 @@ namespace vg
         /**
         <description>
         */
-        Game(Graphics* graphics);
+        Game();
 
         /**
         <description>
@@ -43,10 +43,6 @@ namespace vg
         */
         void update();
 
-        /**
-        <description>
-        */
-        void draw(Graphics* graphics);
 
         /**
         <description>
@@ -67,8 +63,12 @@ namespace vg
         <description>
         */
         void start();
+
+		/**
+		*/
+		SceneManager *mSceneManager;   ///< description
     private:
-		SceneManager mSceneManager();   ///< description
+
         float mPulse;                   ///< description
         bool mIsRunning;                ///< description
 

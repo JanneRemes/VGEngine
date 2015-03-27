@@ -25,6 +25,7 @@
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\objectPool.h" />
     <ClInclude Include="include\engine\game\scene.h" />
+    <ClInclude Include="include\engine\game\sceneManager.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
     <ClInclude Include="include\engine\graphics\debugSprite.h" />
     <ClInclude Include="include\engine\graphics\drawable.h" />
@@ -48,11 +49,9 @@
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
-    <ClInclude Include="sceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\lodepng\lodepng.cpp" />
-    <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="source\android_native_app_glue.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
@@ -62,6 +61,7 @@
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\objectPool.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
+    <ClCompile Include="source\game\sceneManager.cpp" />
     <ClCompile Include="source\graphics\debugSprite.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
