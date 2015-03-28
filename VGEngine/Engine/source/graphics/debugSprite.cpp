@@ -6,9 +6,9 @@
 using namespace vg;
 using namespace std;
 
-DebugSprite::DebugSprite(/*const Texture& texture*/)
-    //:mTexture(texture)
+DebugSprite::DebugSprite(const string& textureFileName)
 {
+	mTexture = new Texture(textureFileName);
     //mVertexBuffer = new VertexBuffer(getVertices());
     //mIndexBuffer = new IndexBuffer(getIndices());
 }
@@ -22,16 +22,23 @@ void DebugSprite::draw(Shader& shader)
 {
     VertexBuffer vertexBuffer(getVertices());
     IndexBuffer indexBuffer(getIndices());
+
+	if (mTexture->isLoaded())
+		mTexture->bind();
+
+	shader.useProgram();
+	
     GraphicsDevice::draw(shader, vertexBuffer, indexBuffer);
+	
+	if (mTexture->isLoaded())
+		mTexture->unbind();
+	shader.unUseProgram();
 }
 
-
-/*
 Texture* DebugSprite::getTexture()
 {
-    return &mTexture;
+    return mTexture;
 }
-*/
 
 std::vector<float> DebugSprite::getVertices()
 {
@@ -43,7 +50,7 @@ std::vector<float> DebugSprite::getVertices()
 
         //left up
         -0.5f, 0.5f,
-        1.0f, 0.0f, 0.0f, 1.0f,
+        0.5f, 0.5f, 0.5f, 1.0f,
         0.0f, 1.0f,
     
         //left down

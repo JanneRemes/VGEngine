@@ -84,6 +84,16 @@ GLuint Shader::getProgramId()
     return mProgramId;
 }
 
+void Shader::useProgram()
+{
+	glUseProgram(mProgramId);
+}
+
+void Shader::unUseProgram()
+{
+	glUseProgram(0u);
+}
+
 const AttributeNameMap& Shader::getVertexElementNames()
 {
     return mVertexElementNames;

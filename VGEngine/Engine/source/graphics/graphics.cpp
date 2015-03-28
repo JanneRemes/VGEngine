@@ -32,6 +32,13 @@ void Graphics::initialize(android_app* app, const Shader& shader)
     mShader = Shader(shader);
     mShader.load(*mFileManager);
     mInitialized = true;
+
+	for (vector<DebugSprite*>::iterator i = mUnloadedDebugSprites.begin(); i != mUnloadedDebugSprites.end(); i++)
+	{
+		(*i)->getTexture()->load(*mFileManager);
+		mDebugSprites.push_back(*i);
+	}
+	mUnloadedDebugSprites.clear();
 }
 
 void Graphics::unInitialize()
@@ -99,5 +106,8 @@ void Graphics::draw()
 
 void Graphics::append(DebugSprite* sprite)
 {
-    mDebugSprites.push_back(sprite);
+	if (mInitialized)
+		mDebugSprites.push_back(sprite);
+	else
+		mUnloadedDebugSprites.push_back(sprite);
 }

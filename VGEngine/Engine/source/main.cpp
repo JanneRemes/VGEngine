@@ -112,9 +112,8 @@ void android_main(struct android_app* state)
 
 	engine.state.game = mainGame();
     engine.state.game->start();
-
-    DebugSprite testSprite;
-    engine.graphics.append(&testSprite);
+	
+	engine.graphics.append(new DebugSprite("koala.png"));
 
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
@@ -131,7 +130,6 @@ void android_main(struct android_app* state)
 		Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
-
             // Process this event.
             if (source != NULL)
             {

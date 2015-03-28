@@ -7,22 +7,23 @@
 #include "engine/graphics/indexBuffer.h"
 
 #include <vector>
+#include <string>
 
 namespace vg
 {
     class DebugSprite
     {
     public:
-        DebugSprite(/*const Texture& texture*/);
+        DebugSprite(const std::string& textureFileName);
         ~DebugSprite();
 
         void draw(Shader& shader);
-        //Texture* getTexture();
+        Texture* getTexture();
         std::vector<float> getVertices();
         std::vector<uint> getIndices();
 
     private:
-        //Texture mTexture;
+        Texture* mTexture;
         //VertexBuffer* mVertexBuffer;
         //IndexBuffer* mIndexBuffer;
     };

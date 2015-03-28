@@ -80,6 +80,7 @@ namespace vg
         //std::vector<SpriteBatch*> mBatches;
 
         std::vector<DebugSprite*> mDebugSprites;
+		std::vector<DebugSprite*> mUnloadedDebugSprites;
 
     };
 }

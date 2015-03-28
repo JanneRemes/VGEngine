@@ -48,6 +48,16 @@ namespace vg
         */
         GLuint getProgramId();
 
+		/**
+			calls glUseProgram
+		*/
+		void useProgram();
+
+		/**
+			calls glUseProgram(0u)
+		*/
+		void unUseProgram();
+
         /**
 			Returns current map of vertex element ids and names
 			@return map of vertex element ids and names
