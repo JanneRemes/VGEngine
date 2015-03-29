@@ -11,20 +11,41 @@
 
 namespace vg
 {
+	/**
+		unbatched test sprite
+	*/
     class DebugSprite
     {
     public:
+		/**
+			@param textureFileName path to texture
+		*/
         DebugSprite(const std::string& textureFileName);
+
+		/**
+			<description>
+		*/
         ~DebugSprite();
 
+		/**
+			creates new index and vertex buffers
+		*/
+		void initialize();
+
+		/**
+			draws the sprite
+		*/
         void draw(Shader& shader);
+		
+		/**
+			<description>
+			@return pointer to current texture
+		*/
         Texture* getTexture();
-        std::vector<float> getVertices();
-        std::vector<uint> getIndices();
 
     private:
-        Texture* mTexture;
-        //VertexBuffer* mVertexBuffer;
-        //IndexBuffer* mIndexBuffer;
+        Texture* mTexture;				///<description>			
+        VertexBuffer* mVertexBuffer;	///<description>
+        IndexBuffer* mIndexBuffer;		///<description>
     };
 }

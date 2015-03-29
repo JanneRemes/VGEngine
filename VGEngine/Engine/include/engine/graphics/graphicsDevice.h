@@ -10,8 +10,8 @@ namespace vg
 	class GraphicsDevice
 	{
 	public:
-		static void draw(Shader& shader, VertexBuffer& vertices);
-		static void draw(Shader& shader, VertexBuffer& vertices, IndexBuffer& indices);
+		static void draw(Shader& shader, VertexBuffer&  vertices);
+		static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices);
 	private:
 	};
 }

@@ -16,13 +16,9 @@ Graphics::~Graphics()
     delete mFileManager;
     vector<SpriteBatch*>::iterator i;
     
-    /*
-    for (i = mBatches.begin(); i != mBatches.end(); i++)
-    {
-        delete (*i);
-    }
-    mBatches.clear();
-    */
+	for (vector<DebugSprite*>::iterator i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
+		delete (*i);
+	mDebugSprites.clear();
 }
 
 void Graphics::initialize(android_app* app, const Shader& shader)
@@ -36,6 +32,7 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 	for (vector<DebugSprite*>::iterator i = mUnloadedDebugSprites.begin(); i != mUnloadedDebugSprites.end(); i++)
 	{
 		(*i)->getTexture()->load(*mFileManager);
+		(*i)->initialize();
 		mDebugSprites.push_back(*i);
 	}
 	mUnloadedDebugSprites.clear();
@@ -87,21 +84,19 @@ void Graphics::switchShader(string vertexPath, string fragmentPath)
         Log("ERROR", "Graphics context not initialized!", "");
 }
 
-/*
-void Graphics::append(SpriteBatch* spriteBatch)
-{
-    mBatches.push_back(spriteBatch);
-}
-*/
-
 void Graphics::draw()
 {
-    /// @todo draw spriteBatches
-    vector<DebugSprite*>::iterator i;
-    for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
-    {
-        (*i)->draw(mShader);
-    }
+	if (mInitialized)
+	{
+		/// @todo draw spriteBatches
+		vector<DebugSprite*>::iterator i;
+		for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
+		{
+			(*i)->draw(mShader);
+		}
+	}
+	else
+		Log("ERROR", "Graphics context not initialized!", "");
 }
 
 void Graphics::append(DebugSprite* sprite)

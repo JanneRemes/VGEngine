@@ -15,7 +15,7 @@ namespace vg
 
         void drawArrays(GLenum primitiveType, GLint offset, GLsizei count);
 
-        void drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, GLvoid *indices = nullptr);
+        void drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices = nullptr);
 
         void useProgram(GLuint programId = 0);
 

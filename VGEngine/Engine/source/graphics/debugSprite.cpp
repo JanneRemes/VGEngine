@@ -9,26 +9,58 @@ using namespace std;
 DebugSprite::DebugSprite(const string& textureFileName)
 {
 	mTexture = new Texture(textureFileName);
-    //mVertexBuffer = new VertexBuffer(getVertices());
-    //mIndexBuffer = new IndexBuffer(getIndices());
 }
 
 DebugSprite::~DebugSprite()
 {
+	delete mVertexBuffer;
+	delete mIndexBuffer;
+}
 
+void DebugSprite::initialize()
+{
+	mVertexBuffer = new VertexBuffer(vector<float>
+	{
+		// Position Vec2
+		// Color Vec4
+		// TexCoord Vec2
+
+		//left up
+		-0.5f, 0.5f,
+		0.5f, 0.5f, 0.5f, 1.0f,
+		0.0f, 1.0f,
+
+		//left down
+		-0.5f, -0.5f,
+		1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f,
+
+		//right down
+		0.5f, -0.5f,
+		0.0f, 0.0f, 1.0f, 1.0f,
+		1.0f, 0.0f,
+
+		//right up
+		0.5f, 0.5f,
+		1.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f
+	});
+
+	mIndexBuffer = new IndexBuffer(vector<uint>
+	{
+		0u, 1u, 2u,
+		0u, 2u, 3u
+	});
 }
 
 void DebugSprite::draw(Shader& shader)
 {
-    VertexBuffer vertexBuffer(getVertices());
-    IndexBuffer indexBuffer(getIndices());
-
 	if (mTexture->isLoaded())
 		mTexture->bind();
 
 	shader.useProgram();
 	
-    GraphicsDevice::draw(shader, vertexBuffer, indexBuffer);
+    GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer);
 	
 	if (mTexture->isLoaded())
 		mTexture->unbind();
@@ -38,47 +70,4 @@ void DebugSprite::draw(Shader& shader)
 Texture* DebugSprite::getTexture()
 {
     return mTexture;
-}
-
-std::vector<float> DebugSprite::getVertices()
-{
-    float result[] =
-    {
-        // Position Vec2
-        // Color Vec4
-        // TexCoord Vec2
-
-        //left up
-        -0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f, 1.0f,
-        0.0f, 1.0f,
-    
-        //left down
-        -0.5f, -0.5f,
-        1.0f, 0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f,
-    
-        //right down
-        0.5f, -0.5f,
-        0.0f, 0.0f, 1.0f, 1.0f,
-        1.0f, 0.0f,
-    
-        //right up
-        0.5f, 0.5f,
-        1.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 1.0f
-    
-    };
-    return vector<float>(result, result + sizeof(result) / sizeof(float));
-}
-
-std::vector<uint> DebugSprite::getIndices()
-{
-    uint result[] =
-    {
-        0u, 1u, 2u,
-        0u, 2u, 3u
-
-    };
-    return vector<uint>(result, result + sizeof(result) / sizeof(uint));
 }

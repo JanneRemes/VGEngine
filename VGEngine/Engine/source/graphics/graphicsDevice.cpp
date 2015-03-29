@@ -17,17 +17,17 @@ void GraphicsDevice::draw(Shader& shader, VertexBuffer& vertices)
 	gl::useProgram();
 }
 
-void GraphicsDevice::draw(Shader& shader, VertexBuffer& vertices, IndexBuffer& indices)
+void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices)
 {
-	gl::useProgram(shader.getProgramId());
+	gl::useProgram(shader->getProgramId());
 
-	vertices.bind();
-	indices.bind();
+	vertices->bind();
+	indices->bind();
 
-	gl::drawElements(GL_TRIANGLES, vertices.getSize(), GL_UNSIGNED_INT);
+	gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_INT);
 
-	indices.unbind();
-	vertices.unbind();
+	indices->unbind();
+	vertices->unbind();
 	
 	gl::useProgram();
 }

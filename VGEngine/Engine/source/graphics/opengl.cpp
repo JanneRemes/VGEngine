@@ -11,7 +11,7 @@ void vg::gl::drawArrays(GLenum primitiveType, GLint offset, GLsizei count)
     glDrawArrays(primitiveType, offset, count);
 }
 
-void vg::gl::drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, GLvoid *indices)
+void vg::gl::drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices)
 {
     glDrawElements(primitiveType, count, indexType, indices);
 }
