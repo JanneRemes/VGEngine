@@ -25,7 +25,7 @@ namespace vg
 		Updates the scene
 		@param dt The elapsed time since the game last updated
 		*/
-		void update(float dt) {};
+		virtual void update(float dt) {};
 
 		/**
 		Draws the scene
@@ -37,9 +37,9 @@ namespace vg
 		@return returns the bool puased
 		*/	
 		bool getPaused() { return paused; }
-
-	private:
 		ObjectPool mObjectPool; ///< Pool of Objects
+	private:
+
 		bool paused;			///< Bool which is used for determining if scene is paused
 
 	};

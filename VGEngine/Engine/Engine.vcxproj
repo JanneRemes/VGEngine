@@ -21,11 +21,19 @@
     <ClInclude Include="include\Engine\engine.h" />
     <ClInclude Include="include\engine\game.h" />
     <ClInclude Include="include\engine\game\component.h" />
+    <ClInclude Include="include\engine\game\componentSystem.h" />
+    <ClInclude Include="include\engine\game\componentSystemManager.h" />
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\objectPool.h" />
+    <ClInclude Include="include\engine\game\renderComponent.h" />
+    <ClInclude Include="include\engine\game\renderComponentSystem.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\game\sceneManager.h" />
+    <ClInclude Include="include\engine\game\scriptComponent.h" />
+    <ClInclude Include="include\engine\game\scriptSystem.h" />
+    <ClInclude Include="include\engine\game\transformComponent.h" />
+    <ClInclude Include="include\engine\game\transformComponentSystem.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
     <ClInclude Include="include\engine\graphics\debugSprite.h" />
     <ClInclude Include="include\engine\graphics\drawable.h" />
@@ -49,6 +57,7 @@
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
+    <ClInclude Include="include\engine\utility\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\lodepng\lodepng.cpp" />
@@ -57,11 +66,19 @@
     <ClCompile Include="source\assets\assetManager.cpp" />
     <ClCompile Include="source\assets\fileManager.cpp" />
     <ClCompile Include="source\game\component.cpp" />
+    <ClCompile Include="source\game\componentSystem.cpp" />
+    <ClCompile Include="source\game\componentSystemManager.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\objectPool.cpp" />
+    <ClCompile Include="source\game\renderComponent.cpp" />
+    <ClCompile Include="source\game\renderComponentSystem.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\game\sceneManager.cpp" />
+    <ClCompile Include="source\game\scriptComponent.cpp" />
+    <ClCompile Include="source\game\scriptSystem.cpp" />
+    <ClCompile Include="source\game\transformComponent.cpp" />
+    <ClCompile Include="source\game\transformComponentSystem.cpp" />
     <ClCompile Include="source\graphics\debugSprite.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />

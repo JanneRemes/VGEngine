@@ -65,11 +65,13 @@ namespace vg
         void start();
 
 		/**
+		Returns pointer to scene manager
 		*/
-		SceneManager *mSceneManager;   ///< description
-
+		
+		SceneManager* getSceneManager();
 		float mPulse;
     private:
         bool mIsRunning;     ///< description
+		SceneManager *mSceneManager;   ///< Manages and stores game's scenes
     };
 }

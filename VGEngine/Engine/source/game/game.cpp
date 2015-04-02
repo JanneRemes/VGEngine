@@ -18,6 +18,7 @@ void Game::update()
     {
         mPulse = 0;
     }
+	mSceneManager->update(0.0f); //TODO add deltatime
 }
 
 
@@ -65,3 +66,7 @@ void Game::start()
     mIsRunning = true;
 }
 
+SceneManager*  Game::getSceneManager()
+{
+	return mSceneManager;
+}

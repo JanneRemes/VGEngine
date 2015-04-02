@@ -1,6 +1,8 @@
 #pragma once
 #include "engine\game\scene.h"
 #include <vector>
+#include <map>
+#include <string>
 using namespace std;
 namespace vg
 {
@@ -13,7 +15,7 @@ namespace vg
 		/**
 		Default constructor
 		*/
-		SceneManager(){ mSceneChanged = false; };
+		SceneManager();
 		~SceneManager();
 
 		/**
@@ -29,12 +31,14 @@ namespace vg
 
 		/**
 		Opens a scene, pushes it to the currentScene vector
+		and doesn't remove previous scenes
 		@param scene the scene which you want to show on the screen
 		*/
 		void openScene(Scene *scene);
 
 		/**
-		Changes the scene to the scene given for this function
+		Changes the scene to the scene given for this function and
+		cleares previous scenes
 		@param scene the scene which you want to show on the screen
 		*/
 		void changeScene(Scene *scene);
@@ -49,8 +53,14 @@ namespace vg
 		*/
 		void closeCurrentScene();
 
+		/**
+		Adds scene to templatelist where they can be loaded many times.
+		Every load creates new instance of scene from this map.
+		*/
+		void addTemplateScene(string key,Scene *scene);
 	private:
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
+		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.
 	};
 }

@@ -1,12 +1,8 @@
 
 #include "engine/game.h"
-
+#include <algorithm>
 using namespace vg;
-void GameObject::setIsPooled(bool isPooled)
+void GameObject::addComponent(Component* component)
 {
-	mIsPooled = isPooled;
-}
-bool GameObject::getIsPooled()
-{
-	return mIsPooled;
+	mComponents.insert(std::make_pair(&typeid(*component), component));
 }

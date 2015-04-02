@@ -13,10 +13,9 @@ namespace vg
 	class Component
 	{
 	public:
-		type_info *mType;
 		Component() = default;
 		virtual ~Component() = default;
-		virtual void Update() = 0;
+		virtual void update() = 0;
 	private:
 		GameObject* mParent; ///< description
 	};

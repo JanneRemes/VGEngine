@@ -1,7 +1,11 @@
 #include "engine/game/sceneManager.h"
 #include "engine/graphics/graphics.h"
+#include <utility> 
 using namespace vg;
-
+SceneManager::SceneManager(){
+	mSceneChanged = false; 
+	//mSceneTemplates = map<string, Scene*>(); TODO: remove
+};
 SceneManager::~SceneManager()
 {
 }
@@ -21,6 +25,7 @@ void SceneManager::update(float dt)
 	{
 		if (!(*it)->getPaused())
 		{
+			(*it)->mObjectPool.updateGameObjects();//TODO remove
 			(*it)->update(dt);
 		}
 		if (mSceneChanged)
@@ -61,4 +66,8 @@ void SceneManager::closeCurrentScene()
 		mCurrentScenes.pop_back();
 		mSceneChanged = true;
 	}
+}
+void SceneManager::addTemplateScene(string key,Scene *scene)
+{
+	mSceneTemplates.insert(std::make_pair(key, new Scene(*scene)));
 }

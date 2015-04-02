@@ -43,7 +43,7 @@ extern void test_dummy();
 
 using namespace vg;
 
-extern Game* mainGame();
+extern void mainGame(Game* game);
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
@@ -109,8 +109,9 @@ void android_main(struct android_app* state)
 
     // Make sure app_glue isn't stripped.
     app_dummy();
-
-	engine.state.game = mainGame();
+	Game* game = new vg::Game();
+	mainGame(game);
+	engine.state.game = game;
     engine.state.game->start();
 	
 	engine.graphics.append(new DebugSprite("koala.png"));
