@@ -7,5 +7,7 @@
 class TestScene : public vg::Scene
 {
 public:
+	TestScene();
+	void update(float dt);
 private:
 };

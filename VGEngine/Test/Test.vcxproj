@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp" />
-    <ClCompile Include="source\scenes\testScene.cpp" />
+    <ClCompile Include="testScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E497E48B-462A-4C74-812F-932E5D53B835}</ProjectGuid>
@@ -51,6 +51,7 @@
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)Engine/include;</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine</AdditionalDependencies>

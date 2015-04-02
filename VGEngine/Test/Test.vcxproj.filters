@@ -35,11 +35,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\scenes\testScene.cpp">
-      <Filter>source\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="source\dummy.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="testScene.cpp">
+      <Filter>source\scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
