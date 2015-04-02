@@ -1,6 +1,7 @@
 
 #include "engine/graphics/shader.h"
 #include "engine/utility/logger.h"
+#include "engine/graphics/opengl.h"
 
 using namespace std;
 using namespace vg;
@@ -20,6 +21,9 @@ Shader::Shader(const Shader& shader)
     mProgramId = shader.mProgramId;
     mVertexElementNames = shader.mVertexElementNames;
     mInitialized = shader.mInitialized;
+    mProjectionLocation = shader.mProjectionLocation;
+    mViewLocation = shader.mViewLocation;
+    mWorldLocation = shader.mWorldLocation;
 }
 
 void Shader::initialize()
@@ -76,6 +80,20 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
         return false;
     }
 
+    mProjectionLocation = glGetUniformLocation(mProgramId, "unifProjection");
+    if (mProjectionLocation < 0)
+        Log("SHADER", "unifProjection not found!", "");
+
+    mViewLocation = glGetUniformLocation(mProgramId, "unifView");
+    if (mViewLocation < 0)
+        Log("SHADER", "unifView not found!", "");
+
+    mWorldLocation = glGetUniformLocation(mProgramId, "unifWorld");
+    if (mWorldLocation < 0)
+        Log("SHADER", "unifWorld not found!", "");
+
+    setUniforms();
+
     return true;
 }
 
@@ -127,4 +145,21 @@ void Shader::printErrorLog(GLuint shader)
 
     Log("SHADER", "%s", buffer.data());
 
+}
+
+void Shader::setUniforms()
+{
+    gl::useProgram(mProgramId);
+
+    ///@ todo get screen size
+    mProjectionTransform = glm::perspective(60.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+    glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
+
+    mViewTransfrom = glm::inverse(glm::translate(glm::vec3(1.0f, 0.0f, 3.0f)));
+    glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, glm::value_ptr(mViewTransfrom));
+
+    mWorldTransform = glm::rotate(0.15f * 360, glm::vec3(0.0f, 0.0f, 1.0f));
+    glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, glm::value_ptr(mWorldTransform));
+    
+    gl::useProgram(0u);
 }

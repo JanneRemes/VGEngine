@@ -3,6 +3,9 @@
 
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/vertexBufferElement.h"
+#include "../external/glm/gtc/matrix_transform.hpp"
+#include "../external/glm/gtx/transform.hpp"
+#include "../external/glm/gtc/type_ptr.hpp"
 
 #include <GLES2/gl2.h>
 #include <string>
@@ -64,7 +67,6 @@ namespace vg
         */
         const AttributeNameMap& getVertexElementNames();
 
-
     private:
         /**
 			Returns default map of vertex element ids and names
@@ -78,12 +80,26 @@ namespace vg
         */
         GLint compileShaderSource(GLuint id, const std::string& source);
 
+        /**
+            Prints shader ShaderInfoLog to debug log
+        */
         void printErrorLog(GLuint shader);
+
+        /**
+            initializes transform uniforms with default values
+        */
+        void setUniforms();
 
         GLuint mVertexId;                          ///< vertex shader id used for linking
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking
         AttributeNameMap mVertexElementNames;      ///< map of vertex element ids and names
-        bool mInitialized;
+        bool mInitialized;                         ///< have shaders been initialized
+        GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
+        GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
+        GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
+        glm::mat4 mProjectionTransform;            ///< projection transform matrix
+        glm::mat4 mViewTransfrom;                  ///< view transform matrix
+        glm::mat4 mWorldTransform;                 ///< world transform matrix
     };
 }

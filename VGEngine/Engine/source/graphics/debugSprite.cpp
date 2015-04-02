@@ -26,23 +26,23 @@ void DebugSprite::initialize()
 		// TexCoord Vec2
 
 		//left up
-		-0.5f, 0.5f,
+		-1.0f, 1.0f,
 		0.5f, 0.5f, 0.5f, 1.0f,
 		0.0f, 1.0f,
 
 		//left down
-		-0.5f, -0.5f,
+		-1.0f, -1.0f,
 		1.0f, 0.0f, 0.0f, 1.0f,
 		0.0f, 0.0f,
 
 		//right down
-		0.5f, -0.5f,
+		1.0f, -1.0f,
 		0.0f, 0.0f, 1.0f, 1.0f,
 		1.0f, 0.0f,
 
 		//right up
-		0.5f, 0.5f,
-		1.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f, 1.0f,
 		1.0f, 1.0f
 	});
 
