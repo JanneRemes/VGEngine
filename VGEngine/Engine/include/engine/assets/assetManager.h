@@ -98,7 +98,7 @@ namespace vg
 		void unloadAll();
 
 		/**
-			<description>
+			Loads all the assets that are not yet loaded
 		*/
 		void commit();
 	private:
@@ -117,7 +117,7 @@ namespace vg
 		Asset const* find(size_t hash) const;
 
 		std::hash<std::string> mHasher;		///< Hash from a string
-		std::map<size_t, Asset*> mAssets;	///< description
-        FileManager& mFileManager;			///
+		std::map<size_t, Asset*> mAssets;	///< Map that constains the asset and "id" for the said asset
+        FileManager& mFileManager;			///< The manager that manages files
 	};
 }

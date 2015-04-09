@@ -10,43 +10,39 @@ namespace vg
     class FileManager;
 
 	/**
-		<description>
+		Class for any assets
 	*/
 	class Asset
 	{
 		friend class AssetManager;
 	public:
 		/**
-			<description>
-			@param path <description>
-            @param fileManager <description>
-			@return <description>
+			Constructor for asset
+			@param path Filepath for the file
 		*/
 		Asset(const std::string& path);
 
 		virtual ~Asset() = default;
 
 		/**
-			<description>
-			@return <description>
+			For loading the filemanager
+			@param fileManager The manager that manages the files
 		*/
         virtual bool load(FileManager& fileManager) = 0;
 		
 		/**
-			<description>
-			@return <description>
+			Unloads the asset
 		*/
 		virtual bool unload() = 0;
 		
 		/**
-			<description>
-			@return <description>
+			@return Returns if the asset is loaded or not
 		*/
 		bool isLoaded() const;
 	protected:
-		const std::string mPath; ///< description
-		bool mIsLoaded = false;  ///< description
+		const std::string mPath; ///< Assets filepath
+		bool mIsLoaded = false;  ///< Used for determining whether the asset is loaded or not
 	private:
-		size_t mUseCount = 1;    ///< description
+		size_t mUseCount = 1;    ///< The number of how many assets are being used/loaded
 	};
 }
