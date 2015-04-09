@@ -37,9 +37,9 @@ namespace vg
 		@return returns the bool puased
 		*/	
 		bool getPaused() { return paused; }
-		ObjectPool mObjectPool; ///< Pool of Objects
+		ObjectPool* getObjectPool(){ return &mObjectPool; }
 	private:
-
+		ObjectPool mObjectPool; ///< Pool of Objects
 		bool paused;			///< Bool which is used for determining if scene is paused
 
 	};

@@ -18,11 +18,15 @@
     <AndroidBuild Include="res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\TestComponent.h" />
+    <ClInclude Include="include\TestComponentSystem.h" />
     <ClInclude Include="include\Test\Scenes\testScene.h" />
     <ClInclude Include="include\Test\test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp" />
+    <ClCompile Include="source\TestComponent.cpp" />
+    <ClCompile Include="source\TestComponentSystem.cpp" />
     <ClCompile Include="testScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

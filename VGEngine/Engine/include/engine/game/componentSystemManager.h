@@ -1,7 +1,8 @@
 #pragma once
-#include "engine/game/scriptSystem.h"
 #include "engine/game/gameObject.h"
 #include "engine/game/transformComponentSystem.h"
+#include "engine/game/componentSystem.h"
+#include <vector>
 namespace vg
 {
 	class ComponentSystemManager
@@ -10,9 +11,9 @@ namespace vg
 		ComponentSystemManager();
 		~ComponentSystemManager();
 		void update(GameObject* gameObject);
+		void addSystem(ComponentSystem *system);
 	private:
-		ScriptSystem scriptSystem;
-		TransformComponentSystem transformSystem;
+		std::vector<ComponentSystem*> systems;
 	};
 
 }

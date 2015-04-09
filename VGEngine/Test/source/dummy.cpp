@@ -2,9 +2,10 @@
 #include <engine/engine.h>
 #include <engine/game/game.h>
 #include <engine/game/SceneManager.h>
-#include <engine/game/scriptComponent.h>
 #include <engine/game/transformComponent.h>
+#include "TestComponentSystem.h"
 #include <stdlib.h> 
+#include <engine/utility/logger.h>
 using namespace vg;
 void test_dummy()
 {
@@ -13,16 +14,15 @@ void test_dummy()
 }
 void mainGame(Game* game)
 {
+	game->log("test");
 	Scene *scene = new Scene();
 	GameObject doge("doge");
-	ScriptComponent* testComponent = new ScriptComponent();
-	TransformComponent* transform = new TransformComponent();
-	doge.addComponent(testComponent);
+	TransformComponent *transform = new TransformComponent();
 	doge.addComponent(transform);
-
-	doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
-	scene->mObjectPool.addGameObject(doge);
-
+	TestComponentSystem *compSystem = new TestComponentSystem();
+	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
+	scene->getObjectPool()->addGameObject(doge);
+	game->addComponentSystem(scene, compSystem);
 
 	game->getSceneManager()->changeScene(scene);
 	//game->getSceneManager()->

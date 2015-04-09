@@ -70,3 +70,11 @@ SceneManager*  Game::getSceneManager()
 {
 	return mSceneManager;
 }
+void Game::addComponentSystem(Scene *scene, ComponentSystem *componentSystem)
+{
+	scene->getObjectPool()->getComponentSystemManager()->addSystem(componentSystem);
+}
+void Game::log(char* text)
+{
+	Log("fm", "%s", text);
+}

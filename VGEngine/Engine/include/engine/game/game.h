@@ -8,6 +8,8 @@
 #include "engine/assets/fileManager.h"
 #include "engine/game/SceneManager.h"
 #include <unistd.h>
+#include "engine/game/componentSystem.h"
+#include <string>
 
 /// @todo Fix comments in this file
 
@@ -70,6 +72,8 @@ namespace vg
 		
 		SceneManager* getSceneManager();
 		float mPulse;
+		void addComponentSystem(Scene *scene,ComponentSystem *componentSystem);
+		static void log(char* text);
     private:
         bool mIsRunning;     ///< description
 		SceneManager *mSceneManager;   ///< Manages and stores game's scenes

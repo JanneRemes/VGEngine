@@ -33,6 +33,12 @@
     <ClInclude Include="include\Test\Scenes\testScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\TestComponentSystem.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TestComponent.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -40,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="testScene.cpp">
       <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TestComponentSystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TestComponent.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

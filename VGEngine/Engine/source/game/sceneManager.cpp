@@ -25,7 +25,7 @@ void SceneManager::update(float dt)
 	{
 		if (!(*it)->getPaused())
 		{
-			(*it)->mObjectPool.updateGameObjects();//TODO remove
+			(*it)->getObjectPool()->updateGameObjects();//TODO remove
 			(*it)->update(dt);
 		}
 		if (mSceneChanged)

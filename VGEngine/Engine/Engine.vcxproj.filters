@@ -165,12 +165,6 @@
     <ClInclude Include="include\engine\game\renderComponentSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\scriptComponent.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\game\scriptSystem.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\transformComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -285,12 +279,6 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\renderComponentSystem.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\scriptComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\scriptSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\transformComponent.cpp">

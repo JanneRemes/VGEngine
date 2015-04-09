@@ -58,6 +58,7 @@ namespace vg
 		Every load creates new instance of scene from this map.
 		*/
 		void addTemplateScene(string key,Scene *scene);
+
 	private:
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene

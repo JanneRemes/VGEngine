@@ -7,7 +7,7 @@ namespace vg
 	public:
 		ComponentSystem();
 		~ComponentSystem();
-		void update(GameObject* gameObject);
+		virtual void update(GameObject* gameObject);
 	};
 
 }

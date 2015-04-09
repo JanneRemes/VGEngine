@@ -30,8 +30,6 @@
     <ClInclude Include="include\engine\game\renderComponentSystem.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\game\sceneManager.h" />
-    <ClInclude Include="include\engine\game\scriptComponent.h" />
-    <ClInclude Include="include\engine\game\scriptSystem.h" />
     <ClInclude Include="include\engine\game\transformComponent.h" />
     <ClInclude Include="include\engine\game\transformComponentSystem.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
@@ -75,8 +73,6 @@
     <ClCompile Include="source\game\renderComponentSystem.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\game\sceneManager.cpp" />
-    <ClCompile Include="source\game\scriptComponent.cpp" />
-    <ClCompile Include="source\game\scriptSystem.cpp" />
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\transformComponentSystem.cpp" />
     <ClCompile Include="source\graphics\debugSprite.cpp" />

@@ -25,6 +25,7 @@ namespace vg
 		//void removeGameObjectInactivePool(GameObject gObject);
 		//void createGameObjectPool(std::vector<PoolObjectType> *prefabs); //creates empty gameobjects to InactivePool from mPoolPrefabList
 		void updateGameObjects();
+		ComponentSystemManager* getComponentSystemManager(){ return &mComponentSystemManager; }
 	private:
 		ComponentSystemManager mComponentSystemManager;///< updates different component systems
 		//void addPrefabToPool(PoolObjectType type); //<Adds poolobjectype's amount of gameobjects to inactivepool
