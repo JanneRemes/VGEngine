@@ -33,11 +33,11 @@
     <ClInclude Include="include\Test\Scenes\testScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="include\TestComponentSystem.h">
-      <Filter>source</Filter>
-    </ClInclude>
     <ClInclude Include="include\TestComponent.h">
-      <Filter>source</Filter>
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TestComponentSystem.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,10 +47,10 @@
     <ClCompile Include="testScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\TestComponentSystem.cpp">
+    <ClCompile Include="source\TestComponent.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="source\TestComponent.cpp">
+    <ClCompile Include="source\TestComponentSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

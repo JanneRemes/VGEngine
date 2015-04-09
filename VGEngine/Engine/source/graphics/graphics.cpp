@@ -36,6 +36,13 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 		mDebugSprites.push_back(*i);
 	}
 	mUnloadedDebugSprites.clear();
+
+	/*std::string fontpath = "font2.ttf";
+	t = new text(fontpath, mFileManager);
+
+	char X = 'X';
+	t->initialize(0, 0, &X);*/
+
 }
 
 void Graphics::unInitialize()
@@ -97,6 +104,9 @@ void Graphics::draw()
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");
+
+	
+	//t->draw(mShader);
 }
 
 void Graphics::append(DebugSprite* sprite)

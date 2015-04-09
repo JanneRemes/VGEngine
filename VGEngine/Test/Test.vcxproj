@@ -53,13 +53,13 @@
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)Engine/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Engine/include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>android;EGL;GLESv2;freetype;OpenSLES;vgengine</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <AntBuild>
       <AssetsDirectories>$(ProjectDir)assets/;</AssetsDirectories>
@@ -69,12 +69,12 @@
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)Engine/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Engine/include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;vgengine;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>android;EGL;GLESv2;freetype;vgengine;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

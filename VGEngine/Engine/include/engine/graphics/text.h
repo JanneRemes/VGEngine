@@ -1,9 +1,14 @@
 #pragma once
 
-#include "../external/stb_truetype.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <GLES2/gl2.h>
 #include "engine\assets\fileManager.h"
-
+#include <vector>
+#include "engine\graphics\shader.h"
+#include "engine\graphics\vertexBuffer.h"
+#include "engine\graphics\indexBuffer.h"
 namespace vg
 {
 	/**
@@ -30,16 +35,37 @@ namespace vg
 		@param y
 		@param text
 		*/
-		void print(float x, float y, char* text);
+		void initialize();
+
+		//void draw(Shader &slimshady);
+
+
+		///**
+		//<description>
+		//@return vector<float>
+		//*/
+		//std::vector<float> getVertexData() { return mVertexData; };
+
+		///**
+		//<description>
+		//@return vector<uint32_t>
+		//*/
+		//std::vector<uint32_t> getIndexData() { return mIndexData; };
 
 	private:
-		const unsigned char *mBuffer;	///< <description>
-		unsigned char mBitmap[512*512]; ///< <description>
+		/*const unsigned char *mBuffer;	///< <description>
+		unsigned char mBitmap[800*600]; ///< <description>
 		const char *mFontPath;			///< <description>
 		std::string mOutData;			///< <description>
 		GLuint ftex;					///< <description>
 		stbtt_bakedchar mData[96];		///< <description>
 		void convertTriangles();		///< <description>
+		
+		std::vector<float> mVertexData;		///< <description>
+		std::vector<uint32_t> mIndexData;	///< <description>
+
+		VertexBuffer *mVertexBuffer;
+		IndexBuffer *mIndexBuffer;*/
 		
 	};
 }

@@ -6,6 +6,7 @@
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/spriteBatch.h"
 #include "engine/graphics/debugSprite.h"
+#include "engine\graphics\text.h"
 
 #include <string>
 #include <vector>
@@ -78,6 +79,8 @@ namespace vg
         Shader mShader;             ///< current Shader
         bool mInitialized;          ///< has Graphics been initialized
         //std::vector<SpriteBatch*> mBatches;
+
+		text *t;
 
         std::vector<DebugSprite*> mDebugSprites;
 		std::vector<DebugSprite*> mUnloadedDebugSprites;
