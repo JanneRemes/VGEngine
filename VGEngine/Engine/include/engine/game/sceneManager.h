@@ -1,12 +1,19 @@
+
 #pragma once
-#include "engine\game\scene.h"
+
+#include "engine/game/game.h"
+#include "engine/game/scene.h"
 #include <vector>
 #include <map>
 #include <string>
-#include "engine/game/game.h"
+
 using namespace std;
+
 namespace vg
 {
+    /// @todo remove when not needed anymore
+    class Game;
+
 	/**
 	Manages Scenes.
 	*/
@@ -61,7 +68,7 @@ namespace vg
 		void addTemplateScene(string key,Scene *scene);
 
 	private:
-		Game *mGame;
+		Game* mGame;
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.

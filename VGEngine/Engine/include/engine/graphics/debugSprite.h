@@ -20,7 +20,7 @@ namespace vg
 		/**
 			@param textureFileName path to texture
 		*/
-        DebugSprite(const std::string& textureFileName);
+        DebugSprite(const std::string& textureFileName, float x, float y, float rotation);
 
 		/**
 			<description>
@@ -47,5 +47,7 @@ namespace vg
         Texture* mTexture;				///<description>			
         VertexBuffer* mVertexBuffer;	///<description>
         IndexBuffer* mIndexBuffer;		///<description>
+        glm::vec2 mPosition;
+        float mRotation;
     };
 }

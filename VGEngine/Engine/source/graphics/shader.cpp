@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace vg;
+using namespace glm;
 
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
@@ -36,6 +37,7 @@ void Shader::initialize()
     {
         glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
+
     mInitialized = true;
 }
 
@@ -79,6 +81,8 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
         Log("SHADER", "Shader program link error!", "");
         return false;
     }
+    
+    gl::useProgram(mProgramId);
 
     mProjectionLocation = glGetUniformLocation(mProgramId, "unifProjection");
     if (mProjectionLocation < 0)
@@ -92,7 +96,10 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     if (mWorldLocation < 0)
         Log("SHADER", "unifWorld not found!", "");
 
-    setUniforms();
+    resetUniforms();
+    updateUniforms();
+
+    gl::useProgram(0u);
 
     return true;
 }
@@ -147,19 +154,37 @@ void Shader::printErrorLog(GLuint shader)
 
 }
 
-void Shader::setUniforms()
+void Shader::resetUniforms()
 {
-    gl::useProgram(mProgramId);
+    setPosition(0.0f, 0.0f);
+    setRotation(0);
+    setScale(1.0f);
+}
+
+void Shader::setPosition(float x, float y)
+{
+    mPosition = vec2(x, y);
+}
+
+void Shader::setRotation(float degrees)
+{
+    mRotation = degrees;
+}
+
+void Shader::setScale(float scale)
+{
+    mScale = scale;
+}
+
+void Shader::updateUniforms()
+{
+    mViewTransfrom = inverse(translate(vec3(mPosition, 1.0f / mScale)));
+    glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, value_ptr(mViewTransfrom));
+
+    mWorldTransform = rotate(mRotation, vec3(0.0f, 0.0f, 1.0f));
+    glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, value_ptr(mWorldTransform));
 
     ///@ todo get screen size
-    mProjectionTransform = glm::perspective(60.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+    mProjectionTransform = glm::perspective(120.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
     glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
-
-    mViewTransfrom = glm::inverse(glm::translate(glm::vec3(1.0f, 0.0f, 3.0f)));
-    glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, glm::value_ptr(mViewTransfrom));
-
-    mWorldTransform = glm::rotate(0.15f * 360, glm::vec3(0.0f, 0.0f, 1.0f));
-    glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, glm::value_ptr(mWorldTransform));
-    
-    gl::useProgram(0u);
 }

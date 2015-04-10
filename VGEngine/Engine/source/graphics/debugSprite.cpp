@@ -5,8 +5,10 @@
 
 using namespace vg;
 using namespace std;
+using namespace glm;
 
-DebugSprite::DebugSprite(const string& textureFileName)
+DebugSprite::DebugSprite(const string& textureFileName, float x, float y, float rotation)
+    : mPosition(x, y), mRotation(rotation)
 {
 	mTexture = new Texture(textureFileName);
 }
@@ -55,16 +57,22 @@ void DebugSprite::initialize()
 
 void DebugSprite::draw(Shader& shader)
 {
-	if (mTexture->isLoaded())
-		mTexture->bind();
-
-	shader.useProgram();
+    if (mTexture->isLoaded())
+    {
+        shader.useProgram();
+        mTexture->bind();
+        shader.unUseProgram();
+    }
+        
+    GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer,
+        mPosition.x, mPosition.y, mRotation);
 	
-    GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer);
-	
-	if (mTexture->isLoaded())
-		mTexture->unbind();
-	shader.unUseProgram();
+    if (mTexture->isLoaded())
+    {
+        shader.useProgram();
+        mTexture->unbind();
+        shader.unUseProgram();
+    }
 }
 
 Texture* DebugSprite::getTexture()

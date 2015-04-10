@@ -1,24 +1,25 @@
 
 #pragma once
 
-#include <vector>
-#include "engine/android_native_app_glue.h"
-#include "engine/graphics/graphics.h"
-#include <android/sensor.h>
-#include "engine/assets/fileManager.h"
 #include "engine/game/SceneManager.h"
-#include <unistd.h>
+#include "engine/graphics/graphics.h"
+#include "engine/assets/fileManager.h"
 #include "engine/game/componentSystem.h"
-#include <string>
 #include "engine/graphics/shader.h"
 
-/// @todo Fix comments in this file
+#include "engine/android_native_app_glue.h"
+#include <android/sensor.h>
 
+#include <vector>
+#include <unistd.h>
+#include <string>
+
+/// @todo Fix comments in this file
 namespace vg
 {
-    /**
-    <description>
-    */
+    /// @todo remove when not needed anymore
+    class Scene;
+    class SceneManager;
 
 
 

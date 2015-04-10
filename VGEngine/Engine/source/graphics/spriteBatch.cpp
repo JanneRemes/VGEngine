@@ -17,7 +17,7 @@ void SpriteBatch::draw(Shader& shader)
 		for (auto& group : layer.second)
 		{
 			mVertexButter.setData(group.second);
-			GraphicsDevice::draw(shader, mVertexButter);
+			GraphicsDevice::draw(&shader, &mVertexButter);
 		}
 	}
 }

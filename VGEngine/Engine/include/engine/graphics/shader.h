@@ -67,6 +67,12 @@ namespace vg
         */
         const AttributeNameMap& getVertexElementNames();
 
+        void resetUniforms();
+        void setPosition(float x, float y);
+        void setRotation(float degrees);
+        void setScale(float scale);
+        void updateUniforms();
+
     private:
         /**
 			Returns default map of vertex element ids and names
@@ -85,11 +91,6 @@ namespace vg
         */
         void printErrorLog(GLuint shader);
 
-        /**
-            initializes transform uniforms with default values
-        */
-        void setUniforms();
-
         GLuint mVertexId;                          ///< vertex shader id used for linking
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking
@@ -98,6 +99,9 @@ namespace vg
         GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
         GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
         GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
+        glm::vec2 mPosition;                       ///<
+        float mRotation;                           ///<
+        float mScale;                              ///<
         glm::mat4 mProjectionTransform;            ///< projection transform matrix
         glm::mat4 mViewTransfrom;                  ///< view transform matrix
         glm::mat4 mWorldTransform;                 ///< world transform matrix
