@@ -12,12 +12,12 @@ TriangleComponent::~TriangleComponent()
 }
 std::vector<GLfloat> TriangleComponent::getDefaultVertices()
 {
-	std::vector<GLfloat> defaultVertices();
-	defaultVertices.push_back();
-	return ;
+	std::vector<GLfloat> defaultVertices = std::vector<GLfloat>();
+	//defaultVertices.push_back();
+	return defaultVertices;
 }
 std::vector<GLuint> TriangleComponent::getDefaultIndices()
 {
-	std::vector<GLuint> defaultIndices();
-	return ;
+	std::vector<GLuint> defaultIndices = std::vector<GLuint>();
+	return defaultIndices;
 }
