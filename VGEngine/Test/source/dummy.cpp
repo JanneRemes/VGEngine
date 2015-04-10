@@ -6,7 +6,22 @@
 #include "TestComponentSystem.h"
 #include <stdlib.h> 
 #include <engine/utility/logger.h>
+#include "TestComponent.h"
+//DEBUG
+//#include <cstdio>
+//#include <cstdlib>
 using namespace vg;
+/*void* operator new(size_t sz){
+	Game::log("NEW TEST");
+	void* m = malloc(sz);
+	return m;
+}
+
+void operator delete(void* m) {
+	Game::log("REMOVE TEST");
+	free(m);
+}*/
+
 void test_dummy()
 {
 	
@@ -14,12 +29,14 @@ void test_dummy()
 }
 void mainGame(Game* game)
 {
-	game->log("test");
+	Game::log("test");
 	Scene *scene = new Scene();
 	GameObject doge("doge");
 	TransformComponent *transform = new TransformComponent();
 	doge.addComponent(transform);
 	TestComponentSystem *compSystem = new TestComponentSystem();
+	TestComponent *testcomponent = new TestComponent();
+	doge.addComponent(testcomponent);
 	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
 	scene->getObjectPool()->addGameObject(doge);
 	game->addComponentSystem(scene, compSystem);

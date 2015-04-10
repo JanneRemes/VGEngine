@@ -10,5 +10,5 @@ TestComponent::~TestComponent()
 }
 void TestComponent::update()
 {
-	vg::Game::log("UPDATING COMPONENTSYSTEM");
+	//vg::Game::log("UPDATING COMPONENTSYSTEM");
 }

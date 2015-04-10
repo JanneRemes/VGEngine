@@ -40,7 +40,7 @@ extern void test_dummy();
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
 #include "engine/graphics/debugSprite.h"
-
+#include "engine/utility/MemoryTest.h"
 using namespace vg;
 
 extern void mainGame(Game* game);
@@ -149,7 +149,9 @@ void android_main(struct android_app* state)
             // Check if we are exiting.
             if (engine.app->destroyRequested != 0)
             {
+				
                 engine.graphics.unInitialize();
+				Log("new", "MEMORYSPACECOUNT: %d", memorySpaceCount);
                 return;
             }
         }
@@ -163,6 +165,7 @@ void android_main(struct android_app* state)
 
         engine.state.game->update();
     }
+
 }
 
 /**
