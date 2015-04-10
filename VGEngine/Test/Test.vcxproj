@@ -29,6 +29,11 @@
     <ClCompile Include="source\TestComponentSystem.cpp" />
     <ClCompile Include="testScene.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\freetype\freetype.vcxproj">
+      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E497E48B-462A-4C74-812F-932E5D53B835}</ProjectGuid>
     <RootNamespace>Test</RootNamespace>
@@ -58,7 +63,7 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;freetype;OpenSLES;vgengine</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <AntBuild>
