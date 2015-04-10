@@ -2,7 +2,8 @@
 #include "engine/graphics/graphics.h"
 #include <utility> 
 using namespace vg;
-SceneManager::SceneManager(){
+SceneManager::SceneManager(Game *game){
+	this->mGame = game;
 	mSceneChanged = false; 
 	//mSceneTemplates = map<string, Scene*>(); TODO: remove
 };

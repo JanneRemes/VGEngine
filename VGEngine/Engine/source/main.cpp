@@ -111,7 +111,7 @@ void android_main(struct android_app* state)
 
     // Make sure app_glue isn't stripped.
     app_dummy();
-	Game* game = new vg::Game();
+	Game* game = new vg::Game(&engine.graphics);
 	mainGame(game);
 	engine.state.game = game;
     engine.state.game->start();

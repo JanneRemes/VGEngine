@@ -4,10 +4,11 @@
 #include "engine/input/input.h"
 
 using namespace vg;
-Game::Game()
+Game::Game(Graphics *graphics)
     : mPulse(0), mIsRunning(true)
 {
-	mSceneManager = new SceneManager();
+	this->mGraphics = graphics;
+	mSceneManager = new SceneManager(this);
 }
 
 
@@ -77,4 +78,8 @@ void Game::addComponentSystem(Scene *scene, ComponentSystem *componentSystem)
 void Game::log(char* text)
 {
 	Log("fm", "%s", text);
+}
+Graphics* Game::getGraphics()
+{
+	return mGraphics;
 }

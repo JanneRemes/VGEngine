@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "engine/game/componentSystem.h"
 #include <string>
+#include "engine/graphics/shader.h"
 
 /// @todo Fix comments in this file
 
@@ -32,7 +33,7 @@ namespace vg
         /**
         <description>
         */
-        Game();
+        Game(Graphics *graphics);
 
         /**
         <description>
@@ -74,8 +75,11 @@ namespace vg
 		float mPulse;
 		void addComponentSystem(Scene *scene,ComponentSystem *componentSystem);
 		static void log(char* text);
+		Graphics* getGraphics();
     private:
+		Graphics *mGraphics;
         bool mIsRunning;     ///< description
 		SceneManager *mSceneManager;   ///< Manages and stores game's scenes
+		Shader mShader;
     };
 }

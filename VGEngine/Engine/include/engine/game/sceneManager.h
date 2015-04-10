@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "engine/game/game.h"
 using namespace std;
 namespace vg
 {
@@ -15,7 +16,7 @@ namespace vg
 		/**
 		Default constructor
 		*/
-		SceneManager();
+		SceneManager(Game *game);
 		~SceneManager();
 
 		/**
@@ -60,6 +61,7 @@ namespace vg
 		void addTemplateScene(string key,Scene *scene);
 
 	private:
+		Game *mGame;
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.

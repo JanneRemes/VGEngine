@@ -8,6 +8,7 @@ namespace vg{
 	public:
 		RenderComponentSystem();
 		~RenderComponentSystem();
+		void update(GameObject* gameObject);
 	};
 
 }
