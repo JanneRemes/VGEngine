@@ -32,6 +32,7 @@
     <ClInclude Include="include\engine\game\sceneManager.h" />
     <ClInclude Include="include\engine\game\transformComponent.h" />
     <ClInclude Include="include\engine\game\transformComponentSystem.h" />
+    <ClInclude Include="include\engine\game\triangleComponent.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
     <ClInclude Include="include\engine\graphics\debugSprite.h" />
     <ClInclude Include="include\engine\graphics\drawable.h" />
@@ -53,6 +54,7 @@
     <ClInclude Include="include\engine\sound\SoundEffect.h" />
     <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
+    <ClInclude Include="include\engine\utility\MemoryTest.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
     <ClInclude Include="include\engine\utility\Vector2.h" />
@@ -75,6 +77,7 @@
     <ClCompile Include="source\game\sceneManager.cpp" />
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\transformComponentSystem.cpp" />
+    <ClCompile Include="source\game\triangleComponent.cpp" />
     <ClCompile Include="source\graphics\debugSprite.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />

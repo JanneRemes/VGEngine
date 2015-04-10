@@ -106,6 +106,8 @@ void android_main(struct android_app* state)
     }
     // TEST
     test_dummy();
+	char* dooooge = "dddoooge";
+	delete dooooge;
 
     // Make sure app_glue isn't stripped.
     app_dummy();
@@ -151,7 +153,8 @@ void android_main(struct android_app* state)
             {
 				
                 engine.graphics.unInitialize();
-				Log("new", "MEMORYSPACECOUNT: %d", memorySpaceCount);
+				Log("memory", "MemoryCount is: %d", memorySpaceCount);
+				//Log("new", "MEMORYSPACECOUNT: %d", memorySpaceCount);
                 return;
             }
         }
