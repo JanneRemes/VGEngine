@@ -14,6 +14,7 @@ namespace vg
 		void addSystem(ComponentSystem *system);
 	private:
 		std::vector<ComponentSystem*> systems;
+
 	};
 
 }

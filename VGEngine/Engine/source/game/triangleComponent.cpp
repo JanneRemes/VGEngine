@@ -1,6 +1,7 @@
 #include "engine\game\triangleComponent.h"
 
 using namespace vg;
+using namespace std;
 TriangleComponent::TriangleComponent() :RenderComponent(getDefaultVertices(),getDefaultIndices())
 {
 
@@ -10,9 +11,9 @@ TriangleComponent::TriangleComponent() :RenderComponent(getDefaultVertices(),get
 TriangleComponent::~TriangleComponent()
 {
 }
-std::vector<GLfloat> TriangleComponent::getDefaultVertices()
+std::vector<float> TriangleComponent::getDefaultVertices()
 {
-	std::vector<GLfloat> defaultVertices = std::vector<GLfloat>
+	std::vector<float> defaultVertices = std::vector<float>
 	{
 		// Position Vec2
 		// Color Vec4

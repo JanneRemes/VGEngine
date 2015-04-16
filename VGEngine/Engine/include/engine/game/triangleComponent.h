@@ -8,8 +8,9 @@ namespace vg{
 	public:
 		TriangleComponent();
 		~TriangleComponent();
+		
 	private:
-		std::vector<GLfloat> getDefaultVertices();
+		std::vector<float> getDefaultVertices();
 		std::vector<GLuint> getDefaultIndices();
 	};
 

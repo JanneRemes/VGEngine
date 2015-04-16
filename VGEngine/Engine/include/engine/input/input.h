@@ -5,28 +5,31 @@
 #include <android/sensor.h>
 namespace vg
 {
-	class Input
+	namespace Input
 	{
-	public:
-		static int32_t engine_handle_input(struct android_app* app, AInputEvent* event);
+		class Input
+		{
+		public:
+			static int32_t engine_handle_input(struct android_app* app, AInputEvent* event);
 
-		static float getTouchX();
-		static float getTouchY();
-		static float getSensorX();
-		static float getSensorY();
-		static float getSensorZ();
-		static bool getIsTouched();
-		static bool getIsTouchReleased();
-		static void update();
-		static void accelerometerEvent(ASensorEventQueue *queue);
-	private:
+			static float getTouchX();
+			static float getTouchY();
+			static float getSensorX();
+			static float getSensorY();
+			static float getSensorZ();
+			static bool getIsTouched();
+			static bool getIsTouchReleased();
+			static void update();
+			static void accelerometerEvent(ASensorEventQueue *queue);
+		private:
 
-		static bool isTouched;
-		static bool isTouchReleased;
-		static float mTouchX;
-		static float mTouchY;
-		static float mSensorX;
-		static float mSensorY;
-		static float mSensorZ;
-	};
+			static bool isTouched;
+			static bool isTouchReleased;
+			static float mTouchX;
+			static float mTouchY;
+			static float mSensorX;
+			static float mSensorY;
+			static float mSensorZ;
+		};
+	}
 }

@@ -1,10 +1,12 @@
 #include "engine/game/componentSystemManager.h"
 #include "engine/game/transformComponent.h"
+#include "engine/game/renderComponentSystem.h"
 using namespace vg;
 
 ComponentSystemManager::ComponentSystemManager()
 {
 	systems.push_back(new TransformComponentSystem());
+	systems.push_back(new RenderComponentSystem());
 }
 
 

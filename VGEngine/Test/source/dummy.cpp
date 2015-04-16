@@ -7,6 +7,7 @@
 #include <stdlib.h> 
 #include <engine/utility/logger.h>
 #include "TestComponent.h"
+#include <engine/game/triangleComponent.h>
 //DEBUG
 //#include <cstdio>
 //#include <cstdlib>
@@ -37,6 +38,8 @@ void mainGame(Game* game)
 	TestComponentSystem *compSystem = new TestComponentSystem();
 	TestComponent *testcomponent = new TestComponent();
 	doge.addComponent(testcomponent);
+	TriangleComponent *triangle = new TriangleComponent();
+	doge.addComponent(triangle);
 	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
 	scene->getObjectPool()->addGameObject(doge);
 	game->addComponentSystem(scene, compSystem);

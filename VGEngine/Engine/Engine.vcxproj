@@ -54,7 +54,6 @@
     <ClInclude Include="include\engine\sound\SoundEffect.h" />
     <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
-    <ClInclude Include="include\engine\utility\MemoryTest.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
     <ClInclude Include="include\engine\utility\Vector2.h" />

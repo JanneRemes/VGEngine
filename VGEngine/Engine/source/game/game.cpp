@@ -4,11 +4,19 @@
 #include "engine/input/input.h"
 
 using namespace vg;
-Game::Game(Graphics *graphics)
+Game *Game::mGame = nullptr;
+Game* Game::getInstance()
+{
+	if (mGame == nullptr)
+	{
+		mGame = new Game();
+	}
+	return mGame;
+}
+Game::Game()
     : mPulse(0), mIsRunning(true)
 {
-	this->mGraphics = graphics;
-	mSceneManager = new SceneManager(this);
+	mSceneManager = new SceneManager();
 }
 
 
@@ -21,7 +29,10 @@ void Game::update()
     }
 	mSceneManager->update(0.0f); //TODO add deltatime
 }
-
+void Game::setGraphics(Graphics *graphics)
+{
+	this->mGraphics = graphics;
+}
 
 
 void readFiles(FileManager& fileManager)

@@ -1,4 +1,5 @@
 #include "include/Test/scenes/testScene.h"
+
 using namespace vg;
 
 TestScene::TestScene() :Scene()

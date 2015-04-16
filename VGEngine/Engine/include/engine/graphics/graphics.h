@@ -16,63 +16,63 @@ namespace vg
     /**
     <description>
     */
-    class Graphics
-    {
-    public:
-        /**
-            Default constructor
-        */
-        Graphics();
+	class Graphics
+	{
+	public:
+		/**
+			Default constructor
+			*/
+		Graphics();
 
-        /**
-            <description>
-        */
-        ~Graphics();
+		/**
+			<description>
+			*/
+		~Graphics();
 
-        /**
-            initializes FileManager, GraphicsContext and Shader
-            @param app pointer to current Android application struct
-            @param shader reference to Shader, uses Shader's default constructor as default
-        */
-        void initialize(android_app* app, const Shader& shader = Shader());
-        
-        /**
-            destroys GraphicsContext
-        */
-        void unInitialize();
+		/**
+			initializes FileManager, GraphicsContext and Shader
+			@param app pointer to current Android application struct
+			@param shader reference to Shader, uses Shader's default constructor as default
+			*/
+		void initialize(android_app* app, const Shader& shader = Shader());
 
-        /**
-            @return true of Graphics has been initialized>
-        */
-        bool isInitialized();
+		/**
+			destroys GraphicsContext
+			*/
+		void unInitialize();
 
-        /**
-            Swaps drawbuffers in GraphicContext
-        */
-        void swapBuffers();
+		/**
+			@return true of Graphics has been initialized>
+			*/
+		bool isInitialized();
 
-        /**
-            @return width of current screen in pixels, 0 if Graphics hasn't been initialized
-        */
-        int getScreenWidth();
+		/**
+			Swaps drawbuffers in GraphicContext
+			*/
+		void swapBuffers();
 
-        /**
-            @return height of current screen in pixels, 0 if Graphics hasn't been initialized
-        */
-        int getScreenHeight();
+		/**
+			@return width of current screen in pixels, 0 if Graphics hasn't been initialized
+			*/
+		int getScreenWidth();
 
-        /**
-            Loads and links new shader sources from disk
-            @param vertexPath path to vertex shader source file
-            @param fragmentPath path to fragment shader source file
-        */
-        void switchShader(std::string vertexPath, std::string fragmentPath);
-        
-        void draw();
-        //void append(SpriteBatch* spriteBatch);
-        
-        void append(DebugSprite* sprite);
+		/**
+			@return height of current screen in pixels, 0 if Graphics hasn't been initialized
+			*/
+		int getScreenHeight();
 
+		/**
+			Loads and links new shader sources from disk
+			@param vertexPath path to vertex shader source file
+			@param fragmentPath path to fragment shader source file
+			*/
+		void switchShader(std::string vertexPath, std::string fragmentPath);
+
+		void draw();
+		//void append(SpriteBatch* spriteBatch);
+
+		void append(DebugSprite* sprite);
+		Shader *getShader(){return &mShader;}
     private:
         FileManager* mFileManager;  ///< pointer to FileManager
         GraphicsContext mContext;   ///< current GraphicsContext

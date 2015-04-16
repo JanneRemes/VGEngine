@@ -40,9 +40,8 @@ extern void test_dummy();
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
 #include "engine/graphics/debugSprite.h"
-#include "engine/utility/MemoryTest.h"
 using namespace vg;
-
+using namespace vg::Input;
 extern void mainGame(Game* game);
 void main_dummy()
 {
@@ -90,7 +89,7 @@ void android_main(struct android_app* state)
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;
     state->onAppCmd = handleCommand;
-    state->onInputEvent = Input::engine_handle_input;
+    state->onInputEvent = vg::Input::Input::engine_handle_input;
     engine.app = state;
     // Prepare to monitor accelerometer
     engine.sensorManager = ASensorManager_getInstance();
@@ -111,14 +110,15 @@ void android_main(struct android_app* state)
 
     // Make sure app_glue isn't stripped.
     app_dummy();
-	Game* game = new vg::Game(&engine.graphics);
+	Game* game = Game::getInstance();
+	game->setGraphics(&engine.graphics);
 	mainGame(game);
 	engine.state.game = game;
     engine.state.game->start();
 	
-    engine.graphics.append(new DebugSprite("koala.png", -1.0f, -1.0f, 30.0f));
-    engine.graphics.append(new DebugSprite("koala.png", 1.0f, 1.0f, 60.0f));
-    engine.graphics.append(new DebugSprite("koala.png", -1.0f, 1.0f, 270.0f));
+   // engine.graphics.append(new DebugSprite("koala.png", -1.0f, -1.0f, 30.0f));
+   // engine.graphics.append(new DebugSprite("koala.png", 1.0f, 1.0f, 60.0f));
+   // engine.graphics.append(new DebugSprite("koala.png", -1.0f, 1.0f, 270.0f));
 
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
@@ -132,7 +132,7 @@ void android_main(struct android_app* state)
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-		Input::update();
+		vg::Input::Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
             // Process this event.
@@ -146,7 +146,7 @@ void android_main(struct android_app* state)
             {
                 if (engine.accelerometerSensor != NULL)
                 {
-					Input::accelerometerEvent(engine.sensorEventQueue);
+					vg::Input::Input::accelerometerEvent(engine.sensorEventQueue);
                 }
             }
 
@@ -155,8 +155,7 @@ void android_main(struct android_app* state)
             {
 				
                 engine.graphics.unInitialize();
-				Log("memory", "MemoryCount is: %d", memorySpaceCount);
-				//Log("new", "MEMORYSPACECOUNT: %d", memorySpaceCount);
+
                 return;
             }
         }
@@ -168,7 +167,7 @@ void android_main(struct android_app* state)
             drawFrame(&engine);
         }
 
-        engine.state.game->update();
+
     }
 
 }
@@ -188,9 +187,9 @@ void drawFrame(struct Engine* engine)
     }
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
-        (Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
-
+    glClearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
+        (vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
+	engine->state.game->update();
     engine->graphics.draw();
 
     engine->graphics.swapBuffers();

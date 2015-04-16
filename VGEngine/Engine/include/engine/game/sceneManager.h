@@ -12,7 +12,6 @@ using namespace std;
 namespace vg
 {
     /// @todo remove when not needed anymore
-    class Game;
 
 	/**
 	Manages Scenes.
@@ -23,7 +22,7 @@ namespace vg
 		/**
 		Default constructor
 		*/
-		SceneManager(Game *game);
+		SceneManager();
 		~SceneManager();
 
 		/**
@@ -68,7 +67,6 @@ namespace vg
 		void addTemplateScene(string key,Scene *scene);
 
 	private:
-		Game* mGame;
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.

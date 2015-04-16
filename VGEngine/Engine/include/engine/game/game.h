@@ -31,15 +31,19 @@ namespace vg
 
 
     public:
-        /**
-        <description>
-        */
-        Game(Graphics *graphics);
+
+		static Game* mGame;
+		static Game* getInstance();
 
         /**
         <description>
         */
-        virtual ~Game() = default;
+    
+
+        /**
+        <description>
+        */
+        ~Game() = default;
 
 
         /**
@@ -77,7 +81,9 @@ namespace vg
 		void addComponentSystem(Scene *scene,ComponentSystem *componentSystem);
 		static void log(char* text);
 		Graphics* getGraphics();
+		void setGraphics(Graphics *graphics);
     private:
+		Game();
 		Graphics *mGraphics;
         bool mIsRunning;     ///< description
 		SceneManager *mSceneManager;   ///< Manages and stores game's scenes

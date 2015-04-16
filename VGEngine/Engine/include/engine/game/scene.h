@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "objectPool.h"
+#include "engine/game/game.h"
 /// @todo Fix comments in this file
 
 namespace vg
@@ -18,7 +19,7 @@ namespace vg
 		/**
 		Default constructor
 		*/
-		Scene() : paused(false){};
+		Scene() : paused(false){  };
 		virtual ~Scene() = default;
 
 		/**
