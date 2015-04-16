@@ -1,5 +1,6 @@
 #pragma once
-
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #include <GLES2/gl2.h>
 #include "engine\assets\fileManager.h"
@@ -18,7 +19,7 @@ namespace vg
 	
 		~text(){};
 		text(std::string& fontPath, FileManager *manager);
-		void initialize();
+		void initializeBuffer(char *text);
 		void draw(Shader &slimshady);
 
 		//std::vector<float> getVertexData() { return mVertexData; };
@@ -29,10 +30,14 @@ namespace vg
 		std::vector<float> mVertexData;		///< <description>
 		std::vector<uint32_t> mIndexData;	///< <description>
 
-		GLuint mTexture;
+		void createBuffer(float x, float y, float w, float h);
 
+		GLuint mTexture;
 		VertexBuffer *mVertexBuffer;
 		IndexBuffer *mIndexBuffer;
-		
+
+		FT_Face mFace;
+		FT_GlyphSlot mGlyph;
+
 	};
 }
