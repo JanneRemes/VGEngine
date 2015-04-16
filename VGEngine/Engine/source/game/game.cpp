@@ -19,6 +19,12 @@ Game::Game()
 	mSceneManager = new SceneManager();
 }
 
+Game::~Game()
+{
+	delete mSceneManager;
+}
+
+
 
 void Game::update()
 {

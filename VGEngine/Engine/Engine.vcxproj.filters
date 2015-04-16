@@ -177,6 +177,7 @@
     <ClInclude Include="include\engine\game\triangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\game\baseClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -293,5 +294,6 @@
     <ClCompile Include="source\game\triangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+    <ClCompile Include="source\game\baseClass.cpp" />
   </ItemGroup>
 </Project>

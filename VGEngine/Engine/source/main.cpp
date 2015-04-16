@@ -153,9 +153,9 @@ void android_main(struct android_app* state)
             // Check if we are exiting.
             if (engine.app->destroyRequested != 0)
             {
-				
+				delete Game::getInstance();
                 engine.graphics.unInitialize();
-
+				Log("memory", "MemoryCount is: %d", BaseClass::memoryCount);
                 return;
             }
         }

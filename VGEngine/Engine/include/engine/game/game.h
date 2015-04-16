@@ -43,7 +43,7 @@ namespace vg
         /**
         <description>
         */
-        ~Game() = default;
+		~Game();
 
 
         /**

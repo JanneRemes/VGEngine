@@ -32,14 +32,14 @@ void mainGame(Game* game)
 {
 	Game::log("test");
 	Scene *scene = new Scene();
-	GameObject doge("doge");
+	GameObject *doge = new GameObject("doge");
 	TransformComponent *transform = new TransformComponent();
-	doge.addComponent(transform);
+	doge->addComponent(transform);
 	TestComponentSystem *compSystem = new TestComponentSystem();
 	TestComponent *testcomponent = new TestComponent();
-	doge.addComponent(testcomponent);
+	doge->addComponent(testcomponent);
 	TriangleComponent *triangle = new TriangleComponent();
-	doge.addComponent(triangle);
+	doge->addComponent(triangle);
 	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
 	scene->getObjectPool()->addGameObject(doge);
 	game->addComponentSystem(scene, compSystem);

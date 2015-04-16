@@ -9,6 +9,10 @@ ObjectPool::ObjectPool()
 
 ObjectPool::~ObjectPool()
 {
+	for (int i = 0; i < mActivePool.size(); i++)
+	{
+		delete mActivePool[i];
+	}
 }
 /*
 void ObjectPool::createGameObjectPool(std::vector<PoolObjectType> *prefabs)
@@ -24,7 +28,7 @@ void ObjectPool::addPrefabToPool(PoolObjectType type)
 	for (int i = 0; i < type.amount; i++)
 		mInactivePool.push_back(*type.prefab);
 }*/
-void ObjectPool::addGameObject(GameObject gObject)
+void ObjectPool::addGameObject(GameObject *gObject)
 {
 	/*GameObject* pooledObject = getGameObjectFromPool(gObject.getName());
 	if (pooledObject == nullptr)
@@ -62,6 +66,6 @@ void  ObjectPool::updateGameObjects()
 {
 	for (auto it = mActivePool.begin(); it != mActivePool.end(); it++)
 	{
-		mComponentSystemManager.update(&(*it));
+		mComponentSystemManager.update((*it));
 	}
 }

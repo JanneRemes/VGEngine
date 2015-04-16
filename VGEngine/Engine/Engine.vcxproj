@@ -20,6 +20,7 @@
     <ClInclude Include="include\engine\assets\fileManager.h" />
     <ClInclude Include="include\Engine\engine.h" />
     <ClInclude Include="include\engine\game.h" />
+    <ClInclude Include="include\engine\game\baseClass.h" />
     <ClInclude Include="include\engine\game\component.h" />
     <ClInclude Include="include\engine\game\componentSystem.h" />
     <ClInclude Include="include\engine\game\componentSystemManager.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
     <ClCompile Include="source\assets\fileManager.cpp" />
+    <ClCompile Include="source\game\baseClass.cpp" />
     <ClCompile Include="source\game\component.cpp" />
     <ClCompile Include="source\game\componentSystem.cpp" />
     <ClCompile Include="source\game\componentSystemManager.cpp" />

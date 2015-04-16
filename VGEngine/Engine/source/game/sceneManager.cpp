@@ -3,11 +3,12 @@
 #include <utility> 
 using namespace vg;
 SceneManager::SceneManager(){
-	mSceneChanged = false; 
+	mSceneChanged = false;
 	//mSceneTemplates = map<string, Scene*>(); TODO: remove
 };
 SceneManager::~SceneManager()
 {
+	emptyScenes();
 }
 
 void SceneManager::draw()

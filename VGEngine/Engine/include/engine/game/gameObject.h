@@ -1,10 +1,10 @@
 
 #pragma once
-
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <typeinfo>
+#include "engine\game\baseClass.h"
 /// @todo Fix comments in this file
 
 namespace vg
@@ -14,11 +14,12 @@ namespace vg
 	/**
 		<description>
 	*/
-	class GameObject
+	class GameObject:
+		public BaseClass
 	{
 	public:
-		GameObject(std::string name) :mName(name){};
-		virtual ~GameObject() = default;
+		GameObject(std::string name);
+		virtual ~GameObject() { };
 		std::string getName(){ return mName; }
 		void addComponent(Component* component);
 		template<typename T>

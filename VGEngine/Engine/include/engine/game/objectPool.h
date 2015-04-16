@@ -21,7 +21,7 @@ namespace vg
 		ObjectPool();
 		~ObjectPool();
 		//GameObject *getGameObjectFromPool(std::string name);//returns pooled object if available
-		void addGameObject(GameObject gObject);
+		void addGameObject(GameObject *gObject);
 		//void removeGameObjectInactivePool(GameObject gObject);
 		//void createGameObjectPool(std::vector<PoolObjectType> *prefabs); //creates empty gameobjects to InactivePool from mPoolPrefabList
 		void updateGameObjects();
@@ -30,7 +30,7 @@ namespace vg
 		ComponentSystemManager mComponentSystemManager;///< updates different component systems
 		//void addPrefabToPool(PoolObjectType type); //<Adds poolobjectype's amount of gameobjects to inactivepool
 		//bool loaded;
-		std::vector<GameObject> mActivePool;   ///< description
+		std::vector<GameObject*> mActivePool;   ///< description
 		std::vector<GameObject> mInactivePool; ///< description
 	};
 
