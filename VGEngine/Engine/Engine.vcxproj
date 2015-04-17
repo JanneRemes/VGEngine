@@ -31,6 +31,7 @@
     <ClInclude Include="include\engine\game\renderComponentSystem.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\game\sceneManager.h" />
+    <ClInclude Include="include\engine\game\quadrangleComponent.h" />
     <ClInclude Include="include\engine\game\transformComponent.h" />
     <ClInclude Include="include\engine\game\transformComponentSystem.h" />
     <ClInclude Include="include\engine\game\triangleComponent.h" />
@@ -76,6 +77,7 @@
     <ClCompile Include="source\game\renderComponentSystem.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\game\sceneManager.cpp" />
+    <ClCompile Include="source\game\quadrangleComponent.cpp" />
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\transformComponentSystem.cpp" />
     <ClCompile Include="source\game\triangleComponent.cpp" />

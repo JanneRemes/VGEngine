@@ -178,6 +178,7 @@
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\baseClass.h" />
+    <ClInclude Include="include\engine\game\quadrangleComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -295,5 +296,6 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\baseClass.cpp" />
+    <ClCompile Include="source\game\quadrangleComponent.cpp" />
   </ItemGroup>
 </Project>
