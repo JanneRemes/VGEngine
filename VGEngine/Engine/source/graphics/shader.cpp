@@ -96,6 +96,10 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     if (mWorldLocation < 0)
         Log("SHADER", "unifWorld not found!", "");
 
+    mLayerLocation = glGetUniformLocation(mProgramId, "unifLayer");
+    if (mWorldLocation < 0)
+        Log("SHADER", "unifLayer not found!", "");
+
     resetUniforms();
     updateUniforms();
 
@@ -159,6 +163,7 @@ void Shader::resetUniforms()
     setPosition(0.0f, 0.0f);
     setRotation(0);
     setScale(1.0f);
+    setLayer(0.0f);
 }
 
 void Shader::setPosition(float x, float y)
@@ -176,6 +181,11 @@ void Shader::setScale(float scale)
     mScale = scale;
 }
 
+void Shader::setLayer(float layer)
+{
+    mLayer = layer;
+}
+
 void Shader::updateUniforms()
 {
     mViewTransfrom = inverse(translate(vec3(mPosition, 1.0f / mScale)));
@@ -189,4 +199,6 @@ void Shader::updateUniforms()
 	float screenY = (float)Game::getInstance()->getGraphics()->getContext()->getHeight();
 	mProjectionTransform = glm::perspective(120.0f, screenX /screenY , 0.1f, 1000.0f);
     glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
+
+    glUniform1f(mLayerLocation, mLayer);
 }

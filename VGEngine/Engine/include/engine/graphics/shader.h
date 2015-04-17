@@ -71,6 +71,7 @@ namespace vg
         void setPosition(float x, float y);
         void setRotation(float degrees);
         void setScale(float scale);
+        void setLayer(float layer);
         void updateUniforms();
 
     private:
@@ -99,9 +100,11 @@ namespace vg
         GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
         GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
         GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
+        GLuint mLayerLocation;                     ///<
         glm::vec2 mPosition;                       ///<
         float mRotation;                           ///<
         float mScale;                              ///<
+        float mLayer;                              ///<
         glm::mat4 mProjectionTransform;            ///< projection transform matrix
         glm::mat4 mViewTransfrom;                  ///< view transform matrix
         glm::mat4 mWorldTransform;                 ///< world transform matrix
