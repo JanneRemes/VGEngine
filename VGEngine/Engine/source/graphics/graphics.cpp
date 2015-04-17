@@ -27,6 +27,10 @@ void Graphics::initialize(android_app* app, const Shader& shader)
     mContext.initialize(app->window);
     mShader = Shader(shader);
     mShader.load(*mFileManager);
+
+    std::string fontpath = "font.ttf";
+	t = new text(fontpath, mFileManager);
+
     mInitialized = true;
 
 	for (vector<DebugSprite*>::iterator i = mUnloadedDebugSprites.begin(); i != mUnloadedDebugSprites.end(); i++)
@@ -36,9 +40,6 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 		mDebugSprites.push_back(*i);
 	}
 	mUnloadedDebugSprites.clear();
-
-	std::string fontpath = "koala.png";
-	t = new text(fontpath, mFileManager);
 
 	//char X = 'X';
 	//t->initialize();
@@ -101,7 +102,7 @@ void Graphics::draw()
 		{
 			(*i)->draw(mShader);
 		}
-		t->draw(mShader);
+        t->draw(mShader);
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");
