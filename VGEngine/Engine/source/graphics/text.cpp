@@ -14,50 +14,66 @@ text::text(std::string& fontPath, FileManager *manager)
 	FT_Error error;
 	FT_Library library;
 	error = FT_Init_FreeType(&library);
-	if (error)
-	{
-		Log("FTYPE", "Freetype init fail %x", error, "");
-	}
 
 	mFace = NULL;
-	error = FT_New_Memory_Face(library, &charData[0], charData.size(), 0, &mFace);
-	if (error != 0)
-	{
-		Log("FTYPE", "Freetype new memory face error %x", error, "");
-	}
-	error = FT_Set_Pixel_Sizes(mFace, 0, 10);
-	error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
 
+	error = FT_New_Memory_Face(library, &charData[0], charData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	error = FT_Set_Pixel_Sizes(mFace, 50, 100);
+	error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
 	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	glGenTextures(0, &mTexture);
+	glActiveTexture(mTexture);
+	glBindTexture(GL_TEXTURE_2D, mTexture);
 
-	gl::genTextures(&mTexture);
-	gl::activeTexture();
-	gl::bindTexture(mTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mGlyph->bitmap.width, mGlyph->bitmap.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, mGlyph->bitmap.buffer);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//gl::bindTexture(0);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	//Log("text", "Bitmap width: %i", face->glyph->bitmap.width, "");
-	//Log("text", "Bitmap height: %i", face->glyph->bitmap.rows, "");
-	//Log("text", "Bitmap buffer: %p", face->glyph->bitmap.buffer, "");
+	glActiveTexture(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	Log("text", "Bitmap x: %i", mGlyph->bitmap_left, "");
+	Log("text", "Bitmap y: %i", mGlyph->bitmap_top, "");
+	Log("text", "Bitmap width: %i", mGlyph->bitmap.width, "");
+	Log("text", "Bitmap height: %i", mGlyph->bitmap.rows, "");
 	
-	float x = mGlyph->bitmap_left ;
-	float y = mGlyph->bitmap_top ;
+	float var = 1;
+	
+	float x = mGlyph->bitmap_left * var;
+	float y = mGlyph->bitmap_top * var;
 
-	float w = mGlyph->bitmap.width ;
-	float h = mGlyph->bitmap.rows ;
+	float w = mGlyph->bitmap.width * var;
+	float h = mGlyph->bitmap.rows * var;
+
+	Log("text", "Bitmap x, y, w, h: %f %f %f %f", x, y, w, h, "");
 
 	createBuffer(x, y, w, h);
 
 	mVertexBuffer = new VertexBuffer(mVertexData);
 	mIndexBuffer = new IndexBuffer(mIndexData);
+}
+
+void text::draw(Shader &shader)
+{	
+	shader.useProgram();
+
+	gl::activeTexture(mTexture);
+	gl::bindTexture(mTexture);
+
+	GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer, 0.0f, 0.0f, 0.0f, 1.0f);
+
+	gl::activeTexture();
+	gl::bindTexture(0);
+
+	shader.unUseProgram();
 }
 
 void text::initializeBuffer(char *text)
@@ -86,26 +102,11 @@ void text::initializeBuffer(char *text)
 	}
 }
 
-void text::draw(Shader &slimshady)
-{	
-	slimshady.useProgram();
-
-	gl::activeTexture(mTexture);
-	gl::bindTexture(mTexture);
-
-	GraphicsDevice::draw(&slimshady, mVertexBuffer, mIndexBuffer, 0.0f, 0.0f, 0.0f, 1.0f);
-
-	gl::activeTexture();
-	gl::bindTexture(0);
-
-	slimshady.unUseProgram();
-}
-
 void text::createBuffer(float x, float y, float w, float h)
 {
 	//vertex x0 y0
-	mVertexData.push_back(0.0);
-	mVertexData.push_back(0.0);
+	mVertexData.push_back(x);
+	mVertexData.push_back(y);
 
 	// Colours and alpha
 	mVertexData.push_back(0.0);
@@ -114,12 +115,12 @@ void text::createBuffer(float x, float y, float w, float h)
 	mVertexData.push_back(1.0);
 
 	//UV
-	mVertexData.push_back(0.0);
-	mVertexData.push_back(0.0);
+	mVertexData.push_back(x);
+	mVertexData.push_back(y);
 
 	//vertex x1 y0
-	mVertexData.push_back(0.0);
-	mVertexData.push_back(-1.0);
+	mVertexData.push_back(x);
+	mVertexData.push_back(y - h);
 
 	// Colours and alpha
 	mVertexData.push_back(0.0);
@@ -128,12 +129,12 @@ void text::createBuffer(float x, float y, float w, float h)
 	mVertexData.push_back(1.0);
 
 	//UV
-	mVertexData.push_back(0.0);
-	mVertexData.push_back(-1.0);
+	mVertexData.push_back(x);
+	mVertexData.push_back(y - h);
 
 	//vertex x1 y1
-	mVertexData.push_back(1.0);
-	mVertexData.push_back(-1.0);
+	mVertexData.push_back(x + w);
+	mVertexData.push_back(y - h);
 
 	// Colours and alpha
 	mVertexData.push_back(0.0);
@@ -142,12 +143,12 @@ void text::createBuffer(float x, float y, float w, float h)
 	mVertexData.push_back(1.0);
 
 	//UV
-	mVertexData.push_back(1.0);
-	mVertexData.push_back(-1.0);
+	mVertexData.push_back(x + w);
+	mVertexData.push_back(y - h);
 
 	//vertex x0 y1
-	mVertexData.push_back(1.0);
-	mVertexData.push_back(0.0);
+	mVertexData.push_back(x + w);
+	mVertexData.push_back(y);
 
 	// Colours and alpha
 	mVertexData.push_back(0.0);
@@ -156,9 +157,10 @@ void text::createBuffer(float x, float y, float w, float h)
 	mVertexData.push_back(1.0);
 
 	//UV
-	mVertexData.push_back(1.0);
-	mVertexData.push_back(0.0);
+	mVertexData.push_back(x + w);
+	mVertexData.push_back(y);
 
+	// Index data
 	mIndexData.push_back(0);
 	mIndexData.push_back(1);
 	mIndexData.push_back(2);
@@ -168,8 +170,8 @@ void text::createBuffer(float x, float y, float w, float h)
 	mIndexData.push_back(3);
 
 	////vertex x0 y0
-	//mVertexData.push_back(x);
-	//mVertexData.push_back(-y);
+	//mVertexData.push_back(0.0);
+	//mVertexData.push_back(0.0);
 
 	//// Colours and alpha
 	//mVertexData.push_back(0.0);
@@ -182,8 +184,8 @@ void text::createBuffer(float x, float y, float w, float h)
 	//mVertexData.push_back(0.0);
 
 	////vertex x1 y0
-	//mVertexData.push_back(x);
-	//mVertexData.push_back(-y - h);
+	//mVertexData.push_back(0.0);
+	//mVertexData.push_back(-1.0);
 
 	//// Colours and alpha
 	//mVertexData.push_back(0.0);
@@ -192,12 +194,12 @@ void text::createBuffer(float x, float y, float w, float h)
 	//mVertexData.push_back(1.0);
 
 	////UV
-	//mVertexData.push_back(1.0);
 	//mVertexData.push_back(0.0);
+	//mVertexData.push_back(-1.0);
 
 	////vertex x1 y1
-	//mVertexData.push_back(x + w);
-	//mVertexData.push_back(-y - h);
+	//mVertexData.push_back(1.0);
+	//mVertexData.push_back(-1.0);
 
 	//// Colours and alpha
 	//mVertexData.push_back(0.0);
@@ -206,12 +208,12 @@ void text::createBuffer(float x, float y, float w, float h)
 	//mVertexData.push_back(1.0);
 
 	////UV
-	//mVertexData.push_back(0.0);
 	//mVertexData.push_back(1.0);
+	//mVertexData.push_back(-1.0);
 
 	////vertex x0 y1
-	//mVertexData.push_back(x + w);
-	//mVertexData.push_back(-y);
+	//mVertexData.push_back(1.0);
+	//mVertexData.push_back(0.0);
 
 	//// Colours and alpha
 	//mVertexData.push_back(0.0);
@@ -221,9 +223,8 @@ void text::createBuffer(float x, float y, float w, float h)
 
 	////UV
 	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
+	//mVertexData.push_back(0.0);
 
-	//// Index data
 	//mIndexData.push_back(0);
 	//mIndexData.push_back(1);
 	//mIndexData.push_back(2);

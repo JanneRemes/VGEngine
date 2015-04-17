@@ -20,7 +20,7 @@ namespace vg
 		~text(){};
 		text(std::string& fontPath, FileManager *manager);
 		void initializeBuffer(char *text);
-		void draw(Shader &slimshady);
+		void draw(Shader &shader);
 
 		//std::vector<float> getVertexData() { return mVertexData; };
 		//std::vector<uint32_t> getIndexData() { return mIndexData; };
