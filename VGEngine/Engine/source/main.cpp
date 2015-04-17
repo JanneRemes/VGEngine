@@ -155,7 +155,7 @@ void android_main(struct android_app* state)
             {
 				delete Game::getInstance();
                 engine.graphics.unInitialize();
-				Log("memory", "MemoryCount is: %d", BaseClass::memoryCount);
+				Log("memory", "MemoryCount is: %d", BaseClass::getValue("gameObject"));
                 return;
             }
         }
