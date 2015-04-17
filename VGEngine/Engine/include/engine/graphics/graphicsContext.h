@@ -60,6 +60,9 @@ namespace vg
 
 		GLuint getProgramId();
 
+
+
+
     private:
         /**
         intializes EGL context for current device

@@ -73,6 +73,11 @@ namespace vg
 
 		void append(DebugSprite* sprite);
 		Shader *getShader(){return &mShader;}
+
+		GraphicsContext *getContext()
+		{
+			return &mContext;
+		}
     private:
         FileManager* mFileManager;  ///< pointer to FileManager
         GraphicsContext mContext;   ///< current GraphicsContext

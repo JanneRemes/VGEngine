@@ -31,6 +31,15 @@ namespace vg
 			else
 				return static_cast<T*>(position->second);
 		}
+		std::vector<Component*> getAllComponents()
+		{
+			std::vector<Component*> tempVector;
+			for (ComponentMap::iterator it = mComponents.begin(); it != mComponents.end(); it++)
+			{
+				tempVector.push_back((*it).second);
+			}
+			return tempVector;
+		}
 	private:
 		using ComponentMap = std::unordered_map<const std::type_info*, Component*>;
 		ComponentMap mComponents;

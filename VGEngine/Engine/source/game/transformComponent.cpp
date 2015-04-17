@@ -8,6 +8,7 @@ TransformComponent::TransformComponent() :Component()
 	//mY = 0.0f;
 	mPosition = Vector2<float>();
 	mScale = 1.0f;
+//	mRotation = 0;
 }
 TransformComponent::TransformComponent(float x, float y, float rotation) :Component()
 {

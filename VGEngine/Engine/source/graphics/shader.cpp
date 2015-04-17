@@ -2,7 +2,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
-
+#include "engine/game/game.h"
 using namespace std;
 using namespace vg;
 using namespace glm;
@@ -185,6 +185,8 @@ void Shader::updateUniforms()
     glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, value_ptr(mWorldTransform));
 
     ///@ todo get screen size
-    mProjectionTransform = glm::perspective(120.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+	float screenX = (float)Game::getInstance()->getGraphics()->getContext()->getWidth();
+	float screenY = (float)Game::getInstance()->getGraphics()->getContext()->getHeight();
+	mProjectionTransform = glm::perspective(120.0f, screenX /screenY , 0.1f, 1000.0f);
     glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
 }
