@@ -20,7 +20,8 @@ namespace vg
 		/**
 			@param textureFileName path to texture
 		*/
-        DebugSprite(const std::string& textureFileName, float x, float y, float rotation);
+        DebugSprite(const std::string& textureFileName,
+			float x, float y, float rotation, uint layer);
 
 		/**
 			<description>
@@ -52,7 +53,8 @@ namespace vg
         void rotate(float rotatation);
 
         //void setScale(float scale);
-        //void scale(float scale);
+
+        void scale(float scale);
 
         std::vector<float> defaultVertices =
         {
@@ -88,14 +90,14 @@ namespace vg
         };
 
     private:
-        void updateVertices();
+        //void updateVertices();
 
         Texture* mTexture;				///<description>			
         //VertexBuffer* mVertexBuffer;	///<description>
         //IndexBuffer* mIndexBuffer;		///<description>
         glm::vec2 mPosition;
         float mRotation;
-        //float mScale;
+		uint mLayer;
         std::vector<float> mVertices;
         std::vector<uint> mIndices;
     };

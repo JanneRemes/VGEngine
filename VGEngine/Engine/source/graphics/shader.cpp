@@ -163,7 +163,7 @@ void Shader::resetUniforms()
     setPosition(0.0f, 0.0f);
     setRotation(0);
     setScale(1.0f);
-    setLayer(0.0f);
+    setLayer(0);
 }
 
 void Shader::setPosition(float x, float y)
@@ -181,20 +181,22 @@ void Shader::setScale(float scale)
     mScale = scale;
 }
 
-void Shader::setLayer(float layer)
+void Shader::setLayer(uint layer)
 {
-    mLayer = layer;
+	// drawing doesn't work if the layer is zero
+    mLayer = (1 + layer) * 0.0001f;
 }
 
 void Shader::updateUniforms()
 {
-    mViewTransfrom = inverse(translate(vec3(mPosition, 1.0f / mScale)));
+	//float scale = ((1 + mLayer) * (1.0f / (mScale)));
+	
+    mViewTransfrom = inverse(translate(vec3(mPosition, 1.0f)));
     glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, value_ptr(mViewTransfrom));
 
     mWorldTransform = rotate(mRotation, vec3(0.0f, 0.0f, 1.0f));
     glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, value_ptr(mWorldTransform));
 
-    ///@ todo get screen size
 	float screenX = (float)Game::getInstance()->getGraphics()->getContext()->getWidth();
 	float screenY = (float)Game::getInstance()->getGraphics()->getContext()->getHeight();
 	mProjectionTransform = glm::perspective(120.0f, screenX /screenY , 0.1f, 1000.0f);

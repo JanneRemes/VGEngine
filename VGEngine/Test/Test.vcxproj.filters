@@ -19,6 +19,12 @@
     <Filter Include="source\scenes">
       <UniqueIdentifier>{5a00f74e-1fcc-4600-ae69-c2440c19d6b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{5dd2e151-2814-4c34-9b8c-614819aae716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\shaders">
+      <UniqueIdentifier>{9d962a5a-0532-46d2-bec7-3fa1d15d592c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <AndroidBuild Include="AndroidManifest.xml" />
@@ -53,5 +59,13 @@
     <ClCompile Include="source\TestComponentSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\default_fragment.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\default_vertex.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

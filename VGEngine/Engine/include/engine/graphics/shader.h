@@ -71,7 +71,16 @@ namespace vg
         void setPosition(float x, float y);
         void setRotation(float degrees);
         void setScale(float scale);
-        void setLayer(float layer);
+
+		/**
+			Vertices with higher layer value will be drawn on top. Values above 28 will cause distortion.
+			@param layer Layer value for next draw call
+		*/
+        void setLayer(uint layer);
+
+		/**
+			Send uniform values to GPU
+		*/
         void updateUniforms();
 
     private:
@@ -100,11 +109,11 @@ namespace vg
         GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
         GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
         GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
-        GLuint mLayerLocation;                     ///<
+        GLuint mLayerLocation;                     ///< shader if for uniform layer value
         glm::vec2 mPosition;                       ///<
-        float mRotation;                           ///<
-        float mScale;                              ///<
-        float mLayer;                              ///<
+        float mRotation;                           ///< rotation clockwise in degrees
+        float mScale;                              ///< must be greater than zero 
+        float mLayer;                              ///< must be greater than zero
         glm::mat4 mProjectionTransform;            ///< projection transform matrix
         glm::mat4 mViewTransfrom;                  ///< view transform matrix
         glm::mat4 mWorldTransform;                 ///< world transform matrix

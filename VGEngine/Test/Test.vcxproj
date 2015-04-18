@@ -34,6 +34,10 @@
       <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\default_fragment.glsl" />
+    <None Include="assets\shaders\default_vertex.glsl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E497E48B-462A-4C74-812F-932E5D53B835}</ProjectGuid>
     <RootNamespace>Test</RootNamespace>

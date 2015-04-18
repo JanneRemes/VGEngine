@@ -18,9 +18,7 @@ GraphicsContext::~GraphicsContext()
 void GraphicsContext::initialize(ANativeWindow* window)
 {
     initializeEGL(window);
-	//glCreateProgram();
-    /// @todo Uncomment later, when relevant
-    //initializeOpenGL();
+	initializeOpenGL();
 }
 
 void GraphicsContext::destroy()
@@ -64,17 +62,31 @@ GLint GraphicsContext::getHeight()
 
 void GraphicsContext::initializeEGL(ANativeWindow* window)
 {
+	/*
     const EGLint attribs[] =
     {
         EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
         EGL_NONE
     };
+	*/
+	EGLint attribs[] = 
+	{
+		EGL_RED_SIZE, 8,
+		EGL_GREEN_SIZE, 8,
+		EGL_BLUE_SIZE, 8,
+		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+		EGL_DEPTH_SIZE, 16,
+		EGL_NONE 
+	};
 
     EGLint contextAttribs[] =
     {
         EGL_CONTEXT_CLIENT_VERSION, 2,
         EGL_NONE
     };
+
+
 
     EGLint dummy, format;
     EGLint numConfigs;
@@ -106,6 +118,18 @@ void GraphicsContext::createGLProgram()
 
 void GraphicsContext::initializeOpenGL()
 {
+	// transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// z-layer
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CCW);
+	glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+	glDepthRangef(0.0, 1.0);
 }
 
 GLuint GraphicsContext::getProgramId()

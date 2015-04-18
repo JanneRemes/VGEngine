@@ -23,8 +23,7 @@ text::text(std::string& fontPath, FileManager *manager)
 	error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
 	
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// gl calls moved to graphicsContext.cpp t:Tuomo
 	
 	glGenTextures(0, &mTexture);
 	glActiveTexture(mTexture);

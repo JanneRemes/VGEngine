@@ -116,9 +116,9 @@ void android_main(struct android_app* state)
 	engine.state.game = game;
     engine.state.game->start();
 	
-    //engine.graphics.append(new DebugSprite("koala.png", -1.0f, -1.0f, 45.0f));
-    //engine.graphics.append(new DebugSprite("koala.png", 1.0f, 1.0f, 60.0f));
-   // engine.graphics.append(new DebugSprite("koala.png", -1.0f, 1.0f, 270.0f));
+	engine.graphics.append(new DebugSprite("koala.png", 2.0f, -1.0f, 0.0f, 0));
+	engine.graphics.append(new DebugSprite("koala.png", 2.0f, 0.0f, 90.0f, 1));
+	engine.graphics.append(new DebugSprite("koala.png", 2.0f, 1.0f, 180.0f, 0));
 
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())
@@ -186,7 +186,7 @@ void drawFrame(struct Engine* engine)
         return;
     }
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
         (vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
 	engine->state.game->update();
