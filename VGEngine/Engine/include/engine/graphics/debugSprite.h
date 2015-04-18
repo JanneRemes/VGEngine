@@ -24,12 +24,12 @@ namespace vg
 			float x, float y, float rotation, uint layer);
 
 		/**
-			<description>
+			Deletes the dynamic buffers.
 		*/
         ~DebugSprite();
 
 		/**
-			creates new index and vertex buffers
+			Creates new index and vertex buffers. Call after graphics context has been initialized.
 		*/
 		void initialize();
 
@@ -54,7 +54,7 @@ namespace vg
 
         //void setScale(float scale);
 
-        void scale(float scale);
+        //void scale(float scale);
 
         std::vector<float> defaultVertices =
         {
@@ -90,11 +90,11 @@ namespace vg
         };
 
     private:
-        //void updateVertices();
+        void updateVertices();
 
         Texture* mTexture;				///<description>			
-        //VertexBuffer* mVertexBuffer;	///<description>
-        //IndexBuffer* mIndexBuffer;		///<description>
+        VertexBuffer* mVertexBuffer;	///<description>
+        IndexBuffer* mIndexBuffer;		///<description>
         glm::vec2 mPosition;
         float mRotation;
 		uint mLayer;

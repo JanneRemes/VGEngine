@@ -19,21 +19,18 @@ DebugSprite::DebugSprite(const string& textureFileName, float x, float y, float 
 
 DebugSprite::~DebugSprite()
 {
-	//delete mVertexBuffer;
-	//delete mIndexBuffer;
+	delete mVertexBuffer;
+	delete mIndexBuffer;
 }
 
 void DebugSprite::initialize()
 {
-	//mVertexBuffer = new VertexBuffer(mVertices);
-	//mIndexBuffer = new IndexBuffer(mIndices);
+	mVertexBuffer = new VertexBuffer(mVertices);
+	mIndexBuffer = new IndexBuffer(mIndices);
 }
 
 void DebugSprite::draw(Shader& shader)
 {
-    VertexBuffer vBuffer(mVertices);
-    IndexBuffer iBuffer(mIndices);
-
     if (mTexture->isLoaded())
     {
         shader.useProgram();
@@ -41,7 +38,7 @@ void DebugSprite::draw(Shader& shader)
         shader.unUseProgram();
     }
         
-    GraphicsDevice::draw(&shader, &vBuffer, &iBuffer,
+	GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer,
 		mPosition.x, mPosition.y, mRotation, mLayer);
 	
     if (mTexture->isLoaded())
