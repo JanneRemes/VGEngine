@@ -4,24 +4,42 @@
 
 namespace vg
 {
+	/**
+	<description>
+	*/
 	struct SoundEffectData
 	{
 		off_t start;
 		off_t length;
 		int fd;
 	};
+
+	/**
+	<class description>
+	*/
 	class Sound :
 		public Asset
 	{
 	public:
+
+		/**
+		<description>
+		@param path
+		*/
 		Sound(const std::string& path);
 		~Sound();
+
 		/**
-		Load sound from file
+		Loads sound from file
+		@return <description>
 		*/
 		bool load(FileManager& fileManager);
+
+		/**
+		@return <description>
+		*/
 		bool unload();
-		SoundEffectData data;
+		SoundEffectData data;	///< <description>
 	private:
 	};
 

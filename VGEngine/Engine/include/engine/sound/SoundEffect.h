@@ -10,35 +10,74 @@
 namespace vg 
 {
 
+	/**
+	<class description>
+	*/
 class SoundEffect
 {
 public:
+
+	/**
+	<description>
+	@param soundFile <description>
+	*/
 	SoundEffect(const Sound& soundFile);
 	~SoundEffect();
 	
+	/**
+	<description>
+	*/
 	void Play();
+
+	/**
+	<description>
+	*/
 	void Stop();
+
+	/**
+	<description>
+	*/
 	void Pause();
 
+	/**
+	<description>
+	@param b <description>
+	*/
 	void SetLoop(bool b);
+
+	/**
+	<description>
+	*/
 	void Destroy();
 
+	/**
+	<description>
+	@param pos <description>
+	*/
 	void SetPosition(float pos);
+
+	/**
+	<description>
+	*/
 	float GetPosition();
+
+	/**
+	<description>
+	*/
 	float GetLength();
 private:
 
-	SLEngineItf Engine;
+	SLEngineItf Engine;				///< <description>
 
-	SLObjectItf engineObject;
-	SLObjectItf PlayerObject;
-	SLObjectItf outputObject;
+	SLObjectItf engineObject;		///< <description>
+	SLObjectItf PlayerObject;		///< <description>
+	SLObjectItf outputObject;		///< <description>
 
 	// Interfaces
-	SLPlayItf PlayerPlay;
-	SLVolumeItf PlayerVolume;
-	SLmillibel maxVolumeLevel;
-	SLSeekItf Seek;
-	SLPlaybackRateItf RateObject;
+	SLPlayItf PlayerPlay;			///< <description>
+	SLVolumeItf PlayerVolume;		///< <description>
+	SLmillibel maxVolumeLevel;		///< <description>
+	SLSeekItf Seek;					///< <description>
+	SLPlaybackRateItf RateObject;	///< <description>
 };
 }
