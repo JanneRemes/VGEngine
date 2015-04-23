@@ -98,8 +98,6 @@ namespace vg
 		Graphics *mGraphics;
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
-        bool mIsRunning;     ///< description
-		SceneManager *mSceneManager;   ///< Manages and stores game's scenes
 		Shader mShader;
     };
 }
