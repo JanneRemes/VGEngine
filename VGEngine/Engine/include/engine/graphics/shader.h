@@ -28,10 +28,21 @@ namespace vg
 			@param attributeNames map containing the usage and name of vertex attributes
         */
         Shader(const AttributeNameMap& attributeNames = getDefaultAttribNames());
+        
+        /**
+            Copy constructor
+            @param Shader where values are copied from
+        */
         Shader(const Shader& shader);
 
+        /**
+            Initialize values needed by load(). Don't call before GraphicsContext is initialized.
+        */
         void initialize();
 
+        /**
+            @return true if Shader has been initialized
+        */
         bool isInitialized();
 
         /**
@@ -67,9 +78,24 @@ namespace vg
         */
         const AttributeNameMap& getVertexElementNames();
 
+        /**
+            Reset saved uniform values to defaults. They sent to be sent to GPU.
+        */
         void resetUniforms();
+
+        /**
+           Set saved uniform value for position. 
+        */
         void setPosition(float x, float y);
+
+        /**
+            Set saved uniform value for rotation in degrees increasing in clockwise direction. 
+        */
         void setRotation(float degrees);
+
+        /**
+            Set saved uniform value for scale.
+        */
         void setScale(float scale);
 
 		/**
@@ -79,7 +105,7 @@ namespace vg
         void setLayer(uint layer);
 
 		/**
-			Send uniform values to GPU
+			Send saved uniform values to GPU.
 		*/
         void updateUniforms();
 
@@ -105,12 +131,14 @@ namespace vg
         GLuint mFragmentId;                        ///< fragment shader id used for linking
         GLuint mProgramId;                         ///< shader program id used for linking
         AttributeNameMap mVertexElementNames;      ///< map of vertex element ids and names
+        glm::vec2 mScreenSize;                     ///< Screensize in pixels
         bool mInitialized;                         ///< have shaders been initialized
         GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
         GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
         GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
         GLuint mLayerLocation;                     ///< shader if for uniform layer value
-        glm::vec2 mPosition;                       ///<
+        glm::vec2 mPosition;                       ///< position for next draw call
+        glm::vec2 mOrigin;                         ///< origin for drawing positions, upper left corner
         float mRotation;                           ///< rotation clockwise in degrees
         float mScale;                              ///< must be greater than zero 
         float mLayer;                              ///< must be greater than zero

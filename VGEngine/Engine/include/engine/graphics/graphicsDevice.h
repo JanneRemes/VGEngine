@@ -12,7 +12,7 @@ namespace vg
 	public:
 		static void draw(Shader* shader, VertexBuffer* vertices);
         static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices,
-			float x = 0.0f, float y = 0.0f, float rotation = 0.0f, uint layer = 1);
+			float x = 0.0f, float y = 0.0f, float rotation = 0.0f, uint layer = 0);
 	private:
 	};
 }
