@@ -36,8 +36,11 @@ namespace vg
 		VertexBuffer *mVertexBuffer;
 		IndexBuffer *mIndexBuffer;
 
+		std::vector<FT_Byte> mCharData;
+		
+		FT_UInt  mGlyph_index;
+		FT_Library mLibrary;
 		FT_Face mFace;
 		FT_GlyphSlot mGlyph;
-
 	};
 }

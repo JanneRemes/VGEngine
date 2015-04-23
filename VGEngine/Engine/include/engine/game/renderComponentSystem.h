@@ -2,6 +2,10 @@
 #include "engine/game/componentSystem.h"
 
 namespace vg{
+
+	/**
+	System that updates renderComponents
+	*/
 	class RenderComponentSystem :
 		public ComponentSystem
 	{

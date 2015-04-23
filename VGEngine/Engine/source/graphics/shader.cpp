@@ -38,6 +38,11 @@ void Shader::initialize()
         glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
 
+    mScreenSize = vec2(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+        Game::getInstance()->getGraphics()->getContext()->getHeight());
+    /// @Todo replace hard coded values
+    mOrigin = vec2(3.1f, -1.7777f);
+    
     mInitialized = true;
 }
 
@@ -168,7 +173,9 @@ void Shader::resetUniforms()
 
 void Shader::setPosition(float x, float y)
 {
-    mPosition = vec2(x, y);
+    // values will be inversed back to normal later
+    mPosition = vec2(-(2 * mOrigin.x * x * (1.0f / mScreenSize.x)),
+        -(2 * mOrigin.y * y * (1.0f / mScreenSize.y)));
 }
 
 void Shader::setRotation(float degrees)
@@ -190,16 +197,13 @@ void Shader::setLayer(uint layer)
 void Shader::updateUniforms()
 {
 	//float scale = ((1 + mLayer) * (1.0f / (mScale)));
-	
-    mViewTransfrom = inverse(translate(vec3(mPosition, 1.0f)));
+
+    mViewTransfrom = inverse(translate(vec3(mOrigin + mPosition, 1.0f)));
     glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, value_ptr(mViewTransfrom));
 
     mWorldTransform = rotate(mRotation, vec3(0.0f, 0.0f, 1.0f));
     glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, value_ptr(mWorldTransform));
-
-	float screenX = (float)Game::getInstance()->getGraphics()->getContext()->getWidth();
-	float screenY = (float)Game::getInstance()->getGraphics()->getContext()->getHeight();
-	mProjectionTransform = glm::perspective(120.0f, screenX /screenY , 0.1f, 1000.0f);
+	mProjectionTransform = glm::perspective(120.0f, mScreenSize.x / mScreenSize.y, 0.1f, 1000.0f);
     glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
 
     glUniform1f(mLayerLocation, mLayer);

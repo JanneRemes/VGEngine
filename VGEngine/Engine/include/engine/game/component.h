@@ -1,14 +1,12 @@
 #pragma once
 #include <utility>
 
-/// @todo Fix comments in this file
-
 namespace vg
 {
 	class GameObject;
 	class type_info;
 	/**
-		<description>
+		Base for all components
 	*/
 	class Component
 	{
@@ -16,6 +14,6 @@ namespace vg
 		Component() = default;
 		virtual ~Component() = default;
 	private:
-		GameObject* mParent; ///< description
+		GameObject* mParent; ///< Gameobject parent of the component
 	};
 }

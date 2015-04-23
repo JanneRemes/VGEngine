@@ -14,6 +14,10 @@ namespace vg
 			this->amount = amount;
 		}
 	};*/
+
+	/**
+	Class made to pool all objects for easier updating and managing
+	*/
 	class ObjectPool
 	{
 
@@ -21,17 +25,30 @@ namespace vg
 		ObjectPool();
 		~ObjectPool();
 		//GameObject *getGameObjectFromPool(std::string name);//returns pooled object if available
+
+		/**
+		Adds a gameObject to the pool
+		@param gObject gameObject that is being added in the pool
+		*/
 		void addGameObject(GameObject *gObject);
 		//void removeGameObjectInactivePool(GameObject gObject);
 		//void createGameObjectPool(std::vector<PoolObjectType> *prefabs); //creates empty gameobjects to InactivePool from mPoolPrefabList
+
+		/**
+		Updates all the gameObjects that are in the pool
+		*/
 		void updateGameObjects();
+
+		/**
+		@return Returns the componentSystemManager that the pool is using 
+		*/
 		ComponentSystemManager* getComponentSystemManager(){ return &mComponentSystemManager; }
 	private:
-		ComponentSystemManager mComponentSystemManager;///< updates different component systems
+		ComponentSystemManager mComponentSystemManager;///< Updates different component systems
 		//void addPrefabToPool(PoolObjectType type); //<Adds poolobjectype's amount of gameobjects to inactivepool
 		//bool loaded;
-		std::vector<GameObject*> mActivePool;   ///< description
-		std::vector<GameObject> mInactivePool; ///< description
+		std::vector<GameObject*> mActivePool;   ///< List of the active gameObject pool
+		std::vector<GameObject> mInactivePool; ///< List of the unactive gameObject pool
 	};
 
 }

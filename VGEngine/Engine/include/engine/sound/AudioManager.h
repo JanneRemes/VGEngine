@@ -4,48 +4,87 @@
 
 namespace vg
 {
+	/**
+	<class description>
+	*/
 	class SFXMapping
 	{
 	public:
+		/**
+		<description>
+		@param id <description>
+		@param sound <description>
+		*/
 		SFXMapping(size_t id, const Sound& sound);
 	
-		size_t mId;
-		SoundEffect *mSoundEffect;
+		size_t mId;					///< <description>
+		SoundEffect *mSoundEffect;	///< <description>
 	};
 
+	/**
+	<class description>
+	*/
 	class AudioManager
 	{
 	public:
 		~AudioManager();
 
+		/**
+		<description>
+		@param name <description>
+		@param sound <description>
+		*/
 		void addSound(const std::string& name, const Sound& sound);
+
+		/**
+		<description>
+		@param name <description>
+		*/
 		void Stop(const std::string& name);
+
+		/**
+		<description>
+		@param name <description>
+		*/
 		void Play(const std::string& name);
+
+		/**
+		<description>
+		@param name <description>
+		*/
 		void Pause(const std::string& name);
 
 		/**
 		Set looping enabled or disabled for track
+		@param name <description>
+		@param b <description>
 		*/
 		void LoopEnabled(const std::string& name, bool b);
 
 		/**
 		Set the playing position in track
+		@param name <description>
+		@param pos <description>
 		*/
 		void SetPosition(const std::string& name, float pos);
 
 		/**
-		Get playing position of track in milliseconds
+		@return Returns playing position of track in milliseconds
 		*/
 		float GetPosition(const std::string& name);
 
 		/**
-		Get track length in milliseconds
+		@return Returns track length in milliseconds
 		*/
 		float GetLength(const std::string& name);
 
+		/**
+		<description>
+		@param id <description>
+		*/
 		SFXMapping *FindSFXMap(int id);
 	private:
-		std::hash<std::string> mStringHash;
-		std::vector<SFXMapping> mSoundEffectList;
+		std::hash<std::string> mStringHash;			///< <description>
+		std::vector<SFXMapping> mSoundEffectList;	///< <description>
 	};
 }

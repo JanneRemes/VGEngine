@@ -12,7 +12,7 @@
 namespace vg
 {
 	/**
-		unbatched test sprite
+		Unbatched test sprite.
 	*/
     class DebugSprite
     {
@@ -44,18 +44,39 @@ namespace vg
 		*/
         Texture* getTexture();
 
+        /**
+            Set position value to be used on draw calls.
+        */
         void setPosition(float x, float y);
 
+        /**
+            Add to the position value to be used on draw calls.
+        */
         void move(float x, float y);
 
+        /**
+            Set rotation value to be used on draw calls.
+        */
         void setRotation(float rotation);
 
+        /**
+            Add to the rotation value to be used on draw calls.
+        */
         void rotate(float rotatation);
 
-        //void setScale(float scale);
+        /**
+            Set scale value to be used on draw calls.
+        */
+        void setScale(float scale);
 
-        //void scale(float scale);
+        /**
+            Add to the scale value to be used on draw calls.
+        */
+        void scale(float scale);
 
+        /**
+            Default vertice values without transformation.
+        */
         std::vector<float> defaultVertices =
         {
             // Position Vec2
@@ -83,6 +104,9 @@ namespace vg
             1.0f, 1.0f
         };
 
+        /**
+            Default indices for two triangles forming a quad.
+        */
         std::vector<uint> defaultIndices = 
         {
             0u, 1u, 2u,
@@ -92,13 +116,14 @@ namespace vg
     private:
         void updateVertices();
 
-        Texture* mTexture;				///<description>			
-        VertexBuffer* mVertexBuffer;	///<description>
-        IndexBuffer* mIndexBuffer;		///<description>
-        glm::vec2 mPosition;
-        float mRotation;
-		uint mLayer;
-        std::vector<float> mVertices;
-        std::vector<uint> mIndices;
+        Texture* mTexture;				/// Texture for drawing	
+        VertexBuffer* mVertexBuffer;	/// VertexBuffer that will be binded before drawing.
+        IndexBuffer* mIndexBuffer;		/// IndexBuffer that will be binded before drawing.
+        glm::vec2 mPosition;            /// Position where the sprite will be drawn.
+        float mRotation;                /// Rotation of sprite in angles.
+        float mScale;                   /// Scale of 
+        uint mLayer;                    /// Layer where the sprite will be drawn.
+        std::vector<float> mVertices;   /// Vertices that will be binded to buffer.
+        std::vector<uint> mIndices;     /// Indices that will be binded to buffer.
     };
 }

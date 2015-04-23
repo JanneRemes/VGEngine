@@ -12,7 +12,7 @@ namespace vg
 	class Component;
 
 	/**
-		<description>
+		Manages an Object in the game
 	*/
 	class GameObject:
 		public BaseClass
@@ -20,9 +20,22 @@ namespace vg
 	public:
 		GameObject(std::string name);
 		virtual ~GameObject() { };
+
+		/**
+		@return Returns gameObjects name
+		*/
 		std::string getName(){ return mName; }
+
+		/**
+		Adds a component to the gameObject
+		@param component Component we want to add for the gameObject
+		*/
 		void addComponent(Component* component);
 		template<typename T>
+
+		/**
+		@return Returns component from the gameObject
+		*/
 		T* GetComponent()
 		{
 			ComponentMap::const_iterator position = mComponents.find(&typeid(T));
@@ -31,6 +44,10 @@ namespace vg
 			else
 				return static_cast<T*>(position->second);
 		}
+
+		/**
+		@return Returns all components from the gameObject
+		*/
 		std::vector<Component*> getAllComponents()
 		{
 			std::vector<Component*> tempVector;
@@ -41,8 +58,8 @@ namespace vg
 			return tempVector;
 		}
 	private:
-		using ComponentMap = std::unordered_map<const std::type_info*, Component*>;
-		ComponentMap mComponents;
-		std::string mName;
+		using ComponentMap = std::unordered_map<const std::type_info*, Component*>; 
+		ComponentMap mComponents; ///<  ComponentMap used by the gameObject
+		std::string mName; ///< Name of the gameObject
 	};
 }

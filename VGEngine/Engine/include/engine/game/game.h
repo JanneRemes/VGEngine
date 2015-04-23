@@ -15,17 +15,14 @@
 #include <unistd.h>
 #include <string>
 
-/// @todo Fix comments in this file
 namespace vg
 {
     /// @todo remove when not needed anymore
     class Scene;
     class SceneManager;
 
-
-
     /**
-    <description>
+    Class used for updating and pausing/starting the game
     */
     class Game
     {
@@ -36,19 +33,10 @@ namespace vg
 		static Game* mGame;
 		static Game* getInstance();
 
-        /**
-        <description>
-        */
-    
-
-        /**
-        <description>
-        */
 		~Game();
 
-
         /**
-        <description>
+        Updates the games sceneManager
         */
         void update();
 
@@ -59,35 +47,57 @@ namespace vg
         void readFiles(FileManager& fileManager);
 
         /**
-        <description>
+        @return Returns whether the game is running or not
         */
         bool isRunning();
 
         /**
-        <description>
+        Pauses the game
         */
         void stop();
 
         /**
-        <description>
+        Starts the game if its paused
         */
         void start();
 
 		/**
-		Returns pointer to scene manager
-		*/
-		
+		@return Returns pointer to scene manager
+		*/		
 		SceneManager* getSceneManager();
-		float mPulse;
-		void addComponentSystem(Scene *scene,ComponentSystem *componentSystem);
+
+		/**
+		Adds componentSystem to the scene 
+		@param scene Scene that we are giving our componentSystem to
+		@param componentSystem ComponentSystem that we are giving to the scene
+		*/
+		void addComponentSystem(Scene *scene, ComponentSystem *componentSystem);
+
+		/**
+		Logger reworked in game for debugging purposes
+		@param text Text to log out 
+		*/
 		static void log(char* text);
+
+		/**
+		@return returns the games graphics
+		*/
 		Graphics* getGraphics();
+
+		/**
+		Sets the graphics for the game
+		@param graphics Graphics class that includes everything needed for drawing
+		*/
 		void setGraphics(Graphics *graphics);
 		Factory *getFactory();
+
+		float mPulse;
     private:
 		Game();
 		Factory *mFactory;
 		Graphics *mGraphics;
+        bool mIsRunning;				///< Boolean used for pausing and starting the game
+		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
         bool mIsRunning;     ///< description
 		SceneManager *mSceneManager;   ///< Manages and stores game's scenes
 		Shader mShader;
