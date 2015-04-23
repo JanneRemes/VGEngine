@@ -15,11 +15,11 @@ Texture::Texture(const std::string& path)
 {
 }
 
-bool Texture::load(FileManager& fileManager)
+bool Texture::load(FileManager *fileManager)
 {
 	std::vector<unsigned char> rawBytes;
 
-	if (fileManager.readAsset(mPath, rawBytes) == false)
+	if (fileManager->readAsset(mPath, rawBytes) == false)
 	{
 		Log("ERROR", "Failed to load texture asset '%s'.", mPath.c_str());
 		return false;

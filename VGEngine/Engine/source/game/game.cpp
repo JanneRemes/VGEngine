@@ -100,3 +100,7 @@ Graphics* Game::getGraphics()
 {
 	return mGraphics;
 }
+Factory *Game::getFactory()
+{
+	return mFactory;
+}

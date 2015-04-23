@@ -35,7 +35,7 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 
 	for (vector<DebugSprite*>::iterator i = mUnloadedDebugSprites.begin(); i != mUnloadedDebugSprites.end(); i++)
 	{
-		(*i)->getTexture()->load(*mFileManager);
+		(*i)->getTexture()->load(mFileManager);
 		(*i)->initialize();
 		mDebugSprites.push_back(*i);
 	}

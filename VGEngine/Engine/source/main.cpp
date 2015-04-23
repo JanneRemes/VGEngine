@@ -112,7 +112,7 @@ void android_main(struct android_app* state)
     app_dummy();
 	Game* game = Game::getInstance();
 	game->setGraphics(&engine.graphics);
-	mainGame(game);
+
 	engine.state.game = game;
     engine.state.game->start();
 	
@@ -220,6 +220,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
             engine->graphics.initialize(engine->app);
             engine->animating = true;
             drawFrame(engine);
+			mainGame(engine->state.game);
         }
         break;
 

@@ -2,15 +2,15 @@
 using namespace vg;
 using namespace std;
 
-quadrangleComponent::quadrangleComponent() :RenderComponent(getDefaultVertices(), getDefaultIndices())
+QuadrangleComponent::QuadrangleComponent() :RenderComponent(getDefaultVertices(), getDefaultIndices())
 {
 }
 
 
-quadrangleComponent::~quadrangleComponent()
+QuadrangleComponent::~QuadrangleComponent()
 {
 }
-std::vector<float> quadrangleComponent::getDefaultVertices()
+std::vector<float> QuadrangleComponent::getDefaultVertices()
 {
 	std::vector<float> defaultVertices = std::vector < float >
 	{
@@ -40,7 +40,7 @@ std::vector<float> quadrangleComponent::getDefaultVertices()
 	};
 	return defaultVertices;
 }
-std::vector<GLuint> quadrangleComponent::getDefaultIndices()
+std::vector<GLuint> QuadrangleComponent::getDefaultIndices()
 {
 	std::vector<GLuint> defaultIndices = std::vector < GLuint >
 	{

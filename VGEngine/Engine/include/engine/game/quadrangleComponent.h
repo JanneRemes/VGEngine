@@ -2,12 +2,12 @@
 #include "engine/game/renderComponent.h"
 #include "GLES2/gl2.h"
 namespace vg{
-	class quadrangleComponent :
+	class QuadrangleComponent :
 		public RenderComponent
 	{
 	public:
-		quadrangleComponent();
-		~quadrangleComponent();
+		QuadrangleComponent();
+		~QuadrangleComponent();
 
 	private:
 		std::vector<float> getDefaultVertices();

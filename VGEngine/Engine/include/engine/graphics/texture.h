@@ -21,7 +21,7 @@ namespace vg
 			@param fileManager <description>
 			@return <description>
 		*/
-		bool load(FileManager& fileManager);
+		bool load(FileManager *fileManager);
 
 		/**
 			<description>

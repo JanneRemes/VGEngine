@@ -18,7 +18,6 @@ namespace vg
 		void setRotation(float rotation){ mRotation = rotation; };
 		Vector2<float> mPosition;
 		float mScale;
-		void update();
 	private:
 
 		//float mX;

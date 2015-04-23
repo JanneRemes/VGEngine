@@ -28,7 +28,7 @@ namespace vg
 			For loading the filemanager
 			@param fileManager The manager that manages the files
 		*/
-        virtual bool load(FileManager& fileManager) = 0;
+        virtual bool load(FileManager *fileManager) = 0;
 		
 		/**
 			Unloads the asset

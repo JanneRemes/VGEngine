@@ -1,6 +1,5 @@
 #pragma once
 #include "engine/game/gameObject.h"
-#include "engine/game/transformComponentSystem.h"
 #include "engine/game/componentSystem.h"
 #include <vector>
 namespace vg

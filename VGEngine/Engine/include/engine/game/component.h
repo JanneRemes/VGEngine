@@ -15,7 +15,6 @@ namespace vg
 	public:
 		Component() = default;
 		virtual ~Component() = default;
-		virtual void update() {}
 	private:
 		GameObject* mParent; ///< description
 	};

@@ -6,6 +6,7 @@
 #include "engine/assets/fileManager.h"
 #include "engine/game/componentSystem.h"
 #include "engine/graphics/shader.h"
+#include "engine/game/factory.h"
 
 #include "engine/android_native_app_glue.h"
 #include <android/sensor.h>
@@ -82,8 +83,10 @@ namespace vg
 		static void log(char* text);
 		Graphics* getGraphics();
 		void setGraphics(Graphics *graphics);
+		Factory *getFactory();
     private:
 		Game();
+		Factory *mFactory;
 		Graphics *mGraphics;
         bool mIsRunning;     ///< description
 		SceneManager *mSceneManager;   ///< Manages and stores game's scenes

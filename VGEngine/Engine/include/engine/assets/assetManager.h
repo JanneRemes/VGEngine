@@ -29,11 +29,11 @@ namespace vg
 			@return Point to the asset
 		*/
 		template<class T>
-		const T* get(const std::string& path) const
+		T* get(const std::string& path)
 		{
 			const size_t hash = mHasher(path);
 
-			const Asset* asset = find(hash);
+			Asset* asset = find(hash);
 
 			if (asset)
 			{

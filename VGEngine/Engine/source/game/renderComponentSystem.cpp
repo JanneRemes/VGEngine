@@ -6,6 +6,7 @@
 #include "engine/graphics/indexBuffer.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/game/transformComponent.h"
+#include "engine/graphics/opengl.h"
 #include <vector>
 #include <typeinfo>
 using namespace vg;
@@ -39,13 +40,24 @@ void RenderComponentSystem::update(GameObject* gameObject)
 	{
 		VertexBuffer vBuffer(*component->getVertices());
 		IndexBuffer iBuffer(*component->getIndices());
-		Shader *test = Game::getInstance()->getGraphics()->getShader();
-
-		if (transformComponent == nullptr)
-			GraphicsDevice::draw(test, &vBuffer, &iBuffer);
+		Shader *shader = Game::getInstance()->getGraphics()->getShader();
+		shader->useProgram();
+		if (component->getTexture() != nullptr)
+		{
+			component->getTexture()->bind();
+		}
 		else
 		{
-			GraphicsDevice::draw(test, &vBuffer, &iBuffer, transformComponent->mPosition.getX(), transformComponent->mPosition.getY(), transformComponent->getRotation());
+			gl::activeTexture();
+			gl::bindTexture(0u);
 		}
+		
+		if (transformComponent == nullptr)
+			GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
+		else
+		{
+			GraphicsDevice::draw(shader, &vBuffer, &iBuffer, transformComponent->mPosition.getX(), transformComponent->mPosition.getY(), transformComponent->getRotation());
+		}
+		shader->unUseProgram();
 	}
 }

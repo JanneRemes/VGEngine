@@ -51,7 +51,7 @@ void AssetManager::commit()
 		if (asset->mUseCount > 0 &&
 			asset->mIsLoaded == false)
 		{
-			asset->mIsLoaded = asset->load(mFileManager);
+			asset->mIsLoaded = asset->load(&mFileManager);
 		}
 		else if (asset->mUseCount == 0 &&
 			asset->mIsLoaded == true)

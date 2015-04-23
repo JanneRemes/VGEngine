@@ -19,6 +19,3 @@ TransformComponent::TransformComponent(float x, float y, float rotation) :Compon
 TransformComponent::~TransformComponent()
 {
 }
-void TransformComponent::update()
-{
-}
