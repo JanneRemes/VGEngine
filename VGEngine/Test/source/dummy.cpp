@@ -3,6 +3,7 @@
 #include <engine/game/game.h>
 #include <engine/game/SceneManager.h>
 #include <engine/game/transformComponent.h>
+#include <engine/utility/Vector2.h>
 #include "TestComponentSystem.h"
 #include <stdlib.h> 
 #include <engine/utility/logger.h>
@@ -26,6 +27,7 @@ void mainGame(Game* game)
 	Scene *scene = new Scene();
 	GameObject *doge = new GameObject("doge");
 	TransformComponent *transform = new TransformComponent();
+	transform->mPosition = Vector2<float>(300.0f, 300.0f);
 	transform->setRotation(20);
 	doge->addComponent(transform);
 	TestComponentSystem *compSystem = new TestComponentSystem();
@@ -34,7 +36,7 @@ void mainGame(Game* game)
 	//TriangleComponent *triangle = new TriangleComponent();
 	//doge->addComponent(triangle);
 	//QuadrangleComponent *quadre = new QuadrangleComponent();
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala.png");
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
 	doge->addComponent(quadre);
 	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
 	scene->getObjectPool()->addGameObject(doge);

@@ -111,8 +111,9 @@ void android_main(struct android_app* state)
     // Make sure app_glue isn't stripped.
     app_dummy();
 	Game* game = Game::getInstance();
+	game->setFileManager(state);
 	game->setGraphics(&engine.graphics);
-
+	
 	engine.state.game = game;
     engine.state.game->start();
 	
