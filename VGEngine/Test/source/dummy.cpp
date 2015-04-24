@@ -8,20 +8,12 @@
 #include <engine/utility/logger.h>
 #include "TestComponent.h"
 #include <engine/game/triangleComponent.h>
+#include <engine/game/quadrangleComponent.h>
 //DEBUG
 //#include <cstdio>
 //#include <cstdlib>
 using namespace vg;
-/*void* operator new(size_t sz){
-	Game::log("NEW TEST");
-	void* m = malloc(sz);
-	return m;
-}
 
-void operator delete(void* m) {
-	Game::log("REMOVE TEST");
-	free(m);
-}*/
 
 void test_dummy()
 {
@@ -34,12 +26,16 @@ void mainGame(Game* game)
 	Scene *scene = new Scene();
 	GameObject *doge = new GameObject("doge");
 	TransformComponent *transform = new TransformComponent();
+	transform->setRotation(20);
 	doge->addComponent(transform);
 	TestComponentSystem *compSystem = new TestComponentSystem();
 	TestComponent *testcomponent = new TestComponent();
 	doge->addComponent(testcomponent);
-	TriangleComponent *triangle = new TriangleComponent();
-	doge->addComponent(triangle);
+	//TriangleComponent *triangle = new TriangleComponent();
+	//doge->addComponent(triangle);
+	//QuadrangleComponent *quadre = new QuadrangleComponent();
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala.png");
+	doge->addComponent(quadre);
 	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
 	scene->getObjectPool()->addGameObject(doge);
 	game->addComponentSystem(scene, compSystem);
