@@ -8,8 +8,6 @@
 #include "engine/android_native_app_glue.h"
 #include "engine/assets/fileManager.h"
 
-/// @todo Fix comments in this file
-
 namespace vg
 {
     /**
@@ -42,19 +40,16 @@ namespace vg
         void swapBuffers();
 
         /**
-        <description>
         @return width of current screen in pixels
         */
         EGLint getWidth();
 
         /**
-        <description>
         @return height of current screen in pixels
         */
         EGLint getHeight();
 
 		/**
-		<description>
 		@return returns mProgramId (opengl program id)
 		*/
 
@@ -65,7 +60,7 @@ namespace vg
 
     private:
         /**
-        intializes EGL context for current device
+        Initializes EGL context for current device
         @param window pointer to current devices window handle
         */
         void initializeEGL(ANativeWindow* window);
@@ -81,12 +76,12 @@ namespace vg
         */
         void initializeOpenGL();
 
-        EGLDisplay mDisplay;    ///< handle to devices display
-        EGLSurface mSurface;    ///< handle to device surface
-        EGLContext mContext;    ///< handle to device context
+        EGLDisplay mDisplay;    ///< Handle to devices display
+        EGLSurface mSurface;    ///< Handle to device surface
+        EGLContext mContext;    ///< Handle to device context
 
-        EGLint mWidth, mHeight; ///< screen size in pixels
+        EGLint mWidth, mHeight; ///< Screen size in pixels
 
-		GLuint mProgramId; //< opengl program id
+		GLuint mProgramId; //< OpenGL program id
     };
 }

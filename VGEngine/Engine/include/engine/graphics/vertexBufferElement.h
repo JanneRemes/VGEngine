@@ -6,9 +6,7 @@
 namespace vg
 {
 	/**
-	<description>
-	@param fileManager <description>
-	@return <description>
+	Contains usage types for vertexBuffer
 	*/
 	enum VertexElementUsage
 	{
@@ -20,9 +18,7 @@ namespace vg
 	};
 
 	/**
-	<description>
-	@param fileManager <description>
-	@return <description>
+	Contains types for verteBuffer
 	*/
 	enum VertexElementType
 	{
@@ -39,8 +35,6 @@ namespace vg
 
 	/**
 	<description>
-	@param fileManager <description>
-	@return <description>
 	*/
 	struct VertexElement
 	{

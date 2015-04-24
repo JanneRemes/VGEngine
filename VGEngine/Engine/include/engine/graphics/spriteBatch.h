@@ -12,6 +12,10 @@ namespace vg
 	class Drawable;
 	class Shader;
 
+	/**
+	
+
+	*/
 	class SpriteBatch
 	{
 	public:

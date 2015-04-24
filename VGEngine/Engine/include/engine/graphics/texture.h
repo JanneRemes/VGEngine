@@ -9,8 +9,8 @@ namespace vg
 	{
 	public:
 		/**
-			<description>
-			@param fileManager <description>
+			Constructor
+			@param path Filepath for the texture, must be .png
 		*/
 		Texture(const std::string& path);
 
@@ -24,52 +24,47 @@ namespace vg
 		bool load(FileManager *fileManager);
 
 		/**
-			<description>
+			Deletes the loaded texture
 			@return <description>
 		*/
 		bool unload();
 
 		/**
-			<description>
-			@return <description>
+			Binds the loaded texture
+			@return Returns whether the texture is loaded or not
 		*/
 		void bind() const;
 
 		/**
-			<description>
-			@return <description>
+			Unbinds the loaded texture	
 		*/
 		void unbind() const;
 
 		/**
-			<description>
-			@return <description>
+			Enables smoothing for the texture
 		*/
 		void setSmoothing(bool enable) const;
 
 		/**
-			<description>
-			@return <description>
+			@return Returns texture id
 		*/
 		uint32_t getId() const;
 
 		/**
-			<description>
-			@return <description>
+			@return Returns texture width
 		*/
 		uint32_t getWidth() const;
 
 		/**
-			<description>
-			@return <description>
+			@return Returns texture height
 		*/
 		uint32_t getHeight() const;
 	private:
 		void init();
 
-		uint32_t mWidth = 0;
-		uint32_t mHeight = 0;
-		uint32_t mId = 0; ///< description
+		uint32_t mWidth = 0;	///< Texture width
+		uint32_t mHeight = 0;	///< Texture height
+		uint32_t mId = 0;		///< Texture id
 	};
 
 }

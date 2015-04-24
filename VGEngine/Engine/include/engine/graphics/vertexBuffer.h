@@ -44,8 +44,8 @@ namespace vg
 		void bind() override;
 	private:
 		const uint32_t mStride; ///< Stride used in bind. Calculated in constructor from format
-		const std::vector<VertexElement> mFormat;///< vector that has format currently in use
-		static const std::vector<VertexElement>& gDefaultFormat; ///< default vertexElement format
+		const std::vector<VertexElement> mFormat;///< Vector that has format currently in use
+		static const std::vector<VertexElement>& gDefaultFormat; ///< Default vertexElement format
 
 		//const size_t mFormatSize; ///< Size of current formats
 	};

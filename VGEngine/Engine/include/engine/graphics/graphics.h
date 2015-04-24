@@ -14,7 +14,7 @@
 namespace vg
 {
     /**
-    <description>
+    Managing and initiliazing shaders and buffers
     */
 	class Graphics
 	{

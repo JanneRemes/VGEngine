@@ -127,23 +127,23 @@ namespace vg
         */
         void printErrorLog(GLuint shader);
 
-        GLuint mVertexId;                          ///< vertex shader id used for linking
-        GLuint mFragmentId;                        ///< fragment shader id used for linking
-        GLuint mProgramId;                         ///< shader program id used for linking
-        AttributeNameMap mVertexElementNames;      ///< map of vertex element ids and names
+        GLuint mVertexId;                          ///< Vertex shader id used for linking
+        GLuint mFragmentId;                        ///< Fragment shader id used for linking
+        GLuint mProgramId;                         ///< Shader program id used for linking
+        AttributeNameMap mVertexElementNames;      ///< Map of vertex element ids and names
         glm::vec2 mScreenSize;                     ///< Screensize in pixels
-        bool mInitialized;                         ///< have shaders been initialized
-        GLuint mProjectionLocation;                ///< shader id for uniform projection transform matrix 
-        GLuint mViewLocation;                      ///< shader id for uniform view transform matrix 
-        GLuint mWorldLocation;                     ///< shader id for uniform world transform matrix
-        GLuint mLayerLocation;                     ///< shader if for uniform layer value
-        glm::vec2 mPosition;                       ///< position for next draw call
-        glm::vec2 mOrigin;                         ///< origin for drawing positions, upper left corner
-        float mRotation;                           ///< rotation clockwise in degrees
-        float mScale;                              ///< must be greater than zero 
-        float mLayer;                              ///< must be greater than zero
-        glm::mat4 mProjectionTransform;            ///< projection transform matrix
-        glm::mat4 mViewTransfrom;                  ///< view transform matrix
-        glm::mat4 mWorldTransform;                 ///< world transform matrix
+        bool mInitialized;                         ///< Have shaders been initialized
+        GLuint mProjectionLocation;                ///< Shader id for uniform projection transform matrix 
+        GLuint mViewLocation;                      ///< Shader id for uniform view transform matrix 
+        GLuint mWorldLocation;                     ///< Shader id for uniform world transform matrix
+        GLuint mLayerLocation;                     ///< Shader if for uniform layer value
+        glm::vec2 mPosition;                       ///< Position for next draw call
+        glm::vec2 mOrigin;                         ///< Origin for drawing positions, upper left corner
+        float mRotation;                           ///< Rotation clockwise in degrees
+        float mScale;                              ///< Must be greater than zero 
+        float mLayer;                              ///< Must be greater than zero
+        glm::mat4 mProjectionTransform;            ///< Projection transform matrix
+        glm::mat4 mViewTransfrom;                  ///< View transform matrix
+        glm::mat4 mWorldTransform;                 ///< World transform matrix
     };
 }

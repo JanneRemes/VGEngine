@@ -7,7 +7,7 @@
 namespace vg
 {
 	/**
-		Manages and creates buffers
+		Manages buffers
 	*/
 	template<class T>
 	class Buffer
@@ -15,9 +15,9 @@ namespace vg
 	public:
 
 		/**
-		<description>
-		@param target
-		@param usage
+		Constructs a buffer
+		@param target Specifies the target to which the buffer object is bound
+		@param usage Specifies the expected usage pattern of the data store
 		*/
 		Buffer(GLenum target, GLenum usage)
 			: mTarget(target)
@@ -30,10 +30,10 @@ namespace vg
 		}
 
 		/**
-		<description>
-		@param target
-		@param data
-		@param usage
+		Constructs a buffer with data
+		@param target Specifies the target to which the buffer object is bound
+		@param data Specifies a pointer to data that will be copied into the data store for initialization
+		@param usage Specifies the expected usage pattern of the data store
 		*/
 		Buffer(GLenum target, const std::vector<T>& data, GLenum usage)
 			: mTarget(target)
@@ -47,7 +47,7 @@ namespace vg
 		}
 
 		/**
-		<description>
+		Destructor for the buffer
 		*/
 		virtual ~Buffer()
 		{
@@ -55,8 +55,8 @@ namespace vg
 		}
 
 		/**
-		<description>
-		@param data
+		Creates and initializes a buffer object's data store
+		@param data Specifies a pointer to data that will be copied into the data store for initialization
 		*/
 		void setData(const std::vector<T>& data)
 		{
@@ -67,9 +67,9 @@ namespace vg
 		}
 
 		/**
-		<description>
-		@param offset
-		@param data
+		Updates a subset of a buffer object's data store
+		@param offset Specifies the offset into the buffer object's data store where data replacement will begin, measured in bytes
+		@param data Specifies a pointer to the new data that will be copied into the data store
 		*/
 		void setData(size_t offset, const std::vector<T>& data)
 		{
@@ -79,7 +79,7 @@ namespace vg
 		}
 
 		/**
-		<description>
+		Bind a buffer object
 		*/
 		virtual void bind()
 		{
@@ -87,7 +87,7 @@ namespace vg
 		}
 
 		/**
-		<description>
+		Unbind a buffer object
 		*/
 		void unbind()
 		{
@@ -95,7 +95,7 @@ namespace vg
 		}
 
 		/**
-		<description>
+		@return Returns the size of the data inside the buffer
 		*/
 		size_t getSize() const
 		{
@@ -103,16 +103,16 @@ namespace vg
 		}
 
 		/**
-		<description>
+		Returns the buffer id
 		*/
 		GLuint getId() const
 		{
 			return mId;
 		}
 	protected:
-		size_t mSize = 0;		///< <description>
-		GLuint mId = 0;			///< <description>
-		const GLenum mTarget;	///< <description>
-		const GLenum mUsage;	///< <description>
+		size_t mSize = 0;		///< Size of the pointer to data that will be copied into the data store for initialization
+		GLuint mId = 0;			///< An array in which the generated buffer object names are stored
+		const GLenum mTarget;	///< Target to which the buffer object is bound
+		const GLenum mUsage;	///< Usage pattern of the data store
 	};
 }
