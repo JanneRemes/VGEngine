@@ -21,7 +21,7 @@ namespace vg
             Constructor
             @param fileManager Filemanager class used for loading assets
         */
-        AssetManager(FileManager& fileManager);
+        AssetManager(FileManager *fileManager);
 
 		/**
 			Retrieves an asset, returning a point to it, or null if it doesn't exist.
@@ -118,6 +118,6 @@ namespace vg
 
 		std::hash<std::string> mHasher;		///< Hash from a string
 		std::map<size_t, Asset*> mAssets;	///< Map that constains the asset and "id" for the said asset
-        FileManager& mFileManager;			///< The manager that manages files
+        FileManager *mFileManager;			///< The manager that manages files
 	};
 }

@@ -16,6 +16,7 @@ Game* Game::getInstance()
 Game::Game()
     : mPulse(0), mIsRunning(true)
 {
+
 	mSceneManager = new SceneManager();
 }
 
@@ -103,4 +104,15 @@ Graphics* Game::getGraphics()
 Factory *Game::getFactory()
 {
 	return mFactory;
+}
+FileManager *Game::getFileManager()
+{
+	return mFileManager;
+}
+//TODO
+void Game::setFileManager(android_app *app)
+{
+	mFileManager = new FileManager(app);
+	mAssetManager = new AssetManager(mFileManager);
+	mFactory = new Factory(mAssetManager, mFileManager);
 }

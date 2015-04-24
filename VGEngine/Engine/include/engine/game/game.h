@@ -7,7 +7,7 @@
 #include "engine/game/componentSystem.h"
 #include "engine/graphics/shader.h"
 #include "engine/game/factory.h"
-
+#include "engine/assets/assetManager.h"
 #include "engine/android_native_app_glue.h"
 #include <android/sensor.h>
 
@@ -92,7 +92,12 @@ namespace vg
 		Factory *getFactory();
 
 		float mPulse;
+
+		FileManager *getFileManager();
+		void setFileManager(android_app *app);
     private:
+		FileManager *mFileManager;
+		AssetManager *mAssetManager;
 		Game();
 		Factory *mFactory;
 		Graphics *mGraphics;

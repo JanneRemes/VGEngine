@@ -181,7 +181,9 @@
     <ClInclude Include="include\engine\game\quadrangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\factory.h" />
+    <ClInclude Include="include\engine\game\factory.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -302,6 +304,8 @@
     <ClCompile Include="source\game\quadrangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\game\factory.cpp" />
+    <ClCompile Include="source\game\factory.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
