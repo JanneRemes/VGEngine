@@ -28,8 +28,9 @@ void Graphics::initialize(android_app* app, const Shader& shader)
     mShader = Shader(shader);
     mShader.load(*mFileManager);
 
-   // std::string fontpath = "font.ttf";
-	//t = new text(fontpath, mFileManager);
+    std::string fontpath = "font.ttf";
+	t = new text(fontpath, mFileManager);
+	t->setText("X");
 
     mInitialized = true;
 
@@ -102,7 +103,7 @@ void Graphics::draw()
 		{
 			(*i)->draw(mShader);
 		}
-   //     t->draw(mShader);
+        t->draw(mShader);
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");

@@ -21,7 +21,7 @@ namespace vg
 		text(std::string& fontPath, FileManager *manager);
 		void initializeBuffer(char *text);
 		void draw(Shader &shader);
-
+		void setText(std::string text);
 		//std::vector<float> getVertexData() { return mVertexData; };
 		//std::vector<uint32_t> getIndexData() { return mIndexData; };
 
@@ -36,8 +36,13 @@ namespace vg
 		VertexBuffer *mVertexBuffer;
 		IndexBuffer *mIndexBuffer;
 
+		std::vector<VertexBuffer> mVertexBufferList;
+		std::vector<IndexBuffer> mIndexBufferList;
+		std::vector<GLuint> mTextureList;
+
 		std::vector<FT_Byte> mCharData;
-		
+
+		FT_Bitmap bitmap;
 		FT_UInt  mGlyph_index;
 		FT_Library mLibrary;
 		FT_Face mFace;
