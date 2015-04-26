@@ -23,6 +23,8 @@ void test_dummy()
 }
 void mainGame(Game* game)
 {
+	///@todo remember to uncomment
+	/*
 	Game::log("test");
 	Scene *scene = new Scene();
 	GameObject *doge = new GameObject("doge");
@@ -45,4 +47,5 @@ void mainGame(Game* game)
 	game->getSceneManager()->changeScene(scene);
 	//game->getSceneManager()->
 	//game->mSceneManager->
+	*/
 }

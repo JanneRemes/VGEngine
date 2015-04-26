@@ -22,7 +22,9 @@ void text::draw(Shader &shader)
 		gl::activeTexture(GL_TEXTURE0);
 		gl::bindTexture(mTextureList[i]);
 
-		GraphicsDevice::draw(&shader, &mVertexBufferList[i], &mIndexBufferList[i], 640.0f, 360.0f, 0.0f, 1.0f);
+		///@todo set transform values to shader
+		//GraphicsDevice::draw(&shader, &mVertexBufferList[i], &mIndexBufferList[i], 640.0f, 360.0f, 0.0f, 1.0f);
+		GraphicsDevice::draw(&shader, &mVertexBufferList[i], &mIndexBufferList[i]);
 
 		gl::activeTexture();
 		gl::bindTexture(0);

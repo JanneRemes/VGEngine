@@ -62,13 +62,6 @@ GLint GraphicsContext::getHeight()
 
 void GraphicsContext::initializeEGL(ANativeWindow* window)
 {
-	/*
-    const EGLint attribs[] =
-    {
-        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-        EGL_NONE
-    };
-	*/
 	EGLint attribs[] = 
 	{
 		EGL_RED_SIZE, 8,

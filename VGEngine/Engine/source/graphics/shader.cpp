@@ -3,6 +3,7 @@
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/game.h"
+
 using namespace std;
 using namespace vg;
 using namespace glm;
@@ -23,8 +24,6 @@ Shader::Shader(const Shader& shader)
     mVertexElementNames = shader.mVertexElementNames;
     mInitialized = shader.mInitialized;
     mProjectionLocation = shader.mProjectionLocation;
-    mViewLocation = shader.mViewLocation;
-    mWorldLocation = shader.mWorldLocation;
 }
 
 void Shader::initialize()
@@ -40,8 +39,6 @@ void Shader::initialize()
 
     mScreenSize = vec2(Game::getInstance()->getGraphics()->getContext()->getWidth(),
         Game::getInstance()->getGraphics()->getContext()->getHeight());
-    /// @Todo replace hard coded values
-    mOrigin = vec2(3.1f, -1.7777f);
     
     mInitialized = true;
 }
@@ -89,22 +86,22 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     
     gl::useProgram(mProgramId);
 
-    mProjectionLocation = glGetUniformLocation(mProgramId, "unifProjection");
-    if (mProjectionLocation < 0)
-        Log("SHADER", "unifProjection not found!", "");
+	mProjectionLocation = glGetUniformLocation(mProgramId, "unifProjection");
+	if (mProjectionLocation < 0)
+		Log("SHADER", "unifProjection not found!", "");
 
-    mViewLocation = glGetUniformLocation(mProgramId, "unifView");
-    if (mViewLocation < 0)
-        Log("SHADER", "unifView not found!", "");
+	mModelLocation = glGetUniformLocation(mProgramId, "unifModel");
+	if (mModelLocation < 0)
+		Log("SHADER", "unifModel not found!", "");
 
-    mWorldLocation = glGetUniformLocation(mProgramId, "unifWorld");
-    if (mWorldLocation < 0)
-        Log("SHADER", "unifWorld not found!", "");
+	mLayerLocation = glGetUniformLocation(mProgramId, "unifLayer");
+	if (mLayerLocation < 0)
+		Log("SHADER", "unifLayer not found!", "");
 
-    mLayerLocation = glGetUniformLocation(mProgramId, "unifLayer");
-    if (mWorldLocation < 0)
-        Log("SHADER", "unifLayer not found!", "");
-
+	//projection transform
+	mProjectionTransform = ortho(0.0f, mScreenSize.x, mScreenSize.y, 0.0f, -1.0f, 1.0f);
+	glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
+	
     resetUniforms();
     updateUniforms();
 
@@ -165,17 +162,20 @@ void Shader::printErrorLog(GLuint shader)
 
 void Shader::resetUniforms()
 {
-    setPosition(0.0f, 0.0f);
+    setPosition(Vector2<int>(0,0));
+	setSize(Vector2<int>(1, 1));
     setRotation(0);
-    setScale(1.0f);
     setLayer(0);
 }
 
-void Shader::setPosition(float x, float y)
+void Shader::setPosition(Vector2<int> position)
 {
-    // values will be inversed back to normal later
-    mPosition = vec2(-(2 * mOrigin.x * x * (1.0f / mScreenSize.x)),
-        -(2 * mOrigin.y * y * (1.0f / mScreenSize.y)));
+	mPosition = vec2(position.getX(), position.getY());
+}
+
+void Shader::setSize(Vector2<int> size)
+{
+	mSize = vec2(size.getX(), size.getY());
 }
 
 void Shader::setRotation(float degrees)
@@ -183,28 +183,20 @@ void Shader::setRotation(float degrees)
     mRotation = degrees;
 }
 
-void Shader::setScale(float scale)
-{
-    mScale = scale;
-}
-
 void Shader::setLayer(uint layer)
 {
-	// drawing doesn't work if the layer is zero
-    mLayer = (1 + layer) * 0.0001f;
+    mLayer = layer * 0.0001f;
 }
 
 void Shader::updateUniforms()
 {
-	//float scale = ((1 + mLayer) * (1.0f / (mScale)));
+	mModelTransform = mat4();
+	mModelTransform = translate(mModelTransform, vec3(mPosition, 0.0f));
+	mModelTransform = translate(mModelTransform, vec3(0.5f * mSize.x, 0.5f * mSize.y, 0.0f));
+	mModelTransform = rotate(mModelTransform, mRotation, vec3(0.0f, 0.0f, 1.0f));
+	mModelTransform = translate(mModelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
+	mModelTransform = scale(mModelTransform, vec3(mSize, 1.0f));
 
-    mViewTransfrom = inverse(translate(vec3(mOrigin + mPosition, 1.0f)));
-    glUniformMatrix4fv(mViewLocation, 1, GL_FALSE, value_ptr(mViewTransfrom));
-
-    mWorldTransform = rotate(mRotation, vec3(0.0f, 0.0f, 1.0f));
-    glUniformMatrix4fv(mWorldLocation, 1, GL_FALSE, value_ptr(mWorldTransform));
-	mProjectionTransform = glm::perspective(120.0f, mScreenSize.x / mScreenSize.y, 0.1f, 1000.0f);
-    glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
-
-    glUniform1f(mLayerLocation, mLayer);
+	glUniformMatrix4fv(mModelLocation, 1, GL_FALSE, glm::value_ptr(mModelTransform));
+	glUniform1f(mLayerLocation, mLayer);
 }

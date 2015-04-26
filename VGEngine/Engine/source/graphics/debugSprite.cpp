@@ -9,8 +9,9 @@
 using namespace vg;
 using namespace std;
 
-DebugSprite::DebugSprite(const string& textureFileName, float x, float y, float rotation, uint layer)
-: mPosition(x, y), mRotation(rotation), mLayer(layer)
+DebugSprite::DebugSprite(const string& textureFileName,
+	Vector2<int> position, Vector2<int> size, float rotation, uint layer)
+	: mPosition(position), mSize(size), mRotation(rotation), mLayer(layer)
 {
 	mTexture = new Texture(textureFileName);
 	mVertices = defaultVertices;
@@ -37,9 +38,13 @@ void DebugSprite::draw(Shader& shader)
         mTexture->bind();
         shader.unUseProgram();
     }
-        
-	GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer,
-		mPosition.x, mPosition.y, mRotation, mLayer);
+    
+	shader.setPosition(mPosition);
+	shader.setSize(mSize);
+	shader.setRotation(mRotation);
+	shader.setLayer(mLayer);
+
+	GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer);
 	
     if (mTexture->isLoaded())
     {
@@ -54,15 +59,14 @@ Texture* DebugSprite::getTexture()
     return mTexture;
 }
 
-void DebugSprite::setPosition(float x, float y)
+void DebugSprite::setPosition(Vector2<int> position)
 {
-    mPosition.x = x;
-    mPosition.y = y;
+	mPosition = position;
 }
 
-void DebugSprite::move(float x, float y)
+void DebugSprite::move(Vector2<int> change)
 {
-    setPosition(mPosition.x + x, mPosition.y + y);
+	mPosition += change;
 }
 
 void DebugSprite::setRotation(float rotation)
@@ -74,17 +78,6 @@ void DebugSprite::rotate(float rotation)
 {
     setRotation(mRotation + rotation);
 }
-
-/*
-void DebugSprite::setScale(float scale)
-{
-    setScale(mScale + scale);
-}
-void DebugSprite::scale(float scale)
-{
-    setScale(mScale + scale);
-}
-*/
 
 /// @todo continue with spriteBatch later
 /*

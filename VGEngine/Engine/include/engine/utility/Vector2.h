@@ -19,6 +19,7 @@ namespace vg
 			T b = pow(vector2.mY - vector1.mY, 2);
 			return sqrt(a + b);
 		}
+
 		Vector2() = default;
 
 		Vector2(T X, T Y)
@@ -27,43 +28,43 @@ namespace vg
 		}
 		Vector2<T> operator + (const Vector2<T>& right)
 		{
-			mX = mX + right.x;
-			mY = mY + right.y;
+			mX = mX + right.getX();
+			mY = mY + right.getY();
 			return *this;
 		}
 		Vector2<T> operator - (const Vector2<T>& right)
 		{
-			mX = mX - right.x;
-			mY = mY - right.y;
+			mX = mX - right.getX();
+			mY = mY - right.getY();
 			return *this;
 		}
 		bool operator == (const Vector2<T>& right)
 		{
-			return mX == right.x && mY == right.y;
+			return mX == right.getX() && mY == right.getY();
 		}
 
 		Vector2<T> operator *=(Vector2<T>& left)
 		{
-			mX *= left.x;
-			mY *= left.y;
+			mX *= left.getX();
+			mY *= left.getY();
 			return *this;
 		}
 		Vector2<T> operator /=(Vector2<T>& left)
 		{
-			mX /= left.x;
-			mY /= left.y;
+			mX /= left.getX();
+			mY /= left.getY();
 			return *this;
 		}
 		Vector2<T> operator +=(Vector2<T>& left)
 		{
-			mX += left.x;
-			mY += left.y;
+			mX += left.getX();
+			mY += left.getY();
 			return *this;
 		}
 		Vector2<T> operator -=(Vector2<T>& left)
 		{
-			mX -= left.x;
-			mY -= left.y;
+			mX -= left.getX();
+			mY -= left.getY();
 			return *this;
 		}
 		void log()

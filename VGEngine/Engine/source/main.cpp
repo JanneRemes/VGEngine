@@ -116,11 +116,21 @@ void android_main(struct android_app* state)
 	
 	engine.state.game = game;
     engine.state.game->start();
-	
-    engine.graphics.append(new DebugSprite("test_cross.png", 0.0f, 0.0f, 0.0f, 0));
-    engine.graphics.append(new DebugSprite("test_cross.png", 1280.0f, 720.0f, 0.0f, 0));
-    engine.graphics.append(new DebugSprite("test_cross.png", 0.0f, 720.0f, 0.0f, 0));
-    engine.graphics.append(new DebugSprite("test_cross.png", 1280.0f, 0.0f, 0.0f, 0));
+
+	engine.graphics.append(new DebugSprite("koala.png",
+		Vector2<int>(1280 / 2 - 128, 720 / 2 - 128), Vector2<int>(256, 256), 0, 0));
+
+	for (int i = 0; i < 6; i++)
+	{
+		//draw under
+		engine.graphics.append(new DebugSprite("koala.png",
+			Vector2<int>(i * 64, i * 64), Vector2<int>(128, 128), 0, 6 - i));
+
+		//draw over
+		engine.graphics.append(new DebugSprite("koala.png",
+			Vector2<int>(i * 64, 96 + i * 64), Vector2<int>(128, 128), 0, i));
+	}
+
 
     // loop waiting for stuff to do.
     while (engine.state.game->isRunning())

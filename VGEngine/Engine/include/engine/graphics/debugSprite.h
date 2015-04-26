@@ -5,6 +5,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
+#include "engine/utility/Vector2.h"
 
 #include <vector>
 #include <string>
@@ -21,7 +22,7 @@ namespace vg
 			@param textureFileName path to texture
 		*/
         DebugSprite(const std::string& textureFileName,
-			float x, float y, float rotation, uint layer);
+			vg::Vector2<int> position, vg::Vector2<int> size, float rotation, uint layer);
 
 		/**
 			Deletes the dynamic buffers.
@@ -47,12 +48,12 @@ namespace vg
         /**
             Set position value to be used on draw calls.
         */
-        void setPosition(float x, float y);
+        void setPosition(vg::Vector2<int> position);
 
         /**
             Add to the position value to be used on draw calls.
         */
-        void move(float x, float y);
+		void move(vg::Vector2<int> change);
 
         /**
             Set rotation value to be used on draw calls.
@@ -84,22 +85,22 @@ namespace vg
             // TexCoord Vec2
 
             //left up
-            -1.0f, 1.0f,
+            0.0f, 0.0f,//-1.0f, 1.0f,
             0.5f, 0.5f, 0.5f, 1.0f,
             0.0f, 1.0f,
 
             //left down
-            -1.0f, -1.0f,
+            0.0f, 1.0f,//-1.0f, -1.0f,
             1.0f, 0.0f, 0.0f, 1.0f,
             0.0f, 0.0f,
 
             //right down
-            1.0f, -1.0f,
+            1.0f, 1.0f,//1.0f, -1.0f,
             0.0f, 0.0f, 1.0f, 1.0f,
             1.0f, 0.0f,
 
             //right up
-            1.0f, 1.0f,
+            1.0f, 0.0f,
             0.0f, 1.0f, 0.0f, 1.0f,
             1.0f, 1.0f
         };
@@ -119,8 +120,9 @@ namespace vg
         Texture* mTexture;				/// Texture for drawing	
         VertexBuffer* mVertexBuffer;	/// VertexBuffer that will be binded before drawing.
         IndexBuffer* mIndexBuffer;		/// IndexBuffer that will be binded before drawing.
-        glm::vec2 mPosition;            /// Position where the sprite will be drawn.
-        float mRotation;                /// Rotation of sprite in angles.
+		vg::Vector2<int> mPosition;    /// Position of top left corner in pixels.
+		vg::Vector2<int> mSize;			/// Sprites witdth and length in pixels.
+		float mRotation;                /// Rotation of sprite in angles.
         float mScale;                   /// Scale of 
         uint mLayer;                    /// Layer where the sprite will be drawn.
         std::vector<float> mVertices;   /// Vertices that will be binded to buffer.

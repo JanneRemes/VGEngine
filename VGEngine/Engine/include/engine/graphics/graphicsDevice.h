@@ -27,13 +27,8 @@ namespace vg
 		@param shader <description>
 		@param vertices <description>
 		@param indices <description>
-		@param x <description>
-		@param y <description>
-		@param rotation <description>
-		@param layer <description>
 		*/
-        static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices,
-			float x = 0.0f, float y = 0.0f, float rotation = 0.0f, uint layer = 0);
+        static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices);
 	private:
 	};
 }

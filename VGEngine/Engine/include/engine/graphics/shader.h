@@ -3,6 +3,7 @@
 
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/vertexBufferElement.h"
+#include "engine/utility/Vector2.h"
 #include "../external/glm/gtc/matrix_transform.hpp"
 #include "../external/glm/gtx/transform.hpp"
 #include "../external/glm/gtc/type_ptr.hpp"
@@ -86,17 +87,17 @@ namespace vg
         /**
            Set saved uniform value for position. 
         */
-        void setPosition(float x, float y);
+        void setPosition(vg::Vector2<int> position);
+
+		/**
+			Set saved uniform value for size.
+		*/
+		void setSize(vg::Vector2<int> size);
 
         /**
             Set saved uniform value for rotation in degrees increasing in clockwise direction. 
         */
         void setRotation(float degrees);
-
-        /**
-            Set saved uniform value for scale.
-        */
-        void setScale(float scale);
 
 		/**
 			Vertices with higher layer value will be drawn on top. Values above 28 will cause distortion.
@@ -133,17 +134,15 @@ namespace vg
         AttributeNameMap mVertexElementNames;      ///< Map of vertex element ids and names
         glm::vec2 mScreenSize;                     ///< Screensize in pixels
         bool mInitialized;                         ///< Have shaders been initialized
-        GLuint mProjectionLocation;                ///< Shader id for uniform projection transform matrix 
-        GLuint mViewLocation;                      ///< Shader id for uniform view transform matrix 
-        GLuint mWorldLocation;                     ///< Shader id for uniform world transform matrix
-        GLuint mLayerLocation;                     ///< Shader if for uniform layer value
-        glm::vec2 mPosition;                       ///< Position for next draw call
-        glm::vec2 mOrigin;                         ///< Origin for drawing positions, upper left corner
-        float mRotation;                           ///< Rotation clockwise in degrees
-        float mScale;                              ///< Must be greater than zero 
-        float mLayer;                              ///< Must be greater than zero
+        
+		GLuint mProjectionLocation;                ///< Shader id for uniform projection transform matrix 
+        GLuint mLayerLocation;                     ///< Shader id for uniform layer value
+		GLuint mModelLocation;					   ///< Shader id for uniform model transform matrix
+		glm::vec2 mPosition;                       ///< Position in pixels
+		glm::vec2 mSize;						   ///< Size in pixels
+		float mRotation;                           ///< Rotation clockwise in degrees
+        float mLayer;                              ///< Layer for drawing ranging from 0 to 1
         glm::mat4 mProjectionTransform;            ///< Projection transform matrix
-        glm::mat4 mViewTransfrom;                  ///< View transform matrix
-        glm::mat4 mWorldTransform;                 ///< World transform matrix
-    };
+		glm::mat4 mModelTransform;				   ///< Model transform matrix
+	};
 }

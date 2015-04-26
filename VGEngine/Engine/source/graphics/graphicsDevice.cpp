@@ -17,21 +17,15 @@ void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices)
 	gl::useProgram();
 }
 
-void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices,
-    float x, float y, float rotation, uint layer)
+void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices)
 {
     gl::useProgram(shader->getProgramId());
 
     vertices->bind();
     indices->bind();
 
-    shader->setPosition(x, y);
-	shader->setRotation(rotation);
-	shader->setLayer(layer);
     shader->updateUniforms();
-
     gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_INT);
-
     shader->resetUniforms();
 
     indices->unbind();
