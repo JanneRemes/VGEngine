@@ -9,9 +9,9 @@
 using namespace vg;
 using namespace std;
 
-DebugSprite::DebugSprite(const string& textureFileName,
-	Vector2<int> position, Vector2<int> size, float rotation, uint layer)
-	: mPosition(position), mSize(size), mRotation(rotation), mLayer(layer)
+DebugSprite::DebugSprite(const string& textureFileName, Vector2<int> position,
+	Vector2<int> size, float rotation, uint layer, Vector2<int> origin)
+	: mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin)
 {
 	mTexture = new Texture(textureFileName);
 	mVertices = defaultVertices;
@@ -30,27 +30,26 @@ void DebugSprite::initialize()
 	mIndexBuffer = new IndexBuffer(mIndices);
 }
 
-void DebugSprite::draw(Shader& shader)
+void DebugSprite::draw(Shader* shader)
 {
     if (mTexture->isLoaded())
     {
-        shader.useProgram();
+        shader->useProgram();
         mTexture->bind();
-        shader.unUseProgram();
+        shader->unUseProgram();
     }
-    
-	shader.setPosition(mPosition);
-	shader.setSize(mSize);
-	shader.setRotation(mRotation);
-	shader.setLayer(mLayer);
+	shader->setPosition(mPosition - mOrigin);
+	shader->setSize(mSize);
+	shader->setRotation(mRotation);
+	shader->setLayer(mLayer);
 
-	GraphicsDevice::draw(&shader, mVertexBuffer, mIndexBuffer);
+	GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
 	
     if (mTexture->isLoaded())
     {
-        shader.useProgram();
+        shader->useProgram();
         mTexture->unbind();
-        shader.unUseProgram();
+        shader->unUseProgram();
     }
 }
 
@@ -59,7 +58,7 @@ Texture* DebugSprite::getTexture()
     return mTexture;
 }
 
-void DebugSprite::setPosition(Vector2<int> position)
+void DebugSprite::setPosition(const Vector2<int> position)
 {
 	mPosition = position;
 }
@@ -77,6 +76,11 @@ void DebugSprite::setRotation(float rotation)
 void DebugSprite::rotate(float rotation)
 {
     setRotation(mRotation + rotation);
+}
+
+void DebugSprite::setOrigin(const Vector2<int> origin)
+{
+	mOrigin = origin;
 }
 
 /// @todo continue with spriteBatch later

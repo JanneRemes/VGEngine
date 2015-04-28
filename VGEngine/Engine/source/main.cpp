@@ -118,7 +118,11 @@ void android_main(struct android_app* state)
     engine.state.game->start();
 
 	engine.graphics.append(new DebugSprite("koala.png",
-		Vector2<int>(1280 / 2 - 128, 720 / 2 - 128), Vector2<int>(256, 256), 0, 0));
+		Vector2<int>(640, 360), Vector2<int>(256, 256), 45, 0));
+
+	engine.graphics.append(new DebugSprite("koala.png",
+		Vector2<int>(640, 360), Vector2<int>(256, 256), 45, 1, Vector2<int>(128,128)));
+
 
 	for (int i = 0; i < 6; i++)
 	{

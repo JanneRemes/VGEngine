@@ -7,8 +7,8 @@ namespace vg
 	class Vector2
 	{
 	public:
-		T getX(){ return mX; };
-		T getY(){ return mY; };
+		T getX() const { return mX; };
+		T getY() const { return mY; };
 		void setX(T x){ mX = x; };
 		void setY(T y){ mY = y; };
 		void setXY(T x, T y){ mX = x; mY = y; };
@@ -28,15 +28,15 @@ namespace vg
 		}
 		Vector2<T> operator + (const Vector2<T>& right)
 		{
-			mX = mX + right.getX();
-			mY = mY + right.getY();
-			return *this;
+			T x = mX + right.getX();
+			T y = mY + right.getY();
+			return Vector2<T>(x, y);
 		}
 		Vector2<T> operator - (const Vector2<T>& right)
 		{
-			mX = mX - right.getX();
-			mY = mY - right.getY();
-			return *this;
+			T x = mX - right.getX();
+			T y = mY - right.getY();
+			return Vector2<T>(x, y);
 		}
 		bool operator == (const Vector2<T>& right)
 		{

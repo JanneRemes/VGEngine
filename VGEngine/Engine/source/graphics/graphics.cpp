@@ -102,7 +102,7 @@ void Graphics::draw()
 		vector<DebugSprite*>::iterator i;
 		for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
 		{
-			(*i)->draw(mShader);
+			(*i)->draw(&mShader);
 		}
 		///@todo remember to uncomment
         //t->draw(mShader);
