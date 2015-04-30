@@ -9,6 +9,7 @@
 #include "TestComponent.h"
 #include <engine/game/triangleComponent.h>
 #include <engine/game/quadrangleComponent.h>
+#include "ShipSystem.h"
 using namespace vg;
 
 
@@ -18,24 +19,23 @@ void mainGame(Game* game)
 
 	Game::log("test");
 	Scene *scene = new Scene();
-	GameObject *doge = new GameObject("doge");
-    TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
-        Vector2<int>(256, 256), 20.0f, 0u);
-	doge->addComponent(transform);
-	TestComponentSystem *compSystem = new TestComponentSystem();
-	TestComponent *testcomponent = new TestComponent();
-	doge->addComponent(testcomponent);
-	//TriangleComponent *triangle = new TriangleComponent();
-	//doge->addComponent(triangle);
-	//QuadrangleComponent *quadre = new QuadrangleComponent();
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
-	doge->addComponent(quadre);
-	//doge.GetComponent<TransformComponent>()->mPosition.setX(rand() % 10);
-	scene->getObjectPool()->addGameObject(doge);
-	game->addComponentSystem(scene, compSystem);
 
+	//SHIP
+	GameObject *ship = new GameObject("ship");
+    TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
+        Vector2<int>(80, 80), 0.0f, 0u);
+	ship->addComponent(transform);
+	TestComponent *testcomponent = new TestComponent();
+	ship->addComponent(testcomponent);
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
+	ship->addComponent(quadre);
+	 
 	game->getSceneManager()->changeScene(scene);
-	//game->getSceneManager()->
-	//game->mSceneManager->
+	scene->getObjectPool()->addGameObject(ship);
+	ShipSystem *doge = new ShipSystem();
+	game->addComponentSystem(scene, doge);
+	//TestComponentSystem *compSystem = new TestComponentSystem();
+	//game->addComponentSystem(scene, compSystem);
+
 
 }

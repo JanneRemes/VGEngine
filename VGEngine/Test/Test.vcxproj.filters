@@ -45,6 +45,7 @@
     <ClInclude Include="include\TestComponentSystem.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="ShipSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -62,6 +63,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="ShipSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl">
