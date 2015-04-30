@@ -2,7 +2,7 @@
 #include "engine/game/game.h"
 #include "TestComponent.h"
 #include "engine/game/transformComponent.h"
-TestComponentSystem::TestComponentSystem() :vg::ComponentSystem()
+TestComponentSystem::TestComponentSystem() :vg::System()
 {
 }
 
@@ -10,16 +10,19 @@ TestComponentSystem::TestComponentSystem() :vg::ComponentSystem()
 TestComponentSystem::~TestComponentSystem()
 {
 }
-void TestComponentSystem::update(vg::GameObject* gameObject)
+void TestComponentSystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
-	TestComponent* component = gameObject->GetComponent<TestComponent>();
-	if (component != nullptr)
+	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
-		component->update();
-	}
-	vg::TransformComponent *transform = gameObject->GetComponent<vg::TransformComponent>();
-	if (transform != nullptr)
-	{
-		transform->setRotation(transform->getRotation() + 1);
+		TestComponent* component = (*it)->GetComponent<TestComponent>();
+		if (component != nullptr)
+		{
+			component->update();
+		}
+		vg::TransformComponent *transform = (*it)->GetComponent<vg::TransformComponent>();
+		if (transform != nullptr)
+		{
+			transform->setRotation(transform->getRotation() + 1);
+		}
 	}
 }

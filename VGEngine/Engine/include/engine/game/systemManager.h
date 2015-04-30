@@ -1,26 +1,26 @@
 #pragma once
 #include "engine/game/gameObject.h"
-#include "engine/game/componentSystem.h"
+#include "engine/game/system.h"
 #include <vector>
 namespace vg
 {
 	/**
 	Manages componentSystems
 	*/
-	class ComponentSystemManager
+	class SystemManager
 	{
 	public:
-		ComponentSystemManager();
-		~ComponentSystemManager();
+		SystemManager();
+		~SystemManager();
 
 		/**
 		Updates the components inside the gameObject
 		@param gameObject The gameObject that is going to be updated inside the componentSystems
 		*/
-		void update(GameObject* gameObject);
-		void addSystem(ComponentSystem *system);
+		void update(std::vector<GameObject*> *gameObjects);
+		void addSystem(System *system);
 	private:
-		std::vector<ComponentSystem*> systems;
+		std::vector<System*> systems;
 
 	};
 

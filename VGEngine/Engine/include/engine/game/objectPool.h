@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "engine/game/gameObject.h"
-#include "engine/game/componentSystemManager.h"
+#include "engine/game/systemManager.h"
 namespace vg
 {
 	/*struct PoolObjectType
@@ -42,9 +42,9 @@ namespace vg
 		/**
 		@return Returns the componentSystemManager that the pool is using 
 		*/
-		ComponentSystemManager* getComponentSystemManager(){ return &mComponentSystemManager; }
+		SystemManager* getComponentSystemManager(){ return &mSystemManager; }
 	private:
-		ComponentSystemManager mComponentSystemManager;///< Updates different component systems
+		SystemManager mSystemManager;///< Updates different component systems
 		//void addPrefabToPool(PoolObjectType type); //<Adds poolobjectype's amount of gameobjects to inactivepool
 		//bool loaded;
 		std::vector<GameObject*> mActivePool;   ///< List of the active gameObject pool

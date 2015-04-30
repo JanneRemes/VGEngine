@@ -89,7 +89,7 @@ SceneManager*  Game::getSceneManager()
 {
 	return mSceneManager;
 }
-void Game::addComponentSystem(Scene *scene, ComponentSystem *componentSystem)
+void Game::addComponentSystem(Scene *scene, System *componentSystem)
 {
 	scene->getObjectPool()->getComponentSystemManager()->addSystem(componentSystem);
 }

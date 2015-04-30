@@ -4,7 +4,7 @@
 #include "engine/game/SceneManager.h"
 #include "engine/graphics/graphics.h"
 #include "engine/assets/fileManager.h"
-#include "engine/game/componentSystem.h"
+#include "engine/game/system.h"
 #include "engine/graphics/shader.h"
 #include "engine/game/factory.h"
 #include "engine/assets/assetManager.h"
@@ -71,7 +71,7 @@ namespace vg
 		@param scene Scene that we are giving our componentSystem to
 		@param componentSystem ComponentSystem that we are giving to the scene
 		*/
-		void addComponentSystem(Scene *scene, ComponentSystem *componentSystem);
+		void addComponentSystem(Scene *scene, System *componentSystem);
 
 		/**
 		Logger reworked in game for debugging purposes

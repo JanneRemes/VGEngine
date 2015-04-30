@@ -3,7 +3,7 @@ using namespace vg;
 ObjectPool::ObjectPool()
 {
 	//loaded = false;
-	mComponentSystemManager = ComponentSystemManager();
+	mSystemManager = SystemManager();
 }
 
 
@@ -64,8 +64,7 @@ void ObjectPool::removeGameObjectInactivePool(GameObject gObject)
 }*/
 void  ObjectPool::updateGameObjects()
 {
-	for (auto it = mActivePool.begin(); it != mActivePool.end(); it++)
-	{
-		mComponentSystemManager.update((*it));
-	}
+
+		mSystemManager.update(&mActivePool);
+	
 }

@@ -153,16 +153,10 @@
     <ClInclude Include="include\engine\game\sceneManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\componentSystem.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\componentSystemManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\renderComponent.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\game\renderComponentSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\transformComponent.h">
@@ -181,7 +175,13 @@
     <ClInclude Include="include\engine\game\quadrangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\factory.h">
+    <ClInclude Include="include\engine\game\system.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\systemManager.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\renderSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -279,16 +279,7 @@
     <ClCompile Include="source\game\sceneManager.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\game\componentSystem.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\componentSystemManager.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
     <ClCompile Include="source\game\renderComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\renderComponentSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\transformComponent.cpp">
@@ -305,6 +296,15 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\factory.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\system.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\systemManager.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\renderSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>

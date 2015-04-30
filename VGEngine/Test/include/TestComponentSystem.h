@@ -1,12 +1,12 @@
 #pragma once
-#include "engine/game/componentSystem.h"
+#include "engine/game/system.h"
 #include "engine/game/gameObject.h"
 class TestComponentSystem:
-	public vg::ComponentSystem
+	public vg::System
 {
 public:
 	TestComponentSystem();
 	~TestComponentSystem();
-	void update(vg::GameObject* gameObject);
+	void update(std::vector<vg::GameObject*> *gameObjects);
 };
 
