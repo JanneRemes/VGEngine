@@ -54,3 +54,6 @@ VGEngine/Test/assetsshaders/default_vertex.glsl
 VGEngine/Test/assetstest.txt
 VGEngine/Test/assetstest_cross.png
 VGEngine/Test/assetstest_loop.wav
+VGEngine/freetype/ProjectUpgradeBackup_20150409_1408097866/freetype.vcxproj
+VGEngine/freetype/ProjectUpgradeBackup_20150409_1408097866/freetype.vcxproj.filters
+VGEngine/ProjectUpgradeBackup_20150409_1408343078/VGEngine.sln

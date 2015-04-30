@@ -56,9 +56,11 @@ void RenderComponentSystem::update(GameObject* gameObject)
 			GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
 		else
 		{
-			///@todo set transform values to shader
-			//GraphicsDevice::draw(shader, &vBuffer, &iBuffer, transformComponent->mPosition.getX(), transformComponent->mPosition.getY(), transformComponent->getRotation());
-			GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
+			shader->setPosition(transformComponent->getPosition() - transformComponent->getOrigin());
+            shader->setSize(transformComponent->getSize());
+            shader->setRotation(transformComponent->getRotation());
+            shader->setLayer(transformComponent->getLayer());
+            GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
 		}
 		shader->unUseProgram();
 	}

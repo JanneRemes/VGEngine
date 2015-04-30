@@ -19,9 +19,8 @@ void mainGame(Game* game)
 	Game::log("test");
 	Scene *scene = new Scene();
 	GameObject *doge = new GameObject("doge");
-	TransformComponent *transform = new TransformComponent();
-	transform->mPosition = Vector2<float>(640.0f, 360.0f);
-	transform->setRotation(20);
+    TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
+        Vector2<int>(256, 256), 20.0f, 0u);
 	doge->addComponent(transform);
 	TestComponentSystem *compSystem = new TestComponentSystem();
 	TestComponent *testcomponent = new TestComponent();
