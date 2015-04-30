@@ -174,7 +174,6 @@
     <ClInclude Include="include\engine\game\triangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\baseClass.h" />
     <ClInclude Include="include\engine\graphics\batch.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
@@ -182,6 +181,9 @@
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\factory.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\baseClass.h">
       <Filter>include\game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -297,7 +299,6 @@
     <ClCompile Include="source\game\triangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\game\baseClass.cpp" />
     <ClCompile Include="source\graphics\batch.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
@@ -305,6 +306,9 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\factory.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\baseClass.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,22 +3,19 @@
 
 #include <ctime>
 
-/// @todo Fix comments in this file
-
 namespace vg
 {
 	/**
-		<description>
+		Timer that is used to measure time
 	*/
 	class Timer
 	{
 	public:
 		/**
-			<description>
-			@return The delta time
+			Restarts the timer
 		*/
 		float restart();
 	private:
-		clock_t mBefore = clock(); ///< description
+		clock_t mBefore = clock();
 	};
 }
