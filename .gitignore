@@ -44,3 +44,13 @@ docs/
 
 Debug/
 Release/
+VGEngine/Test/assetsfont.ttf
+VGEngine/Test/assetskoala.png
+VGEngine/Test/assetskoala2.png
+VGEngine/Test/assetspingviini.jpg
+VGEngine/Test/assetspingviini.png
+VGEngine/Test/assetsshaders/default_fragment.glsl
+VGEngine/Test/assetsshaders/default_vertex.glsl
+VGEngine/Test/assetstest.txt
+VGEngine/Test/assetstest_cross.png
+VGEngine/Test/assetstest_loop.wav
