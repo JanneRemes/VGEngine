@@ -22,7 +22,6 @@
     <ClInclude Include="include\engine\game.h" />
     <ClInclude Include="include\engine\game\baseClass.h" />
     <ClInclude Include="include\engine\game\component.h" />
-    <ClInclude Include="include\engine\game\componentSystemManager.h" />
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\objectPool.h" />

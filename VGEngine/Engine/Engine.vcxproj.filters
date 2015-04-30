@@ -153,9 +153,6 @@
     <ClInclude Include="include\engine\game\sceneManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\componentSystemManager.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\renderComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -182,9 +179,6 @@
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\game\renderSystem.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\game\baseClass.h">
       <Filter>include\game</Filter>
     </ClInclude>
   </ItemGroup>
