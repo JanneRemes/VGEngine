@@ -24,6 +24,7 @@
     <ClInclude Include="include\Test\test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="source\dummy.cpp" />
     <ClCompile Include="source\TestComponent.cpp" />
     <ClCompile Include="source\TestComponentSystem.cpp" />

@@ -59,6 +59,9 @@
     <ClCompile Include="source\TestComponentSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl">

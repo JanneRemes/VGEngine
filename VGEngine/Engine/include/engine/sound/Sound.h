@@ -33,7 +33,7 @@ namespace vg
 		Loads sound from file
 		@return <description>
 		*/
-		bool load(FileManager& fileManager);
+		bool load(FileManager *fileManager);
 
 		/**
 		@return <description>

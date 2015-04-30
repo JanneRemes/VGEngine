@@ -6,9 +6,9 @@ Sound::Sound(const std::string& path)
 	
 }
 
-bool Sound::load(FileManager& fileManager)
+bool Sound::load(FileManager *fileManager)
 {
-	fileManager.readAsset(mPath, &data);
+	fileManager->readAsset(mPath, &data);
 }
 
 bool Sound::unload()
