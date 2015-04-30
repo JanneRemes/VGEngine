@@ -125,7 +125,6 @@ namespace vg
 		vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
 		vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
 		float mRotation;                ///< Rotation of sprite in angles.
-        float mScale;                   ///< Scale of 
         uint mLayer;                    ///< Layer where the sprite will be drawn.
         std::vector<float> mVertices;   ///< Vertices that will be binded to buffer.
         std::vector<uint> mIndices;     ///< Indices that will be binded to buffer.

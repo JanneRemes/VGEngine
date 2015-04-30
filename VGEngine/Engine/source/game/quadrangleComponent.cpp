@@ -12,32 +12,59 @@ QuadrangleComponent::~QuadrangleComponent()
 }
 std::vector<float> QuadrangleComponent::getDefaultVertices()
 {
+    /*
+    {
+    // Position Vec2
+    // Color Vec4
+    // TexCoord Vec2
+
+    //left up
+    -1.0f, 1.0f,
+    0.5f, 0.5f, 0.5f, 1.0f,
+    0.0f, 1.0f,
+
+    //left down
+    -1.0f, -1.0f,
+    1.0f, 0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f,
+
+    //right down
+    1.0f, -1.0f,
+    0.0f, 0.0f, 1.0f, 1.0f,
+    1.0f, 0.0f,
+
+    //right up
+    1.0f, 1.0f,
+    0.0f, 1.0f, 0.0f, 1.0f,
+    1.0f, 1.0f
+    };
+    */
 	std::vector<float> defaultVertices = std::vector < float >
-	{
-		// Position Vec2
-		// Color Vec4
-		// TexCoord Vec2
+    {
+        // Position Vec2
+        // Color Vec4
+        // TexCoord Vec2
 
-		    //left up
-		   -1.0f, 1.0f,
-			0.5f, 0.5f, 0.5f, 1.0f,
-			0.0f, 1.0f,
+        //left up
+        0.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f,
+        0.0f, 1.0f,
 
-			//left down
-			-1.0f, -1.0f,
-			1.0f, 0.0f, 0.0f, 1.0f,
-			0.0f, 0.0f,
+        //left down
+        0.0f, 1.0f,
+        1.0f, 0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f,
 
-			//right down
-			1.0f, -1.0f,
-			0.0f, 0.0f, 1.0f, 1.0f,
-			1.0f, 0.0f,
+        //right down
+        1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f,
+        1.0f, 0.0f,
 
-			//right up
-			1.0f, 1.0f,
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f
-	};
+        //right up
+        1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 1.0f
+    };
 	return defaultVertices;
 }
 std::vector<GLuint> QuadrangleComponent::getDefaultIndices()
