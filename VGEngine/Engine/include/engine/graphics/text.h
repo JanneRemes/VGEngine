@@ -1,24 +1,26 @@
+
 #pragma once
+
+#include "engine/assets/fileManager.h"
+#include "engine/graphics/shader.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/indexBuffer.h"
+
+#include <GLES2/gl2.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include <GLES2/gl2.h>
-#include "engine\assets\fileManager.h"
-#include <vector>
-#include "engine\graphics\shader.h"
-#include "engine\graphics\vertexBuffer.h"
-#include "engine\graphics\indexBuffer.h"
 namespace vg
 {
 	/**
 	Class used for showing text on screen, utilizes freetype
 	*/
-	class text
+	class Text
 	{
 	public:
 
-		~text(){};
-		text(std::string& fontPath, FileManager *manager);
+		~Text(){};
+		Text(std::string& fontPath, FileManager *manager);
 		void initializeBuffer(char *text);
 		void draw(Shader *shader);
 

@@ -27,7 +27,7 @@ void mainGame(Game* game)
 	ship->addComponent(transform);
 	TestComponent *testcomponent = new TestComponent();
 	ship->addComponent(testcomponent);
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala2.png");
 	ship->addComponent(quadre);
 	 
 	game->getSceneManager()->changeScene(scene);

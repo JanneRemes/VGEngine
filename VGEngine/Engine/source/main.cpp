@@ -29,10 +29,9 @@ extern void test_dummy();
 #include <EGL/egl.h>
 #include <GLES/gl.h>
 
-
 #include <android/log.h>
-#include "engine/android_native_app_glue.h"
 
+#include "engine/android_native_app_glue.h"
 #include "engine/graphics/graphics.h"
 #include "engine/utility/logger.h"
 #include "engine/game.h"
@@ -40,9 +39,12 @@ extern void test_dummy();
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
 #include "engine/graphics/debugSprite.h"
+#include "engine/graphics/opengl.h"
+
 using namespace vg;
 using namespace vg::Input;
 extern void mainGame(Game* game);
+
 void main_dummy()
 {
     __android_log_print(ANDROID_LOG_DEBUG, "DEBUG", "main_dummy()");
@@ -114,6 +116,8 @@ void android_main(struct android_app* state)
 	game->setFileManager(state);
 	game->setGraphics(&engine.graphics);
 	
+	//engine.graphics.append(new DebugSprite("shipkoala3.png", Vector2<int>(100, 100), Vector2<int>(128, 256), 0.0f, 0u));
+
 	engine.state.game = game;
     engine.state.game->start();
 
@@ -174,18 +178,15 @@ void android_main(struct android_app* state)
 */
 void drawFrame(struct Engine* engine)
 {
-    if (glGetError() != GL_NO_ERROR)
-        Log("DRAW", "gl error", "");
-
     if (!engine->graphics.isInitialized())
     {
-        Log("DRAW", "GraphicsContext not initialized", "");
+        Log("ERROR", "GraphicsContext is not initialized!", "");
         return;
     }
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
-        (vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
+	gl::clear();
+	gl::clearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
+		(vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
 	engine->state.game->update();
     engine->graphics.draw();
 

@@ -11,6 +11,8 @@ namespace vg
 {
 	namespace gl
 	{
+		void checkError();
+
         void vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
 
         void drawArrays(GLenum primitiveType, GLint offset, GLsizei count);
@@ -25,10 +27,14 @@ namespace vg
 
 		void activeTexture(GLuint textureIndex = GL_TEXTURE0);
 
-		void texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels);
+		void texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format = GL_RGBA);
 
-		void texParameteriMag(GLint parameter);
+		void texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format = GL_RGBA);
 
-		void texParameteriMin(GLint parameter);
+		void texParameteri(GLenum pname, GLint parameter);
+
+		void clear();
+
+		void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	}
 }

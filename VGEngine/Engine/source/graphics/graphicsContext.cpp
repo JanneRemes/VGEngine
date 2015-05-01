@@ -1,5 +1,6 @@
 
 #include "engine/graphics/GraphicsContext.h"
+#include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
 using namespace vg;
@@ -111,6 +112,8 @@ void GraphicsContext::createGLProgram()
 
 void GraphicsContext::initializeOpenGL()
 {
+	gl::checkError();
+
 	// transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -123,6 +126,11 @@ void GraphicsContext::initializeOpenGL()
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_TRUE);
 	glDepthRangef(0.0, 1.0);
+
+	// font
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	gl::checkError();
 }
 
 GLuint GraphicsContext::getProgramId()

@@ -85,7 +85,7 @@ namespace vg
         bool mInitialized;          ///< has Graphics been initialized
         //std::vector<SpriteBatch*> mBatches;
 
-		text *t;
+		Text *testText;
 
         std::vector<DebugSprite*> mDebugSprites;
 		std::vector<DebugSprite*> mUnloadedDebugSprites;

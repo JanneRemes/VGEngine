@@ -28,10 +28,8 @@ void Graphics::initialize(android_app* app, const Shader& shader)
     mShader = Shader(shader);
     mShader.load(*mFileManager);
 
-    std::string fontpath = "font.ttf";
-	///@todo remember to uncomment
-	//t = new text(fontpath, mFileManager);
-	//t->setText("X");
+    std::string fontpath = "arial.ttf";
+	testText = new Text(fontpath, mFileManager);
 
     mInitialized = true;
 
@@ -42,10 +40,6 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 		mDebugSprites.push_back(*i);
 	}
 	mUnloadedDebugSprites.clear();
-
-	//char X = 'X';
-	//t->initialize();
-
 }
 
 void Graphics::unInitialize()
@@ -98,14 +92,12 @@ void Graphics::draw()
 {
 	if (mInitialized)
 	{
-		/// @todo draw spriteBatches
 		vector<DebugSprite*>::iterator i;
 		for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
 		{
 			(*i)->draw(&mShader);
 		}
-		///@todo remember to uncomment
-        //t->draw(mShader);
+        testText->draw(&mShader);
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");

@@ -59,8 +59,8 @@ bool Texture::load(FileManager *fileManager)
 	gl::activeTexture();
 	gl::bindTexture(mId);
 	gl::texImage2D(mWidth, mHeight, pixels);
-	gl::texParameteriMag(GL_NEAREST);
-	gl::texParameteriMin(GL_NEAREST);
+	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	gl::bindTexture(0);
 
 	mIsLoaded = true;
@@ -93,8 +93,8 @@ void Texture::setSmoothing(bool enableSmoothing) const
 {
 	gl::activeTexture();
 	gl::bindTexture(mId);
-	gl::texParameteriMag(enableSmoothing ? GL_LINEAR : GL_NEAREST);
-	gl::texParameteriMin(enableSmoothing ? GL_LINEAR : GL_NEAREST);
+	gl::texParameteri(GL_TEXTURE_MAG_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
+	gl::texParameteri(GL_TEXTURE_MIN_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
 	gl::bindTexture(0);
 }
 

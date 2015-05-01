@@ -1,12 +1,14 @@
 
+#include "engine/graphics/text.h"
 #include "../external/lodepng/lodepng.h"
-#include "engine\graphics\text.h"
-#include "engine\utility\logger.h"
+#include "engine/utility/logger.h"
 #include "engine/graphics/graphicsDevice.h"
-#include "engine\graphics\opengl.h"
+#include "engine/graphics/opengl.h"
+#include "engine/game/game.h"
+
 using namespace vg;
 
-text::text(std::string& fontPath, FileManager *manager)
+Text::Text(std::string& fontPath, FileManager *manager)
 {
 	// Library init
 	FT_Error error;
@@ -15,30 +17,32 @@ text::text(std::string& fontPath, FileManager *manager)
 
 	manager->readAsset(fontPath, mCharData);
 
+	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
+
 	// New face
 	error = FT_New_Memory_Face(mLibrary, &mCharData[0], mCharData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
-	FT_Set_Char_Size(mFace, 0, 16 * 64, 1280, 720);
+	FT_Set_Char_Size(mFace, 0, 16 * 64, resolution.getX(), resolution.getY());
 
 	//error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
-	mGlyph_index = FT_Get_Char_Index(mGlyph->face, 'm');
+	mGlyph_index = FT_Get_Char_Index(mGlyph->face, 'k');
 	FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
 	FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
 
+	gl::genTextures(&mTexture);
 
-	glGenTextures(0, &mTexture);
+	gl::activeTexture();
+	gl::bindTexture(mTexture);
 
-	glActiveTexture(GL_TEXTURE0);
-	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glBindTexture(GL_TEXTURE_2D, mTexture);
+	gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mGlyph->bitmap.width, mGlyph->bitmap.rows, 0, GL_ALPHA, GL_UNSIGNED_BYTE, mGlyph->bitmap.buffer);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	gl::bindTexture(0);
 
 	Log("text", "Bitmap x: %i", mGlyph->bitmap_left, "");
 	Log("text", "Bitmap y: %i", mGlyph->bitmap_top, "");
@@ -69,27 +73,23 @@ text::text(std::string& fontPath, FileManager *manager)
 	mIndexBuffer = new IndexBuffer(mIndexData);
 }
 
-void text::draw(Shader *shader)
+void Text::draw(Shader* shader)
 {
 	shader->useProgram();
 
-	gl::activeTexture(mTexture);
+	gl::activeTexture();
 	gl::bindTexture(mTexture);
 	
 	shader->setPosition(Vector2<int>(100, 100));
-	//shader->setSize(Vector2<int>(500*mGlyph->bitmap.width / 800, 500 * mGlyph->bitmap.rows / 600));
 	shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
-
-	//GraphicsDevice::draw(&shader, &mVertexBufferList[i], &mIndexBufferList[i], 640.0f, 360.0f, 0.0f, 1.0f);
 	GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
 
-	gl::activeTexture();
 	gl::bindTexture(0);
 
 	shader->unUseProgram();
 }
 
-void text::initializeBuffer(char *text)
+void Text::initializeBuffer(char *text)
 {
 	float sx = 2 / 1280;
 	float sy = 2 / 720;
@@ -100,7 +100,7 @@ void text::initializeBuffer(char *text)
 		if (FT_Load_Char(mFace, *p, FT_LOAD_RENDER))
 			continue;
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mGlyph->bitmap.width, mGlyph->bitmap.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, mGlyph->bitmap.buffer);
+		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_RGBA);
 
 		float x = mGlyph->bitmap_left;
 		float y = mGlyph->bitmap_top;
@@ -115,7 +115,7 @@ void text::initializeBuffer(char *text)
 	}
 }
 
-void text::createBuffer(float x, float y, float w, float h)
+void Text::createBuffer(float x, float y, float w, float h)
 {
 	//vertex x0 y0
 	mVertexData.push_back(0.0);
