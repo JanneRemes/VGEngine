@@ -2,7 +2,9 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
-void vg::gl::checkError()
+using namespace vg::graphics;
+
+void gl::checkError()
 {
 	GLuint error = glGetError();
 	if (error != GL_NO_ERROR)
@@ -11,74 +13,86 @@ void vg::gl::checkError()
 	}
 }
 
-void vg::gl::vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data)
+void gl::vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data)
 {
     glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, data);
 	checkError();
 }
 
-void vg::gl::drawArrays(GLenum primitiveType, GLint offset, GLsizei count)
+void gl::drawArrays(GLenum primitiveType, GLint offset, GLsizei count)
 {
     glDrawArrays(primitiveType, offset, count);
 	checkError();
 }
 
-void vg::gl::drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices)
+void gl::drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices)
 {
     glDrawElements(primitiveType, count, indexType, indices);
 	checkError();
 }
 
-void vg::gl::useProgram(GLuint programId)
+void gl::useProgram(GLuint programId)
 {
     glUseProgram(programId);
 	checkError();
 }
 
-void vg::gl::genTextures(GLuint* textureIds, GLsizei amount)
+void gl::genTextures(GLuint* textureIds, GLsizei amount)
 {
 	glGenTextures(amount, textureIds);
 	checkError();
 }
 
-void vg::gl::bindTexture(GLuint textureId)
+void gl::bindTexture(GLuint textureId)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	checkError();
 }
 
-void vg::gl::activeTexture(GLuint textureIndex)
+void gl::activeTexture(GLuint textureIndex)
 {
 	glActiveTexture(textureIndex);
 	checkError();
 }
 
-void vg::gl::texParameteri(GLenum pname, GLint parameter)
+void gl::texParameteri(GLenum pname, GLint parameter)
 {
 	glTexParameteri(GL_TEXTURE_2D, pname, parameter);
 	checkError();
 }
 
-void vg::gl::texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format)
+void gl::texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format)
 {
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels.data());
 	checkError();
 }
 
-void vg::gl::texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format)
+void gl::texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format)
 {
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
 	checkError();
 }
 
-void vg::gl::clear()
+void gl::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	checkError();
 }
 
-void vg::gl::clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+void gl::clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
 	glClearColor(red, green, blue, alpha);
+	checkError();
+}
+
+void gl::setUniform(GLuint location, glm::mat4& value)
+{
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+	checkError();
+}
+
+void gl::setUniform(GLuint location, float& value)
+{
+	glUniform1f(location, value);
 	checkError();
 }

@@ -4,37 +4,43 @@
 #include <GLES2/gl2.h>
 #include <stdint.h>
 #include <vector>
-
-// TODO: Add assertions and other error handling to functions in debug mode
+#include "../external/glm/gtc/type_ptr.hpp"
 
 namespace vg
 {
-	namespace gl
+	namespace graphics
 	{
-		void checkError();
+		namespace gl
+		{
+			void checkError();
 
-        void vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
+			void vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
 
-        void drawArrays(GLenum primitiveType, GLint offset, GLsizei count);
+			void drawArrays(GLenum primitiveType, GLint offset, GLsizei count);
 
-        void drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices = nullptr);
+			void drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices = nullptr);
 
-        void useProgram(GLuint programId = 0);
+			void useProgram(GLuint programId = 0);
 
-		void genTextures(GLuint* textureIds, GLsizei amount = 1);
+			void genTextures(GLuint* textureIds, GLsizei amount = 1);
 
-		void bindTexture(GLuint textureId);
+			void bindTexture(GLuint textureId);
 
-		void activeTexture(GLuint textureIndex = GL_TEXTURE0);
+			void activeTexture(GLuint textureIndex = GL_TEXTURE0);
 
-		void texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format = GL_RGBA);
+			void texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format = GL_RGBA);
 
-		void texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format = GL_RGBA);
+			void texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format = GL_RGBA);
 
-		void texParameteri(GLenum pname, GLint parameter);
+			void texParameteri(GLenum pname, GLint parameter);
 
-		void clear();
+			void clear();
 
-		void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+			void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+
+			void setUniform(GLuint location, glm::mat4& value);
+
+			void setUniform(GLuint location, float& value);
+		}
 	}
 }

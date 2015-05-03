@@ -1,3 +1,4 @@
+
 #include "engine/game/renderSystem.h"
 #include "engine/game/renderComponent.h"
 #include "engine/graphics/graphicsDevice.h"
@@ -7,9 +8,13 @@
 #include "engine/game/triangleComponent.h"
 #include "engine/game/transformComponent.h"
 #include "engine/graphics/opengl.h"
+
 #include <vector>
 #include <typeinfo>
+
 using namespace vg;
+using namespace vg::graphics;
+
 RenderSystem::RenderSystem() :System()
 {
 
@@ -40,18 +45,19 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 		TransformComponent* transformComponent = (*it)->GetComponent<TransformComponent>();
 		if (component != nullptr)
 		{
-			VertexBuffer vBuffer(*component->getVertices());
+			vg::graphics::VertexBuffer vBuffer(*component->getVertices());
 			IndexBuffer iBuffer(*component->getIndices());
 			Shader *shader = Game::getInstance()->getGraphics()->getShader();
-			shader->useProgram();
-			if (component->getTexture() != nullptr)
+			Texture* texture = component->getTexture();
+
+			if (texture != nullptr)
 			{
-				component->getTexture()->bind();
-			}
-			else
-			{
-				gl::activeTexture();
-				gl::bindTexture(0u);
+				if (texture->isLoaded())
+				{
+					shader->useProgram();
+					texture->bind();
+					shader->unUseProgram();
+				}
 			}
 
 			if (transformComponent == nullptr)
@@ -62,9 +68,19 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 				shader->setSize(transformComponent->getSize());
 				shader->setRotation(transformComponent->getRotation());
 				shader->setLayer(transformComponent->getLayer());
+				
 				GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
 			}
-			shader->unUseProgram();
+			
+			if (texture != nullptr)
+			{
+				if (texture->isLoaded())
+				{
+					shader->useProgram();
+					texture->unbind();
+					shader->unUseProgram();
+				}
+			}
 		}
 	}
 }

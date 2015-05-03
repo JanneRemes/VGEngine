@@ -3,7 +3,7 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
-using namespace vg;
+using namespace vg::graphics;
 
 GraphicsContext::GraphicsContext()
 {

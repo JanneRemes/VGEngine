@@ -36,7 +36,7 @@ void Game::update()
     }
 	mSceneManager->update(0.0f); //TODO add deltatime
 }
-void Game::setGraphics(Graphics *graphics)
+void Game::setGraphics(vg::graphics::Graphics *graphics)
 {
 	this->mGraphics = graphics;
 }
@@ -97,10 +97,12 @@ void Game::log(char* text)
 {
 	Log("fm", "%s", text);
 }
-Graphics* Game::getGraphics()
+
+vg::graphics::Graphics* Game::getGraphics()
 {
 	return mGraphics;
 }
+
 Factory *Game::getFactory()
 {
 	return mFactory;

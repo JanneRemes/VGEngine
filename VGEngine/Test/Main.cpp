@@ -10,13 +10,12 @@
 #include <engine/game/triangleComponent.h>
 #include <engine/game/quadrangleComponent.h>
 #include "ShipSystem.h"
-using namespace vg;
 
+using namespace vg;
+using namespace vg::graphics;
 
 void mainGame(Game* game)
 {
-	///@todo remember to uncomment
-
 	Game::log("test");
 	Scene *scene = new Scene();
 
@@ -27,7 +26,7 @@ void mainGame(Game* game)
 	ship->addComponent(transform);
 	TestComponent *testcomponent = new TestComponent();
 	ship->addComponent(testcomponent);
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala2.png");
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
 	ship->addComponent(quadre);
 	 
 	game->getSceneManager()->changeScene(scene);
@@ -37,5 +36,6 @@ void mainGame(Game* game)
 	//TestComponentSystem *compSystem = new TestComponentSystem();
 	//game->addComponentSystem(scene, compSystem);
 
-
+	game->getGraphics()->append(new DebugSprite("koala.png",
+		Vector2<int>(200, 200), Vector2<int>(256, 256), 90.0f, 0));
 }

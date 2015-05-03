@@ -43,6 +43,7 @@ extern void test_dummy();
 
 using namespace vg;
 using namespace vg::Input;
+using namespace vg::graphics;
 extern void mainGame(Game* game);
 
 void main_dummy()
@@ -115,8 +116,6 @@ void android_main(struct android_app* state)
 	Game* game = Game::getInstance();
 	game->setFileManager(state);
 	game->setGraphics(&engine.graphics);
-	
-	//engine.graphics.append(new DebugSprite("shipkoala3.png", Vector2<int>(100, 100), Vector2<int>(128, 256), 0.0f, 0u));
 
 	engine.state.game = game;
     engine.state.game->start();

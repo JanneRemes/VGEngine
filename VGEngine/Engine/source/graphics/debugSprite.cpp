@@ -6,51 +6,41 @@
 #include "../external/glm/gtc/matrix_transform.hpp"
 #include "../external/glm/gtx/transform.hpp"
 
-using namespace vg;
+using namespace vg::graphics;
 using namespace std;
 
-DebugSprite::DebugSprite(const string& textureFileName, Vector2<int> position,
+DebugSprite::DebugSprite(const string& texturePath, Vector2<int> position,
 	Vector2<int> size, float rotation, uint layer, Vector2<int> origin)
 	: mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin)
 {
-	mTexture = new Texture(textureFileName);
+	mTexture = new Texture(texturePath);
 	mVertices = defaultVertices;
 	mIndices = defaultIndices;
 }
 
 DebugSprite::~DebugSprite()
 {
-	delete mVertexBuffer;
-	delete mIndexBuffer;
-}
-
-void DebugSprite::initialize()
-{
-	mVertexBuffer = new VertexBuffer(mVertices);
-	mIndexBuffer = new IndexBuffer(mIndices);
+	delete mTexture;
 }
 
 void DebugSprite::draw(Shader* shader)
 {
-    if (mTexture->isLoaded())
-    {
-        shader->useProgram();
-        mTexture->bind();
-        shader->unUseProgram();
-    }
+	shader->useProgram();
+	mTexture->bind();
+	shader->unUseProgram();
+
 	shader->setPosition(mPosition - mOrigin);
 	shader->setSize(mSize);
 	shader->setRotation(mRotation);
 	shader->setLayer(mLayer);
 
-	GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
-	
-    if (mTexture->isLoaded())
-    {
-        shader->useProgram();
-        mTexture->unbind();
-        shader->unUseProgram();
-    }
+	VertexBuffer vertexBuffer(mVertices);
+	IndexBuffer indexBuffer(mIndices);
+	GraphicsDevice::draw(shader, &vertexBuffer, &indexBuffer);
+
+	shader->useProgram();
+	mTexture->unbind();
+	shader->unUseProgram();
 }
 
 Texture* DebugSprite::getTexture()

@@ -6,7 +6,7 @@
 #include "engine/graphics/opengl.h"
 #include "engine/game/game.h"
 
-using namespace vg;
+using namespace vg::graphics;
 
 Text::Text(std::string& fontPath, FileManager *manager)
 {
@@ -26,7 +26,7 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	FT_Set_Char_Size(mFace, 0, 16 * 64, resolution.getX(), resolution.getY());
 
 	//error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
-	mGlyph_index = FT_Get_Char_Index(mGlyph->face, 'k');
+	mGlyph_index = FT_Get_Char_Index(mGlyph->face, 'T');
 	FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
 	FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
 

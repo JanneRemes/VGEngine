@@ -10,78 +10,81 @@
 
 namespace vg
 {
-    /**
-    Initializes EGL and openGL, swaps buffers
-    */
-    class GraphicsContext
-    {
-    public:
-        /**
-        Initializes default values
-        */
-        GraphicsContext();
-
-        ~GraphicsContext();
-
-        /**
-        Initializes EGL and openGL and creates opengl program
-        @param window pointer to Android window surface
-        */
-        void initialize(ANativeWindow* window);
-
-        /**
-        Desroys EGL and disables openGL attributes and buffers
-        */
-        void destroy();
-
-        /**
-        Swaps draw buffers in the current context
-        */
-        void swapBuffers();
-
-        /**
-        @return width of current screen in pixels
-        */
-        EGLint getWidth();
-
-        /**
-        @return height of current screen in pixels
-        */
-        EGLint getHeight();
-
+	namespace graphics
+	{
 		/**
-		@return returns mProgramId (opengl program id)
+		Initializes EGL and openGL, swaps buffers
 		*/
+		class GraphicsContext
+		{
+		public:
+			/**
+			Initializes default values
+			*/
+			GraphicsContext();
 
-		GLuint getProgramId();
+			~GraphicsContext();
+
+			/**
+			Initializes EGL and openGL and creates opengl program
+			@param window pointer to Android window surface
+			*/
+			void initialize(ANativeWindow* window);
+
+			/**
+			Desroys EGL and disables openGL attributes and buffers
+			*/
+			void destroy();
+
+			/**
+			Swaps draw buffers in the current context
+			*/
+			void swapBuffers();
+
+			/**
+			@return width of current screen in pixels
+			*/
+			EGLint getWidth();
+
+			/**
+			@return height of current screen in pixels
+			*/
+			EGLint getHeight();
+
+			/**
+			@return returns mProgramId (opengl program id)
+			*/
+
+			GLuint getProgramId();
 
 
 
 
-    private:
-        /**
-        Initializes EGL context for current device
-        @param window pointer to current devices window handle
-        */
-        void initializeEGL(ANativeWindow* window);
+		private:
+			/**
+			Initializes EGL context for current device
+			@param window pointer to current devices window handle
+			*/
+			void initializeEGL(ANativeWindow* window);
 
-		/**
-		Creates Opengl program and puts it in mProgramId
-		*/
-		void createGLProgram();
+			/**
+			Creates Opengl program and puts it in mProgramId
+			*/
+			void createGLProgram();
 
-        /**
-        links shaders, creates buffers,
-        @todo not being used yet
-        */
-        void initializeOpenGL();
+			/**
+			links shaders, creates buffers,
+			@todo not being used yet
+			*/
+			void initializeOpenGL();
 
-        EGLDisplay mDisplay;    ///< Handle to devices display
-        EGLSurface mSurface;    ///< Handle to device surface
-        EGLContext mContext;    ///< Handle to device context
+			EGLDisplay mDisplay;    ///< Handle to devices display
+			EGLSurface mSurface;    ///< Handle to device surface
+			EGLContext mContext;    ///< Handle to device context
 
-        EGLint mWidth, mHeight; ///< Screen size in pixels
+			EGLint mWidth, mHeight; ///< Screen size in pixels
 
-		GLuint mProgramId; //< OpenGL program id
-    };
+			GLuint mProgramId; //< OpenGL program id
+		};
+	}
 }

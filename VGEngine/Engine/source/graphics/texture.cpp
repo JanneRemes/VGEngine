@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-using namespace vg;
+using namespace vg::graphics;
 
 Texture::Texture(const std::string& path)
 	: Asset(path)

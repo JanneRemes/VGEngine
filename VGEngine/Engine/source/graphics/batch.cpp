@@ -2,9 +2,9 @@
 #include "engine/graphics/batch.h"
 #include "engine/graphics/graphicsDevice.h"
 
-using namespace vg;
+using namespace vg::graphics;
 using namespace std;
-using Ite = vector<RenderComponent*>::iterator;
+using Ite = vector<vg::RenderComponent*>::iterator;
 
 Batch::Batch(Texture* texture)
     :mTexture(texture), mBuffersOutOfDate(false)

@@ -3,7 +3,7 @@
 #include "engine/graphics/drawable.h"
 #include "engine/graphics/graphicsDevice.h"
 
-using namespace vg;
+using namespace vg::graphics;
 
 void SpriteBatch::append(const Drawable& drawable, uint32_t layer)
 {

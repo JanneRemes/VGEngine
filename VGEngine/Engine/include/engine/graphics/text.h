@@ -12,37 +12,40 @@
 
 namespace vg
 {
-	/**
-	Class used for showing text on screen, utilizes freetype
-	*/
-	class Text
+	namespace graphics
 	{
-	public:
+		/**
+		Class used for showing text on screen, utilizes freetype
+		*/
+		class Text
+		{
+		public:
 
-		~Text(){};
-		Text(std::string& fontPath, FileManager *manager);
-		void initializeBuffer(char *text);
-		void draw(Shader *shader);
+			~Text(){};
+			Text(std::string& fontPath, FileManager *manager);
+			void initializeBuffer(char *text);
+			void draw(Shader *shader);
 
-		//std::vector<float> getVertexData() { return mVertexData; };
-		//std::vector<uint32_t> getIndexData() { return mIndexData; };
+			//std::vector<float> getVertexData() { return mVertexData; };
+			//std::vector<uint32_t> getIndexData() { return mIndexData; };
 
-	private:
+		private:
 
-		std::vector<float> mVertexData;		///< <description>
-		std::vector<uint32_t> mIndexData;	///< <description>
+			std::vector<float> mVertexData;		///< <description>
+			std::vector<uint32_t> mIndexData;	///< <description>
 
-		void createBuffer(float x, float y, float w, float h);
+			void createBuffer(float x, float y, float w, float h);
 
-		GLuint mTexture;
-		VertexBuffer *mVertexBuffer;
-		IndexBuffer *mIndexBuffer;
+			GLuint mTexture;
+			VertexBuffer *mVertexBuffer;
+			IndexBuffer *mIndexBuffer;
 
-		std::vector<FT_Byte> mCharData;
+			std::vector<FT_Byte> mCharData;
 
-		FT_UInt  mGlyph_index;
-		FT_Library mLibrary;
-		FT_Face mFace;
-		FT_GlyphSlot mGlyph;
-	};
+			FT_UInt  mGlyph_index;
+			FT_Library mLibrary;
+			FT_Face mFace;
+			FT_GlyphSlot mGlyph;
+		};
+	}
 }

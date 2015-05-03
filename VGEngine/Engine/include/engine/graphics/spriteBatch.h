@@ -8,21 +8,20 @@
 
 namespace vg
 {
-	class Texture;
-	class Drawable;
-	class Shader;
-
-	/**
-	
-
-	*/
-	class SpriteBatch
+	namespace graphics
 	{
-	public:
-		void append(const Drawable& drawable, uint32_t layer = 0);
-		void draw(Shader& shader);
-	private:
-		std::map<uint32_t, std::map<const Texture*, std::vector<float>>> mLayers;
-		VertexBuffer mVertexButter;
-	};
+		class Texture;
+		class Drawable;
+		class Shader;
+
+		class SpriteBatch
+		{
+		public:
+			void append(const Drawable& drawable, uint32_t layer = 0);
+			void draw(Shader& shader);
+		private:
+			std::map<uint32_t, std::map<const Texture*, std::vector<float>>> mLayers;
+			VertexBuffer mVertexButter;
+		};
+	}
 }

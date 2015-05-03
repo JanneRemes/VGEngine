@@ -5,25 +5,15 @@
 #include "engine/game/game.h"
 
 using namespace std;
-using namespace vg;
+using namespace vg::graphics;
 using namespace glm;
 
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
-Shader::Shader(const AttributeNameMap& attributeNames) :
-    mVertexElementNames(attributeNames)
+Shader::Shader(const VariableNameMap& attributeNames, const VariableNameMap& uniformNames) 
+: mVertexElementNames(attributeNames), mUniformNames(uniformNames)
 {
     mInitialized = false;
-}
-
-Shader::Shader(const Shader& shader)
-{
-    mVertexId = shader.mVertexId;
-    mFragmentId = shader.mFragmentId;
-    mProgramId = shader.mProgramId;
-    mVertexElementNames = shader.mVertexElementNames;
-    mInitialized = shader.mInitialized;
-    mProjectionLocation = shader.mProjectionLocation;
 }
 
 void Shader::initialize()
@@ -37,8 +27,7 @@ void Shader::initialize()
         glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
 
-    mScreenSize = vec2(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-        Game::getInstance()->getGraphics()->getContext()->getHeight());
+    
     
     mInitialized = true;
 }
@@ -58,7 +47,7 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     fileManager.readAsset(FOLDER + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
     {
-        Log("SHADER", "Vertex shader compile error!", "");
+        Log("ERROR", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
         return false;
     }
@@ -66,7 +55,7 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     fileManager.readAsset(FOLDER + fragmentPath, buffer);
     if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
     {
-        Log("SHADER", "Fragment shader compile error!", "");
+        Log("ERROR", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
         return false;
     }
@@ -80,31 +69,27 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
 
     if (result != GL_TRUE)
     {
-        Log("SHADER", "Shader program link error!", "");
+        Log("ERROR", "Shader program link error!", "");
         return false;
     }
     
+	//uniforms
     gl::useProgram(mProgramId);
-
-	mProjectionLocation = glGetUniformLocation(mProgramId, "unifProjection");
+	mProjectionLocation = glGetUniformLocation(mProgramId, mUniformNames[Projection].c_str());
 	if (mProjectionLocation < 0)
-		Log("SHADER", "unifProjection not found!", "");
+		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Projection]);
 
-	mModelLocation = glGetUniformLocation(mProgramId, "unifModel");
+	mModelLocation = glGetUniformLocation(mProgramId, mUniformNames[Model].c_str());
 	if (mModelLocation < 0)
-		Log("SHADER", "unifModel not found!", "");
+		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Model]);
 
-	mLayerLocation = glGetUniformLocation(mProgramId, "unifLayer");
+	mLayerLocation = glGetUniformLocation(mProgramId, mUniformNames[Layer].c_str());
 	if (mLayerLocation < 0)
-		Log("SHADER", "unifLayer not found!", "");
-
-	//projection transform
-	mProjectionTransform = ortho(0.0f, mScreenSize.x, mScreenSize.y, 0.0f, -1.0f, 1.0f);
-	glUniformMatrix4fv(mProjectionLocation, 1, GL_FALSE, glm::value_ptr(mProjectionTransform));
+		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Layer]);
 	
     resetUniforms();
     updateUniforms();
-
+	updateProjectionTransform();
     gl::useProgram(0u);
 
     return true;
@@ -125,18 +110,27 @@ void Shader::unUseProgram()
 	glUseProgram(0u);
 }
 
-const AttributeNameMap& Shader::getVertexElementNames()
+const VariableNameMap& Shader::getVertexElementNames()
 {
     return mVertexElementNames;
 }
 
-AttributeNameMap Shader::getDefaultAttribNames()
+VariableNameMap Shader::getDefaultAttribNames()
 {
-    AttributeNameMap result;
+	VariableNameMap result;
     result[Position] = "attrPosition";
     result[Color] = "attrColor";
     result[TexCoord] = "attrTexCoord";
     return result;
+}
+
+VariableNameMap Shader::getDefaultUniformNames()
+{
+	VariableNameMap result;
+	result[Projection] = "unifProjection";
+	result[Model] = "unifModel";
+	result[Layer] = "unifLayer";
+	return result;
 }
 
 GLint Shader::compileShaderSource(GLuint id, const std::string& source)
@@ -190,13 +184,22 @@ void Shader::setLayer(uint layer)
 
 void Shader::updateUniforms()
 {
-	mModelTransform = mat4();
-	mModelTransform = translate(mModelTransform, vec3(mPosition, 0.0f));
-	mModelTransform = translate(mModelTransform, vec3(0.5f * mSize.x, 0.5f * mSize.y, 0.0f));
-	mModelTransform = rotate(mModelTransform, mRotation, vec3(0.0f, 0.0f, 1.0f));
-	mModelTransform = translate(mModelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
-	mModelTransform = scale(mModelTransform, vec3(mSize, 1.0f));
+	mat4 modelTransform = mat4();
+	modelTransform = translate(modelTransform, vec3(mPosition, 0.0f));
+	modelTransform = translate(modelTransform, vec3(0.5f * mSize.x, 0.5f * mSize.y, 0.0f));
+	modelTransform = rotate(modelTransform, mRotation, vec3(0.0f, 0.0f, 1.0f));
+	modelTransform = translate(modelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
+	modelTransform = scale(modelTransform, vec3(mSize, 1.0f));
+	
+	gl::setUniform(mModelLocation, modelTransform);
+	gl::setUniform(mLayerLocation, mLayer);
+}
 
-	glUniformMatrix4fv(mModelLocation, 1, GL_FALSE, glm::value_ptr(mModelTransform));
-	glUniform1f(mLayerLocation, mLayer);
+void Shader::updateProjectionTransform()
+{
+	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
+
+	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
+	gl::setUniform(mProjectionLocation, projectionTransform);
 }

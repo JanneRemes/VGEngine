@@ -15,8 +15,8 @@ namespace vg
 		T *createRenderComponent(std::string filename)
 		{
 			T *texComp = new T();
-			mAssetManager->load<Texture>(filename);
-			Texture *texture = mAssetManager->get<Texture>(filename);
+			mAssetManager->load<vg::graphics::Texture>(filename);
+			vg::graphics::Texture *texture = mAssetManager->get<vg::graphics::Texture>(filename);
 			texture->load(mFileManager);
 			texComp->setTexture(texture);
 			return texComp;

@@ -11,24 +11,27 @@
 
 namespace vg
 {
-    /// @todo continue with this later
-    /**
-        A group of sprites that can be drawn in a single draw call.
-    */
-    class Batch
-    {
-    public:
-        Batch(Texture* texture);
-        ~Batch();
-        void add(RenderComponent* drwawable);
-        void draw(Shader& shader);
+	namespace graphics
+	{
+		/// @todo continue with this later
+		/**
+			A group of sprites that can be drawn in a single draw call.
+			*/
+		class Batch
+		{
+		public:
+			Batch(Texture* texture);
+			~Batch();
+			void add(RenderComponent* drwawable);
+			void draw(Shader& shader);
 
-    private:
-        Texture* mTexture;                          ///<description>
-        VertexBuffer mVertexBuffer;                 ///<description>
-        IndexBuffer mIndexBuffer;                   ///<description>
-        bool mBuffersOutOfDate;                     ///<description>
-        std::vector<RenderComponent*> mDrawables;   ///<description>
+		private:
+			Texture* mTexture;                          ///<description>
+			VertexBuffer mVertexBuffer;                 ///<description>
+			IndexBuffer mIndexBuffer;                   ///<description>
+			bool mBuffersOutOfDate;                     ///<description>
+			std::vector<RenderComponent*> mDrawables;   ///<description>
 
-    };
+		};
+	}
 }

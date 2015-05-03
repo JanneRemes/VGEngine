@@ -82,13 +82,13 @@ namespace vg
 		/**
 		@return returns the games graphics
 		*/
-		Graphics* getGraphics();
+		vg::graphics::Graphics* getGraphics();
 
 		/**
 		Sets the graphics for the game
 		@param graphics Graphics class that includes everything needed for drawing
 		*/
-		void setGraphics(Graphics *graphics);
+		void setGraphics(vg::graphics::Graphics *graphics);
 		Factory *getFactory();
 
 		float mPulse;
@@ -100,9 +100,9 @@ namespace vg
 		AssetManager *mAssetManager;
 		Game();
 		Factory *mFactory;
-		Graphics *mGraphics;
+		vg::graphics::Graphics *mGraphics;
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
-		Shader mShader;
+		vg::graphics::Shader mShader;
     };
 }

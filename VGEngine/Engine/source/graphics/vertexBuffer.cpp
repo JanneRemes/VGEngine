@@ -2,7 +2,7 @@
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/opengl.h"
 
-using namespace vg;
+using namespace vg::graphics;
 
 const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
 {

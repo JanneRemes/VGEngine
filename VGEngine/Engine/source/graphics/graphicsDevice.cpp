@@ -2,7 +2,7 @@
 #include "engine/graphics/graphicsDevice.h"
 #include "engine/graphics/opengl.h"
 
-using namespace vg;
+using namespace vg::graphics;
 
 void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices)
 {

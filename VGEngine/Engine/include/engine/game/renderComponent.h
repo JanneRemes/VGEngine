@@ -31,10 +31,16 @@ namespace vg
 		@return Returns the components indices
 		*/
 		std::vector<GLuint> *getIndices(){ return &indices; };
-		Texture *getTexture();
+
+		/**
+		@return pointer to current texture
+		*/
+		vg::graphics::Texture *getTexture();
+
 	private:
-		Texture *mTexture;
-		void setTexture(Texture *texture);
+		void setTexture(vg::graphics::Texture *texture);
+
+		vg::graphics::Texture *mTexture;
 		std::vector<float> vertices;
 		std::vector<GLuint> indices;
 	};

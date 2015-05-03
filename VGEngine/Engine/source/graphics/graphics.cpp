@@ -2,7 +2,7 @@
 #include "engine/graphics/graphics.h"
 #include "engine/utility/logger.h"
 
-using namespace vg;
+using namespace vg::graphics;
 using namespace std;
 
 
@@ -32,14 +32,6 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 	testText = new Text(fontpath, mFileManager);
 
     mInitialized = true;
-
-	for (vector<DebugSprite*>::iterator i = mUnloadedDebugSprites.begin(); i != mUnloadedDebugSprites.end(); i++)
-	{
-		(*i)->getTexture()->load(mFileManager);
-		(*i)->initialize();
-		mDebugSprites.push_back(*i);
-	}
-	mUnloadedDebugSprites.clear();
 }
 
 void Graphics::unInitialize()
@@ -106,8 +98,16 @@ void Graphics::draw()
 
 void Graphics::append(DebugSprite* sprite)
 {
-	if (mInitialized)
-		mDebugSprites.push_back(sprite);
-	else
-		mUnloadedDebugSprites.push_back(sprite);
+	mDebugSprites.push_back(sprite);
+	sprite->getTexture()->load(mFileManager);
+}
+
+Shader* Graphics::getShader()
+{
+	return &mShader;
+}
+
+GraphicsContext* Graphics::getContext()
+{
+	return &mContext;
 }
