@@ -10,7 +10,7 @@ using namespace glm;
 
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
-Shader::Shader(const VariableNameMap& attributeNames, const VariableNameMap& uniformNames) 
+Shader::Shader(const VariableNames& attributeNames, const UniformNames& uniformNames) 
 : mVertexElementNames(attributeNames), mUniformNames(uniformNames)
 {
     mInitialized = false;
@@ -75,18 +75,14 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     
 	//uniforms
     gl::useProgram(mProgramId);
-	mProjectionLocation = glGetUniformLocation(mProgramId, mUniformNames[Projection].c_str());
-	if (mProjectionLocation < 0)
-		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Projection]);
+	for (auto& pair : mUniformNames)
+	{
+		GLuint location = glGetUniformLocation(mProgramId, pair.second.getName().c_str());
+		if (location < 0)
+			Log("ERROR", "Shader uniform %s not found!", pair.second.getName().c_str());
+		pair.second.setLocation(location);
+	}
 
-	mModelLocation = glGetUniformLocation(mProgramId, mUniformNames[Model].c_str());
-	if (mModelLocation < 0)
-		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Model]);
-
-	mLayerLocation = glGetUniformLocation(mProgramId, mUniformNames[Layer].c_str());
-	if (mLayerLocation < 0)
-		Log("ERROR", "Shader uniform %s not found!", &mUniformNames[Layer]);
-	
     resetUniforms();
     updateUniforms();
 	updateProjectionTransform();
@@ -110,26 +106,26 @@ void Shader::unUseProgram()
 	glUseProgram(0u);
 }
 
-const VariableNameMap& Shader::getVertexElementNames()
+const VariableNames& Shader::getVertexElementNames()
 {
     return mVertexElementNames;
 }
 
-VariableNameMap Shader::getDefaultAttribNames()
+VariableNames Shader::getDefaultAttribNames()
 {
-	VariableNameMap result;
+	VariableNames result;
     result[Position] = "attrPosition";
     result[Color] = "attrColor";
     result[TexCoord] = "attrTexCoord";
     return result;
 }
 
-VariableNameMap Shader::getDefaultUniformNames()
+UniformNames Shader::getDefaultUniformNames()
 {
-	VariableNameMap result;
-	result[Projection] = "unifProjection";
-	result[Model] = "unifModel";
-	result[Layer] = "unifLayer";
+	UniformNames result;
+	result[UniformUsage::Projection] = UniformElement(UniformType::Mat4, "unifProjection");
+	result[UniformUsage::Model] = UniformElement(UniformType::Mat4, "unifModel");
+	result[UniformUsage::Layer] = UniformElement(UniformType::Float, "unifLayer");
 	return result;
 }
 
@@ -191,8 +187,8 @@ void Shader::updateUniforms()
 	modelTransform = translate(modelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
 	modelTransform = scale(modelTransform, vec3(mSize, 1.0f));
 	
-	gl::setUniform(mModelLocation, modelTransform);
-	gl::setUniform(mLayerLocation, mLayer);
+	gl::setUniform(mUniformNames[UniformUsage::Model].getLocation(), modelTransform);
+	gl::setUniform(mUniformNames[UniformUsage::Layer].getLocation(), mLayer);
 }
 
 void Shader::updateProjectionTransform()
@@ -201,5 +197,5 @@ void Shader::updateProjectionTransform()
 		Game::getInstance()->getGraphics()->getContext()->getHeight());
 
 	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
-	gl::setUniform(mProjectionLocation, projectionTransform);
+	gl::setUniform(mUniformNames[UniformUsage::Projection].getLocation(), projectionTransform);
 }

@@ -19,7 +19,8 @@ namespace vg
 	namespace graphics
 	{
 		/// A map containing the usage and name of vertex attributes
-		typedef std::map<uint32_t, std::string> VariableNameMap;
+		typedef std::map<uint32_t, std::string> VariableNames;
+		typedef std::map<UniformUsage, UniformElement> UniformNames;
 
 		/**
 			Holds shader attribute and  ids and links itself
@@ -32,8 +33,8 @@ namespace vg
 				@param attributeNames map containing the usage and name of vertex attributes
 				@param attributeNames map containing the usage and name of unifrom variables
 				*/
-			Shader(const VariableNameMap& attributeNames = getDefaultAttribNames(),
-				const VariableNameMap& uniformNames = getDefaultUniformNames());
+			Shader(const VariableNames& attributeNames = getDefaultAttribNames(),
+				const UniformNames& uniformNames = getDefaultUniformNames());
 
 			/**
 				Initialize values needed by load(). Don't call before GraphicsContext is initialized.
@@ -76,7 +77,7 @@ namespace vg
 				Returns current map of vertex element ids and names
 				@return map of vertex element ids and names
 				*/
-			const VariableNameMap& getVertexElementNames();
+			const VariableNames& getVertexElementNames();
 
 			/**
 				Reset saved uniform values to defaults. They sent to be sent to GPU.
@@ -119,9 +120,9 @@ namespace vg
 				Returns default map of vertex element ids and names
 				@return default map of vertex element usages and names
 				*/
-			static VariableNameMap getDefaultAttribNames();
+			static VariableNames getDefaultAttribNames();
 
-			static VariableNameMap getDefaultUniformNames();
+			static UniformNames getDefaultUniformNames();
 
 			/**
 				Compiles shader source code
@@ -137,20 +138,14 @@ namespace vg
 			GLuint mVertexId;                          ///< Vertex shader id used for linking
 			GLuint mFragmentId;                        ///< Fragment shader id used for linking
 			GLuint mProgramId;                         ///< Shader program id used for linking
-			VariableNameMap mVertexElementNames;       ///< Map of vertex element ids and names
-			VariableNameMap mUniformNames;			   ///< Map of shader uniform ids and names
-			//glm::vec2 mScreenSize;                     ///< Screensize in pixels
+			VariableNames mVertexElementNames;         ///< Map of vertex element ids and names
+			UniformNames mUniformNames;				   ///< Map of shader uniform ids and names
 			bool mInitialized;                         ///< Have shaders been initialized
 
-			GLuint mProjectionLocation;                ///< Shader id for uniform projection transform matrix 
-			GLuint mLayerLocation;                     ///< Shader id for uniform layer value
-			GLuint mModelLocation;					   ///< Shader id for uniform model transform matrix
 			glm::vec2 mPosition;                       ///< Position in pixels
 			glm::vec2 mSize;						   ///< Size in pixels
 			float mRotation;                           ///< Rotation clockwise in degrees
 			float mLayer;                              ///< Layer for drawing ranging from 0 to 1
-			//glm::mat4 mProjectionTransform;            ///< Projection transform matrix
-			//glm::mat4 mModelTransform;				   ///< Model transform matrix
 		};
 	}
 }
