@@ -25,17 +25,10 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	mGlyph = mFace->glyph;
 	FT_Set_Char_Size(mFace, 0, 16 * 64, resolution.getX(), resolution.getY());
 
-	//error = FT_Load_Char(mFace, 'X', FT_LOAD_RENDER);
-	mGlyph_index = FT_Get_Char_Index(mGlyph->face, 'T');
-	FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
-	FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
-
 	gl::genTextures(&mTexture);
 
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
-
-	gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
 
 	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -64,7 +57,6 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	float tempW = mGlyph->bitmap.width;
 	float tempH = mGlyph->bitmap.rows;
 
-
 	Log("text", "Bitmap x, y, w, h: %f %f %f %f", x, y, w, h, "");
 
 	createBuffer(x, y, w, h);
@@ -73,20 +65,31 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	mIndexBuffer = new IndexBuffer(mIndexData);
 }
 
-void Text::draw(Shader* shader)
+void Text::draw(std::string text, Shader* shader)
 {
+	Vector2<int> startPosition(0, 0);
+
 	shader->useProgram();
 
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
-	
-	shader->setPosition(Vector2<int>(100, 100));
-	shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
-	GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
 
-	gl::bindTexture(0);
+	for (int i = 0; i < text.size(); i++)
+	{
+		mGlyph_index = FT_Get_Char_Index(mGlyph->face, text[i]);
+		FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
+		FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
 
-	shader->unUseProgram();
+		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
+
+		shader->setPosition(Vector2<int>(startPosition.getX() + mGlyph->advance.x, startPosition.getY()));
+		shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
+		GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
+
+		gl::bindTexture(0);
+
+		shader->unUseProgram();
+	}
 }
 
 void Text::initializeBuffer(char *text)

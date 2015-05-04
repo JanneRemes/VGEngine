@@ -24,7 +24,7 @@ namespace vg
 			~Text(){};
 			Text(std::string& fontPath, FileManager *manager);
 			void initializeBuffer(char *text);
-			void draw(Shader *shader);
+			void draw(std::string text, Shader *shader);
 
 			//std::vector<float> getVertexData() { return mVertexData; };
 			//std::vector<uint32_t> getIndexData() { return mIndexData; };
