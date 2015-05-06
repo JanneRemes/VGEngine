@@ -74,6 +74,9 @@ void Text::draw(std::string text, Shader* shader)
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
 
+
+	float sx = Game::getInstance()->getGraphics()->getScreenWidth();
+	float sy = Game::getInstance()->getGraphics()->getScreenHeight();
 	for (int i = 0; i < text.size(); i++)
 	{
 		mGlyph_index = FT_Get_Char_Index(mGlyph->face, text[i]);
@@ -82,14 +85,15 @@ void Text::draw(std::string text, Shader* shader)
 
 		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
 
-		shader->setPosition(Vector2<int>(startPosition.getX() + mGlyph->advance.x, startPosition.getY()));
+		Log("text", "ADVANCE: %d", sx);
+		shader->setPosition(Vector2<int>(100 /*+(mGlyph->advance.x >> 6)*sx*/+70*i, 100));
 		shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
 		GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
-
+	}
 		gl::bindTexture(0);
 
 		shader->unUseProgram();
-	}
+	
 }
 
 void Text::initializeBuffer(char *text)

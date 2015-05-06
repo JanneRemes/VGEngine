@@ -89,7 +89,7 @@ void Graphics::draw()
 		{
 			(*i)->draw(&mShader);
 		}
-        testText->draw(&mShader);
+        testText->draw("doge",&mShader);
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");
