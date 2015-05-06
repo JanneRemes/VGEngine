@@ -65,18 +65,20 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	mIndexBuffer = new IndexBuffer(mIndexData);
 }
 
-void Text::draw(std::string text, Shader* shader)
+void Text::draw(std::string text,float x, float y, Shader* shader)
 {
+	float basey = y;
 	Vector2<int> startPosition(0, 0);
 
 	shader->useProgram();
 
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
+	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
 
-
-	float sx = Game::getInstance()->getGraphics()->getScreenWidth();
-	float sy = Game::getInstance()->getGraphics()->getScreenHeight();
+	float sx = 2.0f/resolution.getX();
+	float sy = 2.0f/resolution.getY();
 	for (int i = 0; i < text.size(); i++)
 	{
 		mGlyph_index = FT_Get_Char_Index(mGlyph->face, text[i]);
@@ -85,10 +87,12 @@ void Text::draw(std::string text, Shader* shader)
 
 		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
 
-		Log("text", "ADVANCE: %d", sx);
-		shader->setPosition(Vector2<int>(100 /*+(mGlyph->advance.x >> 6)*sx*/+70*i, 100));
+		Log("text", "ADVANCE: %d",  mGlyph->bitmap_top);
+		y = basey -mGlyph->bitmap_top;
+		shader->setPosition(Vector2<int>(x, y));
 		shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
 		GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
+		x += (mGlyph->advance.x >> 6 );
 	}
 		gl::bindTexture(0);
 
