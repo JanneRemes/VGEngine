@@ -113,6 +113,11 @@ const VariableNames& Shader::getVertexElementNames()
     return mVertexElementNames;
 }
 
+const UniformNames& Shader::getUniformNames()
+{
+	return mUniformNames;
+}
+
 VariableNames Shader::getDefaultAttribNames()
 {
 	VariableNames result;
@@ -189,8 +194,8 @@ void Shader::updateUniforms()
 	modelTransform = translate(modelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
 	modelTransform = scale(modelTransform, vec3(mSize, 1.0f));
 	
-	gl::setUniform(mUniformNames[UniformUsage::Model].getLocation(), modelTransform);
-	gl::setUniform(mUniformNames[UniformUsage::Layer].getLocation(), mLayer);
+	setUniform(UniformUsage::Model, modelTransform);
+	setUniform(UniformUsage::Layer, mLayer);
 }
 
 void Shader::updateProjectionTransform()
@@ -200,6 +205,16 @@ void Shader::updateProjectionTransform()
 
 	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
 	gl::setUniform(mUniformNames[UniformUsage::Projection].getLocation(), projectionTransform);
+}
+
+void Shader::setUniform(UniformUsage usage, mat4& value)
+{
+	gl::setUniform(mUniformNames[usage].getLocation(), value);
+}
+
+void Shader::setUniform(UniformUsage usage, float value)
+{
+	gl::setUniform(mUniformNames[usage].getLocation(), value);
 }
 
 void Shader::setUniformBoolean(string name, bool value)

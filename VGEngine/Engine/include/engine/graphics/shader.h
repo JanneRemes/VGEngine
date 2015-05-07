@@ -74,10 +74,14 @@ namespace vg
 			void unUseProgram();
 
 			/**
-				Returns current map of vertex element ids and names
 				@return map of vertex element ids and names
 				*/
 			const VariableNames& getVertexElementNames();
+
+			/**
+				@return map of uniform variable names and usages
+				*/
+			const UniformNames& getUniformNames();
 
 			/**
 				Reset saved uniform values to defaults. They sent to be sent to GPU.
@@ -115,6 +119,16 @@ namespace vg
 				*/
 			void updateProjectionTransform();
 
+			/**
+				Set uniform matrix value
+				*/
+			void setUniform(UniformUsage usage, glm::mat4& value);
+
+			/**
+				Set uniform float value
+				*/
+			void setUniform(UniformUsage usage, float value);
+
             /**
                 Set value to shader uniform boolean
                 */
@@ -122,11 +136,13 @@ namespace vg
 
 		private:
 			/**
-				Returns default map of vertex element ids and names
 				@return default map of vertex element usages and names
 				*/
 			static VariableNames getDefaultAttribNames();
 
+			/**
+				@return default map of uniform variable usages and names
+				*/
 			static UniformNames getDefaultUniformNames();
 
 			/**
