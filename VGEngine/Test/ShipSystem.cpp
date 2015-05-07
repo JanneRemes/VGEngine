@@ -27,7 +27,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 		if ((*it)->getName() == "dip")
 		{
 			TransformComponent *comp = (*it)->GetComponent<TransformComponent>();
-			(*it)->GetComponent<TransformComponent>()->setPosition(vg::Vector2<int>(Random::nexti(0, 500), Random::nexti(0, 500)));
+			(*it)->GetComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -5));
 		}
 		if ((*it)->getName() == "ship")
 		{
@@ -49,7 +49,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			if (Input::Input::getIsTouchReleased())
 			{
 				GameObject *dip = new GameObject("dip");
-				TransformComponent *dippitransform = new TransformComponent(Vector2<int>(200, 200),
+				TransformComponent *dippitransform = new TransformComponent(Vector2<int>(transformComponent->getPosition().getX(), transformComponent->getPosition().getY()),
 					Vector2<int>(32, 32), 0.0f, 0u);
 				dip->addComponent(dippitransform);
 				QuadrangleComponent *dippiquadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
