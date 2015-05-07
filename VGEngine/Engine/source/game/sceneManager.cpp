@@ -1,5 +1,6 @@
 #include "engine/game/sceneManager.h"
 #include "engine/graphics/graphics.h"
+#include "engine/game/scene.h"
 #include <utility> 
 using namespace vg;
 SceneManager::SceneManager(){

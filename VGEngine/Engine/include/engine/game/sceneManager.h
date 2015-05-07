@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include "engine/game/game.h"
-#include "engine/game/scene.h"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -11,6 +10,7 @@ using namespace std;
 
 namespace vg
 {
+	class Scene;
     /// @todo remove when not needed anymore
 
 	/**

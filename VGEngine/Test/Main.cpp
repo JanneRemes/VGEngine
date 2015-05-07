@@ -1,3 +1,4 @@
+#pragma once
 #include <engine/engine.h>
 #include <engine/game/game.h>
 #include <engine/game/SceneManager.h>
@@ -16,6 +17,10 @@ using namespace vg::graphics;
 
 void mainGame(Game* game)
 {
+
+
+
+
 	Game::log("test");
 	Scene *scene = new Scene();
 
@@ -28,14 +33,12 @@ void mainGame(Game* game)
 	ship->addComponent(testcomponent);
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
 	ship->addComponent(quadre);
-	 
+
+
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);
-	ShipSystem *doge = new ShipSystem();
+	ShipSystem *doge = new ShipSystem(game);
+	doge->mScene = scene;
 	game->addComponentSystem(scene, doge);
-	//TestComponentSystem *compSystem = new TestComponentSystem();
-	//game->addComponentSystem(scene, compSystem);
 
-	game->getGraphics()->append(new DebugSprite("koala.png",
-		Vector2<int>(200, 200), Vector2<int>(256, 256), 90.0f, 0));
 }

@@ -48,14 +48,14 @@ namespace vg
 		/**
 		@return Returns all components from the gameObject
 		*/
-		std::vector<Component*> getAllComponents()
+		std::unordered_map<const std::type_info*, Component*> *getAllComponents()
 		{
-			std::vector<Component*> tempVector;
-			for (ComponentMap::iterator it = mComponents.begin(); it != mComponents.end(); it++)
-			{
-				tempVector.push_back((*it).second);
-			}
-			return tempVector;
+			//std::vector<Component*> tempVector;
+			///for (ComponentMap::iterator it = mComponents.begin(); it != mComponents.end(); it++)
+			//{
+			//	tempVector.push_back((*it).second);
+			//}
+			return &mComponents;//&tempVector;
 		}
 	private:
 		using ComponentMap = std::unordered_map<const std::type_info*, Component*>; 

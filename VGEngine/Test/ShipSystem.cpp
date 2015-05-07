@@ -1,3 +1,4 @@
+#pragma once
 #include "ShipSystem.h"
 
 #include "engine/input/input.h"
@@ -5,12 +6,14 @@
 #include "engine/utility/Vector2.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
+#include "engine/utility/random.h"
 using namespace vg;
-ShipSystem::ShipSystem() :System()
+ShipSystem::ShipSystem(Game *game) :System()
 {
-	mBullet = new GameObject("bullet");
-	QuadrangleComponent *quadre = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
-	mBullet->addComponent(quadre);
+	mGame = game;
+	//mBullet->addComponent(transform);
+	//mScene = gamescene;
+	Random::seed();
 }
 
 
@@ -21,26 +24,40 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
+		if ((*it)->getName() == "dip")
+		{
+			TransformComponent *comp = (*it)->GetComponent<TransformComponent>();
+			(*it)->GetComponent<TransformComponent>()->setPosition(vg::Vector2<int>(Random::nexti(0, 500), Random::nexti(0, 500)));
+		}
 		if ((*it)->getName() == "ship")
 		{
-			Vector2<float> mScreenSize = Vector2<float>(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+			Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
 				Game::getInstance()->getGraphics()->getContext()->getHeight());
+
+
+			Vector2<float> mScreenSize = Vector2<float>(mGame->getGraphics()->getContext()->getWidth(),
+				mGame->getGraphics()->getContext()->getHeight());
 			TransformComponent* transformComponent = (*it)->GetComponent<TransformComponent>();
-			Vector2<int> newPos(((mScreenSize.getX()/ 20 * (Input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 400);
+			
+			Vector2<int> newPos(
+				((mScreenSize.getX()/ 20 * (Input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
+				resolution.getY()-80);
 			if (sqrt(pow(newPos.getX() - transformComponent->getPosition().getX(), 2)) > 15.0f)
 			{
 				transformComponent->setPosition(newPos);
 			}
 			if (Input::Input::getIsTouchReleased())
 			{
-	
-				TransformComponent *transform = new TransformComponent(Vector2<int>(transformComponent->getPosition().getX(), transformComponent->getPosition().getY()),
-					Vector2<int>(80, 80), 0.0f, 1u);
-				mBullet->addComponent(transform);
+				GameObject *dip = new GameObject("dip");
+				TransformComponent *dippitransform = new TransformComponent(Vector2<int>(200, 200),
+					Vector2<int>(32, 32), 0.0f, 0u);
+				dip->addComponent(dippitransform);
+				QuadrangleComponent *dippiquadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
+				dip->addComponent(dippiquadre);
 
-				//myScene->getObjectPool()->addGameObject(mBullet);
+				mScene->getObjectPool()->addGameObject(dip);
+				break;
 			}
-			//Input::Input::
 		}
 	}
 }
