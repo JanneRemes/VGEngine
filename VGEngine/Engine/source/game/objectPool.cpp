@@ -1,5 +1,12 @@
+
 #include "engine\game\objectPool.h"
+#include "engine/game/transformComponent.h"
+
+#include <algorithm>
+
 using namespace vg;
+using namespace std;
+
 ObjectPool::ObjectPool()
 {
 	//loaded = false;
@@ -62,9 +69,26 @@ void ObjectPool::removeGameObjectInactivePool(GameObject gObject)
 		}
 	}
 }*/
-void  ObjectPool::updateGameObjects()
-{
 
-		mSystemManager.update(&mActivePool);
-	
+void ObjectPool::updateGameObjects()
+{
+	sortActivePool();
+	mSystemManager.update(&mActivePool);
+}
+
+void ObjectPool::sortActivePool()
+{
+	sort(mActivePool.begin(), mActivePool.end(),
+		[](GameObject* a, GameObject* b)-> bool
+	{
+		TransformComponent* transformA = a->getComponent<TransformComponent>();
+		TransformComponent* transformB = b->getComponent<TransformComponent>();
+		int layerA = -1;
+		int layerB = -1;
+		if (transformA != nullptr)
+			layerA = transformA->getLayer();
+		if (transformB != nullptr)
+			layerB = transformB->getLayer();
+		return layerA < layerB;
+	});
 }

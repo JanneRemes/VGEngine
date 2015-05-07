@@ -43,7 +43,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 		}
 
 		//TriangleComponent* component = gameObject->GetComponent<TriangleComponent>();
-		TransformComponent* transformComponent = (*it)->GetComponent<TransformComponent>();
+		TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 		if (component != nullptr)
 		{
 			vg::graphics::VertexBuffer vBuffer(*component->getVertices());

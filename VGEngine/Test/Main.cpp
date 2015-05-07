@@ -34,6 +34,15 @@ void mainGame(Game* game)
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
 	ship->addComponent(quadre);
 
+	//transparency test
+	for (int i = 0; i < 5; i++)
+	{
+		GameObject* temp = new GameObject("t1");
+		temp->addComponent(new TransformComponent(Vector2<int>((5 - i) * 32, 128),
+			Vector2<int>(128, 128), 0.0f, 5 - i));
+		temp->addComponent(game->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png"));
+		scene->getObjectPool()->addGameObject(temp);
+	}
 
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);

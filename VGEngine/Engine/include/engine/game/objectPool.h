@@ -43,12 +43,18 @@ namespace vg
 		@return Returns the componentSystemManager that the pool is using 
 		*/
 		SystemManager* getComponentSystemManager(){ return &mSystemManager; }
+
+		/**
+		Sorts objects in active pool by layer
+		*/
+		void sortActivePool();
+
 	private:
 		SystemManager mSystemManager;///< Updates different component systems
 		//void addPrefabToPool(PoolObjectType type); //<Adds poolobjectype's amount of gameobjects to inactivepool
 		//bool loaded;
 		std::vector<GameObject*> mActivePool;   ///< List of the active gameObject pool
-		std::vector<GameObject> mInactivePool; ///< List of the unactive gameObject pool
+		std::vector<GameObject> mInactivePool;  ///< List of the unactive gameObject pool
 	};
 
 }

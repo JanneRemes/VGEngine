@@ -36,7 +36,7 @@ namespace vg
 		/**
 		@return Returns component from the gameObject
 		*/
-		T* GetComponent()
+		T* getComponent()
 		{
 			ComponentMap::const_iterator position = mComponents.find(&typeid(T));
 			if (position == mComponents.end())

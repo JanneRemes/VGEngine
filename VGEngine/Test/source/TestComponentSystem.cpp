@@ -14,12 +14,12 @@ void TestComponentSystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
-		TestComponent* component = (*it)->GetComponent<TestComponent>();
+		TestComponent* component = (*it)->getComponent<TestComponent>();
 		if (component != nullptr)
 		{
 			component->update();
 		}
-		vg::TransformComponent *transform = (*it)->GetComponent<vg::TransformComponent>();
+		vg::TransformComponent *transform = (*it)->getComponent<vg::TransformComponent>();
 		if (transform != nullptr)
 		{
 			transform->setRotation(transform->getRotation() + 1);

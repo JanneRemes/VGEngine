@@ -26,8 +26,8 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 	{
 		if ((*it)->getName() == "dip")
 		{
-			TransformComponent *comp = (*it)->GetComponent<TransformComponent>();
-			(*it)->GetComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -5));
+			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
+			(*it)->getComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -5));
 		}
 		if ((*it)->getName() == "ship")
 		{
@@ -37,7 +37,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 
 			Vector2<float> mScreenSize = Vector2<float>(mGame->getGraphics()->getContext()->getWidth(),
 				mGame->getGraphics()->getContext()->getHeight());
-			TransformComponent* transformComponent = (*it)->GetComponent<TransformComponent>();
+			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
 			Vector2<int> newPos(
 				((mScreenSize.getX()/ 20 * (Input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
