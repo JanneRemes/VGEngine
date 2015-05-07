@@ -40,7 +40,7 @@ namespace vg
 
 			void setUniform(GLuint location, glm::mat4& value);
 
-			void setUniform(GLuint location, float& value);
+			void setUniform(GLuint location, float value);
 		}
 	}
 }

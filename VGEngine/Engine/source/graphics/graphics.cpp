@@ -30,8 +30,8 @@ void Graphics::initialize(android_app* app, const Shader& shader)
 
     std::string fontpath = "arial.ttf";
 	testText = new Text(fontpath, mFileManager);
-	testText->setFontSize(16);
-	testText->setText("Hello Miika");
+	testText->setFontSize(4);
+	testText->setText("Hello World!");
 	
     mInitialized = true;
 }
@@ -94,12 +94,20 @@ void Graphics::draw()
 		testText->setPosition(testText->getPosition().getX(), testText->getPosition().getY() + 5);
 		if (testText->getPosition().getY() > 720)
 		{
-			testText->setText("moi doge");
+			testText->setText("Hello World again!");
 			testText->setColour(255, 0, 0);
             testText->setPosition(0, 0);
 
 		}
+        mShader.useProgram();
+        mShader.setUniformBoolean("unifUsingAlphaTexture", true);
+        mShader.unUseProgram();
+
         testText->draw(&mShader);
+
+        mShader.useProgram();
+        mShader.setUniformBoolean("unifUsingAlphaTexture", false);
+        mShader.unUseProgram();
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");

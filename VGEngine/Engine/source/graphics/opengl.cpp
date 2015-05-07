@@ -91,8 +91,9 @@ void gl::setUniform(GLuint location, glm::mat4& value)
 	checkError();
 }
 
-void gl::setUniform(GLuint location, float& value)
+void gl::setUniform(GLuint location, float value)
 {
-	glUniform1f(location, value);
+    const GLfloat temp = value;
+	glUniform1fv(location, 1, &temp);
 	checkError();
 }

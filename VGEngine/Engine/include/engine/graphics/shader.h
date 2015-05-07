@@ -115,6 +115,11 @@ namespace vg
 				*/
 			void updateProjectionTransform();
 
+            /**
+                Set value to shader uniform boolean
+                */
+            void setUniformBoolean(std::string name, bool value);
+
 		private:
 			/**
 				Returns default map of vertex element ids and names

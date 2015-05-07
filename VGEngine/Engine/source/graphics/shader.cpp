@@ -78,8 +78,10 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
 	for (auto& pair : mUniformNames)
 	{
 		GLuint location = glGetUniformLocation(mProgramId, pair.second.getName().c_str());
-		if (location < 0)
-			Log("ERROR", "Shader uniform %s not found!", pair.second.getName().c_str());
+        if (location < 0)
+        {
+            Log("ERROR", "Shader uniform %s not found!", pair.second.getName().c_str());
+        }
 		pair.second.setLocation(location);
 	}
 
@@ -198,4 +200,16 @@ void Shader::updateProjectionTransform()
 
 	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
 	gl::setUniform(mUniformNames[UniformUsage::Projection].getLocation(), projectionTransform);
+}
+
+void Shader::setUniformBoolean(string name, bool value)
+{
+    GLuint location = glGetUniformLocation(mProgramId, name.c_str());
+    if (location < 0)
+    {
+        Log("ERROR", "Shader uniform %s not found!", name.c_str());
+    }
+    float shaderValue;
+    value ? shaderValue = 1.0f : shaderValue = 0.0f;
+    gl::setUniform(location, shaderValue);
 }
