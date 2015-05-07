@@ -8,8 +8,13 @@
 
 using namespace vg::graphics;
 
-Text::Text(std::string& fontPath, FileManager *manager)
+Text::Text(std::string& fontPath, FileManager *manager, int fontsize)
 {
+	mPosition.setX(200.0f);
+	mPosition.setY(200.0f);
+
+	mFontSize = fontsize;
+
 	// Library init
 	FT_Error error;
 	error = FT_Init_FreeType(&mLibrary);
@@ -23,7 +28,7 @@ Text::Text(std::string& fontPath, FileManager *manager)
 	// New face
 	error = FT_New_Memory_Face(mLibrary, &mCharData[0], mCharData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
-	FT_Set_Char_Size(mFace, 0, 16 * 64, resolution.getX(), resolution.getY());
+	FT_Set_Char_Size(mFace, 0, mFontSize * 64, resolution.getX(), resolution.getY());
 
 	gl::genTextures(&mTexture);
 
@@ -37,38 +42,18 @@ Text::Text(std::string& fontPath, FileManager *manager)
 
 	gl::bindTexture(0);
 
-	Log("text", "Bitmap x: %i", mGlyph->bitmap_left, "");
-	Log("text", "Bitmap y: %i", mGlyph->bitmap_top, "");
-	Log("text", "Bitmap width: %i", mGlyph->bitmap.width, "");
-	Log("text", "Bitmap height: %i", mGlyph->bitmap.rows, "");
-
-	float sx = 2.0f / 1280.0f;
-	float sy = 2.0f / 720.0f;
-
-	float x = mGlyph->bitmap_left / sx;
-	float y = mGlyph->bitmap_top / sy;
-
-	float w = mGlyph->bitmap.width / sx;
-	float h = mGlyph->bitmap.rows / sy;
-
-
-	float tempX = mGlyph->bitmap_left;
-	float tempY = mGlyph->bitmap_top;
-	float tempW = mGlyph->bitmap.width;
-	float tempH = mGlyph->bitmap.rows;
-
-	Log("text", "Bitmap x, y, w, h: %f %f %f %f", x, y, w, h, "");
-
-	createBuffer(x, y, w, h);
+	createBuffer();
 
 	mVertexBuffer = new VertexBuffer(mVertexData);
 	mIndexBuffer = new IndexBuffer(mIndexData);
 }
 
-void Text::draw(std::string text,float x, float y, Shader* shader)
+void Text::draw(Shader* shader)
 {
+	float x = mPosition.getX();
+	float y = mPosition.getY();
+
 	float basey = y;
-	Vector2<int> startPosition(0, 0);
 
 	shader->useProgram();
 
@@ -77,56 +62,61 @@ void Text::draw(std::string text,float x, float y, Shader* shader)
 	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
 		Game::getInstance()->getGraphics()->getContext()->getHeight());
 
-	float sx = 2.0f/resolution.getX();
-	float sy = 2.0f/resolution.getY();
-	for (int i = 0; i < text.size(); i++)
+	for (int i = 0; i < mText.size(); i++)
 	{
-		mGlyph_index = FT_Get_Char_Index(mGlyph->face, text[i]);
+		mGlyph_index = FT_Get_Char_Index(mGlyph->face, mText[i]);
 		FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
 		FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
 
 		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
-
-		Log("text", "ADVANCE: %d",  mGlyph->bitmap_top);
-		y = basey -mGlyph->bitmap_top;
-		shader->setPosition(Vector2<int>(x, y));
+		
+		y = basey - mGlyph->bitmap_top;
+		shader->setPosition(Vector2<int>(x, y ));
 		shader->setSize(Vector2<int>(mGlyph->bitmap.width, mGlyph->bitmap.rows));
 		GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
 		x += (mGlyph->advance.x >> 6 );
 	}
 		gl::bindTexture(0);
 
-		shader->unUseProgram();
-	
+		shader->unUseProgram();	
 }
 
-void Text::initializeBuffer(char *text)
+void Text::setText(std::string text)
 {
-	float sx = 2 / 1280;
-	float sy = 2 / 720;
+	mText = text;
+}
 
-	const char *p;
-	for (p = text; *p; p++)
+void Text::setPosition(int x, int y)
+{
+	mPosition.setX(x);
+	mPosition.setY(y);
+}
+
+vg::Vector2<int> Text::getPosition()
+{
+	return mPosition;
+}
+
+void Text::setColour(int r, int g, int b)
+{
+	for (int i = 2; i < mVertexData.size(); i += 8)
 	{
-		if (FT_Load_Char(mFace, *p, FT_LOAD_RENDER))
-			continue;
-
-		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_RGBA);
-
-		float x = mGlyph->bitmap_left;
-		float y = mGlyph->bitmap_top;
-
-		float w = mGlyph->bitmap.width;
-		float h = mGlyph->bitmap.rows;
-
-		createBuffer(x, y, w, h);
-
-		x += (mGlyph->advance.x * 64) * sx;
-		y += (mGlyph->advance.y * 64) * sy;
+		mVertexData[i] = r / 255.0f;
+		mVertexData[i + 1] = g / 255.0f;
+		mVertexData[i + 2] = b / 255.0f;
 	}
 }
 
-void Text::createBuffer(float x, float y, float w, float h)
+void Text::setFontSize(int size)
+{
+	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
+
+	mFontSize = size;
+	FT_Set_Char_Size(mFace, 0, mFontSize * 64, resolution.getX(), resolution.getY());
+}
+
+void Text::createBuffer()
 {
 	//vertex x0 y0
 	mVertexData.push_back(0.0);
@@ -192,91 +182,4 @@ void Text::createBuffer(float x, float y, float w, float h)
 	mIndexData.push_back(0);
 	mIndexData.push_back(2);
 	mIndexData.push_back(3);
-
-	///////////////////////////
-
-	//// left up
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(0.0);
-
-	//// Colours and alpha
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
-
-	////UV
-	//mVertexData.push_back(x);
-	//mVertexData.push_back(y - h);
-
-	//// left down
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(1.0);
-
-	//// Colours and alpha
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
-
-	////UV
-	//mVertexData.push_back(x);
-	//mVertexData.push_back(y);
-
-	//// right down
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
-
-	//// Colours and alpha
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
-
-	////UV
-	//mVertexData.push_back(x + w);
-	//mVertexData.push_back(y);
-
-	//// right up
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(0.0);
-
-	//// Colours and alpha
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(0.0);
-	//mVertexData.push_back(1.0);
-	//mVertexData.push_back(1.0);
-
-	////UV
-	//mVertexData.push_back(x + w);
-	//mVertexData.push_back(y - h);
-
-	//mIndexData.push_back(0);
-	//mIndexData.push_back(1);
-	//mIndexData.push_back(2);
-
-	//mIndexData.push_back(0);
-	//mIndexData.push_back(2);
-	//mIndexData.push_back(3);
-
-
-	////left up
-	//	0.0f, 0.0f,//-1.0f, 1.0f,
-	//	0.5f, 0.5f, 0.5f, 1.0f,
-	//	0.0f, 1.0f,
-
-	//	//left down
-	//	0.0f, 1.0f,//-1.0f, -1.0f,
-	//	1.0f, 0.0f, 0.0f, 1.0f,
-	//	0.0f, 0.0f,
-
-	//	//right down
-	//	1.0f, 1.0f,//1.0f, -1.0f,
-	//	0.0f, 0.0f, 1.0f, 1.0f,
-	//	1.0f, 0.0f,
-
-	//	//right up
-	//	1.0f, 0.0f,
-	//	0.0f, 1.0f, 0.0f, 1.0f,
-	//	1.0f, 1.0f
 }
