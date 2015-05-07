@@ -10,7 +10,7 @@ using namespace vg::graphics;
 
 Text::Text(std::string& fontPath, FileManager *manager, int fontsize)
 {
-	mPosition.setX(200.0f);
+	mPosition.setX(0.0f);
 	mPosition.setY(200.0f);
 
 	mFontSize = fontsize;
@@ -48,14 +48,22 @@ Text::Text(std::string& fontPath, FileManager *manager, int fontsize)
 	mIndexBuffer = new IndexBuffer(mIndexData);
 }
 
+Text::~Text()
+{
+    delete mVertexBuffer;
+    delete mIndexBuffer;
+}
+
 void Text::draw(Shader* shader)
 {
+    shader->useProgram();
+
 	float x = mPosition.getX();
 	float y = mPosition.getY();
 
 	float basey = y;
 
-	shader->useProgram();
+	
 
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
@@ -76,9 +84,9 @@ void Text::draw(Shader* shader)
 		GraphicsDevice::draw(shader, mVertexBuffer, mIndexBuffer);
 		x += (mGlyph->advance.x >> 6 );
 	}
-		gl::bindTexture(0);
-
-		shader->unUseProgram();	
+    
+    gl::bindTexture(0);
+	shader->unUseProgram();	
 }
 
 void Text::setText(std::string text)
@@ -105,6 +113,8 @@ void Text::setColour(int r, int g, int b)
 		mVertexData[i + 1] = g / 255.0f;
 		mVertexData[i + 2] = b / 255.0f;
 	}
+    delete mVertexBuffer;
+    mVertexBuffer = new VertexBuffer(mVertexData);
 }
 
 void Text::setFontSize(int size)

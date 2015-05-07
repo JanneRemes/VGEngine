@@ -91,11 +91,12 @@ void Graphics::draw()
 		{
 			(*i)->draw(&mShader);
 		}
-		testText->setPosition(testText->getPosition().getX(), testText->getPosition().getY() + 1);
-		if (testText->getPosition().getY() > 300)
+		testText->setPosition(testText->getPosition().getX(), testText->getPosition().getY() + 5);
+		if (testText->getPosition().getY() > 720)
 		{
 			testText->setText("moi doge");
-			testText->setColour(255, 255, 0);
+			testText->setColour(255, 0, 0);
+            testText->setPosition(0, 0);
 
 		}
         testText->draw(&mShader);

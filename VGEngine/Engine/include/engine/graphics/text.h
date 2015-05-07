@@ -22,9 +22,10 @@ namespace vg
 		{
 		public:
 
-			~Text(){};
 			Text(std::string& fontPath, FileManager *manager, int fontsize = 12);
-			void draw(Shader *shader);
+            ~Text();
+            
+            void draw(Shader *shader);
 			void setText(std::string text);
 			void setFontSize(int size);
 			
