@@ -16,6 +16,7 @@ namespace vg
 	public:
 
 		TransformComponent();
+		TransformComponent(const TransformComponent &transform);
         /**
         @param textureFileName path to texture
         @param position position of upper left corner in pixels
@@ -25,7 +26,7 @@ namespace vg
         @param origin offset of origin in pixels from upper left corner
         */
         TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-            float rotation, uint layer, vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
+            float rotation, uint layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
 		
         ~TransformComponent();
 
@@ -90,7 +91,8 @@ namespace vg
         void setOrigin(const vg::Vector2<int> origin);
 
 	private:
-
+		static uint mCurrentLayer;
+		static uint getDefaultLayer();
         vg::Vector2<int> mPosition;     ///< Position of top left corner in pixels.
         vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
         vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.

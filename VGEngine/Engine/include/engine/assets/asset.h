@@ -39,6 +39,11 @@ namespace vg
 			@return Returns if the asset is loaded or not
 		*/
 		bool isLoaded() const;
+
+		/*
+		@return path
+		*/
+		std::string getPath();
 	protected:
 		const std::string mPath; ///< Assets filepath
 		bool mIsLoaded = false;  ///< Used for determining whether the asset is loaded or not

@@ -14,6 +14,15 @@ ShipSystem::ShipSystem(Game *game) :System()
 	//mBullet->addComponent(transform);
 	//mScene = gamescene;
 	Random::seed();
+
+
+	whyudodis = new GameObject("bullet");
+
+	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
+		Vector2<int>(32, 32), 0.0f, 0u);
+	whyudodis->addComponent(transform);
+	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
+	whyudodis->addComponent(quadre);
 }
 
 
@@ -24,10 +33,10 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
-		if ((*it)->getName() == "dip")
+		if ((*it)->getName() == "bullet")
 		{
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
-			(*it)->getComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -5));
+			(*it)->getComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -10));
 		}
 		if ((*it)->getName() == "ship")
 		{
@@ -48,14 +57,11 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			}
 			if (Input::Input::getIsTouchReleased())
 			{
-				GameObject *dip = new GameObject("dip");
-				TransformComponent *dippitransform = new TransformComponent(Vector2<int>(transformComponent->getPosition().getX(), transformComponent->getPosition().getY()),
-					Vector2<int>(32, 32), 0.0f, 0u);
-				dip->addComponent(dippitransform);
-				QuadrangleComponent *dippiquadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
-				dip->addComponent(dippiquadre);
-
-				mScene->getObjectPool()->addGameObject(dip);
+				GameObject *g = new GameObject(*whyudodis);
+				Vector2<int> temppos(transformComponent->getPosition().getX(), transformComponent->getPosition().getY());
+				g->getComponent<TransformComponent>()->setPosition(temppos);
+				
+				mScene->getObjectPool()->addGameObject(g);
 				break;
 			}
 		}

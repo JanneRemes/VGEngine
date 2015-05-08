@@ -32,14 +32,16 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 {
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
+		
 		RenderComponent* render = nullptr;
 		auto *components = (*it)->getAllComponents();
 
 		for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
 		{
 			//component = dynamic_cast<RenderComponent*>(components[i]);
-			if (typeid((RenderComponent*)ij->second) == typeid(RenderComponent*))
+			if (dynamic_cast<RenderComponent*>(ij->second) != nullptr)
 			{
+				
 				render = dynamic_cast<RenderComponent*>(ij->second);
 				break;
 			}

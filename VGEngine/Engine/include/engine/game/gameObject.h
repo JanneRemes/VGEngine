@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <typeinfo>
 #include "engine\game\baseClass.h"
+
 /// @todo Fix comments in this file
 
 namespace vg
@@ -19,6 +20,7 @@ namespace vg
 	{
 	public:
 		GameObject(std::string name);
+		GameObject(const GameObject &obj);
 		virtual ~GameObject() { };
 
 		/**

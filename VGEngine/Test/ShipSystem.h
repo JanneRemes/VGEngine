@@ -15,6 +15,7 @@ public:
 	void update(std::vector<vg::GameObject*> *gameObjects);
 	Scene *mScene;
 private:
+	GameObject *whyudodis;
 	Game *mGame;
 	
 };

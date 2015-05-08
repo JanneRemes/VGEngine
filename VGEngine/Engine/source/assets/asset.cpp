@@ -12,3 +12,7 @@ bool Asset::isLoaded() const
 {
 	return mIsLoaded;
 }
+std::string Asset::getPath()
+{
+	return mPath;
+}

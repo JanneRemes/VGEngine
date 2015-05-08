@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 
 using namespace vg;
-
+uint TransformComponent::mCurrentLayer = 0;
 TransformComponent::TransformComponent(): Component()
 {
     mPosition = Vector2<int>(0, 0);
@@ -11,6 +11,15 @@ TransformComponent::TransformComponent(): Component()
     mRotation = 0.0f;
     mLayer = 0u;
     mOrigin = Vector2<int>(0, 0);
+}
+
+TransformComponent::TransformComponent(const TransformComponent &transform)
+{
+	mPosition = transform.mPosition;
+	mSize = transform.mSize;
+	mRotation = transform.mRotation;
+	mLayer = getDefaultLayer();
+	mOrigin = transform.mOrigin;
 }
 
 TransformComponent::TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
@@ -81,4 +90,8 @@ vg::Vector2<int> TransformComponent::getOrigin()
 void TransformComponent::setOrigin(const Vector2<int> origin)
 {
     mOrigin = origin;
+}
+uint TransformComponent::getDefaultLayer()
+{
+	return mCurrentLayer++;
 }

@@ -47,22 +47,22 @@ std::vector<float> QuadrangleComponent::getDefaultVertices()
 
         //left up
         0.0f, 0.0f,
-        0.5f, 0.5f, 0.5f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
         0.0f, 1.0f,
 
         //left down
         0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
         0.0f, 0.0f,
 
         //right down
         1.0f, 1.0f,
-        0.0f, 0.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
         1.0f, 0.0f,
 
         //right up
         1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 1.0f, 1.0f,
         1.0f, 1.0f
     };
 	return defaultVertices;

@@ -14,8 +14,12 @@ namespace vg
 		/**
 			Restarts the timer
 		*/
+		Timer();
 		float restart();
+		float getCurrentTimeSeconds();
+		float getCurrentTimeMillis();
 	private:
-		clock_t mBefore = clock();
+		
+		clock_t mStartTime;
 	};
 }

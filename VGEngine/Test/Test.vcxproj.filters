@@ -46,6 +46,7 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="ShipSystem.h" />
+    <ClInclude Include="EnemySystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -64,6 +65,7 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="ShipSystem.cpp" />
+    <ClCompile Include="EnemySystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl">
