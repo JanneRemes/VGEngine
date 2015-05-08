@@ -1,7 +1,7 @@
 
 #include "engine\sound\AudioManager.h"
 #include <string>
-
+#include "engine\utility\logger.h"
 using namespace vg;
 
 SFXMapping::SFXMapping(size_t id, const Sound& sound)
@@ -81,7 +81,7 @@ float AudioManager::GetPosition(const std::string& name)
 	SFXMapping* mapping = FindSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->GetPosition();
+		return mapping->mSoundEffect->GetPosition();
 	}
 }
 float AudioManager::GetLength(const std::string& name)
@@ -91,12 +91,47 @@ float AudioManager::GetLength(const std::string& name)
 	SFXMapping* mapping = FindSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->GetLength();
+		return mapping->mSoundEffect->GetLength();
 	}
 }
 void AudioManager::addSound(const std::string& name, const Sound& sound)
 {
 	mSoundEffectList.emplace_back(mStringHash(name), sound);
+}
+
+void AudioManager::addSound(const Sound& sound)
+{
+	//mSoundEffectList.emplace_back(mStringHash("Instant"), sound);
+
+	const size_t id = ++mInstantID;
+	mSoundEffectList.emplace_back(id, sound);
+
+	SFXMapping* mapping = FindSFXMap(id);
+	if (mapping != nullptr)
+	{
+		mapping->mSoundEffect->Play();
+	}
+}
+
+void AudioManager::update()
+{
+	auto i = std::begin(mSoundEffectList);
+	while (i != std::end(mSoundEffectList))
+	{
+			if ((*i).mSoundEffect->IsFinishedPlaying())
+			{
+				int pos = (*i).mSoundEffect->GetPosition();
+				int length = (*i).mSoundEffect->GetLength();
+
+				Log("TrackTag", "track im in the end", "");
+
+				(*i).mSoundEffect->Stop();
+				(*i).mSoundEffect->Destroy();
+				i = mSoundEffectList.erase(i);
+			}
+			else
+		++i;
+	}
 }
 
 SFXMapping *AudioManager::FindSFXMap(int id)

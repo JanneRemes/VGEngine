@@ -10,6 +10,7 @@
 #include "engine/assets/assetManager.h"
 #include "engine/android_native_app_glue.h"
 #include <android/sensor.h>
+#include "engine\sound\AudioManager.h"
 
 #include <vector>
 #include <unistd.h>
@@ -94,6 +95,8 @@ namespace vg
 		float mPulse;
 
 		FileManager *getFileManager();
+		AudioManager *getAudioManager();
+
 		void setFileManager(android_app *app);
     private:
 		FileManager *mFileManager;
@@ -104,5 +107,6 @@ namespace vg
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
 		vg::graphics::Shader mShader;
+		AudioManager *mAudioManager;
     };
 }

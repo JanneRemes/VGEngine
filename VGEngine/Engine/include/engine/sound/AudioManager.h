@@ -27,6 +27,7 @@ namespace vg
 	class AudioManager
 	{
 	public:
+		AudioManager() { mInstantID = 0; };
 		~AudioManager();
 
 		/**
@@ -35,6 +36,12 @@ namespace vg
 		@param sound <description>
 		*/
 		void addSound(const std::string& name, const Sound& sound);
+
+		/**
+		<Add sound without ID, plays it instantly and then deletes>
+		@param sound <description>
+		*/
+		void addSound(const Sound& sound);
 
 		/**
 		<description>
@@ -78,12 +85,15 @@ namespace vg
 		*/
 		float GetLength(const std::string& name);
 
+		void update();
+
 		/**
 		<description>
 		@param id <description>
 		*/
 		SFXMapping *FindSFXMap(int id);
 	private:
+		size_t mInstantID;
 		std::hash<std::string> mStringHash;			///< <description>
 		std::vector<SFXMapping> mSoundEffectList;	///< <description>
 	};

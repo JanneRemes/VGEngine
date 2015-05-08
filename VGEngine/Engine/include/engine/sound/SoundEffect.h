@@ -65,13 +65,21 @@ public:
 	<description>
 	*/
 	float GetLength();
+
+	bool IsFinishedPlaying();
+	bool IsStartedPlaying();
 private:
+
+	bool mIsFinished;
+	bool mIsStarted;
 
 	SLEngineItf Engine;				///< <description>
 
 	SLObjectItf engineObject;		///< <description>
 	SLObjectItf PlayerObject;		///< <description>
 	SLObjectItf outputObject;		///< <description>
+
+	SLuint32 mState;
 
 	// Interfaces
 	SLPlayItf PlayerPlay;			///< <description>

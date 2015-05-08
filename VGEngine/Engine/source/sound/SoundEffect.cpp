@@ -3,6 +3,8 @@
 using namespace vg;
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
+	mIsFinished = false;
+	mIsStarted = false;
 	// For error checking
 	SLresult result;
 	
@@ -60,12 +62,40 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAYBACKRATE, &RateObject);
 	if (result != SL_RESULT_SUCCESS)
 		Log("debug", "Playback rate interface failed","");
-
 }
 
 void SoundEffect::Play()
-{
+{	
 	(*PlayerPlay)->SetPlayState(PlayerPlay, SL_PLAYSTATE_PLAYING);
+	mIsStarted = true;
+}
+
+bool SoundEffect::IsFinishedPlaying()
+{
+	SLmillisecond position = 0;
+	SLmillisecond length = 0;
+	(*PlayerPlay)->GetPosition(PlayerPlay, &position);
+	(*PlayerPlay)->GetDuration(PlayerPlay, &length);
+
+	//Log("SoundTest", "Track: %i / %i", position, length);
+	//Log("SoundTest", "Track: %i / %i", position, length);
+	
+	(*PlayerPlay)->GetPlayState(PlayerPlay, &mState);
+	
+	if (mState == SL_PLAYSTATE_PAUSED)
+	{
+		Log("SoundTest", "track im in the end", "");
+		mIsFinished = true;
+		return true;
+	}
+	else
+		mIsFinished = false;
+		return false;
+}
+
+bool SoundEffect::IsStartedPlaying()
+{
+	return mIsStarted;
 }
 
 void SoundEffect::Pause()

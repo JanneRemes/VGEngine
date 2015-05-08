@@ -18,6 +18,7 @@ Game::Game()
 {
 
 	mSceneManager = new SceneManager();
+	AudioManager AM;
 }
 
 Game::~Game()
@@ -35,6 +36,7 @@ void Game::update()
         mPulse = 0;
     }
 	mSceneManager->update(0.0f); //TODO add deltatime
+	mAudioManager->update();
 }
 void Game::setGraphics(vg::graphics::Graphics *graphics)
 {
@@ -111,10 +113,15 @@ FileManager *Game::getFileManager()
 {
 	return mFileManager;
 }
+AudioManager *Game::getAudioManager()
+{
+	return mAudioManager;
+}
 //TODO
 void Game::setFileManager(android_app *app)
 {
 	mFileManager = new FileManager(app);
+	mAudioManager = new AudioManager();
 	mAssetManager = new AssetManager(mFileManager);
 	mFactory = new Factory(mAssetManager, mFileManager);
 }

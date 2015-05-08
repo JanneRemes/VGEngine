@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "engine/game/game.h"
 #include "engine/game/renderComponent.h"
-#include "engine/utility/misc.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/graphics/texture.h"
