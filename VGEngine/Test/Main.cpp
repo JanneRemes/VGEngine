@@ -11,6 +11,8 @@
 #include <engine/game/triangleComponent.h>
 #include <engine/game/quadrangleComponent.h>
 #include "ShipSystem.h"
+#include "engine/game/textComponent.h"
+#include "engine/game/textRenderSystem.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -43,6 +45,16 @@ void mainGame(Game* game)
 		temp->addComponent(game->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png"));
 		scene->getObjectPool()->addGameObject(temp);
 	}
+
+    //text
+    TextComponent* tempText = game->getFactory()->create("arial.ttf");
+    tempText->setFontSize(16);
+    tempText->setText("test");
+    tempText->setPosition(Vector2<int>(500, 500));
+    GameObject* textObj = new GameObject("text1");
+    textObj->addComponent(tempText);
+    scene->getObjectPool()->addGameObject(textObj);
+    game->addComponentSystem(scene, new TextRenderSystem());
 
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);

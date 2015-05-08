@@ -14,11 +14,6 @@ Graphics::Graphics()
 Graphics::~Graphics()
 {
     delete mFileManager;
-    vector<SpriteBatch*>::iterator i;
-    
-	for (vector<DebugSprite*>::iterator i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
-		delete (*i);
-	mDebugSprites.clear();
 }
 
 void Graphics::initialize(android_app* app, const Shader& shader)
@@ -27,11 +22,6 @@ void Graphics::initialize(android_app* app, const Shader& shader)
     mContext.initialize(app->window);
     mShader = Shader(shader);
     mShader.load(*mFileManager);
-
-    std::string fontpath = "arial.ttf";
-	testText = new Text(fontpath, mFileManager);
-	testText->setFontSize(4);
-	testText->setText("Hello World!");
 	
     mInitialized = true;
 }
@@ -86,6 +76,7 @@ void Graphics::draw()
 {
 	if (mInitialized)
 	{
+        /*
 		vector<DebugSprite*>::iterator i;
 		for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
 		{
@@ -108,15 +99,10 @@ void Graphics::draw()
         mShader.useProgram();
         mShader.setUniformBoolean("unifUsingAlphaTexture", false);
         mShader.unUseProgram();
+        */
 	}
 	else
 		Log("ERROR", "Graphics context not initialized!", "");
-}
-
-void Graphics::append(DebugSprite* sprite)
-{
-	mDebugSprites.push_back(sprite);
-	sprite->getTexture()->load(mFileManager);
 }
 
 Shader* Graphics::getShader()

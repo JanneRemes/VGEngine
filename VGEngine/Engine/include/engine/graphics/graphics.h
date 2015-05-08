@@ -72,7 +72,6 @@ namespace vg
 
 			void draw();
 
-			void append(DebugSprite* sprite);
 			Shader *getShader();
 
 			GraphicsContext *getContext();
@@ -82,9 +81,6 @@ namespace vg
 			GraphicsContext mContext;   ///< current GraphicsContext
 			Shader mShader;             ///< current Shader
 			bool mInitialized;          ///< has Graphics been initialized
-
-			Text *testText;
-			std::vector<DebugSprite*> mDebugSprites;
 		};
 	}
 }

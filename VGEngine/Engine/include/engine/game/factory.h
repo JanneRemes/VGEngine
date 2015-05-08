@@ -1,8 +1,12 @@
 #pragma once
+
 #include "engine/assets/assetManager.h"
-#include "engine\graphics\texture.h"
+#include "engine/graphics/texture.h"
 #include "engine/assets/fileManager.h"
+#include "engine/game/textComponent.h"
+
 #include <string>
+
 namespace vg
 {
 	
@@ -21,6 +25,9 @@ namespace vg
 			texComp->setTexture(texture);
 			return texComp;
 		}
+
+        TextComponent* create(std::string fontPath);
+
 	private:
 		AssetManager *mAssetManager;
 		FileManager *mFileManager;

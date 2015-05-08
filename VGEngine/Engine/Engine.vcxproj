@@ -33,6 +33,8 @@
     <ClInclude Include="include\engine\game\quadrangleComponent.h" />
     <ClInclude Include="include\engine\game\system.h" />
     <ClInclude Include="include\engine\game\systemManager.h" />
+    <ClInclude Include="include\engine\game\textComponent.h" />
+    <ClInclude Include="include\engine\game\textRenderSystem.h" />
     <ClInclude Include="include\engine\game\transformComponent.h" />
     <ClInclude Include="include\engine\game\triangleComponent.h" />
     <ClInclude Include="include\engine\graphics\batch.h" />
@@ -81,6 +83,8 @@
     <ClCompile Include="source\game\quadrangleComponent.cpp" />
     <ClCompile Include="source\game\system.cpp" />
     <ClCompile Include="source\game\systemManager.cpp" />
+    <ClCompile Include="source\game\textComponent.cpp" />
+    <ClCompile Include="source\game\textRenderSystem.cpp" />
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\triangleComponent.cpp" />
     <ClCompile Include="source\graphics\batch.cpp" />
