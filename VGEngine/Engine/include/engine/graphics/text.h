@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "engine/assets/fileManager.h"
@@ -21,16 +20,39 @@ namespace vg
 		class Text
 		{
 		public:
-
+			/**
+			Initializes freetype library and creates new font face
+			@param Path to where font file is located
+			@param Filemanager to load in the fontfile
+			@param Fontsize, optional and 12 if not set
+			*/
 			Text(std::string& fontPath, FileManager *manager, int fontsize = 12);
             ~Text();
             
+			/**
+			Draws the previously set string 
+			Text position (0, 200) by default
+			@param Shader to use for drawing
+			*/
             void draw(Shader *shader);
+
+			/**
+			Changes the string to render
+			@param String to render
+			*/
 			void setText(std::string text);
+
+			/**
+			Changes font size
+			@param New font size int
+			*/
 			void setFontSize(int size);
 			
 			/**
+			New position for text
 			Origin in lower left corner of the text
+			@param int x
+			@param int y
 			*/
 			void setPosition(int x, int y);
 			vg::Vector2<int> getPosition();
@@ -40,30 +62,27 @@ namespace vg
 			*/
 			void setColour(int r, int g, int b);
 
-			//std::vector<float> getVertexData() { return mVertexData; };
-			//std::vector<uint32_t> getIndexData() { return mIndexData; };
-
 		private:
 
-			std::vector<float> mVertexData;		///< <description>
-			std::vector<uint32_t> mIndexData;	///< <description>
+			std::vector<float> mVertexData;		///< <Vertex data for buffer>
+			std::vector<uint32_t> mIndexData;	///< <Index data for buffer>
 
-			void createBuffer();
+			void createBuffer();				///< <Creates vertex and index data>
 
-			GLuint mTexture;
-			VertexBuffer *mVertexBuffer;
-			IndexBuffer *mIndexBuffer;
+			GLuint mTexture;					///< <Font texture ID>
+			VertexBuffer *mVertexBuffer;		///< <Vertex buffer for drawing>
+			IndexBuffer *mIndexBuffer;			///< <Index buffer for drawing>
 
-			std::vector<FT_Byte> mCharData;
-			Vector2<int> mPosition;
+			std::vector<FT_Byte> mCharData;		///< <Vector where fontfile is saved>
+			Vector2<int> mPosition;				///< <Text position>
 
-			std::string mText;
+			std::string mText;					///< <String to render>
 
-			FT_UInt  mGlyph_index;
-			FT_Library mLibrary;
-			FT_Face mFace;
-			FT_GlyphSlot mGlyph;
-			FT_UInt mFontSize;
+			FT_UInt mGlyph_index;				///< <Glyph index for each char>
+			FT_Library mLibrary;				///< <Freetype library>
+			FT_Face mFace;						///< <Face that includes the loaded font>
+			FT_GlyphSlot mGlyph;				///< <Slot where each glyph is saved>
+			FT_UInt mFontSize;					///< <Fontsize for text>
 		};
 	}
 }

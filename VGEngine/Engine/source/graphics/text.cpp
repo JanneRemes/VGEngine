@@ -15,7 +15,7 @@ Text::Text(std::string& fontPath, FileManager *manager, int fontsize)
 
 	mFontSize = fontsize;
 
-	// Library init
+	// Library initialize
 	FT_Error error;
 	error = FT_Init_FreeType(&mLibrary);
 	mFace = NULL;
@@ -62,9 +62,7 @@ void Text::draw(Shader* shader)
 	float y = mPosition.getY();
 
 	float basey = y;
-
 	
-
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
 	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
@@ -73,7 +71,7 @@ void Text::draw(Shader* shader)
 	for (int i = 0; i < mText.size(); i++)
 	{
 		mGlyph_index = FT_Get_Char_Index(mGlyph->face, mText[i]);
-		FT_Load_Glyph(mFace, mGlyph_index, FT_LOAD_DEFAULT);
+		FT_Load_Glyph(mFace, mGlyph_index, FT_RENDER_MODE_NORMAL);
 		FT_Render_Glyph(mGlyph, FT_RENDER_MODE_NORMAL);
 
 		gl::texImage2D(mGlyph->bitmap.width, mGlyph->bitmap.rows, mGlyph->bitmap.buffer, GL_ALPHA);
