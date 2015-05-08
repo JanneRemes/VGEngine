@@ -12,7 +12,6 @@ namespace vg
         ~TextRenderSystem();
         void update(std::vector<GameObject*> *gameObjects);
 
-
     private:
 
     };

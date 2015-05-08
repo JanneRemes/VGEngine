@@ -84,11 +84,6 @@ namespace vg
 			const UniformNames& getUniformNames();
 
 			/**
-				Reset saved uniform values to defaults. They sent to be sent to GPU.
-				*/
-			void resetUniforms();
-
-			/**
 			   Set saved uniform value for position.
 			   */
 			void setPosition(vg::Vector2<int> position);

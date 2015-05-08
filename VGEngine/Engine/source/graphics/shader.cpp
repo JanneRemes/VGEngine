@@ -84,8 +84,6 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
         }
 		pair.second.setLocation(location);
 	}
-
-    resetUniforms();
     updateUniforms();
 	updateProjectionTransform();
     gl::useProgram(0u);
@@ -155,14 +153,6 @@ void Shader::printErrorLog(GLuint shader)
 
     Log("SHADER", "%s", buffer.data());
 
-}
-
-void Shader::resetUniforms()
-{
-    setPosition(Vector2<int>(0,0));
-	setSize(Vector2<int>(1, 1));
-    setRotation(0);
-    setLayer(0);
 }
 
 void Shader::setPosition(Vector2<int> position)

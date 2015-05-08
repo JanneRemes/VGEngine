@@ -135,7 +135,7 @@ void android_main(struct android_app* state)
 		vg::Input::Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
-			Log("test", "AccelerationX: %f", vg::Input::Input::getSensorX());
+			//Log("test", "AccelerationX: %f", vg::Input::Input::getSensorX());
             // Process this event.
             if (source != NULL)
             {
@@ -187,8 +187,8 @@ void drawFrame(struct Engine* engine)
 	gl::clear();
 	gl::clearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
 		(vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
+	
 	engine->state.game->update();
-    engine->graphics.draw();
 
     engine->graphics.swapBuffers();
 }

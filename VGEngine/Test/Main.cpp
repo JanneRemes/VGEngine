@@ -46,15 +46,28 @@ void mainGame(Game* game)
 		scene->getObjectPool()->addGameObject(temp);
 	}
 
-    //text
-    TextComponent* tempText = game->getFactory()->create("arial.ttf");
-    tempText->setFontSize(16);
-    tempText->setText("test");
-    tempText->setPosition(Vector2<int>(500, 500));
-    GameObject* textObj = new GameObject("text1");
-    textObj->addComponent(tempText);
-    scene->getObjectPool()->addGameObject(textObj);
-    game->addComponentSystem(scene, new TextRenderSystem());
+	//text
+	{
+		TextComponent* tempText = game->getFactory()->create("arial.ttf");
+		tempText->setFontSize(16);
+		tempText->setText("test");
+		GameObject* textObj = new GameObject("text1");
+		textObj->addComponent(new TransformComponent(Vector2<int>(500, 500),
+			Vector2<int>(0, 0), 0.0f, 100));
+		textObj->addComponent(tempText);
+		scene->getObjectPool()->addGameObject(textObj);
+		game->addComponentSystem(scene, new TextRenderSystem());
+	}
+	{
+		TextComponent* tempText2 = game->getFactory()->create("arial.ttf");
+		tempText2->setFontSize(10);
+		tempText2->setText("asd");
+		GameObject* textObj2 = new GameObject("text2");
+		textObj2->addComponent(new TransformComponent(Vector2<int>(500, 525),
+			Vector2<int>(0, 0), 0.0f, 2));
+		textObj2->addComponent(tempText2);
+		scene->getObjectPool()->addGameObject(textObj2);
+	}
 
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);
