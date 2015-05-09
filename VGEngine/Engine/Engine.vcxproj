@@ -39,7 +39,6 @@
     <ClInclude Include="include\engine\game\triangleComponent.h" />
     <ClInclude Include="include\engine\graphics\batch.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
-    <ClInclude Include="include\engine\graphics\debugSprite.h" />
     <ClInclude Include="include\engine\graphics\drawable.h" />
     <ClInclude Include="include\engine\graphics\graphics.h" />
     <ClInclude Include="include\engine\graphics\opengl.h" />
@@ -49,7 +48,6 @@
     <ClInclude Include="include\engine\graphics\shader.h" />
     <ClInclude Include="include\engine\graphics\spriteBatch.h" />
     <ClInclude Include="include\engine\graphics\stb_truetype.h" />
-    <ClInclude Include="include\engine\graphics\text.h" />
     <ClInclude Include="include\engine\graphics\texture.h" />
     <ClInclude Include="include\engine\graphics\uniformElement.h" />
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
@@ -62,7 +60,7 @@
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
-    <ClInclude Include="include\engine\utility\Vector2.h" />
+    <ClInclude Include="include\engine\utility\vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\lodepng\lodepng.cpp" />
@@ -88,7 +86,6 @@
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\triangleComponent.cpp" />
     <ClCompile Include="source\graphics\batch.cpp" />
-    <ClCompile Include="source\graphics\debugSprite.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\graphics\graphicsDevice.cpp" />
@@ -96,7 +93,6 @@
     <ClCompile Include="source\graphics\opengl.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\graphics\spriteBatch.cpp" />
-    <ClCompile Include="source\graphics\text.cpp" />
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />

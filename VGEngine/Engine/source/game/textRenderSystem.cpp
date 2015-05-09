@@ -23,6 +23,8 @@ TextRenderSystem::~TextRenderSystem()
 void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 {
     Shader* shader = Game::getInstance()->getGraphics()->getShader();
+	shader->useProgram();
+	shader->setUniform("unifUsingAlphaTexture", true);
 
     for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
     {
@@ -30,12 +32,12 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 		TransformComponent* transform = (*i)->getComponent<TransformComponent>();
         if (text != nullptr && transform != nullptr)
         {
-			shader->useProgram();
 			gl::activeTexture();
 			gl::bindTexture(text->getTextureId());
             
 			shader->setRotation(0.0f);
 			shader->setSize(Vector2<int>(0, 0));
+			//shader->setUniform(UniformUsage::Layer, transform->getLayer());
 			shader->setLayer(transform->getLayer());
 
 			string textString = text->getText();
@@ -59,7 +61,8 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 				x += ((*glyph)->advance.x >> 6);
 			}
 			gl::bindTexture(0u);
-			shader->unUseProgram();
         }
     }
+	shader->setUniform("unifUsingAlphaTexture", false);
+	shader->unUseProgram();
 }

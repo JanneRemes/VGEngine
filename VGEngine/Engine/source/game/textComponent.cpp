@@ -8,40 +8,13 @@ using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
-TextComponent::TextComponent(std::string& fontPath, FileManager *manager)
+TextComponent::TextComponent(std::string& fontPath, FileManager *manager, uint fontSize)
 {
-    mFontSize = 12;
-
-    // Library initialize
-    FT_Error error;
-	FT_Library library;
-    error = FT_Init_FreeType(&library);
-    mFace = NULL;
-
+    mFontSize = fontSize;
+	mVertexBuffer = new VertexBuffer(defaultVertices);
+	mIndexBuffer = new IndexBuffer(defaultIndices);
     manager->readAsset(fontPath, mCharData);
-
-    Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-        Game::getInstance()->getGraphics()->getContext()->getHeight());
-
-    // New face
-    error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);
-    mGlyph = mFace->glyph;
-    FT_Set_Char_Size(mFace, 0, mFontSize * 64, resolution.getX(), resolution.getY());
-
-    gl::genTextures(&mTexture);
-
-    gl::activeTexture();
-    gl::bindTexture(mTexture);
-
-    gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    gl::bindTexture(0);
-
-    mVertexBuffer = new VertexBuffer(defaultVertices);
-    mIndexBuffer = new IndexBuffer(defaultIndices);
+	initializeFace();
 }
 
 TextComponent::~TextComponent()
@@ -63,6 +36,7 @@ string TextComponent::getText()
 void TextComponent::setFontSize(uint fontSize)
 {
     mFontSize = fontSize;
+	initializeFace();
 }
 
 GLuint TextComponent::getTextureId()
@@ -88,4 +62,46 @@ VertexBuffer* TextComponent::getVertexBuffer()
 IndexBuffer* TextComponent::getIndexBuffer()
 {
 	return mIndexBuffer;
+}
+
+void TextComponent::initializeFace()
+{
+	FT_Error error;
+	FT_Library library;
+	error = FT_Init_FreeType(&library);
+
+	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
+
+	// New face
+	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);
+	mGlyph = mFace->glyph;
+	FT_Set_Char_Size(mFace, 0, mFontSize * 64, resolution.getX(), resolution.getY());
+
+	gl::genTextures(&mTexture);
+
+	gl::activeTexture();
+	gl::bindTexture(mTexture);
+
+	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	gl::bindTexture(0);
+}
+
+void TextComponent::setColour(uint red, uint green, uint blue, uint alpha)
+{
+	vector<float> vertexData = defaultVertices;
+
+	for (int i = 2; i < vertexData.size(); i += 8)
+	{
+		vertexData[i] = red / 255.0f;
+		vertexData[i + 1] = green / 255.0f;
+		vertexData[i + 2] = blue / 255.0f;
+		vertexData[i + 3] = alpha / 255.0f;
+	}
+	delete mVertexBuffer;
+	mVertexBuffer = new VertexBuffer(vertexData);
 }

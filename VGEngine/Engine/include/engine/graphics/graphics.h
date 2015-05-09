@@ -4,9 +4,6 @@
 #include "engine/graphics/graphicsContext.h"
 #include "engine/graphics/shader.h"
 #include "engine/assets/fileManager.h"
-#include "engine/graphics/spriteBatch.h"
-#include "engine/graphics/debugSprite.h"
-#include "engine/graphics/text.h"
 
 #include <string>
 #include <vector>
@@ -70,10 +67,14 @@ namespace vg
 				*/
 			void switchShader(std::string vertexPath, std::string fragmentPath);
 
-			void draw();
-
+			/**
+				@return pointer to current Shader
+				*/
 			Shader *getShader();
 
+			/**
+				@return pointer to current GraphicsContext
+				*/
 			GraphicsContext *getContext();
 
 		private:

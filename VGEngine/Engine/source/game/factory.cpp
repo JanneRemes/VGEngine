@@ -15,7 +15,7 @@ Factory::~Factory()
 {
 }
 
-TextComponent* Factory::create(string fontPath)
+TextComponent* Factory::create(string fontPath, uint fontSize)
 {
-    return new TextComponent(fontPath, mFileManager);
+    return new TextComponent(fontPath, mFileManager, fontSize);
 }

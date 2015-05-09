@@ -19,8 +19,6 @@ void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices)
 
 void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices)
 {
-    gl::useProgram(shader->getProgramId());
-
     vertices->bind();
     indices->bind();
 
@@ -29,8 +27,6 @@ void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* i
 
     indices->unbind();
     vertices->unbind();
-
-    gl::useProgram();
 }
 
 

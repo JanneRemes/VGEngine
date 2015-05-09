@@ -72,39 +72,6 @@ void Graphics::switchShader(string vertexPath, string fragmentPath)
         Log("ERROR", "Graphics context not initialized!", "");
 }
 
-void Graphics::draw()
-{
-	if (mInitialized)
-	{
-        /*
-		vector<DebugSprite*>::iterator i;
-		for (i = mDebugSprites.begin(); i != mDebugSprites.end(); i++)
-		{
-			(*i)->draw(&mShader);
-		}
-		testText->setPosition(testText->getPosition().getX(), testText->getPosition().getY() + 5);
-		if (testText->getPosition().getY() > 720)
-		{
-			testText->setText("Hello World again!");
-			testText->setColour(255, 0, 0);
-            testText->setPosition(0, 0);
-
-		}
-        mShader.useProgram();
-        mShader.setUniformBoolean("unifUsingAlphaTexture", true);
-        mShader.unUseProgram();
-
-        testText->draw(&mShader);
-
-        mShader.useProgram();
-        mShader.setUniformBoolean("unifUsingAlphaTexture", false);
-        mShader.unUseProgram();
-        */
-	}
-	else
-		Log("ERROR", "Graphics context not initialized!", "");
-}
-
 Shader* Graphics::getShader()
 {
 	return &mShader;

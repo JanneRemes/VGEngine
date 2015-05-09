@@ -1,4 +1,6 @@
+
 #pragma once
+
 #include <engine/engine.h>
 #include <engine/game/game.h>
 #include <engine/game/SceneManager.h>
@@ -19,10 +21,6 @@ using namespace vg::graphics;
 
 void mainGame(Game* game)
 {
-
-
-
-
 	Game::log("test");
 	Scene *scene = new Scene();
 
@@ -41,16 +39,16 @@ void mainGame(Game* game)
 	{
 		GameObject* temp = new GameObject("t1");
 		temp->addComponent(new TransformComponent(Vector2<int>((5 - i) * 32, 128),
-			Vector2<int>(128, 128), 0.0f, 5 - i));
-		temp->addComponent(game->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png"));
+			Vector2<int>(64, 64), 0.0f, 5 - i));
+		temp->addComponent(game->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png"));
 		scene->getObjectPool()->addGameObject(temp);
 	}
 
 	//text
 	{
-		TextComponent* tempText = game->getFactory()->create("arial.ttf");
-		tempText->setFontSize(16);
+		TextComponent* tempText = game->getFactory()->create("arial.ttf", 16u);
 		tempText->setText("test");
+		tempText->setColour(0, 0, 255, 115);
 		GameObject* textObj = new GameObject("text1");
 		textObj->addComponent(new TransformComponent(Vector2<int>(500, 500),
 			Vector2<int>(0, 0), 0.0f, 100));
@@ -60,8 +58,9 @@ void mainGame(Game* game)
 	}
 	{
 		TextComponent* tempText2 = game->getFactory()->create("arial.ttf");
-		tempText2->setFontSize(10);
+		tempText2->setFontSize(12);
 		tempText2->setText("asd");
+		tempText2->setColour(255, 0, 255);
 		GameObject* textObj2 = new GameObject("text2");
 		textObj2->addComponent(new TransformComponent(Vector2<int>(500, 525),
 			Vector2<int>(0, 0), 0.0f, 2));

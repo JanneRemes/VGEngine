@@ -38,7 +38,6 @@ extern void test_dummy();
 #include "engine/input/input.h"
 #include "engine/assets/fileManager.h"
 #include "engine/input/input.h"
-#include "engine/graphics/debugSprite.h"
 #include "engine/graphics/opengl.h"
 
 using namespace vg;

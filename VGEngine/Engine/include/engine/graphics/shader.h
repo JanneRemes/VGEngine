@@ -127,7 +127,7 @@ namespace vg
             /**
                 Set value to shader uniform boolean
                 */
-            void setUniformBoolean(std::string name, bool value);
+            void setUniform(std::string name, bool value);
 
 		private:
 			/**

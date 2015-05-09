@@ -207,7 +207,7 @@ void Shader::setUniform(UniformUsage usage, float value)
 	gl::setUniform(mUniformNames[usage].getLocation(), value);
 }
 
-void Shader::setUniformBoolean(string name, bool value)
+void Shader::setUniform(string name, bool value)
 {
     GLuint location = glGetUniformLocation(mProgramId, name.c_str());
     if (location < 0)

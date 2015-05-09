@@ -18,16 +18,18 @@
 namespace vg
 {
 	/**
-	Contains data needed to draw text
+	Class used for showing text on screen, utilizes freetype
 	*/
     class TextComponent : public Component
     {
     public:
 		/**
-		@param fontPath path to a ttf-file
-		@param pointer to an initialized FileManager instance
+		Initializes freetype library and creates new font face
+		@param Path to where font file is located
+		@param Filemanager to load in the fontfile
+		@param Fontsize, optional and 12 if not set
 		*/
-        TextComponent(std::string& fontPath, FileManager *manager);
+        TextComponent(std::string& fontPath, FileManager *manager, uint fontSize = 12);
         
 		/**
 		Deletes vertex and indexBuffers
@@ -37,7 +39,8 @@ namespace vg
 		//void draw(graphics::Shader* shader, TransformComponent* transform);
 
 		/**
-		@param text new value for text to be drawn
+		Changes the string to render
+		@param String to render
 		*/
         void setText(std::string text);
 
@@ -47,7 +50,8 @@ namespace vg
 		std::string getText();
 
 		/**
-		@param fontSize new font size
+		Changes font size
+		@param New font size int
 		*/
         void setFontSize(uint fontSize);
 
@@ -76,8 +80,18 @@ namespace vg
 		*/
 		graphics::IndexBuffer* getIndexBuffer();
 
+		/**
+		Colour values ranging from 0 - 255
+		*/
+		void setColour(uint red, uint green, uint blue, uint alpha = 255);
 
     private:
+
+		/**
+		Generate face from font using FreeType
+		*/
+		void initializeFace();
+
         /**
         Default vertices
         */
@@ -89,22 +103,22 @@ namespace vg
 
             //left up
             0.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 1.0f,
+            0.0f, 0.0f, 0.0f, 1.0f,
             0.0f, 0.0f,
 
             //left down
             0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f, 1.0f,
+            0.0f, 0.0f, 0.0f, 1.0f,
             0.0f, 1.0f,
 
             //right down
             1.0f, 1.0f,
-            0.0f, 0.0f, 1.0f, 1.0f,
+            0.0f, 0.0f, 0.0f, 1.0f,
             1.0f, 1.0f,
 
             //right up
             1.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 1.0f,
+            0.0f, 0.0f, 0.0f, 1.0f,
             1.0f, 0.0f
         };
 

@@ -30,33 +30,29 @@ RenderSystem::~RenderSystem()
 
 void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 {
+	Shader* shader = Game::getInstance()->getGraphics()->getShader();
+	shader->useProgram();
+
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
-		
 		RenderComponent* render = nullptr;
 		auto *components = (*it)->getAllComponents();
-
 		for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
 		{
-			//component = dynamic_cast<RenderComponent*>(components[i]);
 			if (dynamic_cast<RenderComponent*>(ij->second) != nullptr)
-			{
-				
+			{		
 				render = dynamic_cast<RenderComponent*>(ij->second);
 				break;
 			}
 		}
 
-		//TriangleComponent* component = gameObject->GetComponent<TriangleComponent>();
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 		if (render != nullptr)
 		{
 			vg::graphics::VertexBuffer vBuffer(*render->getVertices());
 			IndexBuffer iBuffer(*render->getIndices());
-			Shader* shader = Game::getInstance()->getGraphics()->getShader();
+			
 			Texture* texture = render->getTexture();
-
-			shader->useProgram();
 			if (texture != nullptr)
 				texture->bind();
 
@@ -65,9 +61,9 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 			
 			if (texture != nullptr)
 				texture->unbind();
-			shader->unUseProgram();
 		}
 	}
+	shader->unUseProgram();
 }
 
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
@@ -77,6 +73,7 @@ void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 		shader->setPosition(transform->getPosition() - transform->getOrigin());
 		shader->setSize(transform->getSize());
 		shader->setRotation(transform->getRotation());
+		//shader->setUniform(UniformUsage::Layer, transform->getLayer());
 		shader->setLayer(transform->getLayer());
 		
 		/*

@@ -9,7 +9,7 @@ void main()
 	// ES2.0 doesn't support booleans
 	if (unifUsingAlphaTexture > 0.5)
 	{
-		mediump float alpha = texture2D(unifTexture, varyTexCoord).a;
+		mediump float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
 		gl_FragColor = vec4(varyColor.rgb, alpha);
 	}
 	else
