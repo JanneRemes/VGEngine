@@ -31,6 +31,12 @@ namespace vg
 		@param gObject gameObject that is being added in the pool
 		*/
 		void addGameObject(GameObject *gObject);
+		/*
+		Removes gameObject from list and deletes it (and puts it nullpointer)
+		@param gameobject you want to remove
+		@return returns iterator pointing to next object after removed or  end of mActivePool
+		*/
+		std::vector<GameObject*>::iterator removeGameObject(GameObject *gObject);
 		//void removeGameObjectInactivePool(GameObject gObject);
 		//void createGameObjectPool(std::vector<PoolObjectType> *prefabs); //creates empty gameobjects to InactivePool from mPoolPrefabList
 

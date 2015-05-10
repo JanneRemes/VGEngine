@@ -13,7 +13,7 @@
 #include "ShipSystem.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/textRenderSystem.h"
-
+#include "Test\EnemySystem.h"
 using namespace vg;
 using namespace vg::graphics;
 
@@ -69,7 +69,9 @@ void mainGame(Game* game)
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);
 	ShipSystem *doge = new ShipSystem(game);
+	EnemySystem *enemySystem = new EnemySystem(game);
 	doge->mScene = scene;
+	enemySystem->mScene = scene;
 	game->addComponentSystem(scene, doge);
-
+	game->addComponentSystem(scene, enemySystem);
 }

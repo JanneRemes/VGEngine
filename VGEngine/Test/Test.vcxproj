@@ -21,6 +21,7 @@
     <ClInclude Include="EnemySystem.h" />
     <ClInclude Include="include\TestComponent.h" />
     <ClInclude Include="include\TestComponentSystem.h" />
+    <ClInclude Include="include\Test\EnemySystem.h" />
     <ClInclude Include="include\Test\Scenes\testScene.h" />
     <ClInclude Include="include\Test\test.h" />
     <ClInclude Include="ShipSystem.h" />
@@ -29,6 +30,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShipSystem.cpp" />
     <ClCompile Include="source\dummy.cpp" />
+    <ClCompile Include="source\EnemySystem.cpp" />
     <ClCompile Include="source\TestComponent.cpp" />
     <ClCompile Include="source\TestComponentSystem.cpp" />
     <ClCompile Include="testScene.cpp" />
