@@ -71,12 +71,12 @@ namespace vg
         void rotate(float rotatation);
 
         /**
-        <description>
+        @return layer value clamped to range of 0-1.
         */
-        uint getLayer();
+        float getLayer();
 
         /**
-        <description>
+        @param layer value ranging from 0 to 10000.
         */
         void setLayer(uint layer);
 
@@ -97,7 +97,7 @@ namespace vg
         vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
         vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
         float mRotation;                ///< Rotation of sprite in angles.
-        uint mLayer;                    ///< Layer where the sprite will be drawn.
+        uint mLayer;                   ///< Layer where the sprite will be drawn.
 	};
 
 }

@@ -72,14 +72,14 @@ void TransformComponent::rotate(float rotation)
     setRotation(mRotation + rotation);
 }
 
-uint TransformComponent::getLayer()
+float TransformComponent::getLayer()
 {
-    return mLayer;
+	return mLayer * 0.0001f;
 }
 
 void TransformComponent::setLayer(uint layer)
 {
-    mLayer = layer;
+	mLayer = layer;
 }
 
 vg::Vector2<int> TransformComponent::getOrigin()

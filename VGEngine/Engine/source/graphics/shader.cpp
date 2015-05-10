@@ -27,8 +27,6 @@ void Shader::initialize()
         glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
 
-    
-    
     mInitialized = true;
 }
 
@@ -84,8 +82,6 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
         }
 		pair.second.setLocation(location);
 	}
-    updateUniforms();
-	updateProjectionTransform();
     gl::useProgram(0u);
 
     return true;
@@ -98,12 +94,12 @@ GLuint Shader::getProgramId()
 
 void Shader::useProgram()
 {
-	glUseProgram(mProgramId);
+	gl::useProgram(mProgramId);
 }
 
 void Shader::unUseProgram()
 {
-	glUseProgram(0u);
+	gl::useProgram(0u);
 }
 
 const VariableNames& Shader::getVertexElementNames()
@@ -150,61 +146,24 @@ void Shader::printErrorLog(GLuint shader)
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferLenght);
     vector<GLchar> buffer(bufferLenght);
     glGetShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
-
     Log("SHADER", "%s", buffer.data());
-
 }
 
-void Shader::setPosition(Vector2<int> position)
-{
-	mPosition = vec2(position.getX(), position.getY());
-}
-
-void Shader::setSize(Vector2<int> size)
-{
-	mSize = vec2(size.getX(), size.getY());
-}
-
-void Shader::setRotation(float degrees)
-{
-    mRotation = degrees;
-}
-
-void Shader::setLayer(uint layer)
-{
-    mLayer = layer * 0.0001f;
-}
-
-void Shader::updateUniforms()
-{
-	mat4 modelTransform = mat4();
-	modelTransform = translate(modelTransform, vec3(mPosition, 0.0f));
-	modelTransform = translate(modelTransform, vec3(0.5f * mSize.x, 0.5f * mSize.y, 0.0f));
-	modelTransform = rotate(modelTransform, mRotation, vec3(0.0f, 0.0f, 1.0f));
-	modelTransform = translate(modelTransform, vec3(-0.5f * mSize.x, -0.5f * mSize.y, 0.0f));
-	modelTransform = scale(modelTransform, vec3(mSize, 1.0f));
-	
-	setUniform(UniformUsage::Model, modelTransform);
-	setUniform(UniformUsage::Layer, mLayer);
-}
-
-void Shader::updateProjectionTransform()
-{
-	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-		Game::getInstance()->getGraphics()->getContext()->getHeight());
-
-	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
-	gl::setUniform(mUniformNames[UniformUsage::Projection].getLocation(), projectionTransform);
-}
-
-void Shader::setUniform(UniformUsage usage, mat4& value)
+void Shader::setUniform(UniformUsage usage, mat4 value)
 {
 	gl::setUniform(mUniformNames[usage].getLocation(), value);
 }
 
 void Shader::setUniform(UniformUsage usage, float value)
 {
-	gl::setUniform(mUniformNames[usage].getLocation(), value);
+	float shaderValue = value;
+	gl::setUniform(mUniformNames[usage].getLocation(), shaderValue);
+}
+
+void Shader::setUniform(UniformUsage usage, uint value)
+{
+	float shaderValue = static_cast<float>(value);
+	gl::setUniform(mUniformNames[usage].getLocation(), shaderValue);
 }
 
 void Shader::setUniform(string name, bool value)

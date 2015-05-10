@@ -1,6 +1,4 @@
 
-#pragma once
-
 #include <engine/engine.h>
 #include <engine/game/game.h>
 #include <engine/game/SceneManager.h>
@@ -50,7 +48,7 @@ void mainGame(Game* game)
 		tempText->setText("test");
 		tempText->setColour(0, 0, 255, 115);
 		GameObject* textObj = new GameObject("text1");
-		textObj->addComponent(new TransformComponent(Vector2<int>(500, 500),
+		textObj->addComponent(new TransformComponent(Vector2<int>(0, 500),
 			Vector2<int>(0, 0), 0.0f, 100));
 		textObj->addComponent(tempText);
 		scene->getObjectPool()->addGameObject(textObj);
@@ -62,8 +60,8 @@ void mainGame(Game* game)
 		tempText2->setText("asd");
 		tempText2->setColour(255, 0, 255);
 		GameObject* textObj2 = new GameObject("text2");
-		textObj2->addComponent(new TransformComponent(Vector2<int>(500, 525),
-			Vector2<int>(0, 0), 0.0f, 2));
+		textObj2->addComponent(new TransformComponent(Vector2<int>(0, 525),
+			Vector2<int>(0, 0), 0.0f, 0));
 		textObj2->addComponent(tempText2);
 		scene->getObjectPool()->addGameObject(textObj2);
 	}

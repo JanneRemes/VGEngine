@@ -84,45 +84,19 @@ namespace vg
 			const UniformNames& getUniformNames();
 
 			/**
-			   Set saved uniform value for position.
-			   */
-			void setPosition(vg::Vector2<int> position);
-
-			/**
-				Set saved uniform value for size.
-				*/
-			void setSize(vg::Vector2<int> size);
-
-			/**
-				Set saved uniform value for rotation in degrees increasing in clockwise direction.
-				*/
-			void setRotation(float degrees);
-
-			/**
-				Vertices with higher layer value will be drawn on top. Values above 28 will cause distortion.
-				@param layer Layer value for next draw call
-				*/
-			void setLayer(uint layer);
-
-			/**
-				Send saved uniform values to GPU.
-				*/
-			void updateUniforms();
-
-			/**
-				Gets current screen size and sends new projection transform matrix to GPU
-				*/
-			void updateProjectionTransform();
-
-			/**
 				Set uniform matrix value
 				*/
-			void setUniform(UniformUsage usage, glm::mat4& value);
+			void setUniform(UniformUsage usage, glm::mat4 value);
 
 			/**
 				Set uniform float value
 				*/
 			void setUniform(UniformUsage usage, float value);
+
+			/**
+				Set uniform uint value.
+			*/
+			void setUniform(UniformUsage usage, uint value);
 
             /**
                 Set value to shader uniform boolean
@@ -157,11 +131,6 @@ namespace vg
 			VariableNames mVertexElementNames;         ///< Map of vertex element ids and names
 			UniformNames mUniformNames;				   ///< Map of shader uniform ids and names
 			bool mInitialized;                         ///< Have shaders been initialized
-
-			glm::vec2 mPosition;                       ///< Position in pixels
-			glm::vec2 mSize;						   ///< Size in pixels
-			float mRotation;                           ///< Rotation clockwise in degrees
-			float mLayer;                              ///< Layer for drawing ranging from 0 to 1
 		};
 	}
 }

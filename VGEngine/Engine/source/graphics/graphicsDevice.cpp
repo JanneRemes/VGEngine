@@ -22,7 +22,6 @@ void GraphicsDevice::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* i
     vertices->bind();
     indices->bind();
 
-    shader->updateUniforms();
     gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_INT);
 
     indices->unbind();

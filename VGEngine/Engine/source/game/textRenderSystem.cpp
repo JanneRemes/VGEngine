@@ -5,6 +5,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/graphics/opengl.h"
 #include "engine/graphics/graphicsDevice.h"
+#include "engine/game/renderSystem.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -32,13 +33,7 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 		TransformComponent* transform = (*i)->getComponent<TransformComponent>();
         if (text != nullptr && transform != nullptr)
         {
-			gl::activeTexture();
 			gl::bindTexture(text->getTextureId());
-            
-			shader->setRotation(0.0f);
-			shader->setSize(Vector2<int>(0, 0));
-			//shader->setUniform(UniformUsage::Layer, transform->getLayer());
-			shader->setLayer(transform->getLayer());
 
 			string textString = text->getText();
 			FT_GlyphSlot* glyph = text->getGlyph();
@@ -54,10 +49,12 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 				gl::texImage2D((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer, GL_ALPHA);
 
 				y = base - (*glyph)->bitmap_top;
-				shader->setPosition(Vector2<int>(x, y));
-				shader->setSize(Vector2<int>((*glyph)->bitmap.width, (*glyph)->bitmap.rows));
 
+				shader->setUniform(UniformUsage::Model, RenderSystem::modelTransform(Vector2<int>(x, y),
+					Vector2<int>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
+				shader->setUniform(UniformUsage::Layer, transform->getLayer());
 				GraphicsDevice::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
+				
 				x += ((*glyph)->advance.x >> 6);
 			}
 			gl::bindTexture(0u);

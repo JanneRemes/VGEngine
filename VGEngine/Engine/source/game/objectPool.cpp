@@ -83,8 +83,8 @@ void ObjectPool::sortActivePool()
 	{
 		TransformComponent* transformA = a->getComponent<TransformComponent>();
 		TransformComponent* transformB = b->getComponent<TransformComponent>();
-		int layerA = -1;
-		int layerB = -1;
+		float layerA = -1.0f;
+		float layerB = -1.0f;
 		if (transformA != nullptr)
 			layerA = transformA->getLayer();
 		if (transformB != nullptr)

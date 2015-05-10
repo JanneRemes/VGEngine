@@ -84,6 +84,7 @@
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Engine/include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <AdditionalDependencies>android;EGL;GLESv2;freetype;vgengine;</AdditionalDependencies>

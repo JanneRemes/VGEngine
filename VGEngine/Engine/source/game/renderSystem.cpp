@@ -7,6 +7,7 @@
 #include "engine/graphics/indexBuffer.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/graphics/opengl.h"
+#include "engine/game/renderComponent.h"
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -19,13 +20,7 @@ using namespace glm;
 
 RenderSystem::RenderSystem() :System()
 {
-
-}
-
-
-RenderSystem::~RenderSystem()
-{
-
+	updateProjection();
 }
 
 void RenderSystem::update(std::vector<GameObject*> *gameObjects)
@@ -66,30 +61,49 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 	shader->unUseProgram();
 }
 
+void RenderSystem::updateProjection()
+{
+	Shader* shader = Game::getInstance()->getGraphics()->getShader();
+	shader->useProgram();
+	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
+	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
+	shader->setUniform(UniformUsage::Projection, projectionTransform);
+	shader->unUseProgram();
+}
+
+mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation)
+{
+	vec2 position2(position.getX(), position.getY());
+	vec2 size2(size.getX(), size.getY());
+
+	mat4 model = mat4();
+	model = translate(model, vec3(position2, 0.0f));
+	model = translate(model, vec3(0.5f * size2.x, 0.5f * size2.y, 0.0f));
+	model = rotate(model, rotation, vec3(0.0f, 0.0f, 1.0f));
+	model = translate(model, vec3(-0.5f * size2.x, -0.5f * size2.y, 0.0f));
+	model = scale(model, vec3(size2, 1.0f));
+	return model;
+}
+
+mat4 RenderSystem::modelTransform(TransformComponent* transform)
+{
+	return modelTransform(transform->getPosition() - transform->getOrigin(),
+		transform->getSize(), transform->getRotation());
+}
+
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
 	if (transform != nullptr)
 	{
-		shader->setPosition(transform->getPosition() - transform->getOrigin());
-		shader->setSize(transform->getSize());
-		shader->setRotation(transform->getRotation());
-		//shader->setUniform(UniformUsage::Layer, transform->getLayer());
-		shader->setLayer(transform->getLayer());
-		
-		/*
-		vec2 position((transform->getPosition() - transform->getOrigin()).getX(),
-			(transform->getPosition() - transform->getOrigin()).getY());
-		vec2 size(transform->getSize().getX(), transform->getSize().getY());
-		
-		mat4 modelTransform = mat4();
-		modelTransform = translate(modelTransform, vec3(position, 0.0f));
-		modelTransform = translate(modelTransform, vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
-		modelTransform = rotate(modelTransform, transform->getRotation(), vec3(0.0f, 0.0f, 1.0f));
-		modelTransform = translate(modelTransform, vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
-		modelTransform = scale(modelTransform, vec3(size, 1.0f));
-
-		shader->setUniform(UniformUsage::Model, modelTransform);
+		shader->setUniform(UniformUsage::Model, modelTransform(transform));
 		shader->setUniform(UniformUsage::Layer, transform->getLayer());
-		*/
 	}
+	else
+	{
+		shader->setUniform(UniformUsage::Model, modelTransform(
+			Vector2<int>(0, 0), Vector2<int>(0, 0), 0.0f));
+		shader->setUniform(UniformUsage::Layer, 0.0f);
+	}
+	
 }
