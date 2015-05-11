@@ -4,7 +4,6 @@
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/vertexBufferElement.h"
 #include "engine/utility/Vector2.h"
-#include "engine/graphics/uniformElement.h"
 #include "../external/glm/gtc/matrix_transform.hpp"
 #include "../external/glm/gtx/transform.hpp"
 #include "../external/glm/gtc/type_ptr.hpp"
@@ -20,7 +19,6 @@ namespace vg
 	{
 		/// A map containing the usage and name of vertex attributes
 		typedef std::map<uint32_t, std::string> VariableNames;
-		typedef std::map<UniformUsage, UniformElement> UniformNames;
 
 		/**
 			Holds shader attribute and  ids and links itself
@@ -34,7 +32,7 @@ namespace vg
 				@param attributeNames map containing the usage and name of unifrom variables
 				*/
 			Shader(const VariableNames& attributeNames = getDefaultAttribNames(),
-				const UniformNames& uniformNames = getDefaultUniformNames());
+				const std::vector<std::string>& uniformNames = getDefaultUniformNames());
 
 			/**
 				Initialize values needed by load(). Don't call before GraphicsContext is initialized.
@@ -81,27 +79,42 @@ namespace vg
 			/**
 				@return map of uniform variable names and usages
 				*/
-			const UniformNames& getUniformNames();
+			const std::vector<std::string>& getUniformNames();
 
 			/**
 				Set uniform matrix value
 				*/
-			void setUniform(UniformUsage usage, glm::mat4 value);
+			void setUniform(std::string name, glm::mat3 value);
+
+			/**
+				Set uniform matrix value
+				*/
+			void setUniform(std::string name, glm::mat4 value);
 
 			/**
 				Set uniform float value
 				*/
-			void setUniform(UniformUsage usage, float value);
-
-			/**
-				Set uniform uint value.
-			*/
-			void setUniform(UniformUsage usage, uint value);
+			void setUniform(std::string name, float value);
 
             /**
                 Set value to shader uniform boolean
                 */
             void setUniform(std::string name, bool value);
+
+			/**
+				Set uniform vector values
+				*/
+			void setUniform(std::string name, glm::vec2 value);
+			
+			/**
+				Set uniform vector values
+				*/
+			void setUniform(std::string name, glm::vec3 value);
+			
+			/**
+				Set uniform vector values
+				*/
+			void setUniform(std::string name, glm::vec4 value);
 
 		private:
 			/**
@@ -110,9 +123,9 @@ namespace vg
 			static VariableNames getDefaultAttribNames();
 
 			/**
-				@return default map of uniform variable usages and names
+				@return Vector of default uniform variable names
 				*/
-			static UniformNames getDefaultUniformNames();
+			static std::vector<std::string> getDefaultUniformNames();
 
 			/**
 				Compiles shader source code
@@ -125,12 +138,13 @@ namespace vg
 				*/
 			void printErrorLog(GLuint shader);
 
-			GLuint mVertexId;                          ///< Vertex shader id used for linking
-			GLuint mFragmentId;                        ///< Fragment shader id used for linking
-			GLuint mProgramId;                         ///< Shader program id used for linking
-			VariableNames mVertexElementNames;         ///< Map of vertex element ids and names
-			UniformNames mUniformNames;				   ///< Map of shader uniform ids and names
-			bool mInitialized;                         ///< Have shaders been initialized
+			GLuint mVertexId;								///< Vertex shader id used for linking
+			GLuint mFragmentId;								///< Fragment shader id used for linking
+			GLuint mProgramId;								///< Shader program id used for linking
+			VariableNames mVertexElementNames;				///< Map of vertex element ids and names
+			std::vector<std::string> mUniformNames;						///< list of uniform variable names
+			std::map<std::string, GLuint> mUniformLocations;///< Map of shader uniform names and locations
+			bool mInitialized;								///< Have shaders been initialized
 		};
 	}
 }

@@ -85,15 +85,38 @@ void gl::clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 	checkError();
 }
 
+void gl::setUniform(GLuint location, glm::mat3& value)
+{
+	glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+	checkError();
+}
+
 void gl::setUniform(GLuint location, glm::mat4& value)
 {
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, float value)
+void gl::setUniform(GLuint location, const GLfloat* value)
 {
-    const GLfloat temp = value;
-	glUniform1fv(location, 1, &temp);
+	glUniform1fv(location, 1, value);
+	checkError();
+}
+
+void gl::setUniform(GLuint location, glm::vec2& value)
+{
+	glUniform2fv(location, 2, glm::value_ptr(value));
+	checkError();
+}
+
+void gl::setUniform(GLuint location, glm::vec3& value)
+{
+	glUniform3fv(location, 3, glm::value_ptr(value));
+	checkError();
+}
+
+void gl::setUniform(GLuint location, glm::vec4& value)
+{
+	glUniform4fv(location, 4, glm::value_ptr(value));
 	checkError();
 }

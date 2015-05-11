@@ -172,9 +172,6 @@
     <ClInclude Include="include\engine\game\renderSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\graphics\uniformElement.h">
-      <Filter>include\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\factory.h">
       <Filter>include\game</Filter>
     </ClInclude>

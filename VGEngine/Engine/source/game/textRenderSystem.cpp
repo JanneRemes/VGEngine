@@ -50,9 +50,9 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 
 				y = base - (*glyph)->bitmap_top;
 
-				shader->setUniform(UniformUsage::Model, RenderSystem::modelTransform(Vector2<int>(x, y),
+				shader->setUniform("unifModel", RenderSystem::modelTransform(Vector2<int>(x, y),
 					Vector2<int>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
-				shader->setUniform(UniformUsage::Layer, transform->getLayer());
+				shader->setUniform("unifLayer", transform->getLayer());
 				GraphicsDevice::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
 				
 				x += ((*glyph)->advance.x >> 6);

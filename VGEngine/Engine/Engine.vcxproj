@@ -49,7 +49,6 @@
     <ClInclude Include="include\engine\graphics\spriteBatch.h" />
     <ClInclude Include="include\engine\graphics\stb_truetype.h" />
     <ClInclude Include="include\engine\graphics\texture.h" />
-    <ClInclude Include="include\engine\graphics\uniformElement.h" />
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h" />
     <ClInclude Include="include\engine\input\input.h" />

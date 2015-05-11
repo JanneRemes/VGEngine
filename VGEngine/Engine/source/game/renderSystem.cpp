@@ -68,7 +68,7 @@ void RenderSystem::updateProjection()
 	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
 		Game::getInstance()->getGraphics()->getContext()->getHeight());
 	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
-	shader->setUniform(UniformUsage::Projection, projectionTransform);
+	shader->setUniform("unifProjection", projectionTransform);
 	shader->unUseProgram();
 }
 
@@ -96,14 +96,14 @@ void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
 	if (transform != nullptr)
 	{
-		shader->setUniform(UniformUsage::Model, modelTransform(transform));
-		shader->setUniform(UniformUsage::Layer, transform->getLayer());
+		shader->setUniform("unifModel", modelTransform(transform));
+		shader->setUniform("unifLayer", transform->getLayer());
 	}
 	else
 	{
-		shader->setUniform(UniformUsage::Model, modelTransform(
+		shader->setUniform("unifModel", modelTransform(
 			Vector2<int>(0, 0), Vector2<int>(0, 0), 0.0f));
-		shader->setUniform(UniformUsage::Layer, 0.0f);
+		shader->setUniform("unifLayer", 0.0f);
 	}
 	
 }

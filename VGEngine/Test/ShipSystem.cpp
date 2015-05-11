@@ -21,7 +21,7 @@ ShipSystem::ShipSystem(Game *game) :System()
 	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
 		Vector2<int>(32, 32), 0.0f, 0u);
 	whyudodis->addComponent(transform);
-	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png");
+	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png");
 	whyudodis->addComponent(quadre);
 }
 

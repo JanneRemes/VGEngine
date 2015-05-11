@@ -38,9 +38,17 @@ namespace vg
 
 			void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 
+			void setUniform(GLuint location, glm::mat3& value);
+
 			void setUniform(GLuint location, glm::mat4& value);
 
-			void setUniform(GLuint location, float value);
+			void setUniform(GLuint location, const GLfloat* value);
+
+			void setUniform(GLuint location, glm::vec2& value);
+
+			void setUniform(GLuint location, glm::vec3& value);
+
+			void setUniform(GLuint location, glm::vec4& value);
 		}
 	}
 }

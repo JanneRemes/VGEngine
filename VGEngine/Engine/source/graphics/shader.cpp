@@ -10,8 +10,8 @@ using namespace glm;
 
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
-Shader::Shader(const VariableNames& attributeNames, const UniformNames& uniformNames) 
-: mVertexElementNames(attributeNames), mUniformNames(uniformNames)
+Shader::Shader(const VariableNames& attributeNames, const std::vector<std::string>& uniformNames)
+	: mVertexElementNames(attributeNames), mUniformNames(uniformNames)
 {
     mInitialized = false;
 }
@@ -73,14 +73,16 @@ bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const
     
 	//uniforms
     gl::useProgram(mProgramId);
-	for (auto& pair : mUniformNames)
+	for (int i = 0; i < mUniformNames.size(); i++)
+		mUniformLocations.insert(make_pair<string&, GLuint>(mUniformNames[i], 0));
+	for (auto& pair : mUniformLocations)
 	{
-		GLuint location = glGetUniformLocation(mProgramId, pair.second.getName().c_str());
+		GLuint location = glGetUniformLocation(mProgramId, pair.first.c_str());
         if (location < 0)
         {
-            Log("ERROR", "Shader uniform %s not found!", pair.second.getName().c_str());
+            Log("ERROR", "Shader uniform %s not found!", pair.first.c_str());
         }
-		pair.second.setLocation(location);
+		pair.second = location;
 	}
     gl::useProgram(0u);
 
@@ -107,7 +109,7 @@ const VariableNames& Shader::getVertexElementNames()
     return mVertexElementNames;
 }
 
-const UniformNames& Shader::getUniformNames()
+const std::vector<std::string>& Shader::getUniformNames()
 {
 	return mUniformNames;
 }
@@ -121,14 +123,16 @@ VariableNames Shader::getDefaultAttribNames()
     return result;
 }
 
-UniformNames Shader::getDefaultUniformNames()
+vector<string> Shader::getDefaultUniformNames()
 {
-	UniformNames result;
-	result[UniformUsage::Projection] = UniformElement(UniformType::Mat4, "unifProjection");
-	result[UniformUsage::Model] = UniformElement(UniformType::Mat4, "unifModel");
-	result[UniformUsage::Layer] = UniformElement(UniformType::Float, "unifLayer");
-	return result;
-}
+	return vector<string>
+	{
+		"unifProjection",
+		"unifModel",
+		"unifLayer",
+		"unifUsingAlphaTexture"
+	};
+};
 
 GLint Shader::compileShaderSource(GLuint id, const std::string& source)
 {
@@ -149,31 +153,39 @@ void Shader::printErrorLog(GLuint shader)
     Log("SHADER", "%s", buffer.data());
 }
 
-void Shader::setUniform(UniformUsage usage, mat4 value)
+void Shader::setUniform(string name, glm::mat3 value)
 {
-	gl::setUniform(mUniformNames[usage].getLocation(), value);
+	gl::setUniform(mUniformLocations[name], value);
 }
 
-void Shader::setUniform(UniformUsage usage, float value)
+void Shader::setUniform(string name, mat4 value)
 {
-	float shaderValue = value;
-	gl::setUniform(mUniformNames[usage].getLocation(), shaderValue);
+	gl::setUniform(mUniformLocations[name], value);
 }
 
-void Shader::setUniform(UniformUsage usage, uint value)
+void Shader::setUniform(string name, float value)
 {
-	float shaderValue = static_cast<float>(value);
-	gl::setUniform(mUniformNames[usage].getLocation(), shaderValue);
+	gl::setUniform(mUniformLocations[name], &value);
 }
 
 void Shader::setUniform(string name, bool value)
 {
-    GLuint location = glGetUniformLocation(mProgramId, name.c_str());
-    if (location < 0)
-    {
-        Log("ERROR", "Shader uniform %s not found!", name.c_str());
-    }
     float shaderValue;
     value ? shaderValue = 1.0f : shaderValue = 0.0f;
-    gl::setUniform(location, shaderValue);
+	gl::setUniform(mUniformLocations[name], &shaderValue);
+}
+
+void setUniform(std::string name, glm::vec2 value)
+{
+
+}
+
+void setUniform(std::string name, glm::vec3 value)
+{
+
+}
+
+void setUniform(std::string name, glm::vec4 value)
+{
+
 }
