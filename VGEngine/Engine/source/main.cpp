@@ -235,6 +235,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
             // We'd like to get 60 events per second (in us).
             ASensorEventQueue_setEventRate(engine->sensorEventQueue, engine->accelerometerSensor, (1000L / 60) * 1000);
         }
+        engine->state.game->getAudioManager()->playAll();
         break;
 
     case APP_CMD_LOST_FOCUS:
@@ -247,6 +248,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
         // Also stop animating.
         engine->animating = 0;
         drawFrame(engine);
+        engine->state.game->getAudioManager()->pauseAll();
         break;
     }
 }

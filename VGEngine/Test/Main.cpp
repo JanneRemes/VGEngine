@@ -46,7 +46,7 @@ void mainGame(Game* game)
 	{
 		TextComponent* tempText = game->getFactory()->create("arial.ttf", 16u);
 		tempText->setText("test");
-		tempText->setColour(0, 0, 255, 115);
+		tempText->setColour(0, 0, 255);
 		GameObject* textObj = new GameObject("text1");
 		textObj->addComponent(new TransformComponent(Vector2<int>(0, 500),
 			Vector2<int>(0, 0), 0.0f, 100));
@@ -74,4 +74,11 @@ void mainGame(Game* game)
 	enemySystem->mScene = scene;
 	game->addComponentSystem(scene, doge);
 	game->addComponentSystem(scene, enemySystem);
+
+    vg::Sound* testSound = new vg::Sound("test_loop.wav");
+    testSound->load(game->getInstance()->getFileManager());
+
+    Game::getInstance()->getAudioManager()->addSound("rust", *testSound);
+    Game::getInstance()->getAudioManager()->Play("rust");
+
 }

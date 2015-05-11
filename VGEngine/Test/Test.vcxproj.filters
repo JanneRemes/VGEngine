@@ -48,7 +48,6 @@
     <ClInclude Include="ShipSystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="EnemySystem.h" />
     <ClInclude Include="include\Test\EnemySystem.h" />
   </ItemGroup>
   <ItemGroup>

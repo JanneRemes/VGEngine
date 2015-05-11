@@ -34,14 +34,16 @@ namespace vg
 		<description>
 		@param name <description>
 		@param sound <description>
+        @return true if there was room to add sound
 		*/
-		void addSound(const std::string& name, const Sound& sound);
+		bool addSound(const std::string& name, const Sound& sound);
 
 		/**
 		<Add sound without ID, plays it instantly and then deletes>
 		@param sound <description>
+        @return true if there was room to add sound
 		*/
-		void addSound(const Sound& sound);
+		bool addSound(const Sound& sound);
 
 		/**
 		<description>
@@ -54,12 +56,22 @@ namespace vg
 		@param name <description>
 		*/
 		void Play(const std::string& name);
+        
+        /**
+        <description>
+        */
+        void playAll();
 
 		/**
 		<description>
 		@param name <description>
 		*/
 		void Pause(const std::string& name);
+
+        /**
+        <description
+        */
+        void pauseAll();
 
 		/**
 		Set looping enabled or disabled for track
@@ -96,5 +108,6 @@ namespace vg
 		size_t mInstantID;
 		std::hash<std::string> mStringHash;			///< <description>
 		std::vector<SFXMapping> mSoundEffectList;	///< <description>
+        const int mMaxSounds = 15;
 	};
 }

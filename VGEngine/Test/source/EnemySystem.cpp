@@ -11,7 +11,7 @@ EnemySystem::EnemySystem(Game *game) :mGame(game)
 		Vector2<int>(80, 80), 0.0f, 0u);
 	transform->setOrigin(vg::Vector2<int>(40, 40));
 	mEnemyPrefab->addComponent(transform);
-	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("enemykoala.png");
+	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koala.png");
 	mEnemyPrefab->addComponent(quadre);
 	mSpawnTimer.restart();
 	mSpawnDelay = 0.0f;

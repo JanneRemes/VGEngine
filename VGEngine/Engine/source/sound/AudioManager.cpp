@@ -42,6 +42,16 @@ void AudioManager::Pause(const std::string& name)
 	}
 }
 
+void AudioManager::pauseAll()
+{
+    auto i = std::begin(mSoundEffectList);
+    while (i != std::end(mSoundEffectList))
+    {
+        (*i).mSoundEffect->Pause();
+        i++;
+    }
+}
+
 void AudioManager::Play(const std::string& name)
 {
 	const size_t id = mStringHash(name);
@@ -51,6 +61,19 @@ void AudioManager::Play(const std::string& name)
 	{
 		mapping->mSoundEffect->Play();
 	}
+}
+
+void AudioManager::playAll()
+{
+    auto i = std::begin(mSoundEffectList);
+    while (i != std::end(mSoundEffectList))
+    {
+        //if (!(*i).mSoundEffect->IsFinishedPlaying())
+        {
+            (*i).mSoundEffect->Play();
+        }
+        i++;
+    }
 }
 
 void AudioManager::LoopEnabled(const std::string& name, bool b)
@@ -94,23 +117,34 @@ float AudioManager::GetLength(const std::string& name)
 		return mapping->mSoundEffect->GetLength();
 	}
 }
-void AudioManager::addSound(const std::string& name, const Sound& sound)
+bool AudioManager::addSound(const std::string& name, const Sound& sound)
 {
-	mSoundEffectList.emplace_back(mStringHash(name), sound);
+    if (mSoundEffectList.size() < mMaxSounds)
+    {
+        mSoundEffectList.emplace_back(mStringHash(name), sound);
+        return true;
+    }
+    Log("ERROR", "Max number of sounds playing!", "");
+    return false;
 }
 
-void AudioManager::addSound(const Sound& sound)
+bool AudioManager::addSound(const Sound& sound)
 {
 	//mSoundEffectList.emplace_back(mStringHash("Instant"), sound);
+    if (mSoundEffectList.size() < mMaxSounds)
+    {
+        const size_t id = ++mInstantID;
+        mSoundEffectList.emplace_back(id, sound);
 
-	const size_t id = ++mInstantID;
-	mSoundEffectList.emplace_back(id, sound);
-
-	SFXMapping* mapping = FindSFXMap(id);
-	if (mapping != nullptr)
-	{
-		mapping->mSoundEffect->Play();
-	}
+        SFXMapping* mapping = FindSFXMap(id);
+        if (mapping != nullptr)
+        {
+            mapping->mSoundEffect->Play();
+        }
+        return true;
+    }
+    Log("ERROR", "Max number of sounds playing!", "");
+    return false;
 }
 
 void AudioManager::update()

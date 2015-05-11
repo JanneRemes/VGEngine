@@ -57,6 +57,10 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			}
 			if (Input::Input::getIsTouchReleased())
 			{
+                vg::Sound* testSound = new vg::Sound("shoot.mp3");
+                testSound->load(Game::getInstance()->getFileManager());
+                Game::getInstance()->getAudioManager()->addSound(*testSound);
+
 				GameObject *g = new GameObject(*whyudodis);
 				Vector2<int> temppos(transformComponent->getPosition().getX(), transformComponent->getPosition().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);
