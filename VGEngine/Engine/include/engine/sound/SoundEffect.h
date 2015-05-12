@@ -9,77 +9,83 @@
 #include "engine/utility/logger.h"
 namespace vg 
 {
-
 	/**
-	<class description>
+	Plays soundfiles
 	*/
 class SoundEffect
 {
 public:
 
 	/**
-	<description>
-	@param soundFile <description>
+	Create new SoundEffect
+	@param soundFile sound to play
 	*/
 	SoundEffect(const Sound& soundFile);
 	~SoundEffect();
 	
 	/**
-	<description>
+	Play sound
 	*/
 	void Play();
 
 	/**
-	<description>
+	Stop sound
 	*/
 	void Stop();
 
 	/**
-	<description>
+	Pause sound
 	*/
 	void Pause();
 
 	/**
-	<description>
-	@param b <description>
+	Enable or disable sound looping
+	@param bool set true to enable looping
 	*/
 	void SetLoop(bool b);
 
 	/**
-	<description>
+	Destroys sound
 	*/
 	void Destroy();
 
 	/**
-	<description>
-	@param pos <description>
+	Set track position
+	@param pos new position in track
 	*/
 	void SetPosition(float pos);
 
 	/**
-	<description>
+	Get current track position
+	@param pos get current track position
 	*/
 	float GetPosition();
 
 	/**
-	<description>
+	Get current track position
+	@param length get total length of the track
 	*/
 	float GetLength();
 
+	/**
+	Checks if track has finished playing
+	@param bool
+	*/
 	bool IsFinishedPlaying();
+
+	/**
+	Checks if track has started playing
+	@param bool
+	*/
 	bool IsStartedPlaying();
 private:
-
-	bool mIsFinished;
-	bool mIsStarted;
-
+	// Engine
 	SLEngineItf Engine;				///< <description>
 
+	// Objects
 	SLObjectItf engineObject;		///< <description>
 	SLObjectItf PlayerObject;		///< <description>
 	SLObjectItf outputObject;		///< <description>
-
-	SLuint32 mState;
 
 	// Interfaces
 	SLPlayItf PlayerPlay;			///< <description>
@@ -87,5 +93,10 @@ private:
 	SLmillibel maxVolumeLevel;		///< <description>
 	SLSeekItf Seek;					///< <description>
 	SLPlaybackRateItf RateObject;	///< <description>
+
+	bool mIsFinished;				///< <description>
+	bool mIsStarted;				///< <description>
+
+	SLuint32 mState;				///< Playing state of the sound
 };
 }

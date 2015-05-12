@@ -13,11 +13,11 @@ SFXMapping::SFXMapping(size_t id, const Sound& sound)
 
 AudioManager::~AudioManager()
 {
-	//for (auto& mapping : mSoundEffectList)
-	//{
-	//	mapping.mSoundEffect->Stop();
-	//	mapping.mSoundEffect->Destroy();
-	//}
+	for (auto& mapping : mSoundEffectList)
+	{
+		mapping.mSoundEffect->Stop();
+		mapping.mSoundEffect->Destroy();
+	}
 }
 
 void AudioManager::Stop(const std::string& name)
@@ -68,7 +68,6 @@ void AudioManager::playAll()
     auto i = std::begin(mSoundEffectList);
     while (i != std::end(mSoundEffectList))
     {
-        //if (!(*i).mSoundEffect->IsFinishedPlaying())
         {
             (*i).mSoundEffect->Play();
         }
@@ -130,7 +129,6 @@ bool AudioManager::addSound(const std::string& name, const Sound& sound)
 
 bool AudioManager::addSound(const Sound& sound)
 {
-	//mSoundEffectList.emplace_back(mStringHash("Instant"), sound);
     if (mSoundEffectList.size() < mMaxSounds)
     {
         const size_t id = ++mInstantID;
@@ -154,11 +152,6 @@ void AudioManager::update()
 	{
 			if ((*i).mSoundEffect->IsFinishedPlaying())
 			{
-				int pos = (*i).mSoundEffect->GetPosition();
-				int length = (*i).mSoundEffect->GetLength();
-
-				Log("TrackTag", "track im in the end", "");
-
 				(*i).mSoundEffect->Stop();
 				(*i).mSoundEffect->Destroy();
 				i = mSoundEffectList.erase(i);

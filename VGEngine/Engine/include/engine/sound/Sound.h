@@ -4,9 +4,6 @@
 
 namespace vg
 {
-	/**
-	<description>
-	*/
 	struct SoundEffectData
 	{
 		off_t start;
@@ -15,31 +12,22 @@ namespace vg
 	};
 
 	/**
-	<class description>
+	Storing filedata for sound
 	*/
 	class Sound :
 		public Asset
 	{
 	public:
-
-		/**
-		<description>
-		@param path
-		*/
 		Sound(const std::string& path);
 		~Sound();
 
 		/**
 		Loads sound from file
-		@return <description>
+		@return true if succesful
 		*/
 		bool load(FileManager *fileManager);
-
-		/**
-		@return <description>
-		*/
 		bool unload();
-		SoundEffectData data;	///< <description>
+		SoundEffectData data;	///< Used to store sound data
 	private:
 	};
 

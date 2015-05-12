@@ -17,7 +17,6 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	int mFd = soundFile.data.fd;
 	off_t mStart = soundFile.data.start;
 	off_t mLength = soundFile.data.length;
-	Log("debug","Sound data: %i %i %i", mStart, mLength, mFd);
 
 	// Data location
 	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength };
@@ -76,15 +75,11 @@ bool SoundEffect::IsFinishedPlaying()
 	SLmillisecond length = 0;
 	(*PlayerPlay)->GetPosition(PlayerPlay, &position);
 	(*PlayerPlay)->GetDuration(PlayerPlay, &length);
-
-	//Log("SoundTest", "Track: %i / %i", position, length);
-	//Log("SoundTest", "Track: %i / %i", position, length);
 	
 	(*PlayerPlay)->GetPlayState(PlayerPlay, &mState);
 	
 	if (mState == SL_PLAYSTATE_PAUSED)
 	{
-		Log("SoundTest", "track im in the end", "");
 		mIsFinished = true;
 		return true;
 	}
