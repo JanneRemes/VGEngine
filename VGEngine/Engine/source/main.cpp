@@ -225,6 +225,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
         // The window is being hidden or closed, clean it up.
         engine->graphics.unInitialize();
         engine->state.game->stop();
+        engine->state.game->getAudioManager()->pauseAll();
         break;
 
     case APP_CMD_GAINED_FOCUS:
