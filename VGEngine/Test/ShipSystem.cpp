@@ -34,19 +34,21 @@ ShipSystem::~ShipSystem()
 }
 void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
+	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
+		Game::getInstance()->getGraphics()->getContext()->getHeight());
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "bullet")
 		{
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
-			(*it)->getComponent<TransformComponent>()->setPosition( Vector2<int>(comp->getPosition().getX(), comp->getPosition().getY() -10));
+			comp->move(Vector2<int>(0, -10));
+			if (comp->getPosition().getY() < 0)
+				it = mScene->getObjectPool()->removeGameObject((*it));
+			if (it == gameObjects->end())
+				break;
 		}
-		if ((*it)->getName() == "ship")
+		else if ((*it)->getName() == "ship")
 		{
-			Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-				Game::getInstance()->getGraphics()->getContext()->getHeight());
-
-
 			Vector2<float> mScreenSize = Vector2<float>(mGame->getGraphics()->getContext()->getWidth(),
 				mGame->getGraphics()->getContext()->getHeight());
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
