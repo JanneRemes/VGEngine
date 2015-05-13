@@ -1,7 +1,7 @@
 
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
-#include "engine/graphics/graphicsDevice.h"
+#include "engine/graphics/graphics.h"
 #include "engine/graphics/opengl.h"
 
 using namespace vg;

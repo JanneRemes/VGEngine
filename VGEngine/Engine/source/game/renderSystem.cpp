@@ -1,7 +1,7 @@
 
 #include "engine/game/renderSystem.h"
 #include "engine/game/renderComponent.h"
-#include "engine/graphics/graphicsDevice.h"
+#include "engine/graphics/graphics.h"
 #include "engine/game/game.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
@@ -52,7 +52,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects)
 				texture->bind();
 
 			updateShader(shader, transform);
-			GraphicsDevice::draw(shader, &vBuffer, &iBuffer);
+			Graphics::draw(shader, &vBuffer, &iBuffer);
 			
 			if (texture != nullptr)
 				texture->unbind();

@@ -25,11 +25,11 @@ void mainGame(Game* game)
 	//SHIP
 	GameObject *ship = new GameObject("ship");
     TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
-        Vector2<int>(80, 80), 0.0f, 0u);
+        Vector2<int>(128, 128), 0.0f, 0u, Vector2<int>(64,64));
 	ship->addComponent(transform);
 	TestComponent *testcomponent = new TestComponent();
 	ship->addComponent(testcomponent);
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
+	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	ship->addComponent(quadre);
 
 	//text
@@ -44,17 +44,6 @@ void mainGame(Game* game)
 		scene->getObjectPool()->addGameObject(textObj);
 		game->addComponentSystem(scene, new TextRenderSystem());
 	}
-	{
-		TextComponent* tempText2 = game->getFactory()->create("arial.ttf");
-		tempText2->setFontSize(12);
-		tempText2->setText("asd");
-		tempText2->setColour(255, 0, 255);
-		GameObject* textObj2 = new GameObject("text2");
-		textObj2->addComponent(new TransformComponent(Vector2<int>(0, 525),
-			Vector2<int>(0, 0), 0.0f, 0));
-		textObj2->addComponent(tempText2);
-		scene->getObjectPool()->addGameObject(textObj2);
-	}
 
 	game->getSceneManager()->changeScene(scene);
 	scene->getObjectPool()->addGameObject(ship);
@@ -68,7 +57,7 @@ void mainGame(Game* game)
     sound::Sound* testSound = new sound::Sound("Kalimba.mp3");
     testSound->load(game->getInstance()->getFileManager());
 
-    Game::getInstance()->getAudioManager()->addSound("rust", *testSound);
-    Game::getInstance()->getAudioManager()->Play("rust");
+    Game::getInstance()->getAudioManager()->addSound("music", *testSound);
+    Game::getInstance()->getAudioManager()->Play("music");
 
 }

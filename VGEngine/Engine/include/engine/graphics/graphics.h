@@ -12,6 +12,9 @@ namespace vg
 {
 	namespace graphics
 	{
+		class IndexBuffer;
+		class VertexBuffer;
+
 		/**
 		Managing and initiliazing shaders and buffers
 		*/
@@ -76,6 +79,13 @@ namespace vg
 				@return pointer to current GraphicsContext
 				*/
 			GraphicsContext *getContext();
+
+			/**
+			Draw the content of the buffers
+			@param vertices Vertexbuffer which vertices are used for the draw
+			@param indices Indexbuffer which indices are used for the draw
+			*/
+			static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices);
 
 		private:
 			core::FileManager* mFileManager;  ///< pointer to FileManager

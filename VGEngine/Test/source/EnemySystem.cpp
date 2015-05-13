@@ -50,7 +50,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 				if ((*ij)->getName() == "bullet")
 				{
 					TransformComponent *btransf = (*ij)->getComponent<TransformComponent>();
-					if (Vector2<int>::Distance(btransf->getPosition()+btransf->getOrigin(), comp->getPosition()) < 30.0f)
+					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) < 40.0f)
 					{
 						it = mScene->getObjectPool()->removeGameObject((*it));
                         if (it == gameObjects->end())

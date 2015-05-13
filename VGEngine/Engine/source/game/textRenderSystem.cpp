@@ -4,7 +4,7 @@
 #include "engine/game/game.h"
 #include "engine/graphics/shader.h"
 #include "engine/graphics/opengl.h"
-#include "engine/graphics/graphicsDevice.h"
+#include "engine/graphics/graphics.h"
 #include "engine/game/renderSystem.h"
 
 using namespace vg;
@@ -53,7 +53,7 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
 				shader->setUniform("unifModel", RenderSystem::modelTransform(Vector2<int>(x, y),
 					Vector2<int>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
 				shader->setUniform("unifLayer", transform->getLayer());
-				GraphicsDevice::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
+				Graphics::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
 				
 				x += ((*glyph)->advance.x >> 6);
 			}

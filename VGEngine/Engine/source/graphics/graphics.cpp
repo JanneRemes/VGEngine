@@ -1,5 +1,8 @@
 
 #include "engine/graphics/graphics.h"
+#include "engine/graphics/indexBuffer.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
 using namespace vg::graphics;
@@ -80,4 +83,15 @@ Shader* Graphics::getShader()
 GraphicsContext* Graphics::getContext()
 {
 	return &mContext;
+}
+
+void Graphics::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices)
+{
+	vertices->bind();
+	indices->bind();
+
+	gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_INT);
+
+	indices->unbind();
+	vertices->unbind();
 }

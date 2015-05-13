@@ -22,7 +22,7 @@ ShipSystem::ShipSystem(Game *game) :System()
 	whyudodis = new GameObject("bullet");
 
 	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
-		Vector2<int>(32, 32), 0.0f, 0u);
+		Vector2<int>(32, 32), 0.0f, 0u, Vector2<int>(16, 16));
 	whyudodis->addComponent(transform);
 	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png");
 	whyudodis->addComponent(quadre);
@@ -65,7 +65,8 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
                 Game::getInstance()->getAudioManager()->addSound(*testSound);
 
 				GameObject *g = new GameObject(*whyudodis);
-				Vector2<int> temppos(transformComponent->getPosition().getX(), transformComponent->getPosition().getY());
+				Vector2<int> temppos(transformComponent->getPosition().getX(),
+					transformComponent->getPosition().getY() - transformComponent->getOrigin().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				
 				mScene->getObjectPool()->addGameObject(g);
