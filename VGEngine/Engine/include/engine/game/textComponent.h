@@ -29,7 +29,7 @@ namespace vg
 		@param Filemanager to load in the fontfile
 		@param Fontsize, optional and 12 if not set
 		*/
-        TextComponent(std::string& fontPath, FileManager *manager, uint fontSize = 12);
+        TextComponent(std::string& fontPath, core::FileManager *manager, uint fontSize = 12);
         
 		/**
 		Deletes vertex and indexBuffers

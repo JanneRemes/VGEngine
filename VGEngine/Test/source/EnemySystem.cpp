@@ -24,10 +24,11 @@ EnemySystem::~EnemySystem()
 }
 void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 {
+    int screenWidth = Game::getInstance()->getGraphics()->getScreenWidth();
 	if (mSpawnTimer.getCurrentTimeSeconds() >= mSpawnDelay)
 	{
 		GameObject *gameObject = new GameObject(*mEnemyPrefab);
-		Vector2<int> temppos(Random::nexti(45,400),-10.0f);
+        Vector2<int> temppos(Random::nexti(45, screenWidth - 45), -10.0f);
 		gameObject->getComponent<TransformComponent>()->setPosition(temppos);
 		unsigned int size = gameObjects->size();
 		mScene->getObjectPool()->addGameObject(gameObject);
@@ -52,7 +53,10 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 					if (Vector2<int>::Distance(btransf->getPosition()+btransf->getOrigin(), comp->getPosition()) < 30.0f)
 					{
 						it = mScene->getObjectPool()->removeGameObject((*it));
-						break;
+                        if (it == gameObjects->end())
+                            return;
+                        else
+						    break;
 					}
 				}
 			}

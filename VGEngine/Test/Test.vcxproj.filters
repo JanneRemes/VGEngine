@@ -48,7 +48,9 @@
     <ClInclude Include="ShipSystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Test\EnemySystem.h" />
+    <ClInclude Include="include\Test\EnemySystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -69,7 +71,9 @@
     <ClCompile Include="main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="source\EnemySystem.cpp" />
+    <ClCompile Include="source\EnemySystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl">

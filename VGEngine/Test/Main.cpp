@@ -32,16 +32,6 @@ void mainGame(Game* game)
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("koala2.png");
 	ship->addComponent(quadre);
 
-	//transparency test
-	for (int i = 0; i < 5; i++)
-	{
-		GameObject* temp = new GameObject("t1");
-		temp->addComponent(new TransformComponent(Vector2<int>((5 - i) * 32, 128),
-			Vector2<int>(64, 64), 0.0f, 5 - i));
-		temp->addComponent(game->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png"));
-		scene->getObjectPool()->addGameObject(temp);
-	}
-
 	//text
 	{
 		TextComponent* tempText = game->getFactory()->create("arial.ttf", 16u);
@@ -75,7 +65,7 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, doge);
 	game->addComponentSystem(scene, enemySystem);
 
-    vg::Sound* testSound = new vg::Sound("test_loop.wav");
+    sound::Sound* testSound = new sound::Sound("Kalimba.mp3");
     testSound->load(game->getInstance()->getFileManager());
 
     Game::getInstance()->getAudioManager()->addSound("rust", *testSound);

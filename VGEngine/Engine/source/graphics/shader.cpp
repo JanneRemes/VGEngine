@@ -35,7 +35,7 @@ bool Shader::isInitialized()
     return mInitialized;
 }
 
-bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
+bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
 {
     if (!mInitialized)
         initialize();

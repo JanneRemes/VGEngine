@@ -8,7 +8,7 @@ using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
-TextComponent::TextComponent(std::string& fontPath, FileManager *manager, uint fontSize)
+TextComponent::TextComponent(std::string& fontPath, core::FileManager *manager, uint fontSize)
 {
     mFontSize = fontSize;
 	mVertexBuffer = new VertexBuffer(defaultVertices);

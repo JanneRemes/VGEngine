@@ -78,7 +78,7 @@ namespace vg
 			GraphicsContext *getContext();
 
 		private:
-			FileManager* mFileManager;  ///< pointer to FileManager
+			core::FileManager* mFileManager;  ///< pointer to FileManager
 			GraphicsContext mContext;   ///< current GraphicsContext
 			Shader mShader;             ///< current Shader
 			bool mInitialized;          ///< has Graphics been initialized

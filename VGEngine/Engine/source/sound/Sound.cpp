@@ -1,12 +1,15 @@
+
 #include "engine/sound/Sound.h"
-using namespace vg;
+
+using namespace vg::sound;
+
 Sound::Sound(const std::string& path)
 	: Asset(path)
 {
 	
 }
 
-bool Sound::load(FileManager *fileManager)
+bool Sound::load(vg::core::FileManager *fileManager)
 {
 	fileManager->readAsset(mPath, &data);
 }

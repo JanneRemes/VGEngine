@@ -18,7 +18,7 @@ Graphics::~Graphics()
 
 void Graphics::initialize(android_app* app, const Shader& shader)
 {
-    mFileManager = new FileManager(app);
+    mFileManager = new core::FileManager(app);
     mContext.initialize(app->window);
     mShader = Shader(shader);
     mShader.load(*mFileManager);

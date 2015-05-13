@@ -1,6 +1,8 @@
+
 #include "engine/sound/SoundEffect.h"
 
-using namespace vg;
+using namespace vg::sound;
+
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
 	mIsFinished = false;

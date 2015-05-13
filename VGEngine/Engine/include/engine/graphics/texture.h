@@ -3,11 +3,12 @@
 
 #include "engine/assets/asset.h"
 #include <GLES2/gl2.h>
+
 namespace vg
 {
 	namespace graphics
 	{
-		class Texture : public Asset
+		class Texture : public core::Asset
 		{
 		public:
 			/**
@@ -23,7 +24,7 @@ namespace vg
 				@param fileManager <description>
 				@return <description>
 				*/
-			bool load(FileManager *fileManager);
+			bool load(core::FileManager *fileManager);
 
 			/**
 				Deletes the loaded texture

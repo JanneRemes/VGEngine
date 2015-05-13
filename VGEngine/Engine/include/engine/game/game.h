@@ -45,7 +45,7 @@ namespace vg
         /**
         <description>
         */
-        void readFiles(FileManager& fileManager);
+        void readFiles(core::FileManager& fileManager);
 
         /**
         @return Returns whether the game is running or not
@@ -94,19 +94,19 @@ namespace vg
 
 		float mPulse;
 
-		FileManager *getFileManager();
-		AudioManager *getAudioManager();
+		core::FileManager *getFileManager();
+		sound::AudioManager *getAudioManager();
 
 		void setFileManager(android_app *app);
     private:
-		FileManager *mFileManager;
-		AssetManager *mAssetManager;
+		core::FileManager *mFileManager;
+		core::AssetManager *mAssetManager;
 		Game();
 		Factory *mFactory;
 		vg::graphics::Graphics *mGraphics;
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
 		vg::graphics::Shader mShader;
-		AudioManager *mAudioManager;
+		sound::AudioManager *mAudioManager;
     };
 }

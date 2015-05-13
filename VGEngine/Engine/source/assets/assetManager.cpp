@@ -2,7 +2,7 @@
 #include "engine/assets/assetManager.h"
 #include "engine/assets/asset.h"
 
-using namespace vg;
+using namespace vg::core;
 
 AssetManager::AssetManager(FileManager *fileManager)
     :mFileManager(fileManager)

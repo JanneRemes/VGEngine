@@ -18,7 +18,7 @@ Game::Game()
 {
 
 	mSceneManager = new SceneManager();
-	AudioManager AM;
+	sound::AudioManager AM;
 }
 
 Game::~Game()
@@ -44,7 +44,7 @@ void Game::setGraphics(vg::graphics::Graphics *graphics)
 }
 
 
-void readFiles(FileManager& fileManager)
+void readFiles(core::FileManager& fileManager)
 {
     Log("-----", "----- -----", "");
     Log("fm", "Begin", "");
@@ -58,12 +58,12 @@ void readFiles(FileManager& fileManager)
 
         str = "Hello World!";
         Log("fm", "Writing...", "");
-        Log("fm", "success? %s", fileManager.writeFile(FileManager::Internal, file, str) ? "true" : "false");
+        Log("fm", "success? %s", fileManager.writeFile(core::FileManager::Internal, file, str) ? "true" : "false");
         Log("fm", "line = '%s'", str.c_str());
 
         str = "";
         Log("fm", "Reading...", "");
-        Log("fm", "success? %s", fileManager.readFile(FileManager::Internal, file, str) ? "true" : "false");
+        Log("fm", "success? %s", fileManager.readFile(core::FileManager::Internal, file, str) ? "true" : "false");
         Log("fm", "line = '%s'", str.c_str());
     }
     Log("fm", "End", "");
@@ -75,7 +75,6 @@ bool Game::isRunning()
 {
     return mIsRunning;
 }
-
 
 void Game::stop()
 {
@@ -91,10 +90,12 @@ SceneManager*  Game::getSceneManager()
 {
 	return mSceneManager;
 }
+
 void Game::addComponentSystem(Scene *scene, System *componentSystem)
 {
 	scene->getObjectPool()->getComponentSystemManager()->addSystem(componentSystem);
 }
+
 void Game::log(char* text)
 {
 	Log("fm", "%s", text);
@@ -109,19 +110,21 @@ Factory *Game::getFactory()
 {
 	return mFactory;
 }
-FileManager *Game::getFileManager()
+
+core::FileManager *Game::getFileManager()
 {
 	return mFileManager;
 }
-AudioManager *Game::getAudioManager()
+
+sound::AudioManager *Game::getAudioManager()
 {
 	return mAudioManager;
 }
-//TODO
+
 void Game::setFileManager(android_app *app)
 {
-	mFileManager = new FileManager(app);
-	mAudioManager = new AudioManager();
-	mAssetManager = new AssetManager(mFileManager);
+	mFileManager = new core::FileManager(app);
+	mAudioManager = new sound::AudioManager();
+	mAssetManager = new core::AssetManager(mFileManager);
 	mFactory = new Factory(mAssetManager, mFileManager);
 }

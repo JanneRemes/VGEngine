@@ -1,4 +1,6 @@
+
 #pragma once
+
 #include "ShipSystem.h"
 
 #include "engine/input/input.h"
@@ -7,14 +9,15 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
+
 using namespace vg;
+
 ShipSystem::ShipSystem(Game *game) :System()
 {
 	mGame = game;
-	//mBullet->addComponent(transform);
-	//mScene = gamescene;
 	Random::seed();
-
+    mCoolDown = 0.25f;
+    mCoolDownTimer.restart();
 
 	whyudodis = new GameObject("bullet");
 
@@ -55,9 +58,9 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			{
 				transformComponent->setPosition(newPos);
 			}
-			if (Input::Input::getIsTouchReleased())
+            if (Input::Input::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
 			{
-                vg::Sound* testSound = new vg::Sound("shoot.mp3");
+                sound::Sound* testSound = new sound::Sound("shoot.mp3");
                 testSound->load(Game::getInstance()->getFileManager());
                 Game::getInstance()->getAudioManager()->addSound(*testSound);
 
@@ -66,6 +69,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				
 				mScene->getObjectPool()->addGameObject(g);
+                mCoolDownTimer.restart();
 				break;
 			}
 		}

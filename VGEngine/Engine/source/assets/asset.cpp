@@ -1,7 +1,7 @@
 
 #include "engine/assets/asset.h"
 
-using namespace vg;
+using namespace vg::core;
 
 Asset::Asset(const std::string& path)
 	: mPath(path)

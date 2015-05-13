@@ -13,7 +13,7 @@ namespace vg
 	class Factory
 	{
 	public:
-		Factory(AssetManager *assetManager,FileManager *fileManager);
+		Factory(core::AssetManager *assetManager, core::FileManager *fileManager);
 		~Factory();
 		template <typename T>
 		T *createRenderComponent(std::string filename)
@@ -38,8 +38,8 @@ namespace vg
         TextComponent* create(std::string fontPath, uint fontSize = 12u);
 
 	private:
-		AssetManager *mAssetManager;
-		FileManager *mFileManager;
+		core::AssetManager *mAssetManager;
+		core::FileManager *mFileManager;
 	};
 
 }

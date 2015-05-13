@@ -4,7 +4,7 @@
 using namespace vg;
 using namespace std;
 
-Factory::Factory(AssetManager *assetManager,FileManager *fileManager)
+Factory::Factory(core::AssetManager *assetManager, core::FileManager *fileManager)
 {
 	mAssetManager = assetManager;
 	mFileManager = fileManager;

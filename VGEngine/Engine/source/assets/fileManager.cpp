@@ -1,8 +1,9 @@
 
 #include "engine/assets/fileManager.h"
-#include <vector>
 #include "engine/sound/Sound.h"
-using namespace vg;
+#include <vector>
+
+using namespace vg::core;
 
 /// @todo Use the dedicated logger instead
 #include <android/log.h>
@@ -39,7 +40,7 @@ bool FileManager::readAsset(const std::string& path, std::vector<unsigned char>&
 	return true;
 }
 
-bool FileManager::readAsset(const std::string& path, SoundEffectData* soundOutDat)
+bool FileManager::readAsset(const std::string& path, sound::SoundEffectData* soundOutDat)
 {
 	AAsset* asset = AAssetManager_open(mAssetManager, path.c_str(), AASSET_MODE_UNKNOWN);
 

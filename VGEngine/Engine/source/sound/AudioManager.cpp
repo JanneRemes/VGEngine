@@ -1,8 +1,9 @@
 
-#include "engine\sound\AudioManager.h"
+#include "engine/sound/AudioManager.h"
+#include "engine/utility/logger.h"
 #include <string>
-#include "engine\utility\logger.h"
-using namespace vg;
+
+using namespace vg::sound;
 
 SFXMapping::SFXMapping(size_t id, const Sound& sound)
 	: mId(id)

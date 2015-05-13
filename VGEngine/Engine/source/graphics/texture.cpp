@@ -15,7 +15,7 @@ Texture::Texture(const std::string& path)
 {
 }
 
-bool Texture::load(FileManager *fileManager)
+bool Texture::load(core::FileManager *fileManager)
 {
 	std::vector<unsigned char> rawBytes;
 

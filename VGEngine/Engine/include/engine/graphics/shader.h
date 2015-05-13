@@ -51,7 +51,7 @@ namespace vg
 				@param fragmentPath path to glsl file containing fragment shader source
 				@return was shader source loading succesful
 				*/
-			bool load(FileManager& fileManager,
+			bool load(core::FileManager& fileManager,
 				const std::string& vertexPath = "default_vertex.glsl",
 				const std::string& fragmentPath = "default_fragment.glsl");
 
