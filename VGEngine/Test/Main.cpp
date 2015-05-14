@@ -14,6 +14,8 @@
 #include "engine/game/textComponent.h"
 #include "engine/game/textRenderSystem.h"
 #include "Test/EnemySystem.h"
+#include "deleteSystem.h"
+
 using namespace vg;
 using namespace vg::graphics;
 
@@ -58,9 +60,10 @@ void mainGame(Game* game)
 	ShipSystem *doge = new ShipSystem(game);
 	EnemySystem *enemySystem = new EnemySystem(game);
 	doge->mScene = scene;
-	enemySystem->mScene = scene;
+	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, doge);
 	game->addComponentSystem(scene, enemySystem);
+	game->addComponentSystem(scene, new DeleteSystem(game));
 
     sound::Sound* testSound = new sound::Sound("Kalimba.mp3");
     testSound->load(game->getInstance()->getFileManager());

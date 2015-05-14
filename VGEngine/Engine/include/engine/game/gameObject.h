@@ -1,25 +1,32 @@
 
 #pragma once
+
+#include <engine\game\baseClass.h>
+
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <typeinfo>
-#include "engine\game\baseClass.h"
-
-/// @todo Fix comments in this file
 
 namespace vg
 {
 	class Component;
+	using ComponentMap = std::unordered_map<const std::type_info*, Component*>;
 
 	/**
-		Manages an Object in the game
+	Manages an Object in the game
 	*/
-	class GameObject:
-		public BaseClass
+	class GameObject: public BaseClass
 	{
 	public:
+		/**
+		@param name for object
+		*/
 		GameObject(std::string name);
+
+		/**
+		@param obj original object
+		*/
 		GameObject(const GameObject &obj);
 		virtual ~GameObject() { };
 
@@ -33,12 +40,11 @@ namespace vg
 		@param component Component we want to add for the gameObject
 		*/
 		void addComponent(Component* component);
-		template<typename T>
-
+		
 		/**
 		@return Returns component from the gameObject
 		*/
-		T* getComponent()
+		template<typename T> T* getComponent()
 		{
 			ComponentMap::const_iterator position = mComponents.find(&typeid(T));
 			if (position == mComponents.end())
@@ -52,16 +58,22 @@ namespace vg
 		*/
 		std::unordered_map<const std::type_info*, Component*> *getAllComponents()
 		{
-			//std::vector<Component*> tempVector;
-			///for (ComponentMap::iterator it = mComponents.begin(); it != mComponents.end(); it++)
-			//{
-			//	tempVector.push_back((*it).second);
-			//}
-			return &mComponents;//&tempVector;
+			return &mComponents;
 		}
+
+		/**
+		Mark the GameObject to be deleted later.
+		*/
+		void markForDelete();
+
+		/**
+		@return has the GameObject been marked for delete.
+		*/
+		bool markedForDelete();
+
 	private:
-		using ComponentMap = std::unordered_map<const std::type_info*, Component*>; 
-		ComponentMap mComponents; ///<  ComponentMap used by the gameObject
-		std::string mName; ///< Name of the gameObject
+		ComponentMap mComponents;	///< ComponentMap used by the gameObject
+		std::string mName;			///< Name of the gameObject
+		bool mMarkedForDelete;		///< has the GameObject been marked for delete
 	};
 }

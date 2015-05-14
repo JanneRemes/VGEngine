@@ -1,24 +1,25 @@
 
-#include "engine/game.h"
+#include <engine/game/gameObject.h>
+#include <engine/game/game.h>
+#include <engine/game/renderComponent.h>
+#include <engine/game/quadrangleComponent.h>
+#include <engine/game/triangleComponent.h>
+#include <engine/graphics/texture.h>
+#include <engine/game/transformComponent.h>
+
 #include <algorithm>
-#include "engine/game/game.h"
-#include "engine/game/renderComponent.h"
-#include "engine/game/quadrangleComponent.h"
-#include "engine/game/triangleComponent.h"
-#include "engine/graphics/texture.h"
-#include "engine/game/transformComponent.h"
+
 using namespace vg;
 using namespace vg::graphics;
-void GameObject::addComponent(Component* component)
-{
-	mComponents.insert(std::make_pair(&typeid(*component), component));
-}
 
-GameObject::GameObject(std::string name):BaseClass("gameObject"),mName(name)
+GameObject::GameObject(std::string name)
+	: BaseClass("gameObject"), mName(name), mMarkedForDelete(false)
 {
 	
 }
-GameObject::GameObject(const GameObject &obj) : BaseClass(obj.mName), mName(obj.mName)
+
+GameObject::GameObject(const GameObject &obj) 
+	: BaseClass(obj.mName), mName(obj.mName), mMarkedForDelete(false)
 {
 	for (auto ij = obj.mComponents.begin(); ij != obj.mComponents.end(); ij++)
 	{
@@ -50,6 +51,19 @@ GameObject::GameObject(const GameObject &obj) : BaseClass(obj.mName), mName(obj.
 			mComponents.insert(std::make_pair(&typeid(*ij->second),t));
 		}
 	}
+}
 
-	//Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos.png")
+void GameObject::addComponent(Component* component)
+{
+	mComponents.insert(std::make_pair(&typeid(*component), component));
+}
+
+void GameObject::markForDelete()
+{
+	mMarkedForDelete = true;
+}
+
+bool GameObject::markedForDelete()
+{
+	return mMarkedForDelete;
 }

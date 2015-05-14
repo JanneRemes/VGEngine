@@ -9,7 +9,6 @@ using namespace std;
 
 ObjectPool::ObjectPool()
 {
-	//loaded = false;
 	mSystemManager = SystemManager();
 }
 
@@ -28,19 +27,6 @@ void ObjectPool::addGameObject(GameObject *gObject)
 		mActivePool.push_back(gObject);
 
 }
-std::vector<GameObject*>::iterator ObjectPool::removeGameObject(GameObject *gObject)
-{
-	auto it = std::find(mActivePool.begin(), mActivePool.end(), gObject);
-	if (it != mActivePool.end())
-	{
-		auto tempIt = mActivePool.erase(it);
-		delete gObject;
-		gObject = nullptr;
-		return tempIt;
-	}
-	return it;
-}
-
 
 void ObjectPool::updateGameObjects()
 {

@@ -18,6 +18,7 @@
     <AndroidBuild Include="res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\deleteSystem.h" />
     <ClInclude Include="include\TestComponent.h" />
     <ClInclude Include="include\TestComponentSystem.h" />
     <ClInclude Include="include\Test\EnemySystem.h" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShipSystem.cpp" />
+    <ClCompile Include="source\deleteSystem.cpp" />
     <ClCompile Include="source\dummy.cpp" />
     <ClCompile Include="source\EnemySystem.cpp" />
     <ClCompile Include="source\TestComponent.cpp" />

@@ -69,11 +69,9 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
 			comp->move(Vector2<int>(0, 5));
 			comp->rotate(2.0f);
-			if (comp->getPosition().getY() > screenHeight)
+			if (comp->getPosition().getY() + comp->getOrigin().getY() > screenHeight)
 			{
-				i = mScene->getObjectPool()->removeGameObject((*i));
-				if (i == gameObjects->end())
-					break;
+				(*i)->markForDelete();
 			}
 				
 			int tempBulletCount = 0;
@@ -83,16 +81,17 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) < 40.0f)
-					{
-						i = mScene->getObjectPool()->removeGameObject((*i));
-						if (i == gameObjects->end())
-							break;
-					}
+					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) < 30.0f)
+						(*i)->markForDelete();
 				}
 			}
 			mBulletCount = tempBulletCount;
 		}
 	}
 	mEnemyCount = tempEnemyCount;
+}
+
+void EnemySystem::setScene(Scene* scene)
+{
+	mScene = scene;
 }

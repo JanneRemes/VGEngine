@@ -14,11 +14,12 @@ public:
 	EnemySystem(vg::Game *game);
 	~EnemySystem();
 	void update(std::vector<vg::GameObject*> *gameObjects);
-	vg::Scene *mScene;
+	void setScene(vg::Scene* scene);
 
 private:
 	vg::GameObject *mEnemyPrefab;
 	vg::Game *mGame;
+	vg::Scene *mScene;
 	vg::Timer mSpawnTimer;
 	float mSpawnDelay;
 	int mEnemyCount;

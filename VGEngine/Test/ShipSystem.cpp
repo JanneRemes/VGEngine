@@ -43,9 +43,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
 			comp->move(Vector2<int>(0, -10));
 			if (comp->getPosition().getY() < 0)
-				it = mScene->getObjectPool()->removeGameObject((*it));
-			if (it == gameObjects->end())
-				break;
+				(*it)->markForDelete();
 		}
 		else if ((*it)->getName() == "ship")
 		{
