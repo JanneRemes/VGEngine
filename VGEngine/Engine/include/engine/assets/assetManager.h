@@ -64,6 +64,7 @@ namespace vg
                 else
                 {
                     mAssets[hash] = new T(path);
+					mAssets[hash]->load(mFileManager);
                 }
             }
 

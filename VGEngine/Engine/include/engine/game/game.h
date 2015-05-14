@@ -18,7 +18,6 @@
 
 namespace vg
 {
-    /// @todo remove when not needed anymore
     class Scene;
     class SceneManager;
 
@@ -96,6 +95,9 @@ namespace vg
 		sound::AudioManager *getAudioManager();
 
 		void setFileManager(android_app *app);
+
+		core::AssetManager* getAssetManager();
+
     private:
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;

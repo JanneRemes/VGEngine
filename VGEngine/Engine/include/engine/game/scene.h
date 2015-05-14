@@ -4,7 +4,6 @@
 #include <vector>
 #include "objectPool.h"
 #include "engine/game/game.h"
-/// @todo Fix comments in this file
 
 namespace vg
 {

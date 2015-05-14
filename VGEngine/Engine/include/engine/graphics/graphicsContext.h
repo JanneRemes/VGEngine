@@ -73,8 +73,7 @@ namespace vg
 			void createGLProgram();
 
 			/**
-			links shaders, creates buffers,
-			@todo not being used yet
+			links shaders, creates buffers
 			*/
 			void initializeOpenGL();
 

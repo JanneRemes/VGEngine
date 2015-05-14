@@ -14,7 +14,7 @@ public:
 	void update(std::vector<vg::GameObject*> *gameObjects);
 	Scene *mScene;
 private:
-	GameObject *whyudodis;
+	GameObject *mBullet;
 	Game *mGame;
     vg::Timer mCoolDownTimer;
     float mCoolDown;

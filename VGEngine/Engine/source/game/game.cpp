@@ -121,3 +121,8 @@ void Game::setFileManager(android_app *app)
 	mAssetManager = new core::AssetManager(mFileManager);
 	mFactory = new Factory(mAssetManager, mFileManager);
 }
+
+core::AssetManager* Game::getAssetManager()
+{
+	return mAssetManager;
+}

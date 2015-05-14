@@ -19,13 +19,16 @@ ShipSystem::ShipSystem(Game *game) :System()
     mCoolDown = 0.25f;
     mCoolDownTimer.restart();
 
-	whyudodis = new GameObject("bullet");
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+	mBullet = new GameObject("bullet");
+	if ((assetManager->get<sound::Sound>("shoot.mp3")) == nullptr)
+		assetManager->load<sound::Sound>("shoot.mp3");
 
 	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
 		Vector2<int>(32, 32), 0.0f, 0u, Vector2<int>(16, 16));
-	whyudodis->addComponent(transform);
+	mBullet->addComponent(transform);
 	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png");
-	whyudodis->addComponent(quadre);
+	mBullet->addComponent(quadre);
 }
 
 
@@ -60,11 +63,11 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			}
             if (input::Input::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
 			{
-                sound::Sound* testSound = new sound::Sound("shoot.mp3");
-                testSound->load(Game::getInstance()->getFileManager());
-                Game::getInstance()->getAudioManager()->addSound(*testSound);
+				core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+				sound::Sound* sound = assetManager->get<sound::Sound>("shoot.mp3");
+                Game::getInstance()->getAudioManager()->addSound(*sound);
 
-				GameObject *g = new GameObject(*whyudodis);
+				GameObject *g = new GameObject(*mBullet);
 				Vector2<int> temppos(transformComponent->getPosition().getX(),
 					transformComponent->getPosition().getY() - transformComponent->getOrigin().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);

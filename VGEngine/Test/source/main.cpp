@@ -4,17 +4,19 @@
 #include <engine/game/SceneManager.h>
 #include <engine/game/transformComponent.h>
 #include <engine/utility/Vector2.h>
-#include "TestComponentSystem.h"
-#include <stdlib.h> 
 #include <engine/utility/logger.h>
-#include "TestComponent.h"
 #include <engine/game/triangleComponent.h>
 #include <engine/game/quadrangleComponent.h>
+#include <engine/game/textComponent.h>
+#include <engine/game/textRenderSystem.h>
+
+#include "TestComponent.h"
 #include "ShipSystem.h"
-#include "engine/game/textComponent.h"
-#include "engine/game/textRenderSystem.h"
 #include "enemySystem.h"
 #include "deleteSystem.h"
+#include "TestComponentSystem.h"
+
+#include <stdlib.h> 
 
 using namespace vg;
 using namespace vg::graphics;
@@ -23,6 +25,7 @@ void mainGame(Game* game)
 {
 	Game::log("test");
 	Scene *scene = new Scene();
+	core::AssetManager* assetManager = game->getAssetManager();
 
 	//SHIP
 	GameObject *ship = new GameObject("ship");
@@ -65,10 +68,9 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, enemySystem);
 	game->addComponentSystem(scene, new DeleteSystem(game));
 
-    sound::Sound* testSound = new sound::Sound("Kalimba.mp3");
-    testSound->load(game->getInstance()->getFileManager());
-
-    Game::getInstance()->getAudioManager()->addSound("music", *testSound);
+	assetManager->load<sound::Sound>("Kalimba.mp3");
+    Game::getInstance()->getAudioManager()->addSound("music",
+		*assetManager->get<sound::Sound>("Kalimba.mp3"));
     Game::getInstance()->getAudioManager()->play("music");
 
 }

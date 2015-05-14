@@ -1,7 +1,6 @@
 
 #pragma once
 
-
 #include <vector>
 #include <map>
 #include <string>
@@ -11,7 +10,6 @@ using namespace std;
 namespace vg
 {
 	class Scene;
-    /// @todo remove when not needed anymore
 
 	/**
 	Manages Scenes.
