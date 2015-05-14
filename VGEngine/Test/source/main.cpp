@@ -13,7 +13,7 @@
 #include "ShipSystem.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/textRenderSystem.h"
-#include "Test/EnemySystem.h"
+#include "enemySystem.h"
 #include "deleteSystem.h"
 
 using namespace vg;
@@ -37,7 +37,7 @@ void mainGame(Game* game)
 	//text
 	TextComponent* tempText = game->getFactory()->create("arial.ttf", 6u);
 	tempText->setText("Enemies: ");
-	tempText->setColour(0, 0, 255);
+	tempText->setColour(127, 0, 0);
 	GameObject* textObj = new GameObject("enemyText");
 	textObj->addComponent(new TransformComponent(Vector2<int>(4, 64),
 		Vector2<int>(0, 0), 0.0f, 10000));
@@ -47,7 +47,7 @@ void mainGame(Game* game)
 
 	TextComponent* tempText2 = game->getFactory()->create("arial.ttf", 6u);
 	tempText2->setText("Bullets: ");
-	tempText2->setColour(255, 0, 255);
+	tempText2->setColour(0, 0, 127);
 	GameObject* textObj2 = new GameObject("bulletText");
 	textObj2->addComponent(new TransformComponent(Vector2<int>(4, 128),
 		Vector2<int>(0, 0), 0.0f, 10000));
@@ -69,6 +69,6 @@ void mainGame(Game* game)
     testSound->load(game->getInstance()->getFileManager());
 
     Game::getInstance()->getAudioManager()->addSound("music", *testSound);
-    Game::getInstance()->getAudioManager()->Play("music");
+    Game::getInstance()->getAudioManager()->play("music");
 
 }

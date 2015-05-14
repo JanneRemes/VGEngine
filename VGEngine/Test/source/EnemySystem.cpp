@@ -1,9 +1,11 @@
 
-#include "Test\EnemySystem.h"
-#include <engine\game\transformComponent.h>
-#include <engine\game\quadrangleComponent.h>
-#include <engine\utility\random.h>
-#include <engine\utility\vector2.h>
+#include "enemySystem.h"
+
+#include <engine/game/transformComponent.h>
+#include <engine/game/quadrangleComponent.h>
+#include <engine/utility/random.h>
+#include <engine/utility/vector2.h>
+
 #include <sstream>
 
 using namespace vg;
@@ -69,7 +71,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
 			comp->move(Vector2<int>(0, 5));
 			comp->rotate(2.0f);
-			if (comp->getPosition().getY() + comp->getOrigin().getY() > screenHeight)
+			if (comp->getPosition().getY() - comp->getOrigin().getY() > screenHeight)
 			{
 				(*i)->markForDelete();
 			}
@@ -81,7 +83,8 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) < 30.0f)
+					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) 
+						< (comp->getSize().getX() + comp->getSize().getY()) / 2.0f)
 						(*i)->markForDelete();
 				}
 			}

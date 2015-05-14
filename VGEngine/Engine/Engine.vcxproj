@@ -48,9 +48,9 @@
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h" />
     <ClInclude Include="include\engine\input\input.h" />
-    <ClInclude Include="include\engine\sound\AudioManager.h" />
-    <ClInclude Include="include\engine\sound\Sound.h" />
-    <ClInclude Include="include\engine\sound\SoundEffect.h" />
+    <ClInclude Include="include\engine\sound\audioManager.h" />
+    <ClInclude Include="include\engine\sound\sound.h" />
+    <ClInclude Include="include\engine\sound\soundEffect.h" />
     <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
@@ -89,9 +89,9 @@
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\sound\AudioManager.cpp" />
-    <ClCompile Include="source\sound\Sound.cpp" />
-    <ClCompile Include="source\sound\SoundEffect.cpp" />
+    <ClCompile Include="source\sound\audioManager.cpp" />
+    <ClCompile Include="source\sound\sound.cpp" />
+    <ClCompile Include="source\sound\soundEffect.cpp" />
     <ClCompile Include="source\utility\math.cpp" />
     <ClCompile Include="source\utility\random.cpp" />
     <ClCompile Include="source\utility\timer.cpp" />

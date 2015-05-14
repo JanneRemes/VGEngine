@@ -1,9 +1,13 @@
+
 #include "engine\game\baseClass.h"
 #include "engine\utility\logger.h"
 #include <utility>
+
 using namespace vg;
+
 std::map<std::string, int> BaseClass::memLeaks;
-BaseClass::BaseClass(std::string name){ 
+BaseClass::BaseClass(std::string name)
+{ 
 	className = name; 
 	int value = getValue(name);
 	if (value == -1)
@@ -17,7 +21,9 @@ BaseClass::BaseClass(std::string name){
 	}
 	Log("memory", "Current count for %s is %d.", name.c_str(), getValue(name));
 }
-BaseClass::~BaseClass(){ 
+
+BaseClass::~BaseClass()
+{ 
 	int value = getValue(className);
 	if (value != -1)
 	{
@@ -31,6 +37,7 @@ BaseClass::~BaseClass(){
 	}
 	Log("memory", "Removed: %s", className.c_str()); 
 }
+
 int BaseClass::getValue(std::string name)
 {
 	std::map<std::string, int>::iterator it;

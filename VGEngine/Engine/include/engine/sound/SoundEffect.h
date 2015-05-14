@@ -1,17 +1,18 @@
 
 #pragma once
 
-#include "engine/assets/fileManager.h"
-#include "engine/sound/Sound.h"
-#include "engine/android_native_app_glue.h"
-#include <android/asset_manager.h>
-#include <android/asset_manager_jni.h>
+#include <engine/sound/Sound.h>
+
 #include <SLES/OpenSLES_Android.h>
 #include <SLES/OpenSLES.h>
-#include "engine/utility/logger.h"
+
+#include <string>
 
 namespace vg 
 {
+	class FileManager;
+	class AssetManager;
+
     namespace sound
     {
         /**
@@ -31,58 +32,59 @@ namespace vg
             /**
             Play sound
             */
-            void Play();
+            void play();
 
             /**
             Stop sound
             */
-            void Stop();
+            void stop();
 
             /**
             Pause sound
             */
-            void Pause();
+            void pause();
 
             /**
             Enable or disable sound looping
             @param bool set true to enable looping
             */
-            void SetLoop(bool b);
+            void setLoop(bool b);
 
             /**
             Destroys sound
             */
-            void Destroy();
+            void destroy();
 
             /**
             Set track position
             @param pos new position in track
             */
-            void SetPosition(float pos);
+            void setPosition(float pos);
 
             /**
             Get current track position
             @param pos get current track position
             */
-            float GetPosition();
+            float getPosition();
 
             /**
             Get current track position
             @param length get total length of the track
             */
-            float GetLength();
+            float getLength();
 
             /**
             Checks if track has finished playing
             @param bool
             */
-            bool IsFinishedPlaying();
+            bool isFinishedPlaying();
 
             /**
             Checks if track has started playing
             @param bool
             */
-            bool IsStartedPlaying();
+            bool isStartedPlaying();
+
         private:
             // Engine
             SLEngineItf Engine;				///< <description>

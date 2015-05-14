@@ -111,20 +111,11 @@
     <ClInclude Include="include\engine\graphics\vertexBuffer.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\sound\Sound.h">
-      <Filter>include\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\sound\SoundEffect.h">
-      <Filter>include\sound</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\graphics\opengl.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h">
       <Filter>include\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\sound\AudioManager.h">
-      <Filter>include\sound</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\stb_truetype.h">
       <Filter>external</Filter>
@@ -147,7 +138,6 @@
     <ClInclude Include="include\engine\game\triangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\baseClass.h" />
     <ClInclude Include="include\engine\game\quadrangleComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -171,6 +161,18 @@
     </ClInclude>
     <ClInclude Include="include\engine\utility\vector2.h">
       <Filter>include\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\baseClass.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\sound\audioManager.h">
+      <Filter>include\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\sound\sound.h">
+      <Filter>include\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\sound\soundEffect.h">
+      <Filter>include\sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,15 +233,6 @@
     <ClCompile Include="source\graphics\vertexBuffer.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="source\sound\Sound.cpp">
-      <Filter>source\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="source\sound\SoundEffect.cpp">
-      <Filter>source\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="source\sound\AudioManager.cpp">
-      <Filter>source\sound</Filter>
-    </ClCompile>
     <ClCompile Include="source\graphics\graphics.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
@@ -264,7 +257,6 @@
     <ClCompile Include="source\game\triangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\game\baseClass.cpp" />
     <ClCompile Include="source\game\quadrangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
@@ -285,6 +277,18 @@
     </ClCompile>
     <ClCompile Include="source\game\textRenderSystem.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\baseClass.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\sound\audioManager.cpp">
+      <Filter>source\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\sound\sound.cpp">
+      <Filter>source\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="source\sound\soundEffect.cpp">
+      <Filter>source\sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

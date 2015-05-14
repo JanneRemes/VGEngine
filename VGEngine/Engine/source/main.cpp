@@ -41,7 +41,7 @@ extern void test_dummy();
 #include "engine/graphics/opengl.h"
 
 using namespace vg;
-using namespace vg::Input;
+using namespace vg::input;
 using namespace vg::graphics;
 extern void mainGame(Game* game);
 
@@ -91,7 +91,7 @@ void android_main(struct android_app* state)
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;
     state->onAppCmd = handleCommand;
-    state->onInputEvent = vg::Input::Input::engine_handle_input;
+    state->onInputEvent = vg::input::Input::engine_handle_input;
     engine.app = state;
     // Prepare to monitor accelerometer
     engine.sensorManager = ASensorManager_getInstance();
@@ -131,7 +131,7 @@ void android_main(struct android_app* state)
         // If not animating, we will block forever waiting for events.
         // If animating, we loop until all events are read, then continue
         // to draw the next frame of animation.
-		vg::Input::Input::update();
+		vg::input::Input::update();
         while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
         {
 			//Log("test", "AccelerationX: %f", vg::Input::Input::getSensorX());
@@ -146,7 +146,7 @@ void android_main(struct android_app* state)
             {
                 if (engine.accelerometerSensor != NULL)
                 {
-					vg::Input::Input::accelerometerEvent(engine.sensorEventQueue);
+					vg::input::Input::accelerometerEvent(engine.sensorEventQueue);
                 }
             }
 
@@ -155,7 +155,7 @@ void android_main(struct android_app* state)
             {
 				delete Game::getInstance();
                 engine.graphics.unInitialize();
-				Log("memory", "MemoryCount is: %d", BaseClass::getValue("gameObject"));
+				//Log("memory", "MemoryCount is: %d", BaseClass::getValue("gameObject"));
                 return;
             }
         }
@@ -184,8 +184,8 @@ void drawFrame(struct Engine* engine)
     }
 
 	gl::clear();
-	gl::clearColor(vg::Input::Input::getTouchX() / engine->graphics.getScreenWidth(), engine->state.game->mPulse,
-		(vg::Input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
+	gl::clearColor(vg::input::Input::getTouchX() / engine->graphics.getScreenWidth(), 0.5f,
+		(vg::input::Input::getTouchY()) / engine->graphics.getScreenHeight(), 1);
 	
 	engine->state.game->update();
 

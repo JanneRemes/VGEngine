@@ -5,7 +5,7 @@
 #include <android/sensor.h>
 namespace vg
 {
-	namespace Input
+	namespace input
 	{
 		class Input
 		{

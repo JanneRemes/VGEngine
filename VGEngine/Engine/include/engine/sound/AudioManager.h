@@ -1,6 +1,9 @@
+
 #pragma once
+
+#include <engine/sound/SoundEffect.h>
+
 #include <vector>
-#include "engine\sound\SoundEffect.h"
 
 namespace vg
 {
@@ -46,13 +49,13 @@ namespace vg
             Stop playing the soundfile
             @param name ID for sound
             */
-            void Stop(const std::string& name);
+            void stop(const std::string& name);
 
             /**
             Start playing the soundfile
             @param name ID for sound
             */
-            void Play(const std::string& name);
+            void play(const std::string& name);
 
             /**
             Plays all the soundfiles
@@ -63,7 +66,7 @@ namespace vg
             Pause playing the soundfile
             @param name ID for sound
             */
-            void Pause(const std::string& name);
+            void pause(const std::string& name);
 
             /**
             Pause all soundfiles currently playing
@@ -75,26 +78,26 @@ namespace vg
             @param name ID for sound
             @param b
             */
-            void LoopEnabled(const std::string& name, bool b);
+            void loopEnabled(const std::string& name, bool b);
 
             /**
             Set the playing position in track
             @param name ID for sound
             @param pos
             */
-            void SetPosition(const std::string& name, float pos);
+            void setPosition(const std::string& name, float pos);
 
             /**
             @param name ID for sound
             @return Returns playing position of track in milliseconds
             */
-            float GetPosition(const std::string& name);
+            float getPosition(const std::string& name);
 
             /**
             @param name ID for sound
             @return Returns track length in milliseconds
             */
-            float GetLength(const std::string& name);
+            float getLength(const std::string& name);
 
             /**
             Checks if soundfile has finished playing and destroys it
@@ -105,7 +108,8 @@ namespace vg
             Find soundfile by ID
             @param id soundfile ID
             */
-            SFXMapping *FindSFXMap(int id);
+            SFXMapping *findSFXMap(int id);
+
         private:
             size_t mInstantID;
             std::hash<std::string> mStringHash;			///< ID hash

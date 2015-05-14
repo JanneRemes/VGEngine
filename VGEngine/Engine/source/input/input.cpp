@@ -7,7 +7,7 @@
 /**
 * Process the next input event.
 */
-using namespace vg::Input;
+using namespace vg::input;
 
 float Input::mTouchX = 0;
 float Input::mTouchY = 0;

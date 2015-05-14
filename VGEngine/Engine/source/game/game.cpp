@@ -13,8 +13,9 @@ Game* Game::getInstance()
 	}
 	return mGame;
 }
+
 Game::Game()
-    : mPulse(0), mIsRunning(true)
+    : mIsRunning(true)
 {
 
 	mSceneManager = new SceneManager();
@@ -26,23 +27,16 @@ Game::~Game()
 	delete mSceneManager;
 }
 
-
-
 void Game::update()
 {
-    mPulse += .01f;
-    if (mPulse > 1)
-    {
-        mPulse = 0;
-    }
 	mSceneManager->update(0.0f); //TODO add deltatime
 	mAudioManager->update();
 }
+
 void Game::setGraphics(vg::graphics::Graphics *graphics)
 {
 	this->mGraphics = graphics;
 }
-
 
 void readFiles(core::FileManager& fileManager)
 {
@@ -69,7 +63,6 @@ void readFiles(core::FileManager& fileManager)
     Log("fm", "End", "");
     Log("-----", "----- -----", "");
 }
-
 
 bool Game::isRunning()
 {

@@ -33,25 +33,25 @@
     </AndroidBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Test\test.h">
+    <ClInclude Include="include\deleteSystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Test\Scenes\testScene.h">
+    <ClInclude Include="include\Scenes\testScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="include\TestComponent.h">
+    <ClInclude Include="include\enemySystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\TestComponentSystem.h">
+    <ClInclude Include="include\shipSystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="ShipSystem.h">
+    <ClInclude Include="include\test.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Test\EnemySystem.h">
+    <ClInclude Include="include\testComponent.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\deleteSystem.h">
+    <ClInclude Include="include\testComponentSystem.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,25 +59,25 @@
     <ClCompile Include="source\dummy.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="testScene.cpp">
+    <ClCompile Include="source\deleteSystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\shipSystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\enemySystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\testScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\TestComponent.cpp">
+    <ClCompile Include="source\testComponent.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="source\TestComponentSystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="ShipSystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\EnemySystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\deleteSystem.cpp">
+    <ClCompile Include="source\testComponentSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

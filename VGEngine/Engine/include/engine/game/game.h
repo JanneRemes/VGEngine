@@ -92,8 +92,6 @@ namespace vg
 		void setGraphics(vg::graphics::Graphics *graphics);
 		Factory *getFactory();
 
-		float mPulse;
-
 		core::FileManager *getFileManager();
 		sound::AudioManager *getAudioManager();
 

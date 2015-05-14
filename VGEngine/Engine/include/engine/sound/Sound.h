@@ -1,9 +1,12 @@
+
 #pragma once
-#include "engine/assets/fileManager.h"
-#include "engine/assets/asset.h"
+
+#include <engine/assets/asset.h>
 
 namespace vg
 {
+	class FileManager;
+
     namespace sound
     {
         struct SoundEffectData
@@ -29,7 +32,6 @@ namespace vg
             bool load(core::FileManager *fileManager);
             bool unload();
             SoundEffectData data;	///< Used to store sound data
-        private:
         };
     }
 }

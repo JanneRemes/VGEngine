@@ -1,9 +1,12 @@
+
 #pragma once
+
 #include <string>
 #include <map>
 #include <iostream>
-namespace vg{
 
+namespace vg
+{
 	/**
 	Class used for detecting memory leaks
 	*/
@@ -20,5 +23,4 @@ namespace vg{
 		*/
 		static int getValue(std::string name);
 	};
-
 }

@@ -19,22 +19,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\deleteSystem.h" />
-    <ClInclude Include="include\TestComponent.h" />
-    <ClInclude Include="include\TestComponentSystem.h" />
-    <ClInclude Include="include\Test\EnemySystem.h" />
-    <ClInclude Include="include\Test\Scenes\testScene.h" />
-    <ClInclude Include="include\Test\test.h" />
-    <ClInclude Include="ShipSystem.h" />
+    <ClInclude Include="include\enemySystem.h" />
+    <ClInclude Include="include\Scenes\testScene.h" />
+    <ClInclude Include="include\shipSystem.h" />
+    <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\testComponent.h" />
+    <ClInclude Include="include\testComponentSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShipSystem.cpp" />
     <ClCompile Include="source\deleteSystem.cpp" />
     <ClCompile Include="source\dummy.cpp" />
-    <ClCompile Include="source\EnemySystem.cpp" />
-    <ClCompile Include="source\TestComponent.cpp" />
-    <ClCompile Include="source\TestComponentSystem.cpp" />
-    <ClCompile Include="testScene.cpp" />
+    <ClCompile Include="source\enemySystem.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\scenes\testScene.cpp" />
+    <ClCompile Include="source\shipSystem.cpp" />
+    <ClCompile Include="source\testComponent.cpp" />
+    <ClCompile Include="source\testComponentSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\freetype\freetype.vcxproj">

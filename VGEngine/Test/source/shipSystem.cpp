@@ -52,13 +52,13 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
 			Vector2<int> newPos(
-				((mScreenSize.getX()/ 20 * (Input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
+				((mScreenSize.getX()/ 20 * (input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
 				resolution.getY()-80);
 			if (sqrt(pow(newPos.getX() - transformComponent->getPosition().getX(), 2)) > 15.0f)
 			{
 				transformComponent->setPosition(newPos);
 			}
-            if (Input::Input::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
+            if (input::Input::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
 			{
                 sound::Sound* testSound = new sound::Sound("shoot.mp3");
                 testSound->load(Game::getInstance()->getFileManager());

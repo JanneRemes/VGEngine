@@ -1,6 +1,6 @@
 
-#include "engine/sound/AudioManager.h"
-#include "engine/utility/logger.h"
+#include <engine/sound/AudioManager.h>
+#include <engine/utility/logger.h>
 #include <string>
 
 using namespace vg::sound;
@@ -16,30 +16,30 @@ AudioManager::~AudioManager()
 {
 	for (auto& mapping : mSoundEffectList)
 	{
-		mapping.mSoundEffect->Stop();
-		mapping.mSoundEffect->Destroy();
+		mapping.mSoundEffect->stop();
+		mapping.mSoundEffect->destroy();
 	}
 }
 
-void AudioManager::Stop(const std::string& name)
+void AudioManager::stop(const std::string& name)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->Stop();
+		mapping->mSoundEffect->stop();
 	}
 }
 
-void AudioManager::Pause(const std::string& name)
+void AudioManager::pause(const std::string& name)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->Pause();
+		mapping->mSoundEffect->pause();
 	}
 }
 
@@ -48,19 +48,19 @@ void AudioManager::pauseAll()
     auto i = std::begin(mSoundEffectList);
     while (i != std::end(mSoundEffectList))
     {
-        (*i).mSoundEffect->Pause();
+        (*i).mSoundEffect->pause();
         i++;
     }
 }
 
-void AudioManager::Play(const std::string& name)
+void AudioManager::play(const std::string& name)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->Play();
+		mapping->mSoundEffect->play();
 	}
 }
 
@@ -70,51 +70,51 @@ void AudioManager::playAll()
     while (i != std::end(mSoundEffectList))
     {
         {
-            (*i).mSoundEffect->Play();
+            (*i).mSoundEffect->play();
         }
         i++;
     }
 }
 
-void AudioManager::LoopEnabled(const std::string& name, bool b)
+void AudioManager::loopEnabled(const std::string& name, bool b)
 {
 	const size_t id = mStringHash(name);
 
-			SFXMapping* mapping= FindSFXMap(id);
+			SFXMapping* mapping= findSFXMap(id);
 			if (mapping != nullptr)
 			{
-				mapping->mSoundEffect->SetLoop(b);
+				mapping->mSoundEffect->setLoop(b);
 			}
 }
-void AudioManager::SetPosition(const std::string& name, float pos)
+void AudioManager::setPosition(const std::string& name, float pos)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		mapping->mSoundEffect->SetPosition(pos);
+		mapping->mSoundEffect->setPosition(pos);
 	}
 }
 
-float AudioManager::GetPosition(const std::string& name)
+float AudioManager::getPosition(const std::string& name)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		return mapping->mSoundEffect->GetPosition();
+		return mapping->mSoundEffect->getPosition();
 	}
 }
-float AudioManager::GetLength(const std::string& name)
+float AudioManager::getLength(const std::string& name)
 {
 	const size_t id = mStringHash(name);
 
-	SFXMapping* mapping = FindSFXMap(id);
+	SFXMapping* mapping = findSFXMap(id);
 	if (mapping != nullptr)
 	{
-		return mapping->mSoundEffect->GetLength();
+		return mapping->mSoundEffect->getLength();
 	}
 }
 bool AudioManager::addSound(const std::string& name, const Sound& sound)
@@ -135,10 +135,10 @@ bool AudioManager::addSound(const Sound& sound)
         const size_t id = ++mInstantID;
         mSoundEffectList.emplace_back(id, sound);
 
-        SFXMapping* mapping = FindSFXMap(id);
+        SFXMapping* mapping = findSFXMap(id);
         if (mapping != nullptr)
         {
-            mapping->mSoundEffect->Play();
+            mapping->mSoundEffect->play();
         }
         return true;
     }
@@ -151,10 +151,10 @@ void AudioManager::update()
 	auto i = std::begin(mSoundEffectList);
 	while (i != std::end(mSoundEffectList))
 	{
-			if ((*i).mSoundEffect->IsFinishedPlaying())
+			if ((*i).mSoundEffect->isFinishedPlaying())
 			{
-				(*i).mSoundEffect->Stop();
-				(*i).mSoundEffect->Destroy();
+				(*i).mSoundEffect->stop();
+				(*i).mSoundEffect->destroy();
 				i = mSoundEffectList.erase(i);
 			}
 			else
@@ -162,7 +162,7 @@ void AudioManager::update()
 	}
 }
 
-SFXMapping *AudioManager::FindSFXMap(int id)
+SFXMapping *AudioManager::findSFXMap(int id)
 {
 	for (auto& mapping : mSoundEffectList)
 	{
