@@ -1,14 +1,13 @@
 
-#include "deleteSystem.h"
+#include "engine/game/deleteSystem.h"
 
-#include <engine/game/game.h>
-#include <engine/game/gameObject.h>
+#include "engine/game/game.h"
+#include "engine/game/gameObject.h"
 
 using namespace vg;
 using namespace std;
 
-DeleteSystem::DeleteSystem(Game* game)
-	: mGame(game)
+DeleteSystem::DeleteSystem() :vg::System()
 {
 
 }
@@ -22,9 +21,12 @@ void DeleteSystem::update(vector<GameObject*>* gameObjects)
 {
 	for (vector<GameObject*>::iterator i = gameObjects->begin(); i != gameObjects->end(); i++)
 	{
+		if (*i == nullptr)
+			continue;
 		if ((*i)->markedForDelete())
 		{
 			delete *i;
+			*i = nullptr;
 			i = gameObjects->erase(i);
 		}
 	}

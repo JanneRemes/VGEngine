@@ -13,12 +13,11 @@ namespace vg
 class DeleteSystem : public vg::System
 {
 public:
-	DeleteSystem(vg::Game* game);
+	DeleteSystem();
 	~DeleteSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects);
 	void setScene(vg::Scene* scene);
 
 private:
-	vg::Game* mGame;
 	vg::Scene* mScene;
 };

@@ -33,9 +33,6 @@
     </AndroidBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\deleteSystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Scenes\testScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
@@ -57,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\deleteSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\main.cpp">

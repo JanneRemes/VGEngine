@@ -13,7 +13,7 @@
 #include "TestComponent.h"
 #include "ShipSystem.h"
 #include "enemySystem.h"
-#include "deleteSystem.h"
+//#include "deleteSystem.h"
 #include "TestComponentSystem.h"
 
 #include <stdlib.h> 
@@ -66,7 +66,7 @@ void mainGame(Game* game)
 	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, doge);
 	game->addComponentSystem(scene, enemySystem);
-	game->addComponentSystem(scene, new DeleteSystem(game));
+	//game->addComponentSystem(scene, new DeleteSystem(game));
 
 	assetManager->load<sound::Sound>("Kalimba.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",
