@@ -107,8 +107,6 @@ void android_main(struct android_app* state)
     }
     // TEST
     test_dummy();
-	char* dooooge = "dddoooge";
-	delete dooooge;
 
     // Make sure app_glue isn't stripped.
     app_dummy();

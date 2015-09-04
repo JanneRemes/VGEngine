@@ -36,11 +36,6 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 				isTouchReleased = true;
 			}
 		}
-		/*
-		engine->animating = 1;
-		engine->state.x = AMotionEvent_getX(event, 0);
-		engine->state.y = AMotionEvent_getY(event, 0);
-		*/
 
 		return 1;
 	}
@@ -55,8 +50,6 @@ void Input::accelerometerEvent(ASensorEventQueue *queue)
 		mSensorX = event.acceleration.x;
 		mSensorY = event.acceleration.y;
 		mSensorZ = event.acceleration.z;
-		// Uncomment if needed
-		//Log("DEBUG", "accelerometer: x=%f y=%f z=%f",event.acceleration.x, event.acceleration.y, event.acceleration.z);
 	}
 }
 float Input::getTouchX()

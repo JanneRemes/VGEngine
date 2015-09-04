@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="NsightTegraProject">
-    <NsightTegraProjectRevisionNumber>9</NsightTegraProjectRevisionNumber>
+    <NsightTegraProjectRevisionNumber>11</NsightTegraProjectRevisionNumber>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Tegra-Android">
@@ -12,36 +12,6 @@
       <Configuration>Release</Configuration>
       <Platform>Tegra-Android</Platform>
     </ProjectConfiguration>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidBuild Include="AndroidManifest.xml" />
-    <AndroidBuild Include="res\values\strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\enemySystem.h" />
-    <ClInclude Include="include\Scenes\testScene.h" />
-    <ClInclude Include="include\shipSystem.h" />
-    <ClInclude Include="include\test.h" />
-    <ClInclude Include="include\testComponent.h" />
-    <ClInclude Include="include\testComponentSystem.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="source\dummy.cpp" />
-    <ClCompile Include="source\enemySystem.cpp" />
-    <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\scenes\testScene.cpp" />
-    <ClCompile Include="source\shipSystem.cpp" />
-    <ClCompile Include="source\testComponent.cpp" />
-    <ClCompile Include="source\testComponentSystem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\freetype\freetype.vcxproj">
-      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\default_fragment.glsl" />
-    <None Include="assets\shaders\default_vertex.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E497E48B-462A-4C74-812F-932E5D53B835}</ProjectGuid>
@@ -88,10 +58,40 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;freetype;vgengine;</AdditionalDependencies>
+      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <AndroidBuild Include="AndroidManifest.xml" />
+    <AndroidBuild Include="res\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\enemySystem.h" />
+    <ClInclude Include="include\Scenes\testScene.h" />
+    <ClInclude Include="include\shipSystem.h" />
+    <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\testComponent.h" />
+    <ClInclude Include="include\testComponentSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\dummy.cpp" />
+    <ClCompile Include="source\enemySystem.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\scenes\testScene.cpp" />
+    <ClCompile Include="source\shipSystem.cpp" />
+    <ClCompile Include="source\testComponent.cpp" />
+    <ClCompile Include="source\testComponentSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\freetype\freetype.vcxproj">
+      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\default_fragment.glsl" />
+    <None Include="assets\shaders\default_vertex.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
