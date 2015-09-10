@@ -120,3 +120,30 @@ void gl::setUniform(GLuint location, glm::vec4& value)
 	glUniform4fv(location, 1, glm::value_ptr(value));
 	checkError();
 }
+
+void gl::attachShader(GLuint program, GLuint shader)
+{
+	glAttachShader(program, shader);
+	checkError();
+}
+
+void gl::linkProgram(GLuint program)
+{
+	glLinkProgram(program);
+	checkError();
+}
+
+GLint gl::linkStatus(GLuint program)
+{
+	GLint result = GL_FALSE;
+	glGetProgramiv(program, GL_LINK_STATUS, &result);
+	checkError();
+	return result;
+}
+
+GLuint gl::getUniformLocation(GLuint program, std::string name)
+{
+	GLuint location = glGetUniformLocation(program, name.c_str());
+	checkError();
+	return location;
+}

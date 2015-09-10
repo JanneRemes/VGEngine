@@ -20,7 +20,8 @@ namespace vg
 			static bool getIsTouched();
 			static bool getIsTouchReleased();
 			static void update();
-			static void accelerometerEvent(ASensorEventQueue *queue);
+			static void sensorEvent(ASensorEventQueue *queue);
+
 		private:
 
 			static bool isTouched;
@@ -30,6 +31,9 @@ namespace vg
 			static float mSensorX;
 			static float mSensorY;
 			static float mSensorZ;
+			static float mAngleX;
+			static float mAngleY;
+			static float mAngleZ;
 		};
 	}
 }

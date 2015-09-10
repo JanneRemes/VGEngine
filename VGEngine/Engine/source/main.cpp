@@ -72,6 +72,7 @@ struct Engine
 
     ASensorManager* sensorManager;
     const ASensor* accelerometerSensor;
+	const ASensor* gyroscopeSensor;
     ASensorEventQueue* sensorEventQueue;
     int animating;
     Graphics graphics;
@@ -97,6 +98,8 @@ void android_main(struct android_app* state)
     engine.sensorManager = ASensorManager_getInstance();
     engine.accelerometerSensor = ASensorManager_getDefaultSensor(engine.sensorManager,
         ASENSOR_TYPE_ACCELEROMETER);
+	engine.gyroscopeSensor = ASensorManager_getDefaultSensor(engine.sensorManager,
+		ASENSOR_TYPE_GYROSCOPE);
     engine.sensorEventQueue = ASensorManager_createEventQueue(engine.sensorManager,
         engine.app->looper, LOOPER_ID_USER,NULL, NULL);
 
@@ -144,7 +147,7 @@ void android_main(struct android_app* state)
             {
                 if (engine.accelerometerSensor != NULL)
                 {
-					vg::input::Input::accelerometerEvent(engine.sensorEventQueue);
+					vg::input::Input::sensorEvent(engine.sensorEventQueue);
                 }
             }
 
@@ -228,25 +231,37 @@ void handleCommand(struct android_app* app, int32_t cmd)
         break;
 
     case APP_CMD_GAINED_FOCUS:
-        // When our app gains focus, we start monitoring the accelerometer.
+        // When our app gains focus, we start monitoring accelerometer and gyroscope.
         if (engine->accelerometerSensor != NULL)
         {
             ASensorEventQueue_enableSensor(engine->sensorEventQueue, engine->accelerometerSensor);
-            // We'd like to get 60 events per second (in us).
+			//Accelerometer refresh rate to 60/sec
             ASensorEventQueue_setEventRate(engine->sensorEventQueue, engine->accelerometerSensor, (1000L / 60) * 1000);
         }
+
+		if (engine->gyroscopeSensor != NULL)
+		{
+			ASensorEventQueue_enableSensor(engine->sensorEventQueue, engine->gyroscopeSensor);
+			//Gyroscope refresh rate to 60/sec
+			ASensorEventQueue_setEventRate(engine->sensorEventQueue, engine->gyroscopeSensor, (1000L / 60) * 1000);
+		}
         engine->state.game->getAudioManager()->playAll();
 		engine->state.game->start();
         break;
 
     case APP_CMD_LOST_FOCUS:
-        // When our app loses focus, we stop monitoring the accelerometer.
+        // When our app loses focus, we stop monitoring accelerometer and gyroscope.
         // This is to avoid consuming battery while not being used.
 		engine->state.game->getAudioManager()->pauseAll();
         if (engine->accelerometerSensor != NULL)
         {
             ASensorEventQueue_disableSensor(engine->sensorEventQueue, engine->accelerometerSensor);
         }
+
+		if (engine->gyroscopeSensor != NULL)
+		{
+			ASensorEventQueue_disableSensor(engine->sensorEventQueue, engine->gyroscopeSensor);
+		}
 		engine->state.game->stop();
 		engine->graphics.unInitialize();
 
