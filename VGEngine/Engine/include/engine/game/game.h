@@ -20,7 +20,7 @@ namespace vg
 {
     class Scene;
     class SceneManager;
-
+	class Timer;
     /**
     Class used for updating and pausing/starting the game
     */
@@ -37,6 +37,7 @@ namespace vg
 
         /**
         Updates the games sceneManager
+		Updates deltatime timer that returns deltatime in seconds
         */
         void update();
 
@@ -97,6 +98,9 @@ namespace vg
 		void setFileManager(android_app *app);
 
 		core::AssetManager* getAssetManager();
+		/**
+		Creates Game's scenemanager
+		*/
 		void initSceneManager();
     private:
 		core::FileManager *mFileManager;
@@ -108,5 +112,6 @@ namespace vg
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
 		vg::graphics::Shader mShader;
 		sound::AudioManager *mAudioManager;
+		vg::Timer *deltaTimer;
     };
 }

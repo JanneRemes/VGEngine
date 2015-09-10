@@ -2,7 +2,7 @@
 #include "engine/game.h"
 #include "engine/utility/logger.h"
 #include "engine/input/input.h"
-
+#include "engine/utility/timer.h"
 using namespace vg;
 Game *Game::mGame = nullptr;
 Game* Game::getInstance()
@@ -18,7 +18,7 @@ Game::Game()
     : mIsRunning(true)
 {
 	initSceneManager();
-	
+	deltaTimer = new Timer();
 	//sound::AudioManager AM;
 }
 
@@ -33,8 +33,11 @@ void Game::initSceneManager()
 }
 void Game::update()
 {
-	mSceneManager->update(0.0f); //TODO add deltatime
+	float deltaTime = deltaTimer->restart();
+
+	mSceneManager->update(deltaTime); //TODO add deltatime
 	mAudioManager->update();
+	
 }
 
 void Game::setGraphics(vg::graphics::Graphics *graphics)

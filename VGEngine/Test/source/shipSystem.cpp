@@ -9,6 +9,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
+#include <vector>
 
 using namespace vg;
 
