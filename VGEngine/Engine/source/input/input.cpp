@@ -14,6 +14,9 @@ float Input::mTouchY = 0;
 float Input::mSensorX = 0;
 float Input::mSensorY = 0;
 float Input::mSensorZ = 0;
+float Input::mAngleX = 0;
+float Input::mAngleY = 0;
+float Input::mAngleZ = 0;
 bool Input::isTouched = false;
 bool Input::isTouchReleased = false;
 int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
@@ -42,7 +45,7 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 
 	return 0;
 }
-void Input::accelerometerEvent(ASensorEventQueue *queue)
+void Input::sensorEvent(ASensorEventQueue *queue)
 {
 	ASensorEvent event;
 	while (ASensorEventQueue_getEvents(queue, &event, 1) > 0)
@@ -50,8 +53,12 @@ void Input::accelerometerEvent(ASensorEventQueue *queue)
 		mSensorX = event.acceleration.x;
 		mSensorY = event.acceleration.y;
 		mSensorZ = event.acceleration.z;
+		mAngleX = event.vector.x;
+		mAngleY = event.vector.y;
+		mAngleZ = event.vector.z;
 	}
 }
+
 float Input::getTouchX()
 {
 	return mTouchX;
