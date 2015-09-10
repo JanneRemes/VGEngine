@@ -4,12 +4,16 @@
 #include <GLES2/gl2.h>
 #include <stdint.h>
 #include <vector>
+#include <string>
 #include "../external/glm/gtc/type_ptr.hpp"
 
 namespace vg
 {
 	namespace graphics
 	{
+		/**
+			Wrappers for opengl functions. Errors are checked and printed to LogCat.
+			*/
 		namespace gl
 		{
 			void checkError();
@@ -49,6 +53,14 @@ namespace vg
 			void setUniform(GLuint location, glm::vec3& value);
 
 			void setUniform(GLuint location, glm::vec4& value);
+
+			void attachShader(GLuint program, GLuint shader);
+
+			void linkProgram(GLuint program);
+
+			GLint linkStatus(GLuint program);
+
+			GLuint getUniformLocation(GLuint program, std::string name);
 		}
 	}
 }

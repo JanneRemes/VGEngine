@@ -16,6 +16,11 @@ Shader::Shader(const VariableNames& attributeNames, const std::vector<std::strin
     mInitialized = false;
 }
 
+Shader::~Shader()
+{
+	gl::useProgram(0u);
+}
+
 void Shader::initialize()
 {
     mProgramId = glCreateProgram();
@@ -59,13 +64,12 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     }
 
     // link program
-    GLint result = GL_FALSE;
-    glAttachShader(mProgramId, mVertexId);
-    glAttachShader(mProgramId, mFragmentId);
-    glLinkProgram(mProgramId);
-    glGetProgramiv(mProgramId, GL_LINK_STATUS, &result);
-
-    if (result != GL_TRUE)
+    //GLint result = GL_FALSE;
+    gl::attachShader(mProgramId, mVertexId);
+	gl::attachShader(mProgramId, mFragmentId);
+    gl::linkProgram(mProgramId);
+    
+	if (gl::linkStatus(mProgramId) != GL_TRUE)
     {
         Log("ERROR", "Shader program link error!", "");
         return false;
@@ -77,7 +81,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
 		mUniformLocations.insert(make_pair<string&, GLuint>(mUniformNames[i], 0));
 	for (auto& pair : mUniformLocations)
 	{
-		GLuint location = glGetUniformLocation(mProgramId, pair.first.c_str());
+		GLuint location = gl::getUniformLocation(mProgramId, pair.first);
         if (location < 0)
         {
             Log("ERROR", "Shader uniform %s not found!", pair.first.c_str());

@@ -35,6 +35,11 @@ namespace vg
 				const std::vector<std::string>& uniformNames = getDefaultUniformNames());
 
 			/**
+				Uninitializes and unloads everything.
+				*/
+			~Shader();
+
+			/**
 				Initialize values needed by load(). Don't call before GraphicsContext is initialized.
 				*/
 			void initialize();
