@@ -17,16 +17,20 @@ Game* Game::getInstance()
 Game::Game()
     : mIsRunning(true)
 {
-
-	mSceneManager = new SceneManager();
-	sound::AudioManager AM;
+	initSceneManager();
+	
+	//sound::AudioManager AM;
 }
 
 Game::~Game()
 {
 	delete mSceneManager;
+	mGame = nullptr;
 }
-
+void Game::initSceneManager()
+{
+	mSceneManager = new SceneManager();
+}
 void Game::update()
 {
 	mSceneManager->update(0.0f); //TODO add deltatime

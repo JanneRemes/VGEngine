@@ -203,9 +203,9 @@ void handleCommand(struct android_app* app, int32_t cmd)
     {
     case APP_CMD_SAVE_STATE:
         // The system has asked us to save our current state.  Do so.
-        engine->app->savedState = malloc(sizeof(struct SavedState));
-        *((struct SavedState*)engine->app->savedState) = engine->state;
-        engine->app->savedStateSize = sizeof(struct SavedState);
+      //  engine->app->savedState = malloc(sizeof(struct SavedState));
+      //  *((struct SavedState*)engine->app->savedState) = engine->state;
+      //  engine->app->savedStateSize = sizeof(struct SavedState);
         break;
 
     case APP_CMD_INIT_WINDOW:
@@ -214,15 +214,16 @@ void handleCommand(struct android_app* app, int32_t cmd)
         {
             engine->graphics.initialize(engine->app);
             engine->animating = true;
-            drawFrame(engine);
+			engine->state.game->initSceneManager();
+			engine->state.game->setFileManager(app);
 			mainGame(engine->state.game);
+			drawFrame(engine);
         }
         break;
 
     case APP_CMD_TERM_WINDOW:
         // The window is being hidden or closed, clean it up.
-        engine->graphics.unInitialize();
-        engine->state.game->stop();
+
         engine->state.game->getAudioManager()->pauseAll();
         break;
 
@@ -235,19 +236,41 @@ void handleCommand(struct android_app* app, int32_t cmd)
             ASensorEventQueue_setEventRate(engine->sensorEventQueue, engine->accelerometerSensor, (1000L / 60) * 1000);
         }
         engine->state.game->getAudioManager()->playAll();
+		engine->state.game->start();
         break;
 
     case APP_CMD_LOST_FOCUS:
         // When our app loses focus, we stop monitoring the accelerometer.
         // This is to avoid consuming battery while not being used.
+		engine->state.game->getAudioManager()->pauseAll();
         if (engine->accelerometerSensor != NULL)
         {
             ASensorEventQueue_disableSensor(engine->sensorEventQueue, engine->accelerometerSensor);
         }
+		engine->state.game->stop();
+		engine->graphics.unInitialize();
+
         // Also stop animating.
         engine->animating = 0;
-        drawFrame(engine);
-        engine->state.game->getAudioManager()->pauseAll();
+        //drawFrame(engine);
+
         break;
+	case  APP_CMD_START:
+		if (true)
+			Log("ERROR", "APP_CMD_START!", "");
+		break;
+	case APP_CMD_RESUME:
+		if (true)
+			Log("ERROR", "APP_CMD_RESUME!", "");
+		break;
+	case APP_CMD_PAUSE:
+		if (true)
+			Log("ERROR", "APP_CMD_PAUSE!", "");
+		break;
+	case APP_CMD_STOP:
+		if (true)
+			Log("ERROR", "APP_CMD_STOP!", "");
+		break;
+
     }
 }

@@ -26,8 +26,11 @@ void SceneManager::draw()
 
 void SceneManager::update(float dt)
 {
+	int size = mCurrentScenes.size();
 	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 	{
+		if ((*it) == nullptr)
+			continue;
 		if (!(*it)->getPaused())
 		{
 			(*it)->getObjectPool()->updateGameObjects();

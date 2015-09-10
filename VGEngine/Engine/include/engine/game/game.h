@@ -97,7 +97,7 @@ namespace vg
 		void setFileManager(android_app *app);
 
 		core::AssetManager* getAssetManager();
-
+		void initSceneManager();
     private:
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;
