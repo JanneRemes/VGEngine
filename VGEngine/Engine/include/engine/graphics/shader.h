@@ -109,17 +109,17 @@ namespace vg
 			/**
 				Set uniform vector values
 				*/
-			void setUniform(std::string name, glm::vec2 value);
+			void setUniform(std::string name, float x, float y);
 			
 			/**
 				Set uniform vector values
 				*/
-			void setUniform(std::string name, glm::vec3 value);
+			void setUniform(std::string name, float x, float y ,float z);
 			
 			/**
 				Set uniform vector values
 				*/
-			void setUniform(std::string name, glm::vec4 value);
+			void setUniform(std::string name, float x, float y, float z, float w);
 
 		private:
 			/**

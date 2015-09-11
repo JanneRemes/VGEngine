@@ -92,6 +92,41 @@ mat4 RenderSystem::modelTransform(TransformComponent* transform)
 		transform->getSize(), transform->getRotation());
 }
 
+void RenderSystem::setCameraPosition(float x, float y)
+{
+	mCameraPosition = vec2(x, y);
+}
+
+void RenderSystem::moveCameraPosition(float x, float y)
+{
+	mCameraPosition += vec2(x, y);
+}
+
+void RenderSystem::setCameraRotation(float rotation)
+{
+	mCameraRotation = rotation;
+}
+
+void RenderSystem::rotateCamera(float rotation)
+{
+	mCameraRotation += rotation;
+}
+
+void RenderSystem::setCameraScale(float scaleX, float scaleY)
+{
+	if (scaleX < 0)
+		scaleX = 0;
+	if (scaleY < 0)
+		scaleY = 0;
+
+	mCameraScale = vec2(scaleX, scaleY);
+}
+
+void RenderSystem::scaleCamera(float scaleX, float scaleY)
+{
+	setCameraScale(mCameraScale.x + scaleX, mCameraScale.y + scaleY);
+}
+
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
 	if (transform != nullptr)

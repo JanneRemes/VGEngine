@@ -64,7 +64,6 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     }
 
     // link program
-    //GLint result = GL_FALSE;
     gl::attachShader(mProgramId, mVertexId);
 	gl::attachShader(mProgramId, mFragmentId);
     gl::linkProgram(mProgramId);
@@ -179,17 +178,20 @@ void Shader::setUniform(string name, bool value)
 	gl::setUniform(mUniformLocations[name], &shaderValue);
 }
 
-void setUniform(std::string name, glm::vec2 value)
+void Shader::setUniform(string name, float x ,float y)
 {
-
+	glm::vec2 shaderValue(x, y);
+	gl::setUniform(mUniformLocations[name], shaderValue);
 }
 
-void setUniform(std::string name, glm::vec3 value)
+void Shader::setUniform(std::string name, float x, float y, float z)
 {
-
+	glm::vec3 shaderValue(x, y, z);
+	gl::setUniform(mUniformLocations[name], shaderValue);
 }
 
-void setUniform(std::string name, glm::vec4 value)
+void Shader::setUniform(std::string name, float x, float y, float z, float w)
 {
-
+	glm::vec4 shaderValue(x, y, z, w);
+	gl::setUniform(mUniformLocations[name], shaderValue);
 }
