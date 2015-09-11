@@ -23,7 +23,7 @@ RenderSystem::RenderSystem() :System()
 	updateProjection();
 }
 
-void RenderSystem::update(std::vector<GameObject*> *gameObjects)
+void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 {
 	Shader* shader = Game::getInstance()->getGraphics()->getShader();
 	shader->useProgram();

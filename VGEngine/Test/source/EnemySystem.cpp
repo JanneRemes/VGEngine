@@ -27,7 +27,7 @@ EnemySystem::~EnemySystem()
 {
 }
 
-void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects)
+void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
 	int screenWidth = Game::getInstance()->getGraphics()->getScreenWidth();
 	int screenHeight = Game::getInstance()->getGraphics()->getScreenHeight();

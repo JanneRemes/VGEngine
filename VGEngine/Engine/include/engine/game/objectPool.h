@@ -23,7 +23,7 @@ namespace vg
 		/**
 		Updates all the gameObjects that are in the pool
 		*/
-		void updateGameObjects();
+		void updateGameObjects(float deltaTime);
 
 		/**
 		@return Returns the componentSystemManager that the pool is using 

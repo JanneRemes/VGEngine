@@ -24,7 +24,7 @@ void SceneManager::draw()
 	}
 }
 
-void SceneManager::update(float dt)
+void SceneManager::update(float deltaTime)
 {
 	int size = mCurrentScenes.size();
 	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
@@ -33,8 +33,8 @@ void SceneManager::update(float dt)
 			continue;
 		if (!(*it)->getPaused())
 		{
-			(*it)->getObjectPool()->updateGameObjects();
-			(*it)->update(dt);
+			(*it)->getObjectPool()->updateGameObjects(deltaTime);
+			(*it)->update(deltaTime);
 		}
 		if (mSceneChanged)
 		{

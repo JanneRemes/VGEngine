@@ -8,7 +8,7 @@ System::System()
 System::~System()
 {
 }
-void System::update(std::vector<GameObject*> *gameObjects)
+void System::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 {
 
 }

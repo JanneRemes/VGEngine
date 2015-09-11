@@ -28,10 +28,10 @@ void ObjectPool::addGameObject(GameObject *gObject)
 
 }
 
-void ObjectPool::updateGameObjects()
+void ObjectPool::updateGameObjects(float deltaTime)
 {
 	sortActivePool();
-	mSystemManager.update(&mActivePool);
+	mSystemManager.update(&mActivePool,deltaTime);
 }
 
 void ObjectPool::sortActivePool()

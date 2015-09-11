@@ -16,7 +16,7 @@ namespace vg
 		Updates the s inside the gameObject
 		@param gameObject The gameObject whos s we are updating
 		*/
-		virtual void update(std::vector<GameObject*> *gameObjects);
+		virtual void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 	};
 
 }

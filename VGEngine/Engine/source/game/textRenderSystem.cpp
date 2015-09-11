@@ -21,7 +21,7 @@ TextRenderSystem::~TextRenderSystem()
 
 }
 
-void TextRenderSystem::update(std::vector<GameObject*> *gameObjects)
+void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 {
     Shader* shader = Game::getInstance()->getGraphics()->getShader();
 	shader->useProgram();

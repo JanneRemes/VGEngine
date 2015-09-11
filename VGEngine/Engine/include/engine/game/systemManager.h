@@ -17,7 +17,7 @@ namespace vg
 		Updates the components inside the gameObject
 		@param gameObject The gameObject that is going to be updated inside the componentSystems
 		*/
-		void update(std::vector<GameObject*> *gameObjects);
+		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 		void addSystem(System *system);
 	private:
 		std::vector<System*> systems;

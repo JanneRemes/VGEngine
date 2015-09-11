@@ -10,7 +10,7 @@ namespace vg
     public:
         TextRenderSystem();
         ~TextRenderSystem();
-        void update(std::vector<GameObject*> *gameObjects);
+        void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 
     private:
 

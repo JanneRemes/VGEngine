@@ -36,7 +36,7 @@ ShipSystem::ShipSystem(Game *game) :System()
 ShipSystem::~ShipSystem()
 {
 }
-void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects)
+void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
 	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
 		Game::getInstance()->getGraphics()->getContext()->getHeight());

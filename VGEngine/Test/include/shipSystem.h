@@ -11,7 +11,7 @@ class ShipSystem :
 public:
 	ShipSystem(Game* game);
 	~ShipSystem();
-	void update(std::vector<vg::GameObject*> *gameObjects);
+	void update(std::vector<vg::GameObject*> *gameObjects,float deltaTime);
 	Scene *mScene;
 private:
 	GameObject *mBullet;

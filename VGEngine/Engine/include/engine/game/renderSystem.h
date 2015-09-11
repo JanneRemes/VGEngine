@@ -22,7 +22,7 @@ namespace vg
 		/**
 		Draws all the GameObjects that contain a RenderComponent.
 		*/
-		void update(std::vector<GameObject*> *gameObjects);
+		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 
 		/**
 		Gets screen size from Game and sends new projection matrix to shader.

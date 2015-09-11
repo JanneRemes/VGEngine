@@ -14,11 +14,11 @@ SystemManager::SystemManager()
 SystemManager::~SystemManager()
 {
 }
-void SystemManager::update(std::vector<GameObject*> *gameObjects)
+void SystemManager::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 {
 		for (auto it = systems.begin(); it != systems.end(); it++)
 		{
-			(*it)->update(gameObjects);
+			(*it)->update(gameObjects,deltaTime);
 		}
 	
 

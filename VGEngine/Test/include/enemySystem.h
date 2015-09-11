@@ -13,7 +13,7 @@ class EnemySystem : public vg::System
 public:
 	EnemySystem(vg::Game *game);
 	~EnemySystem();
-	void update(std::vector<vg::GameObject*> *gameObjects);
+	void update(std::vector<vg::GameObject*> *gameObjects,float deltaTime);
 	void setScene(vg::Scene* scene);
 
 private:
