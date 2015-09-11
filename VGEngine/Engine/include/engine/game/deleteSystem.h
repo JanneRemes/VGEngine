@@ -15,7 +15,7 @@ namespace vg
 	public:
 		DeleteSystem();
 		~DeleteSystem();
-		void update(std::vector<vg::GameObject*> *gameObjects);
+		void update(std::vector<vg::GameObject*> *gameObjects,float deltaTime);
 		void setScene(vg::Scene* scene);
 
 	private:

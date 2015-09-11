@@ -17,7 +17,7 @@ DeleteSystem::~DeleteSystem()
 
 }
 
-void DeleteSystem::update(vector<GameObject*>* gameObjects)
+void DeleteSystem::update(vector<GameObject*>* gameObjects,float deltaTime)
 {
 	for (vector<GameObject*>::iterator i = gameObjects->begin(); i != gameObjects->end(); i++)
 	{

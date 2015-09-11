@@ -48,6 +48,7 @@ void mainGame(Game* game)
 	scene->getObjectPool()->addGameObject(textObj);
 	game->addComponentSystem(scene, new TextRenderSystem());
 
+	//text
 	TextComponent* tempText2 = game->getFactory()->create("arial.ttf", 6u);
 	tempText2->setText("Bullets: ");
 	tempText2->setColour(0, 0, 127);
@@ -56,6 +57,17 @@ void mainGame(Game* game)
 		Vector2<int>(0, 0), 0.0f, 10000));
 	textObj2->addComponent(tempText2);
 	scene->getObjectPool()->addGameObject(textObj2);
+
+	//FPS text
+	TextComponent* tempText3= game->getFactory()->create("arial.ttf", 6u);
+	tempText3->setText("FPS: ");
+	tempText3->setColour(0, 0, 127);
+	GameObject* textObj3 = new GameObject("fpsText");
+	textObj3->addComponent(new TransformComponent(Vector2<int>(4, 156),
+		Vector2<int>(0, 0), 0.0f, 10000));
+	textObj3->addComponent(tempText2);
+	scene->getObjectPool()->addGameObject(textObj3);
+
 
 
 	game->getSceneManager()->changeScene(scene);

@@ -69,7 +69,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 		{
 			tempEnemyCount++;
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
-			comp->move(Vector2<int>(0, 5));
+			comp->move(Vector2<int>(0, 500 *deltaTime));
 			comp->rotate(2.0f);
 			if (comp->getPosition().getY() - comp->getOrigin().getY() > screenHeight)
 			{
