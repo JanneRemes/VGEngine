@@ -39,12 +39,55 @@ namespace vg
 		*/
 		static glm::mat4 modelTransform(TransformComponent* transform);
 
+		/**
+		Set camera position
+		@param x position in pixels
+		@param y position in pixels
+		*/
+		void setCameraPosition(float x, float y);
+
+		/**
+		Move camera position
+		@param x position in pixels
+		@param y position in pixels
+		*/
+		void moveCameraPosition(float x, float y);
+
+		/**
+		Set camera rotation
+		@param rotation in degrees
+		*/
+		void setCameraRotation(float rotation);
+
+		/**
+		Rotate camera position
+		@param rotation in degrees
+		*/
+		void rotateCamera(float rotation);
+
+		/**
+		Set camera scale
+		@param scaleX must be greater than zero
+		@param scaleY must be greater than zero
+		*/
+		void setCameraScale(float scaleX, float scaleY);
+
+		/**
+		Set camera scale
+		@param scaleX must be greater than zero
+		@param scaleY must be greater than zero
+		*/
+		void scaleCamera(float scaleX, float scaleY);
+
 	private:
 		/**
 		Sends new uniform values to shader
 		*/
 		void updateShader(graphics::Shader* shader, TransformComponent* transform);
 
+		glm::vec2 mCameraPosition;	///Camera position in pixels
+		float mCameraRotation;		///Camera rotation in degrees
+		glm::vec2 mCameraScale;		///Camera scale, must be greater than zero
 	};
 
 }
