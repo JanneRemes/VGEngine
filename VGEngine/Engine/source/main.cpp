@@ -149,6 +149,11 @@ void android_main(struct android_app* state)
                 {
 					vg::input::Input::sensorEvent(engine.sensorEventQueue);
                 }
+
+				if (engine.gyroscopeSensor != NULL)
+				{
+					vg::input::Input::sensorEvent(engine.sensorEventQueue);
+				}
             }
 
             // Check if we are exiting.
