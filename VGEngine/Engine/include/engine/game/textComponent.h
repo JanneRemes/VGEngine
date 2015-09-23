@@ -125,7 +125,7 @@ namespace vg
         /**
         Default indices
         */
-        const std::vector<uint> defaultIndices =
+		const std::vector<unsigned short> defaultIndices =
         {
             0u, 1u, 2u,
             0u, 2u, 3u

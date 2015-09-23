@@ -9,7 +9,7 @@ namespace vg
 		Buffer that contains data of indices
 		*/
 		class IndexBuffer :
-			public Buffer<GLuint>
+			public Buffer<GLushort>
 		{
 		public:
 			IndexBuffer();
@@ -18,7 +18,7 @@ namespace vg
 			Constructor for the indexbuffer
 			@param data Indice data for buffer
 			*/
-			IndexBuffer(const std::vector<GLuint>& data);
+			IndexBuffer(const std::vector<GLushort>& data);
 		};
 	}
 }

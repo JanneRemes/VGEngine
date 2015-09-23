@@ -11,6 +11,6 @@ namespace vg{
 
 	private:
 		std::vector<float> getDefaultVertices();
-		std::vector<GLuint> getDefaultIndices();
+		std::vector<GLushort> getDefaultIndices();
 	};
 }

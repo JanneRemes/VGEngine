@@ -19,7 +19,7 @@ namespace vg
 		@param vertices vector of vertices for the draw
 		@param indices vector of indices for the draw
 		*/
-		RenderComponent(std::vector<float> vertices,std::vector<GLuint> indices);
+		RenderComponent(std::vector<float> vertices, std::vector<GLushort> indices);
 		~RenderComponent() = default;
 
 		/**
@@ -30,7 +30,7 @@ namespace vg
 		/**
 		@return Returns the components indices
 		*/
-		std::vector<GLuint> *getIndices(){ return &indices; };
+		std::vector<GLushort> *getIndices(){ return &indices; };
 
 		/**
 		@return pointer to current texture
@@ -42,6 +42,6 @@ namespace vg
 
 		vg::graphics::Texture *mTexture;
 		std::vector<float> vertices;
-		std::vector<GLuint> indices;
+		std::vector<GLushort> indices;
 	};
 }

@@ -63,15 +63,34 @@ GLint GraphicsContext::getHeight()
 
 void GraphicsContext::initializeEGL(ANativeWindow* window)
 {
-	EGLint attribs[] = 
-	{
+	const EGLint config16bpp[] = {
+		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+		EGL_RED_SIZE, 5,
+		EGL_GREEN_SIZE, 6,
+		EGL_BLUE_SIZE, 5,
+		EGL_NONE
+	};
+
+	const EGLint config24bpp[] = {
+		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
 		EGL_RED_SIZE, 8,
 		EGL_GREEN_SIZE, 8,
 		EGL_BLUE_SIZE, 8,
-		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+		EGL_NONE
+	};
+
+	const EGLint config32bpp[] = {
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+		EGL_RED_SIZE, 8,
+		EGL_GREEN_SIZE, 8,
+		EGL_BLUE_SIZE, 8,
+		EGL_ALPHA_SIZE, 8,
 		EGL_DEPTH_SIZE, 16,
-		EGL_NONE 
+		EGL_STENCIL_SIZE, 0,
+		EGL_NONE
 	};
 
     EGLint contextAttribs[] =
@@ -80,60 +99,108 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
         EGL_NONE
     };
 
-
-
-    EGLint dummy, format;
-    EGLint numConfigs;
+	EGLint format, majorVersion, minorVersion, numConfigs, windowFormat;
+	const EGLint* attribs = NULL;
     EGLConfig config;
     mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+    eglInitialize(mDisplay, &majorVersion, &minorVersion);
+	Log("INFO", "EGL version: %i.%i", majorVersion, minorVersion);
+	checkError();
 
-    eglInitialize(mDisplay, 0, 0);
+	windowFormat = ANativeWindow_getFormat(window);
+	switch (windowFormat) 
+	{
+	case WINDOW_FORMAT_RGBA_8888:
+		attribs = config32bpp;
+		Log("INFO", "Window format: 32 bits per pixel", "");
+		break;
+	case WINDOW_FORMAT_RGBX_8888:
+		attribs = config24bpp;
+		Log("INFO", "Window format: 24 bits per pixel", "");
+		break;
+	case WINDOW_FORMAT_RGB_565:
+		attribs = config16bpp;
+		Log("INFO", "Window format: 16 bits per pixel", "");
+		break;
+	default:
+		attribs = config16bpp;
+		Log("ERROR", "Unknown window format!", "");
+	}
+
     eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
-    eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
+	Log("INFO", "Number of EGL configs: %i", numConfigs);
+	checkError();
+	eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
+	checkError();
 
     ANativeWindow_setBuffersGeometry(window, 0, 0, format);
 
+	mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
+	checkError();
     mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
-    mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
+	checkError();
 
     if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
     {
         Log("WARNING", "Unable to eglMakeCurrent", "");
     }
+	checkError();
 
     eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
-    eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
+	checkError();
+	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
+	checkError();
 }
 
 void GraphicsContext::createGLProgram()
 {
 	mProgramId = glCreateProgram();
+	gl::checkError();
 }
 
 void GraphicsContext::initializeOpenGL()
 {
+	const GLubyte* glVersion = glGetString(GL_VERSION);
+	Log("INFO", "OpenGL ES version: %s", glVersion);
 	gl::checkError();
 
 	// transparency
 	glEnable(GL_BLEND);
+	gl::checkError();
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	gl::checkError();
 
 	// z-layer
 	glEnable(GL_DEPTH_TEST);
+	gl::checkError();
 	glEnable(GL_CULL_FACE);
+	gl::checkError();
 	glCullFace(GL_BACK);
+	gl::checkError();
 	glFrontFace(GL_CCW);
+	gl::checkError();
 	glDepthFunc(GL_LESS);
+	gl::checkError();
 	glDepthMask(GL_TRUE);
+	gl::checkError();
 	glDepthRangef(0.0, 1.0);
+	gl::checkError();
 
 	// font
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
 	gl::checkError();
 }
 
 GLuint GraphicsContext::getProgramId()
 {
 	return mProgramId;
+}
+
+void GraphicsContext::checkError()
+{
+	EGLint error = eglGetError();
+	if (error != EGL_SUCCESS)
+	{
+		Log("ERROR", "EGL error: %i", error, "");
+	}
 }

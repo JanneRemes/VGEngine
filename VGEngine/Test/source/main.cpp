@@ -13,7 +13,6 @@
 #include "TestComponent.h"
 #include "ShipSystem.h"
 #include "enemySystem.h"
-//#include "deleteSystem.h"
 #include "TestComponentSystem.h"
 
 #include <stdlib.h> 
@@ -26,16 +25,22 @@ void mainGame(Game* game)
 	Game::log("test");
 	Scene *scene = new Scene();
 	core::AssetManager* assetManager = game->getAssetManager();
+	game->getSceneManager()->changeScene(scene);
 
 	//SHIP
 	GameObject *ship = new GameObject("ship");
     TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
-        Vector2<int>(128, 128), 0.0f, 10000, Vector2<int>(64,64));
+        Vector2<int>(128, 128), 0.0f, 0, Vector2<int>(64,64));
 	ship->addComponent(transform);
 	TestComponent *testcomponent = new TestComponent();
 	ship->addComponent(testcomponent);
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	ship->addComponent(quadre);
+	scene->getObjectPool()->addGameObject(ship);
+
+	ShipSystem *shipSystem = new ShipSystem(game);
+	shipSystem->mScene = scene;
+	game->addComponentSystem(scene, shipSystem);
 
 	//text
 	TextComponent* tempText = game->getFactory()->create("arial.ttf", 6u);
@@ -47,7 +52,7 @@ void mainGame(Game* game)
 	textObj->addComponent(tempText);
 	scene->getObjectPool()->addGameObject(textObj);
 	game->addComponentSystem(scene, new TextRenderSystem());
-
+	
 	//text
 	TextComponent* tempText2 = game->getFactory()->create("arial.ttf", 6u);
 	tempText2->setText("Bullets: ");
@@ -67,22 +72,15 @@ void mainGame(Game* game)
 		Vector2<int>(0, 0), 0.0f, 10000));
 	textObj3->addComponent(tempText2);
 	scene->getObjectPool()->addGameObject(textObj3);
-
-
-
-	game->getSceneManager()->changeScene(scene);
-	scene->getObjectPool()->addGameObject(ship);
-	ShipSystem *doge = new ShipSystem(game);
+	
+	//enemy
 	EnemySystem *enemySystem = new EnemySystem(game);
-	doge->mScene = scene;
 	enemySystem->setScene(scene);
-	game->addComponentSystem(scene, doge);
 	game->addComponentSystem(scene, enemySystem);
-	//game->addComponentSystem(scene, new DeleteSystem(game));
 
+	//sound
 	assetManager->load<sound::Sound>("Kalimba.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",
 		*assetManager->get<sound::Sound>("Kalimba.mp3"));
     Game::getInstance()->getAudioManager()->play("music");
-
 }

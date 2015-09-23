@@ -38,9 +38,9 @@ std::vector<float> TriangleComponent::getDefaultVertices()
 	};
 	return defaultVertices;
 }
-std::vector<GLuint> TriangleComponent::getDefaultIndices()
+std::vector<GLushort> TriangleComponent::getDefaultIndices()
 {
-	std::vector<GLuint> defaultIndices = std::vector<GLuint>
+	std::vector<GLushort> defaultIndices = std::vector<GLushort>
 	{
 		//up
 		0,

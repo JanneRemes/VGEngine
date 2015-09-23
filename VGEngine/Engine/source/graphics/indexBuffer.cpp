@@ -8,7 +8,7 @@ IndexBuffer::IndexBuffer()
 {
 }
 
-IndexBuffer::IndexBuffer(const std::vector<GLuint>& data)
+IndexBuffer::IndexBuffer(const std::vector<GLushort>& data)
 	: Buffer(GL_ELEMENT_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW)
 {
 }

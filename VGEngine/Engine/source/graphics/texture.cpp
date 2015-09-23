@@ -59,8 +59,14 @@ bool Texture::load(core::FileManager *fileManager)
 	gl::activeTexture();
 	gl::bindTexture(mId);
 	gl::texImage2D(mWidth, mHeight, pixels);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//gl::texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//gl::texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
+	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	gl::bindTexture(0);
 
 	mIsLoaded = true;

@@ -27,7 +27,7 @@ namespace vg{
 		/**
 		@return Returns the default indices that are needed for a triangle
 		*/
-		std::vector<GLuint> getDefaultIndices();
+		std::vector<GLushort> getDefaultIndices();
 	};
 
 }

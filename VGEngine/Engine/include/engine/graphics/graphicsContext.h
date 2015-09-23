@@ -54,11 +54,7 @@ namespace vg
 			/**
 			@return returns mProgramId (opengl program id)
 			*/
-
 			GLuint getProgramId();
-
-
-
 
 		private:
 			/**
@@ -76,6 +72,11 @@ namespace vg
 			links shaders, creates buffers
 			*/
 			void initializeOpenGL();
+
+			/**
+			Checks and prints possible EGL errors
+			*/
+			void checkError();
 
 			EGLDisplay mDisplay;    ///< Handle to devices display
 			EGLSurface mSurface;    ///< Handle to device surface
