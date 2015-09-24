@@ -21,6 +21,7 @@ EnemySystem::EnemySystem(Game *game)
 	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koala.png");
 	mEnemyPrefab->addComponent(quadre);
 	mSpawnTimer.restart();
+	fpsTimer.restart();
 }
 
 EnemySystem::~EnemySystem()
@@ -58,11 +59,23 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 		else if ((*i)->getName() == "bulletText")
 		{
 			TextComponent* text = (*i)->getComponent<TextComponent>();
-			if (text != nullptr)
+			if (text != nullptr )
 			{
 				std::stringstream stream;
 				stream << "Bullets: " << mBulletCount;
 				text->setText(stream.str());
+				
+			}
+		}
+		else if((*i)->getName() == "fpsText")
+		{
+			TextComponent* text = (*i)->getComponent<TextComponent>();
+			if (text != nullptr && fpsTimer.getCurrentTimeSeconds() >= 0.5f)
+			{
+				std::stringstream stream;
+				stream << "FPS: " << (int)(1/deltaTime);
+				text->setText(stream.str());
+				fpsTimer.restart();
 			}
 		}
 		else if ((*i)->getName() == "enemy")
@@ -71,7 +84,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
 			comp->move(Vector2<int>(0, 500 *deltaTime));
 			comp->rotate(2.0f);
-			if (comp->getPosition().getY() - comp->getOrigin().getY() > screenHeight)
+			if (comp->getWorldPosition().getY() - comp->getOrigin().getY() > screenHeight)
 			{
 				(*i)->markForDelete();
 			}
@@ -83,8 +96,8 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<int>::Distance(btransf->getPosition(), comp->getPosition()) 
-						< (comp->getSize().getX() + comp->getSize().getY()) / 2.0f)
+					if (Vector2<int>::Distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
+						< (comp->getWorldSize().getX() + comp->getWorldSize().getY()) / 2.0f)
 						(*i)->markForDelete();
 				}
 			}

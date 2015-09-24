@@ -38,6 +38,19 @@ void mainGame(Game* game)
 	ship->addComponent(quadre);
 	scene->getObjectPool()->addGameObject(ship);
 
+
+	//SHIP
+	/*
+	GameObject *ship2 = new GameObject("ship2");
+	TransformComponent *transformship = new TransformComponent(Vector2<int>(64, 0),
+		Vector2<int>(128, 128), 0.0f, 0, Vector2<int>(64, 64));
+	ship2->addComponent(transformship);
+	QuadrangleComponent *quadreship = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
+	ship2->addComponent(quadreship);
+	scene->getObjectPool()->addGameObject(ship2);*/
+
+
+
 	ShipSystem *shipSystem = new ShipSystem(game);
 	shipSystem->mScene = scene;
 	game->addComponentSystem(scene, shipSystem);
@@ -64,14 +77,14 @@ void mainGame(Game* game)
 	scene->getObjectPool()->addGameObject(textObj2);
 
 	//FPS text
-	TextComponent* tempText3= game->getFactory()->create("arial.ttf", 6u);
-	tempText3->setText("FPS: ");
-	tempText3->setColour(0, 0, 127);
-	GameObject* textObj3 = new GameObject("fpsText");
-	textObj3->addComponent(new TransformComponent(Vector2<int>(4, 156),
+	TextComponent* fpstextComponent= game->getFactory()->create("arial.ttf", 6u);
+	fpstextComponent->setText("FPS: ");
+	fpstextComponent->setColour(0, 0, 127);
+	GameObject* fpstextObject = new GameObject("fpsText");
+	fpstextObject->addComponent(new TransformComponent(Vector2<int>(4, 178),
 		Vector2<int>(0, 0), 0.0f, 10000));
-	textObj3->addComponent(tempText2);
-	scene->getObjectPool()->addGameObject(textObj3);
+	fpstextObject->addComponent(fpstextComponent);
+	scene->getObjectPool()->addGameObject(fpstextObject);
 	
 	//enemy
 	EnemySystem *enemySystem = new EnemySystem(game);

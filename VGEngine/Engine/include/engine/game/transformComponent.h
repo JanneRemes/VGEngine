@@ -31,10 +31,14 @@ namespace vg
         ~TransformComponent();
 
         /**
-        <description>
+        @return local position (only taking into account this component큦 position not parent큦 position)
         */
-        vg::Vector2<int> getPosition();
+        vg::Vector2<int> getLocalPosition();
 
+		/**
+		@return world position (adds parent gameobject큦 position to this components local position)
+		*/
+		vg::Vector2<int> getWorldPosition();
         /**
         Set position value to be used on draw calls.
         */
@@ -46,9 +50,14 @@ namespace vg
         void move(vg::Vector2<int> change);
 
         /**
-        <description>
+		@return local size (only taking into account this component큦 size not parent큦 size)
         */
-        vg::Vector2<int> getSize();
+        vg::Vector2<int> getLocalSize();
+
+		/**
+		@return world size (adds parent gameobject큦 size to this components local size)
+		*/
+		vg::Vector2<int> getWorldSize();
 
         /**
         Set position value to be used on draw calls.
@@ -56,9 +65,14 @@ namespace vg
         void setSize(const vg::Vector2<int> size);
 
         /**
-        <description>
+		@return local rotattion (only taking into account this component큦 rotation not parent큦 rotation)
         */
-        float getRotation();
+        float getLocalRotation();
+
+		/**
+		@return world rotation (adds parent gameobject큦 rotation to this components local rotation)
+		*/
+		float getWorldRotation();
 
         /**
         Set rotation value to be used on draw calls.
@@ -66,7 +80,7 @@ namespace vg
         void setRotation(float rotation);
 
         /**
-        Add to the rotation value to be used on draw calls.
+        Add to the rotation value
         */
         void rotate(float rotatation);
 

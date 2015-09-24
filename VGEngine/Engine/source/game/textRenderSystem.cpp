@@ -37,8 +37,8 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaT
 
 			string textString = text->getText();
 			FT_GlyphSlot* glyph = text->getGlyph();
-			float x = transform->getPosition().getX();
-			float y = transform->getPosition().getY();
+			float x = transform->getWorldPosition().getX();
+			float y = transform->getWorldPosition().getY();
 			float base = y;
 
 			for (int i = 0; i < textString.size(); i++)

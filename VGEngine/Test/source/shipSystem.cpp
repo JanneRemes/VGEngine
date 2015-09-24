@@ -46,7 +46,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 		{
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
 			comp->move(Vector2<int>(0, -10));
-			if (comp->getPosition().getY() < 0)
+			if (comp->getWorldPosition().getY() < 0)
 				(*it)->markForDelete();
 		}
 		else if ((*it)->getName() == "ship")
@@ -58,7 +58,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 			Vector2<int> newPos(
 				((mScreenSize.getX()/ 20 * (input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
 				resolution.getY()-80);
-			if (sqrt(pow(newPos.getX() - transformComponent->getPosition().getX(), 2)) > 15.0f)
+			if (sqrt(pow(newPos.getX() - transformComponent->getWorldPosition().getX(), 2)) > 15.0f)
 			{
 				transformComponent->setPosition(newPos);
 			}
@@ -69,8 +69,8 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
                 Game::getInstance()->getAudioManager()->addSound(*sound);
 
 				GameObject *g = new GameObject(*mBullet);
-				Vector2<int> temppos(transformComponent->getPosition().getX(),
-					transformComponent->getPosition().getY() - transformComponent->getOrigin().getY());
+				Vector2<int> temppos(transformComponent->getWorldPosition().getX(),
+					transformComponent->getWorldPosition().getY() - transformComponent->getOrigin().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				
 				mScene->getObjectPool()->addGameObject(g);
