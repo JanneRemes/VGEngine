@@ -177,6 +177,9 @@
     <ClInclude Include="include\engine\game\deleteSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\game\physicsComponent.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -294,6 +297,9 @@
       <Filter>source\sound</Filter>
     </ClCompile>
     <ClCompile Include="source\game\deleteSystem.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\physicsComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
