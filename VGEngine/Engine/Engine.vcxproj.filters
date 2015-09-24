@@ -177,6 +177,12 @@
     <ClInclude Include="include\engine\game\deleteSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\game\animationComponent.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\animationSystem.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -294,6 +300,12 @@
       <Filter>source\sound</Filter>
     </ClCompile>
     <ClCompile Include="source\game\deleteSystem.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\animationComponent.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\animationSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
