@@ -44,7 +44,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Box2D\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -72,6 +72,7 @@
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\objectPool.h" />
+    <ClInclude Include="include\engine\game\physicsComponent.h" />
     <ClInclude Include="include\engine\game\renderComponent.h" />
     <ClInclude Include="include\engine\game\renderSystem.h" />
     <ClInclude Include="include\engine\game\scene.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\objectPool.cpp" />
+    <ClCompile Include="source\game\physicsComponent.cpp" />
     <ClCompile Include="source\game\renderComponent.cpp" />
     <ClCompile Include="source\game\renderSystem.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
