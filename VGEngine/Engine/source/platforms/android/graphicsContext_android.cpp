@@ -1,4 +1,4 @@
-#if defined(OS_ANDROID) || true ==true
+#if defined(OS_ANDROID) 
 #pragma once
 #include "engine/assets/fileManager.h"
 #include "engine\graphics\graphicsContext.h"
@@ -7,8 +7,9 @@
 #include "engine/utility/logger.h"
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
+#include "engine/application.h"
 using namespace vg::graphics;
-
+using namespace vg::core;
 EGLDisplay mDisplay;    ///< Handle to devices display
 EGLSurface mSurface;    ///< Handle to device surface
 EGLContext mContext;    ///< Handle to device context
@@ -26,10 +27,10 @@ GraphicsContext::~GraphicsContext()
 
 }
 
-void GraphicsContext::initialize(void *windowHandle)
+void GraphicsContext::initialize()
 {
-	ANativeWindow* window = static_cast<ANativeWindow*>(windowHandle);
-	initializeGraphicsContext(window);
+
+	initializeGraphicsContext();
 	initializeOpenGL();
 }
 
@@ -72,9 +73,10 @@ unsigned int GraphicsContext::getHeight()
 	return mHeight;
 }
 
-void GraphicsContext::initializeGraphicsContext(void *windowData)
+void GraphicsContext::initializeGraphicsContext()
 {
-	ANativeWindow *window = static_cast<ANativeWindow*>(windowData);
+	android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());
+	ANativeWindow* window = static_cast<ANativeWindow*>(app->window);
 	const EGLint config16bpp[] = {
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,

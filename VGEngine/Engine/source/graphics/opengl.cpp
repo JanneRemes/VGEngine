@@ -1,4 +1,6 @@
-
+#if defined(OS_ANDROID)
+#pragma once
+#include <GLES2/gl2.h>
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
@@ -6,7 +8,7 @@ using namespace vg::graphics;
 
 void gl::checkError()
 {
-	GLuint error = glGetError();
+	unsigned int error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
 		Log("vgengine", "OpenGL error: %i", error, "");
@@ -19,55 +21,67 @@ void gl::vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void*
 	checkError();
 }
 
-void gl::drawArrays(GLenum primitiveType, GLint offset, GLsizei count)
+void gl::drawArrays(unsigned int primitiveType, int offset, int count)
 {
     glDrawArrays(primitiveType, offset, count);
 	checkError();
 }
 
-void gl::drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices)
+void gl::drawElements(unsigned int primitiveType, int count, unsigned int indexType, const void *indices)
 {
     glDrawElements(primitiveType, count, indexType, indices);
 	checkError();
 }
 
-void gl::useProgram(GLuint programId)
+void gl::useProgram(unsigned int programId)
 {
     glUseProgram(programId);
 	checkError();
 }
 
-void gl::genTextures(GLuint* textureIds, GLsizei amount)
+void gl::genTextures(unsigned int* textureIds, int amount)
 {
 	glGenTextures(amount, textureIds);
 	checkError();
 }
 
-void gl::bindTexture(GLuint textureId)
+void gl::bindTexture(unsigned int textureId)
 {
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	checkError();
 }
 
-void gl::activeTexture(GLuint textureIndex)
+void gl::activeTexture()
+{
+	glActiveTexture(GL_TEXTURE0);
+	checkError();
+}
+
+void gl::activeTexture(unsigned int textureIndex = GL_TEXTURE0)
 {
 	glActiveTexture(textureIndex);
 	checkError();
 }
 
-void gl::texParameteri(GLenum pname, GLint parameter)
+void gl::texParameteri(unsigned int pname, int parameter)
 {
 	glTexParameteri(GL_TEXTURE_2D, pname, parameter);
 	checkError();
 }
 
-void gl::texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format)
+void gl::texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels)
+{
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+	checkError();
+}
+
+void gl::texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels, unsigned int format = GL_RGBA)
 {
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels.data());
 	checkError();
 }
 
-void gl::texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format)
+void gl::texImage2D(unsigned int width, unsigned int height, const unsigned char* pixels, unsigned int format = GL_RGBA)
 {
 	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
 	checkError();
@@ -79,71 +93,72 @@ void gl::clear()
 	checkError();
 }
 
-void gl::clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+void gl::clearColor(float red, float green, float blue, float alpha)
 {
-	glClearColor(red, green, blue, alpha);
+	glClearColor(GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, glm::mat3& value)
+void gl::setUniform(unsigned int location, glm::mat3& value)
 {
 	glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, glm::mat4& value)
+void gl::setUniform(unsigned int location, glm::mat4& value)
 {
 	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, const GLfloat* value)
+void gl::setUniform(unsigned int location, const float* value)
 {
 	glUniform1fv(location, 1, value);
 	checkError();
 }
 
-void gl::setUniform(GLuint location, glm::vec2& value)
+void gl::setUniform(unsigned int location, glm::vec2& value)
 {
 	glUniform2fv(location, 1, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, glm::vec3& value)
+void gl::setUniform(unsigned int location, glm::vec3& value)
 {
 	glUniform3fv(location, 1, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::setUniform(GLuint location, glm::vec4& value)
+void gl::setUniform(unsigned int location, glm::vec4& value)
 {
 	glUniform4fv(location, 1, glm::value_ptr(value));
 	checkError();
 }
 
-void gl::attachShader(GLuint program, GLuint shader)
+void gl::attachShader(unsigned int program, unsigned int shader)
 {
 	glAttachShader(program, shader);
 	checkError();
 }
 
-void gl::linkProgram(GLuint program)
+void gl::linkProgram(unsigned int program)
 {
 	glLinkProgram(program);
 	checkError();
 }
 
-GLint gl::linkStatus(GLuint program)
+int gl::linkStatus(unsigned int program)
 {
-	GLint result = GL_FALSE;
+	int result = GL_FALSE;
 	glGetProgramiv(program, GL_LINK_STATUS, &result);
 	checkError();
 	return result;
 }
 
-GLuint gl::getUniformLocation(GLuint program, std::string name)
+unsigned int gl::getUniformLocation(unsigned int program, std::string name)
 {
-	GLuint location = glGetUniformLocation(program, name.c_str());
+	unsigned int location = glGetUniformLocation(program, name.c_str());
 	checkError();
 	return location;
 }
+#endif

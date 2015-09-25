@@ -43,7 +43,7 @@ namespace vg
         /**
         <description>
         */
-        void readFiles(core::FileManager& fileManager);
+        //void readFiles(core::FileManager& fileManager);
 
         /**
         @return Returns whether the game is running or not

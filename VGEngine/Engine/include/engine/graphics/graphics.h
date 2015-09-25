@@ -36,7 +36,7 @@ namespace vg
 				@param app pointer to current Android application struct
 				@param shader reference to Shader, uses Shader's default constructor as default
 				*/
-			void initialize(android_app* app, const Shader& shader = Shader());
+			void initialize( const Shader& shader = Shader());
 
 			/**
 				destroys GraphicsContext

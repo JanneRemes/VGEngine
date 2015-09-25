@@ -1,19 +1,19 @@
-
+#if defined (OS_ANDROID)
+#pragma once
 #include "engine/assets/fileManager.h"
 #include "engine\utility\logger.h"
 #include "engine/sound/Sound.h"
 #include <vector>
-
+#include "engine\application.h"
 using namespace vg::core;
 
 std::string mInternalDataPath;          ///< For reading and writing internal assets
 std::string mExternalDataPath;          ///< For reading and writing external assets
-
-FileManager::FileManager(android_app* app)
-	: mAssetManager(app->activity->assetManager)
-	
-	
+std::string getDataPath(FileManager::DataPath dataPath);
+FileManager::FileManager()
 { 
+	android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());
+	mAssetManager = app->activity->assetManager;
 	mExternalDataPath = std::string(app->activity->externalDataPath) + "/";
 	mInternalDataPath= std::string(app->activity->internalDataPath) + "/";
 }
@@ -101,10 +101,13 @@ bool FileManager::writeFile(DataPath dataPath, const std::string& path, const st
 
 	return ferror(file) == 0;
 }
-
-std::string FileManager::getDataPath(DataPath dataPath) const
+/**
+@param dataPath Used to choose if the path Internal or External
+@return Path for the data
+*/
+std::string getDataPath(FileManager::DataPath dataPath)
 {
-	if (dataPath == DataPath::Internal)
+	if (dataPath == FileManager::DataPath::Internal)
 	{
 		return mInternalDataPath;
 	}
@@ -113,3 +116,4 @@ std::string FileManager::getDataPath(DataPath dataPath) const
 		return mExternalDataPath;
 	}
 }
+#endif

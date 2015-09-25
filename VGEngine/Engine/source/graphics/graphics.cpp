@@ -4,10 +4,10 @@
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
-
+#include "engine/application.h"
 using namespace vg::graphics;
 using namespace std;
-
+using namespace vg::core;
 
 Graphics::Graphics()
     : mInitialized(false)
@@ -19,10 +19,11 @@ Graphics::~Graphics()
     delete mFileManager;
 }
 
-void Graphics::initialize(android_app* app, const Shader& shader)
+void Graphics::initialize( const Shader& shader)
 {
-    mFileManager = new core::FileManager(app);
-    mContext.initialize(app->window);
+	android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());
+    mFileManager = new core::FileManager();
+    mContext.initialize();
     mShader = Shader(shader);
     mShader.load(*mFileManager);
 	

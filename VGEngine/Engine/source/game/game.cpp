@@ -44,7 +44,7 @@ void Game::setGraphics(vg::graphics::Graphics *graphics)
 {
 	this->mGraphics = graphics;
 }
-
+/*
 void readFiles(core::FileManager& fileManager)
 {
     Log("vgengine", "----- -----", "");
@@ -69,7 +69,7 @@ void readFiles(core::FileManager& fileManager)
     }
     Log("vgengine", "End", "");
     Log("vgengine", "----- -----", "");
-}
+}*/
 
 bool Game::isRunning()
 {
@@ -123,7 +123,7 @@ sound::AudioManager *Game::getAudioManager()
 
 void Game::setFileManager(android_app *app)
 {
-	mFileManager = new core::FileManager(app);
+	mFileManager = new core::FileManager();
 	mAudioManager = new sound::AudioManager();
 	mAssetManager = new core::AssetManager(mFileManager);
 	mFactory = new Factory(mAssetManager, mFileManager);

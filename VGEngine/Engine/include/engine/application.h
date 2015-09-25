@@ -25,6 +25,7 @@ namespace vg
 				}
 				return currentApplication;
 			}
+			void *getEngine();
 		private:
 			static Application *currentApplication;
 		};

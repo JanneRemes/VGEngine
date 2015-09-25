@@ -41,7 +41,7 @@ namespace vg
                 Filemanagers constructor
                 @param app Android application
                 */
-            FileManager(android_app* app);
+            FileManager();
 
             ~FileManager() = default;
 
@@ -87,11 +87,8 @@ namespace vg
                 */
             bool writeFile(DataPath dataPath, const std::string& path, const std::string& inData) const;
         private:
-            /**
-                @param dataPath Used to choose if the path Internal or External
-                @return Path for the data
-                */
-            std::string getDataPath(DataPath dataPath) const;
+
+
 
             AAssetManager* mAssetManager = nullptr; ///< AssetManager which is used for reading and writing
              };

@@ -1,4 +1,4 @@
-#if defined(OS_WIMNDOWS) || true ==true
+#if defined(OS_WIMNDOWS)
 
 
 #endif

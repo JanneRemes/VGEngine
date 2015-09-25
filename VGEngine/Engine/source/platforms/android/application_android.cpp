@@ -1,4 +1,4 @@
-#if defined(OS_ANDROID) || true == true
+#if defined(OS_ANDROID)
 #include "engine\application.h"
 #include "engine\android_native_app_glue.h"
 #include "engine\utility\logger.h"
@@ -205,7 +205,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
 			// The window is being shown, get it ready.
 			if (engine->app->window != NULL)
 			{
-				engine->graphics.initialize(engine->app);
+				engine->graphics.initialize();
 				engine->animating = true;
 				engine->state.game->initSceneManager();
 				engine->state.game->setFileManager(app);
@@ -283,6 +283,9 @@ void handleCommand(struct android_app* app, int32_t cmd)
 
 		}
 }
-
+void *Application::getEngine()
+{
+	return engine.app;
+}
 
 #endif

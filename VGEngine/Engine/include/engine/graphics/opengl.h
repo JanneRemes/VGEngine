@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <GLES2/gl2.h>
+
 #include <stdint.h>
 #include <vector>
 #include <string>
@@ -16,51 +16,62 @@ namespace vg
 			*/
 		namespace gl
 		{
+			/*class unsigned int;
+			class unsigned int;
+			class int ;
+			class int;
+			class void;
+			class float;
+			class float;*/
 			void checkError();
 
 			void vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
 
-			void drawArrays(GLenum primitiveType, GLint offset, GLsizei count);
+			void drawArrays(unsigned int primitiveType, int offset, int  count);
 
-			void drawElements(GLenum primitiveType, GLsizei count, GLenum indexType, const GLvoid *indices = nullptr);
+			void drawElements(unsigned int primitiveType, int  count, unsigned int indexType, const void *indices = nullptr);
 
-			void useProgram(GLuint programId = 0);
+			void useProgram(unsigned int programId = 0);
 
-			void genTextures(GLuint* textureIds, GLsizei amount = 1);
+			void genTextures(unsigned int* textureIds, int  amount = 1);
 
-			void bindTexture(GLuint textureId);
+			void bindTexture(unsigned int textureId);
 
-			void activeTexture(GLuint textureIndex = GL_TEXTURE0);
+			void activeTexture();
 
-			void texImage2D(GLuint width, GLuint height, const std::vector<unsigned char>& pixels, GLenum format = GL_RGBA);
+			void activeTexture(unsigned int textureIndex);
 
-			void texImage2D(GLuint width, GLuint height, const unsigned char* pixels, GLenum format = GL_RGBA);
+			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
 
-			void texParameteri(GLenum pname, GLint parameter);
+			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels, unsigned int format);
+
+			void texImage2D(unsigned int width, unsigned int height, const unsigned char* pixels, unsigned int format);
+
+			void texParameteri(unsigned int pname, int parameter);
 
 			void clear();
 
-			void clearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+			void clearColor(float red, float green, float blue, float alpha);
 
-			void setUniform(GLuint location, glm::mat3& value);
+			void setUniform(unsigned int location, glm::mat3& value);
 
-			void setUniform(GLuint location, glm::mat4& value);
+			void setUniform(unsigned int location, glm::mat4& value);
 
-			void setUniform(GLuint location, const GLfloat* value);
+			void setUniform(unsigned int location, const float* value);
 
-			void setUniform(GLuint location, glm::vec2& value);
+			void setUniform(unsigned int location, glm::vec2& value);
 
-			void setUniform(GLuint location, glm::vec3& value);
+			void setUniform(unsigned int location, glm::vec3& value);
 
-			void setUniform(GLuint location, glm::vec4& value);
+			void setUniform(unsigned int location, glm::vec4& value);
 
-			void attachShader(GLuint program, GLuint shader);
+			void attachShader(unsigned int program, unsigned int shader);
 
-			void linkProgram(GLuint program);
+			void linkProgram(unsigned int program);
 
-			GLint linkStatus(GLuint program);
+			int linkStatus(unsigned int program);
 
-			GLuint getUniformLocation(GLuint program, std::string name);
+			unsigned int getUniformLocation(unsigned int program, std::string name);
 		}
 	}
 }
