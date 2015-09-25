@@ -8,8 +8,6 @@
 #include "engine/graphics/shader.h"
 #include "engine/game/factory.h"
 #include "engine/assets/assetManager.h"
-#include "engine/android_native_app_glue.h"
-#include <android/sensor.h>
 #include "engine\sound\AudioManager.h"
 
 #include <vector>

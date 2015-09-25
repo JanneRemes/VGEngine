@@ -29,7 +29,7 @@ namespace vg
 			Initializes EGL and openGL and creates opengl program
 			@param window pointer to Android window surface
 			*/
-			void initialize(ANativeWindow* window);
+			void initialize(void *windowHandle/*ANativeWindow* window*/);
 
 			/**
 			Desroys EGL and disables openGL attributes and buffers

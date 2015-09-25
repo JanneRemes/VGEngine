@@ -8,9 +8,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Tegra-Android</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Tegra-Android">
       <Configuration>Release</Configuration>
       <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -30,6 +38,12 @@
     <AndroidStlType>gnustl_static</AndroidStlType>
     <NdkToolchainVersion>gcc-4.9</NdkToolchainVersion>
   </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -46,7 +60,7 @@
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;OS_ANDROID</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -60,6 +74,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h" />
+    <ClInclude Include="include\engine\application.h" />
     <ClInclude Include="include\engine\assets\asset.h" />
     <ClInclude Include="include\engine\assets\assetManager.h" />
     <ClInclude Include="include\engine\assets\fileManager.h" />
@@ -132,14 +147,18 @@
     <ClCompile Include="source\game\transformComponent.cpp" />
     <ClCompile Include="source\game\triangleComponent.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
-    <ClCompile Include="source\graphics\graphicsContext.cpp" />
     <ClCompile Include="source\graphics\indexBuffer.cpp" />
     <ClCompile Include="source\graphics\opengl.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
-    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\platforms\android\application_android.cpp" />
+    <ClCompile Include="source\platforms\android\fileManager_android.cpp" />
+    <ClCompile Include="source\platforms\android\graphicsContext_android.cpp" />
+    <ClCompile Include="source\platforms\windows\application_windows.cpp" />
+    <ClCompile Include="source\platforms\windows\fileManager_windowscpp.cpp" />
+    <ClCompile Include="source\platforms\windows\graphicsContext_windows.cpp" />
     <ClCompile Include="source\sound\audioManager.cpp" />
     <ClCompile Include="source\sound\sound.cpp" />
     <ClCompile Include="source\sound\soundEffect.cpp" />

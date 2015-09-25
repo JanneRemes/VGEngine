@@ -1,5 +1,7 @@
-
-#include "engine/graphics/GraphicsContext.h"
+#if defined(OS_ANDROID) || true ==true
+#pragma once
+#include "engine\graphics\graphicsContext.h"
+#include "engine\application.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 
@@ -7,8 +9,8 @@ using namespace vg::graphics;
 
 GraphicsContext::GraphicsContext()
 {
-    mWidth = mHeight = 0;
-    mDisplay = mSurface = mContext = NULL;
+	mWidth = mHeight = 0;
+	mDisplay = mSurface = mContext = NULL;
 }
 
 GraphicsContext::~GraphicsContext()
@@ -16,49 +18,50 @@ GraphicsContext::~GraphicsContext()
 
 }
 
-void GraphicsContext::initialize(ANativeWindow* window)
+void GraphicsContext::initialize(void *windowHandle)
 {
-    initializeEGL(window);
+	ANativeWindow* window = static_cast<ANativeWindow*>(windowHandle);
+	initializeEGL(window);
 	initializeOpenGL();
 }
 
 void GraphicsContext::destroy()
 {
-    if (mDisplay != EGL_NO_DISPLAY)
-    {
-        eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_SURFACE);
+	if (mDisplay != EGL_NO_DISPLAY)
+	{
+		eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_SURFACE);
 
-        if (mContext != EGL_NO_CONTEXT)
-        {
-            eglDestroyContext(mDisplay, mContext);
-        }
+		if (mContext != EGL_NO_CONTEXT)
+		{
+			eglDestroyContext(mDisplay, mContext);
+		}
 
-        if (mSurface != EGL_NO_SURFACE)
-        {
-            eglDestroySurface(mDisplay, mSurface);
-        }
+		if (mSurface != EGL_NO_SURFACE)
+		{
+			eglDestroySurface(mDisplay, mSurface);
+		}
 
-        eglTerminate(mDisplay);
-    }
+		eglTerminate(mDisplay);
+	}
 
-    mDisplay = EGL_NO_DISPLAY;
-    mContext = EGL_NO_CONTEXT;
-    mSurface = EGL_NO_SURFACE;
+	mDisplay = EGL_NO_DISPLAY;
+	mContext = EGL_NO_CONTEXT;
+	mSurface = EGL_NO_SURFACE;
 }
 
 void GraphicsContext::swapBuffers()
 {
-    eglSwapBuffers(mDisplay, mSurface);
+	eglSwapBuffers(mDisplay, mSurface);
 }
 
 GLint GraphicsContext::getWidth()
 {
-    return mWidth;
+	return mWidth;
 }
 
 GLint GraphicsContext::getHeight()
 {
-    return mHeight;
+	return mHeight;
 }
 
 void GraphicsContext::initializeEGL(ANativeWindow* window)
@@ -93,22 +96,22 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
 		EGL_NONE
 	};
 
-    EGLint contextAttribs[] =
-    {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE
-    };
+	EGLint contextAttribs[] =
+	{
+		EGL_CONTEXT_CLIENT_VERSION, 2,
+		EGL_NONE
+	};
 
 	EGLint format, majorVersion, minorVersion, numConfigs, windowFormat;
 	const EGLint* attribs = NULL;
-    EGLConfig config;
-    mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    eglInitialize(mDisplay, &majorVersion, &minorVersion);
+	EGLConfig config;
+	mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+	eglInitialize(mDisplay, &majorVersion, &minorVersion);
 	Log("vgengine", "EGL version: %i.%i", majorVersion, minorVersion);
 	checkError();
 
 	windowFormat = ANativeWindow_getFormat(window);
-	switch (windowFormat) 
+	switch (windowFormat)
 	{
 	case WINDOW_FORMAT_RGBA_8888:
 		attribs = config32bpp;
@@ -127,26 +130,26 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
 		Log("vgengine", "Unknown window format!", "");
 	}
 
-    eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
+	eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
 	Log("vgengine", "Number of EGL configs: %i", numConfigs);
 	checkError();
 	eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
 	checkError();
 
-    ANativeWindow_setBuffersGeometry(window, 0, 0, format);
+	ANativeWindow_setBuffersGeometry(window, 0, 0, format);
 
 	mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
 	checkError();
-    mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
+	mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
 	checkError();
 
-    if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
-    {
-        Log("vgengine", "Unable to eglMakeCurrent", "");
-    }
+	if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
+	{
+		Log("vgengine", "Unable to eglMakeCurrent", "");
+	}
 	checkError();
 
-    eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
+	eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
 	checkError();
 	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
 	checkError();
@@ -204,3 +207,4 @@ void GraphicsContext::checkError()
 		Log("vgengine", "EGL error: %i", error, "");
 	}
 }
+#endif

@@ -1,4 +1,4 @@
-#ifdef OS_0
+
 #include "engine/assets/fileManager.h"
 #include "engine\utility\logger.h"
 #include "engine/sound/Sound.h"
@@ -9,12 +9,13 @@ using namespace vg::core;
 std::string mInternalDataPath;          ///< For reading and writing internal assets
 std::string mExternalDataPath;          ///< For reading and writing external assets
 
-
 FileManager::FileManager(android_app* app)
 	: mAssetManager(app->activity->assetManager)
-	, mInternalDataPath(std::string(app->activity->internalDataPath) + "/")
-	, mExternalDataPath(std::string(app->activity->externalDataPath) + "/")
-{
+	
+	
+{ 
+	mExternalDataPath = std::string(app->activity->externalDataPath) + "/";
+	mInternalDataPath= std::string(app->activity->internalDataPath) + "/";
 }
 
 bool FileManager::readAsset(const std::string& path, std::string& outData)
@@ -26,7 +27,7 @@ bool FileManager::readAsset(const std::string& path, std::string& outData)
 	AAsset_read(asset, &buffer[0], buffer.size());
 	AAsset_close(asset);
 	outData.assign(buffer.begin(), buffer.end());
-	
+
 	return true;
 }
 
@@ -112,4 +113,3 @@ std::string FileManager::getDataPath(DataPath dataPath) const
 		return mExternalDataPath;
 	}
 }
-#endif

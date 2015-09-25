@@ -46,6 +46,15 @@
     <Filter Include="external">
       <UniqueIdentifier>{08c84e93-0f1e-4f81-b366-e916baf2b441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\platforms">
+      <UniqueIdentifier>{2a136957-9c55-4931-b018-c08a148ae6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\platforms\android">
+      <UniqueIdentifier>{cc45aa05-f838-48a9-8420-2ec311c14ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\platforms\windows">
+      <UniqueIdentifier>{2d024c82-8698-4571-8fff-920efb9d3e15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -183,13 +192,13 @@
     <ClInclude Include="include\engine\game\physicsSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\application.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\main.cpp">
-      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\android_native_app_glue.cpp">
       <Filter>source</Filter>
@@ -214,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="source\assets\fileManager.cpp">
       <Filter>source\assets</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\graphicsContext.cpp">
-      <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\utility\math.cpp">
       <Filter>source\utility</Filter>
@@ -307,6 +313,24 @@
     </ClCompile>
     <ClCompile Include="source\game\physicsSystem.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\fileManager_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\application_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\application_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\fileManager_windowscpp.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\graphicsContext_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\graphicsContext_android.cpp">
+      <Filter>source\platforms\android</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
