@@ -63,9 +63,11 @@ namespace vg
         /**
 		@return rotation in degrees
         */
-        float getRotation();
-
-
+        float getLocalRotation();
+		/**
+		stuff
+		*/
+		float getWorldRotation();
         /**
         Set rotation value to be used on draw calls.
         */
