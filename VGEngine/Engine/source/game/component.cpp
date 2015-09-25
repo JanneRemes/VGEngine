@@ -2,7 +2,10 @@
 #include "engine/game.h"
 
 using namespace vg;
-
+Component::Component()
+{
+	mGameObject = nullptr;
+}
 void Component::setGameObject(GameObject *gameObject)
 {
 	mGameObject = gameObject;

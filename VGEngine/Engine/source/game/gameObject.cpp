@@ -42,7 +42,7 @@ GameObject::GameObject(const GameObject &obj)
 			}
 			else
 			{
-				Log("error", "error!!!!", "");
+				Log("vgengine", "error!!!!", "");
 			}
 		
 		}

@@ -89,7 +89,7 @@ mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, floa
 mat4 RenderSystem::modelTransform(TransformComponent* transform)
 {
 	return modelTransform(transform->getWorldPosition() - transform->getOrigin(),
-		transform->getWorldSize(), transform->getWorldRotation());
+		transform->getSize(), transform->getRotation());
 }
 
 void RenderSystem::setCameraPosition(float x, float y)

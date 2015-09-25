@@ -124,7 +124,7 @@ bool AudioManager::addSound(const std::string& name, const Sound& sound)
         mSoundEffectList.emplace_back(mStringHash(name), sound);
         return true;
     }
-    Log("ERROR", "Max number of sounds playing!", "");
+    Log("vgengine", "Max number of sounds playing!", "");
     return false;
 }
 
@@ -142,7 +142,7 @@ bool AudioManager::addSound(const Sound& sound)
         }
         return true;
     }
-    Log("ERROR", "Max number of sounds playing!", "");
+    Log("vgengine", "Max number of sounds playing!", "");
     return false;
 }
 

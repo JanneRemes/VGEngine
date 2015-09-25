@@ -40,15 +40,15 @@ void mainGame(Game* game)
 
 
 	//SHIP
-	/*
+	
 	GameObject *ship2 = new GameObject("ship2");
-	TransformComponent *transformship = new TransformComponent(Vector2<int>(64, 0),
-		Vector2<int>(128, 128), 0.0f, 0, Vector2<int>(64, 64));
+	TransformComponent *transformship = new TransformComponent(Vector2<int>(64, -64),
+		Vector2<int>(128, 128), 0.0f,1, Vector2<int>(64, 64));
 	ship2->addComponent(transformship);
 	QuadrangleComponent *quadreship = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	ship2->addComponent(quadreship);
-	scene->getObjectPool()->addGameObject(ship2);*/
-
+	scene->getObjectPool()->addGameObject(ship2);
+	ship2->setParent(ship);
 
 
 	ShipSystem *shipSystem = new ShipSystem(game);
@@ -92,8 +92,9 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, enemySystem);
 
 	//sound
-	assetManager->load<sound::Sound>("Kalimba.mp3");
+	assetManager->load<sound::Sound>("muumitechno.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",
-		*assetManager->get<sound::Sound>("Kalimba.mp3"));
+		*assetManager->get<sound::Sound>("muumitechno.mp3"));
     Game::getInstance()->getAudioManager()->play("music");
+	Game::getInstance()->getAudioManager()->loopEnabled("music",true);
 }

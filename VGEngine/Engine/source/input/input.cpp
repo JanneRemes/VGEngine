@@ -29,10 +29,10 @@ int32_t Input::engine_handle_input(android_app* app, AInputEvent* event)
 		mTouchX = AMotionEvent_getX(event, 0);
 		mTouchY = AMotionEvent_getY(event, 0);
 		isTouched = true;
-		Log("debug", "movement %f %f", mTouchX, mTouchY);
+		Log("vgengine", "movement %f %f", mTouchX, mTouchY);
 		if ((AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_UP)
 		{
-			Log("debug", "Released touch %d", 5);
+			Log("vgengine", "Released touch %d", 5);
 			if (isTouched)
 			{
 				isTouched = false;

@@ -46,17 +46,17 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	// Realize player
 	result = (*PlayerObject)->Realize(PlayerObject, SL_BOOLEAN_FALSE);
 	if (result != SL_RESULT_SUCCESS)
-		Log("debug", "Player realize failed", "");
+		Log("vgengine", "Player realize failed", "");
 
 	// Get play interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAY, &PlayerPlay);
 	if (result != SL_RESULT_SUCCESS)
-		Log("debug", "play interface failed", "");
+		Log("vgengine", "play interface failed", "");
 
 	// Get volume interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_VOLUME, &PlayerVolume);
 	if (result != SL_RESULT_SUCCESS)
-		Log("debug", "volume interface failed", "");
+		Log("vgengine", "volume interface failed", "");
 
 	// get seek interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_SEEK, &Seek);
@@ -64,7 +64,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	// get playbackrate interface
 	result = (*PlayerObject)->GetInterface(PlayerObject, SL_IID_PLAYBACKRATE, &RateObject);
 	if (result != SL_RESULT_SUCCESS)
-		Log("debug", "Playback rate interface failed", "");
+		Log("vgengine", "Playback rate interface failed", "");
 }
 
 void SoundEffect::play()

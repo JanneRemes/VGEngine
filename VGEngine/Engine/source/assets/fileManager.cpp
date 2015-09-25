@@ -55,7 +55,7 @@ bool FileManager::readFile(DataPath dataPath, const std::string& path, std::stri
 	const std::string absolutePath = getDataPath(dataPath) + path;
 	FILE* file = fopen(absolutePath.c_str(), "r");
 
-	Log("fm", "open? %s", ferror(file) == 0 ? "true" : "false");
+	Log("vgengine", "open? %s", ferror(file) == 0 ? "true" : "false");
 
 	if (file)
 	{
@@ -66,11 +66,11 @@ bool FileManager::readFile(DataPath dataPath, const std::string& path, std::stri
 		std::vector<char> buffer(length);
 		fread(&buffer[0], sizeof(char), buffer.size(), file);
 
-		Log("fm", "read? %s", ferror(file) == 0 ? "true" : "false");
+		Log("vgengine", "read? %s", ferror(file) == 0 ? "true" : "false");
 
 		fclose(file);
 
-		Log("fm", "close? %s", ferror(file) == 0 ? "true" : "false");
+		Log("vgengine", "close? %s", ferror(file) == 0 ? "true" : "false");
 
 		outData.assign(buffer.begin(), buffer.end());
 	}
@@ -84,17 +84,17 @@ bool FileManager::writeFile(DataPath dataPath, const std::string& path, const st
 
 	FILE* file = fopen(absolutePath.c_str(), "w");
 
-	Log("fm", "open? %s", ferror(file) == 0 ? "true" : "false");
+	Log("vgengine", "open? %s", ferror(file) == 0 ? "true" : "false");
 
 	if (file)
 	{
 		fwrite(inData.data(), sizeof(char), inData.size(), file);
 
-		Log("fm", "write? %s", ferror(file) == 0 ? "true" : "false");
+		Log("vgengine", "write? %s", ferror(file) == 0 ? "true" : "false");
 
 		fclose(file);
 
-		Log("fm", "close? %s", ferror(file) == 0 ? "true" : "false");
+		Log("vgengine", "close? %s", ferror(file) == 0 ? "true" : "false");
 	}
 
 	return ferror(file) == 0;

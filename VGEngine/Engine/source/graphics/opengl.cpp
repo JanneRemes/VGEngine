@@ -9,7 +9,7 @@ void gl::checkError()
 	GLuint error = glGetError();
 	if (error != GL_NO_ERROR)
 	{
-		Log("ERROR", "OpenGL error: %i", error, "");
+		Log("vgengine", "OpenGL error: %i", error, "");
 	}
 }
 

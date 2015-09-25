@@ -50,7 +50,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     fileManager.readAsset(FOLDER + vertexPath, buffer);
     if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
     {
-        Log("ERROR", "Vertex shader compile error!", "");
+        Log("vgengine", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
         return false;
     }
@@ -58,7 +58,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     fileManager.readAsset(FOLDER + fragmentPath, buffer);
     if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
     {
-        Log("ERROR", "Fragment shader compile error!", "");
+        Log("vgengine", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
         return false;
     }
@@ -70,7 +70,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     
 	if (gl::linkStatus(mProgramId) != GL_TRUE)
     {
-        Log("ERROR", "Shader program link error!", "");
+        Log("vgengine", "Shader program link error!", "");
         return false;
     }
     
@@ -83,7 +83,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
 		GLuint location = gl::getUniformLocation(mProgramId, pair.first);
         if (location < 0)
         {
-            Log("ERROR", "Shader uniform %s not found!", pair.first.c_str());
+            Log("vgengine", "Shader uniform %s not found!", pair.first.c_str());
         }
 		pair.second = location;
 	}
@@ -153,7 +153,7 @@ void Shader::printErrorLog(GLuint shader)
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferLenght);
     vector<GLchar> buffer(bufferLenght);
     glGetShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
-    Log("SHADER", "%s", buffer.data());
+    Log("vgengine", "%s", buffer.data());
 }
 
 void Shader::setUniform(string name, glm::mat3 value)

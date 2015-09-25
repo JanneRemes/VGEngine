@@ -21,7 +21,7 @@ bool Texture::load(core::FileManager *fileManager)
 
 	if (fileManager->readAsset(mPath, rawBytes) == false)
 	{
-		Log("ERROR", "Failed to load texture asset '%s'.", mPath.c_str());
+		Log("vgengine", "Failed to load texture asset '%s'.", mPath.c_str());
 		return false;
 	}
 
@@ -29,7 +29,7 @@ bool Texture::load(core::FileManager *fileManager)
 	uint32_t error = lodepng::decode(pixels, mWidth, mHeight, rawBytes);
 	if (error != 0)
 	{
-		Log("ERROR", "LodePNG: '%s'.", lodepng_error_text(error));
+		Log("vgengine", "LodePNG: '%s'.", lodepng_error_text(error));
 		return false;
 	}
 

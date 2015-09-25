@@ -51,7 +51,7 @@ int Graphics::getScreenWidth()
         return mContext.getWidth();
     else
     {
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
         return 0;
     }
 }
@@ -62,7 +62,7 @@ int Graphics::getScreenHeight()
         return mContext.getHeight();
     else
     {
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
         return 0;
     }
 }
@@ -72,7 +72,7 @@ void Graphics::switchShader(string vertexPath, string fragmentPath)
     if (mInitialized)
         mShader.load(*mFileManager, vertexPath, fragmentPath);
     else
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
 }
 
 Shader* Graphics::getShader()

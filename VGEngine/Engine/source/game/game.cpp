@@ -47,28 +47,28 @@ void Game::setGraphics(vg::graphics::Graphics *graphics)
 
 void readFiles(core::FileManager& fileManager)
 {
-    Log("-----", "----- -----", "");
-    Log("fm", "Begin", "");
+    Log("vgengine", "----- -----", "");
+    Log("vgengine", "Begin", "");
     {
         char buffer[1024];
         getcwd(buffer, sizeof(buffer));
-        Log("fm", "path = '%s'", buffer);
+        Log("vgengine", "path = '%s'", buffer);
         const std::string file = "test.txt";
 
         std::string str;
 
         str = "Hello World!";
-        Log("fm", "Writing...", "");
-        Log("fm", "success? %s", fileManager.writeFile(core::FileManager::Internal, file, str) ? "true" : "false");
-        Log("fm", "line = '%s'", str.c_str());
+        Log("vgengine", "Writing...", "");
+        Log("vgengine", "success? %s", fileManager.writeFile(core::FileManager::Internal, file, str) ? "true" : "false");
+        Log("vgengine", "line = '%s'", str.c_str());
 
         str = "";
-        Log("fm", "Reading...", "");
-        Log("fm", "success? %s", fileManager.readFile(core::FileManager::Internal, file, str) ? "true" : "false");
-        Log("fm", "line = '%s'", str.c_str());
+        Log("vgengine", "Reading...", "");
+        Log("vgengine", "success? %s", fileManager.readFile(core::FileManager::Internal, file, str) ? "true" : "false");
+        Log("vgengine", "line = '%s'", str.c_str());
     }
-    Log("fm", "End", "");
-    Log("-----", "----- -----", "");
+    Log("vgengine", "End", "");
+    Log("vgengine", "----- -----", "");
 }
 
 bool Game::isRunning()
@@ -98,7 +98,7 @@ void Game::addComponentSystem(Scene *scene, System *componentSystem)
 
 void Game::log(char* text)
 {
-	Log("fm", "%s", text);
+	Log("vgengine", "%s", text);
 }
 
 vg::graphics::Graphics* Game::getGraphics()

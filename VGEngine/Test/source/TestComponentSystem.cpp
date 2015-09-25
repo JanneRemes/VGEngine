@@ -22,7 +22,7 @@ void TestComponentSystem::update(std::vector<vg::GameObject*> *gameObjects)
 		vg::TransformComponent *transform = (*it)->getComponent<vg::TransformComponent>();
 		if (transform != nullptr)
 		{
-			transform->setRotation(transform->getWorldRotation() + 1);
+			transform->setRotation(transform->getRotation() + 1);
 		}
 	}
 }

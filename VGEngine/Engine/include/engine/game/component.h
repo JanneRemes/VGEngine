@@ -11,7 +11,7 @@ namespace vg
 	class Component
 	{
 	public:
-		Component() = default;
+		Component();
 		virtual ~Component() = default;
 		/**
 		@param GameObject that this component belongs to

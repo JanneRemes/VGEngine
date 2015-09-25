@@ -2,6 +2,8 @@
 #include "engine/game/transformComponent.h"
 #include <stdlib.h> 
 #include "engine/game/gameObject.h"
+#include <math.h>  
+#include "engine/utility/math.h"
 using namespace vg;
 uint TransformComponent::mCurrentLayer = 0;
 TransformComponent::TransformComponent(): Component()
@@ -39,21 +41,27 @@ vg::Vector2<int> TransformComponent::getLocalPosition()
 //TODO fix
 vg::Vector2<int> TransformComponent::getWorldPosition()
 {
-	/*if ( mGameObject != nullptr )
+	if ( mGameObject != nullptr )
 	{
-		if (mGameObject->getParent() != nullptr)
+		if (mGameObject->getParent() == nullptr)
+		{
+			return mPosition;
+		}
+		else
+		{
+			TransformComponent *transformComponent = mGameObject->getParent()->getComponent<TransformComponent>();
+			if (transformComponent != nullptr)
+			{
+				vg::Vector2<int> parentPos = transformComponent->getLocalPosition();
+				vg::Vector2<int> parentOrigo = transformComponent->getOrigin();
+				vg::Vector2<int> tempPos = parentPos + parentOrigo + getLocalPosition();
 
-		return mPosition;
-	}*/
-	/*
-	TransformComponent *transformComponent = mGameObject->getComponent<TransformComponent>();
-	if (transformComponent != nullptr)
-	{
-		vg::Vector2<int> parentPos = transformComponent->getLocalPosition();
-		vg::Vector2<int> parentOrigo = transformComponent->getOrigin();
-		vg::Vector2<int> tempPos = parentPos + parentOrigo + getLocalPosition() + getOrigin();
-		return tempPos;
-	}*/
+				return tempPos;
+			}
+		}
+	}
+	
+
 	return mPosition;
 }
 void TransformComponent::setPosition(const Vector2<int> position)
@@ -66,15 +74,11 @@ void TransformComponent::move(Vector2<int> change)
     mPosition += change;
 }
 
-vg::Vector2<int> TransformComponent::getLocalSize()
+vg::Vector2<int> TransformComponent::getSize()
 {
     return mSize;
 }
-//TODO fix
-vg::Vector2<int> TransformComponent::getWorldSize()
-{
-	return mSize;
-}
+
 
 
 void TransformComponent::setSize(const vg::Vector2<int> size)
@@ -82,25 +86,11 @@ void TransformComponent::setSize(const vg::Vector2<int> size)
     mSize = size;
 }
 
-float TransformComponent::getLocalRotation()
+float TransformComponent::getRotation()
 {
     return mRotation;
 }
 //TODO fix
-float TransformComponent::getWorldRotation()
-{
-	/*if (mGameObject->getParent() == nullptr)
-	{
-		return mRotation;
-	}
-	TransformComponent *transformComponent = mGameObject->getComponent<TransformComponent>();
-	if (transformComponent != nullptr)
-	{
-		float parentPos = transformComponent->getLocalRotation();
-		return parentPos + getLocalRotation();
-	}*/
-	return mRotation;
-}
 
 void TransformComponent::setRotation(float rotation)
 {
@@ -121,7 +111,7 @@ void TransformComponent::setLayer(uint layer)
 {
 	if (layer > 10000)
 	{
-		Log("engine", "setLayer value cannot be higher than 10000 (transformcomponent)!","");
+		Log("vgengine", "setLayer value cannot be higher than 10000 (transformcomponent)!","");
 		layer = 10000;
 	}
 	mLayer = layer;

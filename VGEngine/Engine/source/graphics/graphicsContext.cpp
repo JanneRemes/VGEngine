@@ -104,7 +104,7 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
     EGLConfig config;
     mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     eglInitialize(mDisplay, &majorVersion, &minorVersion);
-	Log("INFO", "EGL version: %i.%i", majorVersion, minorVersion);
+	Log("vgengine", "EGL version: %i.%i", majorVersion, minorVersion);
 	checkError();
 
 	windowFormat = ANativeWindow_getFormat(window);
@@ -112,23 +112,23 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
 	{
 	case WINDOW_FORMAT_RGBA_8888:
 		attribs = config32bpp;
-		Log("INFO", "Window format: 32 bits per pixel", "");
+		Log("vgengine", "Window format: 32 bits per pixel", "");
 		break;
 	case WINDOW_FORMAT_RGBX_8888:
 		attribs = config24bpp;
-		Log("INFO", "Window format: 24 bits per pixel", "");
+		Log("vgengine", "Window format: 24 bits per pixel", "");
 		break;
 	case WINDOW_FORMAT_RGB_565:
 		attribs = config16bpp;
-		Log("INFO", "Window format: 16 bits per pixel", "");
+		Log("vgengine", "Window format: 16 bits per pixel", "");
 		break;
 	default:
 		attribs = config16bpp;
-		Log("ERROR", "Unknown window format!", "");
+		Log("vgengine", "Unknown window format!", "");
 	}
 
     eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
-	Log("INFO", "Number of EGL configs: %i", numConfigs);
+	Log("vgengine", "Number of EGL configs: %i", numConfigs);
 	checkError();
 	eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
 	checkError();
@@ -142,7 +142,7 @@ void GraphicsContext::initializeEGL(ANativeWindow* window)
 
     if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
     {
-        Log("WARNING", "Unable to eglMakeCurrent", "");
+        Log("vgengine", "Unable to eglMakeCurrent", "");
     }
 	checkError();
 
@@ -161,7 +161,7 @@ void GraphicsContext::createGLProgram()
 void GraphicsContext::initializeOpenGL()
 {
 	const GLubyte* glVersion = glGetString(GL_VERSION);
-	Log("INFO", "OpenGL ES version: %s", glVersion);
+	Log("vgengine", "OpenGL ES version: %s", glVersion);
 	gl::checkError();
 
 	// transparency
@@ -201,6 +201,6 @@ void GraphicsContext::checkError()
 	EGLint error = eglGetError();
 	if (error != EGL_SUCCESS)
 	{
-		Log("ERROR", "EGL error: %i", error, "");
+		Log("vgengine", "EGL error: %i", error, "");
 	}
 }
