@@ -1,12 +1,8 @@
 
 #pragma once
 
-#include <jni.h>
-#include <android/log.h>
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include "engine/android_native_app_glue.h"
-#include "engine/assets/fileManager.h"
+
+
 
 namespace vg
 {
@@ -44,24 +40,24 @@ namespace vg
 			/**
 			@return width of current screen in pixels
 			*/
-			EGLint getWidth();
+			unsigned int getWidth();
 
 			/**
 			@return height of current screen in pixels
 			*/
-			EGLint getHeight();
+			unsigned int getHeight();
 
 			/**
 			@return returns mProgramId (opengl program id)
 			*/
-			GLuint getProgramId();
+			unsigned int getProgramId();
 
 		private:
 			/**
 			Initializes EGL context for current device
-			@param window pointer to current devices window handle
+			@param window pointer to current devices window handle 
 			*/
-			void initializeEGL(ANativeWindow* window);
+			void initializeGraphicsContext(void *windowData);
 
 			/**
 			Creates Opengl program and puts it in mProgramId
@@ -78,13 +74,9 @@ namespace vg
 			*/
 			void checkError();
 
-			EGLDisplay mDisplay;    ///< Handle to devices display
-			EGLSurface mSurface;    ///< Handle to device surface
-			EGLContext mContext;    ///< Handle to device context
 
-			EGLint mWidth, mHeight; ///< Screen size in pixels
 
-			GLuint mProgramId; //< OpenGL program id
+
 		};
 	}
 }

@@ -1,12 +1,20 @@
 #if defined(OS_ANDROID) || true ==true
 #pragma once
+#include "engine/assets/fileManager.h"
 #include "engine\graphics\graphicsContext.h"
 #include "engine\application.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
-
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
 using namespace vg::graphics;
 
+EGLDisplay mDisplay;    ///< Handle to devices display
+EGLSurface mSurface;    ///< Handle to device surface
+EGLContext mContext;    ///< Handle to device context
+GLint mWidth, mHeight; ///< Screen size in pixels
+
+GLint mProgramId; //< OpenGL program id
 GraphicsContext::GraphicsContext()
 {
 	mWidth = mHeight = 0;
@@ -21,7 +29,7 @@ GraphicsContext::~GraphicsContext()
 void GraphicsContext::initialize(void *windowHandle)
 {
 	ANativeWindow* window = static_cast<ANativeWindow*>(windowHandle);
-	initializeEGL(window);
+	initializeGraphicsContext(window);
 	initializeOpenGL();
 }
 
@@ -54,18 +62,19 @@ void GraphicsContext::swapBuffers()
 	eglSwapBuffers(mDisplay, mSurface);
 }
 
-GLint GraphicsContext::getWidth()
+unsigned int GraphicsContext::getWidth()
 {
 	return mWidth;
 }
 
-GLint GraphicsContext::getHeight()
+unsigned int GraphicsContext::getHeight()
 {
 	return mHeight;
 }
 
-void GraphicsContext::initializeEGL(ANativeWindow* window)
+void GraphicsContext::initializeGraphicsContext(void *windowData)
 {
+	ANativeWindow *window = static_cast<ANativeWindow*>(windowData);
 	const EGLint config16bpp[] = {
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
@@ -194,7 +203,7 @@ void GraphicsContext::initializeOpenGL()
 	gl::checkError();
 }
 
-GLuint GraphicsContext::getProgramId()
+unsigned int GraphicsContext::getProgramId()
 {
 	return mProgramId;
 }
