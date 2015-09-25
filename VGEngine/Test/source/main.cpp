@@ -9,6 +9,8 @@
 #include <engine/game/quadrangleComponent.h>
 #include <engine/game/textComponent.h>
 #include <engine/game/textRenderSystem.h>
+#include <engine/game/physicsSystem.h>
+#include <engine/game/physicsComponent.h>
 
 #include "TestComponent.h"
 #include "ShipSystem.h"
@@ -16,7 +18,7 @@
 #include "TestComponentSystem.h"
 
 #include <stdlib.h> 
-
+#include <Box2D\Box2D.h>
 using namespace vg;
 using namespace vg::graphics;
 
@@ -90,6 +92,21 @@ void mainGame(Game* game)
 	EnemySystem *enemySystem = new EnemySystem(game);
 	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, enemySystem);
+	
+	// Physics
+	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -10));
+	game->addComponentSystem(scene, physicsSystem);
+	GameObject *physicsTest = new GameObject("physicsTest");
+	physicsTest->addComponent(new PhysicsComponent(physicsSystem->getWorld()));
+
+	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	physicsTest->addComponent(physicsObject);
+
+	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(64, 64),
+		Vector2<int>(128, 128), 0.0f);
+	physicsTest->addComponent(physicsTransform);
+
+	scene->getObjectPool()->addGameObject(physicsTest);
 
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");

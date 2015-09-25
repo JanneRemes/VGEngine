@@ -180,6 +180,9 @@
     <ClInclude Include="include\engine\game\physicsComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\game\physicsSystem.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -300,6 +303,9 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\physicsComponent.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\physicsSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>

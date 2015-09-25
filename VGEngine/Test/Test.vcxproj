@@ -37,13 +37,13 @@
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>DISABLE_IMPORTGL</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)Box2D\;..\freetype\include\;$(SolutionDir)Engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Box2D;$(SolutionDir)Engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir);$(SolutionDir)\Box2D\Build\vs2012\bin\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype;Box2D</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <AntBuild>
       <AssetsDirectories>$(ProjectDir)assets/;</AssetsDirectories>
