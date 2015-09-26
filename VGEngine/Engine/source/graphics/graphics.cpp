@@ -5,6 +5,7 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 #include "engine/application.h"
+#include "engine\android_native_app_glue.h"
 using namespace vg::graphics;
 using namespace std;
 using namespace vg::core;
@@ -90,7 +91,7 @@ void Graphics::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices
 {
 	vertices->bind();
 	indices->bind();
-	gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_SHORT);
+	gl::drawElements(getGL_TRIANGLES(), vertices->getSize(), getGL_UNSIGNED_SHORT());
 	indices->unbind();
 	vertices->unbind();
 }

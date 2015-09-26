@@ -1,3 +1,4 @@
+
 #include "engine\game\triangleComponent.h"
 
 using namespace vg;
@@ -38,9 +39,9 @@ std::vector<float> TriangleComponent::getDefaultVertices()
 	};
 	return defaultVertices;
 }
-std::vector<GLushort> TriangleComponent::getDefaultIndices()
+std::vector<unsigned short> TriangleComponent::getDefaultIndices()
 {
-	std::vector<GLushort> defaultIndices = std::vector<GLushort>
+	std::vector<unsigned short> defaultIndices = std::vector<unsigned short>
 	{
 		//up
 		0,

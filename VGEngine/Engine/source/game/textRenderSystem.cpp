@@ -46,7 +46,7 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaT
 				FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
 				FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
 				FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
-				gl::texImage2D((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer, GL_ALPHA);
+				gl::texImage2D((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer, getGL_ALPHA());
 
 				y = base - (*glyph)->bitmap_top;
 

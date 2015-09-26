@@ -5,11 +5,15 @@
 #include "engine/sound/Sound.h"
 #include <vector>
 #include "engine\application.h"
+#include "android\asset_manager.h"
+#include "engine\android_native_app_glue.h"
+#include "android\asset_manager.h"
 using namespace vg::core;
 
 std::string mInternalDataPath;          ///< For reading and writing internal assets
 std::string mExternalDataPath;          ///< For reading and writing external assets
 std::string getDataPath(FileManager::DataPath dataPath);
+AAssetManager *mAssetManager = nullptr;
 FileManager::FileManager()
 { 
 	android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());

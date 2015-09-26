@@ -11,7 +11,6 @@
 #include "engine\sound\AudioManager.h"
 
 #include <vector>
-#include <unistd.h>
 #include <string>
 
 namespace vg
@@ -93,7 +92,7 @@ namespace vg
 		core::FileManager *getFileManager();
 		sound::AudioManager *getAudioManager();
 
-		void setFileManager(android_app *app);
+		void setFileManager();
 
 		core::AssetManager* getAssetManager();
 		/**

@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include <engine/sound/SoundEffect.h>
-
+#include "engine/sound/SoundEffect.h"
 #include <vector>
 
 namespace vg
@@ -11,9 +10,11 @@ namespace vg
     {
         /**
         Storage for SoundEffects
-        */
+		*/
+	
         class SFXMapping
         {
+			
         public:
             SFXMapping(size_t id, const Sound& sound);
 

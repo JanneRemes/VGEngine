@@ -2,8 +2,8 @@
 #pragma once
 
 #include "engine/assets/asset.h"
-#include <GLES2/gl2.h>
 
+#include <stdint.h>
 namespace vg
 {
 	namespace graphics

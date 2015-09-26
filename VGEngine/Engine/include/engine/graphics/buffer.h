@@ -2,7 +2,8 @@
 #pragma once
 
 #include <vector>
-#include <GLES2/gl2.h>
+#include "engine\graphics\opengl.h"
+//#include <GLES2/gl2.h>
 
 namespace vg
 {
@@ -11,6 +12,7 @@ namespace vg
 		/**
 			Manages buffers
 			*/
+		using namespace vg::graphics::gl;
 		template<class T>
 		class Buffer
 		{
@@ -21,14 +23,14 @@ namespace vg
 			@param target Specifies the target to which the buffer object is bound
 			@param usage Specifies the expected usage pattern of the data store
 			*/
-			Buffer(GLenum target, GLenum usage)
+			Buffer(unsigned int target, unsigned int usage)
 				: mTarget(target)
 				, mUsage(usage)
 			{
-				glGenBuffers(1, &mId);
-				glBindBuffer(mTarget, mId);
-				glBufferData(mTarget, 0, nullptr, mUsage);
-				glBindBuffer(mTarget, 0);
+				genBuffers(1, &mId);
+				bindBuffer(mTarget, mId);
+				bufferData(mTarget, 0, nullptr, mUsage);
+				bindBuffer(mTarget, 0);
 			}
 
 			/**
@@ -37,14 +39,14 @@ namespace vg
 			@param data Specifies a pointer to data that will be copied into the data store for initialization
 			@param usage Specifies the expected usage pattern of the data store
 			*/
-			Buffer(GLenum target, const std::vector<T>& data, GLenum usage)
+			Buffer(unsigned int target, const std::vector<T>& data, unsigned int usage)
 				: mTarget(target)
 				, mUsage(usage)
 			{
-				glGenBuffers(1, &mId);
-				glBindBuffer(mTarget, mId);
-				glBufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
-				glBindBuffer(mTarget, 0);
+				genBuffers(1, &mId);
+				bindBuffer(mTarget, mId);
+				bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
+				bindBuffer(mTarget, 0);
 				mSize = data.size();
 			}
 
@@ -53,7 +55,7 @@ namespace vg
 			*/
 			virtual ~Buffer()
 			{
-				glDeleteBuffers(1, &mId);
+				deleteBuffers(1, &mId);
 			}
 
 			/**
@@ -62,9 +64,9 @@ namespace vg
 			*/
 			void setData(const std::vector<T>& data)
 			{
-				glBindBuffer(mTarget, mId);
-				glBufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
-				glBindBuffer(mTarget, 0);
+				bindBuffer(mTarget, mId);
+				bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
+				bindBuffer(mTarget, 0);
 				mSize = data.size();
 			}
 
@@ -75,9 +77,9 @@ namespace vg
 			*/
 			void setData(size_t offset, const std::vector<T>& data)
 			{
-				glBindBuffer(mTarget, mId);
-				glBufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data[0]);
-				glBindBuffer(mTarget, 0);
+				bindBuffer(mTarget, mId);
+				bufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data[0]);
+				bindBuffer(mTarget, 0);
 			}
 
 			/**
@@ -85,7 +87,7 @@ namespace vg
 			*/
 			virtual void bind()
 			{
-				glBindBuffer(mTarget, mId);
+				bindBuffer(mTarget, mId);
 			}
 
 			/**
@@ -93,7 +95,7 @@ namespace vg
 			*/
 			void unbind()
 			{
-				glBindBuffer(mTarget, 0);
+				bindBuffer(mTarget, 0);
 			}
 
 			/**
@@ -107,15 +109,15 @@ namespace vg
 			/**
 			Returns the buffer id
 			*/
-			GLuint getId() const
+			unsigned int getId() const
 			{
 				return mId;
 			}
 		protected:
 			size_t mSize = 0;		///< Size of the pointer to data that will be copied into the data store for initialization
-			GLuint mId = 0;			///< An array in which the generated buffer object names are stored
-			const GLenum mTarget;	///< Target to which the buffer object is bound
-			const GLenum mUsage;	///< Usage pattern of the data store
+			unsigned int mId = 0;			///< An array in which the generated buffer object names are stored
+			const unsigned int mTarget;	///< Target to which the buffer object is bound
+			const unsigned int mUsage;	///< Usage pattern of the data store
 		};
 	}
 }

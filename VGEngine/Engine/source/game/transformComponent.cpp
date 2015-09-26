@@ -1,6 +1,6 @@
 #include "../external/glm/gtc/matrix_transform.hpp"
 #include "engine/game/transformComponent.h"
-#include <stdlib.h> 
+#include <stdlib.h>
 #include "engine/game/gameObject.h"
 #include <math.h>  
 #include "engine/utility/math.h"

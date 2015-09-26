@@ -13,9 +13,6 @@
     <Filter Include="source\game">
       <UniqueIdentifier>{affd2ddc-b7ab-4d3a-b8ae-fe233b89bd3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\assets">
-      <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source\assets">
       <UniqueIdentifier>{cdd723d8-41ce-441a-b07e-a57857f93eaa}</UniqueIdentifier>
     </Filter>
@@ -55,6 +52,18 @@
     <Filter Include="source\platforms\windows">
       <UniqueIdentifier>{2d024c82-8698-4571-8fff-920efb9d3e15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\platforms">
+      <UniqueIdentifier>{8559ef9d-d6e9-4a50-a36c-ebc86fc7f6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\platforms\android">
+      <UniqueIdentifier>{40817975-861b-4790-9a12-df1a3ac1999e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\platforms\windows">
+      <UniqueIdentifier>{2dc8a5d0-7d52-4858-a052-d7b385ccdc74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\input\assets">
+      <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\android_native_app_glue.h">
@@ -75,17 +84,14 @@
     <ClInclude Include="include\engine\game\gameObject.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\assets\asset.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\assetManager.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\fileManager.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\graphicsContext.h">
       <Filter>include\graphics</Filter>
@@ -195,6 +201,9 @@
     <ClInclude Include="include\engine\application.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\platforms\windows\glew.h">
+      <Filter>include\platforms\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -256,9 +265,6 @@
     </ClCompile>
     <ClCompile Include="source\game\objectPool.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\opengl.cpp">
-      <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\game\sceneManager.cpp">
       <Filter>source\game</Filter>
@@ -331,6 +337,21 @@
     </ClCompile>
     <ClCompile Include="source\platforms\android\graphicsContext_android.cpp">
       <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\opengl_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\opengl_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\input_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\input_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\buffer.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

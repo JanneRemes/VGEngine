@@ -121,7 +121,7 @@ sound::AudioManager *Game::getAudioManager()
 	return mAudioManager;
 }
 
-void Game::setFileManager(android_app *app)
+void Game::setFileManager()
 {
 	mFileManager = new core::FileManager();
 	mAudioManager = new sound::AudioManager();

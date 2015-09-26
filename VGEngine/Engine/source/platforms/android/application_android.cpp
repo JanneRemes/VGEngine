@@ -24,6 +24,7 @@
 #include "engine/graphics/opengl.h"
 
 #include "engine/engine.h"
+#include <android/sensor.h>
 using namespace vg;
 using namespace vg::core;
 using namespace vg::input;
@@ -168,7 +169,7 @@ void android_main(struct android_app* state)
 
 
 	Game* game = Game::getInstance();
-	game->setFileManager(state);
+	game->setFileManager();
 	game->setGraphics(&engine.graphics);
 
 	engine.state.game = game;
@@ -208,7 +209,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
 				engine->graphics.initialize();
 				engine->animating = true;
 				engine->state.game->initSceneManager();
-				engine->state.game->setFileManager(app);
+				engine->state.game->setFileManager();
 				mainGame(engine->state.game);
 				Application::getInstance()->drawFrame();
 			}

@@ -28,7 +28,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source
 	SLDataSource audioSource = { &loc_fd, &format_mime };
-
+	
 	// Outputmix
 	const SLInterfaceID outputInterfaces[1] = { SL_IID_PLAYBACKRATE };
 	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };

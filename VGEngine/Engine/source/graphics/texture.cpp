@@ -4,6 +4,9 @@
 #include "../external/lodepng/lodepng.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
+#if defined (OS_ANDROID)
+#include <GLES2/gl2.h>
+#endif
 
 #include <string>
 #include <vector>

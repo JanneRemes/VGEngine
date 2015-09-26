@@ -3,11 +3,14 @@
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/game.h"
-
+#include "engine\graphics\opengl.h"
+#if defined (OS_ANDROID)
+#include <GLES2/gl2.h>
+#endif
 using namespace std;
 using namespace vg::graphics;
 using namespace glm;
-
+using namespace vg::graphics::gl;
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
 Shader::Shader(const VariableNames& attributeNames, const std::vector<std::string>& uniformNames)

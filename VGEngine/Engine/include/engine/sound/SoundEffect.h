@@ -5,7 +5,6 @@
 
 #include <SLES/OpenSLES_Android.h>
 #include <SLES/OpenSLES.h>
-
 #include <string>
 
 namespace vg 

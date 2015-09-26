@@ -8,6 +8,7 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include "engine/application.h"
+#include "engine\android_native_app_glue.h"
 using namespace vg::graphics;
 using namespace vg::core;
 EGLDisplay mDisplay;    ///< Handle to devices display

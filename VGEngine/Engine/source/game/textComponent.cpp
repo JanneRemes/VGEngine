@@ -39,7 +39,7 @@ void TextComponent::setFontSize(uint fontSize)
 	initializeFace();
 }
 
-GLuint TextComponent::getTextureId()
+unsigned int TextComponent::getTextureId()
 {
 	return mTexture;
 }
@@ -83,10 +83,10 @@ void TextComponent::initializeFace()
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
 
-	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_LINEAR());
+	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_LINEAR());
 
 	gl::bindTexture(0);
 }

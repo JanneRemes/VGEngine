@@ -1,9 +1,12 @@
 
 #include "engine/input/input.h"
 #include "engine/utility/logger.h"
-
+#if defined (OS_ANDROID)
+#include <android/sensor.h>
 
 #include <android/looper.h>
+#include "engine/android_native_app_glue.h"
+#endif
 /**
 * Process the next input event.
 */
