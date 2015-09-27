@@ -236,9 +236,6 @@
     <ClCompile Include="source\assets\assetManager.cpp">
       <Filter>source\assets</Filter>
     </ClCompile>
-    <ClCompile Include="source\assets\fileManager.cpp">
-      <Filter>source\assets</Filter>
-    </ClCompile>
     <ClCompile Include="source\utility\math.cpp">
       <Filter>source\utility</Filter>
     </ClCompile>

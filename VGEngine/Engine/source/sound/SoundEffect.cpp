@@ -24,7 +24,21 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	off_t mLength = soundFile.data.length;
 
 	// Data location
+	/*
+	typedef struct SLDataLocator_AndroidFD_ {
+    SLuint32        locatorType;
+    SLint32         fd;
+    SLAint64        offset;
+    SLAint64        length;
+} SLDataLocator_AndroidFD;
+	*/
+#ifdef OS_ANDROID
 	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength};
+	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
+#else
+	SLDataLocator_Address loc_fd = { SL_DATALOCATOR_ADDRESS };
+	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
+#endif
 	// Data format
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source
@@ -32,7 +46,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	
 	// Outputmix
 	const SLInterfaceID outputInterfaces[1] = { SL_IID_PLAYBACKRATE };
-	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
+	
 	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 1, outputInterfaces, outputRequired);
 	result = (*outputObject)->Realize(outputObject, SL_BOOLEAN_FALSE);
 

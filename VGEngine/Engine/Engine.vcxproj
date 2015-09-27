@@ -138,7 +138,6 @@
     <ClCompile Include="external\lodepng\lodepng.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
-    <ClCompile Include="source\assets\fileManager.cpp" />
     <ClCompile Include="source\game\baseClass.cpp" />
     <ClCompile Include="source\game\component.cpp" />
     <ClCompile Include="source\game\deleteSystem.cpp" />
