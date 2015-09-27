@@ -5,7 +5,7 @@
 #include <math.h>  
 #include "engine/utility/math.h"
 using namespace vg;
-uint TransformComponent::mCurrentLayer = 0;
+unsigned int TransformComponent::mCurrentLayer = 0;
 TransformComponent::TransformComponent(): Component()
 {
     mPosition = Vector2<int>(0, 0);
@@ -25,7 +25,7 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 }
 
 TransformComponent::TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-    float rotation, uint layer, vg::Vector2<int> origin)
+    float rotation, unsigned int layer, vg::Vector2<int> origin)
     :Component(), mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin)
 {
 }
@@ -144,7 +144,7 @@ float TransformComponent::getLayer()
 	return mLayer * 0.0001f;
 }
 
-void TransformComponent::setLayer(uint layer)
+void TransformComponent::setLayer(unsigned int layer)
 {
 	if (layer > 10000)
 	{
@@ -163,7 +163,7 @@ void TransformComponent::setOrigin(const Vector2<int> origin)
 {
     mOrigin = origin;
 }
-uint TransformComponent::getDefaultLayer()
+unsigned int TransformComponent::getDefaultLayer()
 {
 	return mCurrentLayer++;
 }

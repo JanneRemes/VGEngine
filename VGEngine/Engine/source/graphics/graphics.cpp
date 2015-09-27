@@ -5,7 +5,6 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 #include "engine/application.h"
-#include "engine\android_native_app_glue.h"
 using namespace vg::graphics;
 using namespace std;
 using namespace vg::core;
@@ -22,7 +21,6 @@ Graphics::~Graphics()
 
 void Graphics::initialize( const Shader& shader)
 {
-	android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());
     mFileManager = new core::FileManager();
     mContext.initialize();
     mShader = Shader(shader);

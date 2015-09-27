@@ -84,7 +84,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\Engine\android_native_app_glue.h" />
     <ClInclude Include="include\engine\application.h" />
     <ClInclude Include="include\engine\assets\asset.h" />
     <ClInclude Include="include\engine\assets\assetManager.h" />
@@ -121,6 +120,7 @@
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h" />
     <ClInclude Include="include\engine\input\input.h" />
+    <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h" />
     <ClInclude Include="include\engine\platforms\windows\glew.h" />
     <ClInclude Include="include\engine\sound\audioManager.h" />
     <ClInclude Include="include\engine\sound\sound.h" />
@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\lodepng\lodepng.cpp" />
-    <ClCompile Include="source\android_native_app_glue.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
     <ClCompile Include="source\assets\fileManager.cpp" />
@@ -164,6 +163,7 @@
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
+    <ClCompile Include="source\platforms\android\android_native_app_glue.cpp" />
     <ClCompile Include="source\platforms\android\application_android.cpp" />
     <ClCompile Include="source\platforms\android\fileManager_android.cpp" />
     <ClCompile Include="source\platforms\android\graphicsContext_android.cpp" />

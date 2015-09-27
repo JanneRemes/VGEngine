@@ -27,7 +27,7 @@ namespace vg
 			return texComp;
 		}
 
-        TextComponent* create(std::string fontPath, uint fontSize = 12u);
+        TextComponent* create(std::string fontPath, unsigned int fontSize = 12u);
 
 	private:
 		core::AssetManager *mAssetManager;

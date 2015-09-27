@@ -4,15 +4,13 @@
 #include "../external/lodepng/lodepng.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
-#if defined (OS_ANDROID)
-#include <GLES2/gl2.h>
-#endif
+
 
 #include <string>
 #include <vector>
 
 using namespace vg::graphics;
-
+using namespace vg::graphics::gl;
 Texture::Texture(const std::string& path)
 	: Asset(path)
 {
@@ -64,10 +62,10 @@ bool Texture::load(core::FileManager *fileManager)
 	gl::texImage2D(mWidth, mHeight, pixels);
 	//gl::texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
 	//gl::texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
-	gl::texParameteri(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	gl::texParameteri(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_LINEAR());
+	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_LINEAR());
 	//gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	//gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	gl::bindTexture(0);
@@ -80,7 +78,7 @@ bool Texture::unload()
 {
 	if (mId != 0)
 	{
-		glDeleteTextures(1, &mId);
+		deleteTextures(1, &mId);
 	}
 
 	mIsLoaded = false;
@@ -102,8 +100,8 @@ void Texture::setSmoothing(bool enableSmoothing) const
 {
 	gl::activeTexture();
 	gl::bindTexture(mId);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
+	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), enableSmoothing ? getGL_LINEAR() : getGL_NEAREST());
+	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), enableSmoothing ? getGL_LINEAR() : getGL_NEAREST());
 	gl::bindTexture(0);
 }
 

@@ -5,7 +5,7 @@
 #include <android/sensor.h>
 
 #include <android/looper.h>
-#include "engine/android_native_app_glue.h"
+#include "engine/platforms/android/android_native_app_glue.h"
 #endif
 /**
 * Process the next input event.

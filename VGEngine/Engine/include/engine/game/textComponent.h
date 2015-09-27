@@ -28,7 +28,7 @@ namespace vg
 		@param Filemanager to load in the fontfile
 		@param Fontsize, optional and 12 if not set
 		*/
-        TextComponent(std::string& fontPath, core::FileManager *manager, uint fontSize = 12);
+        TextComponent(std::string& fontPath, core::FileManager *manager, unsigned int fontSize = 12);
         
 		/**
 		Deletes vertex and indexBuffers
@@ -52,7 +52,7 @@ namespace vg
 		Changes font size
 		@param New font size int
 		*/
-        void setFontSize(uint fontSize);
+        void setFontSize(unsigned int fontSize);
 
 		/**
 		@return texture id used by shader
@@ -82,7 +82,7 @@ namespace vg
 		/**
 		Colour values ranging from 0 - 255
 		*/
-		void setColour(uint red, uint green, uint blue, uint alpha = 255);
+		void setColour(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha = 255);
 
     private:
 

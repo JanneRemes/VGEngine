@@ -6,7 +6,7 @@
 #include <vector>
 #include "engine\application.h"
 #include "android\asset_manager.h"
-#include "engine\android_native_app_glue.h"
+#include "engine/platforms/android/android_native_app_glue.h"
 #include "android\asset_manager.h"
 using namespace vg::core;
 

@@ -48,6 +48,8 @@ namespace vg
 
 			void activeTexture(unsigned int textureIndex);
 
+			void deleteTextures(int n, const unsigned int* textures);
+
 			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
 
 			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels, unsigned int format);
@@ -121,6 +123,7 @@ namespace vg
 			unsigned int getGL_TRIANGLES();
 			
 
+			unsigned int getGL_NEAREST();
 		}
 	}
 }

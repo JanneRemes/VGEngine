@@ -1,6 +1,6 @@
 #if defined(OS_ANDROID)
 #include "engine\application.h"
-#include "engine\android_native_app_glue.h"
+#include "engine/platforms/android/android_native_app_glue.h"
 #include "engine\utility\logger.h"
 
 
@@ -14,7 +14,6 @@
 
 #include <android/log.h>
 
-#include "engine/android_native_app_glue.h"
 #include "engine/graphics/graphics.h"
 #include "engine/utility/logger.h"
 #include "engine/game.h"

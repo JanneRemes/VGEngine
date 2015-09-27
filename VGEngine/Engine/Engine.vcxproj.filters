@@ -66,9 +66,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Engine\android_native_app_glue.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Engine\engine.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -204,13 +201,13 @@
     <ClInclude Include="include\engine\platforms\windows\glew.h">
       <Filter>include\platforms\windows</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h">
+      <Filter>include\platforms\android</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\android_native_app_glue.cpp">
-      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\game\gameObject.cpp">
       <Filter>source\game</Filter>
@@ -352,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="source\graphics\buffer.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\android_native_app_glue.cpp">
+      <Filter>source\platforms\android</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

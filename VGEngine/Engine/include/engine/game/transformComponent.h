@@ -26,7 +26,7 @@ namespace vg
         @param origin offset of origin in pixels from upper left corner
         */
         TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-            float rotation, uint layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
+            float rotation, unsigned int layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
 		
         ~TransformComponent();
 
@@ -86,7 +86,7 @@ namespace vg
         /**
         @param layer value ranging from 0 to 10000.
         */
-        void setLayer(uint layer);
+        void setLayer(unsigned int layer);
 
         /**
         <description>
@@ -99,13 +99,13 @@ namespace vg
         void setOrigin(const vg::Vector2<int> origin);
 
 	private:
-		static uint mCurrentLayer;
-		static uint getDefaultLayer();
+		static unsigned int mCurrentLayer;
+		static unsigned int getDefaultLayer();
         vg::Vector2<int> mPosition;     ///< Position of top left corner in pixels.
         vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
         vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
         float mRotation;                ///< Rotation of sprite in angles.
-        uint mLayer;                   ///< Layer where the sprite will be drawn.
+        unsigned int mLayer;                   ///< Layer where the sprite will be drawn.
 	};
 
 }
