@@ -18,4 +18,8 @@ void Application::mmessageCheck()
 {
 
 }
+int main()
+{
+
+}
 #endif

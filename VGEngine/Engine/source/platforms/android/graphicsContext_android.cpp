@@ -14,9 +14,9 @@ using namespace vg::core;
 EGLDisplay mDisplay;    ///< Handle to devices display
 EGLSurface mSurface;    ///< Handle to device surface
 EGLContext mContext;    ///< Handle to device context
-GLint mWidth, mHeight; ///< Screen size in pixels
+int mWidth, mHeight; ///< Screen size in pixels
 
-GLint mProgramId; //< OpenGL program id
+int mProgramId; //< OpenGL program id
 GraphicsContext::GraphicsContext()
 {
 	mWidth = mHeight = 0;

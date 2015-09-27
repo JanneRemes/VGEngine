@@ -8,19 +8,42 @@
 #include "engine/utility/logger.h"
 #include "engine/application.h"
 #include "engine/graphics/opengl.h"
-#include "engine/platforms/windows/glew.h"
-#ifndef WIN32
-#define WIN32
-#endif
+#include <Windows.h>
 
 #pragma comment( lib, "glew32d.lib" )
 #pragma comment( lib, "glew32sd.lib" )
 #pragma comment( lib, "opengl32.lib" )
+#include "../external/glew.h"
 using namespace vg::graphics;
 using namespace vg::core;
-GLint mWidth, mHeight; ///< Screen size in pixels
+unsigned int mWidth, mHeight; ///< Screen size in pixels
 
-GLint mProgramId; //< OpenGL program id
+unsigned int mProgramId; //< OpenGL program id
+using namespace vg::graphics::gl;
+
+LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam) //without this nothing works, so I say we keep it
+{
+	switch (uMsg){
+	case WM_CREATE:
+	{
+		return 0;
+	}
+	case WM_DESTROY:
+	{
+		PostQuitMessage(0);
+		DestroyWindow(handle);
+		return 0;
+	}
+	default:
+
+		return DefWindowProc(handle, uMsg, wParam, lParam);
+
+	}
+
+
+}
 GraphicsContext::GraphicsContext()
 {
 	mWidth = mHeight = 0;
@@ -80,8 +103,7 @@ unsigned int GraphicsContext::getHeight()
 
 void GraphicsContext::initializeGraphicsContext()
 {
-	/*android_app *app = static_cast<android_app*>(Application::getInstance()->getEngine());
-	ANativeWindow* window = static_cast<ANativeWindow*>(app->window);
+	/*
 	const EGLint config16bpp[] = {
 		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
 		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
@@ -170,18 +192,39 @@ void GraphicsContext::initializeGraphicsContext()
 	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
 	checkError();
 	*/
+
+	WNDCLASS wc = {};
+
+	std::string windowName = "TestWindow";
+	mWidth = 800;
+	mHeight = 600;
+
+	wc.lpfnWndProc = WindowProc;
+	wc.hInstance = GetModuleHandle(nullptr);
+	wc.lpszClassName = "doge";
+
+	RegisterClass(&wc);
+
+	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "asd", "Window", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
+		NULL, NULL, GetModuleHandle(nullptr), NULL);
+	if (mWindowHandle == nullptr)
+	{
+
+		Log("vgengine", "Window handle creation failed", "");
+
+	}
 }
 
 void GraphicsContext::createGLProgram()
 {
-	/*mProgramId = glCreateProgram();
+	mProgramId = createProgram();
 	gl::checkError();
-	*/
+	
 }
 
 void GraphicsContext::initializeOpenGL()
 {
-	/*const GLubyte* glVersion = glGetString(GL_VERSION);
+	const GLubyte* glVersion = glGetString(GL_VERSION);
 	Log("vgengine", "OpenGL ES version: %s", glVersion);
 	gl::checkError();
 
@@ -209,7 +252,7 @@ void GraphicsContext::initializeOpenGL()
 
 	// font
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	gl::checkError();*/
+	gl::checkError();
 }
 
 unsigned int GraphicsContext::getProgramId()

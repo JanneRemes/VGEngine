@@ -84,6 +84,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="external\glew.h" />
     <ClInclude Include="external\OpenSLES.h" />
     <ClInclude Include="external\OpenSLES_Platform.h" />
     <ClInclude Include="include\engine\application.h" />
@@ -124,7 +125,6 @@
     <ClInclude Include="include\engine\input\input.h" />
     <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h" />
     <ClInclude Include="include\engine\platforms\android\OpenSLES_Android.h" />
-    <ClInclude Include="include\engine\platforms\windows\glew.h" />
     <ClInclude Include="include\engine\sound\audioManager.h" />
     <ClInclude Include="include\engine\sound\sound.h" />
     <ClInclude Include="include\engine\sound\soundEffect.h" />

@@ -19,7 +19,6 @@ namespace vg
 	{
 		/// A map containing the usage and name of vertex attributes
 		typedef std::map<uint32_t, std::string> VariableNames;
-
 		/**
 			Holds shader attribute and  ids and links itself
 			*/

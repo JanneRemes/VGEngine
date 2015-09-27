@@ -1,17 +1,17 @@
+#include <string>
 
-#include "engine/graphics/shader.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/game.h"
 #include "engine\graphics\opengl.h"
-#include <string>
+#include "engine/graphics/shader.h"
+
+const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 using namespace std;
 using namespace vg::graphics;
 using namespace glm;
 using namespace vg::graphics::gl;
 using namespace vg::core;
-const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
-
 Shader::Shader(const VariableNames& attributeNames, const std::vector<std::string>& uniformNames)
 	: mVertexElementNames(attributeNames), mUniformNames(uniformNames)
 {
@@ -42,7 +42,7 @@ bool Shader::isInitialized()
     return mInitialized;
 }
 
-bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
+bool Shader::load(vg::core::FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
 {
     if (!mInitialized)
         initialize();

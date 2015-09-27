@@ -52,6 +52,7 @@ namespace vg
 			*/
 			unsigned int getProgramId();
 
+			void *mWindowHandle;
 		private:
 			/**
 			Initializes EGL context for current device

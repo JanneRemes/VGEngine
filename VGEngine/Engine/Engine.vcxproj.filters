@@ -198,9 +198,6 @@
     <ClInclude Include="include\engine\application.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\platforms\windows\glew.h">
-      <Filter>include\platforms\windows</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h">
       <Filter>include\platforms\android</Filter>
     </ClInclude>
@@ -212,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="include\engine\platforms\android\OpenSLES_Android.h">
       <Filter>include\platforms\android</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glew.h">
+      <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
