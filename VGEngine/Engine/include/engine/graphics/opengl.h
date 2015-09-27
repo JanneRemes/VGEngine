@@ -132,6 +132,8 @@ namespace vg
 
 			unsigned int getGL_FALSE();
 
+			unsigned int getGL_TRUE();
+
 			unsigned int getGL_UNSIGNED_SHORT();
 
 			unsigned int getGL_TRIANGLES();

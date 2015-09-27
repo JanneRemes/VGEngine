@@ -19,17 +19,19 @@
 #include "engine/game.h"
 #include "engine/input/input.h"
 #include "engine/assets/fileManager.h"
+#include <android/sensor.h>
 #include "engine/input/input.h"
 #include "engine/graphics/opengl.h"
 
 #include "engine/engine.h"
-#include <android/sensor.h>
+
 using namespace vg;
 using namespace vg::core;
 using namespace vg::input;
 using namespace vg::graphics;
 static int32_t handleInput(struct android_app* app, AInputEvent* event);
 static void handleCommand(struct android_app* app, int32_t cmd);
+void sensorEvent(ASensorEventQueue *queue);
 extern void test_dummy();
 extern void mainGame(Game* game);
 Application *Application::currentApplication = nullptr;
@@ -97,14 +99,9 @@ void Application::update()
 		// If a sensor has data, process it now. 
 		if (ident == LOOPER_ID_USER)
 		{
-			if (engine.accelerometerSensor != NULL)
+			if (engine.accelerometerSensor != NULL && engine.gyroscopeSensor != NULL)
 			{
-				vg::input::Input::sensorEvent(engine.sensorEventQueue);
-			}
-
-			if (engine.gyroscopeSensor != NULL)
-			{
-				vg::input::Input::sensorEvent(engine.sensorEventQueue);
+				sensorEvent(engine.sensorEventQueue);
 			}
 		}
 
@@ -142,12 +139,48 @@ void Application::drawFrame()
 	engine.graphics.swapBuffers();
 }
 
+int32_t engine_handle_input(android_app* app, AInputEvent* event)
+{
+	//struct engine* engine = (struct engine*)app->userData;
+
+
+	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
+	{
+		vg::input::Input::setTouchX(AMotionEvent_getX(event, 0));
+		vg::input::Input::setTouchY(AMotionEvent_getY(event, 0));
+		vg::input::Input::setIsTouched(true);
+		//Log("vgengine", "movement %f %f", mTouchX, mTouchY);
+		if ((AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_UP)
+		{
+			//Log("vgengine", "Released touch %d", 5);
+			if (vg::input::Input::getIsTouched())
+			{
+				vg::input::Input::setIsTouched(false);
+				vg::input::Input::setIsTouchReleased(true);
+			}
+		}
+
+		return 1;
+	}
+
+	return 0;
+}
+
+void sensorEvent(ASensorEventQueue *queue)
+{
+	ASensorEvent event;
+	while (ASensorEventQueue_getEvents(queue, &event, 1) > 0)
+	{
+		vg::input::Input::setSensor(event.acceleration.x, event.acceleration.y, event.acceleration.z);
+		vg::input::Input::setAngles(event.vector.x, event.vector.y, event.vector.z);
+	}
+}
 void android_main(struct android_app* state)
 {
 	memset(&engine, 0, sizeof(engine));
 	state->userData = &engine;
 	state->onAppCmd = handleCommand;
-	state->onInputEvent = vg::input::Input::engine_handle_input;
+	state->onInputEvent = engine_handle_input;
 	engine.app = state;
 	// Prepare to monitor accelerometer
 	engine.sensorManager = ASensorManager_getInstance();

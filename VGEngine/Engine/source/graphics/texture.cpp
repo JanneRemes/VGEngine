@@ -11,12 +11,13 @@
 
 using namespace vg::graphics;
 using namespace vg::graphics::gl;
+using namespace vg::core;
 Texture::Texture(const std::string& path)
 	: Asset(path)
 {
 }
 
-bool Texture::load(core::FileManager *fileManager)
+bool Texture::load(FileManager *fileManager)
 {
 	std::vector<unsigned char> rawBytes;
 
@@ -82,6 +83,7 @@ bool Texture::unload()
 	}
 
 	mIsLoaded = false;
+	return true;
 }
 
 void Texture::bind() const

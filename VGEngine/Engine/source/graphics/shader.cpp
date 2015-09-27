@@ -5,13 +5,11 @@
 #include "engine/game/game.h"
 #include "engine\graphics\opengl.h"
 #include <string>
-#if defined (OS_ANDROID)
-#include <GLES2/gl2.h>
-#endif
 using namespace std;
 using namespace vg::graphics;
 using namespace glm;
 using namespace vg::graphics::gl;
+using namespace vg::core;
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 
 Shader::Shader(const VariableNames& attributeNames, const std::vector<std::string>& uniformNames)
@@ -44,7 +42,7 @@ bool Shader::isInitialized()
     return mInitialized;
 }
 
-bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
+bool Shader::load(FileManager& fileManager, const std::string& vertexPath, const std::string& fragmentPath)
 {
     if (!mInitialized)
         initialize();
@@ -52,7 +50,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     // compile shaders
     std::string buffer;
     fileManager.readAsset(FOLDER + vertexPath, buffer);
-    if (compileShaderSource(mVertexId, buffer) != GL_TRUE)
+    if (compileShaderSource(mVertexId, buffer) != getGL_TRUE())
     {
         Log("vgengine", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
@@ -60,7 +58,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     }
 
     fileManager.readAsset(FOLDER + fragmentPath, buffer);
-    if (compileShaderSource(mFragmentId, buffer) != GL_TRUE)
+    if (compileShaderSource(mFragmentId, buffer) != getGL_TRUE())
     {
         Log("vgengine", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
@@ -72,7 +70,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
 	gl::attachShader(mProgramId, mFragmentId);
     gl::linkProgram(mProgramId);
     
-	if (gl::linkStatus(mProgramId) != GL_TRUE)
+	if (gl::linkStatus(mProgramId) != getGL_TRUE())
     {
         Log("vgengine", "Shader program link error!", "");
         return false;
@@ -81,10 +79,10 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
 	//uniforms
     gl::useProgram(mProgramId);
 	for (int i = 0; i < mUniformNames.size(); i++)
-		mUniformLocations.insert(make_pair<string&, GLuint>(mUniformNames[i], 0));
+		mUniformLocations.insert(make_pair<string&, unsigned int>(mUniformNames[i], 0));
 	for (auto& pair : mUniformLocations)
 	{
-		GLuint location = gl::getUniformLocation(mProgramId, pair.first);
+		unsigned int location = gl::getUniformLocation(mProgramId, pair.first);
         if (location < 0)
         {
             Log("vgengine", "Shader uniform %s not found!", pair.first.c_str());

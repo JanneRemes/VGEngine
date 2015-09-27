@@ -310,7 +310,10 @@ unsigned int gl::getGL_FALSE()
 {
 	return GL_FALSE;
 }
-
+unsigned int gl::getGL_TRUE()
+{
+	return GL_TRUE;
+}
 unsigned int gl::getGL_UNSIGNED_SHORT()
 {
 	return GL_UNSIGNED_SHORT;
