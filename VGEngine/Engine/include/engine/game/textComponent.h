@@ -94,41 +94,12 @@ namespace vg
         /**
         Default vertices
         */
-        const std::vector<float> defaultVertices =
-        {
-            // Position Vec2
-            // Color Vec4
-            // TexCoord Vec2
-
-            //left up
-            0.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f,
-
-            //left down
-            0.0f, 1.0f,
-            0.0f, 0.0f, 0.0f, 1.0f,
-            0.0f, 1.0f,
-
-            //right down
-            1.0f, 1.0f,
-            0.0f, 0.0f, 0.0f, 1.0f,
-            1.0f, 1.0f,
-
-            //right up
-            1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f,
-            1.0f, 0.0f
-        };
+		std::vector<float> defaultVertices;
 
         /**
         Default indices
         */
-		const std::vector<unsigned short> defaultIndices =
-        {
-            0u, 1u, 2u,
-            0u, 2u, 3u
-        };
+		std::vector<unsigned short> defaultIndices;
 
         unsigned int mTexture;				        ///< <Font texture ID>
         graphics::VertexBuffer* mVertexBuffer;	///< <Vertex buffer for drawing>

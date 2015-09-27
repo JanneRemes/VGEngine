@@ -8,8 +8,44 @@ using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
-TextComponent::TextComponent(std::string& fontPath, core::FileManager *manager, uint fontSize)
+TextComponent::TextComponent(std::string& fontPath, core::FileManager *manager, unsigned int fontSize)
 {
+	float defaultVerticesArray[] =
+	{
+		// Position Vec2
+		// Color Vec4
+		// TexCoord Vec2
+
+		//left up
+		0.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f,
+
+		//left down
+		0.0f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 1.0f,
+
+		//right down
+		1.0f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f,
+		1.0f, 1.0f,
+
+		//right up
+		1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f,
+		1.0f, 0.0f
+	};
+	defaultVertices = std::vector<float>(defaultVerticesArray, defaultVerticesArray + sizeof(defaultVerticesArray) / sizeof(defaultVerticesArray[0]));
+
+
+	unsigned short defaultIndicesArray[] =
+	{
+		0u, 1u, 2u,
+		0u, 2u, 3u
+	};
+	defaultIndices = std::vector<unsigned short>(defaultIndicesArray, defaultIndicesArray + sizeof(defaultIndicesArray) / sizeof(defaultIndicesArray[0]));
+
     mFontSize = fontSize;
 	mVertexBuffer = new VertexBuffer(defaultVertices);
 	mIndexBuffer = new IndexBuffer(defaultIndices);
@@ -33,7 +69,7 @@ string TextComponent::getText()
 	return mText;
 }
 
-void TextComponent::setFontSize(uint fontSize)
+void TextComponent::setFontSize(unsigned int fontSize)
 {
     mFontSize = fontSize;
 	initializeFace();
@@ -91,7 +127,7 @@ void TextComponent::initializeFace()
 	gl::bindTexture(0);
 }
 
-void TextComponent::setColour(uint red, uint green, uint blue, uint alpha)
+void TextComponent::setColour(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
 {
 	vector<float> vertexData = defaultVertices;
 

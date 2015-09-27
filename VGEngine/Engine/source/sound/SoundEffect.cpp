@@ -2,7 +2,8 @@
 #include <engine/sound/soundEffect.h>
 #include <engine/utility/logger.h>
 #include <engine/assets/fileManager.h>
-
+//#include <SLES/OpenSLES_Android.h>
+#include "engine\platforms\android\OpenSLES_Android.h"
 using namespace vg::sound;
 
 SoundEffect::SoundEffect(const Sound& soundFile)
@@ -23,7 +24,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	off_t mLength = soundFile.data.length;
 
 	// Data location
-	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength };
+	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength};
 	// Data format
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source

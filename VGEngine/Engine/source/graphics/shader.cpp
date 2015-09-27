@@ -4,6 +4,7 @@
 #include "engine/graphics/opengl.h"
 #include "engine/game/game.h"
 #include "engine\graphics\opengl.h"
+#include <string>
 #if defined (OS_ANDROID)
 #include <GLES2/gl2.h>
 #endif
@@ -26,13 +27,13 @@ Shader::~Shader()
 
 void Shader::initialize()
 {
-    mProgramId = glCreateProgram();
-    mVertexId = glCreateShader(GL_VERTEX_SHADER);
-    mFragmentId = glCreateShader(GL_FRAGMENT_SHADER);
+    mProgramId = createProgram();
+    mVertexId = createShader(getGL_VERTEX_SHADER());
+    mFragmentId = createShader(getGL_FRAGMENT_SHADER());
 
     for (auto& pair : mVertexElementNames)
     {
-        glBindAttribLocation(mProgramId, pair.first, pair.second.c_str());
+        bindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
 
     mInitialized = true;
@@ -95,7 +96,7 @@ bool Shader::load(core::FileManager& fileManager, const std::string& vertexPath,
     return true;
 }
 
-GLuint Shader::getProgramId()
+unsigned int Shader::getProgramId()
 {
     return mProgramId;
 }
@@ -140,22 +141,22 @@ vector<string> Shader::getDefaultUniformNames()
 	};
 };
 
-GLint Shader::compileShaderSource(GLuint id, const std::string& source)
+int Shader::compileShaderSource(unsigned int id, const std::string& source)
 {
-    GLint result = GL_FALSE;
+    int result = getGL_FALSE();
     const char* temp = source.c_str();
-    glShaderSource(id, 1, &temp, NULL);
-    glCompileShader(id);
-    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+    shaderSource(id, 1, &temp, NULL);
+    compileShader(id);
+    getShaderiv(id, getGL_COMPILE_STATUS(), &result);
     return result;
 }
 
-void Shader::printErrorLog(GLuint shader)
+void Shader::printErrorLog(unsigned int shader)
 {
-    GLint bufferLenght;
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &bufferLenght);
-    vector<GLchar> buffer(bufferLenght);
-    glGetShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
+    int bufferLenght;
+    getShaderiv(shader, getGL_INFO_LOG_LENGTH(), &bufferLenght);
+    vector<char> buffer(bufferLenght);
+    getShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
     Log("vgengine", "%s", buffer.data());
 }
 

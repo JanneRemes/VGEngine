@@ -13,6 +13,7 @@ Sound::Sound(const std::string& path)
 bool Sound::load(vg::core::FileManager *fileManager)
 {
 	fileManager->readAsset(mPath, &data);
+	return true;
 }
 
 bool Sound::unload()

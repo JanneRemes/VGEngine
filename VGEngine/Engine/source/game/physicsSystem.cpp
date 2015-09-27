@@ -16,8 +16,7 @@ PhysicsSystem::~PhysicsSystem()
 }
 
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
-{
-	 float timeStep = 1.0f / 60.0f;	 int velocityIterations = 8;
+{	 int velocityIterations = 8;
 	 int positionIterations = 3;
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
@@ -28,7 +27,7 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 		 {
 			 for (int i = 0; i < 60; ++i)
 			 {
-			  world->Step(timeStep, velocityIterations, positionIterations);
+			  world->Step(deltaTime, velocityIterations, positionIterations);
 			  transform->setPosition(Vector2<int>(physComponent->getBody()->GetPosition().x, physComponent->getBody()->GetPosition().y));
 			  //float angle = body->GetAngle();
 			 }

@@ -92,6 +92,20 @@ namespace vg
 
 			void genBuffers(int n, unsigned int* buffers);
 
+			void shaderSource(unsigned int shader, int count, const char** string, const int* length);
+
+			void getShaderInfoLog(unsigned int shader, int bufsize, int* length, char* infolog);
+
+			void getShaderiv(unsigned int shader, unsigned int pname, int* params);
+
+			unsigned int createProgram(void);
+
+			unsigned int createShader(unsigned int type);
+
+			void bindAttribLocation(unsigned int program, unsigned int index, const char* name);
+
+			void compileShader(unsigned int shader);
+
 			unsigned int getGL_FLOAT();
 			
 			unsigned int getGL_CLAMP_TO_EDGE();
@@ -122,8 +136,15 @@ namespace vg
 
 			unsigned int getGL_TRIANGLES();
 			
-
 			unsigned int getGL_NEAREST();
+
+			unsigned int getGL_COMPILE_STATUS();
+
+			unsigned int getGL_FRAGMENT_SHADER();
+
+			unsigned int getGL_VERTEX_SHADER();
+
+			unsigned int getGL_INFO_LOG_LENGTH();
 		}
 	}
 }

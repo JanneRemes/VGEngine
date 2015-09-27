@@ -36,7 +36,7 @@ bool FileManager::readAsset(const std::string& path, std::vector<unsigned char>&
 
 bool FileManager::readAsset(const std::string& path, sound::SoundEffectData* soundOutDat)
 {
-
+	return true;
 }
 
 bool FileManager::readFile(DataPath dataPath, const std::string& path, std::string& outData)
@@ -58,6 +58,7 @@ bool FileManager::writeFile(DataPath dataPath, const std::string& path, const st
 	myfile.open(path);
 	myfile << inData.c_str();
 	myfile.close();
+	return true;
 }
 
 

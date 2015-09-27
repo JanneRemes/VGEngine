@@ -204,6 +204,15 @@
     <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h">
       <Filter>include\platforms\android</Filter>
     </ClInclude>
+    <ClInclude Include="external\OpenSLES.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="external\OpenSLES_Platform.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\platforms\android\OpenSLES_Android.h">
+      <Filter>include\platforms\android</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
