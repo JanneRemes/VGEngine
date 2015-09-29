@@ -99,6 +99,11 @@ namespace vg
 		Creates Game's scenemanager
 		*/
 		void initSceneManager();
+
+		/**
+		Sets game's state not running (engine will shut down)
+		*/
+		void setIsRunning(bool value){ mIsRunning = value; }
     private:
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;

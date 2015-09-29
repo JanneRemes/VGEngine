@@ -14,6 +14,7 @@
 #pragma comment( lib, "glew32sd.lib" )
 #pragma comment( lib, "opengl32.lib" )
 #include "../external/glew.h"
+#include "engine\game\game.h"
 using namespace vg::graphics;
 using namespace vg::core;
 unsigned int mWidth, mHeight; ///< Screen size in pixels
@@ -26,7 +27,7 @@ HGLRC renderingContext;
 
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam) //without this nothing works, so I say we keep it
+LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg){
 	case WM_CREATE:
@@ -37,6 +38,7 @@ LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam
 	{
 		PostQuitMessage(0);
 		DestroyWindow(handle);
+		vg::Game::getInstance()->setIsRunning(false);
 		return 0;
 	}
 	default:
@@ -97,9 +99,10 @@ void GraphicsContext::initializeGraphicsContext()
 	wc.lpszClassName = "doge";
 
 	RegisterClass(&wc);
-
-	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "doge", "Window", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
+	checkError();
+	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "doge", "VG Engine", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
 		NULL, NULL, GetModuleHandle(nullptr), NULL);
+	checkError();
 	if (mWindowHandle == nullptr)
 	{
 
@@ -151,13 +154,20 @@ void GraphicsContext::initializeGraphicsContext()
 	DWORD dwDamageMask = NULL;
 
 
-	HDC ourWindowHandleToDeviceContext = GetDC(static_cast<HWND>(mWindowHandle));// 
-	g_HDC = ourWindowHandleToDeviceContext;
-	int  letWindowsChooseThisPixelFormat;
-	letWindowsChooseThisPixelFormat = ChoosePixelFormat(ourWindowHandleToDeviceContext, &pfd);
-	SetPixelFormat(ourWindowHandleToDeviceContext, letWindowsChooseThisPixelFormat, &pfd);
-	renderingContext = wglCreateContext(ourWindowHandleToDeviceContext);
-	wglMakeCurrent(ourWindowHandleToDeviceContext, renderingContext);
+	HDC windowHandle = GetDC(static_cast<HWND>(mWindowHandle));// 
+	checkError();
+	g_HDC = windowHandle;
+	int  pixelFormat;
+	pixelFormat = ChoosePixelFormat(windowHandle, &pfd);
+	checkError(); //ERROR CHECK
+	SetPixelFormat(windowHandle, pixelFormat, &pfd);
+	checkError(); //ERROR CHECK
+	renderingContext = wglCreateContext(windowHandle);
+	checkError(); //ERROR CHECK
+	wglMakeCurrent(windowHandle, renderingContext);
+	checkError(); //ERROR CHECK
+	ShowWindow(static_cast<HWND>(mWindowHandle), SW_SHOWNORMAL);
+	checkError(); //ERROR CHECK
 }
 
 void GraphicsContext::createGLProgram()
@@ -209,10 +219,8 @@ unsigned int GraphicsContext::getProgramId()
 
 void GraphicsContext::checkError()
 {
-	/*EGLint error = eglGetError();
-	if (error != EGL_SUCCESS)
-	{
-		Log("vgengine", "EGL error: %i", error, "");
-	}*/
+	DWORD error = GetLastError();
+	if (error != ERROR_SUCCESS)
+		Log("vgengine", "Error initializing window, errorcode: %d!\n",error);
 }
 #endif

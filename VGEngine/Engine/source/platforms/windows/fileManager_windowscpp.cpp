@@ -11,7 +11,7 @@ FileManager::FileManager()
 
 bool FileManager::readAsset(const std::string& path, std::string& outData)
 { 
-	readFile(FileManager::DataPath::File,"/assets/" + path, outData);
+	readFile(FileManager::DataPath::File,"./assets/" + path, outData);
 	return true;
 }
 
@@ -41,6 +41,10 @@ bool FileManager::readAsset(const std::string& path, sound::SoundEffectData* sou
 
 bool FileManager::readFile(DataPath dataPath, const std::string& path, std::string& outData)
 {
+	std::ifstream ifs(path);
+	outData = std::string((std::istreambuf_iterator<char>(ifs)),
+		(std::istreambuf_iterator<char>()));
+	/*outData = std::string();
 	std::ifstream ifstream(path.c_str());
 	ifstream.seekg(0, std::ios::end);
 	outData.reserve(ifstream.tellg());
@@ -48,7 +52,7 @@ bool FileManager::readFile(DataPath dataPath, const std::string& path, std::stri
 
 	outData.assign((std::istreambuf_iterator<char>(ifstream)),
 		std::istreambuf_iterator<char>());
-	ifstream.close();
+	ifstream.close();*/
 	return true;
 }
 

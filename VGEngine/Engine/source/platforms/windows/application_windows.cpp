@@ -3,11 +3,12 @@
 #include "engine\game\game.h"
 #include "engine\graphics\graphics.h"
 #include "engine\input\input.h"
+#include <Windows.h>
 using namespace vg;
 using namespace vg::core; 
 using namespace vg::graphics; 
 extern void mainGame(Game *game);
-
+#define GetCurrentDir _getcwd
 Application::Application()
 {
 
@@ -24,6 +25,7 @@ void Application::mmessageCheck()
 {
 
 }
+
 int main()
 {
 	Game* game = Game::getInstance();
@@ -45,14 +47,30 @@ int main()
 }
 void Application::update()
 {
-	vg::input::Input::update();
 	Graphics *graphics = Game::getInstance()->getGraphics();
-	gl::clear();
-	gl::clearColor(vg::input::Input::getTouchX() / graphics->getScreenWidth(), 0.5f,
-		(vg::input::Input::getTouchY()) / graphics->getScreenHeight(), 1);
-	
-	Game::getInstance()->update();
+	GraphicsContext *context = graphics->getContext(); 
+	//Update window
+	MSG msg;//I don't even...
 
+	while (PeekMessage(&msg, static_cast<HWND>(context->mWindowHandle), NULL, NULL, PM_REMOVE))
+	{
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	//Update input
+	vg::input::Input::update();
+
+	//clear graphics
+	
+	gl::clear();
+	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
+	//gl::clearColor(vg::input::Input::getTouchX() / graphics->getScreenWidth(), 0.5f,
+	//	(vg::input::Input::getTouchY()) / graphics->getScreenHeight(), 1);
+	//Update game
+	Game::getInstance()->update();
+	//swap buffers
 	graphics->swapBuffers();
 }
 #endif
