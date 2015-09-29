@@ -66,7 +66,7 @@
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>DEBUG;OS_ANDROID</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;OS_ANDROID</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -174,14 +174,15 @@
     <ClCompile Include="source\platforms\android\graphicsContext_android.cpp" />
     <ClCompile Include="source\platforms\android\input_android.cpp" />
     <ClCompile Include="source\platforms\android\opengl_android.cpp" />
+    <ClCompile Include="source\platforms\android\soundeffect_android.cpp" />
     <ClCompile Include="source\platforms\windows\application_windows.cpp" />
     <ClCompile Include="source\platforms\windows\fileManager_windowscpp.cpp" />
     <ClCompile Include="source\platforms\windows\graphicsContext_windows.cpp" />
     <ClCompile Include="source\platforms\windows\input_windows.cpp" />
     <ClCompile Include="source\platforms\windows\opengl_windows.cpp" />
+    <ClCompile Include="source\platforms\windows\soundeffect_windows.cpp" />
     <ClCompile Include="source\sound\audioManager.cpp" />
     <ClCompile Include="source\sound\sound.cpp" />
-    <ClCompile Include="source\sound\soundEffect.cpp" />
     <ClCompile Include="source\utility\math.cpp" />
     <ClCompile Include="source\utility\random.cpp" />
     <ClCompile Include="source\utility\timer.cpp" />

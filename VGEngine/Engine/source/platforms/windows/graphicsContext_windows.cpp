@@ -21,6 +21,9 @@ unsigned int mWidth, mHeight; ///< Screen size in pixels
 unsigned int mProgramId; //< OpenGL program id
 using namespace vg::graphics::gl;
 
+HDC g_HDC;
+HGLRC renderingContext;
+
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam) //without this nothing works, so I say we keep it
@@ -63,32 +66,11 @@ void GraphicsContext::initialize()
 
 void GraphicsContext::destroy()
 {
-	/*
-	if (mDisplay != EGL_NO_DISPLAY)
-	{
-		eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_SURFACE);
-
-		if (mContext != EGL_NO_CONTEXT)
-		{
-			eglDestroyContext(mDisplay, mContext);
-		}
-
-		if (mSurface != EGL_NO_SURFACE)
-		{
-			eglDestroySurface(mDisplay, mSurface);
-		}
-
-		eglTerminate(mDisplay);
-	}
-
-	mDisplay = EGL_NO_DISPLAY;
-	mContext = EGL_NO_CONTEXT;
-	mSurface = EGL_NO_SURFACE;*/
 }
 
 void GraphicsContext::swapBuffers()
 {
-//	eglSwapBuffers(mDisplay, mSurface);
+	SwapBuffers(static_cast<HDC>(mWindowHandle));
 }
 
 unsigned int GraphicsContext::getWidth()
@@ -103,96 +85,7 @@ unsigned int GraphicsContext::getHeight()
 
 void GraphicsContext::initializeGraphicsContext()
 {
-	/*
-	const EGLint config16bpp[] = {
-		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-		EGL_RED_SIZE, 5,
-		EGL_GREEN_SIZE, 6,
-		EGL_BLUE_SIZE, 5,
-		EGL_NONE
-	};
-
-	const EGLint config24bpp[] = {
-		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-		EGL_RED_SIZE, 8,
-		EGL_GREEN_SIZE, 8,
-		EGL_BLUE_SIZE, 8,
-		EGL_NONE
-	};
-
-	const EGLint config32bpp[] = {
-		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-		EGL_RED_SIZE, 8,
-		EGL_GREEN_SIZE, 8,
-		EGL_BLUE_SIZE, 8,
-		EGL_ALPHA_SIZE, 8,
-		EGL_DEPTH_SIZE, 16,
-		EGL_STENCIL_SIZE, 0,
-		EGL_NONE
-	};
-
-	EGLint contextAttribs[] =
-	{
-		EGL_CONTEXT_CLIENT_VERSION, 2,
-		EGL_NONE
-	};
-
-	EGLint format, majorVersion, minorVersion, numConfigs, windowFormat;
-	const EGLint* attribs = NULL;
-	EGLConfig config;
-	mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-	eglInitialize(mDisplay, &majorVersion, &minorVersion);
-	Log("vgengine", "EGL version: %i.%i", majorVersion, minorVersion);
-	checkError();
-
-	windowFormat = ANativeWindow_getFormat(window);
-	switch (windowFormat)
-	{
-	case WINDOW_FORMAT_RGBA_8888:
-		attribs = config32bpp;
-		Log("vgengine", "Window format: 32 bits per pixel", "");
-		break;
-	case WINDOW_FORMAT_RGBX_8888:
-		attribs = config24bpp;
-		Log("vgengine", "Window format: 24 bits per pixel", "");
-		break;
-	case WINDOW_FORMAT_RGB_565:
-		attribs = config16bpp;
-		Log("vgengine", "Window format: 16 bits per pixel", "");
-		break;
-	default:
-		attribs = config16bpp;
-		Log("vgengine", "Unknown window format!", "");
-	}
-
-	eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
-	Log("vgengine", "Number of EGL configs: %i", numConfigs);
-	checkError();
-	eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
-	checkError();
-
-	ANativeWindow_setBuffersGeometry(window, 0, 0, format);
-
-	mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);
-	checkError();
-	mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
-	checkError();
-
-	if (eglMakeCurrent(mDisplay, mSurface, mSurface, mContext) == EGL_FALSE)
-	{
-		Log("vgengine", "Unable to eglMakeCurrent", "");
-	}
-	checkError();
-
-	eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
-	checkError();
-	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
-	checkError();
-	*/
-
+	//WINDOW
 	WNDCLASS wc = {};
 
 	std::string windowName = "TestWindow";
@@ -205,7 +98,7 @@ void GraphicsContext::initializeGraphicsContext()
 
 	RegisterClass(&wc);
 
-	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "asd", "Window", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
+	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "doge", "Window", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
 		NULL, NULL, GetModuleHandle(nullptr), NULL);
 	if (mWindowHandle == nullptr)
 	{
@@ -213,6 +106,58 @@ void GraphicsContext::initializeGraphicsContext()
 		Log("vgengine", "Window handle creation failed", "");
 
 	}
+
+
+
+	//OPENGL
+
+	PIXELFORMATDESCRIPTOR pfd =
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),
+		1,
+		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
+		PFD_TYPE_RGBA,            //The kind of framebuffer. RGBA or palette.
+		24,                        //Colordepth of the framebuffer.		
+		24,                        //Number of bits for the depthbuffer
+		8,                        //Number of bits for the stencilbuffer
+		0,                        //Number of Aux buffers in the framebuffer.
+		PFD_MAIN_PLANE
+	};
+	WORD  nSize = sizeof(PIXELFORMATDESCRIPTOR);
+	WORD  nVersion = 1;
+	DWORD dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+	pfd.iPixelType = PFD_TYPE_RGBA;
+	pfd.cColorBits = 24;
+	pfd.cRedBits = 0;
+	pfd.cRedShift = 0;
+	pfd.cGreenBits = 0;
+	pfd.cGreenShift = 0;
+	pfd.cBlueBits = 0;
+	pfd.cBlueShift = 0;
+	pfd.cAlphaBits = 0;
+	pfd.cAlphaShift = 0;
+	pfd.cAccumBits = 0;
+	pfd.cAccumRedBits = 0;
+	pfd.cAccumGreenBits = 0;
+	pfd.cAccumBlueBits = 0;
+	pfd.cAccumAlphaBits = 0;
+	pfd.cDepthBits = 24;
+	pfd.cStencilBits = 8;
+	pfd.cAuxBuffers = 0;
+	pfd.iLayerType = 0;
+	pfd.bReserved = 0;
+	DWORD dwLayerMask = NULL;
+	DWORD dwVisibleMask = NULL;
+	DWORD dwDamageMask = NULL;
+
+
+	HDC ourWindowHandleToDeviceContext = GetDC(static_cast<HWND>(mWindowHandle));// 
+	g_HDC = ourWindowHandleToDeviceContext;
+	int  letWindowsChooseThisPixelFormat;
+	letWindowsChooseThisPixelFormat = ChoosePixelFormat(ourWindowHandleToDeviceContext, &pfd);
+	SetPixelFormat(ourWindowHandleToDeviceContext, letWindowsChooseThisPixelFormat, &pfd);
+	renderingContext = wglCreateContext(ourWindowHandleToDeviceContext);
+	wglMakeCurrent(ourWindowHandleToDeviceContext, renderingContext);
 }
 
 void GraphicsContext::createGLProgram()
@@ -224,7 +169,9 @@ void GraphicsContext::createGLProgram()
 
 void GraphicsContext::initializeOpenGL()
 {
+	glewInit();
 	const GLubyte* glVersion = glGetString(GL_VERSION);
+	Log("vgengine", "Print test:%d", 5522);
 	Log("vgengine", "OpenGL ES version: %s", glVersion);
 	gl::checkError();
 

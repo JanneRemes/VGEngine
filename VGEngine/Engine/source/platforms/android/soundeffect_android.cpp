@@ -1,4 +1,4 @@
-
+#ifdef OS_ANDROID
 #include <engine/sound/soundEffect.h>
 #include <engine/utility/logger.h>
 #include <engine/assets/fileManager.h>
@@ -26,14 +26,14 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	// Data location
 	/*
 	typedef struct SLDataLocator_AndroidFD_ {
-    SLuint32        locatorType;
-    SLint32         fd;
-    SLAint64        offset;
-    SLAint64        length;
-} SLDataLocator_AndroidFD;
+	SLuint32        locatorType;
+	SLint32         fd;
+	SLAint64        offset;
+	SLAint64        length;
+	} SLDataLocator_AndroidFD;
 	*/
 #ifdef OS_ANDROID
-	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength};
+	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength };
 	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
 #else
 	SLDataLocator_Address loc_fd = { SL_DATALOCATOR_ADDRESS };
@@ -43,10 +43,10 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source
 	SLDataSource audioSource = { &loc_fd, &format_mime };
-	
+
 	// Outputmix
 	const SLInterfaceID outputInterfaces[1] = { SL_IID_PLAYBACKRATE };
-	
+
 	result = (*Engine)->CreateOutputMix(Engine, &outputObject, 1, outputInterfaces, outputRequired);
 	result = (*outputObject)->Realize(outputObject, SL_BOOLEAN_FALSE);
 
@@ -176,3 +176,4 @@ void SoundEffect::destroy()
 SoundEffect::~SoundEffect()
 {
 }
+#endif

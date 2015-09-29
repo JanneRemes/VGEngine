@@ -311,9 +311,6 @@
     <ClCompile Include="source\sound\sound.cpp">
       <Filter>source\sound</Filter>
     </ClCompile>
-    <ClCompile Include="source\sound\soundEffect.cpp">
-      <Filter>source\sound</Filter>
-    </ClCompile>
     <ClCompile Include="source\game\deleteSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
@@ -357,6 +354,12 @@
       <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\platforms\android\android_native_app_glue.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\soundeffect_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\soundeffect_android.cpp">
       <Filter>source\platforms\android</Filter>
     </ClCompile>
   </ItemGroup>

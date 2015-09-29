@@ -44,32 +44,7 @@ void Game::setGraphics(vg::graphics::Graphics *graphics)
 {
 	this->mGraphics = graphics;
 }
-/*
-void readFiles(core::FileManager& fileManager)
-{
-    Log("vgengine", "----- -----", "");
-    Log("vgengine", "Begin", "");
-    {
-        char buffer[1024];
-        getcwd(buffer, sizeof(buffer));
-        Log("vgengine", "path = '%s'", buffer);
-        const std::string file = "test.txt";
 
-        std::string str;
-
-        str = "Hello World!";
-        Log("vgengine", "Writing...", "");
-        Log("vgengine", "success? %s", fileManager.writeFile(core::FileManager::Internal, file, str) ? "true" : "false");
-        Log("vgengine", "line = '%s'", str.c_str());
-
-        str = "";
-        Log("vgengine", "Reading...", "");
-        Log("vgengine", "success? %s", fileManager.readFile(core::FileManager::Internal, file, str) ? "true" : "false");
-        Log("vgengine", "line = '%s'", str.c_str());
-    }
-    Log("vgengine", "End", "");
-    Log("vgengine", "----- -----", "");
-}*/
 
 bool Game::isRunning()
 {

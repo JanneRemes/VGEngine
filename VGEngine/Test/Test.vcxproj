@@ -85,6 +85,7 @@
     <Link>
       <AdditionalDependencies>OpenSLES;vgengine;freetype;Box2D;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

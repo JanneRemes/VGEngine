@@ -11,5 +11,6 @@ void test_dummy()
 }
 void mainGame(Game* game)
 {
-
+	int asd;
+	asd = 5;
 }
