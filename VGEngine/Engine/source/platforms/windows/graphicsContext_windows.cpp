@@ -9,10 +9,11 @@
 #include "engine/application.h"
 #include "engine/graphics/opengl.h"
 #include <Windows.h>
-
+/*
 #pragma comment( lib, "glew32d.lib" )
 #pragma comment( lib, "glew32sd.lib" )
 #pragma comment( lib, "opengl32.lib" )
+*/
 #include "../external/glew.h"
 #include "engine\game\game.h"
 using namespace vg::graphics;
@@ -22,7 +23,6 @@ unsigned int mWidth, mHeight; ///< Screen size in pixels
 unsigned int mProgramId; //< OpenGL program id
 using namespace vg::graphics::gl;
 
-HDC g_HDC;
 HGLRC renderingContext;
 
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -72,7 +72,8 @@ void GraphicsContext::destroy()
 
 void GraphicsContext::swapBuffers()
 {
-	SwapBuffers(static_cast<HDC>(mWindowHandle));
+	HDC windowHandle = static_cast<HDC>(mWindowHandle);
+	SwapBuffers(windowHandle);
 }
 
 unsigned int GraphicsContext::getWidth()
@@ -89,18 +90,18 @@ void GraphicsContext::initializeGraphicsContext()
 {
 	//WINDOW
 	WNDCLASS wc = {};
-
-	std::string windowName = "TestWindow";
+	char* CLASS_NAME = "asd";
+	std::string windowName = "VG Engine";
 	mWidth = 800;
 	mHeight = 600;
 
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);
-	wc.lpszClassName = "doge";
+	wc.lpszClassName = CLASS_NAME;
 
 	RegisterClass(&wc);
 	checkError();
-	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "doge", "VG Engine", WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
+	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, windowName.c_str(), WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
 		NULL, NULL, GetModuleHandle(nullptr), NULL);
 	checkError();
 	if (mWindowHandle == nullptr)
@@ -155,16 +156,26 @@ void GraphicsContext::initializeGraphicsContext()
 
 
 	HDC windowHandle = GetDC(static_cast<HWND>(mWindowHandle));// 
+	if (windowHandle == nullptr || windowHandle == NULL)
+	{
+		Log("vgengine", "failed to set openglcontext");
+	}
 	checkError();
-	g_HDC = windowHandle;
 	int  pixelFormat;
 	pixelFormat = ChoosePixelFormat(windowHandle, &pfd);
 	checkError(); //ERROR CHECK
-	SetPixelFormat(windowHandle, pixelFormat, &pfd);
+	Log("vgengine", "Pixelformat: %d",pixelFormat);
+	if (!SetPixelFormat(windowHandle, pixelFormat, &pfd))
+	{
+		Log("vgengine", "Failed to set pixel format");
+	}
 	checkError(); //ERROR CHECK
 	renderingContext = wglCreateContext(windowHandle);
 	checkError(); //ERROR CHECK
-	wglMakeCurrent(windowHandle, renderingContext);
+	if (!wglMakeCurrent(windowHandle, renderingContext))
+	{
+		Log("vgengine", "Failed to make context current");
+	}
 	checkError(); //ERROR CHECK
 	ShowWindow(static_cast<HWND>(mWindowHandle), SW_SHOWNORMAL);
 	checkError(); //ERROR CHECK
@@ -181,7 +192,6 @@ void GraphicsContext::initializeOpenGL()
 {
 	glewInit();
 	const GLubyte* glVersion = glGetString(GL_VERSION);
-	Log("vgengine", "Print test:%d", 5522);
 	Log("vgengine", "OpenGL ES version: %s", glVersion);
 	gl::checkError();
 

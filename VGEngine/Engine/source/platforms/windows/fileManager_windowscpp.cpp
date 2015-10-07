@@ -2,6 +2,7 @@
 #pragma once
 #include "engine\assets\fileManager.h"
 #include<fstream>
+#include "engine\utility\logger.h"
 using namespace vg;
 using namespace vg::core;
 FileManager::FileManager()
@@ -17,20 +18,15 @@ bool FileManager::readAsset(const std::string& path, std::string& outData)
 
 bool FileManager::readAsset(const std::string& path, std::vector<unsigned char>& outData)
 {
+	std::string outString;
 
-	std::ifstream ifstream(path.c_str());
-	if (!ifstream.eof() && !ifstream.fail())
-	{
-		ifstream.seekg(0, std::ios_base::end);
-		std::streampos fileSize = ifstream.tellg();
-		outData.resize(fileSize);
-		std::vector<char> tempData;
-		ifstream.seekg(0, std::ios_base::beg);
-		ifstream.read(&tempData[0], fileSize);
-		for (int i = 0; i < tempData.size(); i++)
-			outData.push_back(tempData[i]);
-	}
-	ifstream.close();
+	//Read to string
+	std::ifstream ifs("./assets/" +path,std::ios_base::binary);
+	outString = std::string((std::istreambuf_iterator<char>(ifs)),
+		(std::istreambuf_iterator<char>()));
+
+	//copy to vector
+	outData = std::vector<unsigned char>(outString.begin(), outString.end());
 	return true;
 }
 
