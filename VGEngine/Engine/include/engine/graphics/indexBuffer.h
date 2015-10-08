@@ -1,6 +1,5 @@
 #pragma once
 #include "engine/graphics/buffer.h"
-#include <GLES2/gl2.h>
 namespace vg
 {
 	namespace graphics
@@ -9,7 +8,7 @@ namespace vg
 		Buffer that contains data of indices
 		*/
 		class IndexBuffer :
-			public Buffer<GLuint>
+			public Buffer<unsigned short>
 		{
 		public:
 			IndexBuffer();
@@ -18,7 +17,7 @@ namespace vg
 			Constructor for the indexbuffer
 			@param data Indice data for buffer
 			*/
-			IndexBuffer(const std::vector<GLuint>& data);
+			IndexBuffer(const std::vector<unsigned short>& data);
 		};
 	}
 }

@@ -13,9 +13,6 @@
     <Filter Include="source\game">
       <UniqueIdentifier>{affd2ddc-b7ab-4d3a-b8ae-fe233b89bd3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\assets">
-      <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source\assets">
       <UniqueIdentifier>{cdd723d8-41ce-441a-b07e-a57857f93eaa}</UniqueIdentifier>
     </Filter>
@@ -46,11 +43,29 @@
     <Filter Include="external">
       <UniqueIdentifier>{08c84e93-0f1e-4f81-b366-e916baf2b441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\platforms">
+      <UniqueIdentifier>{2a136957-9c55-4931-b018-c08a148ae6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\platforms\android">
+      <UniqueIdentifier>{cc45aa05-f838-48a9-8420-2ec311c14ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\platforms\windows">
+      <UniqueIdentifier>{2d024c82-8698-4571-8fff-920efb9d3e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\platforms">
+      <UniqueIdentifier>{8559ef9d-d6e9-4a50-a36c-ebc86fc7f6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\platforms\android">
+      <UniqueIdentifier>{40817975-861b-4790-9a12-df1a3ac1999e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\platforms\windows">
+      <UniqueIdentifier>{2dc8a5d0-7d52-4858-a052-d7b385ccdc74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\input\assets">
+      <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Engine\android_native_app_glue.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Engine\engine.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -66,17 +81,14 @@
     <ClInclude Include="include\engine\game\gameObject.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\assets\asset.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\assetManager.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\fileManager.h">
-      <Filter>include\assets</Filter>
+      <Filter>include\input\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\graphicsContext.h">
       <Filter>include\graphics</Filter>
@@ -177,22 +189,34 @@
     <ClInclude Include="include\engine\game\deleteSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\animationComponent.h">
+    <ClInclude Include="include\engine\game\physicsComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\animationSystem.h">
+    <ClInclude Include="include\engine\game\physicsSystem.h">
       <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\application.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h">
+      <Filter>include\platforms\android</Filter>
+    </ClInclude>
+    <ClInclude Include="external\OpenSLES.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="external\OpenSLES_Platform.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\platforms\android\OpenSLES_Android.h">
+      <Filter>include\platforms\android</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glew.h">
+      <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\main.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\android_native_app_glue.cpp">
-      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\game\gameObject.cpp">
       <Filter>source\game</Filter>
@@ -211,12 +235,6 @@
     </ClCompile>
     <ClCompile Include="source\assets\assetManager.cpp">
       <Filter>source\assets</Filter>
-    </ClCompile>
-    <ClCompile Include="source\assets\fileManager.cpp">
-      <Filter>source\assets</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\graphicsContext.cpp">
-      <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\utility\math.cpp">
       <Filter>source\utility</Filter>
@@ -250,9 +268,6 @@
     </ClCompile>
     <ClCompile Include="source\game\objectPool.cpp">
       <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics\opengl.cpp">
-      <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\game\sceneManager.cpp">
       <Filter>source\game</Filter>
@@ -296,9 +311,6 @@
     <ClCompile Include="source\sound\sound.cpp">
       <Filter>source\sound</Filter>
     </ClCompile>
-    <ClCompile Include="source\sound\soundEffect.cpp">
-      <Filter>source\sound</Filter>
-    </ClCompile>
     <ClCompile Include="source\game\deleteSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
@@ -307,6 +319,54 @@
     </ClCompile>
     <ClCompile Include="source\game\animationSystem.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\physicsComponent.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\physicsSystem.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\fileManager_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\application_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\application_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\fileManager_windowscpp.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\graphicsContext_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\graphicsContext_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\opengl_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\opengl_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\input_android.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\input_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\buffer.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\android_native_app_glue.cpp">
+      <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\windows\soundeffect_windows.cpp">
+      <Filter>source\platforms\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\platforms\android\soundeffect_android.cpp">
+      <Filter>source\platforms\android</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

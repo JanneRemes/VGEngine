@@ -26,15 +26,19 @@ namespace vg
         @param origin offset of origin in pixels from upper left corner
         */
         TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-            float rotation, uint layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
+            float rotation, unsigned int layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
 		
         ~TransformComponent();
 
         /**
-        <description>
+        @return local position (only taking into account this component´s position not parent´s position)
         */
-        vg::Vector2<int> getPosition();
+        vg::Vector2<int> getLocalPosition();
 
+		/**
+		@return world position (adds parent gameobject´s position to this components local position)
+		*/
+		vg::Vector2<int> getWorldPosition();
         /**
         Set position value to be used on draw calls.
         */
@@ -46,9 +50,10 @@ namespace vg
         void move(vg::Vector2<int> change);
 
         /**
-        <description>
+		@return size in pixels
         */
         vg::Vector2<int> getSize();
+
 
         /**
         Set position value to be used on draw calls.
@@ -56,17 +61,20 @@ namespace vg
         void setSize(const vg::Vector2<int> size);
 
         /**
-        <description>
+		@return rotation in degrees
         */
-        float getRotation();
-
+        float getLocalRotation();
+		/**
+		stuff
+		*/
+		float getWorldRotation();
         /**
         Set rotation value to be used on draw calls.
         */
         void setRotation(float rotation);
 
         /**
-        Add to the rotation value to be used on draw calls.
+        Add to the rotation value
         */
         void rotate(float rotatation);
 
@@ -78,7 +86,7 @@ namespace vg
         /**
         @param layer value ranging from 0 to 10000.
         */
-        void setLayer(uint layer);
+        void setLayer(unsigned int layer);
 
         /**
         <description>
@@ -91,13 +99,13 @@ namespace vg
         void setOrigin(const vg::Vector2<int> origin);
 
 	private:
-		static uint mCurrentLayer;
-		static uint getDefaultLayer();
+		static unsigned int mCurrentLayer;
+		static unsigned int getDefaultLayer();
         vg::Vector2<int> mPosition;     ///< Position of top left corner in pixels.
         vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
         vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
         float mRotation;                ///< Rotation of sprite in angles.
-        uint mLayer;                   ///< Layer where the sprite will be drawn.
+        unsigned int mLayer;                   ///< Layer where the sprite will be drawn.
 	};
 
 }

@@ -21,6 +21,7 @@ private:
 	vg::Game *mGame;
 	vg::Scene *mScene;
 	vg::Timer mSpawnTimer;
+	vg::Timer fpsTimer;
 	float mSpawnDelay;
 	int mEnemyCount;
 	int mBulletCount;

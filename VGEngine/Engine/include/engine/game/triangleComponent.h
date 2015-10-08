@@ -1,6 +1,5 @@
 #pragma once
 #include "engine/game/renderComponent.h"
-#include "GLES2/gl2.h"
 namespace vg{
 
 	/**
@@ -27,7 +26,7 @@ namespace vg{
 		/**
 		@return Returns the default indices that are needed for a triangle
 		*/
-		std::vector<GLuint> getDefaultIndices();
+		std::vector<unsigned short> getDefaultIndices();
 	};
 
 }

@@ -69,7 +69,7 @@ namespace vg
 		}
 		void log()
 		{
-			Log("vector", "Vector x: %f, y: %f", mX, mY);
+			Log("vgengine", "Vector x: %f, y: %f", mX, mY);
 		}
 	private:
 		T mX;

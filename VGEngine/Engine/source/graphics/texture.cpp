@@ -5,23 +5,25 @@
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
 
+
 #include <string>
 #include <vector>
 
 using namespace vg::graphics;
-
+using namespace vg::graphics::gl;
+using namespace vg::core;
 Texture::Texture(const std::string& path)
 	: Asset(path)
 {
 }
 
-bool Texture::load(core::FileManager *fileManager)
+bool Texture::load(FileManager *fileManager)
 {
 	std::vector<unsigned char> rawBytes;
 
 	if (fileManager->readAsset(mPath, rawBytes) == false)
 	{
-		Log("ERROR", "Failed to load texture asset '%s'.", mPath.c_str());
+		Log("vgengine", "Failed to load texture asset '%s'.", mPath.c_str());
 		return false;
 	}
 
@@ -29,7 +31,7 @@ bool Texture::load(core::FileManager *fileManager)
 	uint32_t error = lodepng::decode(pixels, mWidth, mHeight, rawBytes);
 	if (error != 0)
 	{
-		Log("ERROR", "LodePNG: '%s'.", lodepng_error_text(error));
+		Log("vgengine", "LodePNG: '%s'.", lodepng_error_text(error));
 		return false;
 	}
 
@@ -59,8 +61,14 @@ bool Texture::load(core::FileManager *fileManager)
 	gl::activeTexture();
 	gl::bindTexture(mId);
 	gl::texImage2D(mWidth, mHeight, pixels);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//gl::texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//gl::texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
+	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_LINEAR());
+	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_LINEAR());
+	//gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	gl::bindTexture(0);
 
 	mIsLoaded = true;
@@ -71,10 +79,11 @@ bool Texture::unload()
 {
 	if (mId != 0)
 	{
-		glDeleteTextures(1, &mId);
+		deleteTextures(1, &mId);
 	}
 
 	mIsLoaded = false;
+	return true;
 }
 
 void Texture::bind() const
@@ -93,8 +102,8 @@ void Texture::setSmoothing(bool enableSmoothing) const
 {
 	gl::activeTexture();
 	gl::bindTexture(mId);
-	gl::texParameteri(GL_TEXTURE_MAG_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
-	gl::texParameteri(GL_TEXTURE_MIN_FILTER, enableSmoothing ? GL_LINEAR : GL_NEAREST);
+	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), enableSmoothing ? getGL_LINEAR() : getGL_NEAREST());
+	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), enableSmoothing ? getGL_LINEAR() : getGL_NEAREST());
 	gl::bindTexture(0);
 }
 

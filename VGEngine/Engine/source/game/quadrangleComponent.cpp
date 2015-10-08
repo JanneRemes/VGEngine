@@ -44,9 +44,9 @@ std::vector<float> QuadrangleComponent::getDefaultVertices()
 	return defaultVertices;
 }
 
-std::vector<GLuint> QuadrangleComponent::getDefaultIndices()
+std::vector<unsigned short> QuadrangleComponent::getDefaultIndices()
 {
-	std::vector<GLuint> defaultIndices = std::vector < GLuint >
+	std::vector<unsigned short> defaultIndices = std::vector <unsigned short>
 	{
 		0u, 1u, 2u,
 		0u, 2u, 3u

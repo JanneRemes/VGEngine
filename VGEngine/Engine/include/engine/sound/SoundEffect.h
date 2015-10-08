@@ -3,9 +3,9 @@
 
 #include <engine/sound/Sound.h>
 
-#include <SLES/OpenSLES_Android.h>
-#include <SLES/OpenSLES.h>
-
+//#include <SLES/OpenSLES_Android.h>
+//#include <SLES/OpenSLES.h>
+#include "../external/OpenSLES.h"
 #include <string>
 
 namespace vg 

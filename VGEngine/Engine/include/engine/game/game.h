@@ -8,12 +8,9 @@
 #include "engine/graphics/shader.h"
 #include "engine/game/factory.h"
 #include "engine/assets/assetManager.h"
-#include "engine/android_native_app_glue.h"
-#include <android/sensor.h>
 #include "engine\sound\AudioManager.h"
 
 #include <vector>
-#include <unistd.h>
 #include <string>
 
 namespace vg
@@ -45,7 +42,7 @@ namespace vg
         /**
         <description>
         */
-        void readFiles(core::FileManager& fileManager);
+        //void readFiles(core::FileManager& fileManager);
 
         /**
         @return Returns whether the game is running or not
@@ -95,13 +92,18 @@ namespace vg
 		core::FileManager *getFileManager();
 		sound::AudioManager *getAudioManager();
 
-		void setFileManager(android_app *app);
+		void setFileManager();
 
 		core::AssetManager* getAssetManager();
 		/**
 		Creates Game's scenemanager
 		*/
 		void initSceneManager();
+
+		/**
+		Sets game's state not running (engine will shut down)
+		*/
+		void setIsRunning(bool value){ mIsRunning = value; }
     private:
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;

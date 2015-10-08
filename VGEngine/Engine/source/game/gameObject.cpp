@@ -15,12 +15,13 @@ using namespace vg::graphics;
 GameObject::GameObject(std::string name)
 	: BaseClass("gameObject"), mName(name), mMarkedForDelete(false)
 {
-	
+	mParent = nullptr;
 }
 
 GameObject::GameObject(const GameObject &obj) 
 	: BaseClass(obj.mName), mName(obj.mName), mMarkedForDelete(false)
 {
+	mParent = nullptr;
 	for (auto ij = obj.mComponents.begin(); ij != obj.mComponents.end(); ij++)
 	{
 		
@@ -41,7 +42,7 @@ GameObject::GameObject(const GameObject &obj)
 			}
 			else
 			{
-				Log("error", "error!!!!", "");
+				Log("vgengine", "error!!!!", "");
 			}
 		
 		}
@@ -55,7 +56,9 @@ GameObject::GameObject(const GameObject &obj)
 
 void GameObject::addComponent(Component* component)
 {
+	component->setGameObject(this);
 	mComponents.insert(std::make_pair(&typeid(*component), component));
+
 }
 
 void GameObject::markForDelete()
@@ -66,4 +69,13 @@ void GameObject::markForDelete()
 bool GameObject::markedForDelete()
 {
 	return mMarkedForDelete;
+}
+
+void GameObject::setParent(GameObject *parent)
+{
+	mParent = parent;
+}
+GameObject *GameObject::getParent()
+{
+	return mParent;
 }

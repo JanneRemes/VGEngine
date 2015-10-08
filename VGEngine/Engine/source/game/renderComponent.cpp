@@ -3,7 +3,7 @@
 
 using namespace vg;
 
-RenderComponent::RenderComponent(std::vector<float> vertices, std::vector<GLuint> indices) :Component()
+RenderComponent::RenderComponent(std::vector<float> vertices, std::vector<unsigned short> indices) :Component()
 {
 	this->vertices = vertices;
 	this->indices = indices;

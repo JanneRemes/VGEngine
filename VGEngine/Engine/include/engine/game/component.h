@@ -11,9 +11,18 @@ namespace vg
 	class Component
 	{
 	public:
-		Component() = default;
+		Component();
 		virtual ~Component() = default;
-	private:
-		GameObject* mParent; ///< Gameobject parent of the component
+		/**
+		@param GameObject that this component belongs to
+		Sets gameobject that this component is part of
+		*/
+		void setGameObject(GameObject *gameObject);
+		/**
+		Gets GameObject that this component is part of
+		*/
+		GameObject *getGameObject();
+	protected:
+		GameObject* mGameObject; ///< Gameobject that this component is part of
 	};
 }

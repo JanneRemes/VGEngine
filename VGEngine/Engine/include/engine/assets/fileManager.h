@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include "engine/android_native_app_glue.h"
-#include <android/asset_manager.h>
 #include <string>
 #include <vector>
 
@@ -23,17 +21,25 @@ namespace vg
             /**
                 Used for checking if the path is internal or external
                 */
-            enum DataPath
-            {
-                Internal,
-                External
-            };
+			#if defined (OS_ANDROID)
+			enum DataPath
+			{
+				Internal,
+				External
+			};
+
+			#else
+			enum DataPath
+			{
+				File
+			};
+			#endif
 
             /**
                 Filemanagers constructor
                 @param app Android application
                 */
-            FileManager(android_app* app);
+            FileManager();
 
             ~FileManager() = default;
 
@@ -79,15 +85,6 @@ namespace vg
                 */
             bool writeFile(DataPath dataPath, const std::string& path, const std::string& inData) const;
         private:
-            /**
-                @param dataPath Used to choose if the path Internal or External
-                @return Path for the data
-                */
-            std::string getDataPath(DataPath dataPath) const;
-
-            AAssetManager* mAssetManager = nullptr; ///< AssetManager which is used for reading and writing
-            std::string mInternalDataPath;          ///< For reading and writing internal assets
-            std::string mExternalDataPath;          ///< For reading and writing external assets
-        };
+             };
     }
 }

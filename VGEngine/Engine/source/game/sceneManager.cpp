@@ -3,9 +3,9 @@
 #include "engine/graphics/graphics.h"
 #include "engine/game/scene.h"
 #include <utility> 
-
+#include "engine\graphics\opengl.h"
 using namespace vg;
-
+using namespace vg::graphics::gl;
 SceneManager::SceneManager(){
 	mSceneChanged = false;
 };
@@ -15,9 +15,10 @@ SceneManager::~SceneManager()
 	emptyScenes();
 }
 
+
 void SceneManager::draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	clear(getGL_COLOR_BUFFER_BIT());
 	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
 	{
 		(*it)->draw();

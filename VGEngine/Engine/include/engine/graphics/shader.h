@@ -8,7 +8,7 @@
 #include "../external/glm/gtx/transform.hpp"
 #include "../external/glm/gtc/type_ptr.hpp"
 
-#include <GLES2/gl2.h>
+
 #include <string>
 #include <map>
 #include <vector>
@@ -19,7 +19,6 @@ namespace vg
 	{
 		/// A map containing the usage and name of vertex attributes
 		typedef std::map<uint32_t, std::string> VariableNames;
-
 		/**
 			Holds shader attribute and  ids and links itself
 			*/
@@ -64,7 +63,7 @@ namespace vg
 				Returns current shader program id
 				@return shader program id
 				*/
-			GLuint getProgramId();
+			unsigned int getProgramId();
 
 			/**
 				calls glUseProgram
@@ -136,19 +135,19 @@ namespace vg
 				Compiles shader source code
 				@return GL_TRUE if compile was succesful
 				*/
-			GLint compileShaderSource(GLuint id, const std::string& source);
+			int compileShaderSource(unsigned int id, const std::string& source);
 
 			/**
 				Prints shader ShaderInfoLog to debug log
 				*/
-			void printErrorLog(GLuint shader);
+			void printErrorLog(unsigned int shader);
 
-			GLuint mVertexId;								///< Vertex shader id used for linking
-			GLuint mFragmentId;								///< Fragment shader id used for linking
-			GLuint mProgramId;								///< Shader program id used for linking
+			unsigned int mVertexId;								///< Vertex shader id used for linking
+			unsigned int mFragmentId;								///< Fragment shader id used for linking
+			unsigned int mProgramId;								///< Shader program id used for linking
 			VariableNames mVertexElementNames;				///< Map of vertex element ids and names
 			std::vector<std::string> mUniformNames;						///< list of uniform variable names
-			std::map<std::string, GLuint> mUniformLocations;///< Map of shader uniform names and locations
+			std::map<std::string, unsigned int> mUniformLocations;///< Map of shader uniform names and locations
 			bool mInitialized;								///< Have shaders been initialized
 		};
 	}

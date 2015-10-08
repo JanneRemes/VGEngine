@@ -1,7 +1,6 @@
 #pragma once
 #include "engine/game/component.h"
 #include <vector>
-#include "GLES2/gl2.h"
 #include "engine/graphics/texture.h"
 using namespace std;
 namespace vg
@@ -19,7 +18,7 @@ namespace vg
 		@param vertices vector of vertices for the draw
 		@param indices vector of indices for the draw
 		*/
-		RenderComponent(std::vector<float> vertices,std::vector<GLuint> indices);
+		RenderComponent(std::vector<float> vertices, std::vector<unsigned short> indices);
 		~RenderComponent() = default;
 
 		/**
@@ -30,7 +29,7 @@ namespace vg
 		/**
 		@return Returns the components indices
 		*/
-		std::vector<GLuint> *getIndices(){ return &indices; };
+		std::vector<unsigned short> *getIndices(){ return &indices; };
 
 		/**
 		@return pointer to current texture
@@ -42,6 +41,6 @@ namespace vg
 
 		vg::graphics::Texture *mTexture;
 		std::vector<float> vertices;
-		std::vector<GLuint> indices;
+		std::vector<unsigned short> indices;
 	};
 }

@@ -1,12 +1,8 @@
 
 #pragma once
 
-#include <jni.h>
-#include <android/log.h>
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
-#include "engine/android_native_app_glue.h"
-#include "engine/assets/fileManager.h"
+
+
 
 namespace vg
 {
@@ -29,7 +25,7 @@ namespace vg
 			Initializes EGL and openGL and creates opengl program
 			@param window pointer to Android window surface
 			*/
-			void initialize(ANativeWindow* window);
+			void initialize(/*ANativeWindow* window*/);
 
 			/**
 			Desroys EGL and disables openGL attributes and buffers
@@ -44,28 +40,25 @@ namespace vg
 			/**
 			@return width of current screen in pixels
 			*/
-			EGLint getWidth();
+			unsigned int getWidth();
 
 			/**
 			@return height of current screen in pixels
 			*/
-			EGLint getHeight();
+			unsigned int getHeight();
 
 			/**
 			@return returns mProgramId (opengl program id)
 			*/
+			unsigned int getProgramId();
 
-			GLuint getProgramId();
-
-
-
-
+			void *mWindowHandle;
 		private:
 			/**
 			Initializes EGL context for current device
-			@param window pointer to current devices window handle
+			@param window pointer to current devices window handle 
 			*/
-			void initializeEGL(ANativeWindow* window);
+			void initializeGraphicsContext();
 
 			/**
 			Creates Opengl program and puts it in mProgramId
@@ -77,13 +70,14 @@ namespace vg
 			*/
 			void initializeOpenGL();
 
-			EGLDisplay mDisplay;    ///< Handle to devices display
-			EGLSurface mSurface;    ///< Handle to device surface
-			EGLContext mContext;    ///< Handle to device context
+			/**
+			Checks and prints possible EGL errors
+			*/
+			void checkError();
 
-			EGLint mWidth, mHeight; ///< Screen size in pixels
 
-			GLuint mProgramId; //< OpenGL program id
+
+
 		};
 	}
 }

@@ -71,7 +71,19 @@ namespace vg
 		*/
 		bool markedForDelete();
 
+		/**
+		@param GameObject that is parent of this GameObject
+		Sets this gameobject´s parent gameobject
+		*/
+		void setParent(GameObject *parent);
+		/**
+		@return GameObject that is parent of this GameObject
+		*/
+		GameObject *getParent();
 	private:
+		
+		GameObject *mParent;///< this gameobject´s parent gameobject
+		
 		ComponentMap mComponents;	///< ComponentMap used by the gameObject
 		std::string mName;			///< Name of the gameObject
 		bool mMarkedForDelete;		///< has the GameObject been marked for delete

@@ -4,10 +4,10 @@
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
-
+#include "engine/application.h"
 using namespace vg::graphics;
 using namespace std;
-
+using namespace vg::core;
 
 Graphics::Graphics()
     : mInitialized(false)
@@ -19,10 +19,10 @@ Graphics::~Graphics()
     delete mFileManager;
 }
 
-void Graphics::initialize(android_app* app, const Shader& shader)
+void Graphics::initialize( const Shader& shader)
 {
-    mFileManager = new core::FileManager(app);
-    mContext.initialize(app->window);
+    mFileManager = new core::FileManager();
+    mContext.initialize();
     mShader = Shader(shader);
     mShader.load(*mFileManager);
 	
@@ -51,7 +51,7 @@ int Graphics::getScreenWidth()
         return mContext.getWidth();
     else
     {
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
         return 0;
     }
 }
@@ -62,7 +62,7 @@ int Graphics::getScreenHeight()
         return mContext.getHeight();
     else
     {
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
         return 0;
     }
 }
@@ -72,7 +72,7 @@ void Graphics::switchShader(string vertexPath, string fragmentPath)
     if (mInitialized)
         mShader.load(*mFileManager, vertexPath, fragmentPath);
     else
-        Log("ERROR", "Graphics context not initialized!", "");
+        Log("vgengine", "Graphics context not initialized!", "");
 }
 
 Shader* Graphics::getShader()
@@ -89,9 +89,7 @@ void Graphics::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices
 {
 	vertices->bind();
 	indices->bind();
-
-	gl::drawElements(GL_TRIANGLES, vertices->getSize(), GL_UNSIGNED_INT);
-
+	gl::drawElements(getGL_TRIANGLES(), vertices->getSize(), getGL_UNSIGNED_SHORT());
 	indices->unbind();
 	vertices->unbind();
 }
