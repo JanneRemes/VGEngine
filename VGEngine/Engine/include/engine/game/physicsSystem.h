@@ -17,7 +17,7 @@ namespace vg
 			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 			//void createJoint(b2Body bodyA, b2Body bodyB);
 			//void setGravity(b2Vec2 gravity);
-			b2World getWorld() { return *world; };
+			b2World* getWorld() { return world; };
 		private:
 			b2World *world;
 		};

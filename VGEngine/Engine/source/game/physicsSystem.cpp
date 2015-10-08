@@ -18,6 +18,8 @@ PhysicsSystem::~PhysicsSystem()
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {	 int velocityIterations = 8;
 	 int positionIterations = 3;
+	 world->Step(deltaTime, velocityIterations, positionIterations);
+
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
 		 PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
@@ -27,9 +29,10 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 		 {
 			 for (int i = 0; i < 60; ++i)
 			 {
-			  world->Step(deltaTime, velocityIterations, positionIterations);
-			  transform->setPosition(Vector2<int>(physComponent->getBody()->GetPosition().x, physComponent->getBody()->GetPosition().y));
-			  //float angle = body->GetAngle();
+			  transform->setPosition(Vector2<int>(physComponent->getBody()->GetPosition().x, -physComponent->getBody()->GetPosition().y));
+			  transform->setRotation(-1.0f * physComponent->getBody()->GetAngle() * 180 / 3.14);
+			  //Log("vgengine", "Box2D X: %f, Y: %f", physComponent->getBody()->GetPosition().x, physComponent->getBody()->GetPosition().y);
+
 			 }
 		 }
 	 }

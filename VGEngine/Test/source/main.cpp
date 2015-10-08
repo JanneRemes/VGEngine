@@ -93,10 +93,10 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, enemySystem);
 	
 	// Physics
-	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -10));
+	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81 * 10));
 	game->addComponentSystem(scene, physicsSystem);
 	GameObject *physicsTest = new GameObject("physicsTest");
-	physicsTest->addComponent(new PhysicsComponent(physicsSystem->getWorld()));
+	physicsTest->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 60, 0, 50, 50, b2BodyType::b2_dynamicBody));
 
 	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest->addComponent(physicsObject);
@@ -106,6 +106,29 @@ void mainGame(Game* game)
 	physicsTest->addComponent(physicsTransform);
 
 	scene->getObjectPool()->addGameObject(physicsTest);
+
+	// 2nd physics object
+	GameObject *physicsTest2 = new GameObject("physicsTest2");
+	physicsTest2->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 0, 128 * 3, 50, 50, b2BodyType::b2_staticBody));
+
+	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	physicsTest2->addComponent(physicsRender2);
+
+	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(64, 64),
+		Vector2<int>(128, 128), 0.0f);
+	physicsTest2->addComponent(physicsTransform2);
+
+	scene->getObjectPool()->addGameObject(physicsTest2);
+
+	// physics floor
+	GameObject *physicsFloor = new GameObject("physicsTest2");
+	physicsFloor->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 0, 720, 1280, 100, b2BodyType::b2_staticBody));
+
+	TransformComponent *physicsFloorTransform = new TransformComponent(Vector2<int>(64, 64),
+		Vector2<int>(128, 128), 0.0f);
+	physicsFloor->addComponent(physicsFloorTransform);
+
+	scene->getObjectPool()->addGameObject(physicsFloor);
 
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");

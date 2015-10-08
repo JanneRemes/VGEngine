@@ -2,10 +2,23 @@
 
 using namespace vg;
 
-PhysicsComponent::PhysicsComponent(b2World world)
+PhysicsComponent::PhysicsComponent(b2World *world, float x, float y, float width, float height, b2BodyType type)
 {
-	b2BodyDef bodyDef;
 	b2PolygonShape shape;
-	_body = world.CreateBody(&bodyDef);
-	_body->CreateFixture(&shape, 10.0f);
+	b2FixtureDef FixDef;
+	b2BodyDef bodyDef;
+
+	shape.SetAsBox(width, height);
+
+	FixDef.density = 10.0f;
+	FixDef.friction = 1.0f;
+	FixDef.shape = &shape;
+
+	bodyDef.position = b2Vec2(x, -y);
+	bodyDef.angle = 0.0f;
+	bodyDef.type = type;
+	
+	_body = world->CreateBody(&bodyDef);
+	_body->CreateFixture(&FixDef);
+
 }
