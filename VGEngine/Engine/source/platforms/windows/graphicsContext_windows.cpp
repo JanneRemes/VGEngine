@@ -72,8 +72,9 @@ void GraphicsContext::destroy()
 
 void GraphicsContext::swapBuffers()
 {
-	HDC windowHandle = static_cast<HDC>(mWindowHandle);
-	SwapBuffers(windowHandle);
+	HWND windowHandle = static_cast<HWND>(mWindowHandle);
+	HDC windowHandle2 = GetDC(windowHandle);// 
+	SwapBuffers(windowHandle2);
 }
 
 unsigned int GraphicsContext::getWidth()
