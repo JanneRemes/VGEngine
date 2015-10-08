@@ -57,3 +57,9 @@ VGEngine/Test/assetstest_loop.wav
 VGEngine/freetype/ProjectUpgradeBackup_20150409_1408097866/freetype.vcxproj
 VGEngine/freetype/ProjectUpgradeBackup_20150409_1408097866/freetype.vcxproj.filters
 VGEngine/ProjectUpgradeBackup_20150409_1408343078/VGEngine.sln
+
+# Temp asset duplicates
+VGEngine/Test/assetsshaders/*
+VGEngine/Test/*.png
+VGEngine/Test/*.ttf
+VGEngine/Test/*.mp3
