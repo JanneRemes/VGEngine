@@ -1,9 +1,6 @@
 
 #pragma once
 
-
-
-
 namespace vg
 {
 	namespace graphics
@@ -52,7 +49,11 @@ namespace vg
 			*/
 			unsigned int getProgramId();
 
+			/**
+			Used for windows sided window handling
+			*/
 			void *mWindowHandle;
+
 		private:
 			/**
 			Initializes EGL context for current device

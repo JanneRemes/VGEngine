@@ -8,20 +8,22 @@ namespace vg
 {
     namespace sound
     {
-        /**
-        Manages the reading and writing of files
-        */
         struct SoundEffectData;
     }
     namespace core
     {
+		/**
+		Manages the reading and writing of files
+		*/
         class FileManager
         {
         public:
-            /**
-                Used for checking if the path is internal or external
-                */
+
 			#if defined (OS_ANDROID)
+
+			/**
+			Used for checking if the path is internal or external
+			*/
 			enum DataPath
 			{
 				Internal,
