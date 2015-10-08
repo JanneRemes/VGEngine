@@ -24,7 +24,6 @@ namespace vg
     class Game
     {
 
-
     public:
 
 		static Game* mGame;
@@ -92,6 +91,9 @@ namespace vg
 		core::FileManager *getFileManager();
 		sound::AudioManager *getAudioManager();
 
+		/**
+		Sets the FileManager, AudioManager and AssetManager
+		*/
 		void setFileManager();
 
 		core::AssetManager* getAssetManager();
