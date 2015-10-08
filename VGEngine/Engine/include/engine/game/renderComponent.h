@@ -2,6 +2,7 @@
 #include "engine/game/component.h"
 #include <vector>
 #include "engine/graphics/texture.h"
+#include "../external/glm/vec2.hpp"
 using namespace std;
 namespace vg
 {
@@ -35,6 +36,9 @@ namespace vg
 		@return pointer to current texture
 		*/
 		vg::graphics::Texture *getTexture();
+
+		void setTexCoords(glm::vec2 texCoords[4]);
+		
 
 	private:
 		void setTexture(vg::graphics::Texture *texture);

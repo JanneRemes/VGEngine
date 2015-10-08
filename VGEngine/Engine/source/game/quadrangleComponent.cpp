@@ -53,3 +53,8 @@ std::vector<unsigned short> QuadrangleComponent::getDefaultIndices()
 	};
 	return defaultIndices;
 };
+
+void QuadrangleComponent::setTexCoords(glm::vec2 texCoords[4])
+{
+	
+}

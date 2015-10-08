@@ -19,3 +19,12 @@ vg::graphics::Texture *RenderComponent::getTexture()
 {
 	return mTexture;
 }
+
+void RenderComponent::setTexCoords(glm::vec2 texCoords[4])
+{
+	for (int i = 0; i < 4; i++)
+	{
+		vertices[i * 7 + 6] = texCoords[i].x;
+		vertices[i * 7 + 7] = texCoords[i].y;
+	}
+}

@@ -2,6 +2,7 @@
 #include "engine\game\system.h"
 #include "engine\game\animationComponent.h"
 
+
 namespace vg
 {
 	/*
@@ -9,7 +10,9 @@ namespace vg
 	*/
 	class AnimationSystem : 
 		public System
+
 	{
+
 	public:
 		AnimationSystem();
 		~AnimationSystem();

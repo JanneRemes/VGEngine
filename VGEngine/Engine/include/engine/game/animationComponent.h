@@ -5,20 +5,25 @@ namespace vg
 	class AnimationComponent :
 		public Component
 	{
+
+		friend class AnimationSystem;
 	public:
-		AnimationComponent(float mAnimationInterval, int frameCount, int frameWidth, int frameHeight);
+		AnimationComponent(float mAnimationInterval, int frameRowCount, int FrameColumnCount, int frameWidth, int frameHeight);
 		~AnimationComponent();
-		float getAnimationInterval() {return mAnimationInterval; }
-		int getFrameCount(){ return mFrameCount; }
-		int getFrameWidth(){ return mFrameWidth; }
-		int getFrameheight(){ return mFrameHeight; }
 		
-	private:
+	protected:
 
 		//float mTexCoords[8];
 		float mAnimationInterval;
-		int mFrameCount;
+		int mFrameTotalCount;
+		int mFrameRowCount;
+		int mFrameColumnCount;
 		int mFrameWidth;
 		int mFrameHeight;
+
+		float mXOffSet;
+		float mYOffSet;
+
+		bool isInitialized;
 	};
 }

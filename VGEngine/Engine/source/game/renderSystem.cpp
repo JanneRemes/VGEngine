@@ -44,7 +44,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 		if (render != nullptr)
 		{
-			vg::graphics::VertexBuffer vBuffer(*render->getVertices());
+			VertexBuffer vBuffer(*render->getVertices());
 			IndexBuffer iBuffer(*render->getIndices());
 			
 			Texture* texture = render->getTexture();
