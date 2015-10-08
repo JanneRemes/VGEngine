@@ -9,6 +9,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
+#include "engine/input/touch.h"
 #include <vector>
 
 using namespace vg;
@@ -62,7 +63,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 			{
 				transformComponent->setPosition(newPos);
 			}
-            if (input::Input::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
+			if (input::Touch::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
 			{
 				core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 				sound::Sound* sound = assetManager->get<sound::Sound>("shoot.mp3");

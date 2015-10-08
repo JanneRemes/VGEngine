@@ -349,5 +349,8 @@ unsigned int gl::getGL_INFO_LOG_LENGTH()
 {
 	return GL_INFO_LOG_LENGTH;
 }
-
+unsigned int gl::getGL_DEPTH_BUFFER_BIT()
+{
+	return GL_DEPTH_BUFFER_BIT;
+}
 #endif

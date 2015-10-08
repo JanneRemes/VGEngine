@@ -81,7 +81,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OS_WINDOWS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OS_WINDOWS;WIN32;_DEBUG</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -94,7 +94,6 @@
     <ClInclude Include="include\engine\assets\asset.h" />
     <ClInclude Include="include\engine\assets\assetManager.h" />
     <ClInclude Include="include\engine\assets\fileManager.h" />
-    <ClInclude Include="include\Engine\engine.h" />
     <ClInclude Include="include\engine\game\animationComponent.h" />
     <ClInclude Include="include\engine\game\animationSystem.h" />
     <ClInclude Include="include\engine\game\baseClass.h" />
@@ -128,6 +127,8 @@
     <ClInclude Include="include\engine\graphics\vertexBuffer.h" />
     <ClInclude Include="include\engine\graphics\vertexBufferElement.h" />
     <ClInclude Include="include\engine\input\input.h" />
+    <ClInclude Include="include\engine\input\mouse.h" />
+    <ClInclude Include="include\engine\input\touch.h" />
     <ClInclude Include="include\engine\platforms\android\android_native_app_glue.h" />
     <ClInclude Include="include\engine\platforms\android\OpenSLES_Android.h" />
     <ClInclude Include="include\engine\sound\audioManager.h" />
@@ -172,6 +173,8 @@
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />
     <ClCompile Include="source\input\input.cpp" />
+    <ClCompile Include="source\input\mouse.cpp" />
+    <ClCompile Include="source\input\touch.cpp" />
     <ClCompile Include="source\platforms\android\android_native_app_glue.cpp" />
     <ClCompile Include="source\platforms\android\application_android.cpp" />
     <ClCompile Include="source\platforms\android\fileManager_android.cpp" />
