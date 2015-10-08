@@ -93,8 +93,8 @@ void GraphicsContext::initializeGraphicsContext()
 	WNDCLASS wc = {};
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
-	mWidth = 800;
-	mHeight = 600;
+	mWidth = 1280;
+	mHeight = 720;
 
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);
