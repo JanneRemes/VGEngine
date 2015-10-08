@@ -147,6 +147,8 @@ namespace vg
 			unsigned int getGL_VERTEX_SHADER();
 
 			unsigned int getGL_INFO_LOG_LENGTH();
+
+			unsigned int getGL_DEPTH_BUFFER_BIT();
 		}
 	}
 }

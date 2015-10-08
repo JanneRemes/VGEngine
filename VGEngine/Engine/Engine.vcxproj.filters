@@ -61,14 +61,11 @@
     <Filter Include="include\platforms\windows">
       <UniqueIdentifier>{2dc8a5d0-7d52-4858-a052-d7b385ccdc74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\input\assets">
+    <Filter Include="include\assets">
       <UniqueIdentifier>{61afb6c2-ab4b-4504-8c21-c31e69738a68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Engine\engine.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\game.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -82,13 +79,13 @@
       <Filter>include\game</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\asset.h">
-      <Filter>include\input\assets</Filter>
+      <Filter>include\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\assetManager.h">
-      <Filter>include\input\assets</Filter>
+      <Filter>include\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\assets\fileManager.h">
-      <Filter>include\input\assets</Filter>
+      <Filter>include\assets</Filter>
     </ClInclude>
     <ClInclude Include="include\engine\graphics\graphicsContext.h">
       <Filter>include\graphics</Filter>
@@ -212,6 +209,14 @@
     </ClInclude>
     <ClInclude Include="external\glew.h">
       <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\animationComponent.h" />
+    <ClInclude Include="include\engine\game\animationSystem.h" />
+    <ClInclude Include="include\engine\input\mouse.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\input\touch.h">
+      <Filter>include\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +372,12 @@
     </ClCompile>
     <ClCompile Include="source\platforms\android\soundeffect_android.cpp">
       <Filter>source\platforms\android</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input\mouse.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input\touch.cpp">
+      <Filter>source\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

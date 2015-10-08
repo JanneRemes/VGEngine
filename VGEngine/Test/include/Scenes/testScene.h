@@ -2,7 +2,7 @@
 #pragma once
 
 #include <android/log.h>
-#include <engine/engine.h>
+#include "engine/game/scene.h"
 class TestScene : public vg::Scene
 {
 public:

@@ -9,7 +9,7 @@
 
 #if defined (OS_WINDOWS) 
 #include <stdio.h>
-#define Log(tag,message,...) printf("[%s]File: %s, Line: %d, Method: %s, Message: "message"\n",tag, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__);
+#define Log(tag,message,...) printf("[%s]File: %s, Line: %d, Method: %s, Message: "message"\n\n",tag, __FILE__, __LINE__, __FUNCTION__, __VA_ARGS__);
 #endif
 
 #else

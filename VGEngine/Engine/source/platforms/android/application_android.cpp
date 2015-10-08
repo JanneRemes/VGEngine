@@ -22,8 +22,7 @@
 #include <android/sensor.h>
 #include "engine/input/input.h"
 #include "engine/graphics/opengl.h"
-
-#include "engine/engine.h"
+#include "engine/input/touch.h"
 
 using namespace vg;
 using namespace vg::core;
@@ -131,8 +130,9 @@ void Application::drawFrame()
 	}
 
 	gl::clear();
-	gl::clearColor(vg::input::Input::getTouchX() / engine.graphics.getScreenWidth(), 0.5f,
-		(vg::input::Input::getTouchY()) / engine.graphics.getScreenHeight(), 1);
+	 vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
+	gl::clearColor(touchPos.getX() / engine.graphics.getScreenWidth(), 0.5f,
+		(touchPos.getY()) / engine.graphics.getScreenHeight(), 1);
 
 	engine.state.game->update();
 
@@ -146,17 +146,20 @@ int32_t engine_handle_input(android_app* app, AInputEvent* event)
 
 	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
 	{
-		vg::input::Input::setTouchX(AMotionEvent_getX(event, 0));
-		vg::input::Input::setTouchY(AMotionEvent_getY(event, 0));
-		vg::input::Input::setIsTouched(true);
+		vg::Vector2<float> touchPos = vg::Vector2<float>(
+			AMotionEvent_getX(event, 0),
+			AMotionEvent_getY(event, 0)
+			);
+		vg::input::Touch::setTouchPos(touchPos);
+		vg::input::Touch::setIsTouched(true);
 		//Log("vgengine", "movement %f %f", mTouchX, mTouchY);
 		if ((AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_UP)
 		{
 			//Log("vgengine", "Released touch %d", 5);
-			if (vg::input::Input::getIsTouched())
+			if (vg::input::Touch::getIsTouched())
 			{
-				vg::input::Input::setIsTouched(false);
-				vg::input::Input::setIsTouchReleased(true);
+				vg::input::Touch::setIsTouched(false);
+				vg::input::Touch::setIsTouchReleased(true);
 			}
 		}
 
