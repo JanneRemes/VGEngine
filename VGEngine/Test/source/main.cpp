@@ -10,14 +10,19 @@
 #include <engine/game/textRenderSystem.h>
 #include <engine/game/physicsSystem.h>
 #include <engine/game/physicsComponent.h>
+#include "engine/input/touch.h"
+#include "engine\input\input.h"
 
 #include "TestComponent.h"
 #include "ShipSystem.h"
 #include "enemySystem.h"
 #include "TestComponentSystem.h"
 
+#include "engine\game\physicsComponent.h"
+#include "engine\game\physicsSystem.h"
+
 #include <stdlib.h> 
-#include <Box2D\Box2D.h>
+
 using namespace vg;
 using namespace vg::graphics;
 
@@ -91,12 +96,12 @@ void mainGame(Game* game)
 	EnemySystem *enemySystem = new EnemySystem(game);
 	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, enemySystem);
-	
+
 	// Physics
-	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81 * 10));
+	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81), true);
 	game->addComponentSystem(scene, physicsSystem);
 	GameObject *physicsTest = new GameObject("physicsTest");
-	physicsTest->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 60, 0, 50, 50, b2BodyType::b2_dynamicBody));
+	physicsTest->addComponent(new PhysicsComponent(150, 0, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
 
 	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest->addComponent(physicsObject);
@@ -109,7 +114,7 @@ void mainGame(Game* game)
 
 	// 2nd physics object
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	physicsTest2->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 0, 128 * 3, 50, 50, b2BodyType::b2_staticBody));
+	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
 
 	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest2->addComponent(physicsRender2);
@@ -119,16 +124,6 @@ void mainGame(Game* game)
 	physicsTest2->addComponent(physicsTransform2);
 
 	scene->getObjectPool()->addGameObject(physicsTest2);
-
-	// physics floor
-	GameObject *physicsFloor = new GameObject("physicsTest2");
-	physicsFloor->addComponent(new PhysicsComponent(physicsSystem->getWorld(), 0, 720, 1280, 100, b2BodyType::b2_staticBody));
-
-	TransformComponent *physicsFloorTransform = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f);
-	physicsFloor->addComponent(physicsFloorTransform);
-
-	scene->getObjectPool()->addGameObject(physicsFloor);
 
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");

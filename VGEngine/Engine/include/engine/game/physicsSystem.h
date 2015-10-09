@@ -12,13 +12,16 @@ namespace vg
 			/**
 			Create new physics world with gravity
 			*/
-			PhysicsSystem(Vector2<float> gravity);
+			static b2World* getWorld();
+			static b2World* world;
+			PhysicsSystem(Vector2<float> gravity, bool borders = false);
 			~PhysicsSystem();
 			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 			//void createJoint(b2Body bodyA, b2Body bodyB);
 			//void setGravity(b2Vec2 gravity);
-			b2World* getWorld() { return world; };
+			//b2World* getWorld() { return world; };
 		private:
-			b2World *world;
+			void createBorders();
+			//b2World *world;
 		};
 }

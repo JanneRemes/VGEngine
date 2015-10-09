@@ -86,6 +86,7 @@ void Application::update()
 	// If animating, we loop until all events are read, then continue
 	// to draw the next frame of animation.
 	vg::input::Input::update();
+	vg::input::Touch::update();
 	while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
 	{
 		//Log("test", "AccelerationX: %f", vg::Input::Input::getSensorX());

@@ -85,9 +85,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhysicsTestSystem.cpp" />
     <ClCompile Include="TestSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PhysicsTestSystem.h" />
     <ClInclude Include="TestSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
