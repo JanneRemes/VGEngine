@@ -8,6 +8,7 @@
 #include "engine/game/triangleComponent.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/renderComponent.h"
+#include <engine/graphics/camera.h>
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -72,10 +73,19 @@ void RenderSystem::updateProjection()
 	shader->unUseProgram();
 }
 
-mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation)
+mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation, bool useCamera)
 {
+	Vector2<float> tempSize = Vector2<float>(size.getX(), size.getY());
+	if (useCamera)
+	{
+		position += Camera::getPosition();
+		rotation += Camera::getRotation();
+		tempSize.setX(tempSize.getX() * Camera::getScale());
+		tempSize.setY(tempSize.getY() * Camera::getScale());
+	}
+
 	vec2 position2(position.getX(), position.getY());
-	vec2 size2(size.getX(), size.getY());
+	vec2 size2(tempSize.getX(), tempSize.getY());
 
 	mat4 model = mat4();
 	model = translate(model, vec3(position2, 0.0f));
@@ -86,45 +96,10 @@ mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, floa
 	return model;
 }
 
-mat4 RenderSystem::modelTransform(TransformComponent* transform)
+mat4 RenderSystem::modelTransform(TransformComponent* transform, bool useCamera)
 {
 	return modelTransform(transform->getWorldPosition() - transform->getOrigin(),
-		transform->getSize(), transform->getWorldRotation());
-}
-
-void RenderSystem::setCameraPosition(float x, float y)
-{
-	mCameraPosition = vec2(x, y);
-}
-
-void RenderSystem::moveCameraPosition(float x, float y)
-{
-	mCameraPosition += vec2(x, y);
-}
-
-void RenderSystem::setCameraRotation(float rotation)
-{
-	mCameraRotation = rotation;
-}
-
-void RenderSystem::rotateCamera(float rotation)
-{
-	mCameraRotation += rotation;
-}
-
-void RenderSystem::setCameraScale(float scaleX, float scaleY)
-{
-	if (scaleX < 0)
-		scaleX = 0;
-	if (scaleY < 0)
-		scaleY = 0;
-
-	mCameraScale = vec2(scaleX, scaleY);
-}
-
-void RenderSystem::scaleCamera(float scaleX, float scaleY)
-{
-	setCameraScale(mCameraScale.x + scaleX, mCameraScale.y + scaleY);
+		transform->getSize(), transform->getWorldRotation(), useCamera);
 }
 
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)

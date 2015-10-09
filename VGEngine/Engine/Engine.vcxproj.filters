@@ -218,6 +218,9 @@
     <ClInclude Include="include\engine\input\touch.h">
       <Filter>include\input</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\camera.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -378,6 +381,9 @@
     </ClCompile>
     <ClCompile Include="source\input\touch.cpp">
       <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\camera.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
