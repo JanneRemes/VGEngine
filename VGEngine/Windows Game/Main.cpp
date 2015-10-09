@@ -2,6 +2,8 @@
 #include <engine\game\game.h>
 #include <engine\game\scene.h>
 #include <engine\game\quadrangleComponent.h>
+#include <engine\game\animationComponent.h>
+#include <engine\game\animationSystem.h>
 #include "TestSystem.h"
 //extern void main_dummy();
 using namespace vg;
@@ -26,4 +28,19 @@ void mainGame(Game* game)
 	scene->getObjectPool()->addGameObject(doge);
 	TestSystem *testSystem = new TestSystem(scene);
 	game->addComponentSystem(scene, testSystem);
+
+	/*AnimationSystem *animationSystem = new AnimationSystem();
+	game->addComponentSystem(scene, animationSystem);
+	GameObject *animationTest = new GameObject("animationTest");
+	
+
+	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
+	animationTest->addComponent(animationComponent);
+
+	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(256, 128), Vector2<int>(256, 256), 0.0f);
+	animationTest->addComponent(animationTransform);
+
+	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
+
+	scene->getObjectPool()->addGameObject(animationTest);*/
 }

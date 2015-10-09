@@ -10,6 +10,8 @@
 #include <engine/game/textRenderSystem.h>
 #include <engine/game/physicsSystem.h>
 #include <engine/game/physicsComponent.h>
+#include <engine/game/animationSystem.h>
+#include <engine/game/animationComponent.h>
 
 #include "TestComponent.h"
 #include "ShipSystem.h"
@@ -106,6 +108,21 @@ void mainGame(Game* game)
 	physicsTest->addComponent(physicsTransform);
 
 	scene->getObjectPool()->addGameObject(physicsTest);
+
+	//Animation
+	AnimationSystem *animationSystem = new AnimationSystem();
+	game->addComponentSystem(scene, animationSystem);
+	GameObject *animationTest = new GameObject("animationTest");
+	
+	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
+	animationTest->addComponent(animationComponent);
+
+	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);
+	animationTest->addComponent(animationTransform);
+
+	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
+
+	scene->getObjectPool()->addGameObject(animationTest);
 
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");

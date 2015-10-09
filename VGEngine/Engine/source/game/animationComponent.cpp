@@ -2,14 +2,21 @@
 
 using namespace vg;
 
-AnimationComponent::AnimationComponent(float animationInterval, int frameRowCount, int frameColumnCount, int frameWidth, int frameHeight) : Component()
+AnimationComponent::AnimationComponent(float animationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount, int frameWidth, int frameHeight) : Component()
 {
 	mAnimationInterval = animationInterval;
 	mFrameRowCount = frameRowCount;
-	mFrameColumnCount = frameColumnCount;
+	mFrameTotalCount = frameTotalCount;
 	mFrameWidth = frameWidth;
 	mFrameHeight = frameHeight;
-	mFrameTotalCount = frameColumnCount + frameRowCount;
+	mFrameColumnCount = frameColumnCount;
+
+	mXOffSet = 0.0f;
+	mYOffSet = 0.0f;
+	mXOffSetIndex = 0;
+	mYOffSetIndex = 0;
+	mFrameIndex = 0;
+	mAnimationTimer = 0.0f;
 
 	isInitialized = false;
 }

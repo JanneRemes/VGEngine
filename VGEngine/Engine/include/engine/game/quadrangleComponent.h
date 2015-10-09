@@ -12,6 +12,5 @@ namespace vg{
 	private:
 		std::vector<float> getDefaultVertices();
 		std::vector<unsigned short> getDefaultIndices();
-		void setTexCoords(glm::vec2 texCoords[4]);
 	};
 }
