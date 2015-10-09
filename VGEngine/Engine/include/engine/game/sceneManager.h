@@ -64,7 +64,10 @@ namespace vg
 		*/
 		void addTemplateScene(string key,Scene *scene);
 
+		Scene* getActiveScene();
+
 	private:
+		Scene* mActiveScene;
 		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.

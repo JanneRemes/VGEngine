@@ -47,12 +47,14 @@ void SceneManager::update(float deltaTime)
 
 void SceneManager::openScene(Scene *scene)
 {
+	
 	mCurrentScenes.push_back(scene);
 	mSceneChanged = true;
 }
 
 void SceneManager::changeScene(Scene *scene)
 {
+	mActiveScene = scene;
 	emptyScenes();
 	openScene(scene);
 }
@@ -80,4 +82,9 @@ void SceneManager::closeCurrentScene()
 void SceneManager::addTemplateScene(string key,Scene *scene)
 {
 	mSceneTemplates.insert(std::make_pair(key, new Scene(*scene)));
+}
+
+Scene* SceneManager::getActiveScene()
+{
+	return mActiveScene;
 }
