@@ -12,7 +12,9 @@ namespace vg
 			PhysicsComponent(float x, float y, float radius, b2BodyType type, b2World *world);
 
 			b2Body* getBody() { return _body; };
+			b2FixtureDef* getFixture() { return &FixDef; };
 		private:
 			b2Body *_body;
+			b2FixtureDef FixDef;
 		};
 }

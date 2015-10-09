@@ -8,11 +8,10 @@ PhysicsComponent::PhysicsComponent(float x, float y, float width, float height, 
 	b2BodyDef bodyDef;
 
 	shape.SetAsBox(width / 2, height / 2);
-
-	b2FixtureDef FixDef;
+	
 	FixDef.density = 1.0f;
-	FixDef.friction = 1.0f;
-	FixDef.restitution = 1.0f;
+	FixDef.friction = 0.2f;
+	FixDef.restitution = 0.5f;
 	FixDef.shape = &shape;
 
 	bodyDef.position = b2Vec2(x, -y);
@@ -20,6 +19,7 @@ PhysicsComponent::PhysicsComponent(float x, float y, float width, float height, 
 	bodyDef.type = type;
 	
 	_body = world->CreateBody(&bodyDef);
+	_body->SetGravityScale(5.0f);
 	_body->CreateFixture(&FixDef);
 }
 
@@ -28,12 +28,11 @@ PhysicsComponent::PhysicsComponent(float x, float y, float radius, b2BodyType ty
 	b2BodyDef bodyDef;
 
 	b2CircleShape circle;
-	circle.m_p.Set(x, -y);
 	circle.m_radius = radius / 2;
 
-	b2FixtureDef FixDef;
-	FixDef.density = 10.0f;
-	FixDef.friction = 1.0f;
+	FixDef.density = 1.0f;
+	FixDef.friction = 0.2f;
+	FixDef.restitution = 0.5f;
 	FixDef.shape = &circle;
 
 	bodyDef.position = b2Vec2(x, -y);

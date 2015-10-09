@@ -30,7 +30,7 @@ PhysicsSystem::~PhysicsSystem()
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {	 int velocityIterations = 8;
 	 int positionIterations = 3;
-	 world->Step(deltaTime * 4, velocityIterations, positionIterations);
+	 world->Step(deltaTime, velocityIterations, positionIterations);
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
@@ -39,13 +39,8 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
-			 for (int i = 0; i < 60; ++i)
-			 {
 			  transform->setPosition(Vector2<int>(physComponent->getBody()->GetPosition().x , -physComponent->getBody()->GetPosition().y));
 			  transform->setRotation(-1.0f * physComponent->getBody()->GetAngle() * 180 / 3.14);
-			  //Log("vgengine", "Box2D X: %f, Y: %f", physComponent->getBody()->GetPosition().x, physComponent->getBody()->GetPosition().y);
-
-			 }
 		 }
 	 }
 }
@@ -55,8 +50,8 @@ void PhysicsSystem::createBorders()
 	b2PolygonShape shapeHorizontal;
 	b2PolygonShape shapeVertical;
 
-	shapeHorizontal.SetAsBox(Game::getInstance()->getGraphics()->getScreenWidth(), 64);
-	shapeVertical.SetAsBox(64, Game::getInstance()->getGraphics()->getScreenHeight());
+	shapeHorizontal.SetAsBox(Game::getInstance()->getGraphics()->getScreenWidth() / 2, 0);
+	shapeVertical.SetAsBox(0, Game::getInstance()->getGraphics()->getScreenHeight() / 2);
 
 	b2BodyDef bodyDef1;
 	b2BodyDef bodyDef2;
@@ -68,40 +63,41 @@ void PhysicsSystem::createBorders()
 	b2FixtureDef FixDef3;
 	b2FixtureDef FixDef4;
 
-	FixDef1.density = 10.0f;
-	FixDef1.friction = 1.0f;
-	FixDef1.restitution = 5.0f;
+	FixDef1.density = 1.0f;
+	FixDef1.friction = 0.5f;
+	FixDef1.restitution = 0.5f;
 	FixDef1.shape = &shapeHorizontal;
 
-	FixDef2.density = 10.0f;
-	FixDef2.friction = 1.0f;
-	FixDef2.restitution = 5.0f;
+	FixDef2.density = 1.0f;
+	FixDef2.friction = 0.5f;
+	FixDef2.restitution = 0.5f;
 	FixDef2.shape = &shapeHorizontal;
 
-	FixDef3.density = 10.0f;
-	FixDef3.friction = 1.0f;
-	FixDef3.restitution = 5.0f;
+	FixDef3.density = 1.0f;
+	FixDef3.friction = 0.5f;
+	FixDef3.restitution = 0.5f;
 	FixDef3.shape = &shapeVertical;
 
-	FixDef4.density = 10.0f;
-	FixDef4.friction = 1.0f;
-	FixDef4.restitution = 5.0f;
+	FixDef4.density = 1.0f;
+	FixDef4.friction = 0.5f;
+	FixDef4.restitution = 0.5f;
 	FixDef4.shape = &shapeVertical;
 
-	bodyDef1.position = b2Vec2(0, 0);
+	// Up
+	bodyDef1.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() / 2, 32);
 	bodyDef1.angle = 0.0f;
 	bodyDef1.type = b2BodyType::b2_staticBody;
-
-	bodyDef2.position = b2Vec2(0, -Game::getInstance()->getGraphics()->getScreenHeight());
+	// Down
+	bodyDef2.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() / 2, -Game::getInstance()->getGraphics()->getScreenHeight() + 32);
 	bodyDef2.angle = 0.0f;
 	bodyDef2.type = b2BodyType::b2_staticBody;
-
-	bodyDef3.position = b2Vec2(0, 0);
-	bodyDef3.angle = 90.0f;
+	// Left
+	bodyDef3.position = b2Vec2(-32, -Game::getInstance()->getGraphics()->getScreenHeight() / 2);
+	bodyDef3.angle = 0.0f;
 	bodyDef3.type = b2BodyType::b2_staticBody;
-
-	bodyDef4.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth(), 0);
-	bodyDef4.angle = 90.0f;
+	// Right
+	bodyDef4.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() - 32, -Game::getInstance()->getGraphics()->getScreenHeight() / 2);
+	bodyDef4.angle = 0.0f;
 	bodyDef4.type = b2BodyType::b2_staticBody;
 
 	b2Body *_body1;

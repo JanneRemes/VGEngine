@@ -32,34 +32,36 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, testSystem);
 
 	// Physics
-	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81), true);
+	float gravity = 9.81;
+	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -gravity), true);
 	game->addComponentSystem(scene, physicsSystem);
-	GameObject *physicsTest = new GameObject("physicsTest");
-	physicsTest->addComponent(new PhysicsComponent(150, 0, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+
+	GameObject *physicsTest = new GameObject("physicsTest1");
+	physicsTest->addComponent(new PhysicsComponent(150, 0, 64, 64, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
 
 	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest->addComponent(physicsObject);
 
 	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f);
+		Vector2<int>(64, 64), 0.0f);
 	physicsTest->addComponent(physicsTransform);
 
 	scene->getObjectPool()->addGameObject(physicsTest);
 
 	// 2nd physics object
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 64, 64, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
 
 	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest2->addComponent(physicsRender2);
 
 	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f);
+		Vector2<int>(64, 64), 0.0f);
 	physicsTest2->addComponent(physicsTransform2);
 
 	scene->getObjectPool()->addGameObject(physicsTest2);
+	
 
-	// 
 	PhysicsTestSystem *physicsTestSystem = new PhysicsTestSystem(scene);
 	game->addComponentSystem(scene, physicsTestSystem);
 }
