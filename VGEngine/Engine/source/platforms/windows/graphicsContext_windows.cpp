@@ -8,6 +8,7 @@
 #include "engine/utility/logger.h"
 #include "engine/application.h"
 #include "engine/graphics/opengl.h"
+#include <engine/graphics/graphics.h>
 #include <Windows.h>
 /*
 #pragma comment( lib, "glew32d.lib" )
@@ -95,6 +96,7 @@ void GraphicsContext::initializeGraphicsContext()
 	std::string windowName = "VG Engine";
 	mWidth = 1280;
 	mHeight = 720;
+	Graphics::setResolution(Vector2<int>(mWidth, mHeight));
 
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);

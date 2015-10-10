@@ -50,25 +50,25 @@ namespace vg
 			static void rotate(float change);
 
 			/**
-			@return camera scale
+			@return camera zoom level
 			*/
-			static float getScale();
+			static float getZoom();
 
 			/**
-			Set camera scale
+			Set camera zoom
 			@param scale must be greater than zero
 			*/
-			static void setScale(float scale);
+			static void setZoom(float zoom);
 
 			/**
-			Scale the camera
-			@param scale must be greater than zero
+			Zoom the camera
+			@param change added to zoom
 			*/
-			static void scale(float change);
+			static void zoom(float change);
 
 		private:
 			static Vector2<int> mPosition;	///< camera focus position in pixels
-			static float mScale;			///< camera scale
+			static float mZoom;				///< camera zoom level
 			static float mRotation;			///< camera rotation in degrees
 
 		};

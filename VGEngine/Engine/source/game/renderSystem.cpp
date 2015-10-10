@@ -21,7 +21,6 @@ using namespace glm;
 
 RenderSystem::RenderSystem() :System()
 {
-	updateProjection();
 }
 
 void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
@@ -62,30 +61,38 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 	shader->unUseProgram();
 }
 
-void RenderSystem::updateProjection()
+void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
-	Shader* shader = Game::getInstance()->getGraphics()->getShader();
-	shader->useProgram();
-	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-		Game::getInstance()->getGraphics()->getContext()->getHeight());
-	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
-	shader->setUniform("unifProjection", projectionTransform);
-	shader->unUseProgram();
-}
-
-mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation, bool useCamera)
-{
-	Vector2<float> tempSize = Vector2<float>(size.getX(), size.getY());
+	vec2 screen(Graphics::getResolution().getX(), Graphics::getResolution().getY());
+	vec2 camera(0, 0);
+	float zoom = 0.0f;
 	if (useCamera)
 	{
-		position += Camera::getPosition();
-		rotation += Camera::getRotation();
-		tempSize.setX(tempSize.getX() * Camera::getScale());
-		tempSize.setY(tempSize.getY() * Camera::getScale());
+		camera = vec2(Camera::getPosition().getX(), Camera::getPosition().getY());
+		zoom = Camera::getZoom();
 	}
 
+	// left, right, bottom, top, near, far
+	mat4 projection = ortho(
+		camera.x + screen.x - screen.x * zoom,
+		camera.x + screen.x - screen.x * (1.0f - zoom),
+		camera.y + screen.y - screen.y * (1.0f - zoom),
+		camera.y + screen.y - screen.y * zoom,
+		-1.0f, 1.0f);
+	
+	if (useCamera)
+	{
+		projection = translate(projection, vec3(0.5f * screen.x, 0.5f * screen.y, 0.0f));
+		projection = rotate(projection, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));
+		projection = translate(projection, vec3(-0.5f * screen.x, -0.5f * screen.y, 0.0f));
+	}
+	shader->setUniform("unifProjection", projection);
+}
+
+mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation)
+{
 	vec2 position2(position.getX(), position.getY());
-	vec2 size2(tempSize.getX(), tempSize.getY());
+	vec2 size2(size.getX(), size.getY());
 
 	mat4 model = mat4();
 	model = translate(model, vec3(position2, 0.0f));
@@ -96,14 +103,15 @@ mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, floa
 	return model;
 }
 
-mat4 RenderSystem::modelTransform(TransformComponent* transform, bool useCamera)
+mat4 RenderSystem::modelTransform(TransformComponent* transform)
 {
 	return modelTransform(transform->getWorldPosition() - transform->getOrigin(),
-		transform->getSize(), transform->getWorldRotation(), useCamera);
+		transform->getSize(), transform->getWorldRotation());
 }
 
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
+	updateProjection(shader, transform->getUsingCamera());
 	if (transform != nullptr)
 	{
 		shader->setUniform("unifModel", modelTransform(transform));

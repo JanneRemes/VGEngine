@@ -32,18 +32,23 @@ namespace vg
 		/**
 		Makes a model transform matrix 
 		*/
-		static glm::mat4 modelTransform(Vector2<int> position, Vector2<int> size, float rotation, bool useCamera = true);
+		static glm::mat4 modelTransform(Vector2<int> position, Vector2<int> size, float rotation);
 		
 		/**
 		Makes a model transform matrix using values from a TransformComponent
 		*/
-		static glm::mat4 modelTransform(TransformComponent* transform, bool useCamera = true);
+		static glm::mat4 modelTransform(TransformComponent* transform);
 
 	private:
 		/**
 		Sends new uniform values to shader
 		*/
 		void updateShader(graphics::Shader* shader, TransformComponent* transform);
+
+		/**
+		Calculates and sends new projection matrix to shader
+		*/
+		void updateProjection(graphics::Shader* shader, bool useCamera = true);
 
 	};
 

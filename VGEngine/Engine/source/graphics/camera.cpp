@@ -6,7 +6,7 @@ using namespace vg::graphics;
 
 // Default values
 Vector2<int> Camera::mPosition = Vector2<int>(0,0);
-float Camera::mScale = 1.0f;
+float Camera::mZoom = 1.0f;
 float Camera::mRotation = 0.0f;
 
 Vector2<int> Camera::getPosition()
@@ -39,21 +39,21 @@ void Camera::rotate(float change)
 	mRotation += change;
 }
 
-float Camera::getScale()
+float Camera::getZoom()
 {
-	return mScale;
+	return mZoom;
 }
 
-void Camera::setScale(float scale)
+void Camera::setZoom(float zoom)
 {
-	if (scale < 0.0f)
-		scale = 0.0f;
-	mScale = scale;
+	if (zoom < 0.0f)
+		zoom = 0.0f;
+	mZoom = zoom;
 }
 
-void Camera::scale(float change)
+void Camera::zoom(float change)
 {
-	mScale += change; 
-	if (mScale < 0.0f)
-		mScale = 0.0f;
+	mZoom += change; 
+	if (mZoom < 0.0f)
+		mZoom = 0.0f;
 }

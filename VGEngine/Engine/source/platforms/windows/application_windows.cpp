@@ -41,14 +41,10 @@ int main()
 	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
 	gl::clear();
 	graphics->swapBuffers();
-	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
-	gl::clear();
 	while (game->isRunning())
 	{
 		a->update();
 	}
-
-
 }
 void Application::update()
 {

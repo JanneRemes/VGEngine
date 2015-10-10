@@ -24,9 +24,10 @@ namespace vg
         @param rotation angle of rotation clockwise
         @param layer higher layers are drawn over lower ones
         @param origin offset of origin in pixels from upper left corner
+		@param useCamera true if the position is affected by camera
         */
         TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-            float rotation, unsigned int layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0));
+            float rotation, unsigned int layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0), bool useCamera = true);
 		
         ~TransformComponent();
 
@@ -98,6 +99,16 @@ namespace vg
         */
         void setOrigin(const vg::Vector2<int> origin);
 
+		/**
+		@param value true if the position is affected by camera
+		*/
+		void setUsingCamera(bool value);
+
+		/**
+		@return true if the position is affected by camera
+		*/
+		bool getUsingCamera();
+
 	private:
 		static unsigned int mCurrentLayer;
 		static unsigned int getDefaultLayer();
@@ -105,7 +116,8 @@ namespace vg
         vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
         vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
         float mRotation;                ///< Rotation of sprite in angles.
-        unsigned int mLayer;                   ///< Layer where the sprite will be drawn.
+        unsigned int mLayer;            ///< Layer where the sprite will be drawn.
+		bool mUsingCamera;				///< Is the position affected by camera?
 	};
 
 }

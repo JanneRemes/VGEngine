@@ -25,8 +25,8 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 }
 
 TransformComponent::TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-    float rotation, unsigned int layer, vg::Vector2<int> origin)
-    :Component(), mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin)
+    float rotation, unsigned int layer, vg::Vector2<int> origin, bool useCamera)
+	:Component(), mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin), mUsingCamera(useCamera)
 {
 }
 
@@ -163,6 +163,17 @@ void TransformComponent::setOrigin(const Vector2<int> origin)
 {
     mOrigin = origin;
 }
+
+void TransformComponent::setUsingCamera(bool value)
+{
+	mUsingCamera = value;
+}
+
+bool TransformComponent::getUsingCamera()
+{
+	return mUsingCamera;
+}
+
 unsigned int TransformComponent::getDefaultLayer()
 {
 	return mCurrentLayer++;

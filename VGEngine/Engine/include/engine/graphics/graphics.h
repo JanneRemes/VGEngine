@@ -4,6 +4,7 @@
 #include "engine/graphics/graphicsContext.h"
 #include "engine/graphics/shader.h"
 #include "engine/assets/fileManager.h"
+#include <engine/utility/Vector2.h>
 
 #include <string>
 #include <vector>
@@ -87,11 +88,22 @@ namespace vg
 			*/
 			static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices);
 
+			/**
+			@param resolution in pixels
+			*/
+			static void setResolution(Vector2<int> resolution);
+
+			/**
+			@return screen resolution in pixels
+			*/
+			static Vector2<int> getResolution();
+
 		private:
-			core::FileManager* mFileManager;  ///< pointer to FileManager
-			GraphicsContext mContext;   ///< current GraphicsContext
-			Shader mShader;             ///< current Shader
-			bool mInitialized;          ///< has Graphics been initialized
+			core::FileManager* mFileManager;	///< pointer to FileManager
+			GraphicsContext mContext;			///< current GraphicsContext
+			Shader mShader;						///< current Shader
+			bool mInitialized;					///< has Graphics been initialized
+			static vg::Vector2<int> mResolution;///< screen resolution
 		};
 	}
 }

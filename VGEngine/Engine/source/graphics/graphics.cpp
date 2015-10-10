@@ -5,9 +5,13 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 #include "engine/application.h"
-using namespace vg::graphics;
+
 using namespace std;
+using namespace vg;
 using namespace vg::core;
+using namespace vg::graphics;
+
+Vector2<int> Graphics::mResolution = Vector2<int>(0, 0);
 
 Graphics::Graphics()
     : mInitialized(false)
@@ -92,4 +96,14 @@ void Graphics::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices
 	gl::drawElements(getGL_TRIANGLES(), vertices->getSize(), getGL_UNSIGNED_SHORT());
 	indices->unbind();
 	vertices->unbind();
+}
+
+void Graphics::setResolution(Vector2<int> resolution)
+{
+	mResolution = resolution;
+}
+
+Vector2<int> Graphics::getResolution()
+{
+	return mResolution;
 }

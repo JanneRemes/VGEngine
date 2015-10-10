@@ -9,6 +9,8 @@
 #include <GLES2/gl2.h>
 #include "engine/application.h"
 #include "engine/platforms/android/android_native_app_glue.h"
+#include <engine/graphics/graphics.h>
+
 using namespace vg::graphics;
 using namespace vg::core;
 EGLDisplay mDisplay;    ///< Handle to devices display
@@ -165,6 +167,8 @@ void GraphicsContext::initializeGraphicsContext()
 	checkError();
 	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
 	checkError();
+
+	Graphics::setResolution(Vector2<int>(mWidth, mHeight));
 }
 
 void GraphicsContext::createGLProgram()
