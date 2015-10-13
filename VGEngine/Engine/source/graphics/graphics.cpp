@@ -5,8 +5,10 @@
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 #include "engine/application.h"
+#include <engine/graphics/camera.h>
 
 using namespace std;
+using namespace glm;
 using namespace vg;
 using namespace vg::core;
 using namespace vg::graphics;
@@ -49,28 +51,6 @@ void Graphics::swapBuffers()
     mContext.swapBuffers();
 }
 
-int Graphics::getScreenWidth()
-{
-    if (mInitialized)
-        return mContext.getWidth();
-    else
-    {
-        Log("vgengine", "Graphics context not initialized!", "");
-        return 0;
-    }
-}
-
-int Graphics::getScreenHeight()
-{
-    if (mInitialized)
-        return mContext.getHeight();
-    else
-    {
-        Log("vgengine", "Graphics context not initialized!", "");
-        return 0;
-    }
-}
-
 void Graphics::switchShader(string vertexPath, string fragmentPath)
 {
     if (mInitialized)
@@ -106,4 +86,22 @@ void Graphics::setResolution(Vector2<int> resolution)
 Vector2<int> Graphics::getResolution()
 {
 	return mResolution;
+}
+
+Vector2<float> Graphics::translateInput(Vector2<float> input)
+{
+	float zoom = Camera::getZoom();
+	vec2 camera(Camera::getPosition().getX(), Camera::getPosition().getY());
+	vec2 screen(Graphics::getResolution().getX(), Graphics::getResolution().getY());
+	vec4 result(input.getX(), input.getY(), 0.0f, 0.0f);
+
+	/*
+	mat4 transform = mat4();
+	transform = translate(transform, vec3(0.5f * screen, 0.0f));
+	transform = rotate(transform, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));
+	transform = translate(transform, vec3(-0.5f * screen, 0.0f));
+	result = transform * result;
+	*/
+	result += vec4(camera, 0.0f, 0.0f);
+	return Vector2<float>(result.x, result.y);
 }

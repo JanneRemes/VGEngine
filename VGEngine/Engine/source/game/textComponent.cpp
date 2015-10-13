@@ -106,8 +106,7 @@ void TextComponent::initializeFace()
 	FT_Library library;
 	error = FT_Init_FreeType(&library);
 
-	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-		Game::getInstance()->getGraphics()->getContext()->getHeight());
+	Vector2<int> resolution = Graphics::getResolution();
 
 	// New face
 	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);

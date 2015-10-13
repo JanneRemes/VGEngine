@@ -5,6 +5,8 @@
 #include "engine/graphics/shader.h"
 #include "engine/game/transformComponent.h"
 #include "engine/graphics/shader.h"
+#include <engine/graphics/vertexBuffer.h>
+#include <engine/graphics/indexBuffer.h>
 
 namespace vg
 {
@@ -50,6 +52,8 @@ namespace vg
 		*/
 		void updateProjection(graphics::Shader* shader, bool useCamera = true);
 
+		vg::graphics::VertexBuffer mVertexBuffer;
+		vg::graphics::IndexBuffer mIndexBuffer;
 	};
 
 }

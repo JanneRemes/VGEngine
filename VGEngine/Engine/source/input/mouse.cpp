@@ -2,6 +2,8 @@
 #include "engine/input/mouse.h"
 #include <Windows.h>
 #include "engine/game/game.h"
+#include <engine/graphics/graphics.h>
+
 using namespace vg::input;
 bool Mouse::isKeyPressed(MOUSE_KEY key)
 {
@@ -30,8 +32,7 @@ vg::Vector2<float> Mouse::getMousePos()
 	GetCursorPos(&pt);
 	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->mWindowHandle);
 	ScreenToClient(handle, &pt);
-	vg::Vector2<float> tempVector(pt.x,pt.y);
-	return tempVector;
+	return graphics::Graphics::translateInput(Vector2<float>(pt.x, pt.y));
 }
 
 #endif

@@ -10,9 +10,12 @@
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
 #include "engine/input/touch.h"
+#include <engine/graphics/graphics.h>
+
 #include <vector>
 
 using namespace vg;
+using namespace vg::graphics;
 
 ShipSystem::ShipSystem(Game *game) :System()
 {
@@ -39,8 +42,7 @@ ShipSystem::~ShipSystem()
 }
 void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
-	Vector2<int> resolution(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-		Game::getInstance()->getGraphics()->getContext()->getHeight());
+	Vector2<int> resolution = Graphics::getResolution();
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "bullet")
@@ -52,8 +54,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 		}
 		else if ((*it)->getName() == "ship")
 		{
-			Vector2<float> mScreenSize = Vector2<float>(mGame->getGraphics()->getContext()->getWidth(),
-				mGame->getGraphics()->getContext()->getHeight());
+			Vector2<float> mScreenSize = Vector2<float>(resolution.getX(), resolution.getY());
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
 			Vector2<int> newPos(

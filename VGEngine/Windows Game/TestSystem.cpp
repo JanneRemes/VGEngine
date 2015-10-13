@@ -13,8 +13,8 @@ TestSystem::TestSystem(Scene *scene)
 {
 	this->scene = scene;
 	dogeDir = Vector2<int>(3, 0);
-	camDir = 2;
-	camRotDir = 0.1f;
+	camDir = 1;
+	camRotDir = 0.05f;
 	camZoom = 0.001f;
 	camState = 0;
 }
@@ -22,9 +22,9 @@ TestSystem::TestSystem(Scene *scene)
 void TestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
 	//camera
-	Camera::zoom(camZoom);
-	Camera::move(Vector2<int>(-camDir, camDir));
-	Camera::rotate(camRotDir);
+	//Camera::zoom(camZoom);
+	//Camera::move(Vector2<int>(camDir, -camDir));
+	//Camera::rotate(camRotDir);
 	
 	if (Camera::getZoom() < 0.95f || Camera::getZoom() > 1.05f)
 		camZoom *= -1.0f;
@@ -44,7 +44,7 @@ void TestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
 		GameObject *doge = new GameObject("shipgotreal");
 		TransformComponent *transform = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
-			Vector2<int>(128, 128), 0.0f, layerShip++, Vector2<int>(64, 64));
+			Vector2<int>(64, 64), 0.0f, layerShip++, Vector2<int>(32, 32));
 		doge->addComponent(transform);
 
 		QuadrangleComponent *quadre = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");

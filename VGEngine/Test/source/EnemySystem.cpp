@@ -5,10 +5,12 @@
 #include <engine/game/quadrangleComponent.h>
 #include <engine/utility/random.h>
 #include <engine/utility/vector2.h>
+#include <engine/graphics/graphics.h>
 
 #include <sstream>
 
 using namespace vg;
+using namespace vg::graphics;
 
 EnemySystem::EnemySystem(Game *game)
 : mGame(game), mEnemyCount(0), mSpawnDelay(0), mBulletCount(0)
@@ -30,8 +32,8 @@ EnemySystem::~EnemySystem()
 
 void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
-	int screenWidth = Game::getInstance()->getGraphics()->getScreenWidth();
-	int screenHeight = Game::getInstance()->getGraphics()->getScreenHeight();
+	int screenWidth = Graphics::getResolution().getX();
+	int screenHeight = Graphics::getResolution().getY();
 	if (mSpawnTimer.getCurrentTimeSeconds() >= mSpawnDelay)
 	{
 		GameObject *gameObject = new GameObject(*mEnemyPrefab);

@@ -1,9 +1,13 @@
+
 #include <engine\game\physicsSystem.h>
 #include "engine\game\physicsComponent.h"
 #include "engine\game.h"
+#include <engine/graphics/graphics.h>
 #include <typeinfo>
 #include <vector>
+
 using namespace vg;
+using namespace vg::graphics;
 
 b2World *PhysicsSystem::world = nullptr;
 b2World* PhysicsSystem::getWorld()
@@ -28,8 +32,10 @@ PhysicsSystem::~PhysicsSystem()
 }
 
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
-{	 int velocityIterations = 8;
-	 int positionIterations = 3;
+{
+	 int velocityIterations = 8;
+	 int positionIterations = 3;
+
 	 world->Step(deltaTime, velocityIterations, positionIterations);
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
@@ -49,9 +55,10 @@ void PhysicsSystem::createBorders()
 {
 	b2PolygonShape shapeHorizontal;
 	b2PolygonShape shapeVertical;
+	Vector2<int> resolution = Graphics::getResolution();
 
-	shapeHorizontal.SetAsBox(Game::getInstance()->getGraphics()->getScreenWidth() / 2, 0);
-	shapeVertical.SetAsBox(0, Game::getInstance()->getGraphics()->getScreenHeight() / 2);
+	shapeHorizontal.SetAsBox(resolution.getX() / 2.0f, 0);
+	shapeVertical.SetAsBox(0, resolution.getY() / 2.0f);
 
 	b2BodyDef bodyDef1;
 	b2BodyDef bodyDef2;
@@ -84,19 +91,19 @@ void PhysicsSystem::createBorders()
 	FixDef4.shape = &shapeVertical;
 
 	// Up
-	bodyDef1.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() / 2, 32);
+	bodyDef1.position = b2Vec2(resolution.getX() / 2, 32);
 	bodyDef1.angle = 0.0f;
 	bodyDef1.type = b2BodyType::b2_staticBody;
 	// Down
-	bodyDef2.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() / 2, -Game::getInstance()->getGraphics()->getScreenHeight() + 32);
+	bodyDef2.position = b2Vec2(resolution.getX() / 2.0f, -resolution.getY() + 32);
 	bodyDef2.angle = 0.0f;
 	bodyDef2.type = b2BodyType::b2_staticBody;
 	// Left
-	bodyDef3.position = b2Vec2(-32, -Game::getInstance()->getGraphics()->getScreenHeight() / 2);
+	bodyDef3.position = b2Vec2(-32, -resolution.getY() / 2.0f);
 	bodyDef3.angle = 0.0f;
 	bodyDef3.type = b2BodyType::b2_staticBody;
 	// Right
-	bodyDef4.position = b2Vec2(Game::getInstance()->getGraphics()->getScreenWidth() - 32, -Game::getInstance()->getGraphics()->getScreenHeight() / 2);
+	bodyDef4.position = b2Vec2(resolution.getX() - 32, -resolution.getY() / 2.0f);
 	bodyDef4.angle = 0.0f;
 	bodyDef4.type = b2BodyType::b2_staticBody;
 

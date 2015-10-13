@@ -44,15 +44,15 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 		if (render != nullptr)
 		{
-			VertexBuffer vBuffer(*render->getVertices());
-			IndexBuffer iBuffer(*render->getIndices());
+			mVertexBuffer.setData(*render->getVertices());
+			mIndexBuffer.setData(*render->getIndices());
 			
 			Texture* texture = render->getTexture();
 			if (texture != nullptr)
 				texture->bind();
 
 			updateShader(shader, transform);
-			Graphics::draw(shader, &vBuffer, &iBuffer);
+			Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 			
 			if (texture != nullptr)
 				texture->unbind();

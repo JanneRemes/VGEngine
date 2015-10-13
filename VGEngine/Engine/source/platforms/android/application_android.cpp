@@ -131,9 +131,9 @@ void Application::drawFrame()
 	}
 
 	gl::clear();
-	 vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
-	gl::clearColor(touchPos.getX() / engine.graphics.getScreenWidth(), 0.5f,
-		(touchPos.getY()) / engine.graphics.getScreenHeight(), 1);
+	vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
+	Vector2<int> res = Graphics::getResolution();
+	gl::clearColor(touchPos.getX() / res.getX(), 0.5f, (touchPos.getY()) / res.getY(), 1);
 
 	engine.state.game->update();
 

@@ -35,16 +35,6 @@ namespace vg
 			void swapBuffers();
 
 			/**
-			@return width of current screen in pixels
-			*/
-			unsigned int getWidth();
-
-			/**
-			@return height of current screen in pixels
-			*/
-			unsigned int getHeight();
-
-			/**
 			@return returns mProgramId (opengl program id)
 			*/
 			unsigned int getProgramId();
