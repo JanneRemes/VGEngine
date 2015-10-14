@@ -89,10 +89,17 @@ namespace vg
 			static Vector2<int> getResolution();
 
 			/**
+			@param x input touch or mouse x coordinate
+			@param y input touch or mouse y coordinate
+			@return coordinates relative to camera
+			*/
+			static vg::Vector2<float> screenToWorld(float x, float y);
+
+			/**
 			@param input touch or mouse coordinates
 			@return coordinates relative to camera
 			*/
-			static vg::Vector2<float> translateInput(vg::Vector2<float> input);
+			static vg::Vector2<float> screenToWorld(vg::Vector2<float> input);
 
 		private:
 			core::FileManager* mFileManager;	///< pointer to FileManager

@@ -32,22 +32,22 @@ namespace vg
 			*/
 			static void move(Vector2<int> change);
 
-			/**
+			/*
 			@return camera rotation
 			*/
-			static float getRotation();
+			//static float getRotation();
 
-			/**
+			/*
 			Set camera rotation
 			@param rotation in degrees
 			*/
-			static void setRotation(float rotation);
+			//static void setRotation(float rotation);
 
-			/**
+			/*
 			Rotate camera position
 			@param change rotation in degrees
 			*/
-			static void rotate(float change);
+			//static void rotate(float change);
 
 			/**
 			@return camera zoom level
@@ -66,11 +66,32 @@ namespace vg
 			*/
 			static void zoom(float change);
 
-		private:
-			static Vector2<int> mPosition;	///< camera focus position in pixels
-			static float mZoom;				///< camera zoom level
-			static float mRotation;			///< camera rotation in degrees
+			/**
+			@param value top left visible point on screen
+			*/
+			static void setLeftTop(Vector2<float> value);
+			
+			/**
+			@return top left visible point on screen
+			*/
+			static Vector2<float> getLeftTop();
+			
+			/**
+			@param value bottom right visible point on screen
+			*/
+			static void setRightBottom(Vector2<float> value);
 
+			/**
+			@return bottom right visible point on screen
+			*/
+			static Vector2<float> getRightBottom();
+
+		private:
+			static Vector2<int> mPosition;		///< camera focus position in pixels
+			static float mZoom;					///< camera zoom level
+			//static float mRotation;				///< camera rotation in degrees
+			static Vector2<float> mLeftTop;		///< top left corner of screen
+			static Vector2<float> mRightBottom; ///< bottom right corner of screen
 		};
 	}
 }

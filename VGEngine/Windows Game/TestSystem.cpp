@@ -14,30 +14,24 @@ TestSystem::TestSystem(Scene *scene)
 	this->scene = scene;
 	dogeDir = Vector2<int>(3, 0);
 	camDir = 1;
-	camRotDir = 0.05f;
 	camZoom = 0.001f;
 	camState = 0;
 }
 
 void TestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	//camera
-	//Camera::zoom(camZoom);
-	//Camera::move(Vector2<int>(camDir, -camDir));
-	//Camera::rotate(camRotDir);
-	
+	/*
+	Camera::zoom(camZoom);
+	Camera::move(Vector2<int>(camDir, -camDir));
 	if (Camera::getZoom() < 0.95f || Camera::getZoom() > 1.05f)
 		camZoom *= -1.0f;
-	if (abs(Camera::getRotation()) > 20.0f)
-		camRotDir *= -1.0f;
-	
 	camState++;
 	if (camState > 30)
 	{
 		camState = 0;
 		camDir *= -1;
 	}
-		
+	*/
 
 	if (vg::input::Mouse::isKeyPressed(vg::input::LEFT))
 	{

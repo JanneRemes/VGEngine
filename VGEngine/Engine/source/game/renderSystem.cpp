@@ -72,19 +72,23 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 		zoom = Camera::getZoom();
 	}
 
+	float left = camera.x + screen.x - screen.x * zoom;
+	float right = camera.x + screen.x - screen.x * (1.0f - zoom);
+	float bottom = camera.y + screen.y - screen.y * (1.0f - zoom);
+	float top = camera.y + screen.y - screen.y * zoom;
 	// left, right, bottom, top, near, far
-	mat4 projection = ortho(
-		camera.x + screen.x - screen.x * zoom,
-		camera.x + screen.x - screen.x * (1.0f - zoom),
-		camera.y + screen.y - screen.y * (1.0f - zoom),
-		camera.y + screen.y - screen.y * zoom,
-		-1.0f, 1.0f);
+	mat4 projection = ortho(left, right, bottom, top, -1.0f, 1.0f);
 	
 	if (useCamera)
 	{
+		Camera::setLeftTop(Vector2<float>(left, top));
+		Camera::setRightBottom(Vector2<float>(right, bottom));
+
+		/*
 		projection = translate(projection, vec3(0.5f * screen.x, 0.5f * screen.y, 0.0f));
 		projection = rotate(projection, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));
 		projection = translate(projection, vec3(-0.5f * screen.x, -0.5f * screen.y, 0.0f));
+		*/
 	}
 	shader->setUniform("unifProjection", projection);
 }

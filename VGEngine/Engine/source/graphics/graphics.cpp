@@ -88,20 +88,17 @@ Vector2<int> Graphics::getResolution()
 	return mResolution;
 }
 
-Vector2<float> Graphics::translateInput(Vector2<float> input)
+Vector2<float> Graphics::screenToWorld(float x, float y)
 {
-	float zoom = Camera::getZoom();
-	vec2 camera(Camera::getPosition().getX(), Camera::getPosition().getY());
-	vec2 screen(Graphics::getResolution().getX(), Graphics::getResolution().getY());
-	vec4 result(input.getX(), input.getY(), 0.0f, 0.0f);
+	Vector2<int> screen = Graphics::getResolution();
+	Vector2<float> lt = Camera::getLeftTop();
+	Vector2<float> rb = Camera::getRightBottom();
+	float width = rb.getX() - lt.getX();
+	float height = rb.getY() - lt.getY();
+	return lt + Vector2<float>(x * (width / screen.getX()), y * (height / screen.getY()));
+}
 
-	/*
-	mat4 transform = mat4();
-	transform = translate(transform, vec3(0.5f * screen, 0.0f));
-	transform = rotate(transform, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));
-	transform = translate(transform, vec3(-0.5f * screen, 0.0f));
-	result = transform * result;
-	*/
-	result += vec4(camera, 0.0f, 0.0f);
-	return Vector2<float>(result.x, result.y);
+Vector2<float> Graphics::screenToWorld(Vector2<float> input)
+{
+	return screenToWorld(input.getX(), input.getY());
 }
