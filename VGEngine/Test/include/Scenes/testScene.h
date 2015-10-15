@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include <android/log.h>
 #include "engine/game/scene.h"
 class TestScene : public vg::Scene
 {

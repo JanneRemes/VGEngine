@@ -84,6 +84,7 @@
       <PreprocessorDefinitions>OS_WINDOWS;WIN32;_DEBUG</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -102,7 +103,6 @@
     <ClInclude Include="include\engine\game\factory.h" />
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
-    <ClInclude Include="include\engine\game\objectPool.h" />
     <ClInclude Include="include\engine\game\physicsComponent.h" />
     <ClInclude Include="include\engine\game\physicsSystem.h" />
     <ClInclude Include="include\engine\game\renderComponent.h" />
@@ -153,7 +153,6 @@
     <ClCompile Include="source\game\factory.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
-    <ClCompile Include="source\game\objectPool.cpp" />
     <ClCompile Include="source\game\physicsComponent.cpp" />
     <ClCompile Include="source\game\physicsSystem.cpp" />
     <ClCompile Include="source\game\renderComponent.cpp" />

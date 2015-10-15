@@ -1,8 +1,8 @@
 
-extern void main_dummy();
+//extern void main_dummy();
 
 void test_dummy()
 {
 	
-	main_dummy();
+	//main_dummy();
 }

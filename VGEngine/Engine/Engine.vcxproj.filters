@@ -132,9 +132,6 @@
     <ClInclude Include="include\engine\graphics\graphics.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\objectPool.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\sceneManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -273,9 +270,6 @@
     </ClCompile>
     <ClCompile Include="external\lodepng\lodepng.cpp">
       <Filter>external</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\objectPool.cpp">
-      <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\sceneManager.cpp">
       <Filter>source\game</Filter>

@@ -197,3 +197,19 @@ void Shader::setUniform(std::string name, float x, float y, float z, float w)
 	glm::vec4 shaderValue(x, y, z, w);
 	gl::setUniform(mUniformLocations[name], shaderValue);
 }
+const std::string Shader::getDefaultVertexPath()
+{
+#ifdef OS_WINDOWS
+	return "win_vertex.glsl";
+#else
+	return "android_vertex.glsl";
+#endif
+}
+const std::string Shader::getDefaultFragmentPath()
+{
+#ifdef OS_WINDOWS
+	return "win_fragment.glsl";
+#else
+	return "android_fragment.glsl";
+#endif
+}

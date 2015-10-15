@@ -40,7 +40,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 		Vector2<int> temppos(Random::nexti(45, screenWidth - 45), -10.0f);
 		gameObject->getComponent<TransformComponent>()->setPosition(temppos);
 		unsigned int size = gameObjects->size();
-		mScene->getObjectPool()->addGameObject(gameObject);
+		mScene->addGameObject(gameObject);
 		mSpawnDelay = Random::nextf(1.0, 3.5);
 		mSpawnTimer.restart();
 	}

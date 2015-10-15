@@ -75,7 +75,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 					transformComponent->getWorldPosition().getY() - transformComponent->getOrigin().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				
-				mScene->getObjectPool()->addGameObject(g);
+				mScene->addGameObject(g);
                 mCoolDownTimer.restart();
 				break;
 			}
