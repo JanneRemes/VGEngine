@@ -9,17 +9,17 @@
 #include <GLES2/gl2.h>
 #include "engine/application.h"
 #include "engine/platforms/android/android_native_app_glue.h"
+#include <engine/graphics/graphics.h>
+
 using namespace vg::graphics;
 using namespace vg::core;
 EGLDisplay mDisplay;    ///< Handle to devices display
 EGLSurface mSurface;    ///< Handle to device surface
 EGLContext mContext;    ///< Handle to device context
-int mWidth, mHeight; ///< Screen size in pixels
 
 int mProgramId; //< OpenGL program id
 GraphicsContext::GraphicsContext()
 {
-	mWidth = mHeight = 0;
 	mDisplay = mSurface = mContext = NULL;
 }
 
@@ -62,16 +62,6 @@ void GraphicsContext::destroy()
 void GraphicsContext::swapBuffers()
 {
 	eglSwapBuffers(mDisplay, mSurface);
-}
-
-unsigned int GraphicsContext::getWidth()
-{
-	return mWidth;
-}
-
-unsigned int GraphicsContext::getHeight()
-{
-	return mHeight;
 }
 
 void GraphicsContext::initializeGraphicsContext()
@@ -161,10 +151,12 @@ void GraphicsContext::initializeGraphicsContext()
 	}
 	checkError();
 
-	eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &mWidth);
+	int w, h = 0;
+	eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &w);
 	checkError();
-	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &mHeight);
+	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &h);
 	checkError();
+	Graphics::setResolution(Vector2<int>(w, h));
 }
 
 void GraphicsContext::createGLProgram()

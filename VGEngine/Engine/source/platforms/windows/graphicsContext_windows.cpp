@@ -8,6 +8,7 @@
 #include "engine/utility/logger.h"
 #include "engine/application.h"
 #include "engine/graphics/opengl.h"
+#include <engine/graphics/graphics.h>
 #include <Windows.h>
 /*
 #pragma comment( lib, "glew32d.lib" )
@@ -77,32 +78,23 @@ void GraphicsContext::swapBuffers()
 	SwapBuffers(windowHandle2);
 }
 
-unsigned int GraphicsContext::getWidth()
-{
-	return mWidth;
-}
-
-unsigned int GraphicsContext::getHeight()
-{
-	return mHeight;
-}
-
 void GraphicsContext::initializeGraphicsContext()
 {
 	//WINDOW
 	WNDCLASS wc = {};
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
-	mWidth = 1280;
-	mHeight = 720;
-
+	RECT winRect = {0, 0, 1280, 720};
+	Graphics::setResolution(Vector2<int>(winRect.right, winRect.bottom));
+	AdjustWindowRectEx(&winRect, WS_CAPTION, false, WS_EX_LEFT);
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);
 	wc.lpszClassName = CLASS_NAME;
 
 	RegisterClass(&wc);
 	checkError();
-	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, windowName.c_str(), WS_OVERLAPPEDWINDOW, 100, 100, mWidth, mHeight, //Windowhandle pointter creation
+	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, windowName.c_str(), WS_OVERLAPPEDWINDOW, 
+		100, 100, winRect.right - winRect.left, winRect.bottom - winRect.top,
 		NULL, NULL, GetModuleHandle(nullptr), NULL);
 	checkError();
 	if (mWindowHandle == nullptr)

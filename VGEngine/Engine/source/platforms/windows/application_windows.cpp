@@ -41,14 +41,10 @@ int main()
 	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
 	gl::clear();
 	graphics->swapBuffers();
-	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
-	gl::clear();
 	while (game->isRunning())
 	{
 		a->update();
 	}
-
-
 }
 void Application::update()
 {
@@ -68,8 +64,8 @@ void Application::update()
 	vg::input::Input::update();
 
 	//clear graphics
-	//gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
-	//gl::clear();
+	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
+	gl::clear();
 	gl::clear(gl::getGL_DEPTH_BUFFER_BIT());
 	//gl::clearColor(vg::input::Input::getTouchX() / graphics->getScreenWidth(), 0.5f,
 	//	(vg::input::Input::getTouchY()) / graphics->getScreenHeight(), 1);

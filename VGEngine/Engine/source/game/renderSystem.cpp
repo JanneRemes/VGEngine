@@ -8,6 +8,7 @@
 #include "engine/game/triangleComponent.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/renderComponent.h"
+#include <engine/graphics/camera.h>
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -20,7 +21,6 @@ using namespace glm;
 
 RenderSystem::RenderSystem() :System()
 {
-	updateProjection();
 }
 
 void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
@@ -44,15 +44,15 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 		if (render != nullptr)
 		{
-			VertexBuffer vBuffer(*render->getVertices());
-			IndexBuffer iBuffer(*render->getIndices());
+			mVertexBuffer.setData(*render->getVertices());
+			mIndexBuffer.setData(*render->getIndices());
 			
 			Texture* texture = render->getTexture();
 			if (texture != nullptr)
 				texture->bind();
 
 			updateShader(shader, transform);
-			Graphics::draw(shader, &vBuffer, &iBuffer);
+			Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 			
 			if (texture != nullptr)
 				texture->unbind();
@@ -61,15 +61,36 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 	shader->unUseProgram();
 }
 
-void RenderSystem::updateProjection()
+void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
-	Shader* shader = Game::getInstance()->getGraphics()->getShader();
-	shader->useProgram();
-	vec2 screenSize(Game::getInstance()->getGraphics()->getContext()->getWidth(),
-		Game::getInstance()->getGraphics()->getContext()->getHeight());
-	mat4 projectionTransform = ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
-	shader->setUniform("unifProjection", projectionTransform);
-	shader->unUseProgram();
+	vec2 screen(Graphics::getResolution().getX(), Graphics::getResolution().getY());
+	vec2 camera(0, 0);
+	float zoom = 0.0f;
+	if (useCamera)
+	{
+		camera = vec2(Camera::getPosition().getX(), Camera::getPosition().getY());
+		zoom = Camera::getZoom();
+	}
+
+	float left = camera.x + screen.x - screen.x * zoom;
+	float right = camera.x + screen.x - screen.x * (1.0f - zoom);
+	float bottom = camera.y + screen.y - screen.y * (1.0f - zoom);
+	float top = camera.y + screen.y - screen.y * zoom;
+	// left, right, bottom, top, near, far
+	mat4 projection = ortho(left, right, bottom, top, -1.0f, 1.0f);
+	
+	if (useCamera)
+	{
+		Camera::setLeftTop(Vector2<float>(left, top));
+		Camera::setRightBottom(Vector2<float>(right, bottom));
+
+		/*
+		projection = translate(projection, vec3(0.5f * screen.x, 0.5f * screen.y, 0.0f));
+		projection = rotate(projection, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));
+		projection = translate(projection, vec3(-0.5f * screen.x, -0.5f * screen.y, 0.0f));
+		*/
+	}
+	shader->setUniform("unifProjection", projection);
 }
 
 mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation)
@@ -92,43 +113,9 @@ mat4 RenderSystem::modelTransform(TransformComponent* transform)
 		transform->getSize(), transform->getWorldRotation());
 }
 
-void RenderSystem::setCameraPosition(float x, float y)
-{
-	mCameraPosition = vec2(x, y);
-}
-
-void RenderSystem::moveCameraPosition(float x, float y)
-{
-	mCameraPosition += vec2(x, y);
-}
-
-void RenderSystem::setCameraRotation(float rotation)
-{
-	mCameraRotation = rotation;
-}
-
-void RenderSystem::rotateCamera(float rotation)
-{
-	mCameraRotation += rotation;
-}
-
-void RenderSystem::setCameraScale(float scaleX, float scaleY)
-{
-	if (scaleX < 0)
-		scaleX = 0;
-	if (scaleY < 0)
-		scaleY = 0;
-
-	mCameraScale = vec2(scaleX, scaleY);
-}
-
-void RenderSystem::scaleCamera(float scaleX, float scaleY)
-{
-	setCameraScale(mCameraScale.x + scaleX, mCameraScale.y + scaleY);
-}
-
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
+	updateProjection(shader, transform->getUsingCamera());
 	if (transform != nullptr)
 	{
 		shader->setUniform("unifModel", modelTransform(transform));

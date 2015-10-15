@@ -6,9 +6,15 @@ namespace vg
 		class PhysicsComponent : public Component
 		{
 		public:
-			PhysicsComponent(b2World world);
+			// Create physics box
+			PhysicsComponent(float x, float y, float width, float height, b2BodyType type, b2World *world);
+			// Create physics circle
+			PhysicsComponent(float x, float y, float radius, b2BodyType type, b2World *world);
+
 			b2Body* getBody() { return _body; };
+			b2FixtureDef* getFixture() { return &FixDef; };
 		private:
 			b2Body *_body;
+			b2FixtureDef FixDef;
 		};
 }

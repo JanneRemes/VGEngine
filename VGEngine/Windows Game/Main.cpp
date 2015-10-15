@@ -2,8 +2,10 @@
 #include <engine\game\game.h>
 #include <engine\game\scene.h>
 #include <engine\game\quadrangleComponent.h>
-#include <engine\game\animationComponent.h>
-#include <engine\game\animationSystem.h>
+#include <engine\game\physicsSystem.h>
+#include <engine\game\physicsComponent.h>
+
+#include "PhysicsTestSystem.h"
 #include "TestSystem.h"
 //extern void main_dummy();
 using namespace vg;
@@ -29,18 +31,37 @@ void mainGame(Game* game)
 	TestSystem *testSystem = new TestSystem(scene);
 	game->addComponentSystem(scene, testSystem);
 
-	/*AnimationSystem *animationSystem = new AnimationSystem();
-	game->addComponentSystem(scene, animationSystem);
-	GameObject *animationTest = new GameObject("animationTest");
+	// Physics
+	float gravity = 9.81;
+	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -gravity), true);
+	game->addComponentSystem(scene, physicsSystem);
+
+	GameObject *physicsTest = new GameObject("physicsTest1");
+	physicsTest->addComponent(new PhysicsComponent(150, 0, 64, 64, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+
+	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	physicsTest->addComponent(physicsObject);
+
+	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(64, 64),
+		Vector2<int>(64, 64), 0.0f);
+	physicsTest->addComponent(physicsTransform);
+
+	scene->getObjectPool()->addGameObject(physicsTest);
+
+	// 2nd physics object
+	GameObject *physicsTest2 = new GameObject("physicsTest2");
+	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 64, 64, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+
+	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	physicsTest2->addComponent(physicsRender2);
+
+	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(64, 64),
+		Vector2<int>(64, 64), 0.0f);
+	physicsTest2->addComponent(physicsTransform2);
+
+	scene->getObjectPool()->addGameObject(physicsTest2);
 	
 
-	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
-	animationTest->addComponent(animationComponent);
-
-	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(256, 128), Vector2<int>(256, 256), 0.0f);
-	animationTest->addComponent(animationTransform);
-
-	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
-
-	scene->getObjectPool()->addGameObject(animationTest);*/
+	PhysicsTestSystem *physicsTestSystem = new PhysicsTestSystem(scene);
+	game->addComponentSystem(scene, physicsTestSystem);
 }

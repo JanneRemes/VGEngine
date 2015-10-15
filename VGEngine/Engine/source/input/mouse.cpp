@@ -1,8 +1,14 @@
 #ifdef OS_WINDOWS
-#include "engine/input/mouse.h"
+
+#include <engine/input/mouse.h>
+#include <engine/game/game.h>
+#include <engine/graphics/graphics.h>
 #include <Windows.h>
-#include "engine/game/game.h"
+
+using namespace vg;
 using namespace vg::input;
+using namespace vg::graphics;
+
 bool Mouse::isKeyPressed(MOUSE_KEY key)
 {
 	int vkey = 0;
@@ -24,14 +30,14 @@ bool Mouse::isKeyPressed(MOUSE_KEY key)
 	}
 	return(GetAsyncKeyState(vkey) & 0x8000 != 0);
 }
+
 vg::Vector2<float> Mouse::getMousePos()
 {
 	POINT pt;
 	GetCursorPos(&pt);
 	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->mWindowHandle);
 	ScreenToClient(handle, &pt);
-	vg::Vector2<float> tempVector(pt.x,pt.y);
-	return tempVector;
+	return Graphics::screenToWorld(pt.x, pt.y);
 }
 
 #endif
