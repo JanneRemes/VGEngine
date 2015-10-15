@@ -83,7 +83,7 @@ void mainGame(Game* game)
 	AnimationSystem *animationSystem = new AnimationSystem();
 	game->addComponentSystem(scene, animationSystem);
 
-	scene->getObjectPool()->addGameObject(animationTest);
+	scene->addGameObject(animationTest);
 	
 	PhysicsTestSystem *physicsTestSystem = new PhysicsTestSystem(scene);
 	game->addComponentSystem(scene, physicsTestSystem);
