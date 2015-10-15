@@ -10,6 +10,8 @@
 #include <engine/game/textRenderSystem.h>
 #include <engine/game/physicsSystem.h>
 #include <engine/game/physicsComponent.h>
+#include <engine/game/animationComponent.h>
+#include <engine/game/animationSystem.h>
 #include "engine/input/touch.h"
 #include "engine\input\input.h"
 
@@ -124,7 +126,10 @@ void mainGame(Game* game)
 	physicsTest2->addComponent(physicsTransform2);
 
 	scene->getObjectPool()->addGameObject(physicsTest2);
-	
+
+	//Animation test
+	/*
+	GameObject *animationTest = new GameObject("animationTest");
 	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
 	animationTest->addComponent(animationComponent);
 

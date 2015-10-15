@@ -4,6 +4,8 @@
 #include <engine\game\quadrangleComponent.h>
 #include <engine\game\physicsSystem.h>
 #include <engine\game\physicsComponent.h>
+#include <engine\game\animationComponent.h>
+#include <engine\game\animationSystem.h>
 
 #include "PhysicsTestSystem.h"
 #include "TestSystem.h"
@@ -21,6 +23,7 @@ void mainGame(Game* game)
 	Scene *scene = new Scene();
 	game->getSceneManager()->changeScene(scene);
 	GameObject *doge = new GameObject("doge");
+
 	TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
 		Vector2<int>(128, 128), 0.0f, layer++, Vector2<int>(64, 64));
 	doge->addComponent(transform);
@@ -60,8 +63,24 @@ void mainGame(Game* game)
 	physicsTest2->addComponent(physicsTransform2);
 
 	scene->getObjectPool()->addGameObject(physicsTest2);
-	
 
+	//Animation
+	
+	GameObject *animationTest = new GameObject("animationTest");
+
+	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
+	animationTest->addComponent(animationComponent);
+
+	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(512, 512), Vector2<int>(256, 128), 0.0f);
+	animationTest->addComponent(animationTransform);
+
+	animationTest->addComponent(new AnimationComponent(0.03, 4, 2, 8, 256, 128));
+
+	AnimationSystem *animationSystem = new AnimationSystem();
+	game->addComponentSystem(scene, animationSystem);
+
+	scene->getObjectPool()->addGameObject(animationTest);
+	
 	PhysicsTestSystem *physicsTestSystem = new PhysicsTestSystem(scene);
 	game->addComponentSystem(scene, physicsTestSystem);
 }

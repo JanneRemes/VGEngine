@@ -53,10 +53,10 @@ void AnimationSystem::initAnimations(GameObject *gameObject)
 		animation->mXOffSetIndex = 0;
 		animation->mYOffSetIndex = 0;
 
-		texCoords[0] = glm::vec2(0, yOffset);
-		texCoords[1] = glm::vec2(0, 0);
-		texCoords[2] = glm::vec2(xOffset, 0);
-		texCoords[3] = glm::vec2(xOffset, yOffset);
+		texCoords[0] = glm::vec2(0, 1);
+		texCoords[1] = glm::vec2(0, (1 - yOffset));
+		texCoords[2] = glm::vec2(xOffset, (1 - yOffset));
+		texCoords[3] = glm::vec2(xOffset, 1);
 			//--
 		render->setTexCoords(texCoords);
 		//--
@@ -68,6 +68,7 @@ void AnimationSystem::initAnimations(GameObject *gameObject)
 void AnimationSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {	
 	glm::vec2 texCoords[4];
+
 	for (auto it = gameObjects->begin(); it < gameObjects->end(); it++)
 	{
 		auto *components = (*it)->getAllComponents();
@@ -82,8 +83,18 @@ void AnimationSystem::update(std::vector<GameObject*> *gameObjects, float deltaT
 				break;
 			}
 		}
+
 		if (animation != nullptr)
 		{
+			for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
+			{
+				if (dynamic_cast<RenderComponent*>(ij->second) != nullptr)
+				{
+					render = dynamic_cast<RenderComponent*>(ij->second);
+					break;
+				}
+			}
+		
 			animation->mAnimationTimer += deltaTime;
 
 			if (animation->isInitialized == false)
@@ -93,33 +104,27 @@ void AnimationSystem::update(std::vector<GameObject*> *gameObjects, float deltaT
 			
 			else if (animation->mAnimationTimer >= animation->mAnimationInterval)
 			{
-				RenderComponent *render = (*it)->getComponent<RenderComponent>();
-
+				animation->mAnimationTimer = 0;
 				animation->mXOffSetIndex++;
 				animation->mFrameIndex++;
 
-				if (animation->mFrameIndex > animation->mFrameTotalCount)
+				if (animation->mFrameIndex > animation->mFrameTotalCount - 1)
 				{
 					animation->mFrameIndex = 0;
 					animation->mYOffSetIndex = 0;
 					animation->mXOffSetIndex = 0;
 				}
 
-				else if (animation->mXOffSetIndex > animation->mFrameColumnCount)
+				else if (animation->mXOffSetIndex > animation->mFrameColumnCount - 1)
 				{
 					animation->mXOffSetIndex = 0;
 					animation->mYOffSetIndex++;
 				}
 
-				else
-				{
-					animation->mXOffSetIndex++;
-				}
-
-				texCoords[0] = glm::vec2(animation->mXOffSet * animation->mXOffSetIndex, animation->mYOffSet * (animation->mYOffSetIndex + 1));
-				texCoords[1] = glm::vec2(animation->mXOffSet * animation->mXOffSetIndex, animation->mYOffSet * animation->mYOffSetIndex);
-				texCoords[2] = glm::vec2(animation->mXOffSet * (animation->mXOffSetIndex + 1), animation->mYOffSet * animation->mYOffSetIndex);
-				texCoords[3] = glm::vec2(animation->mXOffSet * (animation->mXOffSetIndex + 1), animation->mYOffSet * (animation->mYOffSetIndex + 1));
+				texCoords[0] = glm::vec2(animation->mXOffSet * animation->mXOffSetIndex, 1 - (animation->mYOffSet * (animation->mYOffSetIndex)));
+				texCoords[1] = glm::vec2(animation->mXOffSet * animation->mXOffSetIndex, 1 - (animation->mYOffSet * (animation->mYOffSetIndex + 1) ));
+				texCoords[2] = glm::vec2(animation->mXOffSet * (animation->mXOffSetIndex + 1), 1 - (animation->mYOffSet * (animation->mYOffSetIndex + 1)));
+				texCoords[3] = glm::vec2(animation->mXOffSet * (animation->mXOffSetIndex + 1), 1- (animation->mYOffSet * (animation->mYOffSetIndex)));
 
 				render->setTexCoords(texCoords);
 			}
