@@ -41,17 +41,17 @@ namespace vg
 		*/
 		static glm::mat4 modelTransform(TransformComponent* transform);
 
-	private:
 		/**
 		Sends new uniform values to shader
 		*/
-		void updateShader(graphics::Shader* shader, TransformComponent* transform);
+		static void updateShader(graphics::Shader* shader, TransformComponent* transform);
 
 		/**
 		Calculates and sends new projection matrix to shader
 		*/
-		void updateProjection(graphics::Shader* shader, bool useCamera = true);
+		static void updateProjection(graphics::Shader* shader, bool useCamera = true);
 
+	private:
 		vg::graphics::VertexBuffer mVertexBuffer;
 		vg::graphics::IndexBuffer mIndexBuffer;
 	};
