@@ -17,7 +17,7 @@ namespace vg
 		AnimationSystem();
 		~AnimationSystem();
 
-		void initAnimations(std::vector<GameObject*> *gameObjects);
+		void initAnimations(GameObject *gameObject);
 		void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 
 	};
