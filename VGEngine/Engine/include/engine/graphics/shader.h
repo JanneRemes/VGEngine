@@ -56,8 +56,8 @@ namespace vg
 				@return was shader source loading succesful
 				*/
 			bool load(core::FileManager& fileManager,
-				const std::string& vertexPath = "default_vertex.glsl",
-				const std::string& fragmentPath = "default_fragment.glsl");
+				const std::string& vertexPath = getDefaultVertexPath(),
+				const std::string& fragmentPath = getDefaultFragmentPath());
 
 			/**
 				Returns current shader program id
@@ -121,6 +121,8 @@ namespace vg
 			void setUniform(std::string name, float x, float y, float z, float w);
 
 		private:
+			static const std::string getDefaultVertexPath();
+			static const std::string getDefaultFragmentPath();
 			/**
 				@return default map of vertex element usages and names
 				*/
