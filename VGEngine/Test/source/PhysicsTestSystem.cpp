@@ -1,11 +1,17 @@
 #include "PhysicsTestSystem.h"
+#ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
+#endif
+#ifdef OS_ANDROID
+#include "engine/input/touch.h"
+#endif
 #include <engine\game\quadrangleComponent.h>
 #include <engine\game\game.h>
 
 #include <engine\game\physicsComponent.h>
 #include <engine\game\physicsSystem.h>
 #include <iostream>
+#include <engine/utility/random.h>
 using namespace vg;
 
 PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
@@ -21,7 +27,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	Game::getInstance()->addComponentSystem(scene, physicsSystem);
 
-	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(64, 64),
+	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(80, 64),
 		Vector2<int>(64, 64), 0.0f);
 
 	GameObject *physicsTest = new GameObject("physicsTest1");
@@ -50,24 +56,26 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	/*
+	#ifdef OS_WINDOWS
+	
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
-		std::cout << "Wild moomi appears" << endl;
-		cout << PhysicsSystem::world->GetGravity().x << " " << PhysicsSystem::world->GetGravity().y << endl;
+		for (int i = 0; i < 5; i++)
+		{
+			vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
+			
+			TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
+				Vector2<int>(64, 64), 0.0f);
 
-		TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
-			Vector2<int>(64, 64), 0.0f);
+			GameObject *physicsTest = new GameObject("physicsTest");
+			physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
 
-		GameObject *physicsTest = new GameObject("physicsTest");
-		physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
+			QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("doge.png");
+			physicsTest->addComponent(physicsRender2);
+			physicsTest->addComponent(physicsTransform2);
 
-		QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("doge.png");
-		physicsTest->addComponent(physicsRender2);
-		physicsTest->addComponent(physicsTransform2);
-
-		scene->addGameObject(physicsTest);
+			scene->addGameObject(physicsTest);
+		}
 	}
 	
 	if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))
@@ -82,9 +90,52 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 			if (physComponent != nullptr && transform != nullptr)
 			{
-				physComponent->getBody()->SetLinearVelocity(b2Vec2(physComponent->getBody()->GetLinearVelocity().x + 100, physComponent->getBody()->GetLinearVelocity().y + 100));
+				float number = rand() % 400  -200.0f;
+				float number2 = rand() % 200 ;
+				physComponent->getBody()->SetLinearVelocity(b2Vec2( number, number2));
 			}
 		}
 	}
-	*/
+	#endif
+
+	#ifdef OS_ANDROID
+	if (vg::input::Touch::getIsTouched())
+	{
+		vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
+		vg::Vector2<int> res = vg::graphics::Graphics::getResolution();
+		if (touchPos.getX() < res.getX() / 2)
+		{
+			for (int i = 0; i < 5; i++)
+			{
+
+				TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(touchPos.getX(), touchPos.getY()),
+					Vector2<int>(64, 64), 0.0f);
+
+				GameObject *physicsTest = new GameObject("physicsTest");
+				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
+
+				QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("doge.png");
+				physicsTest->addComponent(physicsRender2);
+				physicsTest->addComponent(physicsTransform2);
+
+				scene->addGameObject(physicsTest);
+			}
+		}
+		else
+		{
+			for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+			{
+				PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
+				TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+
+				if (physComponent != nullptr && transform != nullptr)
+				{
+					float number = rand() % 400 - 200.0f;
+					float number2 = rand() % 200;
+					physComponent->getBody()->SetLinearVelocity(b2Vec2(number, number2));
+				}
+			}
+		}
+	}
+	#endif
 }

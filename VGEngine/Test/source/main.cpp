@@ -19,10 +19,11 @@
 #include "ShipSystem.h"
 #include "enemySystem.h"
 #include "TestComponentSystem.h"
+#include "PhysicsTestSystem.h"
 
 #include "engine\game\physicsComponent.h"
 #include "engine\game\physicsSystem.h"
-
+#include "PhysicsTestSystem.h"
 #include <stdlib.h> 
 
 using namespace vg;
@@ -100,7 +101,8 @@ void mainGame(Game* game)
 	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, enemySystem);
 
-
+	PhysicsTestSystem *fysiks = new PhysicsTestSystem(scene);
+	game->addComponentSystem(scene,fysiks);
 	//Animation test
 	/*
 	GameObject *animationTest = new GameObject("animationTest");
