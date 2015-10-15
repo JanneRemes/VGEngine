@@ -12,8 +12,6 @@
 #include <engine/game/physicsComponent.h>
 #include <engine/game/animationComponent.h>
 #include <engine/game/animationSystem.h>
-#include "engine/input/touch.h"
-#include "engine\input\input.h"
 
 #include "TestComponent.h"
 #include "ShipSystem.h"

@@ -1,7 +1,6 @@
 
 #include "engine/game.h"
 #include "engine/utility/logger.h"
-#include "engine/input/input.h"
 #include "engine/utility/timer.h"
 using namespace vg;
 Game *Game::mGame = nullptr;

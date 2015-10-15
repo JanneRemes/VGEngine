@@ -17,10 +17,9 @@
 #include "engine/graphics/graphics.h"
 #include "engine/utility/logger.h"
 #include "engine/game.h"
-#include "engine/input/input.h"
+#include "engine/input/sensor.h"
 #include "engine/assets/fileManager.h"
 #include <android/sensor.h>
-#include "engine/input/input.h"
 #include "engine/graphics/opengl.h"
 #include "engine/input/touch.h"
 
@@ -85,7 +84,6 @@ void Application::update()
 	// If not animating, we will block forever waiting for events.
 	// If animating, we loop until all events are read, then continue
 	// to draw the next frame of animation.
-	vg::input::Input::update();
 	vg::input::Touch::update();
 	while ((ident = ALooper_pollAll(engine.animating ? 0 : -1, NULL, &events, (void**)&source)) >= 0)
 	{
@@ -175,8 +173,8 @@ void sensorEvent(ASensorEventQueue *queue)
 	ASensorEvent event;
 	while (ASensorEventQueue_getEvents(queue, &event, 1) > 0)
 	{
-		vg::input::Input::setSensor(event.acceleration.x, event.acceleration.y, event.acceleration.z);
-		vg::input::Input::setAngles(event.vector.x, event.vector.y, event.vector.z);
+		vg::input::Sensor::setSensor(event.acceleration.x, event.acceleration.y, event.acceleration.z);
+		vg::input::Sensor::setAngles(event.vector.x, event.vector.y, event.vector.z);
 	}
 }
 void android_main(struct android_app* state)

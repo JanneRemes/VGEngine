@@ -3,7 +3,7 @@
 
 #include "ShipSystem.h"
 
-#include "engine/input/input.h"
+#include "engine/input/sensor.h"
 #include "engine/game/game.h"
 #include "engine/utility/Vector2.h"
 #include "engine/game/transformComponent.h"
@@ -58,7 +58,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
 			Vector2<int> newPos(
-				((mScreenSize.getX()/ 20 * (input::Input::getSensorX() + 10) - mScreenSize.getX()) * -1), 
+				((mScreenSize.getX()/ 20 * (input::Sensor::getSensorX() + 10) - mScreenSize.getX()) * -1), 
 				resolution.getY()-80);
 			if (sqrt(pow(newPos.getX() - transformComponent->getWorldPosition().getX(), 2)) > 15.0f)
 			{

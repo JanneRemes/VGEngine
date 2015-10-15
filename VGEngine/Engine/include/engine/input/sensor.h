@@ -1,12 +1,12 @@
 
 #pragma once
-
-//#include "engine/platforms/android/android_native_app_glue.h"
+#include "engine/utility/vector2.h"
 namespace vg
 {
 	namespace input
 	{
-		class Input
+
+		class Sensor
 		{
 		public:
 			static void setSensor(float x, float y, float z);
@@ -14,9 +14,6 @@ namespace vg
 			static float getSensorX();
 			static float getSensorY();
 			static float getSensorZ();
-
-			static void update();
-
 		private:
 			static float mSensorX;
 			static float mSensorY;
@@ -24,6 +21,7 @@ namespace vg
 			static float mAngleX;
 			static float mAngleY;
 			static float mAngleZ;
+
 		};
 	}
 }
