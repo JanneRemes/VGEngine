@@ -51,6 +51,9 @@
     <ClInclude Include="include\testComponentSystem.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PhysicsTestSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -72,6 +75,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\testComponentSystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PhysicsTestSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

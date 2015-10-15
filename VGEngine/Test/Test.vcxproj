@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\enemySystem.h" />
+    <ClInclude Include="include\PhysicsTestSystem.h" />
     <ClInclude Include="include\Scenes\testScene.h" />
     <ClInclude Include="include\shipSystem.h" />
     <ClInclude Include="include\test.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="source\dummy.cpp" />
     <ClCompile Include="source\enemySystem.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\PhysicsTestSystem.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
     <ClCompile Include="source\shipSystem.cpp" />
     <ClCompile Include="source\testComponent.cpp" />
