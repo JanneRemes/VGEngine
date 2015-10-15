@@ -9,17 +9,16 @@ namespace vg
 		class PhysicsSystem : public System
 		{
 		public:
-			static b2World* getWorld();
 			static b2World* world;
-
+			
 			/**
 			Create new physics world with gravity
 			*/
-			PhysicsSystem(Vector2<float> gravity, bool borders = false);
+			PhysicsSystem(float gravityX, float gravityY);
+			void createBorders(float x, float y, float width, float height);
 			~PhysicsSystem();
 			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 		private:
-			void createBorders();
 			b2JointDef jointDefinition;
 		};
 }
