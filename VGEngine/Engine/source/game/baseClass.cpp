@@ -19,7 +19,7 @@ BaseClass::BaseClass(std::string name)
 		if (it != memLeaks.end())
 			it->second = ++value;
 	}
-	Log("vgengine", "Current count for %s is %d.", name.c_str(), getValue(name));
+	//Log("vgengine", "Current count for %s is %d.", name.c_str(), getValue(name));
 }
 
 BaseClass::~BaseClass()
@@ -33,9 +33,9 @@ BaseClass::~BaseClass()
 
 		if (it != memLeaks.end())
 			it->second = value;
-		Log("vgengine", "removing object: %s with value %d.", className.c_str(), value);
+		//Log("vgengine", "removing object: %s with value %d.", className.c_str(), value);
 	}
-	Log("vgengine", "Removed: %s", className.c_str()); 
+	//Log("vgengine", "Removed: %s", className.c_str()); 
 }
 
 int BaseClass::getValue(std::string name)

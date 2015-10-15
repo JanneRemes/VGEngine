@@ -2,9 +2,8 @@
 #pragma once
 
 #include <vector>
-#include "objectPool.h"
 #include "engine/game/game.h"
-
+#include "engine/game/systemManager.h"
 namespace vg
 {
 	class GameObject;
@@ -18,9 +17,10 @@ namespace vg
 		/**
 		Default constructor
 		*/
-		Scene() : paused(false){  };
-		virtual ~Scene() = default;
+		Scene();
+		~Scene();
 
+		virtual void loadObjects(){};
 		/**
 		Updates the scene
 		@param dt The elapsed time since the game last updated
@@ -37,10 +37,35 @@ namespace vg
 		@return returns the bool puased
 		*/	
 		bool getPaused() { return paused; }
-		ObjectPool* getObjectPool(){ return &mObjectPool; }
+
+
+
+		/**
+		Adds a gameObject to the pool
+		@param gObject gameObject that is being added in the pool
+		*/
+		void addGameObject(GameObject *gObject);
+
+		/**
+		Updates all the gameObjects that are in the pool
+		*/
+		void updateGameObjects(float deltaTime);
+
+		/**
+		@return Returns the componentSystemManager that the pool is using
+		*/
+		SystemManager* getComponentSystemManager(){ return &mSystemManager; }
+
+		/**
+		Sorts objects in active pool by layer
+		*/
+		void sortActivePool();
+
+		void clearObjects();
 	private:
-		ObjectPool mObjectPool; ///< Pool of Objects
 		bool paused;			///< Bool which is used for determining if scene is paused
+		SystemManager mSystemManager;		  ///< Updates different component systems
+		std::vector<GameObject*> mActivePool; ///< List of the active gameObject pool
 
 	};
 }

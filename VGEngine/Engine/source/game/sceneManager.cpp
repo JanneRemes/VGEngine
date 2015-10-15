@@ -8,80 +8,62 @@ using namespace vg;
 using namespace vg::graphics::gl;
 SceneManager::SceneManager(){
 	mSceneChanged = false;
+	mActiveScene = nullptr;
 };
 
 SceneManager::~SceneManager()
 {
-	emptyScenes();
+	//mActiveScene->~Scene();
+	
+	for (auto it = mSceneTemplates.begin(); it != mSceneTemplates.end(); it++)
+	{
+		delete (*it).second;
+		it = mSceneTemplates.erase(it);
+	}
 }
 
 
 void SceneManager::draw()
 {
 	clear(getGL_COLOR_BUFFER_BIT());
-	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
-	{
-		(*it)->draw();
-	}
+
+		mActiveScene->draw();
+	
 }
 
 void SceneManager::update(float deltaTime)
 {
-	int size = mCurrentScenes.size();
-	for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
-	{
-		if ((*it) == nullptr)
-			continue;
-		if (!(*it)->getPaused())
-		{
-			(*it)->getObjectPool()->updateGameObjects(deltaTime);
-			(*it)->update(deltaTime);
-		}
-		if (mSceneChanged)
-		{
-			mSceneChanged = false;
-			break;
-		}
-	}
-}
 
-void SceneManager::openScene(Scene *scene)
-{
+	if (mActiveScene == nullptr)
+		return;
+	if (!mActiveScene->getPaused())
+		{
+			mActiveScene->updateGameObjects(deltaTime);
+			mActiveScene->update(deltaTime);
+		}
 	
-	mCurrentScenes.push_back(scene);
-	mSceneChanged = true;
 }
 
-void SceneManager::changeScene(Scene *scene)
-{
-	mActiveScene = scene;
-	emptyScenes();
-	openScene(scene);
-}
 
-void SceneManager::emptyScenes()
+void SceneManager::changeScene(string key)
 {
-	if (mCurrentScenes.size() > 0)
+	if (mActiveScene != nullptr)
+		mActiveScene->clearObjects();
+	for (auto it = mSceneTemplates.begin(); it != mSceneTemplates.end(); it++)
 	{
-		for (vector<Scene*>::iterator it = mCurrentScenes.begin(); it != mCurrentScenes.end(); it++)
-			delete (*it);
-	}
-	mCurrentScenes.clear();
-}
-
-void SceneManager::closeCurrentScene()
-{
-	if (mCurrentScenes.size() > 0)
-	{
-		delete mCurrentScenes.back();
-		mCurrentScenes.pop_back();
-		mSceneChanged = true;
+		if (it->first == key)
+		{
+			mActiveScene = it->second;
+			mActiveScene->loadObjects();
+		}
 	}
 }
+
+
 
 void SceneManager::addTemplateScene(string key,Scene *scene)
 {
-	mSceneTemplates.insert(std::make_pair(key, new Scene(*scene)));
+	mSceneTemplates.insert(std::make_pair(key,scene));
 }
 
 Scene* SceneManager::getActiveScene()

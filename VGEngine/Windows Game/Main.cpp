@@ -9,6 +9,7 @@
 
 #include "PhysicsTestSystem.h"
 #include "TestSystem.h"
+#include "DogeScene.h"
 //extern void main_dummy();
 using namespace vg;
 using namespace vg::graphics;
@@ -21,7 +22,10 @@ void test_dummy()
 void mainGame(Game* game)
 {
 	Scene *scene = new Scene();
-	game->getSceneManager()->changeScene(scene);
+	DogeScene *dogeScene = new DogeScene();
+	game->getSceneManager()->addTemplateScene("doge", dogeScene);
+	game->getSceneManager()->addTemplateScene("scene", scene);
+	game->getSceneManager()->changeScene("scene");
 	GameObject *doge = new GameObject("doge");
 
 	TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
@@ -30,7 +34,7 @@ void mainGame(Game* game)
 
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	doge->addComponent(quadre);
-	scene->getObjectPool()->addGameObject(doge);
+	scene->addGameObject(doge);
 	TestSystem *testSystem = new TestSystem(scene);
 	game->addComponentSystem(scene, testSystem);
 
@@ -49,7 +53,7 @@ void mainGame(Game* game)
 		Vector2<int>(64, 64), 0.0f);
 	physicsTest->addComponent(physicsTransform);
 
-	scene->getObjectPool()->addGameObject(physicsTest);
+	scene->addGameObject(physicsTest);
 
 	// 2nd physics object
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
@@ -62,7 +66,7 @@ void mainGame(Game* game)
 		Vector2<int>(64, 64), 0.0f);
 	physicsTest2->addComponent(physicsTransform2);
 
-	scene->getObjectPool()->addGameObject(physicsTest2);
+	scene->addGameObject(physicsTest2);
 
 	//Animation
 	
@@ -83,4 +87,6 @@ void mainGame(Game* game)
 	
 	PhysicsTestSystem *physicsTestSystem = new PhysicsTestSystem(scene);
 	game->addComponentSystem(scene, physicsTestSystem);
+
+	game->getSceneManager()->changeScene("doge");
 }
