@@ -30,8 +30,9 @@ void mainGame(Game* game)
 {
 	Game::log("test");
 	Scene *scene = new Scene();
+	game->getSceneManager()->addTemplateScene("scene", scene);
 	core::AssetManager* assetManager = game->getAssetManager();
-	game->getSceneManager()->changeScene(scene);
+	game->getSceneManager()->changeScene("scene");
 
 	//SHIP
 	GameObject *ship = new GameObject("ship");
@@ -42,7 +43,7 @@ void mainGame(Game* game)
 	ship->addComponent(testcomponent);
 	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	ship->addComponent(quadre);
-	scene->getObjectPool()->addGameObject(ship);
+	scene->addGameObject(ship);
 
 
 	//SHIP
@@ -53,7 +54,7 @@ void mainGame(Game* game)
 	ship2->addComponent(transformship);
 	QuadrangleComponent *quadreship = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 	ship2->addComponent(quadreship);
-	scene->getObjectPool()->addGameObject(ship2);
+	scene->addGameObject(ship2);
 	ship2->setParent(ship);
 
 
@@ -69,7 +70,7 @@ void mainGame(Game* game)
 	textObj->addComponent(new TransformComponent(Vector2<int>(4, 64),
 		Vector2<int>(0, 0), 0.0f, 10000));
 	textObj->addComponent(tempText);
-	scene->getObjectPool()->addGameObject(textObj);
+	scene->addGameObject(textObj);
 	game->addComponentSystem(scene, new TextRenderSystem());
 	
 	//text
@@ -80,7 +81,7 @@ void mainGame(Game* game)
 	textObj2->addComponent(new TransformComponent(Vector2<int>(4, 128),
 		Vector2<int>(0, 0), 0.0f, 10000));
 	textObj2->addComponent(tempText2);
-	scene->getObjectPool()->addGameObject(textObj2);
+	scene->addGameObject(textObj2);
 
 	//FPS text
 	TextComponent* fpstextComponent= game->getFactory()->create("arial.ttf", 6u);
@@ -90,7 +91,7 @@ void mainGame(Game* game)
 	fpstextObject->addComponent(new TransformComponent(Vector2<int>(4, 178),
 		Vector2<int>(0, 0), 0.0f, 10000));
 	fpstextObject->addComponent(fpstextComponent);
-	scene->getObjectPool()->addGameObject(fpstextObject);
+	scene->addGameObject(fpstextObject);
 	
 	//enemy
 	EnemySystem *enemySystem = new EnemySystem(game);
@@ -110,7 +111,7 @@ void mainGame(Game* game)
 		Vector2<int>(128, 128), 0.0f);
 	physicsTest->addComponent(physicsTransform);
 
-	scene->getObjectPool()->addGameObject(physicsTest);
+	scene->addGameObject(physicsTest);
 
 	// 2nd physics object
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
@@ -123,7 +124,7 @@ void mainGame(Game* game)
 		Vector2<int>(128, 128), 0.0f);
 	physicsTest2->addComponent(physicsTransform2);
 
-	scene->getObjectPool()->addGameObject(physicsTest2);
+	scene->addGameObject(physicsTest2);
 
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");

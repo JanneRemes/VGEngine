@@ -217,8 +217,6 @@ void android_main(struct android_app* state)
 	while (engine.state.game->isRunning())
 	{
 		app->update();
-
-
 	}
 }
 /**

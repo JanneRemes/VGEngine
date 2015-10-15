@@ -84,11 +84,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DogeScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhysicsTestSystem.cpp" />
     <ClCompile Include="TestSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DogeScene.h" />
     <ClInclude Include="PhysicsTestSystem.h" />
     <ClInclude Include="TestSystem.h" />
   </ItemGroup>

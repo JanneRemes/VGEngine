@@ -29,7 +29,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			Vector2<int>(64, 64), 0.0f);
 		physicsTest->addComponent(physicsTransform2);
 
-		scene->getObjectPool()->addGameObject(physicsTest);
+		scene->addGameObject(physicsTest);
 	}
 	
 	if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))

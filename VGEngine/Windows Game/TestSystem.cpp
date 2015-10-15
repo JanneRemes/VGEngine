@@ -43,7 +43,7 @@ void TestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 
 		QuadrangleComponent *quadre = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
 		doge->addComponent(quadre);
-		scene->getObjectPool()->addGameObject(doge);
+		scene->addGameObject(doge);
 	}
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{

@@ -35,28 +35,11 @@ namespace vg
 		void update(float dt);
 
 		/**
-		Opens a scene, pushes it to the currentScene vector
-		and doesn't remove previous scenes
-		@param scene the scene which you want to show on the screen
-		*/
-		void openScene(Scene *scene);
-
-		/**
 		Changes the scene to the scene given for this function and
 		cleares previous scenes
 		@param scene the scene which you want to show on the screen
 		*/
-		void changeScene(Scene *scene);
-
-		/**
-		Completely empties the currentScene vector from all scenes
-		*/
-		void emptyScenes();
-
-		/**
-		Closes the scene that is currently playing
-		*/
-		void closeCurrentScene();
+		void changeScene(string key);
 
 		/**
 		Adds scene to templatelist where they can be loaded many times.
@@ -66,9 +49,10 @@ namespace vg
 
 		Scene* getActiveScene();
 
+
+
 	private:
 		Scene* mActiveScene;
-		vector<Scene*> mCurrentScenes; ///< Vector that includes all the scenes that we are currently using
 		map<string, Scene*> mSceneTemplates;	///< Map of different templates that can be used to create new scene
 		bool mSceneChanged; ///< Bool that is used for changing scenes.
 	};
