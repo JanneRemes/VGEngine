@@ -98,10 +98,10 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, enemySystem);
 
 	// Physics
-	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81), true);
+	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -1000, true);
 	game->addComponentSystem(scene, physicsSystem);
 	GameObject *physicsTest = new GameObject("physicsTest");
-	physicsTest->addComponent(new PhysicsComponent(150, 0, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+	physicsTest->addComponent(new PhysicsComponent(150, 0, 128, 128, b2BodyType::b2_dynamicBody, PhysicsSystem::world));
 
 	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest->addComponent(physicsObject);
@@ -114,7 +114,7 @@ void mainGame(Game* game)
 
 	// 2nd physics object
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
+	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 128, 128, b2BodyType::b2_dynamicBody, PhysicsSystem::world));
 
 	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
 	physicsTest2->addComponent(physicsRender2);
