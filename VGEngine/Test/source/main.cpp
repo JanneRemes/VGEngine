@@ -108,7 +108,7 @@ void mainGame(Game* game)
 	physicsTest->addComponent(physicsTransform);
 
 	scene->getObjectPool()->addGameObject(physicsTest);
-
+	/*
 	//Animation
 	AnimationSystem *animationSystem = new AnimationSystem();
 	game->addComponentSystem(scene, animationSystem);
@@ -123,7 +123,7 @@ void mainGame(Game* game)
 	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
 
 	scene->getObjectPool()->addGameObject(animationTest);
-
+	*/
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",
