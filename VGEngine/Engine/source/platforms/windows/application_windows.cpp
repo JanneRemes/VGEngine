@@ -5,7 +5,7 @@
 #include "engine\game\game.h"
 #include "engine\graphics\graphics.h"
 #include <engine/graphics/opengl.h>
-
+include "engine/input/keyboard.h"
 #include <Windows.h>
 
 using namespace vg;
@@ -53,6 +53,7 @@ int main()
 }
 void Application::update()
 {
+	vg::input::Keyboard::update();
 	Graphics *graphics = Game::getInstance()->getGraphics();
 	GraphicsContext *context = graphics->getContext(); 
 	//Update window

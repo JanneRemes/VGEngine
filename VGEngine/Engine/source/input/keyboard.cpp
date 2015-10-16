@@ -1,8 +1,10 @@
 #ifdef OS_WINDOWS
 
 #include "engine/input/keyboard.h"
+#include "engine/utility/logger.h"
 #include <Windows.h>
 using namespace vg::input;
+std::map<Keyboard::Key, Keyboard::KeyState> Keyboard::keyStates;
 bool Keyboard::isKeyPressed(Key key)
 {
 
@@ -115,5 +117,80 @@ bool Keyboard::isKeyPressed(Key key)
 
 
 	return (GetAsyncKeyState(vkey) & 0x8000) != 0;
+}
+
+void Keyboard::update()
+{
+	for (int i = vg::input::Keyboard::A; i < vg::input::Keyboard::Pause; i++)
+	{
+		//If key is not in map add it
+		if (keyStates.find(static_cast<Key>(i)) == keyStates.end())
+		{
+			keyStates[static_cast<Key>(i)] = NOT_PRESSED;
+		}
+		//else check what state it is at and update it
+		else
+		{
+			auto it = keyStates.find(static_cast<Key>(i));
+			bool isPressed = isKeyPressed(static_cast<Key>(i));
+			switch (it->second)
+			{
+			case NOT_PRESSED:
+			{
+				if (isPressed)
+					keyStates[static_cast<Key>(i)] = DOWN;
+				break;
+			}
+			case DOWN:
+			{
+				if (isPressed)
+					keyStates[static_cast<Key>(i)] = PRESSED;
+				else
+					keyStates[static_cast<Key>(i)] = UP;
+				break;
+			}
+			case PRESSED:
+			{
+				if (!isPressed)
+					keyStates[static_cast<Key>(i)] = UP;
+				break;
+			}
+			case UP:
+			{
+				if (isPressed)
+					keyStates[static_cast<Key>(i)] = DOWN;
+				else
+					keyStates[static_cast<Key>(i)] = NOT_PRESSED;
+				break;
+			}
+			default:
+				break;
+
+			}
+		}
+	}
+}
+
+Keyboard::KeyState Keyboard::getKeyState(Key key)
+{
+	for (int i = vg::input::Keyboard::A; i < vg::input::Keyboard::Pause; i++)
+	{
+		if (key != i)
+			continue;
+		//If key is not in map add it
+		if (keyStates.find(static_cast<Key>(i)) == keyStates.end())
+		{
+			Log("vgengine", "KeyState:%d", NOT_PRESSED);
+			return NOT_PRESSED;
+		}
+		else
+		{
+			auto it = keyStates.find(static_cast<Key>(i));
+			Log("vgengine", "KeyState:%d", it->second);
+			return it->second;
+		}
+	}
+	Log("vgengine", "KeyState:%d", NOT_PRESSED);
+	return NOT_PRESSED;
 }
 #endif

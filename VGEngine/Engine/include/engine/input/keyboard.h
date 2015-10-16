@@ -1,6 +1,6 @@
 
 #pragma once
-
+#include<map>
 namespace vg
 {
 	namespace input
@@ -116,7 +116,17 @@ namespace vg
 
 				KeyCount
 			};
-
+			enum KeyState
+			{
+				NOT_PRESSED,
+				DOWN,
+				PRESSED,
+				UP
+			};
+			static void update();
+			static KeyState getKeyState(Key key);
+			private:
+			static std::map<Key, KeyState> keyStates;
 			static bool isKeyPressed(Key key);
 		};
 
