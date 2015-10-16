@@ -8,7 +8,7 @@ namespace vg
 
 		friend class AnimationSystem;
 	public:
-		AnimationComponent(float mAnimationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount, int frameWidth, int frameHeight);
+		AnimationComponent(float mAnimationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount);
 		~AnimationComponent();
 		
 	protected:
@@ -16,8 +16,6 @@ namespace vg
 		int mFrameTotalCount;
 		int mFrameRowCount;
 		int mFrameColumnCount;
-		int mFrameWidth;
-		int mFrameHeight;
 		float mAnimationInterval;
 		float mAnimationTimer;
 
