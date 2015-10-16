@@ -9,10 +9,8 @@ namespace vg
 	/**
 	Component for rendering gameObject
 	*/
-	class RenderComponent :
-		public Component
+	class RenderComponent : public Component
 	{
-		friend class Factory;
 	public:
 		/**
 		Constructor
@@ -40,9 +38,7 @@ namespace vg
 		void setTexCoords(glm::vec2 texCoords[4]);
 		
 
-	private:
-		void setTexture(vg::graphics::Texture *texture);
-
+	protected:
 		vg::graphics::Texture *mTexture;
 		std::vector<float> vertices;
 		std::vector<unsigned short> indices;

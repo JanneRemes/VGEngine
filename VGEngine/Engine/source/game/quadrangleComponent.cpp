@@ -1,11 +1,27 @@
 
 #include <engine/game/quadrangleComponent.h>
+#include <engine/assets/assetManager.h>
+#include <engine/graphics/texture.h>
+#include <engine/assets/fileManager.h>
+#include <engine/game/game.h>
+
+#include "../external/glm/vec2.hpp"
 
 using namespace vg;
+using namespace vg::core;
 using namespace std;
 
 QuadrangleComponent::QuadrangleComponent() :RenderComponent(getDefaultVertices(), getDefaultIndices())
 {
+	mTexture = nullptr;
+}
+
+QuadrangleComponent::QuadrangleComponent(string textureName) :RenderComponent(getDefaultVertices(), getDefaultIndices())
+{
+	core::AssetManager* am = Game::getInstance()->getAssetManager();
+	if ((am->get<vg::graphics::Texture>(textureName)) == nullptr)
+		am->load<vg::graphics::Texture>(textureName);
+	mTexture = am->get<vg::graphics::Texture>(textureName);
 }
 
 

@@ -10,11 +10,6 @@ RenderComponent::RenderComponent(std::vector<float> vertices, std::vector<unsign
 	mTexture = nullptr;
 }
 
-void RenderComponent::setTexture(vg::graphics::Texture *texture)
-{
-	mTexture = texture;
-}
-
 vg::graphics::Texture *RenderComponent::getTexture()
 {
 	return mTexture;

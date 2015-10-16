@@ -6,7 +6,6 @@
 #include "engine/assets/fileManager.h"
 #include "engine/game/system.h"
 #include "engine/graphics/shader.h"
-#include "engine/game/factory.h"
 #include "engine/assets/assetManager.h"
 #include "engine\sound\AudioManager.h"
 
@@ -86,9 +85,15 @@ namespace vg
 		@param graphics Graphics class that includes everything needed for drawing
 		*/
 		void setGraphics(vg::graphics::Graphics *graphics);
-		Factory *getFactory();
 
+		/**
+		@return pointer to current file manager
+		*/
 		core::FileManager *getFileManager();
+
+		/**
+		@return pointer to current audio manager
+		*/
 		sound::AudioManager *getAudioManager();
 
 		/**
@@ -110,7 +115,6 @@ namespace vg
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;
 		Game();
-		Factory *mFactory;
 		vg::graphics::Graphics *mGraphics;
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes

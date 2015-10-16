@@ -153,9 +153,6 @@
     <ClInclude Include="include\engine\game\renderSystem.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\factory.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\textComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -284,9 +281,6 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\quadrangleComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\factory.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\system.cpp">

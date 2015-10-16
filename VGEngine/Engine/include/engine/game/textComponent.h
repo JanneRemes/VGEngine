@@ -9,6 +9,7 @@
 #include "engine/graphics/shader.h"
 #include "engine/game/transformComponent.h"
 #include "engine\graphics\opengl.h"
+
 #include <vector>
 #include <string>
 #include <ft2build.h>
@@ -28,7 +29,7 @@ namespace vg
 		@param Filemanager to load in the fontfile
 		@param Fontsize, optional and 12 if not set
 		*/
-        TextComponent(std::string& fontPath, core::FileManager *manager, unsigned int fontSize = 12);
+        TextComponent(std::string fontPath, unsigned int fontSize = 12);
         
 		/**
 		Deletes vertex and indexBuffers

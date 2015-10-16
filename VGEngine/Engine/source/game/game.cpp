@@ -80,11 +80,6 @@ vg::graphics::Graphics* Game::getGraphics()
 	return mGraphics;
 }
 
-Factory *Game::getFactory()
-{
-	return mFactory;
-}
-
 core::FileManager *Game::getFileManager()
 {
 	return mFileManager;
@@ -100,7 +95,6 @@ void Game::setFileManager()
 	mFileManager = new core::FileManager();
 	mAudioManager = new sound::AudioManager();
 	mAssetManager = new core::AssetManager(mFileManager);
-	mFactory = new Factory(mAssetManager, mFileManager);
 }
 
 core::AssetManager* Game::getAssetManager()

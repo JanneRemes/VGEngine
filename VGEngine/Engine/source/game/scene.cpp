@@ -1,9 +1,14 @@
 
-#include "engine/game.h"
+#include <engine/game/scene.h>
+#include <engine/game/transformComponent.h>
+#include <engine/game.h>
+
 #include <algorithm>
+
 using namespace vg;
+
 Scene::Scene()
-:paused(false)
+	:paused(false)
 {
 	mSystemManager = SystemManager();
 }

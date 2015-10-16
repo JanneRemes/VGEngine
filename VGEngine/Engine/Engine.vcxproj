@@ -100,7 +100,6 @@
     <ClInclude Include="include\engine\game\baseClass.h" />
     <ClInclude Include="include\engine\game\component.h" />
     <ClInclude Include="include\engine\game\deleteSystem.h" />
-    <ClInclude Include="include\engine\game\factory.h" />
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\physicsComponent.h" />
@@ -151,7 +150,6 @@
     <ClCompile Include="source\game\baseClass.cpp" />
     <ClCompile Include="source\game\component.cpp" />
     <ClCompile Include="source\game\deleteSystem.cpp" />
-    <ClCompile Include="source\game\factory.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\physicsComponent.cpp" />

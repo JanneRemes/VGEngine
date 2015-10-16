@@ -32,12 +32,12 @@ GameObject::GameObject(const GameObject &obj)
 				Game *game = Game::getInstance();
 				QuadrangleComponent *comppp = dynamic_cast<QuadrangleComponent*>(ij->second);
 				std::string path = comppp->getTexture()->getPath();
-				QuadrangleComponent *temp = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>(path);
+				QuadrangleComponent *temp = new QuadrangleComponent(path);
 				mComponents.insert(std::make_pair(&typeid(*temp), temp));
 			}
 			else if (typeid((TriangleComponent*)ij->second) == typeid(TriangleComponent))
 			{
-				TriangleComponent *temp = Game::getInstance()->getFactory()->createRenderComponent<TriangleComponent>(dynamic_cast<TriangleComponent*>(ij->second)->getTexture()->getPath());
+				TriangleComponent *temp = new TriangleComponent();
 				mComponents.insert(std::make_pair(&typeid(*temp), temp));
 			}
 			else

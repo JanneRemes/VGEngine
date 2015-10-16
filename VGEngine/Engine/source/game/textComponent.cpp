@@ -1,6 +1,7 @@
 
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
+#include <engine/assets/fileManager.h>
 #include "engine/graphics/graphics.h"
 #include "engine/graphics/opengl.h"
 
@@ -8,8 +9,9 @@ using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
-TextComponent::TextComponent(std::string& fontPath, core::FileManager *manager, unsigned int fontSize)
+TextComponent::TextComponent(string fontPath, unsigned int fontSize)
 {
+	core::FileManager* fm = Game::getInstance()->getFileManager();
 	float defaultVerticesArray[] =
 	{
 		// Position Vec2
@@ -49,7 +51,7 @@ TextComponent::TextComponent(std::string& fontPath, core::FileManager *manager, 
     mFontSize = fontSize;
 	mVertexBuffer = new VertexBuffer(defaultVertices);
 	mIndexBuffer = new IndexBuffer(defaultIndices);
-    manager->readAsset(fontPath, mCharData);
+    fm->readAsset(fontPath, mCharData);
 	initializeFace();
 }
 

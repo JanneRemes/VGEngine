@@ -42,7 +42,7 @@ void mainGame(Game* game)
 	ship->addComponent(transform);
 	TestComponent *testcomponent = new TestComponent();
 	ship->addComponent(testcomponent);
-	QuadrangleComponent *quadre = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
+	QuadrangleComponent *quadre = new QuadrangleComponent("shipkoala.png");
 	ship->addComponent(quadre);
 	scene->addGameObject(ship);
 
@@ -53,7 +53,7 @@ void mainGame(Game* game)
 	TransformComponent *transformship = new TransformComponent(Vector2<int>(64, -64),
 		Vector2<int>(128, 128), 0.0f,1, Vector2<int>(64, 64));
 	ship2->addComponent(transformship);
-	QuadrangleComponent *quadreship = game->getFactory()->createRenderComponent<QuadrangleComponent>("shipkoala.png");
+	QuadrangleComponent *quadreship = new QuadrangleComponent("shipkoala.png");
 	ship2->addComponent(quadreship);
 	scene->addGameObject(ship2);
 	ship2->setParent(ship);
@@ -64,7 +64,7 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, shipSystem);
 
 	//text
-	TextComponent* tempText = game->getFactory()->create("arial.ttf", 6u);
+	TextComponent* tempText = new TextComponent("arial.ttf", 6u);
 	tempText->setText("Enemies: ");
 	tempText->setColour(127, 0, 0);
 	GameObject* textObj = new GameObject("enemyText");
@@ -75,7 +75,7 @@ void mainGame(Game* game)
 	game->addComponentSystem(scene, new TextRenderSystem());
 	
 	//text
-	TextComponent* tempText2 = game->getFactory()->create("arial.ttf", 6u);
+	TextComponent* tempText2 = new TextComponent("arial.ttf", 6u);
 	tempText2->setText("Bullets: ");
 	tempText2->setColour(0, 0, 127);
 	GameObject* textObj2 = new GameObject("bulletText");
@@ -85,7 +85,7 @@ void mainGame(Game* game)
 	scene->addGameObject(textObj2);
 
 	//FPS text
-	TextComponent* fpstextComponent= game->getFactory()->create("arial.ttf", 6u);
+	TextComponent* fpstextComponent = new TextComponent("arial.ttf", 6u);
 	fpstextComponent->setText("FPS: ");
 	fpstextComponent->setColour(0, 0, 127);
 	GameObject* fpstextObject = new GameObject("fpsText");
@@ -104,7 +104,7 @@ void mainGame(Game* game)
 	//Animation test
 	
 	GameObject *animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("papparunSmall2.png");
+	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
 	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);

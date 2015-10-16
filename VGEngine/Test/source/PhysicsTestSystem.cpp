@@ -34,7 +34,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest->addComponent(physicsTransform);
 	physicsTest->addComponent(new PhysicsComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::BOX));
 
-	QuadrangleComponent *physicsObject = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
 	physicsTest->addComponent(physicsObject);
 
 	scene->addGameObject(physicsTest);
@@ -49,7 +49,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	physicsTest2->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::BOX));
 
-	QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
+	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
 	physicsTest2->addComponent(physicsRender2);
 
 	scene->addGameObject(physicsTest2);
@@ -70,7 +70,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			GameObject *physicsTest = new GameObject("physicsTest");
 			physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
 
-			QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("doge.png");
+			QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
 			physicsTest->addComponent(physicsRender2);
 			physicsTest->addComponent(physicsTransform2);
 
@@ -114,7 +114,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 				GameObject *physicsTest = new GameObject("physicsTest");
 				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
 
-				QuadrangleComponent *physicsRender2 = Game::getInstance()->getFactory()->createRenderComponent<QuadrangleComponent>("doge.png");
+				QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
 				physicsTest->addComponent(physicsRender2);
 				physicsTest->addComponent(physicsTransform2);
 

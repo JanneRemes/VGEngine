@@ -32,7 +32,7 @@ ShipSystem::ShipSystem(Game *game) :System()
 	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
 		Vector2<int>(32, 32), 0.0f, 0u, Vector2<int>(16, 16));
 	mBullet->addComponent(transform);
-	QuadrangleComponent *quadre = mGame->getFactory()->createRenderComponent<QuadrangleComponent>("koalapanos2.png");
+	QuadrangleComponent *quadre = new QuadrangleComponent("koalapanos2.png");
 	mBullet->addComponent(quadre);
 }
 

@@ -82,10 +82,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\default_fragment.glsl">
+    <None Include="assets\shaders\android_fragment.glsl">
       <Filter>assets\shaders</Filter>
     </None>
-    <None Include="assets\shaders\default_vertex.glsl">
+    <None Include="assets\shaders\android_vertex.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\win_fragment.glsl">
+      <Filter>assets\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\win_vertex.glsl">
       <Filter>assets\shaders</Filter>
     </None>
   </ItemGroup>

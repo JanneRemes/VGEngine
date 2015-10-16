@@ -1,15 +1,17 @@
-varying lowp vec4 varyColor;
-varying lowp vec2 varyTexCoord;
+precission lowp float;
 
-uniform lowp sampler2D unifTexture;
-uniform lowp float unifUsingAlphaTexture;
+varying vec4 varyColor;
+varying vec2 varyTexCoord;
+
+uniform sampler2D unifTexture;
+uniform float unifUsingAlphaTexture;
 
 void main()
 {
 	// ES2.0 doesn't support booleans
 	if (unifUsingAlphaTexture > 0.5)
 	{
-		lowp float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
+		float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
 		gl_FragColor = vec4(varyColor.rgb, alpha);
 	}
 	else

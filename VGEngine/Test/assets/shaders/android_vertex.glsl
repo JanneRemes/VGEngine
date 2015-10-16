@@ -1,13 +1,15 @@
-attribute lowp vec2 attrPosition;
-attribute lowp vec4 attrColor;
-attribute lowp vec2 attrTexCoord;
+precission lowp float;
 
-uniform lowp mat4 unifProjection;
-uniform lowp mat4 unifModel;
-uniform lowp float unifLayer;
+attribute vec2 attrPosition;
+attribute vec4 attrColor;
+attribute vec2 attrTexCoord;
 
-varying lowp vec4 varyColor;
-varying lowp vec2 varyTexCoord;
+uniform mat4 unifProjection;
+uniform mat4 unifModel;
+uniform float unifLayer;
+
+varying vec4 varyColor;
+varying vec2 varyTexCoord;
 
 void main()
 {

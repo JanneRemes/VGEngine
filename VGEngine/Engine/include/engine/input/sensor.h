@@ -1,6 +1,6 @@
 
 #pragma once
-#include "engine/utility/vector2.h"
+
 namespace vg
 {
 	/**

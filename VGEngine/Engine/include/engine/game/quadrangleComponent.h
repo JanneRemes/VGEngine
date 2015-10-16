@@ -1,12 +1,24 @@
+
 #pragma once
+
 #include "engine/game/renderComponent.h"
-#include "../external/glm/vec2.hpp"
-namespace vg{
-	class QuadrangleComponent :
-		public RenderComponent
+
+namespace vg
+{
+	class QuadrangleComponent : public RenderComponent
 	{
 	public:
+		/**
+		Default rectangle render component without texture
+		*/
 		QuadrangleComponent();
+
+		/**
+		Rectangle render component with texture
+		@param textureName texture file path
+		*/
+		QuadrangleComponent(std::string textureName);
+
 		~QuadrangleComponent();
 
 	private:

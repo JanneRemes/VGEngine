@@ -1,13 +1,19 @@
-#if defined(OS_WINDOWS) //|| true == true
+
+#if defined(OS_WINDOWS)
+
 #include "engine\application.h"
 #include "engine\game\game.h"
 #include "engine\graphics\graphics.h"
+#include <engine/graphics/opengl.h>
+
 #include <Windows.h>
+
 using namespace vg;
 using namespace vg::core; 
 using namespace vg::graphics; 
 extern void mainGame(Game *game);
 #define GetCurrentDir _getcwd
+
 Application::Application()
 {
 

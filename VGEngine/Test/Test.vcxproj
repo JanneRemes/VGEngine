@@ -136,8 +136,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\default_fragment.glsl" />
-    <None Include="assets\shaders\default_vertex.glsl" />
+    <None Include="assets\shaders\android_fragment.glsl" />
+    <None Include="assets\shaders\android_vertex.glsl" />
+    <None Include="assets\shaders\win_fragment.glsl" />
+    <None Include="assets\shaders\win_vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
 
 #include "engine/input/sensor.h"
-#include "engine/utility/logger.h"
 
 /**
 * Process the next input event.
