@@ -8,8 +8,12 @@
 #include <engine\game\quadrangleComponent.h>
 #include <engine\game\game.h>
 
-#include <engine\game\physicsComponent.h>
-#include <engine/game/physicsSystem.h>
+#include <engine\game\physicsCircleComponent.h>
+#include <engine\game\physicsPolygonComponent.h>
+#include <engine\game\physicsSystem.h>
+
+#include <engine/game/animationComponent.h>
+#include <engine/game/animationSystem.h>
 #include <iostream>
 #include <engine/utility/random.h>
 using namespace vg;
@@ -19,17 +23,14 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	this->scene = scene;
 
 	// Physics
-	float gravity = 9.81;
-
-	// Remember to create borders here
-
-
 	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(80, 64),
 		Vector2<int>(64, 64), 0.0f);
 
 	GameObject *physicsTest = new GameObject("physicsTest1");
 	physicsTest->addComponent(physicsTransform);
-	physicsTest->addComponent(new PhysicsComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::BOX));
+
+	PhysicsPolygonComponent *polytestasd = new PhysicsPolygonComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world);
+	physicsTest->addComponent(polytestasd);
 
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
 	physicsTest->addComponent(physicsObject);
@@ -44,7 +45,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	physicsTest2->addComponent(physicsTransform2);
 
-	physicsTest2->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::BOX));
+	physicsTest2->addComponent(new PhysicsPolygonComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, 64, 64));
 
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
 	physicsTest2->addComponent(physicsRender2);
@@ -53,28 +54,28 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	#ifdef OS_WINDOWS
-	
+#ifdef OS_WINDOWS
+
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
+		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
 		for (int i = 0; i < 5; i++)
 		{
-			vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
-			
-			TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
+			TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
 				Vector2<int>(64, 64), 0.0f);
 
 			GameObject *physicsTest = new GameObject("physicsTest");
-			physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
-
-			QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
-			physicsTest->addComponent(physicsRender2);
-			physicsTest->addComponent(physicsTransform2);
+			physicsTest->addComponent(physicsTransform);
+			physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world, 54));
+			QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+			
+			physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+			physicsTest->addComponent(animationComponent);
 
 			scene->addGameObject(physicsTest);
 		}
 	}
-	
+
 	if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))
 	{
 		//PhysicsSystem::world->SetGravity(b2Vec2(PhysicsSystem::world->GetGravity().x, -PhysicsSystem::world->GetGravity().y));
@@ -82,14 +83,14 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
-			PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
+			PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
 			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 
 			if (physComponent != nullptr && transform != nullptr)
 			{
-				float number = rand() % 400  -200.0f;
-				float number2 = rand() % 200 ;
-				physComponent->getBody()->SetLinearVelocity(b2Vec2( number, number2));
+				float number = rand() % 400 - 200.0f;
+				float number2 = rand() % 200;
+				physComponent->getBody()->SetLinearVelocity(b2Vec2(number, number2));
 			}
 		}
 	}
@@ -109,7 +110,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 					Vector2<int>(64, 64), 0.0f);
 
 				GameObject *physicsTest = new GameObject("physicsTest");
-				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, PhysicsComponent::CIRCLE));
+				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world));
 
 				QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
 				physicsTest->addComponent(physicsRender2);

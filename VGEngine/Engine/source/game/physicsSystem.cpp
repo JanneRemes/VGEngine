@@ -1,5 +1,6 @@
 
 #include <engine\game\physicsSystem.h>
+#include <engine\game\physicsPolygonComponent.h>
 #include "engine\game\physicsComponent.h"
 #include "engine\game.h"
 #include <engine/graphics/graphics.h>
@@ -33,14 +34,25 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
-		 PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
+		 PhysicsComponent* physComponent = nullptr;
 		 TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+
+		 auto *components = (*it)->getAllComponents();
+		 for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
+		 {
+			 if (dynamic_cast<PhysicsComponent*>(ij->second) != nullptr)
+			 {
+				 physComponent = dynamic_cast<PhysicsComponent*>(ij->second);
+				 break;
+			 }
+		 }
 
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
 			 transform->setPosition(Vector2<int>((physComponent->getBody()->GetPosition().x  * scale) - transform->getSize().getX() / 2.0f, 
 												(-physComponent->getBody()->GetPosition().y * scale) - transform->getSize().getY() / 2.0f));
 			  transform->setRotation(-1.0f * physComponent->getBody()->GetAngle() * 180 / 3.14);
+			  
 		 }
 	 }
 }
