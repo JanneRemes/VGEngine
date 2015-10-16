@@ -17,9 +17,8 @@
 using namespace vg;
 using namespace vg::graphics;
 
-ShipSystem::ShipSystem(Game *game) :System()
+ShipSystem::ShipSystem() :System()
 {
-	mGame = game;
 	Random::seed();
     mCoolDown = 0.25f;
     mCoolDownTimer.restart();

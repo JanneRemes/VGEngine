@@ -45,14 +45,11 @@
     <ClInclude Include="include\test.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\testComponent.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\testComponentSystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\PhysicsTestSystem.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>include\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,14 +68,11 @@
     <ClCompile Include="source\scenes\testScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\testComponent.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\testComponentSystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="source\PhysicsTestSystem.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>source\scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

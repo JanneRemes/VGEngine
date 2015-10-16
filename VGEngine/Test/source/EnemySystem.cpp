@@ -13,8 +13,8 @@
 using namespace vg;
 using namespace vg::graphics;
 
-EnemySystem::EnemySystem(Game *game)
-: mGame(game), mEnemyCount(0), mSpawnDelay(0), mBulletCount(0)
+EnemySystem::EnemySystem()
+:  mEnemyCount(0), mSpawnDelay(0), mBulletCount(0)
 {
 	mEnemyPrefab = new GameObject("enemy");
 	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),

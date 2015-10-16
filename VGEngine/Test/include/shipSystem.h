@@ -9,13 +9,12 @@ class ShipSystem :
 	public System
 { 
 public:
-	ShipSystem(Game* game);
+	ShipSystem();
 	~ShipSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects,float deltaTime);
 	Scene *mScene;
 private:
 	GameObject *mBullet;
-	Game *mGame;
     vg::Timer mCoolDownTimer;
     float mCoolDown;
 };

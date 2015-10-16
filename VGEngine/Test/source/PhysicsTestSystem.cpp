@@ -9,7 +9,7 @@
 #include <engine\game\game.h>
 
 #include <engine\game\physicsComponent.h>
-#include <engine\game\physicsSystem.h>
+#include <engine/game/physicsSystem.h>
 #include <iostream>
 #include <engine/utility/random.h>
 using namespace vg;
@@ -20,12 +20,9 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// Physics
 	float gravity = 9.81;
-	Vector2<int> resolution = Game::getInstance()->getGraphics()->getResolution();
-	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81 * 20);
-	// Remember to create borders here
-	physicsSystem->createBorders(0, 0, resolution.getX(), resolution.getY());
 
-	Game::getInstance()->addComponentSystem(scene, physicsSystem);
+	// Remember to create borders here
+
 
 	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(80, 64),
 		Vector2<int>(64, 64), 0.0f);
