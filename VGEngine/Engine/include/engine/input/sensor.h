@@ -9,7 +9,7 @@ namespace vg
 	namespace input
 	{
 
-		class Sensors
+		class Sensor
 		{
 		public:
 			/**
