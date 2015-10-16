@@ -2,7 +2,6 @@
 #include "engine\application.h"
 #include "engine\game\game.h"
 #include "engine\graphics\graphics.h"
-#include "engine\input\input.h"
 #include <Windows.h>
 using namespace vg;
 using namespace vg::core; 
@@ -59,9 +58,6 @@ void Application::update()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	//Update input
-	vg::input::Input::update();
 
 	//clear graphics
 	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);

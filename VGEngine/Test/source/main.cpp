@@ -12,17 +12,16 @@
 #include <engine/game/physicsComponent.h>
 #include <engine/game/animationComponent.h>
 #include <engine/game/animationSystem.h>
-#include "engine/input/touch.h"
-#include "engine\input\input.h"
 
 #include "TestComponent.h"
 #include "ShipSystem.h"
 #include "enemySystem.h"
 #include "TestComponentSystem.h"
+#include "PhysicsTestSystem.h"
 
 #include "engine\game\physicsComponent.h"
 #include "engine\game\physicsSystem.h"
-
+#include "PhysicsTestSystem.h"
 #include <stdlib.h> 
 
 using namespace vg;
@@ -100,47 +99,24 @@ void mainGame(Game* game)
 	enemySystem->setScene(scene);
 	game->addComponentSystem(scene, enemySystem);
 
-	// Physics
-	PhysicsSystem *physicsSystem = new PhysicsSystem(Vector2<float>(0, -9.81), true);
-	game->addComponentSystem(scene, physicsSystem);
-	GameObject *physicsTest = new GameObject("physicsTest");
-	physicsTest->addComponent(new PhysicsComponent(150, 0, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
-
-	QuadrangleComponent *physicsObject = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
-	physicsTest->addComponent(physicsObject);
-
-	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f);
-	physicsTest->addComponent(physicsTransform);
-
-	scene->addGameObject(physicsTest);
-
-	// 2nd physics object
-	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	physicsTest2->addComponent(new PhysicsComponent(128, 128 * 3, 128, 128, b2BodyType::b2_dynamicBody, physicsSystem->getWorld()));
-
-	QuadrangleComponent *physicsRender2 = game->getFactory()->createRenderComponent<QuadrangleComponent>("hippo.png");
-	physicsTest2->addComponent(physicsRender2);
-
-	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f);
-	physicsTest2->addComponent(physicsTransform2);
-
-	scene->addGameObject(physicsTest2);
-
+	PhysicsTestSystem *fysiks = new PhysicsTestSystem(scene);
+	game->addComponentSystem(scene,fysiks);
 	//Animation test
-	/*
+	
 	GameObject *animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
+	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
 	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);
 	animationTest->addComponent(animationTransform);
 
-	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
+	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24, 256, 256));
 
-	scene->getObjectPool()->addGameObject(animationTest);
-	*/
+	AnimationSystem *animationSystem = new AnimationSystem();
+	game->addComponentSystem(scene, animationSystem);
+
+	scene->addGameObject(animationTest);
+	
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",

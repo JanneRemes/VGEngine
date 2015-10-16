@@ -1,7 +1,6 @@
 
 #pragma once
-
-//#include "engine/platforms/android/android_native_app_glue.h"
+#include "engine/utility/vector2.h"
 namespace vg
 {
 	/**
@@ -9,7 +8,8 @@ namespace vg
 	*/
 	namespace input
 	{
-		class Input
+
+		class Sensors
 		{
 		public:
 			/**
@@ -36,12 +36,9 @@ namespace vg
 			@return Returns sensors Z coordinate
 			*/
 			static float getSensorZ();
-
 			/**
 			Updates the inputs
 			*/
-			static void update();
-
 		private:
 			static float mSensorX;	///< Sensors X coordinate
 			static float mSensorY;	///< Sensors Y coordinate
@@ -49,6 +46,7 @@ namespace vg
 			static float mAngleX;	///< Sensors X angle
 			static float mAngleY;	///< Sensors Y angle
 			static float mAngleZ;	///< Sensors Z angle
+
 		};
 	}
 }

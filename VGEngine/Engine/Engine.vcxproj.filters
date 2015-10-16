@@ -111,9 +111,6 @@
     <ClInclude Include="include\engine\graphics\texture.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\input\input.h">
-      <Filter>include\input</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\graphics\indexBuffer.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
@@ -218,6 +215,12 @@
     <ClInclude Include="include\engine\graphics\camera.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\input\keyboard.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\input\sensor.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -258,9 +261,6 @@
     </ClCompile>
     <ClCompile Include="source\graphics\indexBuffer.cpp">
       <Filter>source\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="source\input\input.cpp">
-      <Filter>source\input</Filter>
     </ClCompile>
     <ClCompile Include="source\graphics\vertexBuffer.cpp">
       <Filter>source\graphics</Filter>
@@ -378,6 +378,12 @@
     </ClCompile>
     <ClCompile Include="source\graphics\camera.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input\keyboard.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input\sensor.cpp">
+      <Filter>source\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
