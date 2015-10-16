@@ -42,7 +42,7 @@ bool Texture::load(FileManager *fileManager)
 	unsigned char* bottom = nullptr;
 	unsigned char temp = 0;
 
-	for (int h = 0; h < mWidth / 2; h++)
+	for (int h = 0; h < mHeight / 2; h++)
 	{
 		top = imagePtr + h * widthInChars;
 		bottom = imagePtr + (mHeight - h - 1) * widthInChars;

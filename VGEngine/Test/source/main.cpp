@@ -102,18 +102,21 @@ void mainGame(Game* game)
 	PhysicsTestSystem *fysiks = new PhysicsTestSystem(scene);
 	game->addComponentSystem(scene,fysiks);
 	//Animation test
-	/*
+	
 	GameObject *animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("runningcat.png");
+	QuadrangleComponent *animationComponent = game->getFactory()->createRenderComponent<QuadrangleComponent>("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
 	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);
 	animationTest->addComponent(animationTransform);
 
-	animationTest->addComponent(new AnimationComponent(0.20, 4, 2, 8, 256, 256));
+	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24, 256, 256));
 
-	scene->getObjectPool()->addGameObject(animationTest);
-	*/
+	AnimationSystem *animationSystem = new AnimationSystem();
+	game->addComponentSystem(scene, animationSystem);
+
+	scene->addGameObject(animationTest);
+	
 	//sound
 	assetManager->load<sound::Sound>("muumitechno.mp3");
     Game::getInstance()->getAudioManager()->addSound("music",
