@@ -61,11 +61,15 @@ namespace vg
 		*/
 		void sortActivePool();
 
+		/**
+		Clears objects from the active objects pool
+		*/
 		void clearObjects();
+
 	private:
-		bool paused;			///< Bool which is used for determining if scene is paused
-		SystemManager mSystemManager;		  ///< Updates different component systems
-		std::vector<GameObject*> mActivePool; ///< List of the active gameObject pool
+		bool paused;							///< Bool which is used for determining if scene is paused
+		SystemManager mSystemManager;			///< Updates different component systems
+		std::vector<GameObject*> mActivePool;	///< List of the active gameObject pool
 
 	};
 }

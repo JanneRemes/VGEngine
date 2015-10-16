@@ -110,14 +110,17 @@ namespace vg
 		bool getUsingCamera();
 
 	private:
-		static unsigned int mCurrentLayer;
-		static unsigned int getDefaultLayer();
-        vg::Vector2<int> mPosition;     ///< Position of top left corner in pixels.
-        vg::Vector2<int> mOrigin;		///< origin offset from upper left corner in pixels
-        vg::Vector2<int> mSize;			///< Sprites witdth and length in pixels.
-        float mRotation;                ///< Rotation of sprite in angles.
-        unsigned int mLayer;            ///< Layer where the sprite will be drawn.
-		bool mUsingCamera;				///< Is the position affected by camera?
+		/**
+		@return Returns the default layer
+		*/
+		static unsigned int getDefaultLayer();	
+		static unsigned int mCurrentLayer;		///< Points at the current layer
+        vg::Vector2<int> mPosition;				///< Position of top left corner in pixels.
+        vg::Vector2<int> mOrigin;				///< origin offset from upper left corner in pixels
+        vg::Vector2<int> mSize;					///< Sprites witdth and length in pixels.
+        float mRotation;						///< Rotation of sprite in angles.
+        unsigned int mLayer;					///< Layer where the sprite will be drawn.
+		bool mUsingCamera;						///< Is the position affected by camera?
 	};
 
 }
