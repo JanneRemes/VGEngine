@@ -2,13 +2,12 @@
 
 using namespace vg;
 
-AnimationComponent::AnimationComponent(float animationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount, int frameWidth, int frameHeight) : Component()
+AnimationComponent::AnimationComponent(float animationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount) : Component()
 {
 	mAnimationInterval = animationInterval;
 	mFrameRowCount = frameRowCount;
 	mFrameTotalCount = frameTotalCount;
-	mFrameWidth = frameWidth;
-	mFrameHeight = frameHeight;
+
 	mFrameColumnCount = frameColumnCount;
 
 	mXOffSet = 0.0f;

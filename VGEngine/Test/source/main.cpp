@@ -110,7 +110,7 @@ void mainGame(Game* game)
 	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);
 	animationTest->addComponent(animationTransform);
 
-	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24, 256, 256));
+	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 
 	AnimationSystem *animationSystem = new AnimationSystem();
 	game->addComponentSystem(scene, animationSystem);
