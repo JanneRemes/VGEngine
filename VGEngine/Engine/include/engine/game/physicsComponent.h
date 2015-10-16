@@ -6,16 +6,12 @@ namespace vg
 {
 		class PhysicsComponent : public Component
 		{
-
 		public:
-			enum SHAPE{ BOX, CIRCLE };
 			static float scale;
-			// Create physics box
-			PhysicsComponent(TransformComponent *component, b2BodyType type, b2World *world, SHAPE shape);
-
+			PhysicsComponent(TransformComponent *component, b2BodyType type, b2World *world);
 			b2Body* getBody() { return _body; };
 			b2FixtureDef* getFixture() { return &FixDef; };
-		private:
+		protected:
 			b2Body *_body;
 			b2FixtureDef FixDef;
 		};

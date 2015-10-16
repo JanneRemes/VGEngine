@@ -102,7 +102,9 @@
     <ClInclude Include="include\engine\game\deleteSystem.h" />
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
+    <ClInclude Include="include\engine\game\physicsCircleComponent.h" />
     <ClInclude Include="include\engine\game\physicsComponent.h" />
+    <ClInclude Include="include\engine\game\physicsPolygonComponent.h" />
     <ClInclude Include="include\engine\game\physicsSystem.h" />
     <ClInclude Include="include\engine\game\renderComponent.h" />
     <ClInclude Include="include\engine\game\renderSystem.h" />
@@ -152,7 +154,9 @@
     <ClCompile Include="source\game\deleteSystem.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
+    <ClCompile Include="source\game\physicsCircleComponent.cpp" />
     <ClCompile Include="source\game\physicsComponent.cpp" />
+    <ClCompile Include="source\game\physicsPolygonComponent.cpp" />
     <ClCompile Include="source\game\physicsSystem.cpp" />
     <ClCompile Include="source\game\renderComponent.cpp" />
     <ClCompile Include="source\game\renderSystem.cpp" />
