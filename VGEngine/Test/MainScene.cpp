@@ -94,8 +94,6 @@ void MainScene::loadObjects()
 
 	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 
-	AnimationSystem *animationSystem = new AnimationSystem();
-	Game::getInstance()->addComponentSystem(this, animationSystem);
 
 	addGameObject(animationTest);
 
