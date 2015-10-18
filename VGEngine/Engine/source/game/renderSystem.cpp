@@ -27,6 +27,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 {
 	Shader* shader = Game::getInstance()->getGraphics()->getShader();
 	shader->useProgram();
+	shader->setUniform("unifNoTexture", false);
 
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
@@ -50,14 +51,19 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			Texture* texture = render->getTexture();
 			if (texture != nullptr)
 				texture->bind();
+			else
+				shader->setUniform("unifNoTexture", true);
 
 			updateShader(shader, transform);
 			Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 			
 			if (texture != nullptr)
 				texture->unbind();
+			else
+				shader->setUniform("unifNoTexture", false);
 		}
 	}
+	shader->setUniform("unifNoTexture", false);
 	shader->unUseProgram();
 }
 

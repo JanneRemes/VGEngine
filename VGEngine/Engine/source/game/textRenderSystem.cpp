@@ -25,7 +25,8 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaT
 {
     Shader* shader = Game::getInstance()->getGraphics()->getShader();
 	shader->useProgram();
-	shader->setUniform("unifUsingAlphaTexture", true);
+	shader->setUniform("unifNoTexture", false);
+	shader->setUniform("unifFontTexture", true);
 
     for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
     {
@@ -61,6 +62,6 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaT
 			gl::bindTexture(0u);
         }
     }
-	shader->setUniform("unifUsingAlphaTexture", false);
+	shader->setUniform("unifFontTexture", false);
 	shader->unUseProgram();
 }
