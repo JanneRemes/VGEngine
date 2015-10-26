@@ -72,6 +72,7 @@
     </Link>
     <AntBuild>
       <AssetsDirectories>$(ProjectDir)assets/;</AssetsDirectories>
+      <SkipAntStep>False</SkipAntStep>
     </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
@@ -86,6 +87,9 @@
       <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
+    <AntBuild>
+      <SkipAntStep>False</SkipAntStep>
+    </AntBuild>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
