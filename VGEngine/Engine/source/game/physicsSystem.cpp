@@ -1,14 +1,12 @@
 
-#include <engine\game\physicsSystem.h>
-#include <engine\game\physicsPolygonComponent.h>
-#include "engine\game\physicsComponent.h"
-#include "engine\game.h"
-#include <engine/graphics/graphics.h>
+#include "engine/game/physicsSystem.h"
+#include "engine/game/physicsPolygonComponent.h"
+#include "engine/game/physicsComponent.h"
+
 #include <typeinfo>
 #include <vector>
 
 using namespace vg;
-using namespace vg::graphics;
 
 b2World *PhysicsSystem::world = nullptr;
 float scale = PhysicsComponent::scale;

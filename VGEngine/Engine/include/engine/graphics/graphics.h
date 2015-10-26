@@ -78,35 +78,11 @@ namespace vg
 			*/
 			static void draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices);
 
-			/**
-			@param resolution in pixels
-			*/
-			static void setResolution(Vector2<int> resolution);
-
-			/**
-			@return screen resolution in pixels
-			*/
-			static Vector2<int> getResolution();
-
-			/**
-			@param x input touch or mouse x coordinate
-			@param y input touch or mouse y coordinate
-			@return coordinates relative to camera
-			*/
-			static vg::Vector2<float> screenToWorld(float x, float y);
-
-			/**
-			@param input touch or mouse coordinates
-			@return coordinates relative to camera
-			*/
-			static vg::Vector2<float> screenToWorld(vg::Vector2<float> input);
-
 		private:
 			core::FileManager* mFileManager;	///< pointer to FileManager
 			GraphicsContext mContext;			///< current GraphicsContext
 			Shader mShader;						///< current Shader
 			bool mInitialized;					///< has Graphics been initialized
-			static vg::Vector2<int> mResolution;///< screen resolution
 		};
 	}
 }

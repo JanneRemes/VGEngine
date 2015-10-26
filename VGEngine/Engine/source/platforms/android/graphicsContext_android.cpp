@@ -1,15 +1,20 @@
+
 #if defined(OS_ANDROID) 
+
 #pragma once
+
 #include "engine/assets/fileManager.h"
-#include "engine\graphics\graphicsContext.h"
-#include "engine\application.h"
+#include "engine/graphics/graphicsContext.h"
+#include "engine/application.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
-#include <EGL/egl.h>
-#include <GLES2/gl2.h>
 #include "engine/application.h"
 #include "engine/platforms/android/android_native_app_glue.h"
-#include <engine/graphics/graphics.h>
+#include "engine/graphics/graphics.h"
+#include "engine/graphics/screen.h"
+
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
 
 using namespace vg::graphics;
 using namespace vg::core;
@@ -156,7 +161,7 @@ void GraphicsContext::initializeGraphicsContext()
 	checkError();
 	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &h);
 	checkError();
-	Graphics::setResolution(Vector2<int>(w, h));
+	Screen::setSize(w, h);
 }
 
 void GraphicsContext::createGLProgram()

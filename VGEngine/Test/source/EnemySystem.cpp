@@ -6,7 +6,7 @@
 #include <engine/game/textComponent.h>
 #include <engine/utility/random.h>
 #include <engine/utility/vector2.h>
-#include <engine/graphics/graphics.h>
+#include <engine/graphics/screen.h>
 
 #include <sstream>
 
@@ -33,8 +33,8 @@ EnemySystem::~EnemySystem()
 
 void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
-	int screenWidth = Graphics::getResolution().getX();
-	int screenHeight = Graphics::getResolution().getY();
+	int screenWidth = Screen::getX();
+	int screenHeight = Screen::getY();
 	if (mSpawnTimer.getCurrentTimeSeconds() >= mSpawnDelay)
 	{
 		GameObject *gameObject = new GameObject(*mEnemyPrefab);

@@ -1,11 +1,11 @@
 
 #include "engine/game/sceneManager.h"
-#include "engine/graphics/graphics.h"
 #include "engine/game/scene.h"
-#include <utility> 
-#include "engine\graphics\opengl.h"
+
+#include <utility>
+
 using namespace vg;
-using namespace vg::graphics::gl;
+
 SceneManager::SceneManager(){
 	mSceneChanged = false;
 	mActiveScene = nullptr;
@@ -22,13 +22,9 @@ SceneManager::~SceneManager()
 	}
 }
 
-
 void SceneManager::draw()
 {
-	clear(getGL_COLOR_BUFFER_BIT());
-
-		mActiveScene->draw();
-	
+	mActiveScene->draw();
 }
 
 void SceneManager::update(float deltaTime)

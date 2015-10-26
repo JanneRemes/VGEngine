@@ -1,9 +1,9 @@
 
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
-#include <engine/assets/fileManager.h>
-#include "engine/graphics/graphics.h"
+#include "engine/assets/fileManager.h"
 #include "engine/graphics/opengl.h"
+#include "engine/graphics/screen.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -108,12 +108,10 @@ void TextComponent::initializeFace()
 	FT_Library library;
 	error = FT_Init_FreeType(&library);
 
-	Vector2<int> resolution = Graphics::getResolution();
-
 	// New face
 	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
-	FT_Set_Char_Size(mFace, 0, mFontSize * 64, resolution.getX(), resolution.getY());
+	FT_Set_Char_Size(mFace, 0, mFontSize * 64, Screen::getX(), Screen::getY());
 
 	gl::genTextures(&mTexture);
 

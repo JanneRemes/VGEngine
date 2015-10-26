@@ -123,6 +123,7 @@
     <ClInclude Include="include\engine\graphics\opengl.h" />
     <ClInclude Include="include\engine\graphics\graphicsContext.h" />
     <ClInclude Include="include\engine\graphics\indexBuffer.h" />
+    <ClInclude Include="include\engine\graphics\screen.h" />
     <ClInclude Include="include\engine\graphics\shader.h" />
     <ClInclude Include="include\engine\graphics\stb_truetype.h" />
     <ClInclude Include="include\engine\graphics\texture.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="source\graphics\camera.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\indexBuffer.cpp" />
+    <ClCompile Include="source\graphics\screen.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\graphics\texture.cpp" />
     <ClCompile Include="source\graphics\vertexBuffer.cpp" />

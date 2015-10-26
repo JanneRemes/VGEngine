@@ -5,6 +5,8 @@
 
 namespace vg
 {
+	class RenderSystem;
+
 	namespace graphics
 	{
 		/**
@@ -12,6 +14,9 @@ namespace vg
 		*/
 		class Camera
 		{
+		friend class Screen;
+		friend class vg::RenderSystem;
+
 		public:
 
 			/**
@@ -66,32 +71,17 @@ namespace vg
 			*/
 			static void zoom(float change);
 
-			/**
-			@param value top left visible point on screen
-			*/
-			static void setLeftTop(Vector2<float> value);
 			
-			/**
-			@return top left visible point on screen
-			*/
-			static Vector2<float> getLeftTop();
-			
-			/**
-			@param value bottom right visible point on screen
-			*/
-			static void setRightBottom(Vector2<float> value);
-
-			/**
-			@return bottom right visible point on screen
-			*/
-			static Vector2<float> getRightBottom();
 
 		private:
+
 			static Vector2<int> mPosition;		///< camera focus position in pixels
 			static float mZoom;					///< camera zoom level
 			//static float mRotation;				///< camera rotation in degrees
-			static Vector2<float> mLeftTop;		///< top left corner of screen
-			static Vector2<float> mRightBottom; ///< bottom right corner of screen
+			static float mLeft;					///< left border of screen
+			static float mTop;					///< top border of screen
+			static float mRight;				///< right border of screen
+			static float mBottom;				///< bottom border of screen
 		};
 	}
 }

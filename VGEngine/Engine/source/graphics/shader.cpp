@@ -1,10 +1,8 @@
 #include <string>
 
+#include "engine/graphics/shader.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
-#include "engine/game/game.h"
-#include "engine\graphics\opengl.h"
-#include "engine/graphics/shader.h"
 
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
 using namespace std;
@@ -135,7 +133,8 @@ vector<string> Shader::getDefaultUniformNames()
 		"unifProjection",
 		"unifModel",
 		"unifLayer",
-		"unifUsingAlphaTexture"
+		"unifNoTexture",
+		"unifFontTexture"
 	};
 };
 

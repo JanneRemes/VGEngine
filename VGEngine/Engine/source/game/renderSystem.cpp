@@ -8,7 +8,8 @@
 #include "engine/game/triangleComponent.h"
 #include "engine/graphics/opengl.h"
 #include "engine/game/renderComponent.h"
-#include <engine/graphics/camera.h>
+#include "engine/graphics/screen.h"
+#include "engine/graphics/camera.h"
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -69,7 +70,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 
 void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
-	vec2 screen(Graphics::getResolution().getX(), Graphics::getResolution().getY());
+	vec2 screen(Screen::getSize().getX(), Screen::getSize().getY());
 	vec2 camera(0, 0);
 	float zoom = 0.0f;
 	if (useCamera)
@@ -87,9 +88,12 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	
 	if (useCamera)
 	{
-		Camera::setLeftTop(Vector2<float>(left, top));
-		Camera::setRightBottom(Vector2<float>(right, bottom));
+		Camera::mLeft = left;
+		Camera::mTop = top;
+		Camera::mRight = right;
+		Camera::mBottom = bottom;
 
+		//TODO: finish camera rotation
 		/*
 		projection = translate(projection, vec3(0.5f * screen.x, 0.5f * screen.y, 0.0f));
 		projection = rotate(projection, Camera::getRotation(), vec3(0.0f, 0.0f, 1.0f));

@@ -224,6 +224,9 @@
     <ClInclude Include="include\engine\game\physicsPolygonComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\screen.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -390,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="source\game\physicsPolygonComponent.cpp">
       <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\screen.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

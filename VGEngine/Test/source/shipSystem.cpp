@@ -10,7 +10,7 @@
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
 #include "engine/input/touch.h"
-#include <engine/graphics/graphics.h>
+#include "engine/graphics/screen.h"
 
 #include <vector>
 
@@ -41,7 +41,7 @@ ShipSystem::~ShipSystem()
 }
 void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
-	Vector2<int> resolution = Graphics::getResolution();
+	//Vector2<int> resolution = Graphics::getResolution();
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "bullet")
@@ -53,12 +53,12 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 		}
 		else if ((*it)->getName() == "ship")
 		{
-			Vector2<float> mScreenSize = Vector2<float>(resolution.getX(), resolution.getY());
+			Vector2<float> mScreenSize = Vector2<float>(Screen::getX(), Screen::getY());
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
 			Vector2<int> newPos(
 				((mScreenSize.getX()/ 20 * (input::Sensor::getSensorX() + 10) - mScreenSize.getX()) * -1), 
-				resolution.getY()-80);
+				mScreenSize.getY()-80);
 			if (sqrt(pow(newPos.getX() - transformComponent->getWorldPosition().getX(), 2)) > 15.0f)
 			{
 				transformComponent->setPosition(newPos);

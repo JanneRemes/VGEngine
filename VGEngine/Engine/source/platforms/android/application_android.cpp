@@ -1,11 +1,17 @@
 #if defined(OS_ANDROID)
-#include "engine\application.h"
+
+#include "engine/application.h"
 #include "engine/platforms/android/android_native_app_glue.h"
-#include "engine\utility\logger.h"
+#include "engine/utility/logger.h"
+#include "engine/graphics/graphics.h"
+#include "engine/utility/logger.h"
+#include "engine/game.h"
+#include "engine/input/sensor.h"
+#include "engine/assets/fileManager.h"
+#include "engine/graphics/opengl.h"
+#include "engine/input/touch.h"
+#include "engine/graphics/screen.h"
 
-
-
-//BEGIN_INCLUDE(all)
 #include <jni.h>
 #include <errno.h>
 
@@ -13,15 +19,7 @@
 #include <GLES/gl.h>
 
 #include <android/log.h>
-
-#include "engine/graphics/graphics.h"
-#include "engine/utility/logger.h"
-#include "engine/game.h"
-#include "engine/input/sensor.h"
-#include "engine/assets/fileManager.h"
 #include <android/sensor.h>
-#include "engine/graphics/opengl.h"
-#include "engine/input/touch.h"
 
 using namespace vg;
 using namespace vg::core;
@@ -130,7 +128,7 @@ void Application::drawFrame()
 
 	gl::clear();
 	vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
-	Vector2<int> res = Graphics::getResolution();
+	Vector2<int> res = Screen::getSize();
 	gl::clearColor(touchPos.getX() / res.getX(), 0.5f, (touchPos.getY()) / res.getY(), 1);
 
 	engine.state.game->update();

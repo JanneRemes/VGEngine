@@ -1,28 +1,25 @@
 #if defined(OS_WINDOWS)
 
 #pragma once
+
+#include "engine/graphics/graphicsContext.h"
 #include "engine/assets/fileManager.h"
-#include "engine\graphics\graphicsContext.h"
-#include "engine\application.h"
+#include "engine/application.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
 #include "engine/application.h"
 #include "engine/graphics/opengl.h"
-#include <engine/graphics/graphics.h>
-#include <Windows.h>
-/*
-#pragma comment( lib, "glew32d.lib" )
-#pragma comment( lib, "glew32sd.lib" )
-#pragma comment( lib, "opengl32.lib" )
-*/
+#include "engine/graphics/screen.h"
+#include "engine/game/game.h"
+
 #include "../external/glew.h"
-#include "engine\game\game.h"
+
+#include <Windows.h>
+
 using namespace vg::graphics;
 using namespace vg::core;
-unsigned int mWidth, mHeight; ///< Screen size in pixels
 
 unsigned int mProgramId; //< OpenGL program id
-using namespace vg::graphics::gl;
 
 HGLRC renderingContext;
 
@@ -52,7 +49,6 @@ LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam
 }
 GraphicsContext::GraphicsContext()
 {
-	mWidth = mHeight = 0;
 }
 
 GraphicsContext::~GraphicsContext()
@@ -85,7 +81,7 @@ void GraphicsContext::initializeGraphicsContext()
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
 	RECT winRect = {0, 0, 1280, 720};
-	Graphics::setResolution(Vector2<int>(winRect.right, winRect.bottom));
+	Screen::setSize(winRect.right, winRect.bottom);
 	AdjustWindowRectEx(&winRect, WS_CAPTION, false, WS_EX_LEFT);
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);
@@ -176,7 +172,7 @@ void GraphicsContext::initializeGraphicsContext()
 
 void GraphicsContext::createGLProgram()
 {
-	mProgramId = createProgram();
+	mProgramId = gl::createProgram();
 	gl::checkError();
 	
 }

@@ -1,6 +1,6 @@
 
 #include "engine/input/touch.h"
-#include <engine/graphics/graphics.h>
+#include "engine/graphics/screen.h"
 
 using namespace vg;
 using namespace vg::input;
@@ -13,7 +13,7 @@ Vector2<float> Touch::touchPos = Vector2<float>();
 
 Vector2<float> Touch::getTouchPos()
 {
-	return Graphics::screenToWorld(touchPos);
+	return Screen::toWorld(touchPos);
 }
 
 void Touch::setTouchPos(Vector2<float> value)

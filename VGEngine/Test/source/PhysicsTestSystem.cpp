@@ -1,21 +1,25 @@
+
 #include "PhysicsTestSystem.h"
+
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
 #endif
 #ifdef OS_ANDROID
 #include "engine/input/touch.h"
 #endif
-#include <engine\game\quadrangleComponent.h>
-#include <engine\game\game.h>
 
-#include <engine\game\physicsCircleComponent.h>
-#include <engine\game\physicsPolygonComponent.h>
-#include <engine\game\physicsSystem.h>
+#include "engine/game/quadrangleComponent.h"
+#include "engine/game/game.h"
+#include "engine/game/physicsCircleComponent.h"
+#include "engine/game/physicsPolygonComponent.h"
+#include "engine/game/physicsSystem.h"
+#include "engine/game/animationComponent.h"
+#include "engine/game/animationSystem.h"
+#include "engine/utility/random.h"
+#include "engine/graphics/screen.h"
 
-#include <engine/game/animationComponent.h>
-#include <engine/game/animationSystem.h>
 #include <iostream>
-#include <engine/utility/random.h>
+
 using namespace vg;
 
 PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
@@ -100,7 +104,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Touch::getIsTouched())
 	{
 		vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
-		vg::Vector2<int> res = vg::graphics::Graphics::getResolution();
+		vg::Vector2<int> res = graphics::Screen::getSize();
 		if (touchPos.getX() < res.getX() / 2)
 		{
 			for (int i = 0; i < 5; i++)

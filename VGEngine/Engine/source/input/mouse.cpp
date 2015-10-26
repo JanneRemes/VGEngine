@@ -1,8 +1,9 @@
 #ifdef OS_WINDOWS
 
-#include <engine/input/mouse.h>
-#include <engine/game/game.h>
-#include <engine/graphics/graphics.h>
+#include "engine/input/mouse.h"
+#include "engine/game/game.h"
+#include "engine/graphics/screen.h"
+
 #include <Windows.h>
 
 using namespace vg;
@@ -37,7 +38,7 @@ vg::Vector2<float> Mouse::getMousePos()
 	GetCursorPos(&pt);
 	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->mWindowHandle);
 	ScreenToClient(handle, &pt);
-	return Graphics::screenToWorld(pt.x, pt.y);
+	return Screen::toWorld(pt.x, pt.y);
 }
 
 #endif
