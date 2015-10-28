@@ -1,5 +1,5 @@
 
-#include "PhysicsTestSystem.h"
+#include "systems/PhysicsTestSystem.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -18,8 +18,6 @@
 #include "engine/utility/random.h"
 #include "engine/graphics/screen.h"
 
-#include <iostream>
-
 using namespace vg;
 
 PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
@@ -27,8 +25,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	this->scene = scene;
 
 	// Physics
-	TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(80, 64),
-		Vector2<int>(64, 64), 0.0f);
+	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(80, 64),
+		Vector2<float>(64, 64), 0.0f);
 
 	GameObject *physicsTest = new GameObject("physicsTest1");
 	physicsTest->addComponent(physicsTransform);
@@ -43,8 +41,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// 2nd physics object
 
-	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(128, 128 * 3),
-		Vector2<int>(64, 64), 0.0f);
+	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(128, 128 * 3),
+		Vector2<float>(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	physicsTest2->addComponent(physicsTransform2);
@@ -65,8 +63,8 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
 		for (int i = 0; i < 5; i++)
 		{
-			TransformComponent *physicsTransform = new TransformComponent(Vector2<int>(pos.getX(), pos.getY()),
-				Vector2<int>(64, 64), 0.0f);
+			TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
+				Vector2<float>(64, 64), 0.0f);
 
 			GameObject *physicsTest = new GameObject("physicsTest");
 			physicsTest->addComponent(physicsTransform);
@@ -110,8 +108,8 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			for (int i = 0; i < 5; i++)
 			{
 
-				TransformComponent *physicsTransform2 = new TransformComponent(Vector2<int>(touchPos.getX(), touchPos.getY()),
-					Vector2<int>(64, 64), 0.0f);
+				TransformComponent *physicsTransform2 = new TransformComponent(
+					Vector2<float>(touchPos.getX(), touchPos.getY()), Vector2<float>(64, 64), 0.0f);
 
 				GameObject *physicsTest = new GameObject("physicsTest");
 				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world));

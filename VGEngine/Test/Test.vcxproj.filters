@@ -25,6 +25,12 @@
     <Filter Include="assets\shaders">
       <UniqueIdentifier>{9d962a5a-0532-46d2-bec7-3fa1d15d592c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\systems">
+      <UniqueIdentifier>{50fc7d0e-9af6-421a-ba26-f0e52fc85ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\systems">
+      <UniqueIdentifier>{5d7abe4d-5bd2-439a-8036-1277aa82366e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <AndroidBuild Include="AndroidManifest.xml" />
@@ -36,20 +42,26 @@
     <ClInclude Include="include\Scenes\testScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="include\enemySystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\shipSystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\test.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\PhysicsTestSystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="MainScene.h">
+    <ClInclude Include="include\Scenes\cameraScene.h">
       <Filter>include\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scenes\MainScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\cameraSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\enemySystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\PhysicsTestSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\shipSystem.h">
+      <Filter>include\systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,20 +71,26 @@
     <ClCompile Include="source\main.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="source\shipSystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\enemySystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="source\scenes\testScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\PhysicsTestSystem.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\cameraScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\cameraSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\enemySystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\PhysicsTestSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\shipSystem.cpp">
+      <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

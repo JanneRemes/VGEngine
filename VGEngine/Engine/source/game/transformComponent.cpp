@@ -1,18 +1,23 @@
-#include "../external/glm/gtc/matrix_transform.hpp"
+
 #include "engine/game/transformComponent.h"
-#include <stdlib.h>
 #include "engine/game/gameObject.h"
-#include <math.h>  
 #include "engine/utility/math.h"
+#include "../external/glm/gtc/matrix_transform.hpp"
+
+#include <math.h>  
+#include <stdlib.h>
+
 using namespace vg;
+
 unsigned int TransformComponent::mCurrentLayer = 0;
+
 TransformComponent::TransformComponent(): Component()
 {
-    mPosition = Vector2<int>(0, 0);
-    mSize = Vector2<int>(0, 0);
+    mPosition = Vector2<float>(0, 0);
+	mSize = Vector2<float>(0, 0);
     mRotation = 0.0f;
     mLayer = 0u;
-    mOrigin = Vector2<int>(0, 0);
+	mOrigin = Vector2<float>(0, 0);
 }
 
 TransformComponent::TransformComponent(const TransformComponent &transform)
@@ -24,8 +29,8 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 	mOrigin = transform.mOrigin;
 }
 
-TransformComponent::TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-    float rotation, unsigned int layer, vg::Vector2<int> origin, bool useCamera)
+TransformComponent::TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
+	float rotation, unsigned int layer, vg::Vector2<float> origin, bool useCamera)
 	:Component(), mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin), mUsingCamera(useCamera)
 {
 }
@@ -34,12 +39,12 @@ TransformComponent::~TransformComponent()
 {
 }
 
-vg::Vector2<int> TransformComponent::getLocalPosition()
+vg::Vector2<float> TransformComponent::getLocalPosition()
 {
     return mPosition;
 }
 //TODO fix
-vg::Vector2<int> TransformComponent::getWorldPosition()
+vg::Vector2<float> TransformComponent::getWorldPosition()
 {
 	if ( mGameObject != nullptr )
 	{
@@ -52,13 +57,13 @@ vg::Vector2<int> TransformComponent::getWorldPosition()
 			TransformComponent *transformComponent = mGameObject->getParent()->getComponent<TransformComponent>();
 			if (transformComponent != nullptr)
 			{
-				vg::Vector2<int> parentPos = transformComponent->getLocalPosition();
-				vg::Vector2<int> parentOrigo = transformComponent->getOrigin();
-				vg::Vector2<int> tempPos = parentPos + parentOrigo /*+ getLocalPosition()*/;
+				vg::Vector2<float> parentPos = transformComponent->getLocalPosition();
+				vg::Vector2<float> parentOrigo = transformComponent->getOrigin();
+				vg::Vector2<float> tempPos = parentPos + parentOrigo /*+ getLocalPosition()*/;
 			
 				float rotation = transformComponent->getLocalRotation();
 
-				vg::Vector2<int> vector = getLocalPosition() -tempPos;
+				vg::Vector2<float> vector = getLocalPosition() -tempPos;
 				glm::mat4 transu;
 				transu = glm::rotate(transu, glm::radians(rotation), glm::vec3(0, 0, 1.0f));
 				glm::vec4 result = transu * glm::vec4(vector.getX(), vector.getY(), 0.0f, 1.0f);
@@ -72,24 +77,24 @@ vg::Vector2<int> TransformComponent::getWorldPosition()
 
 	return mPosition;
 }
-void TransformComponent::setPosition(const Vector2<int> position)
+void TransformComponent::setPosition(const Vector2<float> position)
 {
     mPosition = position;
 }
 
-void TransformComponent::move(Vector2<int> change)
+void TransformComponent::move(Vector2<float> change)
 {
     mPosition += change;
 }
 
-vg::Vector2<int> TransformComponent::getSize()
+vg::Vector2<float> TransformComponent::getSize()
 {
     return mSize;
 }
 
 
 
-void TransformComponent::setSize(const vg::Vector2<int> size)
+void TransformComponent::setSize(const vg::Vector2<float> size)
 {
     mSize = size;
 }
@@ -141,25 +146,25 @@ void TransformComponent::rotate(float rotation)
 
 float TransformComponent::getLayer()
 {
-	return mLayer * 0.0001f;
+	return mLayer;
 }
 
 void TransformComponent::setLayer(unsigned int layer)
 {
-	if (layer > 10000)
+	if (layer > 1000000)
 	{
-		Log("vgengine", "setLayer value cannot be higher than 10000 (transformcomponent)!","");
-		layer = 10000;
+		Log("vgengine", "setLayer value cannot be higher than 1000000 (transformcomponent)!","");
+		layer = 1000000;
 	}
 	mLayer = layer;
 }
 
-vg::Vector2<int> TransformComponent::getOrigin()
+vg::Vector2<float> TransformComponent::getOrigin()
 {
     return mOrigin;
 }
 
-void TransformComponent::setOrigin(const Vector2<int> origin)
+void TransformComponent::setOrigin(const Vector2<float> origin)
 {
     mOrigin = origin;
 }

@@ -5,7 +5,7 @@ using namespace vg;
 using namespace vg::graphics;
 
 // Default values
-Vector2<int> Camera::mPosition = Vector2<int>(0,0);
+Vector2<float> Camera::mPosition = Vector2<float>(0,0);
 float Camera::mZoom = 1.0f;
 //float Camera::mRotation = 0.0f;
 float Camera::mLeft = 0.0f;
@@ -13,17 +13,17 @@ float Camera::mTop = 0.0f;
 float Camera::mRight = 0.0f;
 float Camera::mBottom = 0.0f;
 
-Vector2<int> Camera::getPosition()
+Vector2<float> Camera::getPosition()
 {
 	return mPosition;
 }
 
-void Camera::setPosition(Vector2<int> position)
+void Camera::setPosition(Vector2<float> position)
 {
 	mPosition = position;
 }
 
-void Camera::move(Vector2<int> change)
+void Camera::move(Vector2<float> change)
 {
 	mPosition += change;
 }

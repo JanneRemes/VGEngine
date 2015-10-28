@@ -118,21 +118,25 @@
     <AndroidBuild Include="res\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\enemySystem.h" />
-    <ClInclude Include="include\PhysicsTestSystem.h" />
+    <ClInclude Include="include\Scenes\cameraScene.h" />
+    <ClInclude Include="include\Scenes\MainScene.h" />
     <ClInclude Include="include\Scenes\testScene.h" />
-    <ClInclude Include="include\shipSystem.h" />
+    <ClInclude Include="include\Systems\cameraSystem.h" />
+    <ClInclude Include="include\systems\enemySystem.h" />
+    <ClInclude Include="include\systems\PhysicsTestSystem.h" />
+    <ClInclude Include="include\systems\shipSystem.h" />
     <ClInclude Include="include\test.h" />
-    <ClInclude Include="MainScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="source\dummy.cpp" />
-    <ClCompile Include="source\enemySystem.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\PhysicsTestSystem.cpp" />
+    <ClCompile Include="source\scenes\cameraScene.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
-    <ClCompile Include="source\shipSystem.cpp" />
+    <ClCompile Include="source\systems\cameraSystem.cpp" />
+    <ClCompile Include="source\systems\enemySystem.cpp" />
+    <ClCompile Include="source\systems\PhysicsTestSystem.cpp" />
+    <ClCompile Include="source\systems\shipSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\freetype\freetype.vcxproj">

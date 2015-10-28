@@ -8,7 +8,7 @@ namespace vg
 {
 
 	/**
-	Component for managing gameObject by rotating or scaling
+	Component for managing gameObject by moving, rotating or scaling
 	*/
 	class TransformComponent :
 		public Component
@@ -26,40 +26,41 @@ namespace vg
         @param origin offset of origin in pixels from upper left corner
 		@param useCamera true if the position is affected by camera
         */
-        TransformComponent(vg::Vector2<int> position, vg::Vector2<int> size,
-            float rotation, unsigned int layer = getDefaultLayer(), vg::Vector2<int> origin = vg::Vector2<int>(0, 0), bool useCamera = true);
+		TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
+			float rotation, unsigned int layer = getDefaultLayer(),
+			vg::Vector2<float> origin = vg::Vector2<float>(0, 0), bool useCamera = true);
 		
         ~TransformComponent();
 
         /**
         @return local position (only taking into account this component´s position not parent´s position)
         */
-        vg::Vector2<int> getLocalPosition();
+        vg::Vector2<float> getLocalPosition();
 
 		/**
 		@return world position (adds parent gameobject´s position to this components local position)
 		*/
-		vg::Vector2<int> getWorldPosition();
+		vg::Vector2<float> getWorldPosition();
         /**
         Set position value to be used on draw calls.
         */
-        void setPosition(const vg::Vector2<int> position);
+        void setPosition(const vg::Vector2<float> position);
 
         /**
         Add to the position value to be used on draw calls.
         */
-        void move(vg::Vector2<int> change);
+        void move(vg::Vector2<float> change);
 
         /**
 		@return size in pixels
         */
-        vg::Vector2<int> getSize();
+        vg::Vector2<float> getSize();
 
 
         /**
         Set position value to be used on draw calls.
         */
-        void setSize(const vg::Vector2<int> size);
+        void setSize(const vg::Vector2<float> size);
 
         /**
 		@return rotation in degrees
@@ -90,14 +91,14 @@ namespace vg
         void setLayer(unsigned int layer);
 
         /**
-        <description>
+        @return origin offset
         */
-        vg::Vector2<int> getOrigin();
+        vg::Vector2<float> getOrigin();
 
         /**
         Set origin offset.
         */
-        void setOrigin(const vg::Vector2<int> origin);
+        void setOrigin(const vg::Vector2<float> origin);
 
 		/**
 		@param value true if the position is affected by camera
@@ -114,10 +115,11 @@ namespace vg
 		@return Returns the default layer
 		*/
 		static unsigned int getDefaultLayer();	
+
 		static unsigned int mCurrentLayer;		///< Points at the current layer
-        vg::Vector2<int> mPosition;				///< Position of top left corner in pixels.
-        vg::Vector2<int> mOrigin;				///< origin offset from upper left corner in pixels
-        vg::Vector2<int> mSize;					///< Sprites witdth and length in pixels.
+        vg::Vector2<float> mPosition;				///< Position of top left corner in pixels.
+		vg::Vector2<float> mOrigin;				///< origin offset from upper left corner in pixels
+		vg::Vector2<float> mSize;					///< Sprites witdth and length in pixels.
         float mRotation;						///< Rotation of sprite in angles.
         unsigned int mLayer;					///< Layer where the sprite will be drawn.
 		bool mUsingCamera;						///< Is the position affected by camera?

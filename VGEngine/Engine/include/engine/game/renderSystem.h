@@ -10,12 +10,17 @@
 
 namespace vg
 {
+	// Forward declaration
+	class TextRenderSystem;
+
 	/**
 	System that draws GameObjects with RenderComponents
 	*/
 	class RenderSystem :public System
 	{
 	public:
+		friend class TextRenderSystem;
+
 		/**
 		Initializes RenderSystem
 		*/
@@ -26,16 +31,17 @@ namespace vg
 		*/
 		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 
+	private:
 		/**
 		Gets screen size from Game and sends new projection matrix to shader.
 		*/
 		void updateProjection();
 
 		/**
-		Makes a model transform matrix 
+		Makes a model transform matrix
 		*/
-		static glm::mat4 modelTransform(Vector2<int> position, Vector2<int> size, float rotation);
-		
+		static glm::mat4 modelTransform(Vector2<float> position, Vector2<float> size, float rotation);
+
 		/**
 		Makes a model transform matrix using values from a TransformComponent
 		*/
@@ -51,7 +57,7 @@ namespace vg
 		*/
 		static void updateProjection(graphics::Shader* shader, bool useCamera = true);
 
-	private:
+
 		vg::graphics::VertexBuffer mVertexBuffer;
 		vg::graphics::IndexBuffer mIndexBuffer;
 	};

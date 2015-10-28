@@ -1,15 +1,19 @@
-#include "MainScene.h"
-#include <engine/game/transformComponent.h>
-#include <engine/game/triangleComponent.h>
-#include <engine/game/quadrangleComponent.h>
-#include <engine/game/textComponent.h>
-#include "ShipSystem.h"
-#include "enemySystem.h"
-#include "engine\game\physicsComponent.h"
-#include "PhysicsTestSystem.h"
-#include <engine/game/animationComponent.h>
-#include <engine/game/animationSystem.h>
+
+#include "scenes/MainScene.h"
+#include "systems/ShipSystem.h"
+#include "systems/enemySystem.h"
+#include "systems/PhysicsTestSystem.h"
+
+#include "engine/game/transformComponent.h"
+#include "engine/game/triangleComponent.h"
+#include "engine/game/quadrangleComponent.h"
+#include "engine/game/textComponent.h"
+#include "engine/game/physicsComponent.h"
+#include "engine/game/animationComponent.h"
+#include "engine/game/animationSystem.h"
+
 using namespace vg;
+
 MainScene::MainScene()
 {
 }
@@ -22,8 +26,8 @@ void MainScene::loadObjects()
 {
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	GameObject *ship = new GameObject("ship");
-	TransformComponent *transform = new TransformComponent(Vector2<int>(64, 64),
-		Vector2<int>(128, 128), 0.0f, 0, Vector2<int>(64, 64));
+	TransformComponent *transform = new TransformComponent(Vector2<float>(64, 64),
+		Vector2<float>(128, 128), 0.0f, 0, Vector2<float>(64, 64));
 	ship->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("shipkoala.png");
 	ship->addComponent(quadre);
@@ -33,8 +37,8 @@ void MainScene::loadObjects()
 	//SHIP
 
 	GameObject *ship2 = new GameObject("ship2");
-	TransformComponent *transformship = new TransformComponent(Vector2<int>(64, -64),
-		Vector2<int>(128, 128), 0.0f, 1, Vector2<int>(64, 64));
+	TransformComponent *transformship = new TransformComponent(Vector2<float>(64, -64),
+		Vector2<float>(128, 128), 0.0f, 1, Vector2<float>(64, 64));
 	ship2->addComponent(transformship);
 	QuadrangleComponent *quadreship = new QuadrangleComponent("shipkoala.png");
 	ship2->addComponent(quadreship);
@@ -51,8 +55,8 @@ void MainScene::loadObjects()
 	tempText->setText("Enemies: ");
 	tempText->setColour(127, 0, 0);
 	GameObject* textObj = new GameObject("enemyText");
-	textObj->addComponent(new TransformComponent(Vector2<int>(4, 64),
-		Vector2<int>(0, 0), 0.0f, 10000));
+	textObj->addComponent(new TransformComponent(Vector2<float>(4, 64),
+		Vector2<float>(0, 0), 0.0f, 10000));
 	textObj->addComponent(tempText);
 	addGameObject(textObj);
 
@@ -61,8 +65,8 @@ void MainScene::loadObjects()
 	tempText2->setText("Bullets: ");
 	tempText2->setColour(0, 0, 127);
 	GameObject* textObj2 = new GameObject("bulletText");
-	textObj2->addComponent(new TransformComponent(Vector2<int>(4, 128),
-		Vector2<int>(0, 0), 0.0f, 10000));
+	textObj2->addComponent(new TransformComponent(Vector2<float>(4, 128),
+		Vector2<float>(0, 0), 0.0f, 10000));
 	textObj2->addComponent(tempText2);
 	addGameObject(textObj2);
 
@@ -71,8 +75,8 @@ void MainScene::loadObjects()
 	fpstextComponent->setText("FPS: ");
 	fpstextComponent->setColour(0, 0, 127);
 	GameObject* fpstextObject = new GameObject("fpsText");
-	fpstextObject->addComponent(new TransformComponent(Vector2<int>(4, 178),
-		Vector2<int>(0, 0), 0.0f, 10000));
+	fpstextObject->addComponent(new TransformComponent(Vector2<float>(4, 178),
+		Vector2<float>(0, 0), 0.0f, 10000));
 	fpstextObject->addComponent(fpstextComponent);
 	addGameObject(fpstextObject);
 
@@ -89,7 +93,7 @@ void MainScene::loadObjects()
 	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
-	TransformComponent *animationTransform = new TransformComponent(Vector2<int>(128, 128), Vector2<int>(256, 256), 0.0f);
+	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(128, 128), Vector2<float>(256, 256), 0.0f);
 	animationTest->addComponent(animationTransform);
 
 	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));

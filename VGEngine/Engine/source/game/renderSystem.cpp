@@ -84,7 +84,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	float bottom = camera.y + screen.y - screen.y * (1.0f - zoom);
 	float top = camera.y + screen.y - screen.y * zoom;
 	// left, right, bottom, top, near, far
-	mat4 projection = ortho(left, right, bottom, top, -1.0f, 1.0f);
+	mat4 projection = ortho(left, right, bottom, top, -1000000.0f, 1000000.0f);
 	
 	if (useCamera)
 	{
@@ -103,7 +103,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	shader->setUniform("unifProjection", projection);
 }
 
-mat4 RenderSystem::modelTransform(Vector2<int> position, Vector2<int> size, float rotation)
+mat4 RenderSystem::modelTransform(Vector2<float> position, Vector2<float> size, float rotation)
 {
 	vec2 position2(position.getX(), position.getY());
 	vec2 size2(size.getX(), size.getY());
@@ -134,7 +134,7 @@ void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 	else
 	{
 		shader->setUniform("unifModel", modelTransform(
-			Vector2<int>(0, 0), Vector2<int>(0, 0), 0.0f));
+			Vector2<float>(0, 0), Vector2<float>(0, 0), 0.0f));
 		shader->setUniform("unifLayer", 0.0f);
 	}
 	

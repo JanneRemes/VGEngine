@@ -22,20 +22,20 @@ namespace vg
 			/**
 			@return camera focus position in pixels
 			*/
-			static Vector2<int> getPosition();
+			static Vector2<float> getPosition();
 
 			/**
 			Set camera focus position in pixels
 			@param position in pixels
 			*/
-			static void setPosition(Vector2<int> position);
+			static void setPosition(Vector2<float> position);
 
 			/**
 			Move camera focus position
 			@param x position in pixels
 			@param y position in pixels
 			*/
-			static void move(Vector2<int> change);
+			static void move(Vector2<float> change);
 
 			/*
 			@return camera rotation
@@ -75,7 +75,7 @@ namespace vg
 
 		private:
 
-			static Vector2<int> mPosition;		///< camera focus position in pixels
+			static Vector2<float> mPosition;		///< camera focus position in pixels
 			static float mZoom;					///< camera zoom level
 			//static float mRotation;				///< camera rotation in degrees
 			static float mLeft;					///< left border of screen

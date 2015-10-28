@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "ShipSystem.h"
+#include "systems/ShipSystem.h"
 
 #include "engine/input/sensor.h"
 #include "engine/game/game.h"
@@ -28,8 +28,8 @@ ShipSystem::ShipSystem() :System()
 	if ((assetManager->get<sound::Sound>("shoot.mp3")) == nullptr)
 		assetManager->load<sound::Sound>("shoot.mp3");
 
-	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
-		Vector2<int>(32, 32), 0.0f, 0u, Vector2<int>(16, 16));
+	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
+		Vector2<float>(32, 32), 0.0f, 0u, Vector2<float>(16, 16));
 	mBullet->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koalapanos2.png");
 	mBullet->addComponent(quadre);
@@ -41,13 +41,12 @@ ShipSystem::~ShipSystem()
 }
 void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTime)
 {
-	//Vector2<int> resolution = Graphics::getResolution();
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "bullet")
 		{
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
-			comp->move(Vector2<int>(0, -10));
+			comp->move(Vector2<float>(0, -10));
 			if (comp->getWorldPosition().getY() < 0)
 				(*it)->markForDelete();
 		}
@@ -56,7 +55,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 			Vector2<float> mScreenSize = Vector2<float>(Screen::getX(), Screen::getY());
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
-			Vector2<int> newPos(
+			Vector2<float> newPos(
 				((mScreenSize.getX()/ 20 * (input::Sensor::getSensorX() + 10) - mScreenSize.getX()) * -1), 
 				mScreenSize.getY()-80);
 			if (sqrt(pow(newPos.getX() - transformComponent->getWorldPosition().getX(), 2)) > 15.0f)
@@ -70,7 +69,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
                 Game::getInstance()->getAudioManager()->addSound(*sound);
 
 				GameObject *g = new GameObject(*mBullet);
-				Vector2<int> temppos(transformComponent->getWorldPosition().getX(),
+				Vector2<float> temppos(transformComponent->getWorldPosition().getX(),
 					transformComponent->getWorldPosition().getY() - transformComponent->getOrigin().getY());
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				

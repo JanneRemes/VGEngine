@@ -1,12 +1,12 @@
 
-#include "enemySystem.h"
+#include "systems/enemySystem.h"
 
-#include <engine/game/transformComponent.h>
-#include <engine/game/quadrangleComponent.h>
-#include <engine/game/textComponent.h>
-#include <engine/utility/random.h>
-#include <engine/utility/vector2.h>
-#include <engine/graphics/screen.h>
+#include "engine/game/transformComponent.h"
+#include "engine/game/quadrangleComponent.h"
+#include "engine/game/textComponent.h"
+#include "engine/utility/random.h"
+#include "engine/utility/vector2.h"
+#include "engine/graphics/screen.h"
 
 #include <sstream>
 
@@ -17,9 +17,9 @@ EnemySystem::EnemySystem()
 :  mEnemyCount(0), mSpawnDelay(0), mBulletCount(0)
 {
 	mEnemyPrefab = new GameObject("enemy");
-	TransformComponent *transform = new TransformComponent(Vector2<int>(0.0f, 0.0f),
-		Vector2<int>(80, 80), 0.0f, 0u);
-	transform->setOrigin(vg::Vector2<int>(40, 40));
+	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
+		Vector2<float>(80, 80), 0.0f, 0u);
+	transform->setOrigin(vg::Vector2<float>(40, 40));
 	mEnemyPrefab->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koala.png");
 	mEnemyPrefab->addComponent(quadre);
@@ -38,7 +38,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 	if (mSpawnTimer.getCurrentTimeSeconds() >= mSpawnDelay)
 	{
 		GameObject *gameObject = new GameObject(*mEnemyPrefab);
-		Vector2<int> temppos(Random::nexti(45, screenWidth - 45), -10.0f);
+		Vector2<float> temppos(Random::nexti(45, screenWidth - 45), -10.0f);
 		gameObject->getComponent<TransformComponent>()->setPosition(temppos);
 		unsigned int size = gameObjects->size();
 		mScene->addGameObject(gameObject);
@@ -85,7 +85,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 		{
 			tempEnemyCount++;
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
-			comp->move(Vector2<int>(0, 500 *deltaTime));
+			comp->move(Vector2<float>(0, 500 *deltaTime));
 			comp->rotate(2.0f);
 			if (comp->getWorldPosition().getY() - comp->getOrigin().getY() > screenHeight)
 			{
@@ -99,7 +99,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<int>::Distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
+					if (Vector2<float>::Distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
 						< (comp->getSize().getX() + comp->getSize().getY()) / 2.0f)
 						(*i)->markForDelete();
 				}
