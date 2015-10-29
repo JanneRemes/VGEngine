@@ -86,9 +86,14 @@ void PhysicsSystem::setGravity(Vector2<float> gravity)
 	world->SetGravity(b2Vec2(gravity.getX(), gravity.getY()));
 }
 
-void PhysicsSystem::createJoint(PhysicsComponent bodyA, PhysicsComponent bodyB)
+void PhysicsSystem::createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
 {
-	//jointDefinition.bodyA = bodyA.getBody();
-	//jointDefinition.bodyA = bodyB.getBody();
-	world->CreateJoint(&jointDefinition);
+	b2RevoluteJointDef jointDef;
+	
+	jointDef.bodyA = bodyA->_body;
+	jointDef.bodyB = bodyB->_body;
+	jointDef.localAnchorA = b2Vec2(bodyA->_body->GetLocalCenter().x + 25, bodyA->_body->GetLocalCenter().y + 25);
+	jointDef.localAnchorB = bodyB->_body->GetLocalCenter();
+
+	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
 }

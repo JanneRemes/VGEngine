@@ -1,8 +1,12 @@
 #include <engine\game\physicsCircleComponent.h>
-
+#include "engine\game\game.h"
+#include "engine\game\physicsSystem.h"
+#include "engine\game\scene.h"
 using namespace vg;
-PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BODYTYPE type, b2World *world, float radius) : PhysicsComponent(component, type, world)
+PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BODYTYPE type, float radius) : PhysicsComponent(component, type)
 {
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
 	float _radius = 0;
 	if (radius != 0)
 	{
@@ -33,6 +37,7 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
 	bodyDef.angle = 0.0f;
 
-	_body = world->CreateBody(&bodyDef);
+	_body = system->world->CreateBody(&bodyDef);
 	_body->CreateFixture(&_FixDef);
+
 }

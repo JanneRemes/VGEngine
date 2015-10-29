@@ -1,8 +1,13 @@
 #include <engine\game\physicsPolygonComponent.h>
+#include "engine\game\game.h"
+#include "engine\game\physicsSystem.h"
+#include "engine\game\scene.h"
 
 using namespace vg;
-PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, BODYTYPE type, b2World *world, float width, float height) : PhysicsComponent(component, type, world)
+PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, BODYTYPE type, float width, float height) : PhysicsComponent(component, type)
 {
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
 	float _width = 1;
 	float _height = 1;
 
@@ -37,6 +42,6 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
 	bodyDef.angle = 0.0f;
 
-	_body = world->CreateBody(&bodyDef);
+	_body = system->world->CreateBody(&bodyDef);
 	_body->CreateFixture(&_FixDef);
 }

@@ -18,6 +18,5 @@ void mainGame(Game* game)
 
 	game->getSceneManager()->changeScene("scene");
 
-	PhysicsSystem *system = game->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 
 }

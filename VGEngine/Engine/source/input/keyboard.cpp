@@ -180,17 +180,17 @@ Keyboard::KeyState Keyboard::getKeyState(Key key)
 		//If key is not in map add it
 		if (keyStates.find(static_cast<Key>(i)) == keyStates.end())
 		{
-			Log("vgengine", "KeyState:%d", NOT_PRESSED);
+			//Log("vgengine", "KeyState:%d", NOT_PRESSED);
 			return NOT_PRESSED;
 		}
 		else
 		{
 			auto it = keyStates.find(static_cast<Key>(i));
-			Log("vgengine", "KeyState:%d", it->second);
+			//Log("vgengine", "KeyState:%d", it->second);
 			return it->second;
 		}
 	}
-	Log("vgengine", "KeyState:%d", NOT_PRESSED);
+	//Log("vgengine", "KeyState:%d", NOT_PRESSED);
 	return NOT_PRESSED;
 }
 #endif

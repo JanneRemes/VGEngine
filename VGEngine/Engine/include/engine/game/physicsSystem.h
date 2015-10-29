@@ -20,12 +20,12 @@ namespace vg
 			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 
 			void createBorders(float x, float y, float width, float height);
-			void createJoint(PhysicsComponent bodyA, PhysicsComponent bodyB);
+			void createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
 
 			void setGravity(Vector2<float> gravity);
 			Vector2<float> getGravity();
 
 		private:
-			b2JointDef jointDefinition;
+
 		};
 }
