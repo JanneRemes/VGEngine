@@ -32,8 +32,6 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
 
 	_FixDef.density = 100.0f;
-	//_FixDef.friction = 0.2f;
-	//_FixDef.restitution = 5.5f;
 	_FixDef.shape = &mBoxShape;
 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);

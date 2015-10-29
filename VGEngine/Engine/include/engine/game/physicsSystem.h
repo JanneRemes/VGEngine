@@ -15,9 +15,15 @@ namespace vg
 			Create new physics world with gravity
 			*/
 			PhysicsSystem(float gravityX, float gravityY);
-			void createBorders(float x, float y, float width, float height);
 			~PhysicsSystem();
 			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
+
+			void createBorders(float x, float y, float width, float height);
+			void createJoint(PhysicsComponent bodyA, PhysicsComponent bodyB);
+
+			void setGravity(Vector2<float> gravity);
+			Vector2<float> getGravity();
+
 		private:
 			b2JointDef jointDefinition;
 		};

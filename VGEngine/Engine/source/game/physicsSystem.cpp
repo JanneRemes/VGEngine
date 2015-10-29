@@ -75,3 +75,20 @@ void PhysicsSystem::createBorders(float x, float y, float width, float height)
 	boundaries = world->CreateBody(&chainDef);
 	boundaries->CreateFixture(&chainFix);
 }
+
+Vector2<float> PhysicsSystem::getGravity()
+{
+	return Vector2<float>(world->GetGravity().x, world->GetGravity().y);
+}
+
+void PhysicsSystem::setGravity(Vector2<float> gravity)
+{
+	world->SetGravity(b2Vec2(gravity.getX(), gravity.getY()));
+}
+
+void PhysicsSystem::createJoint(PhysicsComponent bodyA, PhysicsComponent bodyB)
+{
+	//jointDefinition.bodyA = bodyA.getBody();
+	//jointDefinition.bodyA = bodyB.getBody();
+	world->CreateJoint(&jointDefinition);
+}
