@@ -110,7 +110,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 					Vector2<float>(touchPos.getX(), touchPos.getY()), Vector2<float>(64, 64), 0.0f);
 
 				GameObject *physicsTest = new GameObject("physicsTest");
-				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world));
+				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, PhysicsComponent::DYNAMIC, PhysicsSystem::world));
 
 				QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
 				physicsTest->addComponent(physicsRender2);
