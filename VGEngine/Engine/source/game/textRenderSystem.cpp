@@ -52,7 +52,7 @@ void TextRenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaT
 				y = base - (*glyph)->bitmap_top;
 
 				RenderSystem::updateProjection(shader);
-				shader->setUniform("unifModel", RenderSystem::modelTransform(Vector2<float>(x, y),
+				shader->setUniform("unifModel", RenderSystem::modelTransform(Vector2<float>(x, y), transform->getOrigin(),
 					Vector2<float>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
 				shader->setUniform("unifLayer", transform->getLayer());
 				Graphics::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());

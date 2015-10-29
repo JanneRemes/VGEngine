@@ -71,7 +71,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 
 void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
-	vec2 screen(Screen::getSize().getX(), Screen::getSize().getY());
+	vec2 screen(Screen::getVirtualSize().getX(), Screen::getVirtualSize().getY());
 	vec2 camera(0, 0);
 	float zoom = 0.0f;
 	if (useCamera)
@@ -104,9 +104,9 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	shader->setUniform("unifProjection", projection);
 }
 
-mat4 RenderSystem::modelTransform(Vector2<float> position, Vector2<float> size, float rotation)
+mat4 RenderSystem::modelTransform(Vector2<float> position, Vector2<float> origin, Vector2<float> size, float rotation)
 {
-	vec2 position2(position.getX(), position.getY());
+	vec2 position2(position.getX() - origin.getX(), position.getY() - origin.getY());
 	vec2 size2(size.getX(), size.getY());
 
 	mat4 model = mat4();
@@ -120,7 +120,7 @@ mat4 RenderSystem::modelTransform(Vector2<float> position, Vector2<float> size, 
 
 mat4 RenderSystem::modelTransform(TransformComponent* transform)
 {
-	return modelTransform(transform->getWorldPosition() - transform->getOrigin(),
+	return modelTransform(transform->getWorldPosition(), transform->getOrigin(),
 		transform->getSize(), transform->getWorldRotation());
 }
 
@@ -135,7 +135,7 @@ void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 	else
 	{
 		shader->setUniform("unifModel", modelTransform(
-			Vector2<float>(0, 0), Vector2<float>(0, 0), 0.0f));
+			Vector2<float>(0, 0), Vector2<float>(0, 0), Vector2<float>(0, 0), 0.0f));
 		shader->setUniform("unifLayer", 0.0f);
 	}
 	

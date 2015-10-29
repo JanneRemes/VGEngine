@@ -80,7 +80,10 @@ void GraphicsContext::initializeGraphicsContext()
 	WNDCLASS wc = {};
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
+	//RECT winRect = { 0, 0, 640, 360};
 	RECT winRect = {0, 0, 1280, 720};
+	//RECT winRect = { 0, 0, 1920, 1080};
+	Screen::setVirtualSize(1280, 720);
 	Screen::setSize(winRect.right, winRect.bottom);
 	AdjustWindowRectEx(&winRect, WS_CAPTION, false, WS_EX_LEFT);
 	wc.lpfnWndProc = WindowProc;

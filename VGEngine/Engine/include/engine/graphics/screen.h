@@ -21,6 +21,11 @@ namespace vg
 			static vg::Vector2<int> getSize();
 
 			/**
+			@return screen size relative to transformComponent coordinates
+			*/
+			static vg::Vector2<int> getVirtualSize();
+
+			/**
 			@return screen width in pixels
 			*/
 			static int getX();
@@ -52,7 +57,14 @@ namespace vg
 			*/
 			static void setSize(int x, int y);
 
-			static vg::Vector2<int> mSize;	///< screen resolution in pixels
+			/**
+			@param x width in pixels
+			@param y height in pixels
+			*/
+			static void setVirtualSize(int x, int y);
+
+			static vg::Vector2<int> mSize;			///< screen resolution in pixels
+			static vg::Vector2<int> mVirtualSize;	///< used for scaling coordinates for different resolutions
 
 		};
 	}

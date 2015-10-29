@@ -5,11 +5,17 @@
 using namespace vg;
 using namespace vg::graphics;
 
-Vector2<int> Screen::mSize = Vector2<int>(0, 0);
+Vector2<int> Screen::mSize(1280, 720);
+Vector2<int> Screen::mVirtualSize(1280, 720);
 
 Vector2<int> Screen::getSize()
 {
 	return mSize;
+}
+
+vg::Vector2<int> Screen::getVirtualSize()
+{
+	return mVirtualSize;
 }
 
 int Screen::getX()
@@ -21,10 +27,15 @@ int Screen::getY()
 {
 	return mSize.getY();
 }
-
+ 
 void Screen::setSize(int x, int y)
 {
 	mSize = Vector2<int>(x, y);
+}
+
+void Screen::setVirtualSize(int x, int y)
+{
+	mVirtualSize = Vector2<int>(x, y);
 }
 
 Vector2<float> Screen::toWorld(float x, float y)

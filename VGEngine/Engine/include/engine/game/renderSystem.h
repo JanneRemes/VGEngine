@@ -40,7 +40,7 @@ namespace vg
 		/**
 		Makes a model transform matrix
 		*/
-		static glm::mat4 modelTransform(Vector2<float> position, Vector2<float> size, float rotation);
+		static glm::mat4 modelTransform(Vector2<float> position, Vector2<float> origin, Vector2<float> size, float rotation);
 
 		/**
 		Makes a model transform matrix using values from a TransformComponent
