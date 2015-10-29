@@ -14,13 +14,13 @@ namespace vg
 			/**
 			@return Returns the position of the touch
 			*/
-			static Vector2<float> getTouchPos();
+			static Vector2<float> getPos();
 
 			/**
 			Sets the position of the touch with the given value
 			@param value Given touches position
 			*/
-			static void setTouchPos(Vector2<float> value);
+			static void setPos(Vector2<float> value);
 
 			/**
 			@return Returns whether screen is touched
@@ -36,21 +36,21 @@ namespace vg
 			/**
 			@return Returns whether touch is being released from the touch screen
 			*/
-			static bool getIsTouchReleased();
+			static bool getIsReleased();
 
 			/**
 			Sets whether touch is being released or not
 			*/
-			static void setIsTouchReleased(bool value);
+			static void setIsReleased(bool value);
 
 			/**
 			Updates touches
 			*/
 			static void update();
 		private:
-			static bool isTouched;			///< Is touched
-			static bool isTouchReleased;	///< Is touch being released
-			static Vector2<float> touchPos;	///< Touch position in Vector2
+			static bool mIsTouched;			///< Is touched
+			static bool mIsTouchReleased;	///< Is touch being released
+			static Vector2<float> mPos;	///< Touch position in Vector2
 		};
 	}
 }

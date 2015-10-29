@@ -32,7 +32,7 @@ bool Mouse::isKeyPressed(MOUSE_KEY key)
 	return(GetAsyncKeyState(vkey) & 0x8000 != 0);
 }
 
-vg::Vector2<float> Mouse::getMousePos()
+vg::Vector2<float> Mouse::getPos()
 {
 	POINT pt;
 	GetCursorPos(&pt);

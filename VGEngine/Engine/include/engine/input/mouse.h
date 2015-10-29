@@ -11,11 +11,22 @@ namespace vg
 			MIDDLE
 			
 		};
+
+		/**
+		Class for checking where and when mouse is clicked
+		*/
 		class Mouse
 		{
 		public:
+			/**
+			@return Returns whether the mouse is being pressed
+			*/
 			static bool isKeyPressed(MOUSE_KEY key);
-			static vg::Vector2<float> getMousePos();
+
+			/**
+			@return Returns the mouse position
+			*/
+			static vg::Vector2<float> getPos();
 			
 		};
 	}

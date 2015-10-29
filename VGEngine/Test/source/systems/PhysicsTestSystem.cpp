@@ -58,7 +58,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
+		vg::Vector2<float> pos = vg::input::Mouse::getPos();
 		for (int i = 0; i < 5; i++)
 		{
 			TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
@@ -79,7 +79,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))
 	{
 		//PhysicsSystem::world->SetGravity(b2Vec2(PhysicsSystem::world->GetGravity().x, -PhysicsSystem::world->GetGravity().y));
-		vg::Vector2<float> pos = vg::input::Mouse::getMousePos();
+		vg::Vector2<float> pos = vg::input::Mouse::getPos();
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{

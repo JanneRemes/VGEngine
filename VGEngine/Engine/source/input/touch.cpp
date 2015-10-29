@@ -6,43 +6,43 @@ using namespace vg;
 using namespace vg::input;
 using namespace vg::graphics;
 
-bool Touch::isTouched = false;
-bool Touch::isTouchReleased = false;
-Vector2<float> Touch::touchPos = Vector2<float>();
+bool Touch::mIsTouched = false;
+bool Touch::mIsTouchReleased = false;
+Vector2<float> Touch::mPos = Vector2<float>();
 
 
-Vector2<float> Touch::getTouchPos()
+Vector2<float> Touch::getPos()
 {
-	return Screen::toWorld(touchPos);
+	return Screen::toWorld(mPos);
 }
 
-void Touch::setTouchPos(Vector2<float> value)
+void Touch::setPos(Vector2<float> value)
 {
-	touchPos = value;
+	mPos = value;
 }
 
 bool Touch::getIsTouched()
 {
-	return isTouched;
+	return mIsTouched;
 }
 
-bool Touch::getIsTouchReleased()
+bool Touch::getIsReleased()
 {
-	return isTouchReleased;
+	return mIsTouchReleased;
 }
 
 void Touch::update()
 {
-	if (isTouchReleased)
-		isTouchReleased = false;
+	if (mIsTouchReleased)
+		mIsTouchReleased = false;
 }
 
 void Touch::setIsTouched(bool value)
 {
-	isTouched = value;
+	mIsTouched = value;
 }
 
-void Touch::setIsTouchReleased(bool value)
+void Touch::setIsReleased(bool value)
 {
-	isTouchReleased = value;
+	mIsTouchReleased = value;
 }

@@ -33,7 +33,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 	#ifdef OS_WINDOWS
 	if (Mouse::isKeyPressed(LEFT))
 	{
-		input = Mouse::getMousePos();
+		input = Mouse::getPos();
 		newInput = true;
 	}
 	#endif

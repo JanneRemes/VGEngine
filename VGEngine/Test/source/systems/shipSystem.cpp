@@ -62,7 +62,7 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 			{
 				transformComponent->setPosition(newPos);
 			}
-			if (input::Touch::getIsTouchReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
+			if (input::Touch::getIsReleased() && mCoolDownTimer.getCurrentTimeSeconds() > mCoolDown)
 			{
 				core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 				sound::Sound* sound = assetManager->get<sound::Sound>("shoot.mp3");

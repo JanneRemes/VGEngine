@@ -6,6 +6,9 @@ namespace vg
 	namespace input
 	{
 
+		/**
+		Class used to control the keyboard for windows
+		*/
 		class Keyboard
 		{
 		public:
@@ -116,6 +119,10 @@ namespace vg
 
 				KeyCount
 			};
+
+			/**
+			State of the buttons press
+			*/
 			enum KeyState
 			{
 				NOT_PRESSED,
@@ -123,11 +130,19 @@ namespace vg
 				PRESSED,
 				UP
 			};
+
+			/**
+			Updates the keystates
+			*/
 			static void update();
-			static KeyState getKeyState(Key key);
+
+			/**
+			@return Returns the state of the key if its pressed
+			*/
+			static KeyState getKeyState(Key key); 
 			private:
 			static std::map<Key, KeyState> keyStates;
-			static bool isKeyPressed(Key key);
+			static bool isKeyPressed(Key key); ///< Returns whether the key is being pressed
 		};
 
 	}
