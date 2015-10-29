@@ -19,6 +19,21 @@ namespace vg
 		*/
 		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 		void addSystem(System *system);
+
+		/**
+		@return system with template type from system list.
+		*/
+		template<typename T> 
+		T *getSystem()
+		{
+			for (auto it = systems.begin(); it != systems.end(); it++)
+			{
+				T* system = dynamic_cast<T*>((*it));
+				if (system != nullptr)
+					return system;
+			}
+			return nullptr;
+		}
 	private:
 		std::vector<System*> systems;
 

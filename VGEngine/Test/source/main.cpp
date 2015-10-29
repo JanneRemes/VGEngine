@@ -6,6 +6,7 @@
 #include "scenes/MainScene.h"
 #include "scenes/cameraScene.h"
 
+#include "engine/game/physicsSystem.h"
 using namespace vg;
 
 void mainGame(Game* game)
@@ -16,4 +17,7 @@ void mainGame(Game* game)
 	game->getSceneManager()->addTemplateScene("scene", scene);
 
 	game->getSceneManager()->changeScene("scene");
+
+	PhysicsSystem *system = game->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
 }

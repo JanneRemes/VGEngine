@@ -2,6 +2,7 @@
 using namespace vg;
 System::System()
 {
+	mPriority = NORMAL;
 }
 
 

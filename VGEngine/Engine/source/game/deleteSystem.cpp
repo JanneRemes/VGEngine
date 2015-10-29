@@ -9,7 +9,7 @@ using namespace std;
 
 DeleteSystem::DeleteSystem() :vg::System()
 {
-
+	mPriority = System::FIRST;
 }
 
 DeleteSystem::~DeleteSystem()

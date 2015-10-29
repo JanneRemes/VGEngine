@@ -22,6 +22,7 @@ using namespace glm;
 
 RenderSystem::RenderSystem() :System()
 {
+	mPriority = System::LAST;
 }
 
 void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)

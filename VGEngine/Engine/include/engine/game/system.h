@@ -8,7 +8,20 @@ namespace vg
 	*/
 	class System
 	{
+		friend class SystemManager;
 	public:
+		/**
+		Priority that determines when this system is updated. Dont use FIRST, LAST or COUNT.
+		*/
+		enum Priority
+		{
+			FIRST,
+			EARLY,
+			NORMAL,
+			LATER,
+			LAST,
+			COUNT
+		};
 		System();
 		~System();
 
@@ -17,6 +30,18 @@ namespace vg
 		@param gameObject The gameObject whos s we are updating
 		*/
 		virtual void update(std::vector<GameObject*> *gameObjects,float deltaTime);
+
+		/**
+		Fetches system's update priority.
+		@return system´s update priority
+		*/
+		Priority getPriority(){ return mPriority; }
+		/**
+		You can set priority that will determine when this system is updated. Don´t use FIRST or LAST or COUNT.
+		*/
+		void setPriority(Priority priority){ mPriority = priority; }
+	protected:
+		Priority mPriority;
 	};
 
 }
