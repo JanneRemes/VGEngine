@@ -2,7 +2,8 @@
 #include "Box2D\Box2D.h"
 #include "engine/game/system.h"
 #include "engine\utility\Vector2.h"
-#include  "engine\game\transformComponent.h"
+#include "engine\game\transformComponent.h"
+#include "engine\game\physicsComponent.h"
 
 namespace vg
 {
