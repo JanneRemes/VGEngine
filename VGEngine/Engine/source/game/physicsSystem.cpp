@@ -47,10 +47,9 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
-			 transform->setPosition(Vector2<float>((physComponent->getBody()->GetPosition().x  * scale) - transform->getSize().getX() / 2.0f, 
-												(-physComponent->getBody()->GetPosition().y * scale) - transform->getSize().getY() / 2.0f));
-			  transform->setRotation(-1.0f * physComponent->getBody()->GetAngle() * 180 / 3.14);
-			  
+			 transform->setPosition(Vector2<float>((physComponent->getPosition().getX()  * scale) - transform->getSize().getX() / 2.0f, 
+												(-physComponent->getPosition().getY() * scale) - transform->getSize().getY() / 2.0f));
+			  transform->setRotation(-1.0f * physComponent->getRotation() * 180 / 3.14);
 		 }
 	 }
 }

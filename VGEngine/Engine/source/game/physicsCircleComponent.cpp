@@ -27,14 +27,14 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 
 	mCircleShape.m_radius = ((_radius) / scale) / 2.0f;
 
-	FixDef.density = 100.0f;
-	//FixDef.friction = 0.2f;
-	//FixDef.restitution = 5.5f;
-	FixDef.shape = &mCircleShape;
+	_FixDef.density = 100.0f;
+	//_FixDef.friction = 0.2f;
+	//_FixDef.restitution = 5.5f;
+	_FixDef.shape = &mCircleShape;
 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
 	bodyDef.angle = 0.0f;
 
 	_body = world->CreateBody(&bodyDef);
-	_body->CreateFixture(&FixDef);
+	_body->CreateFixture(&_FixDef);
 }

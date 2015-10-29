@@ -68,7 +68,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			physicsTest->addComponent(physicsTransform);
 			physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, PhysicsSystem::world, 54));
 			QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
-			
+
 			physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 			physicsTest->addComponent(animationComponent);
 
@@ -90,13 +90,13 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			{
 				float number = rand() % 400 - 200.0f;
 				float number2 = rand() % 200;
-				physComponent->getBody()->SetLinearVelocity(b2Vec2(number, number2));
+				physComponent->setVelocity(Vector2<float>(number, number2));
 			}
 		}
 	}
-	#endif
+#endif
 
-	#ifdef OS_ANDROID
+#ifdef OS_ANDROID
 	if (vg::input::Touch::getIsTouched())
 	{
 		vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
@@ -130,10 +130,10 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 				{
 					float number = rand() % 400 - 200.0f;
 					float number2 = rand() % 200;
-					physComponent->getBody()->SetLinearVelocity(b2Vec2(number, number2));
+					physComponent->setVelocity(Vector2<float>(number, number2));
 				}
 			}
 		}
 	}
-	#endif
+#endif
 }

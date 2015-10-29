@@ -10,10 +10,17 @@ namespace vg
 			enum BODYTYPE { STATIC, DYNAMIC };
 			static float scale;
 			PhysicsComponent(TransformComponent *component, BODYTYPE type, b2World *world);
-			b2Body* getBody() { return _body; };
-			b2FixtureDef* getFixture() { return &FixDef; };
+			
+			Vector2<float> getPosition();
+			float getRotation();
+			void setVelocity(Vector2<float> velocity);
+
+			void setDensity(float density);
+			void setFriction(float friction);
+			void setRestitution(float restitution);
+
 		protected:
 			b2Body *_body;
-			b2FixtureDef FixDef;
+			b2FixtureDef _FixDef;
 		};
 }
