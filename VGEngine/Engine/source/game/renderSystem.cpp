@@ -71,7 +71,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 
 void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
-	vec2 screen(Screen::getVirtualSize().getX(), Screen::getVirtualSize().getY());
+	vec2 screen(Screen::getX(), Screen::getY());
 	vec2 camera(0, 0);
 	float zoom = 0.0f;
 	if (useCamera)
