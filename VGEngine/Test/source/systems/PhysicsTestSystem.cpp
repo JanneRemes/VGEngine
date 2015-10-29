@@ -25,31 +25,29 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	this->scene = scene;
 
 	// Physics
+	GameObject *physicsTest = new GameObject("physicsTest1");
+
 	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(80, 64),
 		Vector2<float>(64, 64), 0.0f);
 
-	GameObject *physicsTest = new GameObject("physicsTest1");
-	physicsTest->addComponent(physicsTransform);
-
-	PhysicsPolygonComponent *polytestasd = new PhysicsPolygonComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world);
-	physicsTest->addComponent(polytestasd);
-
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
+	PhysicsPolygonComponent *polytestasd = new PhysicsPolygonComponent(physicsTransform, PhysicsComponent::DYNAMIC, PhysicsSystem::world);
+
+	physicsTest->addComponent(polytestasd);
+	physicsTest->addComponent(physicsTransform);
 	physicsTest->addComponent(physicsObject);
 
 	scene->addGameObject(physicsTest);
 
 	// 2nd physics object
-
 	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(128, 128 * 3),
 		Vector2<float>(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	physicsTest2->addComponent(physicsTransform2);
-
-	physicsTest2->addComponent(new PhysicsPolygonComponent(physicsTransform2, b2BodyType::b2_dynamicBody, PhysicsSystem::world, 64, 64));
-
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
+
+	physicsTest2->addComponent(new PhysicsPolygonComponent(physicsTransform2, PhysicsComponent::STATIC, PhysicsSystem::world, 64, 64));
+	physicsTest2->addComponent(physicsTransform2);
 	physicsTest2->addComponent(physicsRender2);
 
 	scene->addGameObject(physicsTest2);
@@ -68,7 +66,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 			GameObject *physicsTest = new GameObject("physicsTest");
 			physicsTest->addComponent(physicsTransform);
-			physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, b2BodyType::b2_dynamicBody, PhysicsSystem::world, 54));
+			physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, PhysicsSystem::world, 54));
 			QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 			
 			physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));

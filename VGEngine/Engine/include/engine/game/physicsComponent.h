@@ -7,8 +7,9 @@ namespace vg
 		class PhysicsComponent : public Component
 		{
 		public:
+			enum BODYTYPE { STATIC, DYNAMIC };
 			static float scale;
-			PhysicsComponent(TransformComponent *component, b2BodyType type, b2World *world);
+			PhysicsComponent(TransformComponent *component, BODYTYPE type, b2World *world);
 			b2Body* getBody() { return _body; };
 			b2FixtureDef* getFixture() { return &FixDef; };
 		protected:

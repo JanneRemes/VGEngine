@@ -1,10 +1,11 @@
 #include <engine\game\physicsPolygonComponent.h>
 
 using namespace vg;
-PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, b2BodyType type, b2World *world, float width, float height ) : PhysicsComponent(component, type, world)
+PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, BODYTYPE type, b2World *world, float width, float height) : PhysicsComponent(component, type, world)
 {
 	float _width = 1;
 	float _height = 1;
+
 	if (width != 0 && height != 0)
 	{
 		_width = width;
@@ -20,6 +21,13 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	float y = component->getWorldPosition().getY();
 	
 	b2BodyDef bodyDef;
+	
+	if (type == DYNAMIC)
+	{
+		bodyDef.type = b2BodyType::b2_dynamicBody;
+	}
+	else
+		bodyDef.type = b2BodyType::b2_staticBody;
 
 	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
 
@@ -30,7 +38,6 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
 	bodyDef.angle = 0.0f;
-	bodyDef.type = type;
 
 	_body = world->CreateBody(&bodyDef);
 	_body->CreateFixture(&FixDef);

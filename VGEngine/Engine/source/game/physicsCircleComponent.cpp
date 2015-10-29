@@ -1,7 +1,7 @@
 #include <engine\game\physicsCircleComponent.h>
 
 using namespace vg;
-PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, b2BodyType type, b2World *world, float radius) : PhysicsComponent(component, type, world)
+PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BODYTYPE type, b2World *world, float radius) : PhysicsComponent(component, type, world)
 {
 	float _radius = 0;
 	if (radius != 0)
@@ -17,6 +17,14 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, b2
 	float y = component->getWorldPosition().getY();
 
 	b2BodyDef bodyDef;
+
+	if (type == DYNAMIC)
+	{
+		bodyDef.type = b2BodyType::b2_dynamicBody;
+	}
+	else
+		bodyDef.type = b2BodyType::b2_staticBody;
+
 	mCircleShape.m_radius = ((_radius) / scale) / 2.0f;
 
 	FixDef.density = 100.0f;
@@ -26,7 +34,6 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, b2
 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
 	bodyDef.angle = 0.0f;
-	bodyDef.type = type;
 
 	_body = world->CreateBody(&bodyDef);
 	_body->CreateFixture(&FixDef);
