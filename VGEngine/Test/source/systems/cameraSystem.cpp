@@ -41,7 +41,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 	#ifdef OS_ANDROID
 	if (Touch::getIsTouched())
 	{
-		input = Touch::getTouchPos();
+		input = Touch::getPos();
 		newInput = true;
 	}
 	#endif

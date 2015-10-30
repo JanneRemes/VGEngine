@@ -60,8 +60,6 @@ namespace vg
 
 			void clear();
 
-			void clear(unsigned int  mask);
-
 			void clearColor(float red, float green, float blue, float alpha);
 
 			void setUniform(unsigned int location, glm::mat3& value);

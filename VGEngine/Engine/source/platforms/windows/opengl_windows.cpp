@@ -105,11 +105,6 @@ void gl::clear()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	checkError();
 }
-void  gl::clear(unsigned int  mask)
-{
-	glClear(mask);
-	checkError();
-}
 void gl::clearColor(float red, float green, float blue, float alpha)
 {
 	glClearColor(GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha));

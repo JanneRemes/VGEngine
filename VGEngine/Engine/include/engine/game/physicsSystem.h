@@ -7,57 +7,27 @@
 
 namespace vg
 {
-	/**
-	Class used to updating and creating physics
-	*/
-	class PhysicsSystem : public System
-	{
-		friend class PhysicsComponent;
-	public:
+		class PhysicsSystem : public System
+		{
+			friend class PhysicsComponent;
+		public:
+			
+			/**
+			Create new physics world with gravity
+			*/
+			PhysicsSystem(float gravityX, float gravityY);
+			~PhysicsSystem();
+			void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 
-		/**
-		Create new physics world with gravity
-		@param gravityX X-axel gravitation
-		@param gravityY Y-axel gravitation
-		*/
-		PhysicsSystem(float gravityX, float gravityY);
-		~PhysicsSystem();
+			void createBorders(float x, float y, float width, float height);
+			void createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
 
-		/**
-		Updates gameobjects with physicsComponents
-		@param gameObjects Vector that contains updateable gameObjects
-		*/
-		void update(std::vector<GameObject*> *gameObjects, float deltaTime);
+			void setGravity(Vector2<float> gravity);
+			Vector2<float> getGravity();
 
-		/**
-		Creates borders for chainable objects
-		*/
-		void createBorders(float x, float y, float width, float height);
+			b2World* getWorld() { return world; };
 
-		/**
-		Creates joint between two physicsComponent bodies
-		@param bodyA One of the two bodies that will be jointed together
-		@param bodyB second of the two bodies that will be jointed together
-		*/
-		void createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
-
-		/**
-		Sets gravity for the physics world
-		@param gravity Vector2 gravity for the world
-		*/
-		void setGravity(Vector2<float> gravity);
-
-		/**
-		@return Returns worlds gravity value
-		*/
-		Vector2<float> getGravity();
-
-		/**
-		@return Returns the physics world
-		*/
-		b2World* getWorld() { return world; };
-
-	private:
-		b2World* world; ///< Physics world
-	};
+		private:
+			b2World* world;
+		};
 }

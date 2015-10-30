@@ -43,5 +43,5 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 	_body = system->getWorld()->CreateBody(&bodyDef);
 	_body->SetGravityScale(2);
 	_body->CreateFixture(&_FixDef);
-
+	mInitialized = true;
 }

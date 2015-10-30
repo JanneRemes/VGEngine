@@ -127,7 +127,7 @@ void Application::drawFrame()
 	}
 
 	gl::clear();
-	vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
+	vg::Vector2<float> touchPos = vg::input::Touch::getPos();
 	Vector2<int> res = Screen::getSize();
 	gl::clearColor(touchPos.getX() / res.getX(), 0.5f, (touchPos.getY()) / res.getY(), 1);
 
@@ -147,7 +147,7 @@ int32_t engine_handle_input(android_app* app, AInputEvent* event)
 			AMotionEvent_getX(event, 0),
 			AMotionEvent_getY(event, 0)
 			);
-		vg::input::Touch::setTouchPos(touchPos);
+		vg::input::Touch::setPos(touchPos);
 		vg::input::Touch::setIsTouched(true);
 		//Log("vgengine", "movement %f %f", mTouchX, mTouchY);
 		if ((AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_UP)
@@ -156,7 +156,7 @@ int32_t engine_handle_input(android_app* app, AInputEvent* event)
 			if (vg::input::Touch::getIsTouched())
 			{
 				vg::input::Touch::setIsTouched(false);
-				vg::input::Touch::setIsTouchReleased(true);
+				vg::input::Touch::setIsReleased(true);
 			}
 		}
 
@@ -210,7 +210,7 @@ void android_main(struct android_app* state)
 	// Make sure app_glue isn't stripped.
 	app_dummy();
 	Application *app = new Application();
-	while (engine.state.game->isRunning())
+	while (true)
 	{
 		app->update();
 	}
@@ -309,8 +309,16 @@ void handleCommand(struct android_app* app, int32_t cmd)
 			Log("vgengine", "APP_CMD_STOP!", "");
 			break;
 
+		case APP_CMD_INPUT_CHANGED:
+			Log("vgengine", "APP_CMD_INPUT_CHANGED!", "");
+			break;
+
+		case  APP_CMD_DESTROY:
+			Log("vgengine", "APP_CMD_DESTROY!", "");
+			break;
+
 		default:
-			Log("vgengine", "Unknown APP_CMD!", "");
+			Log("vgengine", "Unknown APP_CMD = %d !", cmd);
 
 		}
 }

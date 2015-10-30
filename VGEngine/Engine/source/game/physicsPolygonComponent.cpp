@@ -48,4 +48,5 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	_body = system->getWorld()->CreateBody(&bodyDef);
 	_body->SetGravityScale(5);
 	_body->CreateFixture(&_FixDef);
+	mInitialized = true;
 }
