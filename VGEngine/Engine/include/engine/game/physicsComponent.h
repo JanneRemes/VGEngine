@@ -32,5 +32,6 @@ namespace vg
 			b2BodyDef bodyDef;
 			b2FixtureDef _FixDef;
 			b2MassData mMass;
+			bool mInitialized;
 		};
 }

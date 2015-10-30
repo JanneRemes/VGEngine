@@ -144,22 +144,22 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 #ifdef OS_ANDROID
 	if (vg::input::Touch::getIsTouched())
 	{
-		vg::Vector2<float> touchPos = vg::input::Touch::getTouchPos();
+		vg::Vector2<float> pos = vg::input::Touch::getPos();
 		vg::Vector2<int> res = graphics::Screen::getSize();
-		if (touchPos.getX() < res.getX() / 2)
+		if (pos.getX() < res.getX() / 2)
 		{
 			for (int i = 0; i < 5; i++)
 			{
-
-				TransformComponent *physicsTransform2 = new TransformComponent(
-					Vector2<float>(touchPos.getX(), touchPos.getY()), Vector2<float>(64, 64), 0.0f);
+				TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
+					Vector2<float>(64, 64), 0.0f);
 
 				GameObject *physicsTest = new GameObject("physicsTest");
-				physicsTest->addComponent(new PhysicsComponent(physicsTransform2, PhysicsComponent::DYNAMIC));
+				physicsTest->addComponent(physicsTransform);
+				physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
+				QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 
-				QuadrangleComponent *physicsRender2 = new QuadrangleComponent("doge.png");
-				physicsTest->addComponent(physicsRender2);
-				physicsTest->addComponent(physicsTransform2);
+				physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+				physicsTest->addComponent(animationComponent);
 
 				scene->addGameObject(physicsTest);
 			}
@@ -168,7 +168,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		{
 			for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 			{
-				PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
+				PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
 				TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 
 				if (physComponent != nullptr && transform != nullptr)
