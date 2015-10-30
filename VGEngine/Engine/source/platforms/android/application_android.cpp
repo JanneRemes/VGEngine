@@ -210,7 +210,7 @@ void android_main(struct android_app* state)
 	// Make sure app_glue isn't stripped.
 	app_dummy();
 	Application *app = new Application();
-	while (engine.state.game->isRunning())
+	while (true)
 	{
 		app->update();
 	}
@@ -309,8 +309,16 @@ void handleCommand(struct android_app* app, int32_t cmd)
 			Log("vgengine", "APP_CMD_STOP!", "");
 			break;
 
+		case APP_CMD_INPUT_CHANGED:
+			Log("vgengine", "APP_CMD_INPUT_CHANGED!", "");
+			break;
+
+		case  APP_CMD_DESTROY:
+			Log("vgengine", "APP_CMD_DESTROY!", "");
+			break;
+
 		default:
-			Log("vgengine", "Unknown APP_CMD!", "");
+			Log("vgengine", "Unknown APP_CMD = %d !", cmd);
 
 		}
 }
