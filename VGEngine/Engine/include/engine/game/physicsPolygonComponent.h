@@ -18,6 +18,10 @@ namespace vg
 			*/
 			PhysicsPolygonComponent(TransformComponent *component, BODYTYPE type, float width = 0, float height = 0);
 		private:
+<<<<<<< origin/master
 			b2PolygonShape mBoxShape; ///< Polygon boxes shape
+=======
+			b2PolygonShape mBoxShape;	///< Polygon boxes shape
+>>>>>>> local
 		};
 }
