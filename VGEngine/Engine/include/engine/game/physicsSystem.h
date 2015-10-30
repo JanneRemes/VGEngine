@@ -9,8 +9,8 @@ namespace vg
 {
 		class PhysicsSystem : public System
 		{
+			friend class PhysicsComponent;
 		public:
-			static b2World* world;
 			
 			/**
 			Create new physics world with gravity
@@ -25,7 +25,9 @@ namespace vg
 			void setGravity(Vector2<float> gravity);
 			Vector2<float> getGravity();
 
-		private:
+			b2World* getWorld() { return world; };
 
+		private:
+			b2World* world;
 		};
 }

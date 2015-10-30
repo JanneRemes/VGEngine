@@ -17,7 +17,7 @@ SystemManager::SystemManager()
 
 	addSystem(new TextRenderSystem());
 	addSystem(new AnimationSystem());
-	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81 * 20);
+	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81);
 	addSystem(physicsSystem);
 	physicsSystem->createBorders(0, 0, Screen::getX(), Screen::getY());
 	addSystem(new RenderSystem());

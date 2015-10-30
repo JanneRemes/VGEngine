@@ -1,7 +1,7 @@
 #include "engine\game\physicsComponent.h"
 
 using namespace vg;
-float PhysicsComponent::scale = 6.0f;
+float PhysicsComponent::scale = 30.0f;
 PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
 {
 
@@ -12,9 +12,9 @@ void PhysicsComponent::setVelocity(Vector2<float> velocity)
 	_body->SetLinearVelocity(b2Vec2(velocity.getX(), velocity.getY()));
 }
 
-void PhysicsComponent::setForce(Vector2<float> force, Vector2<float> position)
+void PhysicsComponent::applyForce(Vector2<float> force)
 {
-	_body->ApplyForce(b2Vec2(force.getX(), force.getY()), b2Vec2(position.getX(), position.getY()), true);
+	_body->ApplyForce(b2Vec2(force.getX(), force.getY()), b2Vec2(0, 0), true);
 }
 
 Vector2<float> PhysicsComponent::getPosition()
@@ -54,6 +54,10 @@ void PhysicsComponent::setMassCenter(Vector2<float> position)
 
 void PhysicsComponent::setPosition(Vector2<float> position)
 {
-	//_body->SetTransform(b2Vec2(position.getX(), position.getY()), _body->GetAngle());
-	_body->ApplyLinearImpulse(b2Vec2(10000, 10000), b2Vec2(position.getX(), position.getY()), true);
+	_body->SetTransform(b2Vec2(position.getX() / scale, position.getY() / -scale), _body->GetAngle());
+}
+
+void PhysicsComponent::setRotationLock(bool lock)
+{
+	_body->SetFixedRotation(lock);
 }

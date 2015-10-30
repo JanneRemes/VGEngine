@@ -8,7 +8,6 @@
 
 using namespace vg;
 
-b2World *PhysicsSystem::world = nullptr;
 float scale = PhysicsComponent::scale;
 
 PhysicsSystem::PhysicsSystem(float gravityX, float gravityY)
@@ -92,7 +91,7 @@ void PhysicsSystem::createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB
 	
 	jointDef.bodyA = bodyA->_body;
 	jointDef.bodyB = bodyB->_body;
-	jointDef.localAnchorA = b2Vec2(bodyA->_body->GetLocalCenter().x + 25, bodyA->_body->GetLocalCenter().y + 25);
+	jointDef.localAnchorA = b2Vec2(bodyA->_body->GetLocalCenter().x + 64 / scale, bodyA->_body->GetLocalCenter().y + 64 / -scale);
 	jointDef.localAnchorB = bodyB->_body->GetLocalCenter();
 
 	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);

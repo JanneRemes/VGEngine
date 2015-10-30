@@ -8,7 +8,7 @@ namespace vg
 		{
 			friend class PhysicsSystem;
 		public:
-			enum BODYTYPE { STATIC, DYNAMIC };
+			enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };
 			static float scale;
 			PhysicsComponent(TransformComponent *component, BODYTYPE type);
 			
@@ -16,7 +16,7 @@ namespace vg
 			Vector2<float> getPosition();
 			float getRotation();
 			void setVelocity(Vector2<float> velocity);
-			void setForce(Vector2<float> force, Vector2<float> position);
+			void applyForce(Vector2<float> force);
 
 			void setDensity(float density);
 			void setFriction(float friction);
@@ -25,8 +25,11 @@ namespace vg
 			void setMass(float mass);
 			void setMassCenter(Vector2<float> position);
 			
+			void setRotationLock(bool lock);
+
 		protected:
 			b2Body *_body;
+			b2BodyDef bodyDef;
 			b2FixtureDef _FixDef;
 			b2MassData mMass;
 		};

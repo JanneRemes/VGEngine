@@ -19,4 +19,5 @@ private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
 	vg::GameObject *physicsTest;
+	vg::GameObject *physicsTest3;
 };
