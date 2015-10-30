@@ -68,7 +68,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest3->addComponent(physicsTransform3);
 	physicsTest3->addComponent(physicsRender3);
 	
-	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotationLock(true);
+	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotationLock(false);
 
 	scene->addGameObject(physicsTest3);
 
@@ -81,21 +81,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
-		for (int i = 0; i < 5; i++)
-		{
-			TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
-				Vector2<float>(64, 64), 0.0f);
-
-			GameObject *physicsTest = new GameObject("physicsTest");
-			physicsTest->addComponent(physicsTransform);
-			physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
-			QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
-
-			physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
-			physicsTest->addComponent(animationComponent);
-
-			scene->addGameObject(physicsTest);
-		}
+		createPapis(pos);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::W) == vg::input::Keyboard::KeyState::PRESSED)
@@ -117,11 +103,16 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		}
 	}
 	
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::E) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyLinearImpulse(Vector2<float>(0, 100));
+	}
+
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Q) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
 		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyForce(Vector2<float>(0, 1000));
-
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
@@ -148,21 +139,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		vg::Vector2<int> res = graphics::Screen::getSize();
 		if (pos.getX() < res.getX() / 2)
 		{
-			for (int i = 0; i < 5; i++)
-			{
-				TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
-					Vector2<float>(64, 64), 0.0f);
-
-				GameObject *physicsTest = new GameObject("physicsTest");
-				physicsTest->addComponent(physicsTransform);
-				physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
-				QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
-
-				physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
-				physicsTest->addComponent(animationComponent);
-
-				scene->addGameObject(physicsTest);
-			}
+			createPapis(pos);
 		}
 		else
 		{
@@ -181,4 +158,23 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		}
 	}
 #endif
+}
+
+void PhysicsTestSystem::createPapis(Vector2<float> pos)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
+			Vector2<float>(64, 64), 0.0f);
+
+		GameObject *physicsTest = new GameObject("physicsTest");
+		physicsTest->addComponent(physicsTransform);
+		physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
+		QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+
+		physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+		physicsTest->addComponent(animationComponent);
+
+		scene->addGameObject(physicsTest);
+	}
 }

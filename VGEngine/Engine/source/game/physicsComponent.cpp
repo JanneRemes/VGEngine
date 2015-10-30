@@ -16,7 +16,13 @@ void PhysicsComponent::setVelocity(Vector2<float> velocity)
 void PhysicsComponent::applyForce(Vector2<float> force)
 {
 	if (mInitialized)
-		_body->ApplyForce(b2Vec2(force.getX(), force.getY()), b2Vec2(0, 0), true);
+		_body->ApplyForce(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
+}
+
+void PhysicsComponent::applyLinearImpulse(Vector2<float> force)
+{
+	if (mInitialized)
+		_body->ApplyLinearImpulse(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
 }
 
 Vector2<float> PhysicsComponent::getPosition()

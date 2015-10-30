@@ -17,6 +17,7 @@ namespace vg
 			float getRotation();
 			void setVelocity(Vector2<float> velocity);
 			void applyForce(Vector2<float> force);
+			void applyLinearImpulse(Vector2<float> force);
 
 			void setDensity(float density);
 			void setFriction(float friction);
