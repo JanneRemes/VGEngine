@@ -24,7 +24,7 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 	{
 		bodyDef.type = b2BodyType::b2_dynamicBody;
 	}
-	else if(type == KINEMATIC)
+	else if (type == KINEMATIC)
 	{
 		bodyDef.type = b2BodyType::b2_kinematicBody;
 	}
