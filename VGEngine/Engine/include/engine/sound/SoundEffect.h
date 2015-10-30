@@ -86,6 +86,9 @@ namespace vg
             bool isStartedPlaying();
 
         private:
+
+			bool mIsFinished;				///< <description>
+			bool mIsStarted;				///< <description>
             // Engine
             SLEngineItf Engine;				///< <description>
 
@@ -101,8 +104,6 @@ namespace vg
             SLSeekItf Seek;					///< <description>
             SLPlaybackRateItf RateObject;	///< <description>
 
-            bool mIsFinished;				///< <description>
-            bool mIsStarted;				///< <description>
 
             SLuint32 mState;				///< Playing state of the sound
         };

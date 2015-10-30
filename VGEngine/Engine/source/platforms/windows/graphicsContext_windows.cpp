@@ -22,7 +22,7 @@ using namespace vg::core;
 unsigned int mProgramId; //< OpenGL program id
 
 HGLRC renderingContext;
-
+HDC hdcHandle = NULL;
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -69,9 +69,8 @@ void GraphicsContext::destroy()
 
 void GraphicsContext::swapBuffers()
 {
-	HWND windowHandle = static_cast<HWND>(mWindowHandle);
-	HDC windowHandle2 = GetDC(windowHandle);// 
-	SwapBuffers(windowHandle2);
+	checkError();
+	SwapBuffers(hdcHandle);
 }
 
 void GraphicsContext::initializeGraphicsContext()
@@ -81,8 +80,8 @@ void GraphicsContext::initializeGraphicsContext()
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
 	//RECT winRect = { 0, 0, 640, 360};
-	RECT winRect = {0, 0, 1280, 720};
-	//RECT winRect = { 0, 0, 1920, 1080};
+	//RECT winRect = {0, 0, 1280, 720};
+	RECT winRect = { 0, 0, 1920, 1080};
 
 	Screen::setSize(1280, 720);
 	Screen::setRealSize(winRect.right, winRect.bottom);
@@ -172,6 +171,12 @@ void GraphicsContext::initializeGraphicsContext()
 	checkError(); //ERROR CHECK
 	ShowWindow(static_cast<HWND>(mWindowHandle), SW_SHOWNORMAL);
 	checkError(); //ERROR CHECK
+
+	HWND windowHandle2 = static_cast<HWND>(mWindowHandle);
+	checkError();
+
+	hdcHandle = GetDC(windowHandle2);
+
 }
 
 void GraphicsContext::createGLProgram()

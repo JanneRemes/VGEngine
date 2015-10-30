@@ -2,11 +2,13 @@
 #include <engine/sound/soundEffect.h>
 #include <engine/utility/logger.h>
 #include <engine/assets/fileManager.h>
+#include <xaudio2.h>
 using namespace vg::sound;
 
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
-	
+
+
 }
 
 void SoundEffect::play()

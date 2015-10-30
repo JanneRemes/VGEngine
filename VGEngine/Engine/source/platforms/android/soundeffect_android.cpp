@@ -32,13 +32,9 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	SLAint64        length;
 	} SLDataLocator_AndroidFD;
 	*/
-#ifdef OS_ANDROID
 	SLDataLocator_AndroidFD loc_fd = { SL_DATALOCATOR_ANDROIDFD, mFd, mStart, mLength };
 	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
-#else
-	SLDataLocator_Address loc_fd = { SL_DATALOCATOR_ADDRESS };
-	const SLboolean outputRequired[1] = { SL_BOOLEAN_FALSE };
-#endif
+
 	// Data format
 	SLDataFormat_MIME format_mime = { SL_DATAFORMAT_MIME, NULL, SL_CONTAINERTYPE_UNSPECIFIED };
 	// Data source

@@ -24,8 +24,6 @@ namespace vg
     {
 
     public:
-
-		static Game* mGame;
 		static Game* getInstance();
 
 		~Game();
@@ -112,13 +110,15 @@ namespace vg
 		*/
 		void setIsRunning(bool value){ mIsRunning = value; }
     private:
+
+		static Game* mGame;
+
 		core::FileManager *mFileManager;
 		core::AssetManager *mAssetManager;
 		Game();
 		vg::graphics::Graphics *mGraphics;
         bool mIsRunning;				///< Boolean used for pausing and starting the game
 		SceneManager *mSceneManager;    ///< Manages and stores game's scenes
-		vg::graphics::Shader mShader;
 		sound::AudioManager *mAudioManager;
 		vg::Timer *deltaTimer;
     };

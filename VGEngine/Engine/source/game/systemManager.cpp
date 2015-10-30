@@ -7,7 +7,6 @@
 #include "engine/game/animationSystem.h"
 #include "engine/game/physicsSystem.h"
 #include "engine/graphics/screen.h"
-
 using namespace vg;
 using namespace vg::graphics;
 
