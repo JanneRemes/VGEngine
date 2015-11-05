@@ -1,8 +1,13 @@
-#if defined(OS_WINDOWS)
-#pragma once
-#include "../external/glew.h"
+
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
+
+#if defined(OS_ANDROID)
+#include <GLES2/gl2.h>
+#endif
+#if defined(OS_WINDOWS)
+#include "../external/glew.h"
+#endif
 
 using namespace vg::graphics;
 void gl::checkError()
@@ -13,19 +18,22 @@ void gl::checkError()
 		Log("vgengine", "OpenGL error: %i", error, "");
 	}
 }
+
 void gl::enableVertexAttribArray(unsigned int index)
 {
 	glEnableVertexAttribArray(index);
 	checkError();
 }
+
 void gl::vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data)
 {
 	glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, data);
 	checkError();
 }
-void gl::vertexAttribPointer(unsigned int indx, int size, unsigned int type, unsigned char normalized, int stride, const void* ptr)
+
+void gl::vertexAttribPointer(unsigned int indx, int size, int stride, const void* ptr)
 {
-	glVertexAttribPointer(indx, size, type, normalized, stride, ptr);
+	glVertexAttribPointer(indx, size, GL_FLOAT, GL_FALSE, stride, ptr);
 	checkError();
 }
 
@@ -105,6 +113,7 @@ void gl::clear()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	checkError();
 }
+
 void gl::clearColor(float red, float green, float blue, float alpha)
 {
 	glClearColor(GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha));
@@ -159,12 +168,12 @@ void gl::linkProgram(unsigned int program)
 	checkError();
 }
 
-int gl::linkStatus(unsigned int program)
+bool gl::linkStatus(unsigned int program)
 {
-	int result = GL_FALSE;
+	GLint result = GL_FALSE;
 	glGetProgramiv(program, GL_LINK_STATUS, &result);
 	checkError();
-	return result;
+	return result == GL_TRUE;
 }
 
 unsigned int gl::getUniformLocation(unsigned int program, std::string name)
@@ -209,12 +218,19 @@ void gl::getShaderInfoLog(unsigned int shader, int bufsize, int* length, char* i
 }
 
 
-void gl::getShaderiv(unsigned int shader, unsigned int pname, int* params)
+void gl::getShaderivInfoLog(unsigned int shader, int* params)
 {
-	glGetShaderiv(shader, pname, params);
+	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, params);
 	checkError();
 }
 
+bool gl::getShaderivCompileStatus(unsigned int shader)
+{
+	GLint params = GL_FALSE;
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &params);
+	checkError();
+	return params == GL_TRUE;
+}
 
 unsigned int gl::createProgram(void)
 {
@@ -223,14 +239,19 @@ unsigned int gl::createProgram(void)
 	return response;
 }
 
-
-unsigned int gl::createShader(unsigned int type)
+unsigned int gl::createVertexShader()
 {
-	unsigned int response = glCreateShader(type);
+	unsigned int response = glCreateShader(GL_VERTEX_SHADER);
 	checkError();
 	return response;
 }
 
+unsigned int gl::createFragmentShader()
+{
+	unsigned int response = glCreateShader(GL_FRAGMENT_SHADER);
+	checkError();
+	return response;
+}
 
 void gl::bindAttribLocation(unsigned int program, unsigned int index, const char* name)
 {
@@ -242,10 +263,6 @@ void gl::compileShader(unsigned int shader)
 {
 	glCompileShader(shader);
 	checkError();
-}
-unsigned int gl::getGL_FLOAT()
-{
-	return GL_FLOAT;
 }
 
 unsigned int gl::getGL_CLAMP_TO_EDGE()
@@ -301,14 +318,6 @@ unsigned int gl::getGL_ARRAY_BUFFER()
 	return GL_ARRAY_BUFFER;
 }
 
-unsigned int gl::getGL_FALSE()
-{
-	return GL_FALSE;
-}
-unsigned int gl::getGL_TRUE()
-{
-	return GL_TRUE;
-}
 unsigned int gl::getGL_UNSIGNED_SHORT()
 {
 	return GL_UNSIGNED_SHORT;
@@ -329,23 +338,3 @@ unsigned int gl::getGL_COMPILE_STATUS()
 {
 	return GL_COMPILE_STATUS;
 }
-
-unsigned int gl::getGL_FRAGMENT_SHADER()
-{
-	return GL_FRAGMENT_SHADER;
-}
-
-unsigned int gl::getGL_VERTEX_SHADER()
-{
-	return GL_VERTEX_SHADER;
-}
-
-unsigned int gl::getGL_INFO_LOG_LENGTH()
-{
-	return GL_INFO_LOG_LENGTH;
-}
-unsigned int gl::getGL_DEPTH_BUFFER_BIT()
-{
-	return GL_DEPTH_BUFFER_BIT;
-}
-#endif

@@ -1,4 +1,4 @@
-
+#include "engine\graphics\camera.h"
 #include "engine/game/sceneManager.h"
 #include "engine/game/scene.h"
 
@@ -53,6 +53,8 @@ void SceneManager::changeScene(string key)
 				mActiveScene->clearSystems();
 				mActiveScene->clearObjects();
 			}
+			graphics::Camera::setPosition(Vector2<float>(0, 0));
+			graphics::Camera::setZoom(1.0f);
 
 			mActiveScene = it->second;
 

@@ -135,9 +135,9 @@ namespace vg
 
 			/**
 				Compiles shader source code
-				@return GL_TRUE if compile was succesful
+				@return true if compile was succesful
 				*/
-			int compileShaderSource(unsigned int id, const std::string& source);
+			bool compileShaderSource(unsigned int id, const std::string& source);
 
 			/**
 				Prints shader ShaderInfoLog to debug log

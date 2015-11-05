@@ -174,6 +174,7 @@
     <ClCompile Include="source\graphics\camera.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />
     <ClCompile Include="source\graphics\indexBuffer.cpp" />
+    <ClCompile Include="source\graphics\opengl.cpp" />
     <ClCompile Include="source\graphics\screen.cpp" />
     <ClCompile Include="source\graphics\shader.cpp" />
     <ClCompile Include="source\graphics\texture.cpp" />
@@ -187,13 +188,11 @@
     <ClCompile Include="source\platforms\android\fileManager_android.cpp" />
     <ClCompile Include="source\platforms\android\graphicsContext_android.cpp" />
     <ClCompile Include="source\platforms\android\input_android.cpp" />
-    <ClCompile Include="source\platforms\android\opengl_android.cpp" />
     <ClCompile Include="source\platforms\android\soundeffect_android.cpp" />
     <ClCompile Include="source\platforms\windows\application_windows.cpp" />
     <ClCompile Include="source\platforms\windows\fileManager_windowscpp.cpp" />
     <ClCompile Include="source\platforms\windows\graphicsContext_windows.cpp" />
     <ClCompile Include="source\platforms\windows\input_windows.cpp" />
-    <ClCompile Include="source\platforms\windows\opengl_windows.cpp" />
     <ClCompile Include="source\platforms\windows\soundeffect_windows.cpp" />
     <ClCompile Include="source\sound\audioManager.cpp" />
     <ClCompile Include="source\sound\sound.cpp" />

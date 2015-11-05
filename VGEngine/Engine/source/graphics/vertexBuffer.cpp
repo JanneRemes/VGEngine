@@ -54,7 +54,7 @@ void VertexBuffer::bind()
 	for (int i = 0; i < mFormat.size(); i++)
 	{
 		enableVertexAttribArray(mFormat[i].mUsage);
-		vertexAttribPointer(mFormat[i].mUsage, mFormat[i].mType, getGL_FLOAT(), getGL_FALSE(), mStride * sizeof(float), (void*)(offset));
+		gl::vertexAttribPointer(mFormat[i].mUsage, mFormat[i].mType, mStride * sizeof(float), (void*)(offset));
 		offset += mFormat[i].mType * sizeof(float);
 	}
 }

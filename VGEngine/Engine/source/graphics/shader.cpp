@@ -1,15 +1,17 @@
-#include <string>
 
 #include "engine/graphics/shader.h"
 #include "engine/utility/logger.h"
 #include "engine/graphics/opengl.h"
 
+#include <string>
+
 const std::string FOLDER = "shaders/"; ///< subfolder for shader sources
-using namespace std;
-using namespace vg::graphics;
-using namespace glm;
-using namespace vg::graphics::gl;
+
 using namespace vg::core;
+using namespace vg::graphics;
+using namespace std;
+using namespace glm;
+
 Shader::Shader(const VariableNames& attributeNames, const std::vector<std::string>& uniformNames)
 	: mVertexElementNames(attributeNames), mUniformNames(uniformNames)
 {
@@ -23,13 +25,13 @@ Shader::~Shader()
 
 void Shader::initialize()
 {
-    mProgramId = createProgram();
-    mVertexId = createShader(getGL_VERTEX_SHADER());
-    mFragmentId = createShader(getGL_FRAGMENT_SHADER());
+    mProgramId = gl::createProgram();
+    mVertexId = gl::createVertexShader();
+    mFragmentId = gl::createFragmentShader();
 
     for (auto& pair : mVertexElementNames)
     {
-        bindAttribLocation(mProgramId, pair.first, pair.second.c_str());
+        gl::bindAttribLocation(mProgramId, pair.first, pair.second.c_str());
     }
 
     mInitialized = true;
@@ -48,7 +50,7 @@ bool Shader::load(vg::core::FileManager& fileManager, const std::string& vertexP
     // compile shaders
     std::string buffer;
     fileManager.readAsset(FOLDER + vertexPath, buffer);
-    if (compileShaderSource(mVertexId, buffer) != getGL_TRUE())
+    if (!compileShaderSource(mVertexId, buffer))
     {
         Log("vgengine", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
@@ -56,7 +58,7 @@ bool Shader::load(vg::core::FileManager& fileManager, const std::string& vertexP
     }
 
     fileManager.readAsset(FOLDER + fragmentPath, buffer);
-    if (compileShaderSource(mFragmentId, buffer) != getGL_TRUE())
+	if (!compileShaderSource(mFragmentId, buffer))
     {
         Log("vgengine", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
@@ -68,7 +70,7 @@ bool Shader::load(vg::core::FileManager& fileManager, const std::string& vertexP
 	gl::attachShader(mProgramId, mFragmentId);
     gl::linkProgram(mProgramId);
     
-	if (gl::linkStatus(mProgramId) != getGL_TRUE())
+	if (!gl::linkStatus(mProgramId))
     {
         Log("vgengine", "Shader program link error!", "");
         return false;
@@ -138,22 +140,20 @@ vector<string> Shader::getDefaultUniformNames()
 	};
 };
 
-int Shader::compileShaderSource(unsigned int id, const std::string& source)
+bool Shader::compileShaderSource(unsigned int id, const std::string& source)
 {
-    int result = getGL_FALSE();
     const char* temp = source.c_str();
-    shaderSource(id, 1, &temp, NULL);
-    compileShader(id);
-    getShaderiv(id, getGL_COMPILE_STATUS(), &result);
-    return result;
+    gl::shaderSource(id, 1, &temp, NULL);
+    gl::compileShader(id);
+	return gl::getShaderivCompileStatus(id);
 }
 
 void Shader::printErrorLog(unsigned int shader)
 {
     int bufferLenght;
-    getShaderiv(shader, getGL_INFO_LOG_LENGTH(), &bufferLenght);
+    gl::getShaderivInfoLog(shader, &bufferLenght);
     vector<char> buffer(bufferLenght);
-    getShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
+    gl::getShaderInfoLog(shader, buffer.size(), nullptr, buffer.data());
     Log("vgengine", "%s", buffer.data());
 }
 
