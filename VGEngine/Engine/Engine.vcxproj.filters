@@ -201,8 +201,6 @@
     <ClInclude Include="external\glew.h">
       <Filter>external</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\animationComponent.h" />
-    <ClInclude Include="include\engine\game\animationSystem.h" />
     <ClInclude Include="include\engine\input\mouse.h">
       <Filter>include\input</Filter>
     </ClInclude>
@@ -226,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="include\engine\graphics\screen.h">
       <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\animationComponent.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\game\animationSystem.h">
+      <Filter>include\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

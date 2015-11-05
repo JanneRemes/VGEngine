@@ -7,6 +7,7 @@ namespace vg
 	{
 
 		friend class AnimationSystem;
+		friend class RenderSystem;
 	public:
 		AnimationComponent(float mAnimationInterval, int frameRowCount, int frameColumnCount, int frameTotalCount);
 		~AnimationComponent();

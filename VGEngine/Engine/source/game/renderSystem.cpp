@@ -10,7 +10,7 @@
 #include "engine/game/renderComponent.h"
 #include "engine/graphics/screen.h"
 #include "engine/graphics/camera.h"
-
+#include "engine/game/animationComponent.h"
 #include "../external/glm/gtc/matrix_transform.hpp"
 
 #include <vector>
@@ -34,6 +34,10 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		RenderComponent* render = nullptr;
+		AnimationComponent *animComp = (*it)->getComponent<AnimationComponent>();
+		//Don't render if animationcomponent is not updated yet (wait one frame)
+		if (animComp != nullptr && !animComp->isInitialized)
+			return;
 		auto *components = (*it)->getAllComponents();
 		for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
 		{
@@ -43,7 +47,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 				break;
 			}
 		}
-
+		
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 		if (render != nullptr)
 		{
