@@ -353,12 +353,6 @@
     <ClCompile Include="source\platforms\android\graphicsContext_android.cpp">
       <Filter>source\platforms\android</Filter>
     </ClCompile>
-    <ClCompile Include="source\platforms\windows\opengl_windows.cpp">
-      <Filter>source\platforms\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="source\platforms\android\opengl_android.cpp">
-      <Filter>source\platforms\android</Filter>
-    </ClCompile>
     <ClCompile Include="source\platforms\android\input_android.cpp">
       <Filter>source\platforms\android</Filter>
     </ClCompile>
@@ -399,6 +393,9 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\graphics\screen.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\opengl.cpp">
       <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
