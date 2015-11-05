@@ -104,7 +104,7 @@
       <PrecompiledHeader />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glew32d.lib;opengl32.lib;Engine.lib;freetype.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32d.lib;opengl32.lib;Engine.lib;freetype.lib;Box2D.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>

@@ -45,7 +45,7 @@ namespace vg
             */
             std::string getPath();
         protected:
-            const std::string mPath; ///< Assets filepath
+            std::string mPath; ///< Assets filepath
             bool mIsLoaded = false;  ///< Used for determining whether the asset is loaded or not
         private:
             size_t mUseCount = 1;    ///< The number of how many assets are being used/loaded

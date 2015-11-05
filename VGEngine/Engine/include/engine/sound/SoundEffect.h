@@ -104,7 +104,7 @@ namespace vg
             SLSeekItf Seek;					///< <description>
             SLPlaybackRateItf RateObject;	///< <description>
 
-
+			std::string mSoundPath;
             SLuint32 mState;				///< Playing state of the sound
         };
     }
