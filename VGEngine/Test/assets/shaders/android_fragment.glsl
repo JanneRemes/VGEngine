@@ -1,9 +1,9 @@
-varying lowp vec4 varyColor;
-varying lowp vec2 varyTexCoord;
+varying mediump vec4 varyColor;
+varying mediump vec2 varyTexCoord;
 
-uniform lowp sampler2D unifTexture;
-uniform lowp float unifNoTexture;
-uniform lowp float unifFontTexture;
+uniform mediump sampler2D unifTexture;
+uniform mediump float unifNoTexture;
+uniform mediump float unifFontTexture;
 
 void main()
 {
@@ -16,7 +16,7 @@ void main()
 	{
 		if (unifFontTexture > 0.5)
 		{
-			lowp float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
+			mediump float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
 			gl_FragColor = vec4(varyColor.rgb, alpha);
 		}
 		else
