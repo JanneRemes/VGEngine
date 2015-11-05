@@ -3,6 +3,7 @@
 #include "systems/ShipSystem.h"
 #include "systems/enemySystem.h"
 #include "systems/PhysicsTestSystem.h"
+#include "systems/sceneChangeSystem.h"
 
 #include "engine/game/transformComponent.h"
 #include "engine/game/triangleComponent.h"
@@ -84,9 +85,15 @@ void MainScene::loadObjects()
 	EnemySystem *enemySystem = new EnemySystem();
 	enemySystem->setScene(this);
 	Game::getInstance()->addComponentSystem(this, enemySystem);
-
+	
+	// Physics system
 	PhysicsTestSystem *fysiks = new PhysicsTestSystem(this);
 	Game::getInstance()->addComponentSystem(this, fysiks);
+
+	// Scene change system
+	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
+	Game::getInstance()->addComponentSystem(this, sceneChange);
+
 	//Animation test
 
 	GameObject *animationTest = new GameObject("animationTest");
