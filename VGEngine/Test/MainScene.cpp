@@ -109,11 +109,9 @@ void MainScene::loadObjects()
 	addGameObject(animationTest);
 
 	//sound
-#ifdef OS_ANDROID
-	assetManager->load<sound::Sound>("muumitechno.mp3");
+	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
 	Game::getInstance()->getAudioManager()->addSound("music",
-		*assetManager->get<sound::Sound>("muumitechno.mp3"));
+		*assetManager->get<sound::Sound>("Raise your Kappa!.mp3"));
 	Game::getInstance()->getAudioManager()->play("music");
 	Game::getInstance()->getAudioManager()->loopEnabled("music", true);
-#endif
 }
