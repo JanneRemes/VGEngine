@@ -65,7 +65,10 @@ namespace vg
 		Clears objects from the active objects pool
 		*/
 		void clearObjects();
-
+		/**
+		Resets systems
+		*/
+		void clearSystems();
 	private:
 		bool paused;							///< Bool which is used for determining if scene is paused
 		SystemManager mSystemManager;			///< Updates different component systems

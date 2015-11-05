@@ -43,14 +43,22 @@ void SceneManager::update(float deltaTime)
 
 void SceneManager::changeScene(string key)
 {
-	if (mActiveScene != nullptr)
-		mActiveScene->clearObjects();
+
 	for (auto it = mSceneTemplates.begin(); it != mSceneTemplates.end(); it++)
 	{
 		if (it->first == key)
 		{
+			if (mActiveScene != nullptr)
+			{
+				mActiveScene->clearSystems();
+				mActiveScene->clearObjects();
+			}
+
 			mActiveScene = it->second;
+
+
 			mActiveScene->loadObjects();
+			
 		}
 	}
 }

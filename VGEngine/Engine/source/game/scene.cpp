@@ -49,9 +49,13 @@ void Scene::clearObjects()
 	for (auto it = mActivePool.begin(); it != mActivePool.end(); it++)
 	{
 		delete (*it);
-		it = mActivePool.erase(it);
-		if (it == mActivePool.end())
-			break;
 	}
 
+	mActivePool.clear();
+
+}
+void Scene::clearSystems()
+{
+	mSystemManager.clearSystems();
+	mSystemManager.addDefaultSystems();
 }

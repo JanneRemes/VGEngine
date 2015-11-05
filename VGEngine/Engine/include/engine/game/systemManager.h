@@ -9,6 +9,7 @@ namespace vg
 	*/
 	class SystemManager
 	{
+		friend class Scene;
 	public:
 		SystemManager();
 		~SystemManager();
@@ -19,7 +20,8 @@ namespace vg
 		*/
 		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 		void addSystem(System *system);
-
+		void clearSystems();
+		
 		/**
 		@return system with template type from system list.
 		*/
@@ -36,7 +38,7 @@ namespace vg
 		}
 	private:
 		std::vector<System*> systems;
-
+		void addDefaultSystems();
 	};
 
 }

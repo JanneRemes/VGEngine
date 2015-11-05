@@ -124,6 +124,7 @@
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
     <ClInclude Include="include\systems\PhysicsTestSystem.h" />
+    <ClInclude Include="include\systems\sceneChangeSystem.h" />
     <ClInclude Include="include\systems\shipSystem.h" />
     <ClInclude Include="include\test.h" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />
     <ClCompile Include="source\systems\PhysicsTestSystem.cpp" />
+    <ClCompile Include="source\systems\sceneChangeSystem.cpp" />
     <ClCompile Include="source\systems\shipSystem.cpp" />
   </ItemGroup>
   <ItemGroup>

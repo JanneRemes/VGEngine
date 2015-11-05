@@ -12,11 +12,12 @@ using namespace vg;
 void mainGame(Game* game)
 {
 	Game::log("test");
-	MainScene *scene = new MainScene();
-	//CameraScene* scene = new CameraScene();
-	game->getSceneManager()->addTemplateScene("scene", scene);
 
+	MainScene *scene = new MainScene();
+	game->getSceneManager()->addTemplateScene("scene", scene);
 	game->getSceneManager()->changeScene("scene");
 
+	CameraScene* cameraScene = new CameraScene();
+	game->getSceneManager()->addTemplateScene("cameraScene", cameraScene);
 
 }
