@@ -7,6 +7,7 @@
 #include "systems/sceneChangeSystem.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/game.h"
+#include "engine/game/textComponent.h"
 
 using namespace vg;
 
@@ -55,4 +56,18 @@ void CameraScene::loadObjects()
 	// Scene change system
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
+
+	//text
+	for (int i = 0; i < 5; i++)
+	{
+		TextComponent* text = new TextComponent("arial.ttf", 12u);
+		text->setText("Koala");
+		text->setColour(256, 256, 256);
+		GameObject* obj = new GameObject("koalatext");
+		obj->addComponent(new TransformComponent(Vector2<float>(430 - i * 50, 560 - i * 20),
+			Vector2<float>(0, 0), 0.0f, 8-i));
+		obj->addComponent(text);
+		addGameObject(obj);
+	}
+	
 }
