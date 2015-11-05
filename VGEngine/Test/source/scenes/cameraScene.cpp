@@ -4,6 +4,8 @@
 
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
+#include "systems\sceneChangeSystem.h"
+#include "engine\game\animationComponent.h"
 
 using namespace vg;
 
@@ -34,6 +36,22 @@ void CameraScene::loadObjects()
 		addGameObject(obj2);
 	}
 
+
+	GameObject *animationTest = new GameObject("animationTest");
+	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+	animationTest->addComponent(animationComponent);
+
+	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(128 * 7, 128), Vector2<float>(256, 256), 0.0f);
+	animationTest->addComponent(animationTransform);
+	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+
+	addGameObject(animationTest);
+
+
 	CameraSystem* camSys = new CameraSystem();
 	Game::getInstance()->addComponentSystem(this, camSys);
+
+	// Scene change system
+	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
+	Game::getInstance()->addComponentSystem(this, sceneChange);
 }

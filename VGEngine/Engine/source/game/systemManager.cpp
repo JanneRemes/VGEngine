@@ -12,14 +12,7 @@ using namespace vg::graphics;
 
 SystemManager::SystemManager()
 {
-	addSystem(new DeleteSystem());
-
-	addSystem(new TextRenderSystem());
-	addSystem(new AnimationSystem());
-	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81);
-	addSystem(physicsSystem);
-	physicsSystem->createBorders(0, 0, Screen::getX(), Screen::getY());
-	addSystem(new RenderSystem());
+	addDefaultSystems();
 }
 
 
@@ -28,9 +21,12 @@ SystemManager::~SystemManager()
 }
 void SystemManager::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {
-	for (auto it = systems.begin(); it != systems.end(); it++)
+	for (int i = 0; i < systems.size(); i++)
 	{
-		(*it)->update(gameObjects, deltaTime);
+		Scene *scene = Game::getInstance()->getSceneManager()->getActiveScene();
+		systems[i]->update(gameObjects, deltaTime);
+		if (scene != Game::getInstance()->getSceneManager()->getActiveScene())
+			break;
 	}
 
 
@@ -45,4 +41,21 @@ void SystemManager::addSystem(System *system)
 	});
 
 
+}
+void SystemManager::clearSystems()
+{
+	for (int i = 0; i < systems.size(); i++)
+		delete systems[i];
+	systems.clear();
+}
+void SystemManager::addDefaultSystems()
+{
+	addSystem(new DeleteSystem());
+
+	addSystem(new TextRenderSystem());
+	addSystem(new AnimationSystem());
+	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81);
+	addSystem(physicsSystem);
+	physicsSystem->createBorders(0, 0, Screen::getX(), Screen::getY());
+	addSystem(new RenderSystem());
 }

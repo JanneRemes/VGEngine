@@ -63,6 +63,9 @@
     <ClInclude Include="include\systems\shipSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\systems\sceneChangeSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -90,6 +93,9 @@
       <Filter>source\systems</Filter>
     </ClCompile>
     <ClCompile Include="source\systems\shipSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\sceneChangeSystem.cpp">
       <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>
