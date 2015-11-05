@@ -5,6 +5,7 @@
 
 #include "scenes/MainScene.h"
 #include "scenes/cameraScene.h"
+#include "scenes/pappaScene.h"
 
 #include "engine/game/physicsSystem.h"
 using namespace vg;
@@ -19,5 +20,8 @@ void mainGame(Game* game)
 
 	CameraScene* cameraScene = new CameraScene();
 	game->getSceneManager()->addTemplateScene("cameraScene", cameraScene);
+
+	PappaScene* pappaScene = new PappaScene();
+	game->getSceneManager()->addTemplateScene("pappaScene", pappaScene);
 
 }

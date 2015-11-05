@@ -66,6 +66,9 @@
     <ClInclude Include="include\systems\sceneChangeSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\Scenes\pappaScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="source\systems\sceneChangeSystem.cpp">
       <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\pappaScene.cpp">
+      <Filter>source\scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

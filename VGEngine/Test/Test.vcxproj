@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="include\Scenes\cameraScene.h" />
     <ClInclude Include="include\Scenes\MainScene.h" />
+    <ClInclude Include="include\Scenes\pappaScene.h" />
     <ClInclude Include="include\Scenes\testScene.h" />
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="source\dummy.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\scenes\cameraScene.cpp" />
+    <ClCompile Include="source\scenes\pappaScene.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />

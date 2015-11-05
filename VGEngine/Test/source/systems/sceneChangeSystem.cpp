@@ -23,12 +23,17 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Num1) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		Game::getInstance()->getSceneManager()->changeScene("cameraScene");
+		Game::getInstance()->getSceneManager()->changeScene("scene");
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Num2) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		Game::getInstance()->getSceneManager()->changeScene("scene");
+		Game::getInstance()->getSceneManager()->changeScene("cameraScene");
+	}
+
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Num3) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		Game::getInstance()->getSceneManager()->changeScene("pappaScene");
 	}
 
 #endif
