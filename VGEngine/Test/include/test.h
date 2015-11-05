@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include <engine/engine.h>
-#include <android/log.h>
+#include "engine/engine.h"
 
 class Test
 {

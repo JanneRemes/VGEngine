@@ -3,8 +3,7 @@
 
 #include "engine/graphics/graphicsContext.h"
 #include "engine/graphics/shader.h"
-#include "engine/assets/fileManager.h"
-#include <engine/utility/Vector2.h>
+#include "engine/utility/Vector2.h"
 
 #include <string>
 #include <vector>

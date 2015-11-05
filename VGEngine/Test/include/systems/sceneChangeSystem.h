@@ -1,10 +1,12 @@
+
 #pragma once
+
+#include "engine/game/system.h"
+#include "engine/game/gameObject.h"
+#include "engine/utility/timer.h"
+#include "engine/game/scene.h"
+
 #include <vector>
-#include <engine/game/system.h>
-#include <engine/game/gameObject.h>
-#include <engine/game/game.h>
-#include <engine/utility/timer.h>
-#include <engine/game/scene.h>
 
 class sceneChangeSystem : public vg::System
 {

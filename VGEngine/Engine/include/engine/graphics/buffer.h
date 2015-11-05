@@ -3,16 +3,14 @@
 
 #include <vector>
 #include "engine\graphics\opengl.h"
-//#include <GLES2/gl2.h>
 
 namespace vg
 {
 	namespace graphics
 	{
 		/**
-			Manages buffers
-			*/
-		using namespace vg::graphics::gl;
+		Manages and contains buffer data
+		*/
 		template<class T>
 		class Buffer
 		{
@@ -27,10 +25,10 @@ namespace vg
 				: mTarget(target)
 				, mUsage(usage)
 			{
-				genBuffers(1, &mId);
-				bindBuffer(mTarget, mId);
-				bufferData(mTarget, 0, nullptr, mUsage);
-				bindBuffer(mTarget, 0);
+				gl::genBuffers(1, &mId);
+				gl::bindBuffer(mTarget, mId);
+				gl::bufferData(mTarget, 0, nullptr, mUsage);
+				gl::bindBuffer(mTarget, 0);
 			}
 
 			/**
@@ -43,10 +41,10 @@ namespace vg
 				: mTarget(target)
 				, mUsage(usage)
 			{
-				genBuffers(1, &mId);
-				bindBuffer(mTarget, mId);
-				bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
-				bindBuffer(mTarget, 0);
+				gl::genBuffers(1, &mId);
+				gl::bindBuffer(mTarget, mId);
+				gl::bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
+				gl::bindBuffer(mTarget, 0);
 				mSize = data.size();
 			}
 
@@ -55,7 +53,7 @@ namespace vg
 			*/
 			virtual ~Buffer()
 			{
-				deleteBuffers(1, &mId);
+				gl::deleteBuffers(1, &mId);
 			}
 
 			/**
@@ -64,9 +62,9 @@ namespace vg
 			*/
 			void setData(const std::vector<T>& data)
 			{
-				bindBuffer(mTarget, mId);
-				bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
-				bindBuffer(mTarget, 0);
+				gl::bindBuffer(mTarget, mId);
+				gl::bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
+				gl::bindBuffer(mTarget, 0);
 				mSize = data.size();
 			}
 
@@ -77,9 +75,9 @@ namespace vg
 			*/
 			void setData(size_t offset, const std::vector<T>& data)
 			{
-				bindBuffer(mTarget, mId);
-				bufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data[0]);
-				bindBuffer(mTarget, 0);
+				gl::bindBuffer(mTarget, mId);
+				gl::bufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data[0]);
+				gl::bindBuffer(mTarget, 0);
 			}
 
 			/**
@@ -87,7 +85,7 @@ namespace vg
 			*/
 			virtual void bind()
 			{
-				bindBuffer(mTarget, mId);
+				gl::bindBuffer(mTarget, mId);
 			}
 
 			/**
@@ -95,7 +93,7 @@ namespace vg
 			*/
 			void unbind()
 			{
-				bindBuffer(mTarget, 0);
+				gl::bindBuffer(mTarget, 0);
 			}
 
 			/**

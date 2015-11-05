@@ -1,9 +1,11 @@
-#include <engine\game\physicsPolygonComponent.h>
-#include "engine\game\game.h"
-#include "engine\game\physicsSystem.h"
-#include "engine\game\scene.h"
+
+#include "engine/game/physicsPolygonComponent.h"
+#include "engine/game/game.h"
+#include "engine/game/physicsSystem.h"
+#include "engine/game/scene.h"
 
 using namespace vg;
+
 PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, BODYTYPE type, float width, float height) : PhysicsComponent(component, type)
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();

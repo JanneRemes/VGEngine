@@ -71,22 +71,23 @@ namespace vg
 			void enableVertexAttribArray(unsigned int index);
 			void bindBuffer(unsigned int target, unsigned int buffer);
 			void deleteBuffers(int n, const unsigned int* buffers);
-			void bufferData(unsigned int target, signed   long  int size, const void* data, unsigned int usage);
+			void bufferData(unsigned int target, signed long int size, const void* data, unsigned int usage);
 			void genBuffers(int n, unsigned int* buffers);
-
+			void bufferSubData(unsigned int target, int offset, signed long int size, const void* data);
 			
 			///TODO remove
 			unsigned int getGL_CLAMP_TO_EDGE();
-			unsigned int getGL_COLOR_BUFFER_BIT();
-			unsigned int getGL_ELEMENT_ARRAY_BUFFER();
 			unsigned int getGL_LINEAR();
 			unsigned int getGL_TEXTURE_MAG_FILTER();
 			unsigned int getGL_TEXTURE_MIN_FILTER();
 			unsigned int getGL_TEXTURE_WRAP_S();
 			unsigned int getGL_TEXTURE_WRAP_T();
-			unsigned int getGL_DYNAMIC_DRAW();
-			unsigned int getGL_ARRAY_BUFFER();
 			unsigned int getGL_NEAREST();
+
+			unsigned int getGL_ELEMENT_ARRAY_BUFFER();
+			unsigned int getGL_ARRAY_BUFFER();
+			unsigned int getGL_DYNAMIC_DRAW();
+			unsigned int getGL_STATIC_DRAW();
 		}
 	}
 }

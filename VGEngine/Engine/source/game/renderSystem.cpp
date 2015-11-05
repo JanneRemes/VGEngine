@@ -1,16 +1,15 @@
 
 #include "engine/game/renderSystem.h"
-#include "engine/game/renderComponent.h"
-#include "engine/graphics/graphics.h"
 #include "engine/game/game.h"
+#include "engine/game/animationComponent.h"
+#include "engine/game/triangleComponent.h"
+#include "engine/graphics/graphics.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
-#include "engine/game/triangleComponent.h"
 #include "engine/graphics/opengl.h"
-#include "engine/game/renderComponent.h"
 #include "engine/graphics/screen.h"
 #include "engine/graphics/camera.h"
-#include "engine/game/animationComponent.h"
+
 #include "../external/glm/gtc/matrix_transform.hpp"
 
 #include <vector>

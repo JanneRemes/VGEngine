@@ -1,7 +1,6 @@
 
-#include <engine/game/scene.h>
-#include <engine/game/transformComponent.h>
-#include <engine/game.h>
+#include "engine/game/scene.h"
+#include "engine/game/transformComponent.h"
 
 #include <algorithm>
 

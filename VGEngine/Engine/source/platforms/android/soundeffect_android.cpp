@@ -1,9 +1,10 @@
+
 #ifdef OS_ANDROID
-#include <engine/sound/soundEffect.h>
-#include <engine/utility/logger.h>
-#include <engine/assets/fileManager.h>
-//#include <SLES/OpenSLES_Android.h>
-#include "engine\platforms\android\OpenSLES_Android.h"
+#include "engine/sound/soundEffect.h"
+#include "engine/utility/logger.h"
+#include "engine/assets/fileManager.h"
+#include "engine/platforms/android/OpenSLES_Android.h"
+
 using namespace vg::sound;
 
 SoundEffect::SoundEffect(const Sound& soundFile)

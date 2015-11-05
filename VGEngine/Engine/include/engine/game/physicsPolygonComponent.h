@@ -1,5 +1,7 @@
+
 #pragma once
-#include <engine\game\physicsComponent.h>
+
+#include "engine/game/physicsComponent.h"
 
 namespace vg
 {

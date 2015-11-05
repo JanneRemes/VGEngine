@@ -1,8 +1,11 @@
-#include <engine\game\physicsCircleComponent.h>
-#include "engine\game\game.h"
-#include "engine\game\physicsSystem.h"
-#include "engine\game\scene.h"
+
+#include "engine/game/physicsCircleComponent.h"
+#include "engine/game/game.h"
+#include "engine/game/physicsSystem.h"
+#include "engine/game/scene.h"
+
 using namespace vg;
+
 PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BODYTYPE type, float radius) : PhysicsComponent(component, type)
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();

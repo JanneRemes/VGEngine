@@ -1,7 +1,7 @@
 
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/opengl.h"
-//#include <GLES2/gl2.h>
+
 using namespace vg::graphics;
 
 const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
@@ -28,7 +28,7 @@ VertexBuffer::VertexBuffer()
 }
 
 VertexBuffer::VertexBuffer(const std::vector<VertexElement>& format)
-	: Buffer(getGL_ARRAY_BUFFER(), getGL_DYNAMIC_DRAW())
+	: Buffer(gl::getGL_ARRAY_BUFFER(), gl::getGL_DYNAMIC_DRAW())
 	, mFormat(format)
 	, mStride(countStride(format))
 {
@@ -40,7 +40,7 @@ VertexBuffer::VertexBuffer(const std::vector<float>& data)
 }
 
 VertexBuffer::VertexBuffer(const std::vector<float>& data, const std::vector<VertexElement>& format)
-	: Buffer(getGL_ARRAY_BUFFER(), data, getGL_DYNAMIC_DRAW())
+	: Buffer(gl::getGL_ARRAY_BUFFER(), data, gl::getGL_DYNAMIC_DRAW())
 	, mFormat(format)
 	, mStride(countStride(format))
 {
@@ -53,7 +53,7 @@ void VertexBuffer::bind()
 
 	for (int i = 0; i < mFormat.size(); i++)
 	{
-		enableVertexAttribArray(mFormat[i].mUsage);
+		gl::enableVertexAttribArray(mFormat[i].mUsage);
 		gl::vertexAttribPointer(mFormat[i].mUsage, mFormat[i].mType, mStride * sizeof(float), (void*)(offset));
 		offset += mFormat[i].mType * sizeof(float);
 	}

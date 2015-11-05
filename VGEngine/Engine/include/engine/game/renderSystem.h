@@ -2,16 +2,18 @@
 #pragma once
 
 #include "engine/game/system.h"
-#include "engine/graphics/shader.h"
+#include "engine/graphics/vertexBuffer.h"
+#include "engine/graphics/indexBuffer.h"
 #include "engine/game/transformComponent.h"
-#include "engine/graphics/shader.h"
-#include <engine/graphics/vertexBuffer.h>
-#include <engine/graphics/indexBuffer.h>
 
 namespace vg
 {
 	// Forward declaration
 	class TextRenderSystem;
+	namespace graphics
+	{
+		class Shader;
+	}
 
 	/**
 	System that draws GameObjects with RenderComponents

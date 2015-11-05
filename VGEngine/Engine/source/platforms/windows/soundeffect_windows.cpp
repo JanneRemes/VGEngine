@@ -1,12 +1,16 @@
+
 #ifdef OS_WINDOWS
-#include <engine/sound/soundEffect.h>
-#include <engine/utility/logger.h>
-#include <engine/assets/fileManager.h>
+#include "engine/sound/soundEffect.h"
+#include "engine/utility/logger.h"
+#include "engine/assets/fileManager.h""
+
 #include <irrKlang.h>
 
 using namespace vg::sound;
 using namespace irrklang;
+
 ISound *mySound = nullptr;
+
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
 	Sound doge = soundFile;

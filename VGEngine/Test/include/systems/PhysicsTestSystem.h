@@ -1,14 +1,14 @@
 
 #pragma once
 
-#include <vector>
-#include <engine/game/system.h>
-#include <engine/game/gameObject.h>
-#include <engine/game/game.h>
-#include <engine/utility/timer.h>
-#include <engine/game/scene.h>
+#include "engine/game/system.h"
+#include "engine/game/gameObject.h"
+#include "engine/utility/timer.h"
+#include "engine/game/scene.h"
 #include "engine/game/physicsSystem.h"
-#include "engine\utility\Vector2.h"
+#include "engine/utility/Vector2.h"
+
+#include <vector>
 
 class PhysicsTestSystem : public vg::System
 {

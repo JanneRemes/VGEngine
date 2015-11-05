@@ -1,16 +1,19 @@
 
 #pragma once
 
+#include "engine/assets/asset.h"
+
 #include <string>
 #include <vector>
 #include <map>
-#include "engine/assets/asset.h"
-#include "engine/assets/fileManager.h"
 
 namespace vg
 {
     namespace core
     {
+		//forward declaration
+		class FileManager;
+
         /**
             Manages the lifetime of asset files and optimizes their (un)loading.
             */

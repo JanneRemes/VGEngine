@@ -118,10 +118,10 @@ void TextComponent::initializeFace()
 	gl::activeTexture();
 	gl::bindTexture(mTexture);
 
-	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
-	gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
-	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_LINEAR());
-	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_LINEAR());
+	gl::texParameteri(gl::getGL_TEXTURE_WRAP_S(), gl::getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(gl::getGL_TEXTURE_WRAP_T(), gl::getGL_CLAMP_TO_EDGE());
+	gl::texParameteri(gl::getGL_TEXTURE_MIN_FILTER(), gl::getGL_LINEAR());
+	gl::texParameteri(gl::getGL_TEXTURE_MAG_FILTER(), gl::getGL_LINEAR());
 
 	gl::bindTexture(0);
 }

@@ -1,9 +1,8 @@
 
 #pragma once
 
-#include <engine/game/system.h>
-#include <engine/game/game.h>
-#include <engine/game/scene.h>
+#include "engine/game/system.h"
+#include "engine/game/scene.h"
 
 namespace vg
 {

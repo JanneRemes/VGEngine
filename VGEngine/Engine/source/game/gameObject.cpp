@@ -1,11 +1,9 @@
 
-#include <engine/game/gameObject.h>
-#include <engine/game/game.h>
-#include <engine/game/renderComponent.h>
-#include <engine/game/quadrangleComponent.h>
-#include <engine/game/triangleComponent.h>
-#include <engine/graphics/texture.h>
-#include <engine/game/transformComponent.h>
+#include "engine/game/gameObject.h"
+#include "engine/game/game.h"
+#include "engine/game/quadrangleComponent.h"
+#include "engine/game/triangleComponent.h"
+#include "engine/game/transformComponent.h"
 
 #include <algorithm>
 

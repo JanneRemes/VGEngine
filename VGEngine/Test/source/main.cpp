@@ -2,12 +2,12 @@
 #include "engine/game/game.h"
 #include "engine/game/SceneManager.h"
 #include "engine/game/scene.h"
+#include "engine/game/physicsSystem.h"
 
 #include "scenes/MainScene.h"
 #include "scenes/cameraScene.h"
 #include "scenes/pappaScene.h"
 
-#include "engine/game/physicsSystem.h"
 using namespace vg;
 
 void mainGame(Game* game)

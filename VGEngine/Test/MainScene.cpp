@@ -12,6 +12,7 @@
 #include "engine/game/physicsComponent.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/animationSystem.h"
+#include "engine/game/game.h"
 
 using namespace vg;
 

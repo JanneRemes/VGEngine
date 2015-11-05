@@ -1,9 +1,10 @@
 
 #pragma once
 
-#include <vector>
-#include "engine/game/game.h"
 #include "engine/game/systemManager.h"
+
+#include <vector>
+
 namespace vg
 {
 	class GameObject;

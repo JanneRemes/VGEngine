@@ -198,6 +198,12 @@ void gl::genBuffers(int n, unsigned int* buffers)
 	checkError();
 }
 
+void gl::bufferSubData(unsigned int target, int offset, signed long int size, const void* data)
+{
+	glBufferSubData(target, offset, size, data);
+	checkError();
+}
+
 void gl::shaderSource(unsigned int shader, int count, const char** string, const int* length)
 {
 	glShaderSource(shader, count, string, length);
@@ -260,25 +266,20 @@ void gl::compileShader(unsigned int shader)
 }
 
 
-//////////////////////////////////////////
-unsigned int gl::getGL_CLAMP_TO_EDGE()
-{
-	return GL_CLAMP_TO_EDGE;
-}
-
-unsigned int gl::getGL_COLOR_BUFFER_BIT()
-{
-	return GL_COLOR_BUFFER_BIT;
-}
-
-unsigned int gl::getGL_ELEMENT_ARRAY_BUFFER()
-{
-	return GL_ELEMENT_ARRAY_BUFFER;
-}
-
+// texture
 unsigned int gl::getGL_LINEAR()
 {
 	return GL_LINEAR;
+}
+
+unsigned int gl::getGL_NEAREST()
+{
+	return GL_NEAREST;
+}
+
+unsigned int gl::getGL_CLAMP_TO_EDGE()
+{
+	return GL_CLAMP_TO_EDGE;
 }
 
 unsigned int gl::getGL_TEXTURE_MAG_FILTER()
@@ -301,17 +302,24 @@ unsigned int gl::getGL_TEXTURE_WRAP_T()
 	return GL_TEXTURE_WRAP_T;
 }
 
-unsigned int gl::getGL_DYNAMIC_DRAW()
-{
-	return GL_DYNAMIC_DRAW;
-}
+
+// buffers
 unsigned int gl::getGL_ARRAY_BUFFER()
 {
 	return GL_ARRAY_BUFFER;
 }
 
-unsigned int gl::getGL_NEAREST()
+unsigned int gl::getGL_ELEMENT_ARRAY_BUFFER()
 {
-	return GL_NEAREST;
+	return GL_ELEMENT_ARRAY_BUFFER;
 }
 
+unsigned int gl::getGL_DYNAMIC_DRAW()
+{
+	return GL_DYNAMIC_DRAW;
+}
+
+unsigned int gl::getGL_STATIC_DRAW()
+{
+	return GL_STATIC_DRAW;
+}

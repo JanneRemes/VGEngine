@@ -4,8 +4,9 @@
 
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
-#include "systems\sceneChangeSystem.h"
-#include "engine\game\animationComponent.h"
+#include "systems/sceneChangeSystem.h"
+#include "engine/game/animationComponent.h"
+#include "engine/game/game.h"
 
 using namespace vg;
 

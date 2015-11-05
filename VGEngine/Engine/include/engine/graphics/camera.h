@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <engine/utility/Vector2.h>
+#include "engine/utility/Vector2.h"
 
 namespace vg
 {
@@ -18,6 +18,11 @@ namespace vg
 		friend class vg::RenderSystem;
 
 		public:
+
+			/**
+			Reset Camera to it's default values
+			*/
+			static void reset();
 
 			/**
 			@return camera focus position in pixels
@@ -37,23 +42,6 @@ namespace vg
 			*/
 			static void move(Vector2<float> change);
 
-			/*
-			@return camera rotation
-			*/
-			//static float getRotation();
-
-			/*
-			Set camera rotation
-			@param rotation in degrees
-			*/
-			//static void setRotation(float rotation);
-
-			/*
-			Rotate camera position
-			@param change rotation in degrees
-			*/
-			//static void rotate(float change);
-
 			/**
 			@return camera zoom level
 			*/
@@ -71,17 +59,31 @@ namespace vg
 			*/
 			static void zoom(float change);
 
-			
+			/*
+			@return camera rotation
+			*/
+			//static float getRotation();
+
+			/*
+			Set camera rotation
+			@param rotation in degrees
+			*/
+			//static void setRotation(float rotation);
+
+			/*
+			Rotate camera position
+			@param change rotation in degrees
+			*/
+			//static void rotate(float change);
 
 		private:
-
 			static Vector2<float> mPosition;		///< camera focus position in pixels
 			static float mZoom;					///< camera zoom level
-			//static float mRotation;				///< camera rotation in degrees
 			static float mLeft;					///< left border of screen
 			static float mTop;					///< top border of screen
 			static float mRight;				///< right border of screen
 			static float mBottom;				///< bottom border of screen
+			//static float mRotation;				///< camera rotation in degrees
 		};
 	}
 }

@@ -1,9 +1,9 @@
 
-#include <engine/game/quadrangleComponent.h>
-#include <engine/assets/assetManager.h>
-#include <engine/graphics/texture.h>
-#include <engine/assets/fileManager.h>
-#include <engine/game/game.h>
+#include "engine/game/quadrangleComponent.h"
+#include "engine/assets/assetManager.h"
+#include "engine/graphics/texture.h"
+#include "engine/assets/fileManager.h"
+#include "engine/game/game.h"
 
 #include "../external/glm/vec2.hpp"
 
