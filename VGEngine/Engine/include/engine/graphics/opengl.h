@@ -17,130 +17,76 @@ namespace vg
 		{
 			void checkError();
 
-			void enableVertexAttribArray(unsigned int index);
 
-			void vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data);
+			// draw
+			void drawTriangles(int  count, const void *indices = nullptr);
+			void clear();
+			void clearColor(float red, float green, float blue, float alpha);			
+			
 
-			/**
-			type = GL_FLOAT, normalized = GL_FALSE
-			*/
-			void vertexAttribPointer(unsigned int indx, int size, int stride, const void* ptr);
-
-			void drawArrays(unsigned int primitiveType, int offset, int  count);
-
-			void drawElements(unsigned int primitiveType, int  count, unsigned int indexType, const void *indices = nullptr);
-
-			void useProgram(unsigned int programId = 0);
-
+			//texture
 			void genTextures(unsigned int* textureIds, int  amount = 1);
-
 			void bindTexture(unsigned int textureId);
-
 			void activeTexture();
-
 			void activeTexture(unsigned int textureIndex);
-
 			void deleteTextures(int n, const unsigned int* textures);
-
-			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
-
-			void texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels, unsigned int format);
-
-			void texImage2D(unsigned int width, unsigned int height, const unsigned char* pixels, unsigned int format);
-
+			void texImage2DRGBA(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
+			void texImage2DRGBA(unsigned int width, unsigned int height, const unsigned char* pixels);
+			void texImage2DAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
+			void texImage2DAlpha(unsigned int width, unsigned int height, const unsigned char* pixels);
 			void texParameteri(unsigned int pname, int parameter);
 
-			void clear();
 
-			void clearColor(float red, float green, float blue, float alpha);
-
+			// shader uniforms
 			void setUniform(unsigned int location, glm::mat3& value);
-
 			void setUniform(unsigned int location, glm::mat4& value);
-
 			void setUniform(unsigned int location, const float* value);
-
 			void setUniform(unsigned int location, glm::vec2& value);
-
 			void setUniform(unsigned int location, glm::vec3& value);
-
 			void setUniform(unsigned int location, glm::vec4& value);
-
-			void attachShader(unsigned int program, unsigned int shader);
-
-			void linkProgram(unsigned int program);
-
-			bool linkStatus(unsigned int program);
-
 			unsigned int getUniformLocation(unsigned int program, std::string name);
+			
 
-			void bindBuffer(unsigned int target, unsigned int buffer);
-
-			void deleteBuffers(int n, const unsigned int* buffers);
-
-			void bufferData(unsigned int target, signed   long  int size, const void* data, unsigned int usage);
-
-			void genBuffers(int n, unsigned int* buffers);
-
-			void shaderSource(unsigned int shader, int count, const char** string, const int* length);
-
-			void getShaderInfoLog(unsigned int shader, int bufsize, int* length, char* infolog);
-
-			/**
-			pname = GL_INFO_LOG_LENGTH
-			*/
-			void getShaderivInfoLog(unsigned int shader, int* params);
-
-			/**
-			pname = GL_COMPILE_STATUS
-			*/
-			bool getShaderivCompileStatus(unsigned int shader);
-
-			unsigned int createProgram(void);
-
-			/**
-			type = GL_VERTEX_SHADER
-			*/
-			unsigned int createVertexShader();
-
-			/**
-			type = GL_FRAGMENT_SHADER
-			*/
-			unsigned int createFragmentShader();
-
+			// shader attributes
 			void bindAttribLocation(unsigned int program, unsigned int index, const char* name);
 
+
+			//shader
+			void useProgram(unsigned int programId = 0);
+			unsigned int createProgram();
+			void attachShader(unsigned int program, unsigned int shader);
+			void linkProgram(unsigned int program);
+			bool linkStatus(unsigned int program);
+			void shaderSource(unsigned int shader, int count, const char** string, const int* length);
+			void getShaderInfoLog(unsigned int shader, int bufsize, int* length, char* infolog);
+			void getShaderivInfoLog(unsigned int shader, int* params);
+			bool getShaderivCompileStatus(unsigned int shader);
+			unsigned int createVertexShader();
+			unsigned int createFragmentShader();
 			void compileShader(unsigned int shader);
+
+
+			//buffers
+			void vertexAttribPointer(unsigned int index, int size, int stride, const void* ptr);
+			void enableVertexAttribArray(unsigned int index);
+			void bindBuffer(unsigned int target, unsigned int buffer);
+			void deleteBuffers(int n, const unsigned int* buffers);
+			void bufferData(unsigned int target, signed   long  int size, const void* data, unsigned int usage);
+			void genBuffers(int n, unsigned int* buffers);
+
 			
+			///TODO remove
 			unsigned int getGL_CLAMP_TO_EDGE();
-
 			unsigned int getGL_COLOR_BUFFER_BIT();
-
 			unsigned int getGL_ELEMENT_ARRAY_BUFFER();
-
 			unsigned int getGL_LINEAR();
-
 			unsigned int getGL_TEXTURE_MAG_FILTER();
-
 			unsigned int getGL_TEXTURE_MIN_FILTER();
-
 			unsigned int getGL_TEXTURE_WRAP_S();
-
 			unsigned int getGL_TEXTURE_WRAP_T();
-
-			unsigned int getGL_ALPHA();
-
 			unsigned int getGL_DYNAMIC_DRAW();
-
 			unsigned int getGL_ARRAY_BUFFER();
-
-			unsigned int getGL_UNSIGNED_SHORT();
-
-			unsigned int getGL_TRIANGLES();
-			
 			unsigned int getGL_NEAREST();
-
-			unsigned int getGL_COMPILE_STATUS();
 		}
 	}
 }

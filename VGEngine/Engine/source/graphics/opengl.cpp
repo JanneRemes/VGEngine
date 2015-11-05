@@ -25,27 +25,15 @@ void gl::enableVertexAttribArray(unsigned int index)
 	checkError();
 }
 
-void gl::vertexAttribPointer(uint32_t index, int32_t size, int32_t stride, void* data)
+void gl::vertexAttribPointer(unsigned int index, int size, int stride, const void* ptr)
 {
-	glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, data);
+	glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, ptr);
 	checkError();
 }
 
-void gl::vertexAttribPointer(unsigned int indx, int size, int stride, const void* ptr)
+void gl::drawTriangles(int count, const void *indices)
 {
-	glVertexAttribPointer(indx, size, GL_FLOAT, GL_FALSE, stride, ptr);
-	checkError();
-}
-
-void gl::drawArrays(unsigned int primitiveType, int offset, int count)
-{
-	glDrawArrays(primitiveType, offset, count);
-	checkError();
-}
-
-void gl::drawElements(unsigned int primitiveType, int count, unsigned int indexType, const void *indices)
-{
-	glDrawElements(primitiveType, count, indexType, indices);
+	glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, indices);
 	checkError();
 }
 
@@ -90,21 +78,27 @@ void gl::texParameteri(unsigned int pname, int parameter)
 	checkError();
 }
 
-void gl::texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels)
+void gl::texImage2DRGBA(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels)
 {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
 	checkError();
 }
 
-void gl::texImage2D(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels, unsigned int format = GL_RGBA)
+void gl::texImage2DRGBA(unsigned int width, unsigned int height, const unsigned char* pixels)
 {
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels.data());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	checkError();
 }
 
-void gl::texImage2D(unsigned int width, unsigned int height, const unsigned char* pixels, unsigned int format = GL_RGBA)
+void gl::texImage2DAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels)
 {
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width, height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, pixels.data());
+	checkError();
+}
+
+void gl::texImage2DAlpha(unsigned int width, unsigned int height, const unsigned char* pixels)
+{
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width, height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, pixels);
 	checkError();
 }
 
@@ -265,6 +259,8 @@ void gl::compileShader(unsigned int shader)
 	checkError();
 }
 
+
+//////////////////////////////////////////
 unsigned int gl::getGL_CLAMP_TO_EDGE()
 {
 	return GL_CLAMP_TO_EDGE;
@@ -304,10 +300,6 @@ unsigned int gl::getGL_TEXTURE_WRAP_T()
 {
 	return GL_TEXTURE_WRAP_T;
 }
-unsigned int gl::getGL_ALPHA()
-{
-	return GL_ALPHA;
-}
 
 unsigned int gl::getGL_DYNAMIC_DRAW()
 {
@@ -318,23 +310,8 @@ unsigned int gl::getGL_ARRAY_BUFFER()
 	return GL_ARRAY_BUFFER;
 }
 
-unsigned int gl::getGL_UNSIGNED_SHORT()
-{
-	return GL_UNSIGNED_SHORT;
-}
-
-unsigned int gl::getGL_TRIANGLES()
-{
-	return GL_TRIANGLES;
-}
-
-
 unsigned int gl::getGL_NEAREST()
 {
 	return GL_NEAREST;
 }
 
-unsigned int gl::getGL_COMPILE_STATUS()
-{
-	return GL_COMPILE_STATUS;
-}

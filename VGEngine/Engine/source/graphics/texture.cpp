@@ -60,7 +60,7 @@ bool Texture::load(FileManager *fileManager)
 	gl::genTextures(&mId);
 	gl::activeTexture();
 	gl::bindTexture(mId);
-	gl::texImage2D(mWidth, mHeight, pixels);
+	gl::texImage2DRGBA(mWidth, mHeight, pixels);
 	//gl::texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
 	//gl::texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
 	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());

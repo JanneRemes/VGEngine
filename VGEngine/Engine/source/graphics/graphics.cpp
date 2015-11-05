@@ -72,7 +72,7 @@ void Graphics::draw(Shader* shader, VertexBuffer* vertices, IndexBuffer* indices
 {
 	vertices->bind();
 	indices->bind();
-	gl::drawElements(getGL_TRIANGLES(), indices->getSize(), getGL_UNSIGNED_SHORT());
+	gl::drawTriangles(indices->getSize());
 	indices->unbind();
 	vertices->unbind();
 }
