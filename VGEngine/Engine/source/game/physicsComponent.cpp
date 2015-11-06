@@ -10,19 +10,19 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
 void PhysicsComponent::setVelocity(Vector2<float> velocity)
 {
 	if (mInitialized)
-		_body->SetLinearVelocity(b2Vec2(velocity.getX() / scale, velocity.getY() / -scale));
+		_body->SetLinearVelocity(b2Vec2(velocity.getX(), -velocity.getY()));
 }
 
 void PhysicsComponent::applyForce(Vector2<float> force)
 {
 	if (mInitialized)
-		_body->ApplyForce(b2Vec2(force.getX() / scale, force.getY() / -scale), _body->GetWorldCenter(), true);
+		_body->ApplyForce(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
 }
 
 void PhysicsComponent::applyLinearImpulse(Vector2<float> force)
 {
 	if (mInitialized)
-		_body->ApplyLinearImpulse(b2Vec2(force.getX() / scale, force.getY() / -scale), _body->GetWorldCenter(), true);
+		_body->ApplyLinearImpulse(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
 }
 
 Vector2<float> PhysicsComponent::getPosition()
