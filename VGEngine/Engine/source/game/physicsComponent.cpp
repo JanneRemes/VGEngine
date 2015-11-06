@@ -45,30 +45,40 @@ void PhysicsComponent::setDensity(float density)
 {
 	if (mInitialized)
 		_FixDef.density = density;
+
+	_body->CreateFixture(&_FixDef);
 }
 
 void PhysicsComponent::setFriction(float friction)
 {
 	if (mInitialized)
 		_FixDef.friction = friction;
+
+	_body->CreateFixture(&_FixDef);
 }
 
 void PhysicsComponent::setRestitution(float restitution)
 {
 	if (mInitialized)
 		_FixDef.restitution = restitution;
+
+	_body->CreateFixture(&_FixDef);
 }
 
 void PhysicsComponent::setMass(float mass)
 {
 	if (mInitialized)
 		mMass.mass = mass;
+
+	_body->SetMassData(&mMass);
 }
 
 void PhysicsComponent::setMassCenter(Vector2<float> position)
 {
 	if (mInitialized)
-		mMass.center = b2Vec2(position.getX() / scale, position.getY() / -scale);
+		mMass.center = b2Vec2(position.getX(), position.getY());
+
+	_body->SetMassData(&mMass);
 }
 
 void PhysicsComponent::setPosition(Vector2<float> position)

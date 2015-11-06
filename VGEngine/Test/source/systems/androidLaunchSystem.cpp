@@ -19,6 +19,10 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	android->addComponent(quadre);
 	android->addComponent(new PhysicsCircleComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
 
+	android->getComponent<PhysicsCircleComponent>()->setFriction(0.90);
+	android->getComponent<PhysicsCircleComponent>()->setRestitution(0.60);
+	android->getComponent<PhysicsCircleComponent>()->setDensity(100);
+
 	scene->addGameObject(android);
 }
 AndroidLaunchSystem::~AndroidLaunchSystem()
@@ -28,16 +32,21 @@ AndroidLaunchSystem::~AndroidLaunchSystem()
 void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
 #ifdef OS_WINDOWS
-
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{	
 		vg::Vector2<float> velocity = vg::input::Mouse::getPos() - android->getComponent<TransformComponent>()->getWorldPosition();
 		android->getComponent<PhysicsCircleComponent>()->setVelocity(vg::Vector2<float>(velocity.getX(), velocity.getY()));
-		Log("vgengine", "Velocity x = %f.2", velocity.getX());
-		Log("vgengine", "Velocity y = %f.2", velocity.getY());
 	}
 #endif
 
 #ifdef OS_ANROID
+
+	if (vg::input::Touch::getIsTouched())
+	{
+		vg::Vector2<float> pos = vg::input::Touch::getPos();
+
+		vg::Vector2<float> velocity = pos - android->getComponent<TransformComponent>()->getWorldPosition();
+		android->getComponent<PhysicsCircleComponent>()->setVelocity(vg::Vector2<float>(velocity.getX(), velocity.getY()));
+	}
 #endif
 }

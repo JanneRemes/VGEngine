@@ -36,7 +36,7 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 
 	mCircleShape.m_radius = ((_radius) / scale) / 2.0f;
 
-	_FixDef.density = 100000.0f;
+	_FixDef.density = 10.0f;
 	_FixDef.shape = &mCircleShape;
 
 	bodyDef.position = b2Vec2(x / scale, -y / scale);
