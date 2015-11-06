@@ -85,15 +85,15 @@ void GraphicsContext::initializeGraphicsContext()
 
 	Screen::setSize(1280, 720);
 	Screen::setRealSize(winRect.right, winRect.bottom);
-	AdjustWindowRectEx(&winRect, WS_CAPTION, false, WS_EX_LEFT);
+	AdjustWindowRectEx(&winRect, WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, false, WS_EX_LEFT);
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = GetModuleHandle(nullptr);
 	wc.lpszClassName = CLASS_NAME;
 
 	RegisterClass(&wc);
 	checkError();
-	mWindowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, CLASS_NAME, windowName.c_str(), WS_OVERLAPPEDWINDOW, 
-		100, 100, winRect.right - winRect.left, winRect.bottom - winRect.top,
+	mWindowHandle = CreateWindowEx(WS_EX_LEFT, CLASS_NAME, windowName.c_str(), WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
+		0, 0, winRect.right - winRect.left, winRect.bottom - winRect.top,
 		NULL, NULL, GetModuleHandle(nullptr), NULL);
 	checkError();
 	if (mWindowHandle == nullptr)
