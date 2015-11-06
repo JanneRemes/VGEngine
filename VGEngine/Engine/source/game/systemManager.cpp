@@ -3,11 +3,10 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/renderSystem.h"
 #include "engine/game/deleteSystem.h"
-#include "engine/game/textRenderSystem.h"
 #include "engine/game/animationSystem.h"
 #include "engine/game/physicsSystem.h"
-#include "engine/graphics/screen.h"
 #include "engine/game/game.h"
+#include "engine/graphics/screen.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -54,7 +53,6 @@ void SystemManager::addDefaultSystems()
 {
 	addSystem(new DeleteSystem());
 
-	addSystem(new TextRenderSystem());
 	addSystem(new AnimationSystem());
 	PhysicsSystem *physicsSystem = new PhysicsSystem(0, -9.81);
 	addSystem(physicsSystem);

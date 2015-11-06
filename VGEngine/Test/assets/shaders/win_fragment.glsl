@@ -16,9 +16,8 @@ void main()
 	{
 		if (unifFontTexture > 0.5)
 		{
-			float alpha = texture2D(unifTexture, varyTexCoord).a;
-			gl_FragColor = vec4(1.0, 1.0, 1.0, alpha);
-			gl_FragColor *= varyColor;
+			float alpha = texture2D(unifTexture, varyTexCoord).a * varyColor.a;
+			gl_FragColor = vec4(varyColor.rgb, alpha);
 		}
 		else
 		{

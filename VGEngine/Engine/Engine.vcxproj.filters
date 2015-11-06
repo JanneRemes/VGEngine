@@ -156,9 +156,6 @@
     <ClInclude Include="include\engine\game\textComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\textRenderSystem.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\utility\vector2.h">
       <Filter>include\utility</Filter>
     </ClInclude>
@@ -306,9 +303,6 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\textComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\textRenderSystem.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\baseClass.cpp">
