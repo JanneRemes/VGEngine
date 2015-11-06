@@ -22,4 +22,5 @@ private:
 	vg::PhysicsSystem *system;
 	vg::GameObject *physicsTest;
 	vg::GameObject *physicsTest3;
+	vg::GameObject *animationTest;
 };

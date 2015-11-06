@@ -29,12 +29,12 @@ void MainScene::loadObjects()
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	GameObject *ship = new GameObject("ship");
 	TransformComponent *transform = new TransformComponent(Vector2<float>(64, 64),
-		Vector2<float>(128, 128), 0.0f, 0, Vector2<float>(64, 64));
+		Vector2<float>(128, 128), 0.0f, 2, Vector2<float>(64, 64));
 	ship->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("shipkoala.png");
 	ship->addComponent(quadre);
 	addGameObject(ship);
-
+	
 
 	//SHIP
 
@@ -87,32 +87,14 @@ void MainScene::loadObjects()
 	enemySystem->setScene(this);
 	Game::getInstance()->addComponentSystem(this, enemySystem);
 	
-	// Physics system
-	PhysicsTestSystem *fysiks = new PhysicsTestSystem(this);
-	Game::getInstance()->addComponentSystem(this, fysiks);
-
 	// Scene change system
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
-
-	//Animation test
-
-	GameObject *animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
-	animationTest->addComponent(animationComponent);
-
-	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(128, 128), Vector2<float>(256, 256), 0.0f);
-	animationTest->addComponent(animationTransform);
-
-	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
-
-
-	addGameObject(animationTest);
-
-	//sound
+	
+	// sound
 	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
-	Game::getInstance()->getAudioManager()->addSound("music",
+	Game::getInstance()->getAudioManager()->addSound("music1",
 		*assetManager->get<sound::Sound>("Raise your Kappa!.mp3"));
-	Game::getInstance()->getAudioManager()->play("music");
-	Game::getInstance()->getAudioManager()->loopEnabled("music", true);
+	Game::getInstance()->getAudioManager()->play("music1");
+	Game::getInstance()->getAudioManager()->loopEnabled("music1", true);
 }

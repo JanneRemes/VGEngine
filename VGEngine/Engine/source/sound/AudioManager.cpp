@@ -54,6 +54,16 @@ void AudioManager::pauseAll()
     }
 }
 
+void AudioManager::stopAll()
+{
+	auto i = std::begin(mSoundEffectList);
+	while (i != std::end(mSoundEffectList))
+	{
+		(*i).mSoundEffect->stop();
+		i++;
+	}
+}
+
 void AudioManager::play(const std::string& name)
 {
 	const size_t id = mStringHash(name);

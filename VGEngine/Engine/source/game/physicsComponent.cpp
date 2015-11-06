@@ -10,25 +10,25 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
 void PhysicsComponent::setVelocity(Vector2<float> velocity)
 {
 	if (mInitialized)
-		_body->SetLinearVelocity(b2Vec2(velocity.getX(), velocity.getY()));
+		_body->SetLinearVelocity(b2Vec2(velocity.getX() / scale, velocity.getY() / -scale));
 }
 
 void PhysicsComponent::applyForce(Vector2<float> force)
 {
 	if (mInitialized)
-		_body->ApplyForce(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
+		_body->ApplyForce(b2Vec2(force.getX() / scale, force.getY() / -scale), _body->GetWorldCenter(), true);
 }
 
 void PhysicsComponent::applyLinearImpulse(Vector2<float> force)
 {
 	if (mInitialized)
-		_body->ApplyLinearImpulse(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
+		_body->ApplyLinearImpulse(b2Vec2(force.getX() / scale, force.getY() / -scale), _body->GetWorldCenter(), true);
 }
 
 Vector2<float> PhysicsComponent::getPosition()
 {
 	if (mInitialized)
-		return Vector2<float>(_body->GetPosition().x, _body->GetPosition().y);
+		return Vector2<float>(_body->GetPosition().x * scale, _body->GetPosition().y * scale);
 	else
 		return Vector2<float>(0, 0);
 }
@@ -68,7 +68,7 @@ void PhysicsComponent::setMass(float mass)
 void PhysicsComponent::setMassCenter(Vector2<float> position)
 {
 	if (mInitialized)
-		mMass.center = b2Vec2(position.getX(), position.getY());
+		mMass.center = b2Vec2(position.getX() / scale, position.getY() / -scale);
 }
 
 void PhysicsComponent::setPosition(Vector2<float> position)

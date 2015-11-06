@@ -74,6 +74,8 @@ namespace vg
             */
             void pauseAll();
 
+			void stopAll();
+
             /**
             Set looping enabled or disabled for track
             @param name ID for sound

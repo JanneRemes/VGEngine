@@ -5,7 +5,10 @@
 #include "engine/game/quadrangleComponent.h"
 #include "systems/sceneChangeSystem.h"
 #include "engine/game/animationComponent.h"
+#include "engine/game/textComponent.h"
 #include "engine/game/game.h"
+
+#include "systems\PhysicsTestSystem.h"
 
 using namespace vg;
 
@@ -19,17 +22,29 @@ PappaScene::~PappaScene()
 
 void PappaScene::loadObjects()
 {
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 
-	GameObject *animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
-	animationTest->addComponent(animationComponent);
+	// Background
+	GameObject *background = new GameObject("background");
+	TransformComponent *backgroundTransform = new TransformComponent(Vector2<float>(0, 0),
+		Vector2<float>(1280, 720), 0.0f, 0);
+	background->addComponent(backgroundTransform);
+	QuadrangleComponent *quadrBackground = new QuadrangleComponent("muumiBG.png");
+	background->addComponent(quadrBackground);
+	addGameObject(background);
 
-	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(128, 128), Vector2<float>(512, 512), 0.0f);
-	animationTest->addComponent(animationTransform);
-	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+	// Physics system
+	PhysicsTestSystem *fysiks = new PhysicsTestSystem(this);
+	Game::getInstance()->addComponentSystem(this, fysiks);
 
-	addGameObject(animationTest);
 	
+	// sound
+	assetManager->load<sound::Sound>("muumitechno.mp3");
+	Game::getInstance()->getAudioManager()->addSound("music",
+		*assetManager->get<sound::Sound>("muumitechno.mp3"));
+	Game::getInstance()->getAudioManager()->play("music");
+	Game::getInstance()->getAudioManager()->loopEnabled("music", true);
+
 	// Scene change system
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);

@@ -25,11 +25,22 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 
+	// Animation
+	animationTest = new GameObject("animationTest");
+	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+	animationTest->addComponent(animationComponent);
+
+	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(720, graphics::Screen::getY() - 512), Vector2<float>(512, 512), 0.0f, 1);
+	animationTest->addComponent(animationTransform);
+	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+
+	scene->addGameObject(animationTest);
+	
 	// Physics
 	physicsTest = new GameObject("physicsTest1");
 
-	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(128, 128 * 2),
-		Vector2<float>(64, 64), 0.0f);
+	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(128 * 7, 128 * 2),
+		Vector2<float>(64, 64), 0.0f, 6);
 
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
 	PhysicsPolygonComponent *physicsPolyComponent1 = new PhysicsPolygonComponent(physicsTransform, PhysicsComponent::STATIC);
@@ -42,7 +53,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// 2nd physics object
 	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(600, 400),
-		Vector2<float>(64, 64), 0.0f);
+		Vector2<float>(64, 64), 0.0f, 5);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
@@ -57,7 +68,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// 3rd physics object
 	TransformComponent *physicsTransform3 = new TransformComponent(Vector2<float>(800, 400),
-		Vector2<float>(64, 64), 0.0f);
+		Vector2<float>(64, 64), 0.0f, 7);
 
 	physicsTest3 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");
@@ -77,6 +88,12 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
 #ifdef OS_WINDOWS
+	
+	animationTest->getComponent<TransformComponent>()->move(Vector2<float>(-10, 0));
+
+	if (animationTest->getComponent<TransformComponent>()->getLocalPosition().getX() < -animationTest->getComponent<TransformComponent>()->getSize().getX())
+		animationTest->getComponent<TransformComponent>()->setPosition(Vector2<float>(graphics::Screen::getX(), animationTest->getComponent<TransformComponent>()->getLocalPosition().getY()));
+
 
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
