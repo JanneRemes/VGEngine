@@ -1,9 +1,14 @@
+#ifdef OS_WINDOWS
+#include "engine/input/mouse.h"
+#endif
+
 #include "Scenes\AndroidLaunchGame.h"
 
-#include "systems/PhysicsTestSystem.h"
+#include "systems\sceneChangeSystem.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/game/quadrangleComponent.h"
+#include "engine/game/physicsCircleComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/physicsComponent.h"
 #include "engine/game/animationComponent.h"
@@ -13,20 +18,23 @@ using namespace vg;
 
 AndroidLaunchGame::AndroidLaunchGame()
 {
-}
 
+}
 
 AndroidLaunchGame::~AndroidLaunchGame()
 {
 }
 void AndroidLaunchGame::loadObjects()
 {
-	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
-	GameObject *android = new GameObject("Android");
-	TransformComponent *androidTransform = new TransformComponent(Vector2<float>(64, 64),
-		Vector2<float>(128, 128), 0.0f, 0, Vector2<float>(64, 64));
-	android->addComponent(androidTransform);
-	QuadrangleComponent *quadre = new QuadrangleComponent("android.png");
-	android->addComponent(quadre);
-	addGameObject(android);
+	// Scene change system
+	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
+	Game::getInstance()->addComponentSystem(this, sceneChange);
+
+	AndroidLaunchSystem *androidLaunch = new AndroidLaunchSystem(this);
+	Game::getInstance()->addComponentSystem(this, androidLaunch);
+}
+
+void AndroidLaunchGame::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
+{
+	
 }
