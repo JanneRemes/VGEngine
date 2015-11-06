@@ -8,6 +8,7 @@
 #include "scenes/cameraScene.h"
 #include "scenes/pappaScene.h"
 #include "scenes\AndroidLaunchGame.h"
+#include "scenes\rockThrowScene.h"
 
 using namespace vg;
 
@@ -27,4 +28,9 @@ void mainGame(Game* game)
 
 	AndroidLaunchGame* androidScene = new AndroidLaunchGame();
 	game->getSceneManager()->addTemplateScene("Android", androidScene);
+
+	rockThrowScene* rockthrowScene = new rockThrowScene();
+	game->getSceneManager()->addTemplateScene("rockThrowScene", rockthrowScene);
+
+	
 }

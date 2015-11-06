@@ -122,11 +122,13 @@
     <ClInclude Include="include\Scenes\cameraScene.h" />
     <ClInclude Include="include\Scenes\MainScene.h" />
     <ClInclude Include="include\Scenes\pappaScene.h" />
+    <ClInclude Include="include\Scenes\rockThrowScene.h" />
     <ClInclude Include="include\Scenes\testScene.h" />
     <ClInclude Include="include\systems\androidLaunchSystem.h" />
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
     <ClInclude Include="include\systems\PhysicsTestSystem.h" />
+    <ClInclude Include="include\systems\rockSystem.h" />
     <ClInclude Include="include\systems\sceneChangeSystem.h" />
     <ClInclude Include="include\systems\shipSystem.h" />
     <ClInclude Include="include\test.h" />
@@ -138,11 +140,13 @@
     <ClCompile Include="source\scenes\AndroidLaunchGame.cpp" />
     <ClCompile Include="source\scenes\cameraScene.cpp" />
     <ClCompile Include="source\scenes\pappaScene.cpp" />
+    <ClCompile Include="source\scenes\rockThrowScene.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
     <ClCompile Include="source\systems\androidLaunchSystem.cpp" />
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />
     <ClCompile Include="source\systems\PhysicsTestSystem.cpp" />
+    <ClCompile Include="source\systems\rockSystem.cpp" />
     <ClCompile Include="source\systems\sceneChangeSystem.cpp" />
     <ClCompile Include="source\systems\shipSystem.cpp" />
   </ItemGroup>

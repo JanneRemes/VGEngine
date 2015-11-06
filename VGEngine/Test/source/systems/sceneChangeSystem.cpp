@@ -41,6 +41,11 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		Game::getInstance()->getSceneManager()->changeScene("Android");
 	}
 
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Num5) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		Game::getInstance()->getSceneManager()->changeScene("rockThrowScene");
+	}
+
 #endif
 
 #ifdef OS_ANDROID

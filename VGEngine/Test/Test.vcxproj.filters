@@ -75,6 +75,12 @@
     <ClInclude Include="include\Scenes\AndroidLaunchGame.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\Scenes\rockThrowScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\rockSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -115,6 +121,12 @@
     </ClCompile>
     <ClCompile Include="source\scenes\AndroidLaunchGame.cpp">
       <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\rockThrowScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\rockSystem.cpp">
+      <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
