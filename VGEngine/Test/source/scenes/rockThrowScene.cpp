@@ -1,0 +1,41 @@
+#include "Scenes\rockThrowScene.h"
+#include "systems\rockSystem.h"
+
+
+#include "engine/game/game.h"
+#include "engine/game/transformComponent.h"
+#include "engine/game/quadrangleComponent.h"
+#include "engine/game/physicsComponent.h"
+#include "engine/game/physicsPolygonComponent.h"
+#include "systems\sceneChangeSystem.h"
+
+using namespace vg;
+
+rockThrowScene::rockThrowScene()
+{
+}
+
+rockThrowScene::~rockThrowScene()
+{
+}
+
+void rockThrowScene::loadObjects()
+{
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+
+	GameObject *background = new GameObject("background");
+	TransformComponent *backgroundTransform = new TransformComponent(Vector2<float>(0, 0),
+		Vector2<float>(1280, 720), 0.0f, 0);
+	background->addComponent(backgroundTransform);
+	QuadrangleComponent *quadrBackground = new QuadrangleComponent("desertBG.png");
+	background->addComponent(quadrBackground);
+	addGameObject(background);
+
+
+	rockSystem *rocksystem = new rockSystem(this);
+	Game::getInstance()->addComponentSystem(this, rocksystem);
+
+	// Scene change system
+	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
+	Game::getInstance()->addComponentSystem(this, sceneChange);
+}

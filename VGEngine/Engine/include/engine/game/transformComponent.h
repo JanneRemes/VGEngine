@@ -18,7 +18,6 @@ namespace vg
 		TransformComponent();
 		TransformComponent(const TransformComponent &transform);
         /**
-        @param textureFileName path to texture
         @param position position of upper left corner in pixels
         @param size width and lenght of the sprite in pixels
         @param rotation angle of rotation clockwise
