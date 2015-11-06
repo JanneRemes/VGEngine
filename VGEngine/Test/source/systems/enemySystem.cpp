@@ -18,7 +18,7 @@ EnemySystem::EnemySystem()
 {
 	mEnemyPrefab = new GameObject("enemy");
 	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
-		Vector2<float>(80, 80), 0.0f, 0u);
+		Vector2<float>(80, 80), 0.0f);
 	transform->setOrigin(vg::Vector2<float>(40, 40));
 	mEnemyPrefab->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koala.png");

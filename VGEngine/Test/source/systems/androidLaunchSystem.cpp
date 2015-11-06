@@ -13,7 +13,7 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	android = new GameObject("Android");
 	TransformComponent *androidTransform = new TransformComponent(Vector2<float>(60, 60),
-		Vector2<float>(32, 32), 0.0f, 0, Vector2<float>(0, 0));
+		Vector2<float>(32, 32), 0.0f, Vector2<float>(0, 0));
 	android->addComponent(androidTransform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("android.png");
 	android->addComponent(quadre);

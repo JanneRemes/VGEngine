@@ -33,7 +33,7 @@ rockSystem::rockSystem(Scene *scene)
 	//ROCK
 	rock = new GameObject("rock");
 	TransformComponent *transformRock = new TransformComponent(Vector2<float>(100, 600),
-		Vector2<float>(100, 100), 0.0f, 1);	
+		Vector2<float>(100, 100), 0.0f);	
 	QuadrangleComponent *quadre = new QuadrangleComponent("rock.png");	
 	PhysicsPolygonComponent *rockPhysicsComponent = new PhysicsPolygonComponent(transformRock, PhysicsComponent::DYNAMIC);
 	
@@ -45,7 +45,7 @@ rockSystem::rockSystem(Scene *scene)
 
 	bar1 = new GameObject("bar1");
 	TransformComponent *transformBar1 = new TransformComponent(Vector2<float>(20, 10),
-		Vector2<float>(50, 170), 0.0f, 2);
+		Vector2<float>(50, 170), 0.0f);
 	QuadrangleComponent *quadreBar1 = new QuadrangleComponent("bar.png");
 
 	bar1->addComponent(transformBar1);

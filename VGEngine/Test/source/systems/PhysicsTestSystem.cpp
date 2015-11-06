@@ -30,7 +30,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
-	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(720, graphics::Screen::getY() - 512), Vector2<float>(512, 512), 0.0f, 1);
+	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(720, graphics::Screen::getY() - 512), Vector2<float>(512, 512), 0.0f);
 	animationTest->addComponent(animationTransform);
 	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 
@@ -40,7 +40,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest = new GameObject("physicsTest1");
 
 	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(128 * 7, 128 * 2),
-		Vector2<float>(64, 64), 0.0f, 6);
+		Vector2<float>(64, 64), 0.0f);
 
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
 	PhysicsPolygonComponent *physicsPolyComponent1 = new PhysicsPolygonComponent(physicsTransform, PhysicsComponent::STATIC);
@@ -53,7 +53,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// 2nd physics object
 	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(600, 400),
-		Vector2<float>(64, 64), 0.0f, 5);
+		Vector2<float>(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
@@ -68,7 +68,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// 3rd physics object
 	TransformComponent *physicsTransform3 = new TransformComponent(Vector2<float>(800, 400),
-		Vector2<float>(64, 64), 0.0f, 7);
+		Vector2<float>(64, 64), 0.0f);
 
 	physicsTest3 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");

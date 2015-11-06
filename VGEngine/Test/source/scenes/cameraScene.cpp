@@ -25,15 +25,15 @@ void CameraScene::loadObjects()
 	{
 		GameObject *obj1 = new GameObject("test koala");
 		obj1->addComponent(new TransformComponent(
-			Vector2<float>(i * 64, i * 64), Vector2<float>(128, 128),
-			0.0f, i, Vector2<float>(64, 64)));
+			Vector2<float>(100 + i * 64, 32 + i * 64), Vector2<float>(128, 128),
+			0.0f, Vector2<float>(64, 64)));
 		obj1->addComponent(new QuadrangleComponent("koala.png"));
 		addGameObject(obj1);
 
 		GameObject *obj2 = new GameObject("test koala 2");
 		obj2->addComponent(new TransformComponent(
-			Vector2<float>(256 + i * 64, i * 64), Vector2<float>(128, 128),
-			0.0f, 1000000 - i, Vector2<float>(64, 64)));
+			Vector2<float>(300 + i * 64, i * 64), Vector2<float>(128, 128),
+			0.0f, Vector2<float>(64, 64)));
 		obj2->addComponent(new QuadrangleComponent("koala.png"));
 		addGameObject(obj2);
 	}
@@ -46,16 +46,24 @@ void CameraScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
 	//text
-	for (int i = 0; i < 5; i++)
 	{
 		TextComponent* text = new TextComponent("arial.ttf", 12u);
-		text->setText("Koala");
-		text->setColour(256, 256, 256);
+		text->setText("KoalaKoala");
+		text->setColour(127, 256, 256);
 		GameObject* obj = new GameObject("koalatext");
-		obj->addComponent(new TransformComponent(Vector2<float>(430 - i * 50, 560 - i * 20),
-			Vector2<float>(0, 0), 0.0f, 8-i));
+		obj->addComponent(new TransformComponent(Vector2<float>(0, 560),
+			Vector2<float>(0, 0), 0.0f));
 		obj->addComponent(text);
 		addGameObject(obj);
 	}
-	
+	{
+		TextComponent* text = new TextComponent("arial.ttf", 12u);
+		text->setText("KoalaKoala");
+		text->setColour(256, 127, 256);
+		GameObject* obj = new GameObject("koalatext");
+		obj->addComponent(new TransformComponent(Vector2<float>(30, 590),
+			Vector2<float>(0, 0), 0.0f));
+		obj->addComponent(text);
+		addGameObject(obj);
+	}
 }

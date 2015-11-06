@@ -45,7 +45,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		newInput = true;
 	}
 	#endif
-
+	/*
 	if (newInput)
 	{
 		float x = 10.0f, y = 10.0f;
@@ -57,4 +57,5 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 
 		Camera::move(Vector2<float>(x, y));
 	}
+	*/
 }

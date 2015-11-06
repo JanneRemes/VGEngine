@@ -3,6 +3,7 @@
 #include "engine/game/game.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/triangleComponent.h"
+#include "engine/game/transformComponent.h"
 #include "engine/graphics/graphics.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
@@ -48,57 +49,61 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			}
 		}
 
-		// sprite rendering
 		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-		if (render != nullptr && transform != nullptr)
+		if (transform != nullptr)
 		{
-			mVertexBuffer.setData(*render->getVertices());
-			mIndexBuffer.setData(*render->getIndices());
-			
-			Texture* texture = render->getTexture();
-			if (texture != nullptr)
-				texture->bind();
-			else
-				shader->setUniform("unifNoTexture", true);
-
-			updateShader(shader, transform);
-			Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
-			
-			if (texture != nullptr)
-				texture->unbind();
-			else
-				shader->setUniform("unifNoTexture", false);
-		}
-
-		// text rendering
-		TextComponent* text = (*it)->getComponent<TextComponent>();
-		if (text != nullptr && transform != nullptr)
-		{
-			shader->setUniform("unifFontTexture", true);
 			updateProjection(shader, transform->getUsingCamera());
-			gl::bindTexture(text->getTextureId());
-			string textString = text->getText();
-			FT_GlyphSlot* glyph = text->getGlyph();
-			float x = transform->getWorldPosition().getX();
-			float y = transform->getWorldPosition().getY();
-			float base = y;
-			
-			for (int i = 0; i < textString.size(); i++)
-			{
-				FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
-				FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
-				FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
-				gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
 
-				y = base - (*glyph)->bitmap_top;
-				shader->setUniform("unifModel", modelTransform(Vector2<float>(x, y), transform->getOrigin(),
-					Vector2<float>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
-				shader->setUniform("unifLayer", transform->getLayer());
-				Graphics::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
-				x += ((*glyph)->advance.x >> 6);
+			// sprite rendering
+			if (render != nullptr)
+			{
+				mVertexBuffer.setData(*render->getVertices());
+				mIndexBuffer.setData(*render->getIndices());
+
+				Texture* texture = render->getTexture();
+				if (texture != nullptr)
+					texture->bind();
+				else
+					shader->setUniform("unifNoTexture", true);
+
+				updateShader(shader, transform);
+				Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
+
+				if (texture != nullptr)
+					texture->unbind();
+				else
+					shader->setUniform("unifNoTexture", false);
 			}
-			gl::bindTexture(0u);
-			shader->setUniform("unifFontTexture", false);
+
+			// text rendering
+			TextComponent* text = (*it)->getComponent<TextComponent>();
+			if (text != nullptr)
+			{
+				shader->setUniform("unifFontTexture", true);
+				gl::bindTexture(text->getTextureId());
+				string textString = text->getText();
+				FT_GlyphSlot* glyph = text->getGlyph();
+				float x = transform->getWorldPosition().getX();
+				float y = transform->getWorldPosition().getY();
+				float base = y;
+
+				for (int i = 0; i < textString.size(); i++)
+				{
+					FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
+					FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
+					FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
+					gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
+
+					y = base - (*glyph)->bitmap_top;
+					shader->setUniform("unifModel", modelTransform(Vector2<float>(x, y), transform->getOrigin(),
+						Vector2<float>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
+					shader->setUniform("unifLayer", transform->getLayer());
+					Graphics::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
+					x += ((*glyph)->advance.x >> 6);
+				}
+				gl::bindTexture(0u);
+				shader->setUniform("unifFontTexture", false);
+			}
 		}
 	}
 	shader->setUniform("unifNoTexture", false);
@@ -121,7 +126,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	float bottom = camera.y + screen.y - screen.y * (1.0f - zoom);
 	float top = camera.y + screen.y - screen.y * zoom;
 	// left, right, bottom, top, near, far
-	mat4 projection = ortho(left, right, bottom, top, -1000000.0f, 1000000.0f);
+	mat4 projection = ortho(left, right, bottom, top, -8000000.0f, 8000000.0f);
 	
 	if (useCamera)
 	{
@@ -162,7 +167,6 @@ mat4 RenderSystem::modelTransform(TransformComponent* transform)
 
 void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 {
-	updateProjection(shader, transform->getUsingCamera());
 	if (transform != nullptr)
 	{
 		shader->setUniform("unifModel", modelTransform(transform));

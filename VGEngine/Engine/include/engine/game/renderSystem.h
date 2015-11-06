@@ -4,12 +4,12 @@
 #include "engine/game/system.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
-#include "engine/game/transformComponent.h"
+#include "engine/utility/Vector2.h"
 
 namespace vg
 {
 	// Forward declaration
-	class TextRenderSystem;
+	class TransformComponent;
 	namespace graphics
 	{
 		class Shader;
@@ -21,8 +21,6 @@ namespace vg
 	class RenderSystem :public System
 	{
 	public:
-		friend class TextRenderSystem;
-
 		/**
 		Initializes RenderSystem
 		*/

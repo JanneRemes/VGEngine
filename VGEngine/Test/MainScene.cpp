@@ -29,7 +29,7 @@ void MainScene::loadObjects()
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	GameObject *ship = new GameObject("ship");
 	TransformComponent *transform = new TransformComponent(Vector2<float>(64, 64),
-		Vector2<float>(128, 128), 0.0f, 2, Vector2<float>(64, 64));
+		Vector2<float>(128, 128), 0.0f, Vector2<float>(64, 64));
 	ship->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("shipkoala.png");
 	ship->addComponent(quadre);
@@ -40,7 +40,7 @@ void MainScene::loadObjects()
 
 	GameObject *ship2 = new GameObject("ship2");
 	TransformComponent *transformship = new TransformComponent(Vector2<float>(64, -64),
-		Vector2<float>(128, 128), 0.0f, 1, Vector2<float>(64, 64));
+		Vector2<float>(128, 128), 0.0f, Vector2<float>(64, 64));
 	ship2->addComponent(transformship);
 	QuadrangleComponent *quadreship = new QuadrangleComponent("shipkoala.png");
 	ship2->addComponent(quadreship);
@@ -58,7 +58,7 @@ void MainScene::loadObjects()
 	tempText->setColour(127, 0, 0);
 	GameObject* textObj = new GameObject("enemyText");
 	textObj->addComponent(new TransformComponent(Vector2<float>(4, 64),
-		Vector2<float>(0, 0), 0.0f, 10000));
+		Vector2<float>(0, 0), 0.0f));
 	textObj->addComponent(tempText);
 	addGameObject(textObj);
 
@@ -68,7 +68,7 @@ void MainScene::loadObjects()
 	tempText2->setColour(0, 0, 127);
 	GameObject* textObj2 = new GameObject("bulletText");
 	textObj2->addComponent(new TransformComponent(Vector2<float>(4, 128),
-		Vector2<float>(0, 0), 0.0f, 10000));
+		Vector2<float>(0, 0), 0.0f));
 	textObj2->addComponent(tempText2);
 	addGameObject(textObj2);
 
@@ -78,7 +78,7 @@ void MainScene::loadObjects()
 	fpstextComponent->setColour(0, 0, 127);
 	GameObject* fpstextObject = new GameObject("fpsText");
 	fpstextObject->addComponent(new TransformComponent(Vector2<float>(4, 178),
-		Vector2<float>(0, 0), 0.0f, 10000));
+		Vector2<float>(0, 0), 0.0f));
 	fpstextObject->addComponent(fpstextComponent);
 	addGameObject(fpstextObject);
 

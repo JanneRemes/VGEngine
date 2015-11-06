@@ -29,7 +29,7 @@ ShipSystem::ShipSystem() :System()
 		assetManager->load<sound::Sound>("shoot.mp3");
 
 	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
-		Vector2<float>(32, 32), 0.0f, 0u, Vector2<float>(16, 16));
+		Vector2<float>(32, 32), 0.0f, Vector2<float>(16, 16));
 	mBullet->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koalapanos2.png");
 	mBullet->addComponent(quadre);

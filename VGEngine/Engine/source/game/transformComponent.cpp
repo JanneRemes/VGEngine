@@ -9,7 +9,9 @@
 
 using namespace vg;
 
-unsigned int TransformComponent::mCurrentLayer = 0;
+unsigned int mCurrentLayers[] = { 0, 1000000, 2000000, 6000000, 7000000 };
+unsigned int mLayerMinValues[] = { 0, 1000000, 2000000, 6000000, 7000000 };
+unsigned int mLayerMaxValues[] = { 999999, 1999999, 5999999, 6999999, 8000000 };
 
 TransformComponent::TransformComponent(): Component()
 {
@@ -25,14 +27,15 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 	mPosition = transform.mPosition;
 	mSize = transform.mSize;
 	mRotation = transform.mRotation;
-	mLayer = getDefaultLayer();
+	mLayer = 0;
 	mOrigin = transform.mOrigin;
 }
 
 TransformComponent::TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
-	float rotation, unsigned int layer, vg::Vector2<float> origin, bool useCamera)
-	:Component(), mPosition(position), mSize(size), mRotation(rotation), mLayer(layer), mOrigin(origin), mUsingCamera(useCamera)
+	float rotation, vg::Vector2<float> origin, Layer layer, bool useCamera)
+	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mUsingCamera(useCamera)
 {
+	setLayer(layer);
 }
 
 TransformComponent::~TransformComponent()
@@ -92,8 +95,6 @@ vg::Vector2<float> TransformComponent::getSize()
     return mSize;
 }
 
-
-
 void TransformComponent::setSize(const vg::Vector2<float> size)
 {
     mSize = size;
@@ -146,17 +147,15 @@ void TransformComponent::rotate(float rotation)
 
 float TransformComponent::getLayer()
 {
-	return mLayer;
+	return static_cast<float>(mLayer);
 }
 
-void TransformComponent::setLayer(unsigned int layer)
+void TransformComponent::setLayer(Layer layer)
 {
-	if (layer > 1000000)
-	{
-		Log("vgengine", "setLayer value cannot be higher than 1000000 (transformcomponent)!","");
-		layer = 1000000;
-	}
-	mLayer = layer;
+	mCurrentLayers[layer]++;
+	if (mCurrentLayers[layer] > mLayerMaxValues[layer])
+		mCurrentLayers[layer] = mLayerMinValues[layer];
+	mLayer = mCurrentLayers[layer];
 }
 
 vg::Vector2<float> TransformComponent::getOrigin()
@@ -179,7 +178,9 @@ bool TransformComponent::getUsingCamera()
 	return mUsingCamera;
 }
 
+/*
 unsigned int TransformComponent::getDefaultLayer()
 {
 	return mCurrentLayer++;
 }
+*/

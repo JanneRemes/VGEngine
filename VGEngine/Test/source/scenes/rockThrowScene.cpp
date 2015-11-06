@@ -25,7 +25,7 @@ void rockThrowScene::loadObjects()
 
 	GameObject *background = new GameObject("background");
 	TransformComponent *backgroundTransform = new TransformComponent(Vector2<float>(0, 0),
-		Vector2<float>(1280, 720), 0.0f, 0);
+		Vector2<float>(1280, 720), 0.0f);
 	background->addComponent(backgroundTransform);
 	QuadrangleComponent *quadrBackground = new QuadrangleComponent("desertBG.png");
 	background->addComponent(quadrBackground);
