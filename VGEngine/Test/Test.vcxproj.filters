@@ -69,6 +69,12 @@
     <ClInclude Include="include\Scenes\pappaScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\systems\androidLaunchSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scenes\AndroidLaunchGame.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -102,6 +108,12 @@
       <Filter>source\systems</Filter>
     </ClCompile>
     <ClCompile Include="source\scenes\pappaScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\androidLaunchSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\AndroidLaunchGame.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
   </ItemGroup>

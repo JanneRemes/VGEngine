@@ -3,7 +3,7 @@
 #endif
 
 #include "Scenes\AndroidLaunchGame.h"
-
+#include "engine\game.h"
 #include "systems\sceneChangeSystem.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/triangleComponent.h"

@@ -7,6 +7,7 @@
 #include "scenes/MainScene.h"
 #include "scenes/cameraScene.h"
 #include "scenes/pappaScene.h"
+#include "scenes\AndroidLaunchGame.h"
 
 using namespace vg;
 
@@ -24,4 +25,6 @@ void mainGame(Game* game)
 	PappaScene* pappaScene = new PappaScene();
 	game->getSceneManager()->addTemplateScene("pappaScene", pappaScene);
 
+	AndroidLaunchGame* androidScene = new AndroidLaunchGame();
+	game->getSceneManager()->addTemplateScene("Android", androidScene);
 }
