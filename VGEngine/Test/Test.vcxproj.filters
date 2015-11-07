@@ -81,6 +81,9 @@
     <ClInclude Include="include\systems\rockSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\systems\mainMenuSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -126,6 +129,9 @@
       <Filter>source\scenes</Filter>
     </ClCompile>
     <ClCompile Include="source\systems\rockSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\mainMenuSystem.cpp">
       <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>

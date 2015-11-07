@@ -127,6 +127,7 @@
     <ClInclude Include="include\systems\androidLaunchSystem.h" />
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
+    <ClInclude Include="include\systems\mainMenuSystem.h" />
     <ClInclude Include="include\systems\PhysicsTestSystem.h" />
     <ClInclude Include="include\systems\rockSystem.h" />
     <ClInclude Include="include\systems\sceneChangeSystem.h" />
@@ -145,6 +146,7 @@
     <ClCompile Include="source\systems\androidLaunchSystem.cpp" />
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />
+    <ClCompile Include="source\systems\mainMenuSystem.cpp" />
     <ClCompile Include="source\systems\PhysicsTestSystem.cpp" />
     <ClCompile Include="source\systems\rockSystem.cpp" />
     <ClCompile Include="source\systems\sceneChangeSystem.cpp" />

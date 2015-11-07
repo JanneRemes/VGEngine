@@ -27,6 +27,8 @@ CameraSystem::~CameraSystem()
 
 void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
+	///TODO fix, incompatible with scenechangesystem
+	/*
 	Vector2<float> input(0,0);
 	bool newInput = false;
 
@@ -45,6 +47,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		newInput = true;
 	}
 	#endif
+	*/
 	/*
 	if (newInput)
 	{

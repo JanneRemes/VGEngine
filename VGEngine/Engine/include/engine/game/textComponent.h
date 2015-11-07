@@ -25,11 +25,11 @@ namespace vg
     public:
 		/**
 		Initializes freetype library and creates new font face
-		@param Path to where font file is located
-		@param Filemanager to load in the fontfile
-		@param Fontsize, optional and 12 if not set
+		@param fontPath to where font file is located
+		@param fontSize, optional and 12 if not set
+		@param text to be displayed
 		*/
-        TextComponent(std::string fontPath, unsigned int fontSize = 12);
+		TextComponent(std::string fontPath, unsigned int fontSize = 12, std::string text = "");
         
 		/**
 		Deletes vertex and indexBuffers

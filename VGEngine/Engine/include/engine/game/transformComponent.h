@@ -15,31 +15,28 @@ namespace vg
 	public:
 		/**
 		Layers for rendering. Sprites on higher layers are drawn on top of lower ones.
-		!!! Don't use COUNT !!!
 		BOTTOM	recommended for backgrounds
 		MIDDLE	default value
 		TOP		recommended for user interface
 		*/
 		enum Layer
 		{
-			BOTTOM = 0, // 0 - 999 999
+			BOTTOM = 0, // 1 - 999 999
 			LOW,		// 1 000 000 - 1 999 999
 			MIDDLE,		// 2 000 000 - 5 999 999
 			HIGH,		// 6 000 000 - 6 999 999
-			TOP,		// 7 000 000 - 8 000 000
-			COUNT
+			TOP			// 7 000 000 - 8 000 000
 		};
 
 
 		TransformComponent();
 		TransformComponent(const TransformComponent &transform);
 		/**
-		@param textureFileName path to texture
 		@param position position of upper left corner in pixels
 		@param size width and lenght of the sprite in pixels
 		@param rotation angle of rotation clockwise
-		@param layer higher layers are drawn over lower ones
 		@param origin offset of origin in pixels from upper left corner
+		@param layer higher layers are drawn over lower ones
 		@param useCamera true if the position is affected by camera
 		*/
 		TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
@@ -126,9 +123,6 @@ namespace vg
 		*/
 		bool getUsingCamera();
 
-		//static unsigned int* mCurrentLayers;	///< array last used layer values
-		//static unsigned int* mLayerMinValues;	///< lowest value for each Layer range
-		//static unsigned int* mLayerMaxValues;	///< limits when layer range roll over to min
 	private:
 		vg::Vector2<float> mPosition;			///< Position of top left corner in pixels.
 		vg::Vector2<float> mOrigin;				///< origin offset from upper left corner in pixels

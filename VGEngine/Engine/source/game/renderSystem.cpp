@@ -114,7 +114,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 {
 	vec2 screen(Screen::getX(), Screen::getY());
 	vec2 camera(0, 0);
-	float zoom = 0.0f;
+	float zoom = 1.0f;
 	if (useCamera)
 	{
 		camera = vec2(Camera::getPosition().getX(), Camera::getPosition().getY());

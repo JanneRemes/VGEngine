@@ -87,13 +87,13 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-#ifdef OS_WINDOWS
-	
 	animationTest->getComponent<TransformComponent>()->move(Vector2<float>(-10, 0));
 
 	if (animationTest->getComponent<TransformComponent>()->getLocalPosition().getX() < -animationTest->getComponent<TransformComponent>()->getSize().getX())
 		animationTest->getComponent<TransformComponent>()->setPosition(Vector2<float>(graphics::Screen::getX(), animationTest->getComponent<TransformComponent>()->getLocalPosition().getY()));
 
+
+#ifdef OS_WINDOWS
 
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{

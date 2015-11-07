@@ -9,7 +9,8 @@ using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
-TextComponent::TextComponent(string fontPath, unsigned int fontSize)
+TextComponent::TextComponent(string fontPath, unsigned int fontSize, string text)
+	: Component(), mText(text), mFontSize(fontSize)
 {
 	core::FileManager* fm = Game::getInstance()->getFileManager();
 	float defaultVerticesArray[] =
@@ -48,7 +49,6 @@ TextComponent::TextComponent(string fontPath, unsigned int fontSize)
 	};
 	defaultIndices = std::vector<unsigned short>(defaultIndicesArray, defaultIndicesArray + sizeof(defaultIndicesArray) / sizeof(defaultIndicesArray[0]));
 
-    mFontSize = fontSize;
 	mVertexBuffer = new VertexBuffer(defaultVertices);
 	mIndexBuffer = new IndexBuffer(defaultIndices);
     fm->readAsset(fontPath, mCharData);
