@@ -161,7 +161,8 @@ void GraphicsContext::initializeGraphicsContext()
 	checkError();
 	eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &h);
 	checkError();
-	Screen::setSize(w, h);
+	Screen::setSize(1280, 720);
+	Screen::setRealSize(w, h);
 }
 
 void GraphicsContext::createGLProgram()

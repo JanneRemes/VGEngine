@@ -39,7 +39,6 @@ void PappaScene::loadObjects()
 
 	
 	// sound
-	assetManager->load<sound::Sound>("muumitechno.mp3");
 	Game::getInstance()->getAudioManager()->addSound("music",
 		*assetManager->get<sound::Sound>("muumitechno.mp3"));
 	Game::getInstance()->getAudioManager()->play("music");

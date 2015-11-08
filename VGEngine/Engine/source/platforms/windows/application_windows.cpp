@@ -6,6 +6,7 @@
 #include "engine/graphics/graphics.h"
 #include "engine/graphics/opengl.h"
 #include "engine/input/keyboard.h"
+#include "engine/graphics/screen.h"
 
 #include <Windows.h>
 
@@ -68,12 +69,12 @@ void Application::update()
 	}
 
 	//clear graphics
-	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
 	gl::clear();
-	//gl::clearColor(vg::input::Input::getTouchX() / graphics->getScreenWidth(), 0.5f,
-	//	(vg::input::Input::getTouchY()) / graphics->getScreenHeight(), 1);
+	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
+
 	//Update game
 	Game::getInstance()->update();
+
 	//swap buffers
 	graphics->swapBuffers();
 }

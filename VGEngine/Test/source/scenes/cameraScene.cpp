@@ -8,6 +8,7 @@
 #include "engine/game/animationComponent.h"
 #include "engine/game/game.h"
 #include "engine/game/textComponent.h"
+#include "engine/graphics/screen.h"
 
 using namespace vg;
 
@@ -21,6 +22,8 @@ CameraScene::~CameraScene()
 
 void CameraScene::loadObjects()
 {
+	graphics::Screen::setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
 	for (int i = 0; i < 10; i++)
 	{
 		GameObject *obj1 = new GameObject("test koala");

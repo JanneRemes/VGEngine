@@ -16,6 +16,11 @@ void mainGame(Game* game)
 {
 	Game::log("test");
 
+	// preloading large assets
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+	assetManager->load<sound::Sound>("muumitechno.mp3");
+	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
+
 	MainScene *scene = new MainScene();
 	game->getSceneManager()->addTemplateScene("scene", scene);
 	game->getSceneManager()->changeScene("scene");

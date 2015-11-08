@@ -95,9 +95,6 @@
     <ClCompile Include="source\scenes\testScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="MainScene.cpp">
-      <Filter>source\scenes</Filter>
-    </ClCompile>
     <ClCompile Include="source\scenes\cameraScene.cpp">
       <Filter>source\scenes</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="source\systems\mainMenuSystem.cpp">
       <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\mainScene.cpp">
+      <Filter>source\scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

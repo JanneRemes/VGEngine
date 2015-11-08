@@ -135,11 +135,11 @@
     <ClInclude Include="include\test.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="source\dummy.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\scenes\AndroidLaunchGame.cpp" />
     <ClCompile Include="source\scenes\cameraScene.cpp" />
+    <ClCompile Include="source\scenes\mainScene.cpp" />
     <ClCompile Include="source\scenes\pappaScene.cpp" />
     <ClCompile Include="source\scenes\rockThrowScene.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
