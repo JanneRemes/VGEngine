@@ -49,16 +49,14 @@ TextComponent::TextComponent(string fontPath, unsigned int fontSize, string text
 	};
 	defaultIndices = std::vector<unsigned short>(defaultIndicesArray, defaultIndicesArray + sizeof(defaultIndicesArray) / sizeof(defaultIndicesArray[0]));
 
-	mVertexBuffer = new VertexBuffer(defaultVertices);
-	mIndexBuffer = new IndexBuffer(defaultIndices);
+	mVertices = defaultVertices;
+	mIndices = defaultIndices;
     fm->readAsset(fontPath, mCharData);
 	initializeFace();
 }
 
 TextComponent::~TextComponent()
 {
-    delete mVertexBuffer;
-    delete mIndexBuffer;
 }
 
 void TextComponent::setText(string text)
@@ -77,9 +75,19 @@ void TextComponent::setFontSize(unsigned int fontSize)
 	initializeFace();
 }
 
-unsigned int TextComponent::getTextureId()
+unsigned int TextComponent::getFontSize()
 {
-	return mTexture;
+	return mFontSize;
+}
+
+void TextComponent::bindTexture()
+{
+	gl::bindTexture(mTexture);
+}
+
+void TextComponent::unBindTexture()
+{
+	gl::bindTexture(0u);
 }
 
 FT_GlyphSlot*  TextComponent::getGlyph()
@@ -92,14 +100,14 @@ FT_Face* TextComponent::getFace()
 	return &mFace;
 }
 
-VertexBuffer* TextComponent::getVertexBuffer()
+std::vector<float>* TextComponent::getVertices()
 {
-	return mVertexBuffer;
+	return &mVertices;
 }
 
-IndexBuffer* TextComponent::getIndexBuffer()
+std::vector<unsigned short>* TextComponent::getIndices()
 {
-	return mIndexBuffer;
+	return &mIndices;
 }
 
 void TextComponent::initializeFace()
@@ -111,7 +119,11 @@ void TextComponent::initializeFace()
 	// New face
 	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
-	FT_Set_Char_Size(mFace, 0, mFontSize * 64, Screen::getX(), Screen::getY());
+	FT_Set_Char_Size(mFace,	/* handle to face object */
+		0,					/* char_width in 1/64th of points */
+		mFontSize * 64,		/* char_height in 1/64th of points */
+		300,				/* horizontal device resolution in dpi */
+		300);				/* vertical device resolution in dpi */
 
 	gl::genTextures(&mTexture);
 
@@ -126,17 +138,13 @@ void TextComponent::initializeFace()
 	gl::bindTexture(0);
 }
 
-void TextComponent::setColour(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
+void TextComponent::setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
 {
-	vector<float> vertexData = defaultVertices;
-
-	for (int i = 2; i < vertexData.size(); i += 8)
+	for (int i = 2; i < mVertices.size(); i += 8)
 	{
-		vertexData[i] = red / 255.0f;
-		vertexData[i + 1] = green / 255.0f;
-		vertexData[i + 2] = blue / 255.0f;
-		vertexData[i + 3] = alpha / 255.0f;
+		mVertices[i] = red / 255.0f;
+		mVertices[i + 1] = green / 255.0f;
+		mVertices[i + 2] = blue / 255.0f;
+		mVertices[i + 3] = alpha / 255.0f;
 	}
-	delete mVertexBuffer;
-	mVertexBuffer = new VertexBuffer(vertexData);
 }

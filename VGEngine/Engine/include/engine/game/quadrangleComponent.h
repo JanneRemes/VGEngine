@@ -3,6 +3,8 @@
 
 #include "engine/game/renderComponent.h"
 
+#include <string>
+
 namespace vg
 {
 	class QuadrangleComponent : public RenderComponent
@@ -20,6 +22,11 @@ namespace vg
 		QuadrangleComponent(std::string textureName);
 
 		~QuadrangleComponent();
+
+		/**
+		Color values ranging from 0 - 255
+		*/
+		void setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha = 255);
 
 	private:
 		std::vector<float> getDefaultVertices();

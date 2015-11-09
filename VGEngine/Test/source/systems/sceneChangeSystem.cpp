@@ -7,6 +7,7 @@
 #endif
 
 #include "systems/sceneChangeSystem.h"
+
 #include "engine/game/game.h"
 #include "engine/utility/random.h"
 #include "engine/graphics/screen.h"
@@ -20,13 +21,24 @@ using namespace vg::input;
 sceneChangeSystem::sceneChangeSystem(Scene *scene)
 {
 	this->scene = scene;
+	mPriority = LATER;
 
-	buttonPos = Vector2 <float>(1280 - 256, 32);
-	buttonSize = Vector2<float>(128, 32);
+	buttonPos = Vector2 <float>(1280 - 210, 0);
+	buttonSize = Vector2<float>(256, 32);
+	
 	GameObject* button = new GameObject("main menu button");
 	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vector2<float>(0, 0), TransformComponent::TOP, false));
-	button->addComponent(new TextComponent("arial.ttf", 3u, "Main Menu"));
+	QuadrangleComponent* quad = new QuadrangleComponent();
+	quad->setColor(127, 127, 127);
+	button->addComponent(quad);
 	scene->addGameObject(button);
+
+	GameObject* label = new GameObject("main menu button label");
+	label->addComponent(new TransformComponent(Vector2<float>(4,0) + buttonPos, Vector2<float>(0,0), 0.0f, Vector2<float>(0, 0), TransformComponent::TOP, false));
+	TextComponent* text = new TextComponent("arial.ttf", 10u, "Main Menu");
+	text->setColor(255, 255, 255);
+	label->addComponent(text);
+	scene->addGameObject(label);
 }
 
 void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)

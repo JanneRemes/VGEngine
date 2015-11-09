@@ -1,11 +1,20 @@
+
 #pragma once
+
 #include "engine/game/component.h"
-#include <vector>
-#include "engine/graphics/texture.h"
+
 #include "../external/glm/vec2.hpp"
-using namespace std;
+
+#include <vector>
+
 namespace vg
 {
+	//forward declaration
+	namespace graphics
+	{
+		class Texture;
+	}
+
 	/**
 	Component for rendering gameObject
 	*/
@@ -23,24 +32,27 @@ namespace vg
 		/**
 		@return Returns the components vertices
 		*/
-		std::vector<float> *getVertices(){ return &vertices; };
+		std::vector<float> *getVertices();
 
 		/**
 		@return Returns the components indices
 		*/
-		std::vector<unsigned short> *getIndices(){ return &indices; };
+		std::vector<unsigned short> *getIndices();
 
 		/**
 		@return pointer to current texture
 		*/
 		vg::graphics::Texture *getTexture();
 
+		/**
+		@param texCoords new texture coordinates
+		*/
 		void setTexCoords(glm::vec2 texCoords[4]);
 		
 
 	protected:
 		vg::graphics::Texture *mTexture;
-		std::vector<float> vertices;
-		std::vector<unsigned short> indices;
+		std::vector<float> mVertices;
+		std::vector<unsigned short> mIndices;
 	};
 }

@@ -4,13 +4,15 @@
 #include "engine/game/animationComponent.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/game/transformComponent.h"
+#include "engine/game/textComponent.h"
+
 #include "engine/graphics/graphics.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
 #include "engine/graphics/opengl.h"
 #include "engine/graphics/screen.h"
 #include "engine/graphics/camera.h"
-#include "engine/game/textComponent.h"
+#include "engine/graphics/texture.h"
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -80,11 +82,12 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			if (text != nullptr)
 			{
 				shader->setUniform("unifFontTexture", true);
-				gl::bindTexture(text->getTextureId());
+				shader->setUniform("unifLayer", transform->getLayer());
+				text->bindTexture();
 				string textString = text->getText();
 				FT_GlyphSlot* glyph = text->getGlyph();
 				float x = transform->getWorldPosition().getX();
-				float y = transform->getWorldPosition().getY();
+				float y = transform->getWorldPosition().getY() + 3 * text->getFontSize();
 				float base = y;
 
 				for (int i = 0; i < textString.size(); i++)
@@ -97,11 +100,13 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 					y = base - (*glyph)->bitmap_top;
 					shader->setUniform("unifModel", modelTransform(Vector2<float>(x, y), transform->getOrigin(),
 						Vector2<float>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
-					shader->setUniform("unifLayer", transform->getLayer());
-					Graphics::draw(shader, text->getVertexBuffer(), text->getIndexBuffer());
 					x += ((*glyph)->advance.x >> 6);
+
+					mVertexBuffer.setData(*text->getVertices());
+					mIndexBuffer.setData(*text->getIndices());
+					Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 				}
-				gl::bindTexture(0u);
+				text->unBindTexture();
 				shader->setUniform("unifFontTexture", false);
 			}
 		}

@@ -10,6 +10,8 @@
 #include "engine/game/textComponent.h"
 #include "engine/graphics/screen.h"
 
+#include <random>
+
 using namespace vg;
 
 CameraScene::CameraScene()
@@ -22,7 +24,7 @@ CameraScene::~CameraScene()
 
 void CameraScene::loadObjects()
 {
-	graphics::Screen::setColor(1.0f, 1.0f, 1.0f, 1.0f);
+	graphics::Screen::setColor(0.0f, 0.0f, 0.5f, 1.0f);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -30,14 +32,18 @@ void CameraScene::loadObjects()
 		obj1->addComponent(new TransformComponent(
 			Vector2<float>(100 + i * 64, 32 + i * 64), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));
-		obj1->addComponent(new QuadrangleComponent("koala.png"));
+		QuadrangleComponent* quad1 = new QuadrangleComponent("koala.png");
+		quad1->setColor(rand() % 255, rand() % 255, rand() % 255);
+		obj1->addComponent(quad1);
 		addGameObject(obj1);
 
 		GameObject *obj2 = new GameObject("test koala 2");
 		obj2->addComponent(new TransformComponent(
 			Vector2<float>(300 + i * 64, i * 64), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));
-		obj2->addComponent(new QuadrangleComponent("koala.png"));
+		QuadrangleComponent* quad2 = new QuadrangleComponent("koala.png");
+		quad2->setColor(rand() % 255, rand() % 255, rand() % 255);
+		obj2->addComponent(quad2);
 		addGameObject(obj2);
 	}
 
@@ -49,22 +55,13 @@ void CameraScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
 	//text
+	for (int i = 0; i < 5; i++)
 	{
-		TextComponent* text = new TextComponent("arial.ttf", 12u);
-		text->setText("KoalaKoala");
-		text->setColour(127, 256, 256);
+		TextComponent* text = new TextComponent("arial.ttf", 52u);
+		text->setText("Koala");
+		text->setColor(i * 32, i * 32, i * 32);
 		GameObject* obj = new GameObject("koalatext");
-		obj->addComponent(new TransformComponent(Vector2<float>(0, 560),
-			Vector2<float>(0, 0), 0.0f));
-		obj->addComponent(text);
-		addGameObject(obj);
-	}
-	{
-		TextComponent* text = new TextComponent("arial.ttf", 12u);
-		text->setText("KoalaKoala");
-		text->setColour(256, 127, 256);
-		GameObject* obj = new GameObject("koalatext");
-		obj->addComponent(new TransformComponent(Vector2<float>(30, 590),
+		obj->addComponent(new TransformComponent(Vector2<float>(256 + 6 * i, 256 + 6 * i),
 			Vector2<float>(0, 0), 0.0f));
 		obj->addComponent(text);
 		addGameObject(obj);

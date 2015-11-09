@@ -1,16 +1,28 @@
 
 #include "engine/game/renderComponent.h"
+#include "engine/graphics/texture.h"
 
 using namespace vg;
+using namespace vg::graphics;
+using namespace std;
 
-RenderComponent::RenderComponent(std::vector<float> vertices, std::vector<unsigned short> indices) :Component()
+RenderComponent::RenderComponent(vector<float> vertices, vector<unsigned short> indices) 
+: Component(), mVertices(vertices), mIndices(indices)
 {
-	this->vertices = vertices;
-	this->indices = indices;
 	mTexture = nullptr;
 }
 
-vg::graphics::Texture *RenderComponent::getTexture()
+vector<float>* RenderComponent::getVertices()
+{
+	return &mVertices;
+}
+
+vector<unsigned short>* RenderComponent::getIndices()
+{
+	return &mIndices;
+}
+
+Texture* RenderComponent::getTexture()
 {
 	return mTexture;
 }
@@ -19,7 +31,7 @@ void RenderComponent::setTexCoords(glm::vec2 texCoords[4])
 {
 	for (int i = 0; i < 4; i++)
 	{
-		vertices[i * 8 + 6] = texCoords[i].x;
-		vertices[i * 8 + 7] = texCoords[i].y;
+		mVertices[i * 8 + 6] = texCoords[i].x;
+		mVertices[i * 8 + 7] = texCoords[i].y;
 	}
 }

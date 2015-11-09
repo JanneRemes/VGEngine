@@ -29,6 +29,20 @@ QuadrangleComponent::~QuadrangleComponent()
 {
 }
 
+void QuadrangleComponent::setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
+{
+	for (int i = 2; i < mVertices.size(); i += 8)
+	{
+		mVertices[i] = red / 255.0f;
+		mVertices[i + 1] = green / 255.0f;
+		mVertices[i + 2] = blue / 255.0f;
+		mVertices[i + 3] = alpha / 255.0f;
+	}
+}
+
+
+//private
+
 std::vector<float> QuadrangleComponent::getDefaultVertices()
 {
 	std::vector<float> defaultVertices = std::vector < float >

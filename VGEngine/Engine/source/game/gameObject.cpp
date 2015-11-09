@@ -4,6 +4,7 @@
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/game/transformComponent.h"
+#include "engine/graphics/texture.h"
 
 #include <algorithm>
 
