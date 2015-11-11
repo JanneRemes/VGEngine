@@ -11,4 +11,6 @@ public:
 
 private:
 	vg::Scene* mScene;
+	std::vector<std::string> sceneNames;
+	std::vector<std::string>::iterator selectedScene;
 };

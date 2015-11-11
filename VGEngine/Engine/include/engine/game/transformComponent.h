@@ -123,6 +123,11 @@ namespace vg
 		*/
 		bool getUsingCamera();
 
+		/**
+		@return true if the point is inside this TransformComponent
+		*/
+		bool contains(Vector2<float> point);
+
 	private:
 		vg::Vector2<float> mPosition;			///< Position of top left corner in pixels.
 		vg::Vector2<float> mOrigin;				///< origin offset from upper left corner in pixels

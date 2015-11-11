@@ -179,9 +179,14 @@ bool TransformComponent::getUsingCamera()
 	return mUsingCamera;
 }
 
-/*
-unsigned int TransformComponent::getDefaultLayer()
+bool TransformComponent::contains(Vector2<float> point)
 {
-	return mCurrentLayer++;
+	Vector2<float> pos = getWorldPosition() - getOrigin();
+	if (point.getX() > pos.getX() && point.getY() > pos.getY())
+	{
+		pos += mSize;
+		if (point.getX() < pos.getX() && point.getY() < pos.getY())
+			return true;
+	}
+	return false;
 }
-*/
