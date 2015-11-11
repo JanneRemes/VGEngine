@@ -21,7 +21,6 @@ using namespace vg::input;
 sceneChangeSystem::sceneChangeSystem(Scene *scene)
 {
 	this->scene = scene;
-	mPriority = LATER;
 
 	buttonPos = Vector2 <float>(1280 - 210, 0);
 	buttonSize = Vector2<float>(256, 32);
@@ -70,9 +69,9 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		Game::getInstance()->getSceneManager()->changeScene("rockThrowScene");
 	}
 
-	if (Mouse::isKeyPressed(LEFT))
+	if (Mouse::isKeyDown(LEFT))
 	{
-		if (Mouse::getPos().getX() >= buttonPos.getX() && Mouse::getPos().getY() <= buttonSize.getY())
+		if (Mouse::getPos(false).getX() >= buttonPos.getX() && Mouse::getPos(false).getY() <= buttonSize.getY())
 			Game::getInstance()->getSceneManager()->changeScene("scene");
 	}
 
@@ -82,7 +81,7 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (Touch::getIsTouched())
 	{
-		if (Touch::getPos().getX() >= buttonPos.getX() && Touch::getPos().getY() <= buttonSize.getY())
+		if (Touch::getPos(false).getX() >= buttonPos.getX() && Touch::getPos(false).getY() <= buttonSize.getY())
 			Game::getInstance()->getSceneManager()->changeScene("scene");
 	}
 #endif

@@ -2,7 +2,9 @@
 #include "engine/game.h"
 #include "engine/utility/logger.h"
 #include "engine/utility/timer.h"
+
 using namespace vg;
+
 Game *Game::mGame = nullptr;
 Game* Game::getInstance()
 {
@@ -18,7 +20,6 @@ Game::Game()
 {
 	initSceneManager();
 	deltaTimer = new Timer();
-	//sound::AudioManager AM;
 }
 
 Game::~Game()
@@ -26,15 +27,17 @@ Game::~Game()
 	delete mSceneManager;
 	mGame = nullptr;
 }
+
 void Game::initSceneManager()
 {
 	mSceneManager = new SceneManager();
 }
+
 void Game::update()
 {
 	float deltaTime = deltaTimer->restart();
 
-	mSceneManager->update(deltaTime); //TODO add deltatime
+	mSceneManager->update(deltaTime);
 	mAudioManager->update();
 	
 }

@@ -17,7 +17,7 @@ using namespace vg::input;
 
 CameraSystem::CameraSystem()
 {
-
+	cameraSpeed = 200.0f;
 }
 
 CameraSystem::~CameraSystem()
@@ -27,38 +27,21 @@ CameraSystem::~CameraSystem()
 
 void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	///TODO fix, incompatible with scenechangesystem
-	/*
 	Vector2<float> input(0,0);
-	bool newInput = false;
 
 	#ifdef OS_WINDOWS
-	if (Mouse::isKeyPressed(LEFT))
-	{
-		input = Mouse::getPos();
-		newInput = true;
-	}
+	if (Mouse::isKeyDown(LEFT))
+		input = Mouse::fromCenter();
 	#endif
 	
 	#ifdef OS_ANDROID
 	if (Touch::getIsTouched())
-	{
-		input = Touch::getPos();
-		newInput = true;
-	}
+		input = Touch::fromCenter();
 	#endif
-	*/
-	/*
-	if (newInput)
+
+	if (input != Vector2<float>(0, 0))
 	{
-		float x = 10.0f, y = 10.0f;
-
-		if (input.getX() <= Screen::getSize().getX() * 0.5f)
-			x *= -1.0f;
-		if (input.getY() <= Screen::getSize().getY() * 0.5f)
-			y *= -1.0f;
-
-		Camera::move(Vector2<float>(x, y));
+		input *= deltaTime * cameraSpeed;
+		Camera::move(input);
 	}
-	*/
 }

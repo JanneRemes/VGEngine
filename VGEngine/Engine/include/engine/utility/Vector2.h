@@ -1,9 +1,17 @@
+
 #pragma once
+
 #include "engine/utility/logger.h"
+
 #include <math.h> 
+
 namespace vg
 {
 	template <typename T>
+
+	/**
+	Template 2D vector class. Used by most engine functions.
+	*/
 	class Vector2
 	{
 	public:
@@ -13,7 +21,7 @@ namespace vg
 		void setY(T y){ mY = y; };
 		void setXY(T x, T y){ mX = x; mY = y; };
 
-		static float Distance(Vector2<T> vector1, Vector2<T> vector2)
+		static float distance(Vector2<T> vector1, Vector2<T> vector2)
 		{
 			T a = pow(vector2.mX - vector1.mX, 2);
 			T b = pow(vector2.mY - vector1.mY, 2);
@@ -26,21 +34,29 @@ namespace vg
 		{
 			mX = X; mY = Y;
 		}
+
 		Vector2<T> operator + (const Vector2<T>& right)
 		{
 			T x = mX + right.getX();
 			T y = mY + right.getY();
 			return Vector2<T>(x, y);
 		}
+
 		Vector2<T> operator - (const Vector2<T>& right)
 		{
 			T x = mX - right.getX();
 			T y = mY - right.getY();
 			return Vector2<T>(x, y);
 		}
+
 		bool operator == (const Vector2<T>& right)
 		{
 			return mX == right.getX() && mY == right.getY();
+		}
+
+		bool operator != (const Vector2<T>& right)
+		{
+			return mX != right.getX() && mY != right.getY();
 		}
 
 		Vector2<T> operator *=(Vector2<T>& left)
@@ -49,36 +65,50 @@ namespace vg
 			mY *= left.getY();
 			return *this;
 		}
+
 		Vector2<T> operator /=(Vector2<T>& left)
 		{
 			mX /= left.getX();
 			mY /= left.getY();
 			return *this;
 		}
+
 		Vector2<T> operator +=(Vector2<T>& left)
 		{
 			mX += left.getX();
 			mY += left.getY();
 			return *this;
 		}
+
 		Vector2<T> operator -=(Vector2<T>& left)
 		{
 			mX -= left.getX();
 			mY -= left.getY();
 			return *this;
 		}
+
+		Vector2<T> operator *=(float left)
+		{
+			mX *= left;
+			mY *= left;
+			return *this;
+		}
+
+		void normalize()
+		{
+			T length = sqrt(mX * mX + mY * mY);
+			mX /= length;
+			mY /= length;
+		}
+
 		void log()
 		{
 			Log("vgengine", "Vector x: %f, y: %f", mX, mY);
 		}
+
 	private:
 		T mX;
 		T mY;
 	};
 
-
-
-
-
-
-};
+}

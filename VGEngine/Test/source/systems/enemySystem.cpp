@@ -99,7 +99,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<float>::Distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
+					if (Vector2<float>::distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
 						< (comp->getSize().getX() + comp->getSize().getY()) / 2.0f)
 						(*i)->markForDelete();
 				}

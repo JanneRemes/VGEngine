@@ -27,9 +27,10 @@ namespace vg
 
 		/**
 		Updates the s inside the gameObject
-		@param gameObject The gameObject whos s we are updating
+		@param gameObject The gameObject whos components we are updating
+		@param deltaTime how many seconds last update took
 		*/
-		virtual void update(std::vector<GameObject*> *gameObjects,float deltaTime);
+		virtual void update(std::vector<GameObject*>* gameObjects, float deltaTime);
 
 		/**
 		Fetches system's update priority.

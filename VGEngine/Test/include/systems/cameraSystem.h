@@ -11,5 +11,5 @@ public:
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
 
 private:
-
+	float cameraSpeed;
 };

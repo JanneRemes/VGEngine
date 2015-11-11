@@ -1,6 +1,8 @@
 
 #pragma once
+
 #include "engine/utility/vector2.h"
+
 namespace vg
 {
 	namespace input
@@ -9,7 +11,6 @@ namespace vg
 			LEFT,
 			RIGHT,
 			MIDDLE
-			
 		};
 
 		/**
@@ -19,14 +20,24 @@ namespace vg
 		{
 		public:
 			/**
-			@return Returns whether the mouse is being pressed
+			@return Returns whether the mouse is being pressed once or not
 			*/
 			static bool isKeyPressed(MOUSE_KEY key);
 
 			/**
-			@return Returns the mouse position
+			@return Returns whether the mouse is down or not
 			*/
-			static vg::Vector2<float> getPos();
+			static bool isKeyDown(MOUSE_KEY key);
+
+			/**
+			@return Returns the mouse position translated to world coordinates
+			*/
+			static vg::Vector2<float> getPos(bool relativeToCamera = true);
+
+			/**
+			@return normalized vector from center of screen pointing towards input position
+			*/
+			static vg::Vector2<float> fromCenter();
 			
 		};
 	}

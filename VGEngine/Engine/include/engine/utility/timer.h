@@ -11,13 +11,24 @@ namespace vg
 	class Timer
 	{
 	public:
-		/**
-			Restarts the timer
-		*/
 		Timer();
+
+		/**
+		Restarts the timer and returns elapsed time
+		@return elapsed time in seconds
+		*/
 		float restart();
+
+		/**
+		@return elapsed time in seconds
+		*/
 		float getCurrentTimeSeconds();
+
+		/**
+		@return elapsed time in milliseconds
+		*/
 		float getCurrentTimeMillis();
+
 	private:
 		
 		clock_t mStartTime;

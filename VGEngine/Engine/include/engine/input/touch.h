@@ -14,7 +14,7 @@ namespace vg
 			/**
 			@return Returns the position of the touch
 			*/
-			static Vector2<float> getPos();
+			static Vector2<float> getPos(bool relativeToCamera = true);
 
 			/**
 			Sets the position of the touch with the given value
@@ -47,6 +47,12 @@ namespace vg
 			Updates touches
 			*/
 			static void update();
+
+			/**
+			@return normalized vector from center of screen pointing towards input position
+			*/
+			static vg::Vector2<float> fromCenter();
+
 		private:
 			static bool mIsTouched;			///< Is touched
 			static bool mIsTouchReleased;	///< Is touch being released

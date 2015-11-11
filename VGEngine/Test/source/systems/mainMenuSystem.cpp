@@ -16,7 +16,6 @@ using namespace vg::input;
 MainMenuSystem::MainMenuSystem(Scene* scene)
 	:mScene(scene)
 {
-	mPriority = EARLY;
 }
 
 void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
@@ -25,7 +24,7 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 	bool newInput = false;
 
 	#ifdef OS_WINDOWS
-	if (Mouse::isKeyPressed(LEFT))
+	if (Mouse::isKeyDown(LEFT))
 	{
 		newInput = true;
 		input = Mouse::getPos();

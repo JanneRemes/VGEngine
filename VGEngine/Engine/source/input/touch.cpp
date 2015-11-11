@@ -11,9 +11,12 @@ bool Touch::mIsTouchReleased = false;
 Vector2<float> Touch::mPos = Vector2<float>();
 
 
-Vector2<float> Touch::getPos()
+Vector2<float> Touch::getPos(bool relativeToCamera)
 {
-	return Screen::toWorld(mPos);
+	if (relativeToCamera)
+		return Screen::toWorld(mPos);
+	else
+		return mPos;
 }
 
 void Touch::setPos(Vector2<float> value)
@@ -45,4 +48,14 @@ void Touch::setIsTouched(bool value)
 void Touch::setIsReleased(bool value)
 {
 	mIsTouchReleased = value;
+}
+
+Vector2<float> Touch::fromCenter()
+{
+	Vector2<float> result(0.5f * Screen::getSize().getX(), 0.5f * Screen::getSize().getY());
+	Vector2<float> input = getPos(false);
+	result -= input;
+	result.normalize();
+	result *= -1.0f;
+	return result;
 }
