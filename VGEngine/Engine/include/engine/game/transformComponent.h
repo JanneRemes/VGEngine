@@ -2,7 +2,7 @@
 #pragma once
 
 #include "engine/game/component.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 namespace vg
 {
@@ -21,11 +21,11 @@ namespace vg
 		*/
 		enum Layer
 		{
-			BOTTOM = 0, // 1 - 99 999
-			LOW,		// 100 000 - 199 999
-			MIDDLE,		// 200 000 - 799 999
-			HIGH,		// 800 000 - 899 999
-			TOP			// 900 000 - 1 000 000
+			BOTTOM = 0, // 1 - 9 999
+			LOW,		// 10 000 - 19 999
+			MIDDLE,		// 20 000 - 79 999
+			HIGH,		// 80 000 - 89 999
+			TOP			// 90 000 - 100 000
 		};
 
 
@@ -43,6 +43,14 @@ namespace vg
 			float rotation, vg::Vector2<float> origin = vg::Vector2<float>(0, 0),
 			Layer layer = MIDDLE, bool useCamera = true);
 
+		/**
+		@param position position of upper left corner in pixels
+		@param size width and lenght of the sprite in pixels
+		@param rotation angle of rotation clockwise
+		@param origin offset of origin in pixels from upper left corner
+		*/
+		TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation = 0.0f, vg::Vec2f origin = vg::Vec2f());
+
 		~TransformComponent();
 
 		/**
@@ -54,10 +62,16 @@ namespace vg
 		@return world position (adds parent gameobject´s position to this components local position)
 		*/
 		vg::Vector2<float> getWorldPosition();
+		
 		/**
 		Set position value to be used on draw calls.
 		*/
 		void setPosition(const vg::Vector2<float> position);
+
+		/**
+		Set position value to be used on draw calls.
+		*/
+		void setPosition(const Vec2f position);
 
 		/**
 		Add to the position value to be used on draw calls.

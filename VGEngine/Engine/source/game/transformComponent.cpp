@@ -10,9 +10,9 @@
 using namespace vg;
 
 /// values used for tracking reserved layers
-static unsigned int mCurrentLayers[] = { 1, 100000, 200000, 800000, 900000 };
-static unsigned int mLayerMinValues[] = { 1, 100000, 200000, 800000, 900000 };
-static unsigned int mLayerMaxValues[] = { 99999, 199999, 799999, 899999, 1000000 };
+static unsigned int mCurrentLayers[] = { 1, 10000, 20000, 80000, 90000 };
+static unsigned int mLayerMinValues[] = { 1, 10000, 20000, 80000, 90000 };
+static unsigned int mLayerMaxValues[] = { 9999, 19999, 79999, 89999, 100000 };
 
 TransformComponent::TransformComponent(): Component()
 {
@@ -28,8 +28,9 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 	mPosition = transform.mPosition;
 	mSize = transform.mSize;
 	mRotation = transform.mRotation;
-	mLayer = 0;
+	mLayer = transform.mLayer;
 	mOrigin = transform.mOrigin;
+	mUsingCamera = transform.mUsingCamera;
 }
 
 TransformComponent::TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
@@ -37,6 +38,13 @@ TransformComponent::TransformComponent(vg::Vector2<float> position, vg::Vector2<
 	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mUsingCamera(useCamera)
 {
 	setLayer(layer);
+}
+
+TransformComponent::TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation, vg::Vec2f origin)
+: mPosition(Vector2<float>(position.x, position.y)), mSize(Vector2<float>(size.x, size.y)), mRotation(rotation), mOrigin(Vector2<float>(origin.x, origin.y))
+{
+	setLayer(MIDDLE);
+	mUsingCamera = true;
 }
 
 TransformComponent::~TransformComponent()
@@ -84,6 +92,11 @@ vg::Vector2<float> TransformComponent::getWorldPosition()
 void TransformComponent::setPosition(const Vector2<float> position)
 {
     mPosition = position;
+}
+
+void TransformComponent::setPosition(const Vec2f position)
+{
+	mPosition = Vector2<float>(position.x, position.y);
 }
 
 void TransformComponent::move(Vector2<float> change)
