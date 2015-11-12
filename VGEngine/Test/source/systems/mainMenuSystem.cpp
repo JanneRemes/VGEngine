@@ -32,10 +32,9 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 
 	#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
-		input = inputOnce = Mouse::getPos();
-	/// TODO fix Mouse::isKeyPressed
-	/* if (Mouse::isKeyPressed(LEFT))
-		inputOnce = Mouse::getPos(); */
+		input = Mouse::getPos();
+	if (Mouse::isKeyPressed(LEFT))
+		inputOnce = Mouse::getPos();
 	#endif
 	#ifdef OS_ANDROID
 	if (Touch::getIsTouched())
@@ -62,6 +61,7 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 				{
 					if (transform->contains(inputOnce))
 					{
+						Log("vgengine", "Main menu left button click", "");
 						if (selectedScene != sceneNames.begin())
 							selectedScene--;
 					}
@@ -70,6 +70,7 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 				{
 					if (transform->contains(inputOnce))
 					{
+						Log("vgengine", "Main menu right button click", "");
 						if (selectedScene != --sceneNames.end())
 							selectedScene++;
 					}
@@ -78,6 +79,7 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 				{
 					if (transform->contains(inputOnce))
 					{
+						Log("vgengine", "Main menu right middle click", "");
 						Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
 						return;
 					}

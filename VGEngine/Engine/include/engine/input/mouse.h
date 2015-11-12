@@ -38,6 +38,11 @@ namespace vg
 			@return normalized vector from center of screen pointing towards input position
 			*/
 			static vg::Vector2<float> fromCenter();
+
+			/**
+			Saves mouse button states
+			*/
+			static void update();
 			
 		};
 	}

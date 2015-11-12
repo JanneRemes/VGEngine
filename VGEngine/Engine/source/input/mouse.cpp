@@ -10,24 +10,11 @@ using namespace vg;
 using namespace vg::input;
 using namespace vg::graphics;
 
+static bool lastState[] = { false, false, false };
+
 bool Mouse::isKeyPressed(MOUSE_KEY key)
 {
-	int vkey = 0;
-	switch (key)
-	{
-	case LEFT:
-		vkey = VK_LBUTTON;
-		break;
-	case RIGHT:
-		vkey = VK_RBUTTON;
-		break;
-	case MIDDLE:
-		vkey = VK_MBUTTON;
-		break;
-	default:
-		return false;
-	}
-	return(GetAsyncKeyState(vkey) & 0x8000 != 0);
+	return !isKeyDown(key) && lastState[key];
 }
 
 bool Mouse::isKeyDown(MOUSE_KEY key)
@@ -69,6 +56,13 @@ Vector2<float> Mouse::fromCenter()
 	result.normalize();
 	result *= -1.0f;
 	return result;
+}
+
+void Mouse::update()
+{
+	lastState[LEFT] = isKeyDown(LEFT);
+	lastState[RIGHT] = isKeyDown(RIGHT);
+	lastState[MIDDLE] = isKeyDown(MIDDLE);
 }
 
 #endif
