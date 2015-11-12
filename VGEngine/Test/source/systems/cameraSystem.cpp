@@ -3,6 +3,7 @@
 
 #include "engine/graphics/camera.h"
 #include "engine/graphics/screen.h"
+#include "engine/game/transformComponent.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -43,5 +44,21 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 	{
 		input *= deltaTime * cameraSpeed;
 		Camera::move(input);
+	}
+
+	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+	{
+		if ((*it)->getName() == "test koala")
+		{
+			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+			if (transform != nullptr)
+			{
+				transform->rotate(deltaTime * (-50 + rand() % 100));
+
+				float x = (-100 + (rand() % 200)) * deltaTime;
+				float y = (-100 + (rand() % 200)) * deltaTime;
+				transform->move(Vector2<float>(x, y));
+			}
+		}
 	}
 }

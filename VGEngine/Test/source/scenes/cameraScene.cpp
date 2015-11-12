@@ -37,7 +37,7 @@ void CameraScene::loadObjects()
 		obj1->addComponent(quad1);
 		addGameObject(obj1);
 
-		GameObject *obj2 = new GameObject("test koala 2");
+		GameObject *obj2 = new GameObject("test koala");
 		obj2->addComponent(new TransformComponent(
 			Vector2<float>(300 + i * 64, i * 64), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));

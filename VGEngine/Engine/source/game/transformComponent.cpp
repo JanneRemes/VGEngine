@@ -10,9 +10,9 @@
 using namespace vg;
 
 /// values used for tracking reserved layers
-static unsigned int mCurrentLayers[] = { 1, 250000, 500000, 1500000, 1750000 };
-static unsigned int mLayerMinValues[] = { 1, 250000, 500000, 1500000, 1750000 };
-static unsigned int mLayerMaxValues[] = { 249999, 499999, 1499999, 1749999, 2000000 };
+static unsigned int mCurrentLayers[] = { 1, 100000, 200000, 800000, 900000 };
+static unsigned int mLayerMinValues[] = { 1, 100000, 200000, 800000, 900000 };
+static unsigned int mLayerMaxValues[] = { 99999, 199999, 799999, 899999, 1000000 };
 
 TransformComponent::TransformComponent(): Component()
 {
