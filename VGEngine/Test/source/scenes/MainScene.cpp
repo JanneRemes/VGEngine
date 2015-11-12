@@ -29,16 +29,6 @@ void MainScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
 	Game::getInstance()->addComponentSystem(this, new MainMenuSystem(this));
-	
-	GameObject* koala = new GameObject("koala button");
-	koala->addComponent(new TransformComponent(Vector2<float>(0, 0), Vector2<float>(360, 360), 0.0f));
-	koala->addComponent(new QuadrangleComponent("koala.png"));
-	addGameObject(koala);
-
-	GameObject* hippo = new GameObject("hippo button");
-	hippo->addComponent(new TransformComponent(Vector2<float>(0, 360), Vector2<float>(360, 360), 0.0f));
-	hippo->addComponent(new QuadrangleComponent("hippo.png"));
-	addGameObject(hippo);
 
 	// sound
 	Game::getInstance()->getAudioManager()->addSound("music1",

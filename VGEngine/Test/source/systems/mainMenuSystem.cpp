@@ -18,7 +18,6 @@ using namespace vg::input;
 MainMenuSystem::MainMenuSystem(Scene* scene)
 	:mScene(scene)
 {
-	sceneNames.push_back("scene");
 	sceneNames.push_back("cameraScene");
 	sceneNames.push_back("pappaScene");
 	sceneNames.push_back("Android");
@@ -33,9 +32,10 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 
 	#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
-		input = Mouse::getPos();
-	if (Mouse::isKeyPressed(LEFT))
-		inputOnce = Mouse::getPos();
+		input = inputOnce = Mouse::getPos();
+	/// TODO fix Mouse::isKeyPressed
+	/* if (Mouse::isKeyPressed(LEFT))
+		inputOnce = Mouse::getPos(); */
 	#endif
 	#ifdef OS_ANDROID
 	if (Touch::getIsTouched())
@@ -43,20 +43,6 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 	if (Touch::getIsReleased())
 		inputOnce = Touch::getPos();
 	#endif
-
-	if (input != Vector2<float>(0, 0))
-	{
-		if (input.getX() < 360)
-		{
-			if (0 < input.getY() < 720)
-			{
-				if (input.getY() < 360)
-					Game::getInstance()->getSceneManager()->changeScene("cameraScene");
-				else if (input.getY() > 360)
-					Game::getInstance()->getSceneManager()->changeScene("pappaScene");
-			}
-		}
-	}
 
 	//list
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
@@ -67,28 +53,35 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (text != nullptr)
 				text->setText(*selectedScene);
 		}
-
-		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-		if (transform != nullptr)
+		if (inputOnce != Vector2<float>(0.0f, 0.0f))
 		{
-			if ((*it)->getName() == "mmButtonLeft")
+			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+			if (transform != nullptr)
 			{
-				if (transform->contains(input))
+				if ((*it)->getName() == "mmButtonLeft")
 				{
-					if (selectedScene != sceneNames.begin())
-						selectedScene--;
+					if (transform->contains(inputOnce))
+					{
+						if (selectedScene != sceneNames.begin())
+							selectedScene--;
+					}
 				}
-			}
-			else if ((*it)->getName() == "mmButtonRight")
-			{
-				if (transform->contains(input))
+				else if ((*it)->getName() == "mmButtonRight")
 				{
-					if (selectedScene != --sceneNames.end())
-						selectedScene++;
+					if (transform->contains(inputOnce))
+					{
+						if (selectedScene != --sceneNames.end())
+							selectedScene++;
+					}
 				}
-			}
-			else if ((*it)->getName() == "mmButtonMiddle")
-			{
+				else if ((*it)->getName() == "mmButtonMiddle")
+				{
+					if (transform->contains(inputOnce))
+					{
+						Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
+						return;
+					}
+				}
 			}
 		}
 	}
