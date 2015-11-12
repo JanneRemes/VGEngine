@@ -176,7 +176,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 #endif
 
 #ifdef OS_ANDROID
-	if (Touch::getIsTouched())
+	if (Touch::getIsReleased())
 	{
 		if (!heightLock)
 		{
