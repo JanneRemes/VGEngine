@@ -7,6 +7,7 @@
 #include "engine/graphics/opengl.h"
 #include "engine/input/keyboard.h"
 #include "engine/graphics/screen.h"
+#include "engine/input/mouse.h"
 
 #include <Windows.h>
 
@@ -55,7 +56,8 @@ int main()
 }
 void Application::update()
 {
-	vg::input::Keyboard::update();
+	input::Keyboard::update();
+	input::Mouse::update();
 	Graphics *graphics = Game::getInstance()->getGraphics();
 	GraphicsContext *context = graphics->getContext(); 
 	//Update window
