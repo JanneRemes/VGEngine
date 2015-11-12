@@ -131,7 +131,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	float bottom = camera.y + screen.y - screen.y * (1.0f - zoom);
 	float top = camera.y + screen.y - screen.y * zoom;
 	// left, right, bottom, top, near, far
-	mat4 projection = ortho(left, right, bottom, top, -8000000.0f, 8000000.0f);
+	mat4 projection = ortho(left, right, bottom, top, -2000000.0f, 2000000.0f);
 	
 	if (useCamera)
 	{
