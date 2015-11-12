@@ -24,9 +24,10 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 		_height = component->getSize().getY();
 	}
 
-	float x = component->getWorldPosition().getX();
-	float y = component->getWorldPosition().getY();
+	float x = component->getWorldPosition().getX() - component->getOrigin().getX();
+	float y = component->getWorldPosition().getY() - component->getOrigin().getY();
 	
+
 	if (type == DYNAMIC)
 	{
 		bodyDef.type = b2BodyType::b2_dynamicBody;
@@ -39,8 +40,9 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	{
 		bodyDef.type = b2BodyType::b2_staticBody;
 	}
-	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
 
+	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
+	
 	_FixDef.density = 1.0f;
 	_FixDef.shape = &mBoxShape;
 
@@ -49,6 +51,7 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 
 	_body = system->getWorld()->CreateBody(&bodyDef);
 	_body->SetGravityScale(5);
+	_body->SetTransform(_body->GetPosition(), component->getWorldRotation() * (3.14 / 180));
 	_body->CreateFixture(&_FixDef);
 	mInitialized = true;
 }

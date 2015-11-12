@@ -40,6 +40,11 @@ namespace vg
 		float getRotation();
 
 		/**
+		Set body rotation
+		*/
+		void setRotation(float rotation);
+
+		/**
 		Sets velocity for the physicsComponent that it will move with
 		*/
 		void setVelocity(Vector2<float> velocity);

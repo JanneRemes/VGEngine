@@ -23,4 +23,6 @@ private:
 	vg::GameObject *physicsTest;
 	vg::GameObject *physicsTest3;
 	vg::GameObject *animationTest;
+	vg::Timer newPositionTime;
+	vg::Vector2<float> randPos;
 };

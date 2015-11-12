@@ -17,6 +17,7 @@
 #include "engine/game/animationSystem.h"
 #include "engine/utility/random.h"
 #include "engine/graphics/screen.h"
+#include "engine/utility/timer.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -25,6 +26,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	system->createBorders(0, 0, Screen::getX(), Screen::getY());
+
 	// Animation
 	animationTest = new GameObject("animationTest");
 	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
@@ -81,6 +83,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	
 	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotationLock(false);
 
+	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRestitution(1.1);
+
 	scene->addGameObject(physicsTest3);
 
 	system->createJoint(physicsTest2->getComponent<PhysicsPolygonComponent>(), physicsTest->getComponent<PhysicsPolygonComponent>());
@@ -94,6 +98,31 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 
 #ifdef OS_WINDOWS
+
+	// Pappa explosions
+	/*
+	if (newPositionTime.getCurrentTimeSeconds() >= 0.12)
+	{
+		randPos = Vector2<float>(rand() % Screen::getX(), rand() % Screen::getY());
+		newPositionTime.restart();
+
+		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+		{
+			PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
+			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+
+			if (physComponent != nullptr && transform != nullptr)
+			{
+				float number = rand() % 400 - 200.0f;
+				float number2 = rand() % 200;
+
+				physComponent->setVelocity(Vector2<float>(number, number2));
+				physComponent->setPosition(randPos);
+			}
+		}
+	}
+	*/
+
 
 	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
 	{
@@ -135,7 +164,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
-		physicsTest->getComponent<PhysicsPolygonComponent>()->setPosition(pos);
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->setPosition(pos);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED)

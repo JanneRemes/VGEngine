@@ -36,9 +36,15 @@ Vector2<float> PhysicsComponent::getPosition()
 float PhysicsComponent::getRotation()
 {
 	if (mInitialized)
-		return _body->GetAngle();
+		return (_body->GetAngle() * (180 / 3.14)) ;
 	else 
 		return 0.0f;
+}
+
+void PhysicsComponent::setRotation(float rotation)
+{
+	if (mInitialized)
+		_body->SetTransform(_body->GetPosition(), rotation * (3.14 / 180 ));
 }
 
 void PhysicsComponent::setDensity(float density)
