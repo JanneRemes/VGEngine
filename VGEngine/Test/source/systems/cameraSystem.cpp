@@ -4,6 +4,7 @@
 #include "engine/graphics/camera.h"
 #include "engine/graphics/screen.h"
 #include "engine/game/transformComponent.h"
+#include <random>
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
