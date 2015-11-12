@@ -10,7 +10,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
 void PhysicsComponent::setVelocity(Vector2<float> velocity)
 {
 	if (mInitialized)
-		_body->SetLinearVelocity(b2Vec2(velocity.getX(), -velocity.getY()));
+		_body->SetLinearVelocity(b2Vec2(velocity.getX(), velocity.getY()));
 }
 
 void PhysicsComponent::applyForce(Vector2<float> force)

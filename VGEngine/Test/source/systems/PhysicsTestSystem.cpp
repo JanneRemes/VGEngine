@@ -19,12 +19,12 @@
 #include "engine/graphics/screen.h"
 
 using namespace vg;
-
+using namespace vg::graphics;
 PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 {
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-
+	system->createBorders(0, 0, Screen::getX(), Screen::getY());
 	// Animation
 	animationTest = new GameObject("animationTest");
 	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
