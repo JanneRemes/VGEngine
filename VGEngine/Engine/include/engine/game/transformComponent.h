@@ -12,6 +12,7 @@ namespace vg
 	*/
 	class TransformComponent :public Component
 	{
+		friend class RenderSystem;
 	public:
 		/**
 		Layers for rendering. Sprites on higher layers are drawn on top of lower ones.
@@ -21,11 +22,11 @@ namespace vg
 		*/
 		enum Layer
 		{
-			BOTTOM = 0, // 1 - 9 999
-			LOW,		// 10 000 - 19 999
-			MIDDLE,		// 20 000 - 79 999
-			HIGH,		// 80 000 - 89 999
-			TOP			// 90 000 - 100 000
+			BOTTOM = 0, // 1 - 999
+			LOW,		// 1 000 - 1 999
+			MIDDLE,		// 2 000 - 7 999
+			HIGH,		// 8 000 - 8 999
+			TOP			// 9 000 - 10 000
 		};
 
 
@@ -143,6 +144,8 @@ namespace vg
 		bool contains(Vector2<float> point);
 
 	private:
+		static float getMaxLayer();
+
 		vg::Vector2<float> mPosition;			///< Position of top left corner in pixels.
 		vg::Vector2<float> mOrigin;				///< origin offset from upper left corner in pixels
 		vg::Vector2<float> mSize;				///< Sprites witdth and length in pixels.

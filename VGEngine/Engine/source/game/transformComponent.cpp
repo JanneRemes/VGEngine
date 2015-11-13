@@ -10,9 +10,9 @@
 using namespace vg;
 
 /// values used for tracking reserved layers
-static unsigned int mCurrentLayers[] = { 1, 10000, 20000, 80000, 90000 };
-static unsigned int mLayerMinValues[] = { 1, 10000, 20000, 80000, 90000 };
-static unsigned int mLayerMaxValues[] = { 9999, 19999, 79999, 89999, 100000 };
+static unsigned int mCurrentLayers[] = { 1, 1000, 2000, 8000, 9000 };
+static unsigned int mLayerMinValues[] = { 1, 1000, 2000, 8000, 9000 };
+static unsigned int mLayerMaxValues[] = { 999, 1999, 7999, 8999, 10000 };
 
 TransformComponent::TransformComponent(): Component()
 {
@@ -202,4 +202,9 @@ bool TransformComponent::contains(Vector2<float> point)
 			return true;
 	}
 	return false;
+}
+
+float TransformComponent::getMaxLayer()
+{
+	return mLayerMaxValues[TOP];
 }
