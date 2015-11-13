@@ -4,6 +4,7 @@
 #include "engine/game/game.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/textComponent.h"
+#include "engine/game/quadrangleComponent.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -52,39 +53,59 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (text != nullptr)
 				text->setText(*selectedScene);
 		}
-		if (inputOnce != Vector2<float>(0.0f, 0.0f))
+		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
+		QuadrangleComponent* quad = (*it)->getComponent<QuadrangleComponent>();
+		if (transform != nullptr && quad != nullptr)
 		{
-			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-			if (transform != nullptr)
+			if ((*it)->getName() == "mmButtonLeft")
 			{
-				if ((*it)->getName() == "mmButtonLeft")
+				if (transform->contains(inputOnce))
 				{
-					if (transform->contains(inputOnce))
-					{
-						Log("vgengine", "Main menu left button click", "");
-						if (selectedScene != sceneNames.begin())
-							selectedScene--;
-					}
+					Log("vgengine", "Main menu left button click", "");
+					if (selectedScene != sceneNames.begin())
+						selectedScene--;
 				}
-				else if ((*it)->getName() == "mmButtonRight")
+				else if (transform->contains(input))
+					setGreen(quad);
+				else
+					setBlue(quad);
+			}
+			else if ((*it)->getName() == "mmButtonRight")
+			{
+				if (transform->contains(inputOnce))
 				{
-					if (transform->contains(inputOnce))
-					{
-						Log("vgengine", "Main menu right button click", "");
-						if (selectedScene != --sceneNames.end())
-							selectedScene++;
-					}
+					Log("vgengine", "Main menu right button click", "");
+					if (selectedScene != --sceneNames.end())
+						selectedScene++;
 				}
-				else if ((*it)->getName() == "mmButtonMiddle")
+				else if (transform->contains(input))
+					setGreen(quad);
+				else
+					setBlue(quad);
+			}
+			else if ((*it)->getName() == "mmButtonMiddle")
+			{
+				if (transform->contains(inputOnce))
 				{
-					if (transform->contains(inputOnce))
-					{
-						Log("vgengine", "Main menu right middle click", "");
-						Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
-						return;
-					}
+					Log("vgengine", "Main menu right middle click", "");
+					Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
+					return;
 				}
+				else if (transform->contains(input))
+					setGreen(quad);
+				else
+					setBlue(quad);
 			}
 		}
 	}
+}
+
+void MainMenuSystem::setGreen(QuadrangleComponent* quad)
+{
+	quad->setColor(0, 255, 64);
+}
+
+void MainMenuSystem::setBlue(QuadrangleComponent* quad)
+{
+	quad->setColor(0, 64, 255);
 }

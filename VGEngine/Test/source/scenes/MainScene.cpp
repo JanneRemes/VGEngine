@@ -45,7 +45,7 @@ void MainScene::loadObjects()
 	//left
 	GameObject* objLeft = new GameObject("mmButtonLeft");
 	objLeft->addComponent(new TransformComponent(Vector2<float>(bx, by), bSize, 0.0f, bOri));
-	QuadrangleComponent* quadLeft = new QuadrangleComponent();
+	QuadrangleComponent* quadLeft = new QuadrangleComponent("ArrowLeft.png");
 	quadLeft->setColor(0, 64, 255);
 	objLeft->addComponent(quadLeft);
 	addGameObject(objLeft);
@@ -53,9 +53,9 @@ void MainScene::loadObjects()
 	//right
 	GameObject* objRight = new GameObject("mmButtonRight");
 	objRight->addComponent(new TransformComponent(Vector2<float>(1280 - bx, by), bSize, 0.0f, bOri));
-	QuadrangleComponent* quadRight = new QuadrangleComponent();
+	QuadrangleComponent* quadRight = new QuadrangleComponent("ArrowRight.png");
 	quadRight->setColor(0, 64, 255);
-	objRight->addComponent(quadLeft);
+	objRight->addComponent(quadRight);
 	addGameObject(objRight);
 
 	//middle
