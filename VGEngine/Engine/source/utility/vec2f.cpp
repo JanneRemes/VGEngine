@@ -51,6 +51,11 @@ void Vec2f::normalize()
 	y /= length();
 }
 
+Vector2<float> Vec2f::convert()
+{
+	return Vector2<float>(x, y);
+}
+
 //operators
 Vec2f Vec2f::operator + (const Vec2f& right)
 {

@@ -1,3 +1,4 @@
+
 #ifdef OS_WINDOWS
 
 #include "engine/input/mouse.h"
@@ -10,6 +11,7 @@ using namespace vg;
 using namespace vg::input;
 using namespace vg::graphics;
 
+static bool state[] = { false, false, false };
 static bool lastState[] = { false, false, false };
 
 bool Mouse::isKeyPressed(MOUSE_KEY key)
@@ -19,22 +21,7 @@ bool Mouse::isKeyPressed(MOUSE_KEY key)
 
 bool Mouse::isKeyDown(MOUSE_KEY key)
 {
-	int vkey = 0;
-	switch (key)
-	{
-	case LEFT:
-		vkey = VK_LBUTTON;
-		break;
-	case RIGHT:
-		vkey = VK_RBUTTON;
-		break;
-	case MIDDLE:
-		vkey = VK_MBUTTON;
-		break;
-	default:
-		return false;
-	}
-	return(GetAsyncKeyState(vkey) != 0);
+	return state[key];
 }
 
 Vector2<float> Mouse::getPos(bool relativeToCamera)
@@ -60,9 +47,36 @@ Vector2<float> Mouse::fromCenter()
 
 void Mouse::update()
 {
-	lastState[LEFT] = isKeyDown(LEFT);
-	lastState[RIGHT] = isKeyDown(RIGHT);
-	lastState[MIDDLE] = isKeyDown(MIDDLE);
+	lastState[LEFT] = state[LEFT];
+	lastState[RIGHT] = state[RIGHT];
+	lastState[MIDDLE] = state[MIDDLE];
+
+	state[LEFT] = keyDown(LEFT);
+	state[RIGHT] = keyDown(RIGHT);
+	state[MIDDLE] = keyDown(MIDDLE);
+}
+
+
+//private
+
+bool Mouse::keyDown(MOUSE_KEY key)
+{
+	int vkey = 0;
+	switch (key)
+	{
+	case LEFT:
+		vkey = VK_LBUTTON;
+		break;
+	case RIGHT:
+		vkey = VK_RBUTTON;
+		break;
+	case MIDDLE:
+		vkey = VK_MBUTTON;
+		break;
+	default:
+		return false;
+	}
+	return(GetAsyncKeyState(vkey) != 0);
 }
 
 #endif

@@ -6,7 +6,7 @@
 namespace vg
 {
 	/**
-	2D float vector, simple alternative for Vector2<T>
+	2D float vector, simple alternative to Vector2<T>
 	*/
 	class Vec2f
 	{
@@ -41,6 +41,11 @@ namespace vg
 		Converts the vector to a unit vector
 		*/
 		void normalize();
+
+		/**
+		@return copy of the vector as Vector2<float>
+		*/
+		Vector2<float> convert();
 		
 		Vec2f operator + (const Vec2f& right);
 		Vec2f operator - (const Vec2f& right);

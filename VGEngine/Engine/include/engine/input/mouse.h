@@ -43,6 +43,10 @@ namespace vg
 			Saves mouse button states
 			*/
 			static void update();
+
+		private:
+			//not visible to end user
+			static bool keyDown(MOUSE_KEY key);
 			
 		};
 	}

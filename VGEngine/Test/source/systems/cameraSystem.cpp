@@ -19,7 +19,7 @@ using namespace vg::input;
 
 CameraSystem::CameraSystem()
 {
-	cameraSpeed = 200.0f;
+	cameraSpeed = 300.0f;
 }
 
 CameraSystem::~CameraSystem()

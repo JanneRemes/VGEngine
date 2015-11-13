@@ -28,23 +28,25 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 	mPosition = transform.mPosition;
 	mSize = transform.mSize;
 	mRotation = transform.mRotation;
-	mLayer = transform.mLayer;
+	mLayerGroup = transform.mLayerGroup;
+	setLayer(mLayerGroup);
 	mOrigin = transform.mOrigin;
 	mUsingCamera = transform.mUsingCamera;
 }
 
 TransformComponent::TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
-	float rotation, vg::Vector2<float> origin, Layer layer, bool useCamera)
-	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mUsingCamera(useCamera)
+	float rotation, vg::Vector2<float> origin, LayerGroup layerGroup, bool useCamera)
+	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mLayerGroup(layerGroup), mUsingCamera(useCamera)
 {
-	setLayer(layer);
+	setLayer(layerGroup);
 }
 
-TransformComponent::TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation, vg::Vec2f origin)
-: mPosition(Vector2<float>(position.x, position.y)), mSize(Vector2<float>(size.x, size.y)), mRotation(rotation), mOrigin(Vector2<float>(origin.x, origin.y))
+TransformComponent::TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation,
+	vg::Vec2f origin, LayerGroup layerGroup, bool useCamera)
+: mPosition(Vector2<float>(position.x, position.y)), mSize(Vector2<float>(size.x, size.y)),
+mRotation(rotation), mOrigin(Vector2<float>(origin.x, origin.y)), mLayerGroup(layerGroup), mUsingCamera(useCamera)
 {
-	setLayer(MIDDLE);
-	mUsingCamera = true;
+	setLayer(layerGroup);
 }
 
 TransformComponent::~TransformComponent()
@@ -55,6 +57,7 @@ vg::Vector2<float> TransformComponent::getLocalPosition()
 {
     return mPosition;
 }
+
 //TODO fix
 vg::Vector2<float> TransformComponent::getWorldPosition()
 {
@@ -104,6 +107,11 @@ void TransformComponent::move(Vector2<float> change)
     mPosition += change;
 }
 
+void move(vg::Vec2f change)
+{
+	move(change.convert());
+}
+
 vg::Vector2<float> TransformComponent::getSize()
 {
     return mSize;
@@ -146,6 +154,10 @@ float TransformComponent::getWorldRotation()
 	return getLocalRotation();
 }
 
+float TransformComponent::getRotation()
+{
+	return getWorldRotation();
+}
 
 //TODO fix
 
@@ -159,17 +171,17 @@ void TransformComponent::rotate(float rotation)
     setRotation(mRotation + rotation);
 }
 
-float TransformComponent::getLayer()
-{
-	return static_cast<float>(mLayer);
-}
-
-void TransformComponent::setLayer(Layer layer)
+void TransformComponent::setLayer(LayerGroup layer)
 {
 	mCurrentLayers[layer]++;
 	if (mCurrentLayers[layer] > mLayerMaxValues[layer])
 		mCurrentLayers[layer] = mLayerMinValues[layer];
 	mLayer = mCurrentLayers[layer];
+}
+
+TransformComponent::LayerGroup TransformComponent::getLayerGroup()
+{
+	return mLayerGroup;
 }
 
 vg::Vector2<float> TransformComponent::getOrigin()
@@ -204,7 +216,15 @@ bool TransformComponent::contains(Vector2<float> point)
 	return false;
 }
 
+
+//private
+
 float TransformComponent::getMaxLayer()
 {
 	return mLayerMaxValues[TOP];
+}
+
+float TransformComponent::getLayer()
+{
+	return static_cast<float>(mLayer);
 }

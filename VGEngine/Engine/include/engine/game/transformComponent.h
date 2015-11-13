@@ -12,7 +12,10 @@ namespace vg
 	*/
 	class TransformComponent :public Component
 	{
+		// friends
 		friend class RenderSystem;
+		friend class Scene;
+
 	public:
 		/**
 		Layers for rendering. Sprites on higher layers are drawn on top of lower ones.
@@ -20,7 +23,7 @@ namespace vg
 		MIDDLE	default value
 		TOP		recommended for user interface
 		*/
-		enum Layer
+		enum LayerGroup
 		{
 			BOTTOM = 0, // 1 - 999
 			LOW,		// 1 000 - 1 999
@@ -33,26 +36,35 @@ namespace vg
 		TransformComponent();
 		TransformComponent(const TransformComponent &transform);
 		/**
-		@param position position of upper left corner in pixels
-		@param size width and lenght of the sprite in pixels
+		@param position position of upper left corner
+		@param size width and lenght of the sprite
 		@param rotation angle of rotation clockwise
-		@param origin offset of origin in pixels from upper left corner
-		@param layer higher layers are drawn over lower ones
+		@param origin offset of origin from upper left corner
+		@param layerGroup higher layers are drawn over lower ones
 		@param useCamera true if the position is affected by camera
 		*/
 		TransformComponent(vg::Vector2<float> position, vg::Vector2<float> size,
 			float rotation, vg::Vector2<float> origin = vg::Vector2<float>(0, 0),
-			Layer layer = MIDDLE, bool useCamera = true);
+			LayerGroup layerGroup = MIDDLE, bool useCamera = true);
 
 		/**
 		@param position position of upper left corner in pixels
 		@param size width and lenght of the sprite in pixels
 		@param rotation angle of rotation clockwise
 		@param origin offset of origin in pixels from upper left corner
+		@param layerGroup higher layers are drawn over lower ones
+		@param useCamera true if the position is affected by camera
 		*/
-		TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation = 0.0f, vg::Vec2f origin = vg::Vec2f());
+		TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation = 0.0f, 
+			vg::Vec2f origin = vg::Vec2f(), LayerGroup layerGroup = MIDDLE, bool useCamera = true);
 
 		~TransformComponent();
+
+		/**
+		Same as getWorldPosition() with different return value type
+		@return Position taking possible parent's position into account
+		*/
+		vg::Vec2f getPosition();
 
 		/**
 		@return local position (only taking into account this component´s position not parent´s position)
@@ -75,15 +87,19 @@ namespace vg
 		void setPosition(const Vec2f position);
 
 		/**
-		Add to the position value to be used on draw calls.
+		@param change Value that will be added to position
 		*/
 		void move(vg::Vector2<float> change);
+
+		/**
+		@param change Value that will be added to position
+		*/
+		void move(vg::Vec2f change);
 
 		/**
 		@return size in pixels
 		*/
 		vg::Vector2<float> getSize();
-
 
 		/**
 		Set position value to be used on draw calls.
@@ -94,10 +110,18 @@ namespace vg
 		@return rotation in degrees
 		*/
 		float getLocalRotation();
+
 		/**
-		stuff
+		@return rotation taking possible parent's rotation into account
 		*/
 		float getWorldRotation();
+
+		/**
+		Same as getWorldRotation()
+		@return rotation taking possible parent's rotation into account
+		*/
+		float getRotation();
+
 		/**
 		Set rotation value to be used on draw calls.
 		*/
@@ -109,14 +133,14 @@ namespace vg
 		void rotate(float rotatation);
 
 		/**
-		@return real layer value ranging from 0 to 8000000.
+		@param layerGroup layer where GameObject will be drawn
 		*/
-		float getLayer();
-
+		void setLayer(LayerGroup layerGroup);
+		
 		/**
-		@param layer range
+		@return current LayerGroup 
 		*/
-		void setLayer(Layer layer);
+		LayerGroup getLayerGroup();
 
 		/**
 		@return origin offset
@@ -144,14 +168,17 @@ namespace vg
 		bool contains(Vector2<float> point);
 
 	private:
+		//functions that aren't visible to end user
 		static float getMaxLayer();
+		float getLayer();
 
-		vg::Vector2<float> mPosition;			///< Position of top left corner in pixels.
-		vg::Vector2<float> mOrigin;				///< origin offset from upper left corner in pixels
-		vg::Vector2<float> mSize;				///< Sprites witdth and length in pixels.
-		float mRotation;						///< Rotation of sprite in angles.
-		unsigned int mLayer;					///< real layer value used by shader
-		bool mUsingCamera;						///< Is the position affected by camera?
+		vg::Vector2<float> mPosition;	///< Position of top left corner
+		vg::Vector2<float> mOrigin;		///< origin offset from upper left corner
+		vg::Vector2<float> mSize;		///< Sprites witdth and length
+		float mRotation;				///< Rotation of sprite in angles.
+		LayerGroup mLayerGroup;			///< LayerGroup where GameObject will be drawn
+		unsigned int mLayer;			///< real layer value used by shader
+		bool mUsingCamera;				///< Is the position affected by camera?
 	};
 
 }

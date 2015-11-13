@@ -44,40 +44,35 @@ int main()
 
 	game->start();
 
-	Application *a = new Application();
+	Application *app = new Application();
 	mainGame(game);
-	gl::clearColor(0.7f, 0.2f, 0.1f, 1.0f);
+	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
 	gl::clear();
 	graphics->swapBuffers();
 	while (game->isRunning())
 	{
-		a->update();
+		app->update();
 	}
 }
+
 void Application::update()
 {
-	input::Keyboard::update();
-	input::Mouse::update();
 	Graphics *graphics = Game::getInstance()->getGraphics();
-	GraphicsContext *context = graphics->getContext(); 
-	//Update window
-	MSG msg;//I don't even...
+	GraphicsContext *context = graphics->getContext();
+	MSG msg;
 
 	while (PeekMessage(&msg, static_cast<HWND>(context->mWindowHandle), NULL, NULL, PM_REMOVE))
 	{
-
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
-	//clear graphics
+	input::Keyboard::update();
+	input::Mouse::update();
 	gl::clear();
 	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
-
-	//Update game
 	Game::getInstance()->update();
-
-	//swap buffers
 	graphics->swapBuffers();
 }
+
 #endif
