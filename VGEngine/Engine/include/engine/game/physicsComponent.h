@@ -16,6 +16,7 @@ namespace vg
 		friend class PhysicsSystem;
 	public:
 		enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };	///< physicsComponents body type
+		enum FILTER : short { LOW = 0x0001, MIDDLE = 0x0002, HIGH = 0x0004, TOP = 0x0008 };
 		static float scale;								///< Scale of the object
 		/**
 		Constructor for creating PhysicsComponent
@@ -48,6 +49,11 @@ namespace vg
 		Sets velocity for the physicsComponent that it will move with
 		*/
 		void setVelocity(Vector2<float> velocity);
+
+		/**
+		Sets angular velocity
+		*/
+		void setAngularVelocity(float velocity);
 
 		/**
 		Applies force for the physicsComponent
@@ -88,6 +94,11 @@ namespace vg
 		@param lock True or False depending if you need it locked or not
 		*/
 		void setRotationLock(bool lock);
+
+		/**
+		Set collision filter
+		*/
+		void setCollisionFilter(FILTER filter);
 
 	protected:
 		b2Body *_body;			///< PhysicsComponents Box2D body

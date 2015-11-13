@@ -82,12 +82,16 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest3->addComponent(physicsRender3);
 	
 	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotationLock(false);
-
-	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRestitution(1.1);
+	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRestitution(0);
 
 	scene->addGameObject(physicsTest3);
 
 	system->createJoint(physicsTest2->getComponent<PhysicsPolygonComponent>(), physicsTest->getComponent<PhysicsPolygonComponent>());
+
+	// Two physics objects with same collision masks wont collide
+	physicsTest3->getComponent<PhysicsPolygonComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
+	physicsTest->getComponent<PhysicsPolygonComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
+
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
@@ -98,7 +102,6 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 
 #ifdef OS_WINDOWS
-
 	// Pappa explosions
 	/*
 	if (newPositionTime.getCurrentTimeSeconds() >= 0.12)
@@ -122,9 +125,8 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		}
 	}
 	*/
-
-
-	if (vg::input::Mouse::isKeyPressed(vg::input::RIGHT))
+	
+	if (vg::input::Mouse::isKeyDown(vg::input::RIGHT))
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
 		createPapis(pos);
@@ -165,6 +167,15 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
 		physicsTest3->getComponent<PhysicsPolygonComponent>()->setPosition(pos);
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->setAngularVelocity(0);
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->setVelocity(Vector2<float>(0, 0));
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotation(0);
+	}
+
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::R) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED)

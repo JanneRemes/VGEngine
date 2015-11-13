@@ -12,6 +12,11 @@ void PhysicsComponent::setVelocity(Vector2<float> velocity)
 	if (mInitialized)
 		_body->SetLinearVelocity(b2Vec2(velocity.getX(), velocity.getY()));
 }
+void PhysicsComponent::setAngularVelocity(float velocity)
+{
+	if (mInitialized)
+		_body->SetAngularVelocity(velocity);
+}
 
 void PhysicsComponent::applyForce(Vector2<float> force)
 {
@@ -97,4 +102,16 @@ void PhysicsComponent::setRotationLock(bool lock)
 {
 	if (mInitialized)
 		_body->SetFixedRotation(lock);
+}
+
+void PhysicsComponent::setCollisionFilter(FILTER filter)
+{
+	if (mInitialized)
+	{
+		// The function GetFixureList() returns the first element in a linked list of fixtures
+		b2Filter newFilter = _body->GetFixtureList()->GetFilterData();		
+		newFilter.maskBits = filter;
+		_body->GetFixtureList()->SetFilterData(newFilter);
+	}
+
 }
