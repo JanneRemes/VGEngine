@@ -22,10 +22,27 @@ PhysicsSystem::~PhysicsSystem()
 
 }
 
+void PhysicsSystem::removeBody(b2Body *body)
+{
+	bodyRemovalList.push_back(body);
+}
+
+
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {
 	 int velocityIterations = 8;
 	 int positionIterations = 3;
+
+	 // delete marked physic bodies
+	 for (auto i = bodyRemovalList.begin(); i != bodyRemovalList.end(); i++)
+	 {
+		 if (!world->IsLocked())
+		 {
+			 world->DestroyBody(*i);
+			 i = bodyRemovalList.erase(i);
+
+		 }
+	 }
 
 	 world->Step(deltaTime, velocityIterations, positionIterations);
 
@@ -85,7 +102,7 @@ void PhysicsSystem::setGravity(Vector2<float> gravity)
 	world->SetGravity(b2Vec2(gravity.getX(), gravity.getY()));
 }
 
-void PhysicsSystem::createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
+void PhysicsSystem::createRevoluteJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
 {
 	b2RevoluteJointDef jointDef;
 	
@@ -96,3 +113,14 @@ void PhysicsSystem::createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB
 
 	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
 }
+
+void PhysicsSystem::createRopeJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
+{
+	b2RopeJointDef jointDef;
+
+	jointDef.bodyA = bodyA->_body;
+	jointDef.bodyB = bodyB->_body;
+	jointDef.maxLength = 10;
+
+	b2RopeJoint* joint = (b2RopeJoint*)world->CreateJoint(&jointDef);
+} 

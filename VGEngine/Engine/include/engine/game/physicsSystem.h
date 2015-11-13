@@ -25,7 +25,7 @@ namespace vg
 		@param gameObjects Vector that contains updateable gameObjects
 		*/
 		void update(std::vector<GameObject*> *gameObjects, float deltaTime);
-
+		void removeBody(b2Body *body);
 		/**
 		Creates borders for chainable objects
 		*/
@@ -36,8 +36,8 @@ namespace vg
 		@param bodyA One of the two bodies that will be jointed together
 		@param bodyB second of the two bodies that will be jointed together
 		*/
-		void createJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
-
+		void createRevoluteJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
+		void createRopeJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
 		/**
 		Sets gravity for the physics world
 		@param gravity Vector2 gravity for the world
@@ -56,5 +56,6 @@ namespace vg
 
 	private:
 		b2World* world;		///< Physics world
+		std::vector<b2Body*> bodyRemovalList;
 	};
 }

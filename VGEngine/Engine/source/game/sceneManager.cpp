@@ -50,8 +50,8 @@ void SceneManager::changeScene(string key)
 		{
 			if (mActiveScene != nullptr)
 			{
-				mActiveScene->clearSystems();
 				mActiveScene->clearObjects();
+				mActiveScene->clearSystems();
 			}
 			
 			Game::getInstance()->getAudioManager()->stopAll();

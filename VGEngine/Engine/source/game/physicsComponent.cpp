@@ -1,10 +1,19 @@
 #include "engine\game\physicsComponent.h"
+#include "engine\game\physicsSystem.h"
+#include "engine\game\scene.h"
+#include "engine\game\game.h"
 
 using namespace vg;
 float PhysicsComponent::scale = 30.0f;
 PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
 {
 	mInitialized = false;
+}
+
+PhysicsComponent::~PhysicsComponent()
+{
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	system->removeBody(_body);
 }
 
 void PhysicsComponent::setVelocity(Vector2<float> velocity)
@@ -113,5 +122,4 @@ void PhysicsComponent::setCollisionFilter(FILTER filter)
 		newFilter.maskBits = filter;
 		_body->GetFixtureList()->SetFilterData(newFilter);
 	}
-
 }

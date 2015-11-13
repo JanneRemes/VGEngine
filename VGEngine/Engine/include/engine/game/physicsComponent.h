@@ -24,7 +24,7 @@ namespace vg
 		@param type Can be either 'DYNAMIC', 'KINEMATIC' or 'STATIC', defines the type of the physics object
 		*/
 		PhysicsComponent(TransformComponent *component, BODYTYPE type);
-
+		~PhysicsComponent();
 		/**
 		Sets Vector2 position for the physicsComponent
 		*/

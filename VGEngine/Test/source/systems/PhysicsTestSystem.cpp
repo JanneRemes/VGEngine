@@ -54,7 +54,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	scene->addGameObject(physicsTest);
 
 	// 2nd physics object
-	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(600, 400),
+	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(600, 500),
 		Vector2<float>(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
@@ -66,13 +66,15 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest2->addComponent(physicsTransform2);
 	physicsTest2->addComponent(physicsRender2);
 
+	//physicsTest2->getComponent<PhysicsPolygonComponent>()->setRotationLock(true);
+
 	scene->addGameObject(physicsTest2);
 
 	// 3rd physics object
 	TransformComponent *physicsTransform3 = new TransformComponent(Vector2<float>(800, 400),
 		Vector2<float>(64, 64), 0.0f);
 
-	physicsTest3 = new GameObject("physicsTest2");
+	physicsTest3 = new GameObject("physicsTest3");
 	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");
 
 	PhysicsPolygonComponent *physicsPolyComponent3 = new PhysicsPolygonComponent(physicsTransform3, PhysicsComponent::DYNAMIC, 64, 64);
@@ -80,13 +82,11 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest3->addComponent(physicsPolyComponent3);
 	physicsTest3->addComponent(physicsTransform3);
 	physicsTest3->addComponent(physicsRender3);
-	
-	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotationLock(false);
 	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRestitution(0);
 
 	scene->addGameObject(physicsTest3);
 
-	system->createJoint(physicsTest2->getComponent<PhysicsPolygonComponent>(), physicsTest->getComponent<PhysicsPolygonComponent>());
+	system->createRevoluteJoint(physicsTest2->getComponent<PhysicsPolygonComponent>(), physicsTest->getComponent<PhysicsPolygonComponent>());
 
 	// Two physics objects with same collision masks wont collide
 	physicsTest3->getComponent<PhysicsPolygonComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
@@ -175,7 +175,18 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::R) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+	}
 
+
+	if (physicsTest3 != nullptr)
+	{
+		if (!physicsTest3->markedForDelete())
+		{
+			if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::F) == vg::input::Keyboard::KeyState::PRESSED)
+			{
+				physicsTest3->markForDelete();
+			}
+		}
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED)
