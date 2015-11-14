@@ -28,7 +28,7 @@ Vector2<float> Mouse::getPos(bool relativeToCamera)
 {
 	POINT pt;
 	GetCursorPos(&pt);
-	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->mWindowHandle);
+	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->getWindowHandle());
 	ScreenToClient(handle, &pt);
 	if (relativeToCamera)
 		return Screen::toWorld(pt.x, pt.y);
@@ -61,6 +61,9 @@ void Mouse::update()
 
 bool Mouse::keyDown(MOUSE_KEY key)
 {
+	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->getWindowHandle());
+	if (GetActiveWindow() != handle)
+		return false;
 	int vkey = 0;
 	switch (key)
 	{

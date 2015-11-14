@@ -217,4 +217,11 @@ void GraphicsContext::checkError()
 		Log("vgengine", "EGL error: %i", error, "");
 	}
 }
+
+void* GraphicsContext::getWindowHandle()
+{
+	Log("vgengine", "ERROR! getWindowHandle() call on Android!", "");
+	return nullptr;
+}
+
 #endif

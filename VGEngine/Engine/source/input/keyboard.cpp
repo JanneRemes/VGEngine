@@ -1,12 +1,21 @@
+
 #ifdef OS_WINDOWS
 
 #include "engine/input/keyboard.h"
 #include "engine/utility/logger.h"
+#include "engine/game/game.h"
+
 #include <Windows.h>
+
 using namespace vg::input;
+
 std::map<Keyboard::Key, Keyboard::KeyState> Keyboard::keyStates;
+
 bool Keyboard::isKeyPressed(Key key)
 {
+	HWND handle = static_cast<HWND>(Game::getInstance()->getGraphics()->getContext()->getWindowHandle());
+	if (GetActiveWindow() != handle)
+		return false;
 
 	int vkey = 0;
 	switch (key)

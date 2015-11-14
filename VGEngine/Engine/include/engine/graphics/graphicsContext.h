@@ -42,7 +42,7 @@ namespace vg
 			/**
 			Used for windows sided window handling
 			*/
-			void *mWindowHandle;
+			void* getWindowHandle();
 
 		private:
 			/**
@@ -67,8 +67,7 @@ namespace vg
 			void checkError();
 
 
-
-
+			void* mWindowHandle;	///< HWND pointer to a window
 		};
 	}
 }

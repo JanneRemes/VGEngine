@@ -231,4 +231,9 @@ void GraphicsContext::checkError()
 	if (error != ERROR_SUCCESS)
 		Log("vgengine", "Error initializing window, errorcode: %d!\n",error);
 }
+
+void* GraphicsContext::getWindowHandle()
+{
+	return mWindowHandle;
+}
 #endif

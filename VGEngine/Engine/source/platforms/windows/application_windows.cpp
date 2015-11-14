@@ -61,7 +61,7 @@ void Application::update()
 	GraphicsContext *context = graphics->getContext();
 	MSG msg;
 
-	while (PeekMessage(&msg, static_cast<HWND>(context->mWindowHandle), NULL, NULL, PM_REMOVE))
+	while (PeekMessage(&msg, static_cast<HWND>(context->getWindowHandle()), NULL, NULL, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
