@@ -7,10 +7,7 @@ using namespace vg::graphics;
 
 Vector2<int> Screen::mSize(1280, 720);
 Vector2<int> Screen::mRealSize(1280, 720);
-float Screen::mRed = 0;
-float Screen::mGreen = 0;
-float Screen::mBlue = 0;
-float Screen::mAlpha = 1;
+Color Screen::mColor = Color();
 
 Vector2<int> Screen::getSize()
 {
@@ -66,34 +63,15 @@ Vector2<float> Screen::realToVirtual(float x, float y)
 	return realToVirtual(Vector2<float>(x, y));
 }
 
-void Screen::setColor(float red, float green, float blue, float alpha)
+void Screen::setColor(vg::Color color)
 {
-	mRed = red;
-	mGreen = green;
-	mBlue = blue;
-	mAlpha = alpha;
+	mColor = color;
 }
 
-float Screen::getRed()
+Color Screen::getColor()
 {
-	return mRed;
+	return mColor;
 }
-
-float Screen::getGreen()
-{
-	return mGreen;
-}
-
-float Screen::getBlue()
-{
-	return mBlue;
-}
-
-float Screen::getAlpha()
-{
-	return mAlpha;
-}
-
 
 //private
 

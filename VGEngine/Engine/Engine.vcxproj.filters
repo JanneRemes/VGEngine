@@ -231,6 +231,9 @@
     <ClInclude Include="include\engine\utility\vec2f.h">
       <Filter>include\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\utility\color.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -396,6 +399,9 @@
       <Filter>source\graphics</Filter>
     </ClCompile>
     <ClCompile Include="source\utility\vec2f.cpp">
+      <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\color.cpp">
       <Filter>source\utility</Filter>
     </ClCompile>
   </ItemGroup>

@@ -46,7 +46,7 @@ int main()
 
 	Application *app = new Application();
 	mainGame(game);
-	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
+	gl::clearColor(Screen::getColor());
 	gl::clear();
 	graphics->swapBuffers();
 	while (game->isRunning())
@@ -70,7 +70,7 @@ void Application::update()
 	input::Keyboard::update();
 	input::Mouse::update();
 	gl::clear();
-	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
+	gl::clearColor(Screen::getColor());
 	Game::getInstance()->update();
 	graphics->swapBuffers();
 }

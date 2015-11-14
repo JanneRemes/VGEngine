@@ -9,6 +9,7 @@
 #include "engine/game/game.h"
 #include "engine/game/textComponent.h"
 #include "engine/graphics/screen.h"
+#include "engine/utility/color.h"
 
 #include <random>
 
@@ -24,7 +25,7 @@ CameraScene::~CameraScene()
 
 void CameraScene::loadObjects()
 {
-	graphics::Screen::setColor(0.0f, 0.0f, 0.5f, 1.0f);
+	graphics::Screen::setColor(Color(0, 0, 127));
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -33,7 +34,7 @@ void CameraScene::loadObjects()
 			Vector2<float>(100 + i * 64, 32 + i * 64), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));
 		QuadrangleComponent* quad1 = new QuadrangleComponent("koala.png");
-		quad1->setColor(rand() % 255, rand() % 255, rand() % 255);
+		quad1->setColor(Color::random());
 		obj1->addComponent(quad1);
 		addGameObject(obj1);
 
@@ -42,7 +43,7 @@ void CameraScene::loadObjects()
 			Vector2<float>(300 + i * 64, i * 64), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));
 		QuadrangleComponent* quad2 = new QuadrangleComponent("koala.png");
-		quad2->setColor(rand() % 255, rand() % 255, rand() % 255);
+		quad2->setColor(Color::random());
 		obj2->addComponent(quad2);
 		addGameObject(obj2);
 	}

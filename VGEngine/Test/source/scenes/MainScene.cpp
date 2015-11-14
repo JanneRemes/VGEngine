@@ -22,11 +22,7 @@ MainScene::~MainScene()
 void MainScene::loadObjects()
 {
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
-	graphics::Screen::setColor(0.7f, 0.2f, 0.1f, 1.0f);
-
-	// Scene change system
-	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
-	Game::getInstance()->addComponentSystem(this, sceneChange);
+	graphics::Screen::setColor(Color(180, 50, 25));
 
 	Game::getInstance()->addComponentSystem(this, new MainMenuSystem(this));
 
@@ -37,40 +33,26 @@ void MainScene::loadObjects()
 	Game::getInstance()->getAudioManager()->loopEnabled("music1", true);
 
 	//buttons
-	Vector2<float> bSize(128, 128);
-	Vector2<float> bOri(64, 64);
-	float bx = 350;
-	float by = 400;
-	
-	//left
-	GameObject* objLeft = new GameObject("mmButtonLeft");
-	objLeft->addComponent(new TransformComponent(Vector2<float>(bx, by), bSize, 0.0f, bOri));
-	QuadrangleComponent* quadLeft = new QuadrangleComponent("ArrowLeft.png");
-	quadLeft->setColor(0, 64, 255);
-	objLeft->addComponent(quadLeft);
-	addGameObject(objLeft);
-
-	//right
-	GameObject* objRight = new GameObject("mmButtonRight");
-	objRight->addComponent(new TransformComponent(Vector2<float>(1280 - bx, by), bSize, 0.0f, bOri));
-	QuadrangleComponent* quadRight = new QuadrangleComponent("ArrowRight.png");
-	quadRight->setColor(0, 64, 255);
-	objRight->addComponent(quadRight);
-	addGameObject(objRight);
-
-	//middle
-	GameObject* objMiddle = new GameObject("mmButtonMiddle");
-	objMiddle->addComponent(new TransformComponent(Vector2<float>(640, by), Vector2<float>(256, 128), 0.0f, Vector2<float>(128, 64)));
-	QuadrangleComponent* quadMiddle = new QuadrangleComponent();
-	quadMiddle->setColor(0, 255, 64);
-	objMiddle->addComponent(quadMiddle);
-	addGameObject(objMiddle);
+	float middle = 360;
+	addGameObject(makeButton("mmButtonUp", "ArrowUp.png", middle - 150));
+	addGameObject(makeButton("mmButtonDown", "ArrowDown.png", middle + 150));
+	addGameObject(makeButton("mmButtonPlay", "ButtonPlay.png", middle));
 
 	//scene name text
 	GameObject* objText = new GameObject("mmSceneText");
-	objText->addComponent(new TransformComponent(Vector2<float>(bx, by-180), Vector2<float>(0, 0), 0.0f));
+	objText->addComponent(new TransformComponent(Vector2<float>(250, middle - 35), Vector2<float>(0, 0), 0.0f));
 	TextComponent* text = new TextComponent("arial.ttf", 18u, "very long scene name");
 	text->setColor(255, 255, 255);
 	objText->addComponent(text);
 	addGameObject(objText);
+}
+
+vg::GameObject* MainScene::makeButton(std::string name, std::string texture, float y)
+{
+	GameObject* obj = new GameObject(name);
+	obj->addComponent(new TransformComponent(Vector2<float>(150, y), Vector2<float>(128, 128), 0.0f, Vector2<float>(64, 64)));
+	QuadrangleComponent* quad = new QuadrangleComponent(texture);
+	quad->setColor(Color(0, 64, 255));
+	obj->addComponent(quad);
+	return obj;
 }

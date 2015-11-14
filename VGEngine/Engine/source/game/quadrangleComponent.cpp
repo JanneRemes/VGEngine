@@ -29,14 +29,14 @@ QuadrangleComponent::~QuadrangleComponent()
 {
 }
 
-void QuadrangleComponent::setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
+void QuadrangleComponent::setColor(vg::Color color)
 {
 	for (int i = 2; i < mVertices.size(); i += 8)
 	{
-		mVertices[i] = red / 255.0f;
-		mVertices[i + 1] = green / 255.0f;
-		mVertices[i + 2] = blue / 255.0f;
-		mVertices[i + 3] = alpha / 255.0f;
+		mVertices[i] = color.red / 255.0f;
+		mVertices[i + 1] = color.green / 255.0f;
+		mVertices[i + 2] = color.blue / 255.0f;
+		mVertices[i + 3] = color.alpha / 255.0f;
 	}
 }
 

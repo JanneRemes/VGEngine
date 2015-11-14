@@ -108,10 +108,9 @@ void gl::clear()
 	checkError();
 }
 
-void gl::clearColor(float red, float green, float blue, float alpha)
+void gl::clearColor(vg::Color color)
 {
-	glClearColor(GLclampf(red), GLclampf(green), GLclampf(blue), GLclampf(alpha));
-	checkError();
+	glClearColor(GLclampf(color.red / 255.0f), GLclampf(color.green / 255.0f), GLclampf(color.blue / 255.0f), GLclampf(color.alpha / 255.0f));
 }
 
 void gl::setUniform(unsigned int location, glm::mat3& value)

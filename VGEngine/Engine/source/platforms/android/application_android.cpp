@@ -127,7 +127,7 @@ void Application::drawFrame()
 	}
 
 	gl::clear();
-	gl::clearColor(Screen::getRed(), Screen::getGreen(), Screen::getBlue(), Screen::getAlpha());
+	gl::clearColor(Screen::getColor());
 
 	engine.state.game->update();
 

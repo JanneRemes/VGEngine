@@ -28,7 +28,7 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 	GameObject* button = new GameObject("main menu button");
 	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vector2<float>(0, 0), TransformComponent::TOP, false));
 	QuadrangleComponent* quad = new QuadrangleComponent();
-	quad->setColor(127, 127, 127);
+	quad->setColor(Color(127, 127, 127));
 	button->addComponent(quad);
 	scene->addGameObject(button);
 

@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "engine/utility/color.h"
+
 #include <stdint.h>
 #include <vector>
 #include <string>
@@ -21,7 +23,7 @@ namespace vg
 			// draw
 			void drawTriangles(int  count, const void *indices = nullptr);
 			void clear();
-			void clearColor(float red, float green, float blue, float alpha);			
+			void clearColor(vg::Color color);
 			
 
 			//texture

@@ -17,7 +17,7 @@ using namespace vg;
 using namespace vg::input;
 
 MainMenuSystem::MainMenuSystem(Scene* scene)
-	:mScene(scene)
+:mScene(scene)
 {
 	sceneNames.push_back("cameraScene");
 	sceneNames.push_back("pappaScene");
@@ -28,23 +28,22 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 
 void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	Vector2<float> input(0, 0);
-	Vector2<float> inputOnce(0, 0);
+	inputDown = Vector2<float>(0, 0);
+	inputRelease = Vector2<float>(0, 0);
 
-	#ifdef OS_WINDOWS
+#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
-		input = Mouse::getPos();
+		inputDown = Mouse::getPos();
 	if (Mouse::isKeyPressed(LEFT))
-		inputOnce = Mouse::getPos();
-	#endif
-	#ifdef OS_ANDROID
+		inputRelease = Mouse::getPos();
+#endif
+#ifdef OS_ANDROID
 	if (Touch::getIsTouched())
-		input = Touch::getPos();
+		inputDown = Touch::getPos();
 	if (Touch::getIsReleased())
-		inputOnce = Touch::getPos();
-	#endif
+		inputRelease = Touch::getPos();
+#endif
 
-	//list
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "mmSceneText")
@@ -53,59 +52,41 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (text != nullptr)
 				text->setText(*selectedScene);
 		}
-		TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-		QuadrangleComponent* quad = (*it)->getComponent<QuadrangleComponent>();
-		if (transform != nullptr && quad != nullptr)
+		else if ((*it)->getName() == "mmButtonUp")
 		{
-			if ((*it)->getName() == "mmButtonLeft")
+			if (updateButton((*it)))
+				if (selectedScene != sceneNames.begin())
+					selectedScene--;
+		}
+		else if ((*it)->getName() == "mmButtonDown")
+		{
+			if (updateButton((*it)))
+				if (selectedScene != --sceneNames.end())
+					selectedScene++;
+		}
+		else if ((*it)->getName() == "mmButtonPlay")
+		{
+			if (updateButton((*it)))
 			{
-				if (transform->contains(inputOnce))
-				{
-					Log("vgengine", "Main menu left button click", "");
-					if (selectedScene != sceneNames.begin())
-						selectedScene--;
-				}
-				else if (transform->contains(input))
-					setGreen(quad);
-				else
-					setBlue(quad);
-			}
-			else if ((*it)->getName() == "mmButtonRight")
-			{
-				if (transform->contains(inputOnce))
-				{
-					Log("vgengine", "Main menu right button click", "");
-					if (selectedScene != --sceneNames.end())
-						selectedScene++;
-				}
-				else if (transform->contains(input))
-					setGreen(quad);
-				else
-					setBlue(quad);
-			}
-			else if ((*it)->getName() == "mmButtonMiddle")
-			{
-				if (transform->contains(inputOnce))
-				{
-					Log("vgengine", "Main menu right middle click", "");
-					Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
-					return;
-				}
-				else if (transform->contains(input))
-					setGreen(quad);
-				else
-					setBlue(quad);
+				Game::getInstance()->getSceneManager()->changeScene(*selectedScene);
+				return;
 			}
 		}
 	}
 }
 
-void MainMenuSystem::setGreen(QuadrangleComponent* quad)
+bool MainMenuSystem::updateButton(vg::GameObject* obj)
 {
-	quad->setColor(0, 255, 64);
-}
-
-void MainMenuSystem::setBlue(QuadrangleComponent* quad)
-{
-	quad->setColor(0, 64, 255);
+	TransformComponent* transform = obj->getComponent<TransformComponent>();
+	QuadrangleComponent* render = obj->getComponent<QuadrangleComponent>();
+	if (transform != nullptr && render != nullptr)
+	{
+		if (transform->contains(inputRelease))
+			return true;
+		else if (transform->contains(inputDown))
+			render->setColor(Color(0, 255, 64));
+		else
+			render->setColor(Color(0, 64, 255));
+	}
+	return false;
 }

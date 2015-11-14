@@ -1,11 +1,12 @@
 
 #include "engine/game/system.h"
 #include "engine/game/scene.h"
+#include "engine/utility/vector2.h"
 
 // forward declaration
 namespace vg
 {
-	class QuadrangleComponent;
+	class GameObject;
 }
 
 class MainMenuSystem : public vg::System
@@ -16,10 +17,11 @@ public:
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
 
 private:
-	void setGreen(vg::QuadrangleComponent* quad);
-	void setBlue(vg::QuadrangleComponent* quad);
+	bool updateButton(vg::GameObject* obj);
 
 	vg::Scene* mScene;
 	std::vector<std::string> sceneNames;
 	std::vector<std::string>::iterator selectedScene;
+	vg::Vector2<float> inputDown;
+	vg::Vector2<float> inputRelease;
 };

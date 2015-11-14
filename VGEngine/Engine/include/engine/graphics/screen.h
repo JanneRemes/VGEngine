@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/utility/Vector2.h"
+#include "engine/utility/color.h"
 
 namespace vg
 {
@@ -77,31 +78,16 @@ namespace vg
 			@return point in virtual resolution
 			*/
 			static vg::Vector2<float> realToVirtual(float x, float y);
-			
+
 			/**
 			Set glClearColor value
 			*/
-			static void setColor(float red, float green, float blue, float alpha);
+			static void setColor(vg::Color color);
 
 			/**
-			@return glClearColor value
+			@return color for glClearScreen
 			*/
-			static float getRed();
-
-			/**
-			@return glClearColor value
-			*/
-			static float getGreen();
-
-			/**
-			@return glClearColor value
-			*/
-			static float getBlue();
-
-			/**
-			@return glClearColor value
-			*/
-			static float getAlpha();
+			static vg::Color getColor();
 
 		private:
 			/**
@@ -113,10 +99,7 @@ namespace vg
 
 			static vg::Vector2<int> mSize;		///< Virtual resolution that is used to make rendering independent of resolution.
 			static vg::Vector2<int> mRealSize;	///< Screen resolution in pixels
-			static float mRed;					///< clear screen color
-			static float mGreen;				///< clear screen color
-			static float mBlue;					///< clear screen color
-			static float mAlpha;				///< clear screen color
+			static vg::Color mColor;			///< color used for glClearScreen
 		};
 	}
 }

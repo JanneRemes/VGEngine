@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/game/renderComponent.h"
+#include "engine/utility/color.h"
 
 #include <string>
 
@@ -26,7 +27,7 @@ namespace vg
 		/**
 		Color values ranging from 0 - 255
 		*/
-		void setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha = 255);
+		void setColor(vg::Color color);
 
 	private:
 		std::vector<float> getDefaultVertices();
