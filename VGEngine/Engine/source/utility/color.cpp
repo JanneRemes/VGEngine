@@ -1,7 +1,6 @@
 
 #include "engine/utility/color.h"
-
-#include <random>
+#include "engine/utility/random.h"
 
 using namespace vg;
 
@@ -26,5 +25,5 @@ Color::Color(unsigned char _red, unsigned char _green, unsigned char _blue, unsi
 
 vg::Color Color::random()
 {
-	return Color(rand() % 255, rand() % 255, rand() % 255, 255);
+	return Color(Random::nexti(0, 255), Random::nexti(0, 255), Random::nexti(0, 255), 255);
 }

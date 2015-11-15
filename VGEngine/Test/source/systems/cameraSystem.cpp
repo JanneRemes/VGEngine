@@ -4,7 +4,7 @@
 #include "engine/graphics/camera.h"
 #include "engine/graphics/screen.h"
 #include "engine/game/transformComponent.h"
-#include <random>
+#include "engine/utility/random.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -54,10 +54,10 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 			if (transform != nullptr)
 			{
-				transform->rotate(deltaTime * (-50 + rand() % 100));
+				transform->rotate(Random::nexti(-50, 50) * deltaTime);
 
-				float x = (-100 + (rand() % 200)) * deltaTime;
-				float y = (-100 + (rand() % 200)) * deltaTime;
+				float x = Random::nexti(-100, 100) * deltaTime;
+				float y = Random::nexti(-100, 100) * deltaTime;
 				transform->move(Vector2<float>(x, y));
 			}
 		}

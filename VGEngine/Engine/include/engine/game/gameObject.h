@@ -28,7 +28,11 @@ namespace vg
 		@param obj original object
 		*/
 		GameObject(const GameObject &obj);
-		virtual ~GameObject() { };
+
+		/**
+		Deletes components
+		*/
+		~GameObject();
 
 		/**
 		@return Returns gameObjects name

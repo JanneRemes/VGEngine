@@ -30,9 +30,9 @@ namespace vg
 		static vg::Color random();
 
 		unsigned char red;		///< red value 
-		unsigned char green;	///< red value
-		unsigned char blue;		///< red value
-		unsigned char alpha;	///< red value
+		unsigned char green;	///< green value
+		unsigned char blue;		///< blue value
+		unsigned char alpha;	///< alpha value
 	private:
 
 	};

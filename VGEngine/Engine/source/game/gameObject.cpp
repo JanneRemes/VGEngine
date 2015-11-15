@@ -16,7 +16,7 @@ GameObject::GameObject(std::string name)
 {
 	mParent = nullptr;
 }
-/*
+
 GameObject::~GameObject()
 {
 	for (auto i = mComponents.begin(); i != mComponents.end(); i++)
@@ -25,7 +25,6 @@ GameObject::~GameObject()
 	}
 	mComponents.clear();
 }
-*/
 
 GameObject::GameObject(const GameObject &obj) 
 	: BaseClass(obj.mName), mName(obj.mName), mMarkedForDelete(false)

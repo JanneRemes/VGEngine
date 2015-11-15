@@ -1,17 +1,16 @@
 
 #include "scenes/cameraScene.h"
 #include "systems/cameraSystem.h"
+#include "systems/sceneChangeSystem.h"
 
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
-#include "systems/sceneChangeSystem.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/game.h"
 #include "engine/game/textComponent.h"
 #include "engine/graphics/screen.h"
 #include "engine/utility/color.h"
-
-#include <random>
+#include "engine/utility/random.h"
 
 using namespace vg;
 
@@ -27,25 +26,16 @@ void CameraScene::loadObjects()
 {
 	graphics::Screen::setColor(Color(0, 0, 127));
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		GameObject *obj1 = new GameObject("test koala");
-		obj1->addComponent(new TransformComponent(
-			Vector2<float>(100 + i * 64, 32 + i * 64), Vector2<float>(128, 128),
+		GameObject* obj = new GameObject("test koala");
+		obj->addComponent(new TransformComponent(
+			Vector2<float>(Random::nexti(0, 1280), Random::nexti(0, 720)), Vector2<float>(128, 128),
 			0.0f, Vector2<float>(64, 64)));
-		QuadrangleComponent* quad1 = new QuadrangleComponent("koala.png");
-		quad1->setColor(Color::random());
-		obj1->addComponent(quad1);
-		addGameObject(obj1);
-
-		GameObject *obj2 = new GameObject("test koala");
-		obj2->addComponent(new TransformComponent(
-			Vector2<float>(300 + i * 64, i * 64), Vector2<float>(128, 128),
-			0.0f, Vector2<float>(64, 64)));
-		QuadrangleComponent* quad2 = new QuadrangleComponent("koala.png");
-		quad2->setColor(Color::random());
-		obj2->addComponent(quad2);
-		addGameObject(obj2);
+		QuadrangleComponent* quad = new QuadrangleComponent("koala.png");
+		quad->setColor(Color::random());
+		obj->addComponent(quad);
+		addGameObject(obj);
 	}
 
 	CameraSystem* camSys = new CameraSystem();
