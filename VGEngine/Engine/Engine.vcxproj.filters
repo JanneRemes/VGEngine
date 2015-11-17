@@ -234,6 +234,9 @@
     <ClInclude Include="include\engine\utility\color.h">
       <Filter>include\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\utility\string.h">
+      <Filter>include\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -402,6 +405,9 @@
       <Filter>source\utility</Filter>
     </ClCompile>
     <ClCompile Include="source\utility\color.cpp">
+      <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility\string.cpp">
       <Filter>source\utility</Filter>
     </ClCompile>
   </ItemGroup>

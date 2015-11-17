@@ -141,6 +141,7 @@
     <ClInclude Include="include\engine\utility\logger.h" />
     <ClInclude Include="include\engine\utility\math.h" />
     <ClInclude Include="include\engine\utility\random.h" />
+    <ClInclude Include="include\engine\utility\string.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
     <ClInclude Include="include\engine\utility\vec2f.h" />
     <ClInclude Include="include\engine\utility\vector2.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="source\utility\color.cpp" />
     <ClCompile Include="source\utility\math.cpp" />
     <ClCompile Include="source\utility\random.cpp" />
+    <ClCompile Include="source\utility\string.cpp" />
     <ClCompile Include="source\utility\timer.cpp" />
     <ClCompile Include="source\utility\vec2f.cpp" />
   </ItemGroup>

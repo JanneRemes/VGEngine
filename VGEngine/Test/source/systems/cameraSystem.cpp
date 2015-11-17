@@ -54,11 +54,13 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 			if (transform != nullptr)
 			{
+				/*
 				transform->rotate(Random::nexti(-50, 50) * deltaTime);
 
 				float x = Random::nexti(-100, 100) * deltaTime;
 				float y = Random::nexti(-100, 100) * deltaTime;
 				transform->move(Vector2<float>(x, y));
+				*/
 			}
 		}
 	}

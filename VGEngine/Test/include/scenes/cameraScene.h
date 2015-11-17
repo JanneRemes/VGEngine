@@ -11,5 +11,6 @@ public:
 	void loadObjects();
 
 private:
+	void createBorder(float x, float y, float w, float h);
 
 };
