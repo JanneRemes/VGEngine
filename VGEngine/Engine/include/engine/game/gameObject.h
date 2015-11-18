@@ -46,6 +46,12 @@ namespace vg
 		void addComponent(Component* component);
 		
 		/**
+		Adds a component to the gameObject
+		@param component Component we want to add for the gameObject
+		*/
+		void add(Component* component);
+
+		/**
 		@return Returns component from the gameObject
 		*/
 		template<typename T> 
@@ -56,6 +62,15 @@ namespace vg
 				return nullptr;
 			else
 				return static_cast<T*>(position->second);
+		}
+
+		/**
+		@return Returns component from the gameObject
+		*/
+		template<typename T>
+		T* get()
+		{
+			return getComponent<T>();
 		}
 
 		/**

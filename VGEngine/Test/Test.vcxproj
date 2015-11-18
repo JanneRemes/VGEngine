@@ -153,11 +153,6 @@
     <ClCompile Include="source\systems\shipSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\freetype\freetype.vcxproj">
-      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="assets\shaders\android_fragment.glsl" />
     <None Include="assets\shaders\android_vertex.glsl" />
     <None Include="assets\shaders\win_fragment.glsl" />

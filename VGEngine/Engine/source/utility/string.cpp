@@ -4,10 +4,9 @@
 #include <sstream>
 #include <iomanip>
 
-using namespace vg;
 using namespace std;
 
-string toString(int value, int width)
+string vg::toString(int value, int width)
 {
 	ostringstream ss;
 	if (width > 0)
@@ -16,7 +15,7 @@ string toString(int value, int width)
 	return ss.str();
 }
 
-string toString(float value, int decimals, int width)
+string vg::toString(float value, int decimals, int width)
 {
 	ostringstream ss;
 	if (decimals > 0)

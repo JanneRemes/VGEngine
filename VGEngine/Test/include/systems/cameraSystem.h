@@ -2,6 +2,7 @@
 #pragma once
 
 #include "engine/game/system.h"
+#include "engine/utility/timer.h"
 
 class CameraSystem : public vg::System
 {
@@ -12,4 +13,5 @@ public:
 
 private:
 	float cameraSpeed;
+	vg::Timer timer;
 };

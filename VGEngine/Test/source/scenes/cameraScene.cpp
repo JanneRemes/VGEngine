@@ -12,6 +12,7 @@
 #include "engine/utility/random.h"
 #include "engine/game/physicsSystem.h"
 #include "engine/game/physicsPolygonComponent.h"
+#include "engine/utility/string.h"
 
 using namespace vg;
 using namespace vg::graphics;
@@ -44,18 +45,18 @@ void CameraScene::loadObjects()
 	createBorder(1280 - 32, 32, 32, 720 - 64);
 
 	//koala
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 30; i++)
 	{
-		GameObject* obj = new GameObject("test koala");
+		GameObject* obj = new GameObject("test koala " + toString(i, 2));
 		TransformComponent* transform = new TransformComponent(
 			Vector2<float>(Random::nexti(500, 1000), Random::nexti(100, 300)), Vector2<float>(64, 64),
 			0.0f, Vector2<float>(32, 32));
 		QuadrangleComponent* quad = new QuadrangleComponent("koala.png");
 		quad->setColor(Color::random());
 
-		obj->addComponent(transform);
-		obj->addComponent(new PhysicsPolygonComponent(transform, PhysicsComponent::DYNAMIC, 64));
-		obj->addComponent(quad);
+		obj->add(transform);
+		obj->add(new PhysicsPolygonComponent(transform, PhysicsComponent::DYNAMIC));
+		obj->add(quad);
 		addGameObject(obj);
 	}
 
@@ -66,9 +67,9 @@ void CameraScene::loadObjects()
 		text->setText("Koala");
 		text->setColor(i * 32, i * 32, i * 32);
 		GameObject* obj = new GameObject("koalatext");
-		obj->addComponent(new TransformComponent(Vector2<float>(50 + 6 * i, 500 + 6 * i),
+		obj->add(new TransformComponent(Vector2<float>(300 + 6 * i, 50 + 6 * i),
 			Vector2<float>(0, 0), 0.0f));
-		obj->addComponent(text);
+		obj->add(text);
 		addGameObject(obj);
 	}
 }
@@ -76,9 +77,9 @@ void CameraScene::loadObjects()
 void CameraScene::createBorder(float x, float y, float w, float h)
 {
 	GameObject* obj = new GameObject("border");
-	obj->addComponent(new TransformComponent(Vector2<float>(x, y), Vector2<float>(w, h)));
+	obj->add(new TransformComponent(Vector2<float>(x, y), Vector2<float>(w, h)));
 	QuadrangleComponent* quad = new QuadrangleComponent();
 	quad->setColor(vg::Color(255, 0, 0));
-	obj->addComponent(quad);
+	obj->add(quad);
 	addGameObject(obj);
 }

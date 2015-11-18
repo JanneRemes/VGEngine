@@ -21,6 +21,11 @@ void Scene::addGameObject(GameObject *gObject)
 	mActivePool.push_back(gObject);
 }
 
+void Scene::add(GameObject* obj)
+{
+	mActivePool.push_back(obj);
+}
+
 void Scene::updateGameObjects(float deltaTime)
 {
 	sortActivePool();

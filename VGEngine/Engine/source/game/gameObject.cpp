@@ -66,7 +66,11 @@ void GameObject::addComponent(Component* component)
 {
 	component->setGameObject(this);
 	mComponents.insert(std::make_pair(&typeid(*component), component));
+}
 
+void GameObject::add(Component* component)
+{
+	addComponent(component);
 }
 
 void GameObject::markForDelete()

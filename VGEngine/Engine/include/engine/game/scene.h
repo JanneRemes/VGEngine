@@ -39,13 +39,17 @@ namespace vg
 		*/	
 		bool getPaused() { return paused; }
 
-
-
 		/**
 		Adds a gameObject to the pool
 		@param gObject gameObject that is being added in the pool
 		*/
 		void addGameObject(GameObject *gObject);
+
+		/**
+		Adds a gameObject to the pool
+		@param obj gameObject that is being added in the pool
+		*/
+		void add(GameObject* obj);
 
 		/**
 		Updates all the gameObjects that are in the pool

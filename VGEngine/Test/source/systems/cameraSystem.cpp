@@ -5,6 +5,7 @@
 #include "engine/graphics/screen.h"
 #include "engine/game/transformComponent.h"
 #include "engine/utility/random.h"
+#include "engine/game/physicsPolygonComponent.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -20,6 +21,7 @@ using namespace vg::input;
 CameraSystem::CameraSystem()
 {
 	cameraSpeed = 300.0f;
+	timer.restart();
 }
 
 CameraSystem::~CameraSystem()
@@ -47,21 +49,17 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		Camera::move(input);
 	}
 
-	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+	if (timer.getCurrentTimeSeconds() > 3)
 	{
-		if ((*it)->getName() == "test koala")
+		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
-			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-			if (transform != nullptr)
+			if ((*it)->getName().find("test koala") != -1)
 			{
-				/*
-				transform->rotate(Random::nexti(-50, 50) * deltaTime);
-
-				float x = Random::nexti(-100, 100) * deltaTime;
-				float y = Random::nexti(-100, 100) * deltaTime;
-				transform->move(Vector2<float>(x, y));
-				*/
+				PhysicsPolygonComponent* phys = (*it)->get<PhysicsPolygonComponent>();
+				if (phys != nullptr)
+					phys->setVelocity(Vector2<float>(Random::nexti(-50, 50), Random::nexti(0, 50)));
 			}
 		}
+		timer.restart();
 	}
 }
