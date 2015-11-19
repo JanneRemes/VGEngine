@@ -5,7 +5,7 @@
 
 #include "engine/input/sensor.h"
 #include "engine/game/game.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/utility/random.h"
@@ -28,8 +28,8 @@ ShipSystem::ShipSystem() :System()
 	if ((assetManager->get<sound::Sound>("shoot.mp3")) == nullptr)
 		assetManager->load<sound::Sound>("shoot.mp3");
 
-	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
-		Vector2<float>(32, 32), 0.0f, Vector2<float>(16, 16));
+	TransformComponent *transform = new TransformComponent(Vec2f(0.0f, 0.0f),
+		Vec2f(32, 32), 0.0f, Vec2f(16, 16));
 	mBullet->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koalapanos2.png");
 	mBullet->addComponent(quadre);
@@ -46,19 +46,19 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
 		if ((*it)->getName() == "bullet")
 		{
 			TransformComponent *comp = (*it)->getComponent<TransformComponent>();
-			comp->move(Vector2<float>(0, -10));
-			if (comp->getWorldPosition().getY() < 0)
+			comp->move(Vec2f(0, -10));
+			if (comp->getWorldPosition().y < 0)
 				(*it)->markForDelete();
 		}
 		else if ((*it)->getName() == "ship")
 		{
-			Vector2<float> mScreenSize = Vector2<float>(Screen::getX(), Screen::getY());
+			Vec2f mScreenSize = Vec2f(Screen::getX(), Screen::getY());
 			TransformComponent* transformComponent = (*it)->getComponent<TransformComponent>();
 			
-			Vector2<float> newPos(
-				((mScreenSize.getX()/ 20 * (input::Sensor::getSensorX() + 10) - mScreenSize.getX()) * -1), 
-				mScreenSize.getY()-80);
-			if (sqrt(pow(newPos.getX() - transformComponent->getWorldPosition().getX(), 2)) > 15.0f)
+			Vec2f newPos(
+				((mScreenSize.x/ 20 * (input::Sensor::getSensorX() + 10) - mScreenSize.x) * -1), 
+				mScreenSize.y-80);
+			if (sqrt(pow(newPos.x - transformComponent->getWorldPosition().x, 2)) > 15.0f)
 			{
 				transformComponent->setPosition(newPos);
 			}
@@ -69,8 +69,8 @@ void ShipSystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTim
                 Game::getInstance()->getAudioManager()->addSound(*sound);
 
 				GameObject *g = new GameObject(*mBullet);
-				Vector2<float> temppos(transformComponent->getWorldPosition().getX(),
-					transformComponent->getWorldPosition().getY() - transformComponent->getOrigin().getY());
+				Vec2f temppos(transformComponent->getWorldPosition().x,
+					transformComponent->getWorldPosition().y - transformComponent->getOrigin().y);
 				g->getComponent<TransformComponent>()->setPosition(temppos);
 				
 				mScene->addGameObject(g);

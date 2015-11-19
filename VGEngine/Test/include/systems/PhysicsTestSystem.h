@@ -6,7 +6,7 @@
 #include "engine/utility/timer.h"
 #include "engine/game/scene.h"
 #include "engine/game/physicsSystem.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 #include <vector>
 
@@ -16,7 +16,7 @@ public:
 	PhysicsTestSystem(vg::Scene *scene);
 	~PhysicsTestSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
-	void createPapis(vg::Vector2<float> pos);
+	void createPapis(vg::Vec2f pos);
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
@@ -24,5 +24,5 @@ private:
 	vg::GameObject *physicsTest3;
 	vg::GameObject *animationTest;
 	vg::Timer newPositionTime;
-	vg::Vector2<float> randPos;
+	vg::Vec2f randPos;
 };

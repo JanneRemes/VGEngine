@@ -31,7 +31,7 @@ CameraSystem::~CameraSystem()
 
 void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	Vector2<float> input(0,0);
+	Vec2f input(0,0);
 
 	#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
@@ -43,7 +43,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		input = Touch::fromCenter();
 	#endif
 
-	if (input != Vector2<float>(0, 0))
+	if (input != Vec2f(0, 0))
 	{
 		input *= deltaTime * cameraSpeed;
 		Camera::move(input);
@@ -57,7 +57,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 			{
 				PhysicsPolygonComponent* phys = (*it)->get<PhysicsPolygonComponent>();
 				if (phys != nullptr)
-					phys->setVelocity(Vector2<float>(Random::nexti(-50, 50), Random::nexti(0, 50)));
+					phys->setVelocity(Vec2f(Random::nexti(-50, 50), Random::nexti(0, 50)));
 			}
 		}
 		timer.restart();

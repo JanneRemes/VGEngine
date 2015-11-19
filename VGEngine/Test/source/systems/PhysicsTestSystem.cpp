@@ -32,7 +32,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
-	TransformComponent *animationTransform = new TransformComponent(Vector2<float>(720, graphics::Screen::getY() - 512), Vector2<float>(512, 512), 0.0f);
+	TransformComponent *animationTransform = new TransformComponent(Vec2f(720, graphics::Screen::getY() - 512), Vec2f(512, 512), 0.0f);
 	animationTest->addComponent(animationTransform);
 	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 
@@ -41,8 +41,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	// Physics
 	physicsTest = new GameObject("physicsTest1");
 
-	TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(128 * 7, 128 * 2),
-		Vector2<float>(64, 64), 0.0f);
+	TransformComponent *physicsTransform = new TransformComponent(Vec2f(128 * 7, 128 * 2),
+		Vec2f(64, 64), 0.0f);
 
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
 	PhysicsPolygonComponent *physicsPolyComponent1 = new PhysicsPolygonComponent(physicsTransform, PhysicsComponent::STATIC);
@@ -54,8 +54,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	scene->addGameObject(physicsTest);
 
 	// 2nd physics object
-	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(600, 500),
-		Vector2<float>(64, 64), 0.0f);
+	TransformComponent *physicsTransform2 = new TransformComponent(Vec2f(600, 500),
+		Vec2f(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
@@ -71,8 +71,8 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	scene->addGameObject(physicsTest2);
 
 	// 3rd physics object
-	TransformComponent *physicsTransform3 = new TransformComponent(Vector2<float>(800, 400),
-		Vector2<float>(64, 64), 0.0f);
+	TransformComponent *physicsTransform3 = new TransformComponent(Vec2f(800, 400),
+		Vec2f(64, 64), 0.0f);
 
 	physicsTest3 = new GameObject("physicsTest3");
 	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");
@@ -95,10 +95,10 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	animationTest->getComponent<TransformComponent>()->move(Vector2<float>(-10, 0));
+	animationTest->getComponent<TransformComponent>()->move(Vec2f(-10, 0));
 
-	if (animationTest->getComponent<TransformComponent>()->getLocalPosition().getX() < -animationTest->getComponent<TransformComponent>()->getSize().getX())
-		animationTest->getComponent<TransformComponent>()->setPosition(Vector2<float>(graphics::Screen::getX(), animationTest->getComponent<TransformComponent>()->getLocalPosition().getY()));
+	if (animationTest->getComponent<TransformComponent>()->getLocalPosition().x < -animationTest->getComponent<TransformComponent>()->getSize().x)
+		animationTest->getComponent<TransformComponent>()->setPosition(Vec2f(graphics::Screen::getX(), animationTest->getComponent<TransformComponent>()->getLocalPosition().y));
 
 
 #ifdef OS_WINDOWS
@@ -106,7 +106,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	/*
 	if (newPositionTime.getCurrentTimeSeconds() >= 0.12)
 	{
-		randPos = Vector2<float>(rand() % Screen::getX(), rand() % Screen::getY());
+		randPos = Vec2f(rand() % Screen::getX(), rand() % Screen::getY());
 		newPositionTime.restart();
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
@@ -119,7 +119,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 				float number = rand() % 400 - 200.0f;
 				float number2 = rand() % 200;
 
-				physComponent->setVelocity(Vector2<float>(number, number2));
+				physComponent->setVelocity(Vec2f(number, number2));
 				physComponent->setPosition(randPos);
 			}
 		}
@@ -128,13 +128,13 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	
 	if (vg::input::Mouse::isKeyDown(vg::input::RIGHT))
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+		vg::Vec2f pos = vg::input::Mouse::getPos();
 		createPapis(pos);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::W) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+		vg::Vec2f pos = vg::input::Mouse::getPos();
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
@@ -145,7 +145,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			{
 				float number = rand() % 400 - 200.0f;
 				float number2 = rand() % 200;
-				physComponent->setVelocity(Vector2<float>(number, number2));
+				physComponent->setVelocity(Vec2f(number, number2));
 				physComponent->setPosition(pos);
 			}
 		}
@@ -153,28 +153,28 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::E) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyLinearImpulse(Vector2<float>(0, 100));
+		vg::Vec2f pos = vg::input::Mouse::getPos();
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyLinearImpulse(Vec2f(0, 100));
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Q) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyForce(Vector2<float>(0, 1000));
+		vg::Vec2f pos = vg::input::Mouse::getPos();
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyForce(Vec2f(0, 1000));
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+		vg::Vec2f pos = vg::input::Mouse::getPos();
 		physicsTest3->getComponent<PhysicsPolygonComponent>()->setPosition(pos);
 		physicsTest3->getComponent<PhysicsPolygonComponent>()->setAngularVelocity(0);
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->setVelocity(Vector2<float>(0, 0));
+		physicsTest3->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(0, 0));
 		physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotation(0);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::R) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		vg::Vector2<float> pos = vg::input::Mouse::getPos();
+		vg::Vec2f pos = vg::input::Mouse::getPos();
 	}
 
 
@@ -191,11 +191,11 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		system->setGravity(Vector2<float>(0, 0));
+		system->setGravity(Vec2f(0, 0));
 	}
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::D) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		system->setGravity(Vector2<float>(0, -9.81));
+		system->setGravity(Vec2f(0, -9.81));
 	}
 
 #endif
@@ -203,9 +203,9 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 #ifdef OS_ANDROID
 	if (vg::input::Touch::getIsTouched())
 	{
-		vg::Vector2<float> pos = vg::input::Touch::getPos();
-		vg::Vector2<int> res = graphics::Screen::getSize();
-		if (pos.getX() < res.getX() / 2)
+		vg::Vec2f pos = vg::input::Touch::getPos();
+		vg::Vec2f res = graphics::Screen::getSize();
+		if (pos.x < res.x / 2)
 		{
 			createPapis(pos);
 		}
@@ -220,7 +220,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 				{
 					float number = rand() % 400 - 200.0f;
 					float number2 = rand() % 200;
-					physComponent->setVelocity(Vector2<float>(number, number2));
+					physComponent->setVelocity(Vec2f(number, number2));
 				}
 			}
 		}
@@ -228,12 +228,12 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 #endif
 }
 
-void PhysicsTestSystem::createPapis(Vector2<float> pos)
+void PhysicsTestSystem::createPapis(Vec2f pos)
 {
 	for (int i = 0; i < 5; i++)
 	{
-		TransformComponent *physicsTransform = new TransformComponent(Vector2<float>(pos.getX(), pos.getY()),
-			Vector2<float>(64, 64), 0.0f);
+		TransformComponent *physicsTransform = new TransformComponent(Vec2f(pos.x, pos.y),
+			Vec2f(64, 64), 0.0f);
 
 		GameObject *physicsTest = new GameObject("physicsTest");
 		physicsTest->addComponent(physicsTransform);

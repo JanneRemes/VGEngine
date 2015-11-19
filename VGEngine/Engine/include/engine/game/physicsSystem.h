@@ -1,7 +1,7 @@
 #pragma once
 #include "Box2D\Box2D.h"
 #include "engine/game/system.h"
-#include "engine\utility\Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine\game\transformComponent.h"
 #include "engine\game\physicsComponent.h"
 
@@ -42,12 +42,12 @@ namespace vg
 		Sets gravity for the physics world
 		@param gravity Vector2 gravity for the world
 		*/
-		void setGravity(Vector2<float> gravity);
+		void setGravity(Vec2f gravity);
 
 		/**
 		@return Returns worlds gravity value
 		*/
-		Vector2<float> getGravity();
+		Vec2f getGravity();
 
 		/**
 		@return Returns the physics world

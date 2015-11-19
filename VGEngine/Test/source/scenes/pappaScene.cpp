@@ -27,16 +27,16 @@ void PappaScene::loadObjects()
 
 	// Background
 	GameObject *background = new GameObject("background");
-	TransformComponent *backgroundTransform = new TransformComponent(Vector2<float>(0, 0),
-		Vector2<float>(1280, 720), 0.0f);
+	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
+		Vec2f(1280, 720), 0.0f);
 	background->addComponent(backgroundTransform);
 	QuadrangleComponent *quadrBackground = new QuadrangleComponent("muumiBG.png");
 	background->addComponent(quadrBackground);
 	addGameObject(background);
 
 	// 2nd physics object
-	TransformComponent *physicsTransform2 = new TransformComponent(Vector2<float>(500, 500),
-		Vector2<float>(500, 200), 45);
+	TransformComponent *physicsTransform2 = new TransformComponent(Vec2f(500, 500),
+		Vec2f(500, 200), 45);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("koala.png");

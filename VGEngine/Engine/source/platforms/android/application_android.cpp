@@ -141,7 +141,7 @@ int32_t engine_handle_input(android_app* app, AInputEvent* event)
 
 	if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION)
 	{
-		vg::Vector2<float> touchPos = vg::Vector2<float>(
+		vg::Vec2f touchPos = vg::Vec2f(
 			AMotionEvent_getX(event, 0),
 			AMotionEvent_getY(event, 0)
 			);

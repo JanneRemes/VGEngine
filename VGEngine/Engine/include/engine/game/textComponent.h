@@ -2,7 +2,7 @@
 #pragma once
 
 #include "engine/game/component.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/shader.h"
 #include "engine/game/transformComponent.h"

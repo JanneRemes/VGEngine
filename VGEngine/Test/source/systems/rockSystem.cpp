@@ -13,7 +13,7 @@
 
 #include "engine/input/sensor.h"
 #include "engine/game/game.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/physicsPolygonComponent.h"
@@ -36,8 +36,8 @@ rockSystem::rockSystem(Scene *scene)
 
 	//ROCK
 	rock = new GameObject("rock");
-	TransformComponent *transformRock = new TransformComponent(Vector2<float>(100, 600),
-		Vector2<float>(100, 100), 0.0f);
+	TransformComponent *transformRock = new TransformComponent(Vec2f(100, 600),
+		Vec2f(100, 100), 0.0f);
 	QuadrangleComponent *quadre = new QuadrangleComponent("rock.png");
 	PhysicsPolygonComponent *rockPhysicsComponent = new PhysicsPolygonComponent(transformRock, PhysicsComponent::DYNAMIC);
 
@@ -49,8 +49,8 @@ rockSystem::rockSystem(Scene *scene)
 
 	//HEIGHTBAR
 	bar1 = new GameObject("bar1");
-	TransformComponent *transformBar1 = new TransformComponent(Vector2<float>(20, 10),
-		Vector2<float>(50, 170), 0.0f);
+	TransformComponent *transformBar1 = new TransformComponent(Vec2f(20, 10),
+		Vec2f(50, 170), 0.0f);
 	QuadrangleComponent *quadreBar = new QuadrangleComponent("bar.png");
 
 	bar1->addComponent(transformBar1);
@@ -60,8 +60,8 @@ rockSystem::rockSystem(Scene *scene)
 
 	//INDICATOR FOR HEIGHTBAR
 	indicator1 = new GameObject("indicator1");
-	TransformComponent *transformIndicator1 = new TransformComponent(Vector2<float>(0, 170),
-		Vector2<float>(100, 10), 0.0f);
+	TransformComponent *transformIndicator1 = new TransformComponent(Vec2f(0, 170),
+		Vec2f(100, 10), 0.0f);
 	QuadrangleComponent *quadreIndicator = new QuadrangleComponent("indicator.png");
 
 	indicator1->addComponent(transformIndicator1);
@@ -71,8 +71,8 @@ rockSystem::rockSystem(Scene *scene)
 
 	//POWERBAR
 	bar2 = new GameObject("bar2");
-	TransformComponent *transformBar2 = new TransformComponent(Vector2<float>(120, 10),
-		Vector2<float>(50, 170), 0.0f);
+	TransformComponent *transformBar2 = new TransformComponent(Vec2f(120, 10),
+		Vec2f(50, 170), 0.0f);
 
 	bar2->addComponent(transformBar2);
 	bar2->addComponent(quadreBar);
@@ -81,8 +81,8 @@ rockSystem::rockSystem(Scene *scene)
 
 	//INDICATOR FOR POWERBAR
 	indicator2 = new GameObject("indicator2");
-	TransformComponent *transformIndicator2 = new TransformComponent(Vector2<float>(100, 170),
-		Vector2<float>(100, 10), 0.0f);
+	TransformComponent *transformIndicator2 = new TransformComponent(Vec2f(100, 170),
+		Vec2f(100, 10), 0.0f);
 
 	indicator2->addComponent(transformIndicator2);
 	indicator2->addComponent(quadreIndicator);
@@ -133,7 +133,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		else
 			height--;
 
-		indicator1->getComponent<TransformComponent>()->setPosition(Vector2<float>(0, height));
+		indicator1->getComponent<TransformComponent>()->setPosition(Vec2f(0, height));
 
 	}
 
@@ -155,7 +155,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		else
 			power--;
 
-		indicator2->getComponent<TransformComponent>()->setPosition(Vector2<float>(100, power));
+		indicator2->getComponent<TransformComponent>()->setPosition(Vec2f(100, power));
 
 	}
 
@@ -170,7 +170,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		if (!powerLock)
 		{
 			powerLock = true;
-			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vector2<float>(power, maxHeight - height));
+			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
 		}
 	}
 #endif
@@ -186,7 +186,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		if (!powerLock)
 		{
 			powerLock = true;
-			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vector2<float>(power, maxHeight - height));
+			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
 		}
 	}
 

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "engine/utility/vector2.h"
+#include "engine/utility/vec2f.h"
 
 namespace vg
 {
@@ -15,8 +15,6 @@ namespace vg
 		Vec2f();
 		Vec2f(float _x, float _y);
 		Vec2f(float both);
-		Vec2f(Vector2<float> param);
-		Vec2f(Vector2<int> param);
 
 		~Vec2f() = default;
 
@@ -42,11 +40,6 @@ namespace vg
 		*/
 		void normalize();
 
-		/**
-		@return copy of the vector as Vector2<float>
-		*/
-		Vector2<float> convert();
-		
 		Vec2f operator + (const Vec2f& right);
 		Vec2f operator - (const Vec2f& right);
 		Vec2f operator += (const Vec2f& right);

@@ -3,7 +3,7 @@
 
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/vertexBufferElement.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "../external/glm/gtc/matrix_transform.hpp"
 #include "../external/glm/gtx/transform.hpp"
 #include "../external/glm/gtc/type_ptr.hpp"

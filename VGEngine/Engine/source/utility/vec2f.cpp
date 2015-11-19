@@ -20,16 +20,6 @@ Vec2f::Vec2f(float both)
 	x = y = both;
 }
 
-Vec2f::Vec2f(Vector2<float> param)
-: x(param.getX()), y(param.getY())
-{
-}
-
-Vec2f::Vec2f(Vector2<int> param)
-: x(param.getX()), y(param.getY())
-{
-}
-
 float Vec2f::distance(Vec2f other)
 {
 	return sqrt(pow(x - other.x, 2) + pow(y - other.y, 2));
@@ -49,11 +39,6 @@ void Vec2f::normalize()
 {
 	x /= length();
 	y /= length();
-}
-
-Vector2<float> Vec2f::convert()
-{
-	return Vector2<float>(x, y);
 }
 
 //operators

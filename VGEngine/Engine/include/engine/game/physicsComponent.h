@@ -2,7 +2,7 @@
 #pragma once
 
 #include "engine/game/component.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 #include <Box2D\Box2D.h>
 
@@ -28,12 +28,12 @@ namespace vg
 		/**
 		Sets Vector2 position for the physicsComponent
 		*/
-		void setPosition(Vector2<float> position);
+		void setPosition(Vec2f position);
 
 		/**
 		@return Returns Vector2 position of the physicsComponent
 		*/
-		Vector2<float> getPosition();
+		Vec2f getPosition();
 
 		/**
 		@return Returns rotation of the physicsComponent
@@ -48,7 +48,7 @@ namespace vg
 		/**
 		Sets velocity for the physicsComponent that it will move with
 		*/
-		void setVelocity(Vector2<float> velocity);
+		void setVelocity(Vec2f velocity);
 
 		/**
 		Sets angular velocity
@@ -58,10 +58,10 @@ namespace vg
 		/**
 		Applies force for the physicsComponent
 		*/
-		void applyForce(Vector2<float> force);
+		void applyForce(Vec2f force);
 
 
-		void applyLinearImpulse(Vector2<float> force);
+		void applyLinearImpulse(Vec2f force);
 
 		/**
 		Sets density for the physicsComponent
@@ -87,7 +87,7 @@ namespace vg
 		Sets the center of the mass of the physicsComponent object
 		@param position Center of mass of the object
 		*/
-		void setMassCenter(Vector2<float> position);
+		void setMassCenter(Vec2f position);
 
 		/**
 		Locks the rotation that the object will have while having physics

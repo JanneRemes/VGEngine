@@ -1,6 +1,6 @@
 
 #pragma once
-#include "engine/utility/vector2.h"
+#include "engine/utility/vec2f.h"
 namespace vg
 {
 	namespace input
@@ -14,13 +14,13 @@ namespace vg
 			/**
 			@return Returns the position of the touch
 			*/
-			static Vector2<float> getPos(bool relativeToCamera = true);
+			static Vec2f getPos(bool relativeToCamera = true);
 
 			/**
 			Sets the position of the touch with the given value
 			@param value Given touches position
 			*/
-			static void setPos(Vector2<float> value);
+			static void setPos(Vec2f value);
 
 			/**
 			@return Returns whether screen is touched
@@ -51,12 +51,12 @@ namespace vg
 			/**
 			@return normalized vector from center of screen pointing towards input position
 			*/
-			static vg::Vector2<float> fromCenter();
+			static vg::Vec2f fromCenter();
 
 		private:
 			static bool mIsTouched;			///< Is touched
 			static bool mIsTouchReleased;	///< Is touch being released
-			static Vector2<float> mPos;	///< Touch position in Vector2
+			static Vec2f mPos;	///< Touch position in Vector2
 		};
 	}
 }

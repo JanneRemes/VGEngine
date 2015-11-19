@@ -63,8 +63,8 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
-			 transform->setPosition(Vector2<float>((physComponent->getPosition().getX() ) - transform->getSize().getX() / 2.0f, 
-												(-physComponent->getPosition().getY()) - transform->getSize().getY() / 2.0f));
+			 transform->setPosition(Vec2f((physComponent->getPosition().x ) - transform->getSize().x / 2.0f, 
+												(-physComponent->getPosition().y) - transform->getSize().y / 2.0f));
 			 transform->setRotation(-1.0f * physComponent->getRotation());
 		 }
 	 }
@@ -92,14 +92,14 @@ void PhysicsSystem::createBorders(float x, float y, float width, float height)
 	boundaries->CreateFixture(&chainFix);
 }
 
-Vector2<float> PhysicsSystem::getGravity()
+Vec2f PhysicsSystem::getGravity()
 {
-	return Vector2<float>(world->GetGravity().x, world->GetGravity().y);
+	return Vec2f(world->GetGravity().x, world->GetGravity().y);
 }
 
-void PhysicsSystem::setGravity(Vector2<float> gravity)
+void PhysicsSystem::setGravity(Vec2f gravity)
 {
-	world->SetGravity(b2Vec2(gravity.getX(), gravity.getY()));
+	world->SetGravity(b2Vec2(gravity.x, gravity.y));
 }
 
 void PhysicsSystem::createRevoluteJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)

@@ -49,8 +49,8 @@ void CameraScene::loadObjects()
 	{
 		GameObject* obj = new GameObject("test koala " + toString(i, 2));
 		TransformComponent* transform = new TransformComponent(
-			Vector2<float>(Random::nexti(500, 1000), Random::nexti(100, 300)), Vector2<float>(64, 64),
-			0.0f, Vector2<float>(32, 32));
+			Vec2f(Random::nexti(500, 1000), Random::nexti(100, 300)), Vec2f(64, 64),
+			0.0f, Vec2f(32, 32));
 		QuadrangleComponent* quad = new QuadrangleComponent("koala.png");
 		quad->setColor(Color::random());
 
@@ -67,8 +67,8 @@ void CameraScene::loadObjects()
 		text->setText("Koala");
 		text->setColor(i * 32, i * 32, i * 32);
 		GameObject* obj = new GameObject("koalatext");
-		obj->add(new TransformComponent(Vector2<float>(300 + 6 * i, 50 + 6 * i),
-			Vector2<float>(0, 0), 0.0f));
+		obj->add(new TransformComponent(Vec2f(300 + 6 * i, 50 + 6 * i),
+			Vec2f(0, 0), 0.0f));
 		obj->add(text);
 		addGameObject(obj);
 	}
@@ -77,7 +77,7 @@ void CameraScene::loadObjects()
 void CameraScene::createBorder(float x, float y, float w, float h)
 {
 	GameObject* obj = new GameObject("border");
-	obj->add(new TransformComponent(Vector2<float>(x, y), Vector2<float>(w, h)));
+	obj->add(new TransformComponent(Vec2f(x, y), Vec2f(w, h)));
 	QuadrangleComponent* quad = new QuadrangleComponent();
 	quad->setColor(vg::Color(255, 0, 0));
 	obj->add(quad);

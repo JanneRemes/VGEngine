@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine/utility/color.h"
 
 namespace vg
@@ -23,13 +23,13 @@ namespace vg
 			Get virtual resolution that is used to make rendering independent of resolution
 			@return screen size in TransformComponent coordinate units
 			*/
-			static vg::Vector2<int> getSize();
+			static Vec2f getSize();
 
 			/**
 			Use getSize() instead whenever possible! Returns the real screen resolution in pixels.
 			@return screen size in pixels
 			*/
-			static vg::Vector2<int> getRealSize();
+			static Vec2f getRealSize();
 
 			/**
 			Get virtual screen width that is used to make rendering independent of resolution
@@ -56,28 +56,28 @@ namespace vg
 			@param y input touch or mouse y coordinate
 			@return world coordinates
 			*/
-			static vg::Vector2<float> toWorld(float x, float y);
+			static Vec2f toWorld(float x, float y);
 
 			/**
 			Translates virtual screen coordinates to world coordinates
 			@param input touch or mouse coordinates
 			@return world coordinates
 			*/
-			static vg::Vector2<float> toWorld(vg::Vector2<float> input);
+			static Vec2f toWorld(Vec2f input);
 
 			/**
 			Translates point in screen coordinates to virtual resolution coordinates
 			@param input point in real resolution
 			@return point in virtual resolution
 			*/
-			static vg::Vector2<float> realToVirtual(Vector2<float> input);
+			static Vec2f realToVirtual(Vec2f input);
 
 			/**
 			Translates point in screen coordinates to virtual resolution coordinates
 			@param x,y point in real resolution
 			@return point in virtual resolution
 			*/
-			static vg::Vector2<float> realToVirtual(float x, float y);
+			static Vec2f realToVirtual(float x, float y);
 
 			/**
 			Set glClearColor value
@@ -97,8 +97,8 @@ namespace vg
 			*/
 			static void setRealSize(int x, int y);
 
-			static vg::Vector2<int> mSize;		///< Virtual resolution that is used to make rendering independent of resolution.
-			static vg::Vector2<int> mRealSize;	///< Screen resolution in pixels
+			static Vec2f mSize;		///< Virtual resolution that is used to make rendering independent of resolution.
+			static Vec2f mRealSize;	///< Screen resolution in pixels
 			static vg::Color mColor;			///< color used for glClearScreen
 		};
 	}

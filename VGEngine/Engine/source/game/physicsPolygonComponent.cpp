@@ -20,12 +20,12 @@ PhysicsPolygonComponent::PhysicsPolygonComponent(TransformComponent *component, 
 	}
 	else
 	{
-		_width = component->getSize().getX();
-		_height = component->getSize().getY();
+		_width = component->getSize().x;
+		_height = component->getSize().y;
 	}
 
-	float x = component->getWorldPosition().getX() - component->getOrigin().getX();
-	float y = component->getWorldPosition().getY() - component->getOrigin().getY();
+	float x = component->getWorldPosition().x - component->getOrigin().x;
+	float y = component->getWorldPosition().y - component->getOrigin().y;
 	
 
 	if (type == DYNAMIC)

@@ -144,7 +144,6 @@
     <ClInclude Include="include\engine\utility\string.h" />
     <ClInclude Include="include\engine\utility\timer.h" />
     <ClInclude Include="include\engine\utility\vec2f.h" />
-    <ClInclude Include="include\engine\utility\vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\lodepng\lodepng.cpp" />

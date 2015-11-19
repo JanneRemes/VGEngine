@@ -17,11 +17,11 @@ PhysicsCircleComponent::PhysicsCircleComponent(TransformComponent *component, BO
 	}
 	else
 	{
-		_radius = component->getSize().getX();
+		_radius = component->getSize().x;
 	}
 
-	float x = component->getWorldPosition().getX();
-	float y = component->getWorldPosition().getY();
+	float x = component->getWorldPosition().x;
+	float y = component->getWorldPosition().y;
 
 	if (type == DYNAMIC)
 	{

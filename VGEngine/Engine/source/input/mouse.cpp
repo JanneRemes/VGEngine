@@ -24,7 +24,7 @@ bool Mouse::isKeyDown(MOUSE_KEY key)
 	return state[key];
 }
 
-Vector2<float> Mouse::getPos(bool relativeToCamera)
+Vec2f Mouse::getPos(bool relativeToCamera)
 {
 	POINT pt;
 	GetCursorPos(&pt);
@@ -33,12 +33,12 @@ Vector2<float> Mouse::getPos(bool relativeToCamera)
 	if (relativeToCamera)
 		return Screen::toWorld(pt.x, pt.y);
 	else 
-		return Vector2<float>(pt.x, pt.y);
+		return Vec2f(pt.x, pt.y);
 }
 
-Vector2<float> Mouse::fromCenter()
+Vec2f Mouse::fromCenter()
 {
-	Vector2<float> result(0.5f * Screen::getSize().getX(), 0.5f * Screen::getSize().getY());
+	Vec2f result(0.5f * Screen::getSize().x, 0.5f * Screen::getSize().y);
 	result -= getPos(false);
 	result.normalize();
 	result *= -1.0f;

@@ -5,62 +5,62 @@
 using namespace vg;
 using namespace vg::graphics;
 
-Vector2<int> Screen::mSize(1280, 720);
-Vector2<int> Screen::mRealSize(1280, 720);
+Vec2f Screen::mSize(1280, 720);
+Vec2f Screen::mRealSize(1280, 720);
 Color Screen::mColor = Color();
 
-Vector2<int> Screen::getSize()
+Vec2f Screen::getSize()
 {
 	return mSize;
 }
 
-vg::Vector2<int> Screen::getRealSize()
+vg::Vec2f Screen::getRealSize()
 {
 	return mRealSize;
 }
 
 int Screen::getX()
 {
-	return mSize.getX();
+	return mSize.x;
 }
 
 int Screen::getY()
 {
-	return mSize.getY();
+	return mSize.y;
 }
  
 void Screen::setSize(int x, int y)
 {
-	mSize = Vector2<int>(x, y);
+	mSize = Vec2f(x, y);
 }
 
-Vector2<float> Screen::toWorld(float x, float y)
+Vec2f Screen::toWorld(float x, float y)
 {
-	Vector2<float> input = realToVirtual(x, y);
-	Vector2<int> screen = Screen::getSize();
-	Vector2<float> lt (Camera::mLeft, Camera::mTop);
-	Vector2<float> rb (Camera::mRight, Camera::mBottom);
-	float width = rb.getX() - lt.getX();
-	float height = rb.getY() - lt.getY();
-	return lt + Vector2<float>(input.getX() * (width / screen.getX()),
-		input.getY() * (height / screen.getY()));
+	Vec2f input = realToVirtual(x, y);
+	Vec2f screen = Screen::getSize();
+	Vec2f lt (Camera::mLeft, Camera::mTop);
+	Vec2f rb (Camera::mRight, Camera::mBottom);
+	float width = rb.x - lt.x;
+	float height = rb.y - lt.y;
+	return lt + Vec2f(input.x * (width / screen.x),
+		input.y * (height / screen.y));
 }
 
-Vector2<float> Screen::toWorld(Vector2<float> input)
+Vec2f Screen::toWorld(Vec2f input)
 {
-	return toWorld(input.getX(), input.getY());
+	return toWorld(input.x, input.y);
 }
 
-Vector2<float> Screen::realToVirtual(Vector2<float> input)
+Vec2f Screen::realToVirtual(Vec2f input)
 {
-	Vector2<float> scale(getX() / static_cast<float>(mRealSize.getX()),
-		getY() / static_cast<float>(mRealSize.getY()));
-	return Vector2<float>(scale.getX() * input.getX(), scale.getY() * input.getY());
+	Vec2f scale(getX() / static_cast<float>(mRealSize.x),
+		getY() / static_cast<float>(mRealSize.y));
+	return Vec2f(scale.x * input.x, scale.y * input.y);
 }
 
-Vector2<float> Screen::realToVirtual(float x, float y)
+Vec2f Screen::realToVirtual(float x, float y)
 {
-	return realToVirtual(Vector2<float>(x, y));
+	return realToVirtual(Vec2f(x, y));
 }
 
 void Screen::setColor(vg::Color color)
@@ -77,5 +77,5 @@ Color Screen::getColor()
 
 void Screen::setRealSize(int x, int y)
 {
-	mRealSize = Vector2<int>(x, y);
+	mRealSize = Vec2f(x, y);
 }

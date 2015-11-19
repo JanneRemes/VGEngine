@@ -4,7 +4,7 @@
 #include "engine/game/system.h"
 #include "engine/graphics/vertexBuffer.h"
 #include "engine/graphics/indexBuffer.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 namespace vg
 {
@@ -40,7 +40,7 @@ namespace vg
 		/**
 		Makes a model transform matrix
 		*/
-		static glm::mat4 modelTransform(Vector2<float> position, Vector2<float> origin, Vector2<float> size, float rotation);
+		static glm::mat4 modelTransform(Vec2f position, Vec2f origin, Vec2f size, float rotation);
 
 		/**
 		Makes a model transform matrix using values from a TransformComponent

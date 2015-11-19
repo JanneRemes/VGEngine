@@ -16,10 +16,10 @@ PhysicsComponent::~PhysicsComponent()
 	system->removeBody(_body);
 }
 
-void PhysicsComponent::setVelocity(Vector2<float> velocity)
+void PhysicsComponent::setVelocity(Vec2f velocity)
 {
 	if (mInitialized)
-		_body->SetLinearVelocity(b2Vec2(velocity.getX(), velocity.getY()));
+		_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 void PhysicsComponent::setAngularVelocity(float velocity)
 {
@@ -27,24 +27,24 @@ void PhysicsComponent::setAngularVelocity(float velocity)
 		_body->SetAngularVelocity(velocity);
 }
 
-void PhysicsComponent::applyForce(Vector2<float> force)
+void PhysicsComponent::applyForce(Vec2f force)
 {
 	if (mInitialized)
-		_body->ApplyForce(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
+		_body->ApplyForce(b2Vec2(force.x, force.y), _body->GetWorldCenter(), true);
 }
 
-void PhysicsComponent::applyLinearImpulse(Vector2<float> force)
+void PhysicsComponent::applyLinearImpulse(Vec2f force)
 {
 	if (mInitialized)
-		_body->ApplyLinearImpulse(b2Vec2(force.getX(), force.getY()), _body->GetWorldCenter(), true);
+		_body->ApplyLinearImpulse(b2Vec2(force.x, force.y), _body->GetWorldCenter(), true);
 }
 
-Vector2<float> PhysicsComponent::getPosition()
+Vec2f PhysicsComponent::getPosition()
 {
 	if (mInitialized)
-		return Vector2<float>(_body->GetPosition().x * scale, _body->GetPosition().y * scale);
+		return Vec2f(_body->GetPosition().x * scale, _body->GetPosition().y * scale);
 	else
-		return Vector2<float>(0, 0);
+		return Vec2f(0, 0);
 }
 
 float PhysicsComponent::getRotation()
@@ -93,18 +93,18 @@ void PhysicsComponent::setMass(float mass)
 	_body->SetMassData(&mMass);
 }
 
-void PhysicsComponent::setMassCenter(Vector2<float> position)
+void PhysicsComponent::setMassCenter(Vec2f position)
 {
 	if (mInitialized)
-		mMass.center = b2Vec2(position.getX(), position.getY());
+		mMass.center = b2Vec2(position.x, position.y);
 
 	_body->SetMassData(&mMass);
 }
 
-void PhysicsComponent::setPosition(Vector2<float> position)
+void PhysicsComponent::setPosition(Vec2f position)
 {
 	if (mInitialized)
-		_body->SetTransform(b2Vec2(position.getX() / scale, position.getY() / -scale), _body->GetAngle());
+		_body->SetTransform(b2Vec2(position.x / scale, position.y / -scale), _body->GetAngle());
 }
 
 void PhysicsComponent::setRotationLock(bool lock)

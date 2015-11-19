@@ -5,7 +5,7 @@
 #include "engine/game/gameObject.h"
 #include "engine/utility/timer.h"
 #include "engine/game/scene.h"
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 #include <vector>
 
@@ -17,7 +17,7 @@ public:
 
 private:
 	vg::Scene *scene;
-	vg::Vector2<float> buttonPos;
-	vg::Vector2<float> buttonSize;
+	vg::Vec2f buttonPos;
+	vg::Vec2f buttonSize;
 
 };

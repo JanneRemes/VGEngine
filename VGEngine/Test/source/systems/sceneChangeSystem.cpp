@@ -22,18 +22,18 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 {
 	this->scene = scene;
 
-	buttonPos = Vector2 <float>(1280 - 210, 0);
-	buttonSize = Vector2<float>(256, 32);
+	buttonPos = Vec2f(1280 - 210, 0);
+	buttonSize = Vec2f(256, 32);
 	
 	GameObject* button = new GameObject("main menu button");
-	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vector2<float>(0, 0), TransformComponent::TOP, false));
+	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
 	QuadrangleComponent* quad = new QuadrangleComponent();
 	quad->setColor(Color(127, 127, 127));
 	button->addComponent(quad);
 	scene->addGameObject(button);
 
 	GameObject* label = new GameObject("main menu button label");
-	label->addComponent(new TransformComponent(Vector2<float>(4,0) + buttonPos, Vector2<float>(0,0), 0.0f, Vector2<float>(0, 0), TransformComponent::TOP, false));
+	label->addComponent(new TransformComponent(Vec2f(4,0) + buttonPos, Vec2f(0,0), 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
 	TextComponent* text = new TextComponent("arial.ttf", 10u, "Main Menu");
 	text->setColor(255, 255, 255);
 	label->addComponent(text);
@@ -71,7 +71,7 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (Mouse::isKeyDown(LEFT))
 	{
-		if (Mouse::getPos(false).getX() >= buttonPos.getX() && Mouse::getPos(false).getY() <= buttonSize.getY())
+		if (Mouse::getPos(false).x >= buttonPos.x && Mouse::getPos(false).y <= buttonSize.y)
 			Game::getInstance()->getSceneManager()->changeScene("scene");
 	}
 
@@ -81,7 +81,7 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 	if (Touch::getIsTouched())
 	{
-		if (Touch::getPos(false).getX() >= buttonPos.getX() && Touch::getPos(false).getY() <= buttonSize.getY())
+		if (Touch::getPos(false).x >= buttonPos.x && Touch::getPos(false).y <= buttonSize.y)
 			Game::getInstance()->getSceneManager()->changeScene("scene");
 	}
 #endif

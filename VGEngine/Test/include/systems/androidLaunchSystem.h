@@ -14,7 +14,7 @@ public:
 	AndroidLaunchSystem(vg::Scene *scene);
 	~AndroidLaunchSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
-	vg::Vector2<float> normalize(vg::Vector2<float> vec2);
+	vg::Vec2f normalize(vg::Vec2f vec2);
 
 private:
 
@@ -24,10 +24,10 @@ private:
 	bool isShot;
 	float speed;
 	glm::vec2 barTexCoords[4];
-	vg::Vector2<float> ballPos;
-	vg::Vector2<float> clickPos;
-	vg::Vector2<float> normalizedVec;
-	vg::Vector2<float> defaultPos;
+	vg::Vec2f ballPos;
+	vg::Vec2f clickPos;
+	vg::Vec2f normalizedVec;
+	vg::Vec2f defaultPos;
 	vg::GameObject *android;
 	vg::GameObject *powerBar;
 	vg::Scene *scene;

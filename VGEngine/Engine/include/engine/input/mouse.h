@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "engine/utility/vector2.h"
+#include "engine/utility/vec2f.h"
 
 namespace vg
 {
@@ -32,12 +32,12 @@ namespace vg
 			/**
 			@return Returns the mouse position translated to world coordinates
 			*/
-			static vg::Vector2<float> getPos(bool relativeToCamera = true);
+			static vg::Vec2f getPos(bool relativeToCamera = true);
 
 			/**
 			@return normalized vector from center of screen pointing towards input position
 			*/
-			static vg::Vector2<float> fromCenter();
+			static vg::Vec2f fromCenter();
 
 			/**
 			Saves mouse button states

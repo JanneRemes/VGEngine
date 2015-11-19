@@ -156,9 +156,6 @@
     <ClInclude Include="include\engine\game\textComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\utility\vector2.h">
-      <Filter>include\utility</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\baseClass.h">
       <Filter>include\game</Filter>
     </ClInclude>

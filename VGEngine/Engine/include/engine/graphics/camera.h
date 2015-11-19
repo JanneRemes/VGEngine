@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "engine/utility/Vector2.h"
+#include "engine/utility/vec2f.h"
 
 namespace vg
 {
@@ -27,20 +27,20 @@ namespace vg
 			/**
 			@return camera focus position in pixels
 			*/
-			static Vector2<float> getPosition();
+			static Vec2f getPosition();
 
 			/**
 			Set camera focus position in pixels
 			@param position in pixels
 			*/
-			static void setPosition(Vector2<float> position);
+			static void setPosition(Vec2f position);
 
 			/**
 			Move camera focus position
 			@param x position in pixels
 			@param y position in pixels
 			*/
-			static void move(Vector2<float> change);
+			static void move(Vec2f change);
 
 			/**
 			@return camera zoom level
@@ -77,7 +77,7 @@ namespace vg
 			//static void rotate(float change);
 
 		private:
-			static Vector2<float> mPosition;		///< camera focus position in pixels
+			static Vec2f mPosition;		///< camera focus position in pixels
 			static float mZoom;					///< camera zoom level
 			static float mLeft;					///< left border of screen
 			static float mTop;					///< top border of screen

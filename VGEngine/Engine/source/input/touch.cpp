@@ -8,10 +8,10 @@ using namespace vg::graphics;
 
 bool Touch::mIsTouched = false;
 bool Touch::mIsTouchReleased = false;
-Vector2<float> Touch::mPos = Vector2<float>();
+Vec2f Touch::mPos = Vec2f();
 
 
-Vector2<float> Touch::getPos(bool relativeToCamera)
+Vec2f Touch::getPos(bool relativeToCamera)
 {
 	if (relativeToCamera)
 		return Screen::toWorld(mPos);
@@ -19,7 +19,7 @@ Vector2<float> Touch::getPos(bool relativeToCamera)
 		return mPos;
 }
 
-void Touch::setPos(Vector2<float> value)
+void Touch::setPos(Vec2f value)
 {
 	mPos = value;
 }
@@ -50,10 +50,10 @@ void Touch::setIsReleased(bool value)
 	mIsTouchReleased = value;
 }
 
-Vector2<float> Touch::fromCenter()
+Vec2f Touch::fromCenter()
 {
-	Vector2<float> result(0.5f * Screen::getSize().getX(), 0.5f * Screen::getSize().getY());
-	Vector2<float> input = getPos(false);
+	Vec2f result(0.5f * Screen::getSize().x, 0.5f * Screen::getSize().y);
+	Vec2f input = getPos(false);
 	result -= input;
 	result.normalize();
 	result *= -1.0f;

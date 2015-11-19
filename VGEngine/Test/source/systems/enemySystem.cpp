@@ -5,7 +5,7 @@
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/utility/random.h"
-#include "engine/utility/vector2.h"
+#include "engine/utility/vec2f.h"
 #include "engine/graphics/screen.h"
 
 #include <sstream>
@@ -17,9 +17,9 @@ EnemySystem::EnemySystem()
 :  mEnemyCount(0), mSpawnDelay(0), mBulletCount(0)
 {
 	mEnemyPrefab = new GameObject("enemy");
-	TransformComponent *transform = new TransformComponent(Vector2<float>(0.0f, 0.0f),
-		Vector2<float>(80, 80), 0.0f);
-	transform->setOrigin(vg::Vector2<float>(40, 40));
+	TransformComponent *transform = new TransformComponent(Vec2f(0.0f, 0.0f),
+		Vec2f(80, 80), 0.0f);
+	transform->setOrigin(vg::Vec2f(40, 40));
 	mEnemyPrefab->addComponent(transform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("koala.png");
 	mEnemyPrefab->addComponent(quadre);
@@ -38,7 +38,7 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 	if (mSpawnTimer.getCurrentTimeSeconds() >= mSpawnDelay)
 	{
 		GameObject *gameObject = new GameObject(*mEnemyPrefab);
-		Vector2<float> temppos(Random::nexti(45, screenWidth - 45), -10.0f);
+		Vec2f temppos(Random::nexti(45, screenWidth - 45), -10.0f);
 		gameObject->getComponent<TransformComponent>()->setPosition(temppos);
 		unsigned int size = gameObjects->size();
 		mScene->addGameObject(gameObject);
@@ -85,9 +85,9 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 		{
 			tempEnemyCount++;
 			TransformComponent *comp = (*i)->getComponent<TransformComponent>();
-			comp->move(Vector2<float>(0, 500 *deltaTime));
+			comp->move(Vec2f(0, 500 *deltaTime));
 			comp->rotate(2.0f);
-			if (comp->getWorldPosition().getY() - comp->getOrigin().getY() > screenHeight)
+			if (comp->getWorldPosition().y - comp->getOrigin().y > screenHeight)
 			{
 				(*i)->markForDelete();
 			}
@@ -99,8 +99,8 @@ void EnemySystem::update(std::vector<vg::GameObject*> *gameObjects,float deltaTi
 				{
 					tempBulletCount++;
 					TransformComponent *btransf = (*j)->getComponent<TransformComponent>();
-					if (Vector2<float>::distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
-						< (comp->getSize().getX() + comp->getSize().getY()) / 2.0f)
+					if (Vec2f::distance(btransf->getWorldPosition(), comp->getWorldPosition()) 
+						< (comp->getSize().x + comp->getSize().y) / 2.0f)
 						(*i)->markForDelete();
 				}
 			}

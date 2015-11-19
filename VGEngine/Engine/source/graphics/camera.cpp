@@ -5,7 +5,7 @@ using namespace vg;
 using namespace vg::graphics;
 
 // Default values
-Vector2<float> Camera::mPosition = Vector2<float>(0,0);
+Vec2f Camera::mPosition = Vec2f(0,0);
 float Camera::mZoom = 1.0f;
 float Camera::mLeft = 0.0f;
 float Camera::mTop = 0.0f;
@@ -15,21 +15,21 @@ float Camera::mBottom = 0.0f;
 
 void Camera::reset()
 {
-	mPosition = Vector2<float>(0, 0);
+	mPosition = Vec2f(0, 0);
 	mZoom = 1.0f;
 }
 
-Vector2<float> Camera::getPosition()
+Vec2f Camera::getPosition()
 {
 	return mPosition;
 }
 
-void Camera::setPosition(Vector2<float> position)
+void Camera::setPosition(Vec2f position)
 {
 	mPosition = position;
 }
 
-void Camera::move(Vector2<float> change)
+void Camera::move(Vec2f change)
 {
 	mPosition += change;
 }

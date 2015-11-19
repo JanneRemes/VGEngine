@@ -86,8 +86,8 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 				text->bindTexture();
 				string textString = text->getText();
 				FT_GlyphSlot* glyph = text->getGlyph();
-				float x = transform->getWorldPosition().getX();
-				float y = transform->getWorldPosition().getY() + 3 * text->getFontSize();
+				float x = transform->getWorldPosition().x;
+				float y = transform->getWorldPosition().y + 3 * text->getFontSize();
 				float base = y;
 
 				for (int i = 0; i < textString.size(); i++)
@@ -98,8 +98,8 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 					gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
 
 					y = base - (*glyph)->bitmap_top;
-					shader->setUniform("unifModel", modelTransform(Vector2<float>(x, y), transform->getOrigin(),
-						Vector2<float>((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
+					shader->setUniform("unifModel", modelTransform(Vec2f(x, y), transform->getOrigin(),
+						Vec2f((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
 					x += ((*glyph)->advance.x >> 6);
 
 					mVertexBuffer.setData(*text->getVertices());
@@ -122,7 +122,7 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	float zoom = 1.0f;
 	if (useCamera)
 	{
-		camera = vec2(Camera::getPosition().getX(), Camera::getPosition().getY());
+		camera = vec2(Camera::getPosition().x, Camera::getPosition().y);
 		zoom = Camera::getZoom();
 	}
 
@@ -150,10 +150,10 @@ void RenderSystem::updateProjection(Shader* shader, bool useCamera)
 	shader->setUniform("unifProjection", projection);
 }
 
-mat4 RenderSystem::modelTransform(Vector2<float> position, Vector2<float> origin, Vector2<float> size, float rotation)
+mat4 RenderSystem::modelTransform(Vec2f position, Vec2f origin, Vec2f size, float rotation)
 {
-	vec2 position2(position.getX() - origin.getX(), position.getY() - origin.getY());
-	vec2 size2(size.getX(), size.getY());
+	vec2 position2(position.x - origin.x, position.y - origin.y);
+	vec2 size2(size.x, size.y);
 
 	mat4 model = mat4();
 	model = translate(model, vec3(position2, 0.0f));
@@ -180,7 +180,7 @@ void RenderSystem::updateShader(Shader* shader, TransformComponent* transform)
 	else
 	{
 		shader->setUniform("unifModel", modelTransform(
-			Vector2<float>(0, 0), Vector2<float>(0, 0), Vector2<float>(0, 0), 0.0f));
+			Vec2f(0, 0), Vec2f(0, 0), Vec2f(0, 0), 0.0f));
 		shader->setUniform("unifLayer", 0.0f);
 	}
 	

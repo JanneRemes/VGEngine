@@ -40,7 +40,7 @@ void MainScene::loadObjects()
 
 	//scene name text
 	GameObject* objText = new GameObject("mmSceneText");
-	objText->addComponent(new TransformComponent(Vector2<float>(250, middle - 35), Vector2<float>(0, 0), 0.0f));
+	objText->addComponent(new TransformComponent(Vec2f(250, middle - 35), Vec2f(0, 0), 0.0f));
 	TextComponent* text = new TextComponent("arial.ttf", 18u, "very long scene name");
 	text->setColor(255, 255, 255);
 	objText->addComponent(text);
@@ -50,7 +50,7 @@ void MainScene::loadObjects()
 vg::GameObject* MainScene::makeButton(std::string name, std::string texture, float y)
 {
 	GameObject* obj = new GameObject(name);
-	obj->addComponent(new TransformComponent(Vector2<float>(150, y), Vector2<float>(128, 128), 0.0f, Vector2<float>(64, 64)));
+	obj->addComponent(new TransformComponent(Vec2f(150, y), Vec2f(128, 128), 0.0f, Vec2f(64, 64)));
 	QuadrangleComponent* quad = new QuadrangleComponent(texture);
 	quad->setColor(Color(0, 64, 255));
 	obj->addComponent(quad);

@@ -28,8 +28,8 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 
 void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	inputDown = Vector2<float>(0, 0);
-	inputRelease = Vector2<float>(0, 0);
+	inputDown = Vec2f(0, 0);
+	inputRelease = Vec2f(0, 0);
 
 #ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))

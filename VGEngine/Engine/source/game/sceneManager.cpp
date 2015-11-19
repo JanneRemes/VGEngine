@@ -56,7 +56,7 @@ void SceneManager::changeScene(string key)
 			
 			Game::getInstance()->getAudioManager()->stopAll();
 
-			graphics::Camera::setPosition(Vector2<float>(0, 0));
+			graphics::Camera::setPosition(Vec2f(0, 0));
 			graphics::Camera::setZoom(1.0f);
 
 			mActiveScene = it->second;
