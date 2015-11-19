@@ -44,11 +44,6 @@ GameObject::GameObject(const GameObject &obj)
 				QuadrangleComponent *temp = new QuadrangleComponent(path);
 				mComponents.insert(std::make_pair(&typeid(*temp), temp));
 			}
-			else if (typeid((TriangleComponent*)ij->second) == typeid(TriangleComponent))
-			{
-				TriangleComponent *temp = new TriangleComponent();
-				mComponents.insert(std::make_pair(&typeid(*temp), temp));
-			}
 			else
 			{
 				Log("vgengine", "error!!!!", "");

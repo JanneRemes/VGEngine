@@ -74,20 +74,36 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		Game::getInstance()->getSceneManager()->changeScene("jumpScene");
 	}
 
+#endif
+
+	Vec2f input(0, 0);
+
+#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
-	{
-		if (Mouse::getPos(false).x >= buttonPos.x && Mouse::getPos(false).y <= buttonSize.y)
-			Game::getInstance()->getSceneManager()->changeScene("scene");
-	}
-
+		input = Mouse::getPos(false);
 #endif
-
 #ifdef OS_ANDROID
-
 	if (Touch::getIsTouched())
-	{
-		if (Touch::getPos(false).x >= buttonPos.x && Touch::getPos(false).y <= buttonSize.y)
-			Game::getInstance()->getSceneManager()->changeScene("scene");
-	}
+		input = Touch::getPos(false);
 #endif
+
+	if (input != Vec2f(0, 0))
+	{
+		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+		{
+			if ((*it)->getName() == "main menu button")
+			{
+				TransformComponent* transform = (*it)->get<TransformComponent>();
+				QuadrangleComponent* render = (*it)->get<QuadrangleComponent>();
+				if (transform != nullptr && render != nullptr)
+				{
+					if (transform->contains(input))
+					{
+						Game::getInstance()->getSceneManager()->changeScene("scene");
+						return;
+					}
+				}
+			}
+		}
+	}
 }

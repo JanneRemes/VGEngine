@@ -2,7 +2,7 @@
 #include "engine/game/renderSystem.h"
 #include "engine/game/game.h"
 #include "engine/game/animationComponent.h"
-#include "engine/game/triangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/textComponent.h"
 

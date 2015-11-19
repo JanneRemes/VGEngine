@@ -36,20 +36,21 @@ void CameraScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
 	PhysicsSystem* physics = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	physics->createBorders(0, 0, Screen::getX(), Screen::getY());
+	physics->createBorders(128, 128, Screen::getX() - 64, Screen::getY() - 64);
 	
 	//borders
-	createBorder(0, 0, 1280, 32);
-	createBorder(0, 720 - 32, 1280, 32);
-	createBorder(0, 32, 32, 720 - 64);
-	createBorder(1280 - 32, 32, 32, 720 - 64);
+	int thickness = 32;
+	createBorder(64, 64, 1280 - 128, thickness);
+	createBorder(64, 720 - 96, 1280 - 128, thickness);
+	createBorder(64, 96, thickness, 720 - 192);
+	createBorder(1280 - 96, 96, thickness, 720 - 192);
 
 	//koala
 	for (int i = 0; i < 30; i++)
 	{
 		GameObject* obj = new GameObject("test koala " + toString(i, 2));
 		TransformComponent* transform = new TransformComponent(
-			Vec2f(Random::nexti(500, 1000), Random::nexti(100, 300)), Vec2f(64, 64),
+			Vec2f(Random::nexti(500, 750), Random::nexti(300, 400)), Vec2f(64, 64),
 			0.0f, Vec2f(32, 32));
 		QuadrangleComponent* quad = new QuadrangleComponent("koala.png");
 		quad->setColor(Color::random());
@@ -67,7 +68,7 @@ void CameraScene::loadObjects()
 		text->setText("Koala");
 		text->setColor(i * 32, i * 32, i * 32);
 		GameObject* obj = new GameObject("koalatext");
-		obj->add(new TransformComponent(Vec2f(300 + 6 * i, 50 + 6 * i),
+		obj->add(new TransformComponent(Vec2f(320 + 6 * i, 100 + 6 * i),
 			Vec2f(0, 0), 0.0f));
 		obj->add(text);
 		addGameObject(obj);
