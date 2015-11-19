@@ -56,10 +56,10 @@ rockSystem::rockSystem(Scene *scene)
 	bar1 = new GameObject("bar1");
 	TransformComponent *transformBar1 = new TransformComponent(Vec2f(20, 10),
 		Vec2f(50, 170), 0.0f);
-	QuadrangleComponent *quadreBar = new QuadrangleComponent("bar.png");
+	QuadrangleComponent *quadreBar1 = new QuadrangleComponent("bar.png");
 
 	bar1->addComponent(transformBar1);
-	bar1->addComponent(quadreBar);
+	bar1->addComponent(quadreBar1);
 
 	scene->addGameObject(bar1);
 
@@ -67,10 +67,10 @@ rockSystem::rockSystem(Scene *scene)
 	indicator1 = new GameObject("indicator1");
 	TransformComponent *transformIndicator1 = new TransformComponent(Vec2f(0, 170),
 		Vec2f(100, 10), 0.0f);
-	QuadrangleComponent *quadreIndicator = new QuadrangleComponent("indicator.png");
+	QuadrangleComponent *quadreIndicator1 = new QuadrangleComponent("indicator.png");
 
 	indicator1->addComponent(transformIndicator1);
-	indicator1->addComponent(quadreIndicator);
+	indicator1->addComponent(quadreIndicator1);
 
 	scene->addGameObject(indicator1);
 
@@ -78,9 +78,10 @@ rockSystem::rockSystem(Scene *scene)
 	bar2 = new GameObject("bar2");
 	TransformComponent *transformBar2 = new TransformComponent(Vec2f(120, 10),
 		Vec2f(50, 170), 0.0f);
+	QuadrangleComponent *quadreBar2 = new QuadrangleComponent("bar.png");
 
 	bar2->addComponent(transformBar2);
-	bar2->addComponent(quadreBar);
+	bar2->addComponent(quadreBar2);
 
 	scene->addGameObject(bar2);
 
@@ -88,9 +89,10 @@ rockSystem::rockSystem(Scene *scene)
 	indicator2 = new GameObject("indicator2");
 	TransformComponent *transformIndicator2 = new TransformComponent(Vec2f(100, 170),
 		Vec2f(100, 10), 0.0f);
+	QuadrangleComponent *quadreIndicator2 = new QuadrangleComponent("indicator.png");
 
 	indicator2->addComponent(transformIndicator2);
-	indicator2->addComponent(quadreIndicator);
+	indicator2->addComponent(quadreIndicator2);
 
 	scene->addGameObject(indicator2);
 
