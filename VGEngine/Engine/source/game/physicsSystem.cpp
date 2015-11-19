@@ -40,7 +40,8 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 		 {
 			 world->DestroyBody(*i);
 			 i = bodyRemovalList.erase(i);
-
+			 if (bodyRemovalList.size() == 0)
+				break;
 		 }
 	 }
 
