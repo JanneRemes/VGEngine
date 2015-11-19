@@ -1,6 +1,5 @@
 
 #include "engine/game/physicsSystem.h"
-#include "engine/game/physicsPolygonComponent.h"
 
 
 #include <typeinfo>

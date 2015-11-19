@@ -11,8 +11,6 @@
 
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/game.h"
-#include "engine/game/physicsCircleComponent.h"
-#include "engine/game/physicsPolygonComponent.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/animationSystem.h"
 #include "engine/utility/random.h"
@@ -45,7 +43,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 		Vec2f(64, 64), 0.0f);
 
 	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
-	PhysicsPolygonComponent *physicsPolyComponent1 = new PhysicsPolygonComponent(physicsTransform, PhysicsComponent::STATIC);
+	PhysicsComponent *physicsPolyComponent1 = new PhysicsComponent(physicsTransform, PhysicsComponent::STATIC);
 
 	physicsTest->addComponent(physicsPolyComponent1);
 	physicsTest->addComponent(physicsTransform);
@@ -60,13 +58,14 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
 
-	PhysicsPolygonComponent *physicsPolyComponent2 = new PhysicsPolygonComponent(physicsTransform2, PhysicsComponent::DYNAMIC, 64, 64);
+	PhysicsComponent *physicsPolyComponent2 = new PhysicsComponent(physicsTransform2, PhysicsComponent::DYNAMIC);
 
 	physicsTest2->addComponent(physicsPolyComponent2);
 	physicsTest2->addComponent(physicsTransform2);
 	physicsTest2->addComponent(physicsRender2);
 
-	//physicsTest2->getComponent<PhysicsPolygonComponent>()->setRotationLock(true);
+	physicsTest2->getComponent<PhysicsComponent>()->setFriction(1000);
+	//physicsTest2->getComponent<PhysicsComponent>()->setRotationLock(true);
 
 	scene->addGameObject(physicsTest2);
 
@@ -77,20 +76,20 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest3 = new GameObject("physicsTest3");
 	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");
 
-	PhysicsPolygonComponent *physicsPolyComponent3 = new PhysicsPolygonComponent(physicsTransform3, PhysicsComponent::DYNAMIC, 64, 64);
+	PhysicsComponent *physicsPolyComponent3 = new PhysicsComponent(physicsTransform3, PhysicsComponent::DYNAMIC);
 
 	physicsTest3->addComponent(physicsPolyComponent3);
 	physicsTest3->addComponent(physicsTransform3);
 	physicsTest3->addComponent(physicsRender3);
-	physicsTest3->getComponent<PhysicsPolygonComponent>()->setRestitution(0);
+	physicsTest3->getComponent<PhysicsComponent>()->setRestitution(0);
 
 	scene->addGameObject(physicsTest3);
 
-	system->createRevoluteJoint(physicsTest2->getComponent<PhysicsPolygonComponent>(), physicsTest->getComponent<PhysicsPolygonComponent>());
+	system->createRevoluteJoint(physicsTest2->getComponent<PhysicsComponent>(), physicsTest->getComponent<PhysicsComponent>());
 
-	// Two physics objects with same collision masks wont collide
-	physicsTest3->getComponent<PhysicsPolygonComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
-	physicsTest->getComponent<PhysicsPolygonComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
+	//// Two physics objects with same collision masks wont collide
+	physicsTest3->getComponent<PhysicsComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
+	physicsTest->getComponent<PhysicsComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
 
 }
 void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
@@ -138,7 +137,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
-			PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
+			PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
 			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 
 			if (physComponent != nullptr && transform != nullptr)
@@ -154,22 +153,22 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::E) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vec2f pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyLinearImpulse(Vec2f(0, 100));
+		physicsTest3->getComponent<PhysicsComponent>()->applyLinearImpulse(Vec2f(0, 100));
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Q) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vec2f pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->applyForce(Vec2f(0, 1000));
+		physicsTest3->getComponent<PhysicsComponent>()->applyForce(Vec2f(0, 1000));
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vec2f pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->setPosition(pos);
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->setAngularVelocity(0);
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(0, 0));
-		physicsTest3->getComponent<PhysicsPolygonComponent>()->setRotation(0);
+		physicsTest3->getComponent<PhysicsComponent>()->setPosition(pos);
+		physicsTest3->getComponent<PhysicsComponent>()->setAngularVelocity(0);
+		physicsTest3->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
+		physicsTest3->getComponent<PhysicsComponent>()->setRotation(0);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::R) == vg::input::Keyboard::KeyState::PRESSED)
@@ -237,7 +236,7 @@ void PhysicsTestSystem::createPapis(Vec2f pos)
 
 		GameObject *physicsTest = new GameObject("physicsTest");
 		physicsTest->addComponent(physicsTransform);
-		physicsTest->addComponent(new PhysicsCircleComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
+		physicsTest->addComponent(new PhysicsComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
 		QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
 
 		physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));

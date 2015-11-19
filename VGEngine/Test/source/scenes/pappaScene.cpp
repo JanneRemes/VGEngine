@@ -1,13 +1,13 @@
 
 #include "scenes/pappaScene.h"
 
-#include "engine/game/physicsPolygonComponent.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "systems/sceneChangeSystem.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
+#include "engine\graphics\screen.h"
 
 #include "systems\PhysicsTestSystem.h"
 
@@ -41,13 +41,38 @@ void PappaScene::loadObjects()
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("koala.png");
 
-	PhysicsPolygonComponent *physicsPolyComponent2 = new PhysicsPolygonComponent(physicsTransform2, PhysicsComponent::STATIC);
+	PhysicsComponent *physicsPolyComponent2 = new PhysicsComponent(physicsTransform2, PhysicsComponent::STATIC);
 
 	physicsTest2->addComponent(physicsPolyComponent2);
 	physicsTest2->addComponent(physicsTransform2);
 	physicsTest2->addComponent(physicsRender2);
-	
+
+	physicsTest2->getComponent<PhysicsComponent>()->setDensity(100);
+	physicsTest2->getComponent<PhysicsComponent>()->setFriction(100);
+
 	addGameObject(physicsTest2);
+
+
+	// custom physics shape!
+
+	std::vector<Vec2f> listOfCustomPoints;
+	listOfCustomPoints.push_back(Vec2f(0,0));
+	listOfCustomPoints.push_back(Vec2f(0, graphics::Screen::getY()));
+	listOfCustomPoints.push_back(Vec2f(1280, 720));
+	listOfCustomPoints.push_back(Vec2f(graphics::Screen::getX(), 0));
+
+
+	TransformComponent *customTransform = new TransformComponent(Vec2f(600, 600),
+		Vec2f(200, 64));
+
+	GameObject *customPhysicsTest = new GameObject("customPhysicsTest");
+
+	PhysicsComponent *customPhysics = new PhysicsComponent(customTransform, listOfCustomPoints);
+
+	customPhysicsTest->addComponent(customPhysics);
+	customPhysicsTest->addComponent(customTransform);
+	addGameObject(customPhysicsTest);
+
 
 	// Physics test system
 	PhysicsTestSystem *fysiks = new PhysicsTestSystem(this);

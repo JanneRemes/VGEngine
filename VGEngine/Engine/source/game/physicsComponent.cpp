@@ -5,15 +5,152 @@
 
 using namespace vg;
 float PhysicsComponent::scale = 30.0f;
-PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type)
+
+PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, Vec2f size)
 {
-	mInitialized = false;
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
+	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
+	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
+	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
+	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
+	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
+
+		float _width = 1;
+		float _height = 1;
+
+		if (size.x != 0 && size.y != 0)
+		{
+			_width = size.x;
+			_height = size.y;
+		}
+		else
+		{
+			_width = component->getSize().x;
+			_height = component->getSize().y;
+		}
+
+		float x = component->getWorldPosition().x - component->getOrigin().x;
+		float y = component->getWorldPosition().y - component->getOrigin().y;
+
+
+		if (type == DYNAMIC)
+		{
+			bodyDef->type = b2BodyType::b2_dynamicBody;
+		}
+		else if (type == KINEMATIC)
+		{
+			bodyDef->type = b2BodyType::b2_kinematicBody;
+		}
+		else if (type == STATIC)
+		{
+			bodyDef->type = b2BodyType::b2_staticBody;
+		}
+
+		boxShape->SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
+
+		_FixDef->density = 1.0f;
+		_FixDef->shape = boxShape;
+
+		bodyDef->position = b2Vec2(x / scale, -y / scale);
+		bodyDef->angle = 0.0f;
+
+		_body = system->getWorld()->CreateBody(bodyDef);
+		_body->SetGravityScale(5);
+		_body->SetTransform(_body->GetPosition(), component->getWorldRotation() * (3.14 / 180));
+		_body->CreateFixture(_FixDef);
 }
+
+PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius)
+{
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
+	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
+	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
+	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
+	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
+	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
+
+	float _radius = 0;
+	if (radius != 0)
+	{
+		_radius = radius;
+	}
+	else
+	{
+		_radius = component->getSize().x;
+	}
+
+	float x = component->getWorldPosition().x;
+	float y = component->getWorldPosition().y;
+
+	if (type == DYNAMIC)
+	{
+		bodyDef->type = b2BodyType::b2_dynamicBody;
+	}
+	else if (type == KINEMATIC)
+	{
+		bodyDef->type = b2BodyType::b2_kinematicBody;
+	}
+	else
+		bodyDef->type = b2BodyType::b2_staticBody;
+
+	circleShape->m_radius = ((_radius) / scale) / 2.0f;
+
+	_FixDef->density = 10.0f;
+	_FixDef->shape = circleShape;
+
+	bodyDef->position = b2Vec2(x / scale, -y / scale);
+	bodyDef->angle = 0.0f;
+
+
+	_body = system->getWorld()->CreateBody(bodyDef);
+	_body->SetGravityScale(2);
+	_body->CreateFixture(_FixDef);
+}
+
+PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg::Vec2f> ListOfPoints)
+{
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+
+	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
+	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
+	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
+	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
+	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
+
+	float x = component->getWorldPosition().x - component->getOrigin().x;
+	float y = component->getWorldPosition().y - component->getOrigin().y;
+
+	bodyDef->type = b2BodyType::b2_staticBody;
+
+	b2Vec2 *vs = new b2Vec2[ListOfPoints.size()];
+
+	for (int i = 0; i < ListOfPoints.size(); i++)
+	{
+		vs[i].Set(ListOfPoints[i].x / scale, ListOfPoints[i].y / -scale);
+	}
+
+	chainShape->CreateChain(vs, ListOfPoints.size());
+	_FixDef->shape = chainShape;
+
+	_body = system->world->CreateBody(bodyDef);
+	_body->CreateFixture(_FixDef);
+
+	delete vs;
+}
+
 
 PhysicsComponent::~PhysicsComponent()
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	system->removeBody(_body);
+
+	delete bodyDef;
+	delete _FixDef;
+	delete boxShape;
+	delete circleShape;
+	delete chainShape;
 }
 
 void PhysicsComponent::setVelocity(Vec2f velocity)
@@ -71,25 +208,24 @@ void PhysicsComponent::setRotation(float rotation)
 void PhysicsComponent::setDensity(float density)
 {
 	if (mInitialized)
-		_FixDef.density = density;
+		_FixDef->density = density;
 
-	_body->CreateFixture(&_FixDef);
+	_body->CreateFixture(_FixDef);
 }
 
 void PhysicsComponent::setFriction(float friction)
 {
 	if (mInitialized)
-		_FixDef.friction = friction;
-
-	_body->CreateFixture(&_FixDef);
+		_FixDef->friction = friction;
+		_body->CreateFixture(_FixDef);
 }
 
 void PhysicsComponent::setRestitution(float restitution)
 {
 	if (mInitialized)
-		_FixDef.restitution = restitution;
+		_FixDef->restitution = restitution;
 
-	_body->CreateFixture(&_FixDef);
+	_body->CreateFixture(_FixDef);
 }
 
 void PhysicsComponent::setMass(float mass)

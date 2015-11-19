@@ -3,6 +3,7 @@
 
 #include "engine/game/component.h"
 #include "engine/utility/vec2f.h"
+#include <vector>
 
 #include <Box2D\Box2D.h>
 
@@ -15,6 +16,7 @@ namespace vg
 	{
 		friend class PhysicsSystem;
 	public:
+		enum BODYSHAPE { BOX, CIRCLE, CUSTOM };	///< physicsComponents body shape
 		enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };	///< physicsComponents body type
 		enum FILTER : short { LOW = 0x0001, MIDDLE = 0x0002, HIGH = 0x0004, TOP = 0x0008 };
 		static float scale;								///< Scale of the object
@@ -23,7 +25,11 @@ namespace vg
 		@param component Desired TransformComponent that you wish to add physicsComponent with
 		@param type Can be either 'DYNAMIC', 'KINEMATIC' or 'STATIC', defines the type of the physics object
 		*/
-		PhysicsComponent(TransformComponent *component, BODYTYPE type);
+		PhysicsComponent(TransformComponent *component, BODYTYPE type, Vec2f size = 0);
+		// Circle shapes
+		PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius);
+		// Custom shapes
+		PhysicsComponent(TransformComponent *component, std::vector<vg::Vec2f> ListOfPoints);
 		~PhysicsComponent();
 		/**
 		Sets Vector2 position for the physicsComponent
@@ -104,8 +110,11 @@ namespace vg
 
 	protected:
 		b2Body *_body;			///< PhysicsComponents Box2D body
-		b2BodyDef bodyDef;		///< PhysicsComponents Box2D bodyDef
-		b2FixtureDef _FixDef;	///< PhysicsComponents Box2D fixDef
+		b2BodyDef *bodyDef;		///< PhysicsComponents Box2D bodyDef
+		b2FixtureDef *_FixDef;	///< PhysicsComponents Box2D fixDef
+		b2PolygonShape *boxShape;
+		b2CircleShape *circleShape;
+		b2ChainShape *chainShape;
 		b2MassData mMass;		///< PhysicsComponents Mass data
 		bool mInitialized;
 	};

@@ -11,7 +11,6 @@
 #include "engine/graphics/screen.h"
 #include "engine/utility/random.h"
 #include "engine/game/physicsSystem.h"
-#include "engine/game/physicsPolygonComponent.h"
 #include "engine/utility/string.h"
 
 using namespace vg;
@@ -56,7 +55,7 @@ void CameraScene::loadObjects()
 		quad->setColor(Color::random());
 
 		obj->add(transform);
-		obj->add(new PhysicsPolygonComponent(transform, PhysicsComponent::DYNAMIC));
+		obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC));
 		obj->add(quad);
 		addGameObject(obj);
 	}

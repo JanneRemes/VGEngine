@@ -1,7 +1,6 @@
-
+/*
 #include "scenes/jumpScene.h"
 
-#include "engine/game/physicsPolygonComponent.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "systems/sceneChangeSystem.h"
@@ -51,3 +50,4 @@ void JumpScene::loadObjects()
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 }
+*/

@@ -1,11 +1,11 @@
 
 #include "systems/cameraSystem.h"
 
+#include "engine\game\physicsComponent.h"
 #include "engine/graphics/camera.h"
 #include "engine/graphics/screen.h"
 #include "engine/game/transformComponent.h"
 #include "engine/utility/random.h"
-#include "engine/game/physicsPolygonComponent.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -55,7 +55,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		{
 			if ((*it)->getName().find("test koala") != -1)
 			{
-				PhysicsPolygonComponent* phys = (*it)->get<PhysicsPolygonComponent>();
+				PhysicsComponent* phys = (*it)->get<PhysicsComponent>();
 				if (phys != nullptr)
 					phys->setVelocity(Vec2f(Random::nexti(-50, 50), Random::nexti(0, 50)));
 			}

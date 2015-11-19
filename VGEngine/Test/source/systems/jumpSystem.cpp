@@ -11,8 +11,7 @@
 
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/game.h"
-#include "engine/game/physicsCircleComponent.h"
-#include "engine/game/physicsPolygonComponent.h"
+
 #include "engine/game/animationComponent.h"
 #include "engine/game/animationSystem.h"
 #include "engine/utility/random.h"
