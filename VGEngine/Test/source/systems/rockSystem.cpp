@@ -16,7 +16,7 @@
 #include "engine/utility/vec2f.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
-#include "engine/game/physicsPolygonComponent.h"
+#include "engine/game/PhysicsComponent.h"
 #include "engine/utility/random.h"
 #include "engine/input/touch.h"
 #include "engine/graphics/screen.h"
@@ -40,15 +40,15 @@ rockSystem::rockSystem(Scene *scene)
 	TransformComponent *transformRock = new TransformComponent(Vec2f(100, 600),
 		Vec2f(100, 100), 0.0f);
 	QuadrangleComponent *quadre = new QuadrangleComponent("rock.png");
-	PhysicsPolygonComponent *rockPhysicsComponent = new PhysicsPolygonComponent(transformRock, PhysicsComponent::DYNAMIC);
+	PhysicsComponent *rockPhysicsComponent = new PhysicsComponent(transformRock, PhysicsComponent::DYNAMIC);
 
 	rock->addComponent(transformRock);
 	rock->addComponent(quadre);
 	rock->addComponent(rockPhysicsComponent);
 
-	rock->getComponent<PhysicsPolygonComponent>()->setFriction(0.90);
-	rock->getComponent<PhysicsPolygonComponent>()->setDensity(100);
-	rock->getComponent<PhysicsPolygonComponent>()->setRestitution(0.60);
+	rock->getComponent<PhysicsComponent>()->setFriction(0.90);
+	rock->getComponent<PhysicsComponent>()->setDensity(100);
+	rock->getComponent<PhysicsComponent>()->setRestitution(0.60);
 
 	scene->addGameObject(rock);
 
@@ -175,7 +175,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		if (!powerLock)
 		{
 			powerLock = true;
-			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
+			rock->getComponent<PhysicsComponent>()->setVelocity(Vec2f(power, maxHeight - height));
 			shot = true;
 		}
 
@@ -194,7 +194,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		if (!powerLock)
 		{
 			powerLock = true;
-			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
+			rock->getComponent<PhysicsComponent>()->setVelocity(Vec2f(power, maxHeight - height));
 		}
 
 		if (!heightLock)

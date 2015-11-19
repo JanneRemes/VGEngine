@@ -9,7 +9,7 @@
 #include "scenes/pappaScene.h"
 #include "scenes\AndroidLaunchGame.h"
 #include "scenes\rockThrowScene.h"
-#include "scenes\/jumpScene.h"
+#include "scenes\jumpScene.h"
 #include "engine/game/quadrangleComponent.h"
 
 using namespace vg;

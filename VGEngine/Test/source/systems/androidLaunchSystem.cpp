@@ -28,11 +28,11 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	android->addComponent(androidTransform);
 	QuadrangleComponent *quadre = new QuadrangleComponent("android.png");
 	android->addComponent(quadre);
-	android->addComponent(new PhysicsCircleComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
+	android->addComponent(new PhysicsComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
 
-	android->getComponent<PhysicsCircleComponent>()->setFriction(300);
-	android->getComponent<PhysicsCircleComponent>()->setRestitution(0.60);
-	android->getComponent<PhysicsCircleComponent>()->setDensity(100);
+	android->getComponent<PhysicsComponent>()->setFriction(300);
+	android->getComponent<PhysicsComponent>()->setRestitution(0.60);
+	android->getComponent<PhysicsComponent>()->setDensity(100);
 	scene->addGameObject(android);
 
 	/*
@@ -95,7 +95,7 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	defaultPos.y = Screen::getY() - 60;
 	speed = 100;
 	powerBar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(-200, 200));
-	android->getComponent<PhysicsCircleComponent>()->setPosition(defaultPos);	
+	android->getComponent<PhysicsComponent>()->setPosition(defaultPos);	
 }
 AndroidLaunchSystem::~AndroidLaunchSystem()
 {
@@ -161,7 +161,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			normalizedVec = normalize(tempVec);
 
 			vg::Vec2f velocity = vg::Vec2f(normalizedVec.x * barYIncrement * speed, normalizedVec.y * barYIncrement * speed);
-			android->getComponent<PhysicsCircleComponent>()->setVelocity(vg::Vec2f(velocity.x, -velocity.y));
+			android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(velocity.x, -velocity.y));
 		}
 	}
 
@@ -169,10 +169,10 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 	{
 		if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))
 		{	
-			android->getComponent<PhysicsCircleComponent>()->setPosition(defaultPos);		
-			android->getComponent<PhysicsCircleComponent>()->setVelocity(vg::Vec2f(0.0f, 0.0f));
-			android->getComponent<PhysicsCircleComponent>()->setRotation(0.0f);
-			android->getComponent<PhysicsCircleComponent>()->setAngularVelocity(0.0f);
+			android->getComponent<PhysicsComponent>()->setPosition(defaultPos);		
+			android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(0.0f, 0.0f));
+			android->getComponent<PhysicsComponent>()->setRotation(0.0f);
+			android->getComponent<PhysicsComponent>()->setAngularVelocity(0.0f);
 			isShot = false;
 
 			background1->getComponent<TransformComponent>()->setPosition(Vec2f(0 - (Screen::getX() * 0.10), 0));
@@ -184,7 +184,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 		}
 	}
 
-	distance += (android->getComponent<PhysicsCircleComponent>()->getVelocity().x / 150.0f);
+	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x / 150.0f);
 	std::stringstream stream;
 	stream << "Distance: "  << distance << "m";
 	textObject->getComponent<TextComponent>()->setText(stream.str());
@@ -200,7 +200,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 		vg::Vec2f pos = vg::input::Touch::getPos();
 
 		vg::Vec2f velocity = pos - android->getComponent<TransformComponent>()->getWorldPosition();
-		android->getComponent<PhysicsCircleComponent>()->setVelocity(vg::Vec2f(velocity.x, velocity.y));
+		android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(velocity.x, velocity.y));
 	}
 #endif
 }

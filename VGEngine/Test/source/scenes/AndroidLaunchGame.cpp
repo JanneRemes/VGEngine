@@ -8,7 +8,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/triangleComponent.h"
 #include "engine/game/quadrangleComponent.h"
-#include "engine/game/physicsCircleComponent.h"
+#include "engine/game/PhysicsComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/physicsComponent.h"
 #include "engine/game/animationComponent.h"

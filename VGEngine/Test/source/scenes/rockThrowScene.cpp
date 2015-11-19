@@ -6,7 +6,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/physicsComponent.h"
-#include "engine/game/physicsPolygonComponent.h"
+#include "engine/game/PhysicsComponent.h"
 #include "systems\sceneChangeSystem.h"
 
 using namespace vg;

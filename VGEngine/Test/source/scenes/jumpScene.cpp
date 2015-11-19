@@ -1,4 +1,4 @@
-/*
+
 #include "scenes/jumpScene.h"
 
 #include "engine/game/transformComponent.h"
@@ -33,7 +33,7 @@ void JumpScene::loadObjects()
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("koala.png");
 
-	PhysicsPolygonComponent *physicsPolyComponent2 = new PhysicsPolygonComponent(physicsTransform2, PhysicsComponent::STATIC);
+	PhysicsComponent *physicsPolyComponent2 = new PhysicsComponent(physicsTransform2, PhysicsComponent::STATIC);
 
 	physicsTest2->addComponent(physicsPolyComponent2);
 	physicsTest2->addComponent(physicsTransform2);
@@ -50,4 +50,3 @@ void JumpScene::loadObjects()
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 }
-*/

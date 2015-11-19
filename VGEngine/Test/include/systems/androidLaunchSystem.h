@@ -1,7 +1,7 @@
 #pragma once
 #include "engine\game\system.h"
 #include "engine\game.h"
-#include "engine\game\physicsCircleComponent.h"
+#include "engine\game\PhysicsComponent.h"
 #include "engine\game\physicsSystem.h"
 #include "engine\game\scene.h"
 #include "Scenes\AndroidLaunchGame.h"

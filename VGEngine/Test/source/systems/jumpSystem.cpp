@@ -20,13 +20,12 @@
 
 using namespace vg;
 using namespace vg::graphics;
+
 JumpSystem::JumpSystem(Scene *scene)
 {
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	system->createBorders(0, 0, Screen::getX(), Screen::getY());
-
-
 }
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {

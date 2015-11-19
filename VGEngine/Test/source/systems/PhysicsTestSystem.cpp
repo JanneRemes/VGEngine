@@ -110,7 +110,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
-			PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
+			PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
 			TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 
 			if (physComponent != nullptr && transform != nullptr)
@@ -212,7 +212,7 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		{
 			for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 			{
-				PhysicsCircleComponent* physComponent = (*it)->getComponent<PhysicsCircleComponent>();
+				PhysicsComponent* physComponent = (*it)->getComponent<PhysicsComponent>();
 				TransformComponent* transform = (*it)->getComponent<TransformComponent>();
 
 				if (physComponent != nullptr && transform != nullptr)
