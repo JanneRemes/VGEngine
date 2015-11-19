@@ -1,8 +1,7 @@
 
 #include "engine/game/gameObject.h"
 #include "engine/game/game.h"
-#include "engine/game/quadrangleComponent.h"
-#include "engine/game/triangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/transformComponent.h"
 #include "engine/graphics/texture.h"
 #include "engine/utility/logger.h"
@@ -33,22 +32,13 @@ GameObject::GameObject(const GameObject &obj)
 	mParent = nullptr;
 	for (auto ij = obj.mComponents.begin(); ij != obj.mComponents.end(); ij++)
 	{
-		
 		if (dynamic_cast<RenderComponent*>(ij->second))
 		{
-			if (dynamic_cast<QuadrangleComponent*>(ij->second))
-			{
-				Game *game = Game::getInstance();
-				QuadrangleComponent *comppp = dynamic_cast<QuadrangleComponent*>(ij->second);
-				std::string path = comppp->getTexture()->getPath();
-				QuadrangleComponent *temp = new QuadrangleComponent(path);
-				mComponents.insert(std::make_pair(&typeid(*temp), temp));
-			}
-			else
-			{
-				Log("vgengine", "error!!!!", "");
-			}
-		
+			Game *game = Game::getInstance();
+			RenderComponent *comppp = dynamic_cast<RenderComponent*>(ij->second);
+			std::string path = comppp->getTexture()->getPath();
+			RenderComponent *temp = new RenderComponent(path);
+			mComponents.insert(std::make_pair(&typeid(*temp), temp));
 		}
 		else if (dynamic_cast<TransformComponent*>(ij->second))
 		{

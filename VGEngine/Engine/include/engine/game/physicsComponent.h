@@ -57,6 +57,7 @@ namespace vg
 		void setVelocity(Vec2f velocity);
 
 		Vec2f getVelocity();
+		void wake(bool sleep);
 
 		/**
 		Sets angular velocity

@@ -108,12 +108,10 @@
     <ClInclude Include="include\engine\game\renderSystem.h" />
     <ClInclude Include="include\engine\game\scene.h" />
     <ClInclude Include="include\engine\game\sceneManager.h" />
-    <ClInclude Include="include\engine\game\quadrangleComponent.h" />
     <ClInclude Include="include\engine\game\system.h" />
     <ClInclude Include="include\engine\game\systemManager.h" />
     <ClInclude Include="include\engine\game\textComponent.h" />
     <ClInclude Include="include\engine\game\transformComponent.h" />
-    <ClInclude Include="include\engine\game\triangleComponent.h" />
     <ClInclude Include="include\engine\graphics\buffer.h" />
     <ClInclude Include="include\engine\graphics\camera.h" />
     <ClInclude Include="include\engine\graphics\graphics.h" />
@@ -160,12 +158,10 @@
     <ClCompile Include="source\game\renderSystem.cpp" />
     <ClCompile Include="source\game\scene.cpp" />
     <ClCompile Include="source\game\sceneManager.cpp" />
-    <ClCompile Include="source\game\quadrangleComponent.cpp" />
     <ClCompile Include="source\game\system.cpp" />
     <ClCompile Include="source\game\systemManager.cpp" />
     <ClCompile Include="source\game\textComponent.cpp" />
     <ClCompile Include="source\game\transformComponent.cpp" />
-    <ClCompile Include="source\game\triangleComponent.cpp" />
     <ClCompile Include="source\graphics\buffer.cpp" />
     <ClCompile Include="source\graphics\camera.cpp" />
     <ClCompile Include="source\graphics\graphics.cpp" />

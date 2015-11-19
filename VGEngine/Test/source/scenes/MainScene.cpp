@@ -4,7 +4,7 @@
 #include "systems/mainMenuSystem.h"
 
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
 #include "engine/graphics/screen.h"
@@ -51,7 +51,7 @@ vg::GameObject* MainScene::makeButton(std::string name, std::string texture, flo
 {
 	GameObject* obj = new GameObject(name);
 	obj->addComponent(new TransformComponent(Vec2f(150, y), Vec2f(128, 128), 0.0f, Vec2f(64, 64)));
-	QuadrangleComponent* quad = new QuadrangleComponent(texture);
+	RenderComponent* quad = new RenderComponent(texture);
 	quad->setColor(Color(0, 64, 255));
 	obj->addComponent(quad);
 	return obj;

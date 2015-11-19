@@ -2,7 +2,7 @@
 #include "systems/enemySystem.h"
 
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/utility/random.h"
 #include "engine/utility/vec2f.h"
@@ -21,7 +21,7 @@ EnemySystem::EnemySystem()
 		Vec2f(80, 80), 0.0f);
 	transform->setOrigin(vg::Vec2f(40, 40));
 	mEnemyPrefab->addComponent(transform);
-	QuadrangleComponent *quadre = new QuadrangleComponent("koala.png");
+	RenderComponent *quadre = new RenderComponent("koala.png");
 	mEnemyPrefab->addComponent(quadre);
 	mSpawnTimer.restart();
 	fpsTimer.restart();

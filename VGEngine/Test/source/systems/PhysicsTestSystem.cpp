@@ -9,7 +9,7 @@
 #include "engine/input/touch.h"
 #endif
 
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/game.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/animationSystem.h"
@@ -27,7 +27,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	// Animation
 	animationTest = new GameObject("animationTest");
-	QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+	RenderComponent *animationComponent = new RenderComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
 	TransformComponent *animationTransform = new TransformComponent(Vec2f(720, graphics::Screen::getY() - 512), Vec2f(512, 512), 0.0f);
@@ -42,7 +42,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	TransformComponent *physicsTransform = new TransformComponent(Vec2f(128 * 7, 128 * 2),
 		Vec2f(64, 64), 0.0f);
 
-	QuadrangleComponent *physicsObject = new QuadrangleComponent("hippo.png");
+	RenderComponent *physicsObject = new RenderComponent("hippo.png");
 	PhysicsComponent *physicsPolyComponent1 = new PhysicsComponent(physicsTransform, PhysicsComponent::STATIC);
 
 	physicsTest->addComponent(physicsPolyComponent1);
@@ -56,7 +56,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 		Vec2f(64, 64), 0.0f);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("hippo.png");
+	RenderComponent *physicsRender2 = new RenderComponent("hippo.png");
 
 	PhysicsComponent *physicsPolyComponent2 = new PhysicsComponent(physicsTransform2, PhysicsComponent::DYNAMIC);
 
@@ -74,7 +74,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 		Vec2f(64, 64), 0.0f);
 
 	physicsTest3 = new GameObject("physicsTest3");
-	QuadrangleComponent *physicsRender3 = new QuadrangleComponent("hippo.png");
+	RenderComponent *physicsRender3 = new RenderComponent("hippo.png");
 
 	PhysicsComponent *physicsPolyComponent3 = new PhysicsComponent(physicsTransform3, PhysicsComponent::DYNAMIC);
 
@@ -237,7 +237,7 @@ void PhysicsTestSystem::createPapis(Vec2f pos)
 		GameObject *physicsTest = new GameObject("physicsTest");
 		physicsTest->addComponent(physicsTransform);
 		physicsTest->addComponent(new PhysicsComponent(physicsTransform, PhysicsComponent::DYNAMIC, 54));
-		QuadrangleComponent *animationComponent = new QuadrangleComponent("papparunSmall2.png");
+		RenderComponent *animationComponent = new RenderComponent("papparunSmall2.png");
 
 		physicsTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 		physicsTest->addComponent(animationComponent);

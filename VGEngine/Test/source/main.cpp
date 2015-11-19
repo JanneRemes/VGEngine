@@ -10,7 +10,7 @@
 #include "scenes\AndroidLaunchGame.h"
 #include "scenes\rockThrowScene.h"
 #include "scenes\jumpScene.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 
 using namespace vg;
 
@@ -24,8 +24,8 @@ void mainGame(Game* game)
 	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
 
 	//TODO clean up
-	QuadrangleComponent("papparunSmall2.png");
-	QuadrangleComponent("muumiBG.png");
+	RenderComponent("papparunSmall2.png");
+	RenderComponent("muumiBG.png");
 
 	MainScene *scene = new MainScene();
 	game->getSceneManager()->addTemplateScene("scene", scene);

@@ -2,10 +2,12 @@
 #pragma once
 
 #include "engine/game/component.h"
+#include "engine/utility/color.h"
 
 #include "../external/glm/vec2.hpp"
 
 #include <vector>
+#include <string>
 
 namespace vg
 {
@@ -21,12 +23,29 @@ namespace vg
 	class RenderComponent : public Component
 	{
 	public:
+
+		enum Shape
+		{
+			Triangle,
+			Rectangle
+		};
+		
 		/**
-		Constructor
-		@param vertices vector of vertices for the draw
-		@param indices vector of indices for the draw
+		Default constructor. Shape is a Rectangle without texture.
 		*/
-		RenderComponent(std::vector<float> vertices, std::vector<unsigned short> indices);
+		RenderComponent();
+
+		/**
+		@param textureName path to texture
+		@param shape to be rendered
+		*/
+		RenderComponent(std::string textureName, Shape shape = Rectangle);
+
+		/**
+		@param shape to be rendered
+		*/
+		RenderComponent(Shape shape);
+		
 		~RenderComponent() = default;
 
 		/**
@@ -48,11 +67,19 @@ namespace vg
 		@param texCoords new texture coordinates
 		*/
 		void setTexCoords(glm::vec2 texCoords[4]);
-		
 
-	protected:
-		vg::graphics::Texture *mTexture;
-		std::vector<float> mVertices;
-		std::vector<unsigned short> mIndices;
+		/**
+		Color values ranging from 0 - 255
+		*/
+		void setColor(vg::Color color);
+		
+	private:
+		std::vector<float> getDefaultVertices();
+		std::vector<unsigned short> getDefaultIndices();
+
+		Shape mShape;							///< 
+		vg::graphics::Texture *mTexture;		///< 
+		std::vector<float> mVertices;			///<
+		std::vector<unsigned short> mIndices;	///<
 	};
 }

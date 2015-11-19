@@ -2,7 +2,7 @@
 #include "scenes/pappaScene.h"
 
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "systems/sceneChangeSystem.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/textComponent.h"
@@ -30,7 +30,7 @@ void PappaScene::loadObjects()
 	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(1280, 720), 0.0f);
 	background->addComponent(backgroundTransform);
-	QuadrangleComponent *quadrBackground = new QuadrangleComponent("muumiBG.png");
+	RenderComponent *quadrBackground = new RenderComponent("muumiBG.png");
 	background->addComponent(quadrBackground);
 	addGameObject(background);
 
@@ -39,7 +39,7 @@ void PappaScene::loadObjects()
 		Vec2f(500, 200), 45);
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
-	QuadrangleComponent *physicsRender2 = new QuadrangleComponent("koala.png");
+	RenderComponent *physicsRender2 = new RenderComponent("koala.png");
 
 	PhysicsComponent *physicsPolyComponent2 = new PhysicsComponent(physicsTransform2, PhysicsComponent::STATIC);
 

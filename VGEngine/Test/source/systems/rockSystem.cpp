@@ -15,7 +15,7 @@
 #include "engine/game/game.h"
 #include "engine/utility/vec2f.h"
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/PhysicsComponent.h"
 #include "engine/utility/random.h"
 #include "engine/input/touch.h"
@@ -39,7 +39,7 @@ rockSystem::rockSystem(Scene *scene)
 	rock = new GameObject("rock");
 	TransformComponent *transformRock = new TransformComponent(Vec2f(100, 600),
 		Vec2f(100, 100), 0.0f);
-	QuadrangleComponent *quadre = new QuadrangleComponent("rock.png");
+	RenderComponent *quadre = new RenderComponent("rock.png");
 	PhysicsComponent *rockPhysicsComponent = new PhysicsComponent(transformRock, PhysicsComponent::DYNAMIC);
 
 	rock->addComponent(transformRock);
@@ -56,7 +56,7 @@ rockSystem::rockSystem(Scene *scene)
 	bar1 = new GameObject("bar1");
 	TransformComponent *transformBar1 = new TransformComponent(Vec2f(20, 10),
 		Vec2f(50, 170), 0.0f);
-	QuadrangleComponent *quadreBar1 = new QuadrangleComponent("bar.png");
+	RenderComponent *quadreBar1 = new RenderComponent("bar.png");
 
 	bar1->addComponent(transformBar1);
 	bar1->addComponent(quadreBar1);
@@ -67,7 +67,7 @@ rockSystem::rockSystem(Scene *scene)
 	indicator1 = new GameObject("indicator1");
 	TransformComponent *transformIndicator1 = new TransformComponent(Vec2f(0, 170),
 		Vec2f(100, 10), 0.0f);
-	QuadrangleComponent *quadreIndicator1 = new QuadrangleComponent("indicator.png");
+	RenderComponent *quadreIndicator1 = new RenderComponent("indicator.png");
 
 	indicator1->addComponent(transformIndicator1);
 	indicator1->addComponent(quadreIndicator1);
@@ -78,7 +78,7 @@ rockSystem::rockSystem(Scene *scene)
 	bar2 = new GameObject("bar2");
 	TransformComponent *transformBar2 = new TransformComponent(Vec2f(120, 10),
 		Vec2f(50, 170), 0.0f);
-	QuadrangleComponent *quadreBar2 = new QuadrangleComponent("bar.png");
+	RenderComponent *quadreBar2 = new RenderComponent("bar.png");
 
 	bar2->addComponent(transformBar2);
 	bar2->addComponent(quadreBar2);
@@ -89,7 +89,7 @@ rockSystem::rockSystem(Scene *scene)
 	indicator2 = new GameObject("indicator2");
 	TransformComponent *transformIndicator2 = new TransformComponent(Vec2f(100, 170),
 		Vec2f(100, 10), 0.0f);
-	QuadrangleComponent *quadreIndicator2 = new QuadrangleComponent("indicator.png");
+	RenderComponent *quadreIndicator2 = new RenderComponent("indicator.png");
 
 	indicator2->addComponent(transformIndicator2);
 	indicator2->addComponent(quadreIndicator2);
