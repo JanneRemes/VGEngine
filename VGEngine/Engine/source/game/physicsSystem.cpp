@@ -76,11 +76,11 @@ void PhysicsSystem::createBorders(float x, float y, float width, float height)
 	b2Vec2 vs[5];
 	b2Body *boundaries;
 
-	vs[0].Set(x, y);
-	vs[1].Set(x, -height / scale);
+	vs[0].Set(x / scale, y / -scale);
+	vs[1].Set(x / scale, -height / scale);
 	vs[2].Set(width / scale, -height / scale);
-	vs[3].Set(width / scale, y);
-	vs[4].Set(x, y);
+	vs[3].Set(width / scale, y / -scale);
+	vs[4].Set(x / -scale, y / -scale);
 	
 	b2ChainShape chain;
 	b2BodyDef chainDef;
