@@ -21,6 +21,7 @@
 #include "engine/input/touch.h"
 #include "engine/graphics/screen.h"
 #include "engine/game/physicsSystem.h"
+#include "engine\graphics\camera.h"
 
 #include <vector>
 
@@ -32,7 +33,7 @@ rockSystem::rockSystem(Scene *scene)
 {
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	system->createBorders(0, 0, 3000, Screen::getY());
+	system->createBorders(0, 10000, 10000, Screen::getY());
 
 	//ROCK
 	rock = new GameObject("rock");
@@ -44,6 +45,10 @@ rockSystem::rockSystem(Scene *scene)
 	rock->addComponent(transformRock);
 	rock->addComponent(quadre);
 	rock->addComponent(rockPhysicsComponent);
+
+	rock->getComponent<PhysicsPolygonComponent>()->setFriction(0.90);
+	rock->getComponent<PhysicsPolygonComponent>()->setDensity(100);
+	rock->getComponent<PhysicsPolygonComponent>()->setRestitution(0.60);
 
 	scene->addGameObject(rock);
 
@@ -105,6 +110,8 @@ rockSystem::rockSystem(Scene *scene)
 	power = 170;
 	powerUp = false;
 	powerDown = false;
+
+	shot = false;
 	
 }
 
@@ -144,6 +151,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		{
 			powerUp = true;
 			powerDown = false;
+
 		}
 		if (power >= maxPower)
 		{
@@ -160,36 +168,44 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 	}
 
 #ifdef OS_WINDOWS
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::E) == vg::input::Keyboard::KeyState::DOWN)
+	if (vg::input::Mouse::isKeyPressed(vg::input::LEFT))
 	{
+		if (!powerLock)
+		{
+			powerLock = true;
+			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
+			shot = true;
+		}
+
 		if (!heightLock)
 		{
 			heightLock = true;
 			powerLock = false;
 		}
-		if (!powerLock)
-		{
-			powerLock = true;
-			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
-		}
+
 	}
 #endif
 
 #ifdef OS_ANDROID
 	if (Touch::getIsReleased())
 	{
-		if (!heightLock)
-		{
-			heightLock = true;
-			powerLock = false;
-		}
 		if (!powerLock)
 		{
 			powerLock = true;
 			rock->getComponent<PhysicsPolygonComponent>()->setVelocity(Vec2f(power, maxHeight - height));
 		}
-	}
 
+		if (!heightLock)
+		{
+			heightLock = true;
+			powerLock = false;
+		}
+
+	}
 #endif
+	if (shot)
+	{
+		Camera::setPosition(Vec2f(rock->get<TransformComponent>()->getWorldPosition().x, Camera::getPosition().y));
+	}
 }
 

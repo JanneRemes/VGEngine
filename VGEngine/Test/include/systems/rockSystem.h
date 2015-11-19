@@ -34,5 +34,6 @@ private:
 	int power, minPower, maxPower;
 	bool powerLock, powerUp, powerDown;
 
+	bool shot;
 };
 
