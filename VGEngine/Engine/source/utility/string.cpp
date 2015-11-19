@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string vg::toString(int value, int width)
+string vg::toStringi(int value, int width)
 {
 	ostringstream ss;
 	if (width > 0)
@@ -15,13 +15,13 @@ string vg::toString(int value, int width)
 	return ss.str();
 }
 
-string vg::toString(float value, int decimals, int width)
+string vg::toStringf(float value, int decimals, int width)
 {
 	ostringstream ss;
 	if (decimals > 0)
 		ss.precision(decimals);
 	if (width > 0)
 		ss << setfill('0') << setw(width);
-	ss << value;
+	ss << fixed << value;
 	return ss.str();
 }

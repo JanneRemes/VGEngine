@@ -17,7 +17,6 @@ public:
 
 private:
 	vg::Scene *scene;
-	vg::Vec2f buttonPos;
-	vg::Vec2f buttonSize;
-
+	int frameCount;
+	float fpsTime;
 };

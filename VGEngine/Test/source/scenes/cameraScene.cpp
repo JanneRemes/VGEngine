@@ -48,7 +48,7 @@ void CameraScene::loadObjects()
 	//koala
 	for (int i = 0; i < 30; i++)
 	{
-		GameObject* obj = new GameObject("test koala " + toString(i, 2));
+		GameObject* obj = new GameObject("test koala " + toStringi(i, 2));
 		TransformComponent* transform = new TransformComponent(
 			Vec2f(Random::nexti(500, 750), Random::nexti(300, 400)), Vec2f(64, 64),
 			0.0f, Vec2f(32, 32));

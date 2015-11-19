@@ -14,6 +14,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/quadrangleComponent.h"
 #include "engine/game/textComponent.h"
+#include "engine/utility/string.h"
 
 using namespace vg;
 using namespace vg::input;
@@ -22,8 +23,10 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 {
 	this->scene = scene;
 
-	buttonPos = Vec2f(1280 - 210, 0);
-	buttonSize = Vec2f(256, 32);
+	fpsTime = 0;
+	frameCount = 0;
+	Vec2f buttonPos(1280 - 210, 0);
+	Vec2f buttonSize(256, 32);
 	
 	GameObject* button = new GameObject("main menu button");
 	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
@@ -38,6 +41,13 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 	text->setColor(255, 255, 255);
 	label->addComponent(text);
 	scene->addGameObject(label);
+
+	GameObject* fps = new GameObject("fps");
+	fps->add(new TransformComponent(Vec2f(0, 0), Vec2f(0, 0), 0, Vec2f(0, 0), TransformComponent::TOP, false));
+	TextComponent* text2 = new TextComponent("arial.ttf", 6u, "FPS 60.0 ");
+	text2->setColor(255, 255, 255);
+	fps->add(text2);
+	scene->add(fps);
 }
 
 void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
@@ -87,9 +97,26 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		input = Touch::getPos(false);
 #endif
 
-	if (input != Vec2f(0, 0))
+	fpsTime += deltaTime;
+	frameCount++;
+
+	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
-		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+		if (fpsTime > 1)
+		{
+			if ((*it)->getName() == "fps")
+			{
+				TextComponent* text = (*it)->get<TextComponent>();
+				if (text != nullptr)
+				{
+					text->setText("FPS " + toStringf(static_cast<float>(frameCount) / fpsTime, 2, 5));
+					frameCount = 0;
+					fpsTime = 0;
+				}
+			}
+		}
+
+		if (input != Vec2f(0, 0))
 		{
 			if ((*it)->getName() == "main menu button")
 			{
