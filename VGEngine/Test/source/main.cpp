@@ -9,6 +9,7 @@
 #include "scenes/pappaScene.h"
 #include "scenes\AndroidLaunchGame.h"
 #include "scenes\rockThrowScene.h"
+#include "scenes\/jumpScene.h"
 #include "engine/game/quadrangleComponent.h"
 
 using namespace vg;
@@ -42,5 +43,7 @@ void mainGame(Game* game)
 	rockThrowScene* rockthrowScene = new rockThrowScene();
 	game->getSceneManager()->addTemplateScene("rockThrowScene", rockthrowScene);
 
+	JumpScene* jumpScene = new JumpScene();
+	game->getSceneManager()->addTemplateScene("jumpScene", jumpScene);
 	
 }

@@ -23,6 +23,7 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	sceneNames.push_back("pappaScene");
 	sceneNames.push_back("Android");
 	sceneNames.push_back("rockThrowScene");
+	sceneNames.push_back("jumpScene");
 	selectedScene = sceneNames.begin();
 }
 

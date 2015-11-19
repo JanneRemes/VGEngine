@@ -21,6 +21,13 @@ void PhysicsComponent::setVelocity(Vec2f velocity)
 	if (mInitialized)
 		_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
+
+Vec2f PhysicsComponent::getVelocity()
+{
+	if (mInitialized)
+		return Vec2f( _body->GetLinearVelocity().x, _body->GetLinearVelocity().y);
+}
+
 void PhysicsComponent::setAngularVelocity(float velocity)
 {
 	if (mInitialized)

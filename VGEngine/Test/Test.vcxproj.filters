@@ -84,6 +84,12 @@
     <ClInclude Include="include\systems\mainMenuSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\Scenes\jumpScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\jumpSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -133,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="source\scenes\mainScene.cpp">
       <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\jumpScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\jumpSystem.cpp">
+      <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

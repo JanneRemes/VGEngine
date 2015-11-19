@@ -69,6 +69,11 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 		Game::getInstance()->getSceneManager()->changeScene("rockThrowScene");
 	}
 
+	if (Keyboard::getKeyState(Keyboard::Num6) == Keyboard::KeyState::PRESSED)
+	{
+		Game::getInstance()->getSceneManager()->changeScene("jumpScene");
+	}
+
 	if (Mouse::isKeyDown(LEFT))
 	{
 		if (Mouse::getPos(false).x >= buttonPos.x && Mouse::getPos(false).y <= buttonSize.y)
