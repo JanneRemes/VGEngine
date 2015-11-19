@@ -118,12 +118,8 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
 	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
 	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
-
-	float x = component->getWorldPosition().x - component->getOrigin().x;
-	float y = component->getWorldPosition().y - component->getOrigin().y;
-
+	
 	bodyDef->type = b2BodyType::b2_staticBody;
-
 	b2Vec2 *vs = new b2Vec2[ListOfPoints.size()];
 
 	for (int i = 0; i < ListOfPoints.size(); i++)
@@ -265,4 +261,10 @@ void PhysicsComponent::setCollisionFilter(FILTER filter)
 		newFilter.maskBits = filter;
 		_body->GetFixtureList()->SetFilterData(newFilter);
 	}
+}
+
+void PhysicsComponent::wake(bool sleep)
+{
+	if (mInitialized)
+		_body->SetAwake(sleep);
 }

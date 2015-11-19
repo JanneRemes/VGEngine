@@ -18,4 +18,6 @@ public:
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
+
+	vg::GameObject *physicsTest;
 };
