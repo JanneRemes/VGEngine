@@ -2,7 +2,7 @@
 #include <sstream>
 #include "systems\androidLaunchSystem.h"
 #include "engine\input\mouse.h"
-#include "engine\game\quadrangleComponent.h"
+#include "engine\game\RenderComponent.h"
 #include "engine\game\textComponent.h"
 #include "engine\utility\logger.h"
 #include "engine/graphics/screen.h"
@@ -26,7 +26,7 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	TransformComponent *androidTransform = new TransformComponent(Vec2f(0,0),
 		Vec2f(32, 32), 0.0f, Vec2f(0, 0));
 	android->addComponent(androidTransform);
-	QuadrangleComponent *quadre = new QuadrangleComponent("android.png");
+	RenderComponent *quadre = new RenderComponent("android.png");
 	android->addComponent(quadre);
 	android->addComponent(new PhysicsComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
 
@@ -43,8 +43,8 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	background2 = new GameObject("BG2");
 	TransformComponent *bgTransform1 = new TransformComponent(Vec2f(0 - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0,0), vg::TransformComponent::LayerGroup::BOTTOM);
 	TransformComponent *bgTransform2 = new TransformComponent(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM);
-	QuadrangleComponent *bgRender1 = new QuadrangleComponent("background.png");
-	QuadrangleComponent *bgRender2 = new QuadrangleComponent("background.png");
+	RenderComponent *bgRender1 = new RenderComponent("background.png");
+	RenderComponent *bgRender2 = new RenderComponent("background.png");
 
 	background1->addComponent(bgTransform1);
 	background1->addComponent(bgRender1);
@@ -61,7 +61,7 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	TransformComponent *barTransform = new TransformComponent(Vec2f(100, 30),
 		Vec2f(32, 126), 0.0f, Vec2f(0, 0));
 	powerBar->addComponent(barTransform);
-	QuadrangleComponent *powerRender = new QuadrangleComponent("bar.png");
+	RenderComponent *powerRender = new RenderComponent("bar.png");
 	powerBar->addComponent(powerRender);
 
 	scene->addGameObject(powerBar);
@@ -117,7 +117,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 				barTexCoords[1] = glm::vec2(0, 0);
 				barTexCoords[2] = glm::vec2(1, 0);
 				barTexCoords[3] = glm::vec2(1, 0);
-				powerBar->getComponent<QuadrangleComponent>()->setTexCoords(barTexCoords);
+				powerBar->getComponent<RenderComponent>()->setTexCoords(barTexCoords);
 			}
 			clickInit = true;
 
@@ -148,7 +148,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			barTexCoords[3] = glm::vec2(1, barYIncrement);
 			powerBar->getComponent<TransformComponent>()->setSize(vg::Vec2f(32, 126 * barYIncrement));
 			powerBar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(ballPos.x, ballPos.y - (126 * barYIncrement) - 50));
-			powerBar->getComponent<QuadrangleComponent>()->setTexCoords(barTexCoords);
+			powerBar->getComponent<RenderComponent>()->setTexCoords(barTexCoords);
 		}
 
 		else if (clickInit == true)

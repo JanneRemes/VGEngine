@@ -9,7 +9,7 @@
 #include "engine/input/touch.h"
 #endif
 
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/game.h"
 
 #include "engine/game/animationComponent.h"
@@ -33,7 +33,7 @@ JumpSystem::JumpSystem(Scene *scene)
 	TransformComponent *physicsTransform = new TransformComponent(Vec2f(10, 10),
 		Vec2f(128, 32), -45.0f);
 
-	QuadrangleComponent *physicsObject = new QuadrangleComponent("koala.png");
+	RenderComponent *physicsObject = new RenderComponent("koala.png");
 	PhysicsComponent *physicsComponent = new PhysicsComponent(physicsTransform, PhysicsComponent::DYNAMIC);
 
 	physicsTest->addComponent(physicsComponent);

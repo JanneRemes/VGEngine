@@ -7,7 +7,7 @@
 #include "engine/game/game.h"
 #include "engine/utility/vec2f.h"
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/utility/random.h"
 #include "engine/input/touch.h"
 #include "engine/graphics/screen.h"
@@ -31,7 +31,7 @@ ShipSystem::ShipSystem() :System()
 	TransformComponent *transform = new TransformComponent(Vec2f(0.0f, 0.0f),
 		Vec2f(32, 32), 0.0f, Vec2f(16, 16));
 	mBullet->addComponent(transform);
-	QuadrangleComponent *quadre = new QuadrangleComponent("koalapanos2.png");
+	RenderComponent *quadre = new RenderComponent("koalapanos2.png");
 	mBullet->addComponent(quadre);
 }
 

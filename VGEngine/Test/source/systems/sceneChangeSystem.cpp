@@ -12,7 +12,7 @@
 #include "engine/utility/random.h"
 #include "engine/graphics/screen.h"
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/utility/string.h"
 
@@ -30,7 +30,7 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 	
 	GameObject* button = new GameObject("main menu button");
 	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
-	QuadrangleComponent* quad = new QuadrangleComponent();
+	RenderComponent* quad = new RenderComponent();
 	quad->setColor(Color(127, 127, 127));
 	button->addComponent(quad);
 	scene->addGameObject(button);
@@ -121,7 +121,7 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 			if ((*it)->getName() == "main menu button")
 			{
 				TransformComponent* transform = (*it)->get<TransformComponent>();
-				QuadrangleComponent* render = (*it)->get<QuadrangleComponent>();
+				RenderComponent* render = (*it)->get<RenderComponent>();
 				if (transform != nullptr && render != nullptr)
 				{
 					if (transform->contains(input))

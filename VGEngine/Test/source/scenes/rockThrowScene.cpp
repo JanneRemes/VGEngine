@@ -4,7 +4,7 @@
 
 #include "engine/game/game.h"
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/physicsComponent.h"
 #include "engine/game/PhysicsComponent.h"
 #include "systems\sceneChangeSystem.h"
@@ -27,7 +27,7 @@ void rockThrowScene::loadObjects()
 	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(1280, 720), 0.0f);
 	background->addComponent(backgroundTransform);
-	QuadrangleComponent *quadrBackground = new QuadrangleComponent("desertBG.png");
+	RenderComponent *quadrBackground = new RenderComponent("desertBG.png");
 	background->addComponent(quadrBackground);
 	addGameObject(background);
 

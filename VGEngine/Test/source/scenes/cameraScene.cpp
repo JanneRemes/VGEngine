@@ -4,7 +4,7 @@
 #include "systems/sceneChangeSystem.h"
 
 #include "engine/game/transformComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 #include "engine/game/animationComponent.h"
 #include "engine/game/game.h"
 #include "engine/game/textComponent.h"
@@ -51,8 +51,8 @@ void CameraScene::loadObjects()
 		TransformComponent* transform = new TransformComponent(
 			Vec2f(Random::nexti(500, 750), Random::nexti(300, 400)), Vec2f(64, 64),
 			0.0f, Vec2f(32, 32));
-		QuadrangleComponent* quad = new QuadrangleComponent("koala.png");
-		quad->setColor(Color::random());
+		RenderComponent* quad = new RenderComponent("koala.png");
+		quad->setColor(vg::Color::random());
 
 		obj->add(transform);
 		obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC));
@@ -78,7 +78,7 @@ void CameraScene::createBorder(float x, float y, float w, float h)
 {
 	GameObject* obj = new GameObject("border");
 	obj->add(new TransformComponent(Vec2f(x, y), Vec2f(w, h)));
-	QuadrangleComponent* quad = new QuadrangleComponent();
+	RenderComponent* quad = new RenderComponent();
 	quad->setColor(vg::Color(255, 0, 0));
 	obj->add(quad);
 	addGameObject(obj);

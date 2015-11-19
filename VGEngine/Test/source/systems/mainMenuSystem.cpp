@@ -4,7 +4,7 @@
 #include "engine/game/game.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/textComponent.h"
-#include "engine/game/quadrangleComponent.h"
+#include "engine/game/renderComponent.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -79,15 +79,15 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 bool MainMenuSystem::updateButton(vg::GameObject* obj)
 {
 	TransformComponent* transform = obj->getComponent<TransformComponent>();
-	QuadrangleComponent* render = obj->getComponent<QuadrangleComponent>();
+	RenderComponent* render = obj->getComponent<RenderComponent>();
 	if (transform != nullptr && render != nullptr)
 	{
 		if (transform->contains(inputRelease))
 			return true;
 		else if (transform->contains(inputDown))
-			render->setColor(Color(0, 255, 64));
+			render->setColor(vg::Color(0, 255, 64));
 		else
-			render->setColor(Color(0, 64, 255));
+			render->setColor(vg::Color(0, 64, 255));
 	}
 	return false;
 }

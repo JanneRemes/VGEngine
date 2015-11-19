@@ -138,12 +138,6 @@
     <ClInclude Include="include\engine\game\transformComponent.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\engine\game\triangleComponent.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
-    <ClInclude Include="include\engine\game\quadrangleComponent.h">
-      <Filter>include\game</Filter>
-    </ClInclude>
     <ClInclude Include="include\engine\game\system.h">
       <Filter>include\game</Filter>
     </ClInclude>
@@ -285,12 +279,6 @@
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\transformComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\triangleComponent.cpp">
-      <Filter>source\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\quadrangleComponent.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
     <ClCompile Include="source\game\system.cpp">
