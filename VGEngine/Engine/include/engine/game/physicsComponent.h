@@ -19,18 +19,28 @@ namespace vg
 		enum BODYSHAPE { BOX, CIRCLE, CUSTOM };	///< physicsComponents body shape
 		enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };	///< physicsComponents body type
 		enum FILTER : short { LOW = 0x0001, MIDDLE = 0x0002, HIGH = 0x0004, TOP = 0x0008 };
-		static float scale;								///< Scale of the object
+		
+		static float scale;		///< Scale of the object
+		
 		/**
 		Constructor for creating PhysicsComponent
 		@param component Desired TransformComponent that you wish to add physicsComponent with
 		@param type Can be either 'DYNAMIC', 'KINEMATIC' or 'STATIC', defines the type of the physics object
 		*/
 		PhysicsComponent(TransformComponent *component, BODYTYPE type, Vec2f size = 0);
-		// Circle shapes
+
+		/**
+		Circle shapes
+		*/
 		PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius);
-		// Custom shapes
+
+		/** 
+		Custom shapes
+		*/
 		PhysicsComponent(TransformComponent *component, std::vector<vg::Vec2f> ListOfPoints);
+		
 		~PhysicsComponent();
+		
 		/**
 		Sets Vector2 position for the physicsComponent
 		*/
@@ -57,6 +67,7 @@ namespace vg
 		void setVelocity(Vec2f velocity);
 
 		Vec2f getVelocity();
+
 		void wake(bool sleep);
 
 		/**
@@ -110,12 +121,12 @@ namespace vg
 		void setCollisionFilter(FILTER filter);
 
 	protected:
-		b2Body *_body;			///< PhysicsComponents Box2D body
-		b2BodyDef *bodyDef;		///< PhysicsComponents Box2D bodyDef
-		b2FixtureDef *_FixDef;	///< PhysicsComponents Box2D fixDef
-		b2PolygonShape *boxShape;
-		b2CircleShape *circleShape;
-		b2ChainShape *chainShape;
-		b2MassData mMass;		///< PhysicsComponents Mass data
+		b2Body* mBody;				///< PhysicsComponents Box2D body
+		b2BodyDef mBodyDef;			///< PhysicsComponents Box2D bodyDef
+		b2FixtureDef mFixDef;		///< PhysicsComponents Box2D fixDef
+		b2PolygonShape mBoxShape;	///< PhysicsComponents Box2D bodyDef
+		b2CircleShape mCircleShape;	///< PhysicsComponents Box2D bodyDef
+		b2ChainShape mChainShape;	///< PhysicsComponents Box2D bodyDef
+		b2MassData mMass;			///< PhysicsComponents Mass data
 	};
 }

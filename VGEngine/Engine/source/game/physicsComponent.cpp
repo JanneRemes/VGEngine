@@ -1,7 +1,9 @@
-#include "engine\game\physicsComponent.h"
-#include "engine\game\physicsSystem.h"
-#include "engine\game\scene.h"
-#include "engine\game\game.h"
+
+#include "engine/game/physicsComponent.h"
+#include "engine/game/physicsSystem.h"
+#include "engine/game/scene.h"
+#include "engine/game/game.h"
+#include "engine/utility/math.h"
 
 using namespace vg;
 float PhysicsComponent::scale = 30.0f;
@@ -10,66 +12,54 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 
-	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
-	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
-	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
-	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
-	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
+	float _width = 1;
+	float _height = 1;
 
-		float _width = 1;
-		float _height = 1;
+	if (size.x != 0 && size.y != 0)
+	{
+		_width = size.x;
+		_height = size.y;
+	}
+	else
+	{
+		_width = component->getSize().x;
+		_height = component->getSize().y;
+	}
 
-		if (size.x != 0 && size.y != 0)
-		{
-			_width = size.x;
-			_height = size.y;
-		}
-		else
-		{
-			_width = component->getSize().x;
-			_height = component->getSize().y;
-		}
-
-		float x = component->getWorldPosition().x - component->getOrigin().x;
-		float y = component->getWorldPosition().y - component->getOrigin().y;
+	float x = component->getWorldPosition().x - component->getOrigin().x;
+	float y = component->getWorldPosition().y - component->getOrigin().y;
 
 
-		if (type == DYNAMIC)
-		{
-			bodyDef->type = b2BodyType::b2_dynamicBody;
-		}
-		else if (type == KINEMATIC)
-		{
-			bodyDef->type = b2BodyType::b2_kinematicBody;
-		}
-		else if (type == STATIC)
-		{
-			bodyDef->type = b2BodyType::b2_staticBody;
-		}
+	if (type == DYNAMIC)
+	{
+		mBodyDef.type = b2BodyType::b2_dynamicBody;
+	}
+	else if (type == KINEMATIC)
+	{
+		mBodyDef.type = b2BodyType::b2_kinematicBody;
+	}
+	else if (type == STATIC)
+	{
+		mBodyDef.type = b2BodyType::b2_staticBody;
+	}
 
-		boxShape->SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
+	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
 
-		_FixDef->density = 1.0f;
-		_FixDef->shape = boxShape;
+	mFixDef.density = 1.0f;
+	mFixDef.shape = &mBoxShape;
 
-		bodyDef->position = b2Vec2(x / scale, -y / scale);
-		bodyDef->angle = 0.0f;
+	mBodyDef.position = b2Vec2(x / scale, -y / scale);
+	mBodyDef.angle = 0.0f;
 
-		_body = system->getWorld()->CreateBody(bodyDef);
-		_body->SetGravityScale(5);
-		_body->SetTransform(_body->GetPosition(), component->getWorldRotation() * (3.14 / 180));
-		_body->CreateFixture(_FixDef);
+	mBody = system->getWorld()->CreateBody(&mBodyDef);
+	mBody->SetGravityScale(5);
+	mBody->SetTransform(mBody->GetPosition(), component->getWorldRotation() * (3.14 / 180));
+	mBody->CreateFixture(&mFixDef);
 }
 
 PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius)
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-
-	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
-	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
-	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
-	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
-	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
 
 	float _radius = 0;
 	if (radius != 0)
@@ -86,40 +76,34 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 
 	if (type == DYNAMIC)
 	{
-		bodyDef->type = b2BodyType::b2_dynamicBody;
+		mBodyDef.type = b2BodyType::b2_dynamicBody;
 	}
 	else if (type == KINEMATIC)
 	{
-		bodyDef->type = b2BodyType::b2_kinematicBody;
+		mBodyDef.type = b2BodyType::b2_kinematicBody;
 	}
 	else
-		bodyDef->type = b2BodyType::b2_staticBody;
+		mBodyDef.type = b2BodyType::b2_staticBody;
 
-	circleShape->m_radius = ((_radius) / scale) / 2.0f;
+	mCircleShape.m_radius = ((_radius) / scale) / 2.0f;
 
-	_FixDef->density = 10.0f;
-	_FixDef->shape = circleShape;
+	mFixDef.density = 10.0f;
+	mFixDef.shape = &mCircleShape;
 
-	bodyDef->position = b2Vec2(x / scale, -y / scale);
-	bodyDef->angle = 0.0f;
+	mBodyDef.position = b2Vec2(x / scale, -y / scale);
+	mBodyDef.angle = 0.0f;
 
 
-	_body = system->getWorld()->CreateBody(bodyDef);
-	_body->SetGravityScale(2);
-	_body->CreateFixture(_FixDef);
+	mBody = system->getWorld()->CreateBody(&mBodyDef);
+	mBody->SetGravityScale(2);
+	mBody->CreateFixture(&mFixDef);
 }
 
 PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg::Vec2f> ListOfPoints)
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-
-	bodyDef = new b2BodyDef();		///< PhysicsComponents Box2D bodyDef
-	_FixDef = new b2FixtureDef();	///< PhysicsComponents Box2D fixDef
-	boxShape = new b2PolygonShape();	///< PhysicsComponents Box2D fixDef
-	circleShape = new b2CircleShape();		///< PhysicsComponents Box2D bodyDef
-	chainShape = new b2ChainShape();		///< PhysicsComponents Box2D bodyDef
 	
-	bodyDef->type = b2BodyType::b2_staticBody;
+	mBodyDef.type = b2BodyType::b2_staticBody;
 	b2Vec2 *vs = new b2Vec2[ListOfPoints.size()];
 
 	for (int i = 0; i < ListOfPoints.size(); i++)
@@ -127,11 +111,11 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 		vs[i].Set(ListOfPoints[i].x / scale, ListOfPoints[i].y / -scale);
 	}
 
-	chainShape->CreateChain(vs, ListOfPoints.size());
-	_FixDef->shape = chainShape;
+	mChainShape.CreateChain(vs, ListOfPoints.size());
+	mFixDef.shape = &mChainShape;
 
-	_body = system->world->CreateBody(bodyDef);
-	_body->CreateFixture(_FixDef);
+	mBody = system->world->CreateBody(&mBodyDef);
+	mBody->CreateFixture(&mFixDef);
 
 	delete vs;
 }
@@ -140,104 +124,98 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 PhysicsComponent::~PhysicsComponent()
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	system->removeBody(_body);
-
-	delete bodyDef;
-	delete _FixDef;
-	delete boxShape;
-	delete circleShape;
-	delete chainShape;
+	system->removeBody(mBody);
 }
 
 void PhysicsComponent::setVelocity(Vec2f velocity)
 {
-	_body->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
+	mBody->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 
 Vec2f PhysicsComponent::getVelocity()
 {
-	return Vec2f( _body->GetLinearVelocity().x, _body->GetLinearVelocity().y);
+	return Vec2f( mBody->GetLinearVelocity().x, mBody->GetLinearVelocity().y);
 }
 
 void PhysicsComponent::setAngularVelocity(float velocity)
 {
-	_body->SetAngularVelocity(velocity);
+	mBody->SetAngularVelocity(velocity);
 }
 
 void PhysicsComponent::applyForce(Vec2f force)
 {
-	_body->ApplyForce(b2Vec2(force.x, force.y), _body->GetWorldCenter(), true);
+	mBody->ApplyForce(b2Vec2(force.x, force.y), mBody->GetWorldCenter(), true);
 }
 
 void PhysicsComponent::applyLinearImpulse(Vec2f force)
 {
-	_body->ApplyLinearImpulse(b2Vec2(force.x, force.y), _body->GetWorldCenter(), true);
+	mBody->ApplyLinearImpulse(b2Vec2(force.x, force.y), mBody->GetWorldCenter(), true);
 }
 
 Vec2f PhysicsComponent::getPosition()
 {
-	return Vec2f(_body->GetPosition().x * scale, _body->GetPosition().y * scale);
+	return Vec2f(mBody->GetPosition().x * scale, mBody->GetPosition().y * scale);
 }
 
 float PhysicsComponent::getRotation()
 {
-	return (_body->GetAngle() * (180 / 3.14));
+	return (Math::radianToDegrees(mBody->GetAngle()));
 }
 
 void PhysicsComponent::setRotation(float rotation)
 {
-	_body->SetTransform(_body->GetPosition(), rotation * (3.14 / 180 ));
+	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(rotation));
 }
 
 void PhysicsComponent::setDensity(float density)
 {
-	_FixDef->density = density;
-	_body->CreateFixture(_FixDef);
+	mFixDef.density = density;
+	mBody->CreateFixture(&mFixDef);
 }
 
 void PhysicsComponent::setFriction(float friction)
 {
-	_FixDef->friction = friction;
-	_body->CreateFixture(_FixDef);
+	mFixDef.friction = friction;
+	mBody->CreateFixture(&mFixDef);
 }
 
 void PhysicsComponent::setRestitution(float restitution)
 {
-	_FixDef->restitution = restitution;
-	_body->CreateFixture(_FixDef);
+	mFixDef.restitution = restitution;
+	mBody->CreateFixture(&mFixDef);
 }
 
 void PhysicsComponent::setMass(float mass)
 {
 	mMass.mass = mass;
-	_body->SetMassData(&mMass);
+	mBody->SetMassData(&mMass);
 }
 
 void PhysicsComponent::setMassCenter(Vec2f position)
 {
 	mMass.center = b2Vec2(position.x, position.y);
-	_body->SetMassData(&mMass);
+	mBody->SetMassData(&mMass);
 }
 
 void PhysicsComponent::setPosition(Vec2f position)
 {
-	_body->SetTransform(b2Vec2(position.x / scale, position.y / -scale), _body->GetAngle());
+	mBody->SetTransform(b2Vec2(position.x / scale, position.y / -scale), mBody->GetAngle());
 }
 
 void PhysicsComponent::setRotationLock(bool lock)
 {
-	_body->SetFixedRotation(lock);
+	mBody->SetFixedRotation(lock);
 }
 
 void PhysicsComponent::setCollisionFilter(FILTER filter)
 {
 	// The function GetFixureList() returns the first element in a linked list of fixtures
-	b2Filter newFilter = _body->GetFixtureList()->GetFilterData();
+	b2Filter newFilter = mBody->GetFixtureList()->GetFilterData();
 	newFilter.maskBits = filter;
-	_body->GetFixtureList()->SetFilterData(newFilter);
+	mBody->GetFixtureList()->SetFilterData(newFilter);
 }
 
 void PhysicsComponent::wake(bool sleep)
 {
-	_body->SetAwake(sleep);
+	mBody->SetAwake(sleep);
 }

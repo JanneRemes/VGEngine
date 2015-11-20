@@ -19,10 +19,17 @@ namespace vg
 		{
 			return value < 0 ? -value : value;
 		}
+
 		static float radianToDegrees(float radian)
 		{
 			return ((180 / 3.14159265358 )* radian);
 		}
+
+		static float degreesToRadians(float degrees)
+		{
+			return (3.14159265358 / 180.0f) * degrees;
+		}
+
 	private:
 	};
 }
