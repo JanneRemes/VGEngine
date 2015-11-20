@@ -117,6 +117,5 @@ namespace vg
 		b2CircleShape *circleShape;
 		b2ChainShape *chainShape;
 		b2MassData mMass;		///< PhysicsComponents Mass data
-		bool mInitialized;
 	};
 }

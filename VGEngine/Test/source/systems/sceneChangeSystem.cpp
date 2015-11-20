@@ -26,7 +26,7 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 	fpsTime = 0;
 	frameCount = 0;
 	Vec2f buttonPos(1280 - 210, 0);
-	Vec2f buttonSize(256, 32);
+	Vec2f buttonSize(256, 50);
 	
 	GameObject* button = new GameObject("main menu button");
 	button->addComponent(new TransformComponent(buttonPos, buttonSize, 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
@@ -36,7 +36,7 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 	scene->addGameObject(button);
 
 	GameObject* label = new GameObject("main menu button label");
-	label->addComponent(new TransformComponent(Vec2f(4,0) + buttonPos, Vec2f(0,0), 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
+	label->addComponent(new TransformComponent(Vec2f(4, 8) + buttonPos, Vec2f(0,0), 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
 	TextComponent* text = new TextComponent("arial.ttf", 10u, "Main Menu");
 	text->setColor(255, 255, 255);
 	label->addComponent(text);
@@ -44,7 +44,7 @@ sceneChangeSystem::sceneChangeSystem(Scene *scene)
 
 	GameObject* fps = new GameObject("fps");
 	fps->add(new TransformComponent(Vec2f(0, 0), Vec2f(0, 0), 0, Vec2f(0, 0), TransformComponent::TOP, false));
-	TextComponent* text2 = new TextComponent("arial.ttf", 6u, "FPS 60.0 ");
+	TextComponent* text2 = new TextComponent("arial.ttf", 6u, "FPS 60.00");
 	text2->setColor(255, 255, 255);
 	fps->add(text2);
 	scene->add(fps);

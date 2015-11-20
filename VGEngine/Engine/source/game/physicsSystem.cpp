@@ -48,23 +48,13 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
-		 PhysicsComponent* physComponent = nullptr;
+		 PhysicsComponent* physComponent = (*it)->get<PhysicsComponent>();
 		 TransformComponent* transform = (*it)->getComponent<TransformComponent>();
-
-		 auto *components = (*it)->getAllComponents();
-		 for (std::unordered_map<const std::type_info*, Component*>::iterator ij = components->begin(); ij != components->end(); ij++)
-		 {
-			 if (dynamic_cast<PhysicsComponent*>(ij->second) != nullptr)
-			 {
-				 physComponent = dynamic_cast<PhysicsComponent*>(ij->second);
-				 break;
-			 }
-		 }
 
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
 			 transform->setPosition(Vec2f((physComponent->getPosition().x ) - transform->getSize().x / 2.0f, 
-												(-physComponent->getPosition().y) - transform->getSize().y / 2.0f));
+				(-physComponent->getPosition().y) - transform->getSize().y / 2.0f));
 			 transform->setRotation(-1.0f * physComponent->getRotation());
 		 }
 	 }
