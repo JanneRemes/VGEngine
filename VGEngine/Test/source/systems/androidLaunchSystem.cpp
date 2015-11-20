@@ -2,6 +2,7 @@
 #include <sstream>
 #include "systems\androidLaunchSystem.h"
 #include "engine\input\mouse.h"
+#include "engine\input\touch.h"
 #include "engine\game\RenderComponent.h"
 #include "engine\game\textComponent.h"
 #include "engine\utility\logger.h"
@@ -22,11 +23,11 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	/*
 		Android ball initialization
 	*/
-	android = new GameObject("Android");
-	TransformComponent *androidTransform = new TransformComponent(Vec2f(0,0),
+	GameObject* android = new GameObject("Android");
+	TransformComponent* androidTransform = new TransformComponent(Vec2f(0,0),
 		Vec2f(32, 32), 0.0f, Vec2f(0, 0));
 	android->addComponent(androidTransform);
-	RenderComponent *quadre = new RenderComponent("android.png");
+	RenderComponent* quadre = new RenderComponent("android.png");
 	android->addComponent(quadre);
 	android->addComponent(new PhysicsComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
 
@@ -39,12 +40,12 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 		Background initialization
 	*/
 
-	background1 = new GameObject("BG1");
-	background2 = new GameObject("BG2");
-	TransformComponent *bgTransform1 = new TransformComponent(Vec2f(0 - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0,0), vg::TransformComponent::LayerGroup::BOTTOM);
-	TransformComponent *bgTransform2 = new TransformComponent(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM);
-	RenderComponent *bgRender1 = new RenderComponent("background.png");
-	RenderComponent *bgRender2 = new RenderComponent("background.png");
+	GameObject* background1 = new GameObject("BG1");
+	GameObject* background2 = new GameObject("BG2");
+	TransformComponent* bgTransform1 = new TransformComponent(Vec2f(0 - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0,0), vg::TransformComponent::LayerGroup::BOTTOM);
+	TransformComponent* bgTransform2 = new TransformComponent(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM);
+	RenderComponent* bgRender1 = new RenderComponent("background.png");
+	RenderComponent* bgRender2 = new RenderComponent("background.png");
 
 	background1->addComponent(bgTransform1);
 	background1->addComponent(bgRender1);
@@ -57,11 +58,11 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	/*	
 		Power bar initialization
 	*/
-	powerBar = new GameObject("PowerBar");
+	GameObject* powerBar = new GameObject("PowerBar");
 	TransformComponent *barTransform = new TransformComponent(Vec2f(100, 30),
 		Vec2f(32, 126), 0.0f, Vec2f(0, 0));
 	powerBar->addComponent(barTransform);
-	RenderComponent *powerRender = new RenderComponent("bar.png");
+	RenderComponent* powerRender = new RenderComponent("bar.png");
 	powerBar->addComponent(powerRender);
 
 	scene->addGameObject(powerBar);
@@ -70,9 +71,9 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 		Text init
 	*/
 
-	textObject = new GameObject("Distance");
-	TransformComponent *textTransform = new TransformComponent(Vec2f(20, 20), Vec2f(0, 0), vg::TransformComponent::LayerGroup::HIGH);
-	TextComponent* text = new TextComponent("arial.ttf", 16);
+	GameObject* textObject = new GameObject("Distance");
+	TransformComponent* textTransform = new TransformComponent(Vec2f(20, 20), Vec2f(0, 0), 0.0f, Vec2f(0,0), TransformComponent::TOP, false);
+	TextComponent* text = new TextComponent("arial.ttf", 12, "Distance");
 	text->setColor(255, 0, 0);
 	textObject->addComponent(text);
 	textObject->addComponent(textTransform);
@@ -82,20 +83,30 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	/*
 		Game status init
 	*/
-
 	physicSystem->createBorders(0, Screen::getY() * 3, Screen::getX() * 100, Screen::getY());
 
 	bState = INCREASING;
 	bgState = BACKGROUND1;
 	clickInit = false;
 	isShot = false;
+	gameObjectInit = false;
 	barYIncrement = 0.0f;
 	distance = 0;
-	defaultPos.x = Screen::getX() * 0.10;
+	defaultPos.x = Screen::getX() * 0.20;
 	defaultPos.y = Screen::getY() - 60;
 	speed = 100;
 	powerBar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(-200, 200));
-	android->getComponent<PhysicsComponent>()->setPosition(defaultPos);	
+	android->getComponent<PhysicsComponent>()->setPosition(defaultPos);
+
+	/*	
+		Game reset button
+	*/
+	GameObject* label = new GameObject("reset button");
+	label->addComponent(new TransformComponent(Vec2f(Screen::getX() * 0.5 - 50, 0), Vec2f(150, 40), 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));
+	RenderComponent* reset = new RenderComponent();
+	reset->setColor(vg::Color(150, 150, 150));
+	label->addComponent(reset);
+	scene->addGameObject(label);
 }
 AndroidLaunchSystem::~AndroidLaunchSystem()
 {
@@ -103,15 +114,66 @@ AndroidLaunchSystem::~AndroidLaunchSystem()
 }
 void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-#ifdef OS_WINDOWS
-	
+	GameObject* android;
+	GameObject* powerBar;
+	GameObject* background1;
+	GameObject* background2;
+	GameObject* textObject;
+	GameObject* reset;
+
+	string objectName = "";
+	for (auto it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		objectName = (*it)->getName();
+		if (objectName == "PowerBar")
+		{
+			powerBar = (*it);
+		}
+
+		if (objectName == "Android")
+		{
+			android = (*it);
+		}
+
+		if (objectName == "BG1")
+		{
+			background1 = (*it);
+		}
+		if (objectName == "BG2")
+		{
+			background2 = (*it);
+		}
+
+		if (objectName == "Distance")
+		{
+			textObject = (*it);
+		}
+
+		if (objectName == "reset button")
+		{
+			reset = (*it);
+		}
+	}
+
 	if (isShot == false)
 	{	
-		if (vg::input::Mouse::isKeyDown(vg::input::RIGHT))
+#ifdef OS_WINDOWS
+		if (input::Mouse::isKeyDown(vg::input::RIGHT))
 		{
 			if (clickInit == false)
 			{
 				clickPos = vg::input::Mouse::getPos();
+
+#endif
+
+#ifdef OS_ANDROID
+		if(input::Touch::getIsTouched())
+		{
+			if (clickInit == false)
+			{ 
+				clickPos = input::Touch::getPos();
+#endif
+
 				ballPos = android->getComponent<TransformComponent>()->getWorldPosition();
 				barTexCoords[0] = glm::vec2(0, 0);
 				barTexCoords[1] = glm::vec2(0, 0);
@@ -157,7 +219,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			isShot = true;
 
 			powerBar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(-60, 200));
-			vg::Vec2f tempVec = vg::input::Mouse::getPos() - android->getComponent<TransformComponent>()->getWorldPosition();
+			vg::Vec2f tempVec = clickPos - android->getComponent<TransformComponent>()->getWorldPosition();
 			normalizedVec = normalize(tempVec);
 
 			vg::Vec2f velocity = vg::Vec2f(normalizedVec.x * barYIncrement * speed, normalizedVec.y * barYIncrement * speed);
@@ -165,11 +227,29 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 		}
 	}
 
-	else
+	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x / 150.0f);
+	std::stringstream stream;
+	stream << "Distance: "  << distance << "m";
+	textObject->getComponent<TextComponent>()->setText(stream.str());
+
+	backgroundUpdate(gameObjects);
+
+#ifdef OS_WINDOWS
+
+	if (input::Mouse::isKeyPressed(vg::input::LEFT))
 	{
-		if (vg::input::Mouse::isKeyPressed(vg::input::MIDDLE))
-		{	
-			android->getComponent<PhysicsComponent>()->setPosition(defaultPos);		
+		clickPos = input::Mouse::getPos(false);
+
+#endif
+
+#ifdef OS_ANDROID
+		if(input::Touch::getIsReleased())
+		{ 
+			clickPos = input::Touch::getPos(false);
+#endif
+		if (reset->getComponent<TransformComponent>()->contains(clickPos))
+		{
+			android->getComponent<PhysicsComponent>()->setPosition(defaultPos);
 			android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(0.0f, 0.0f));
 			android->getComponent<PhysicsComponent>()->setRotation(0.0f);
 			android->getComponent<PhysicsComponent>()->setAngularVelocity(0.0f);
@@ -183,26 +263,6 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			distance = 0;
 		}
 	}
-
-	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x / 150.0f);
-	std::stringstream stream;
-	stream << "Distance: "  << distance << "m";
-	textObject->getComponent<TextComponent>()->setText(stream.str());
-
-	backgroundUpdate();
-
-#endif
-
-#ifdef OS_ANROID
-
-	if (vg::input::Touch::getIsTouched())
-	{
-		vg::Vec2f pos = vg::input::Touch::getPos();
-
-		vg::Vec2f velocity = pos - android->getComponent<TransformComponent>()->getWorldPosition();
-		android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(velocity.x, velocity.y));
-	}
-#endif
 }
 
 vg::Vec2f AndroidLaunchSystem::normalize(vg::Vec2f vec2)
@@ -217,14 +277,39 @@ vg::Vec2f AndroidLaunchSystem::normalize(vg::Vec2f vec2)
 	return normalizedVec;
 }
 
-void AndroidLaunchSystem::backgroundUpdate()
+void AndroidLaunchSystem::backgroundUpdate(std::vector<vg::GameObject*> *gameObjects)
 {	
+	GameObject* android;
+	GameObject* background1;
+	GameObject* background2;
+	string objectName;
+
+	TransformComponent* currentBackground;
+
+	for (auto it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		objectName = (*it)->getName();
+
+		if (objectName == "BG1")
+		{
+			background1 = (*it);
+		}
+
+		if (objectName == "BG2")
+		{
+			background2 = (*it);
+		}
+
+		if (objectName == "Android")
+		{
+			android = (*it);
+		}
+	}
+
 
 	Camera::setPosition(Vec2f(android->getComponent<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.10, 0));
-	TransformComponent *currentBackground;
 	
-	textObject->getComponent<TransformComponent>()->setPosition(Vec2f(Camera::getPosition().x + 20, Camera::getPosition().y + 20));
-
+	
 	switch (bgState)
 	{
 	case Background::BACKGROUND1:

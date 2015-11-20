@@ -15,7 +15,7 @@ public:
 	AndroidLaunchSystem(vg::Scene *scene);
 	~AndroidLaunchSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
-	void backgroundUpdate();
+	void backgroundUpdate(std::vector<vg::GameObject*> *gameObjects);
 	vg::Vec2f normalize(vg::Vec2f vec2);
 
 private:
@@ -25,6 +25,7 @@ private:
 	float barYIncrement;
 	bool clickInit;
 	bool isShot;
+	bool gameObjectInit;
 	float speed;
 	double distance;
 	glm::vec2 barTexCoords[4];
@@ -32,11 +33,6 @@ private:
 	vg::Vec2f clickPos;
 	vg::Vec2f normalizedVec;
 	vg::Vec2f defaultPos;
-	vg::GameObject *android;
-	vg::GameObject *powerBar;
-	vg::GameObject *background1;
-	vg::GameObject *background2;
-	vg::GameObject *textObject;
 	vg::Scene *scene;
 	vg::PhysicsSystem *physicSystem;
 };
