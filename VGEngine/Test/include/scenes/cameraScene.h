@@ -3,6 +3,12 @@
 
 #include "engine\game\scene.h"
 
+//forward declaration
+namespace vg
+{
+	class TransformComponent;
+}
+
 class CameraScene : public vg::Scene
 {
 public:
@@ -11,6 +17,6 @@ public:
 	void loadObjects();
 
 private:
-	void createBorder(float x, float y, float w, float h);
+	void createBorder(vg::TransformComponent* transform);
 
 };

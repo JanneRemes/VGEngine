@@ -34,11 +34,25 @@ TransformComponent::TransformComponent(const TransformComponent &transform)
 	mUsingCamera = transform.mUsingCamera;
 }
 
+TransformComponent::TransformComponent(Vec2f position, LayerGroup layerGroup, bool useCamera)
+	: mPosition(position), mSize(Vec2f(0, 0)), mRotation(0), mOrigin(Vec2f(0, 0)), mLayerGroup(layerGroup), mUsingCamera(useCamera)
+{
+	setLayer(mLayerGroup);
+}
+
 TransformComponent::TransformComponent(vg::Vec2f position, vg::Vec2f size,
 	float rotation, vg::Vec2f origin, LayerGroup layerGroup, bool useCamera)
 	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mLayerGroup(layerGroup), mUsingCamera(useCamera)
 {
 	setLayer(layerGroup);
+}
+
+TransformComponent::TransformComponent(Vec2f leftTop, Vec2f rightBottom, Vec2f origin, LayerGroup layerGroup, bool useCamera)
+	: mOrigin(origin), mRotation(0), mLayerGroup(layerGroup), mUsingCamera(useCamera)
+{
+	setLayer(mLayerGroup);
+	mPosition = leftTop + mOrigin;
+	mSize = Vec2f(rightBottom.x - leftTop.x, rightBottom.y - leftTop.y);
 }
 
 TransformComponent::~TransformComponent()
@@ -88,6 +102,16 @@ vg::Vec2f TransformComponent::getWorldPosition()
 void TransformComponent::setPosition(const Vec2f position)
 {
     mPosition = position;
+}
+
+void TransformComponent::setX(float x)
+{
+	mPosition.x = x;
+}
+
+void TransformComponent::setY(float y)
+{
+	mPosition.y = y;
 }
 
 void TransformComponent::move(Vec2f change)

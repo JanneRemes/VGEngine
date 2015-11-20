@@ -32,25 +32,47 @@ namespace vg
 			TOP			// 9 000 - 10 000
 		};
 
-
+		/**
+		Default constructor
+		*/
 		TransformComponent();
+
+		/**
+		Copy constructor
+		*/
 		TransformComponent(const TransformComponent &transform);
 
 		/**
-		@param position position of upper left corner in pixels
-		@param size width and lenght of the sprite in pixels
+		Size and origin are set to (0, 0)
+		@param position of upper left corner
+		@param layerGroup higher layers are drawn over lower ones
+		@param useCamera true if the position is affected by camera
+		*/
+		TransformComponent(Vec2f position, LayerGroup layerGroup = MIDDLE, bool useCamera = true);
+		
+		/**
+		@param position position of upper left corner
+		@param size width and lenght of the sprite
 		@param rotation angle of rotation clockwise
-		@param origin offset of origin in pixels from upper left corner
+		@param origin offset of origin from upper left corner
 		@param layerGroup higher layers are drawn over lower ones
 		@param useCamera true if the position is affected by camera
 		*/
 		TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation = 0.0f, 
 			vg::Vec2f origin = vg::Vec2f(), LayerGroup layerGroup = MIDDLE, bool useCamera = true);
 
+		/**
+		@param leftTop corner of rectangle
+		@param rightBottom corner of rectangle
+		@param origin offset of origin from upper left corner
+		@param layerGroup higher layers are drawn over lower ones
+		@param useCamera true if the position is affected by camera
+		*/
+		TransformComponent(Vec2f leftTop, Vec2f rightBottom, Vec2f origin, LayerGroup layerGroup = MIDDLE, bool useCamera = true);
+
 		~TransformComponent();
 
 		/**
-		Same as getWorldPosition() with different return value type
 		@return Position taking possible parent's position into account
 		*/
 		vg::Vec2f getPosition();
@@ -84,6 +106,16 @@ namespace vg
 		Set position value to be used on draw calls.
 		*/
 		void setSize(const Vec2f size);
+
+		/**
+		@param x value
+		*/
+		void setX(float x);
+
+		/**
+		@param y value
+		*/
+		void setY(float y);
 
 		/**
 		@return rotation in degrees

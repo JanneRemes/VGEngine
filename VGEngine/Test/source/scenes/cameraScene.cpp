@@ -36,13 +36,12 @@ void CameraScene::loadObjects()
 
 	PhysicsSystem* physics = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	physics->createBorders(128, 128, Screen::getX() - 64, Screen::getY() - 64);
-	
+
 	//borders
-	int thickness = 32;
-	createBorder(64, 64, 1280 - 128, thickness);
-	createBorder(64, 720 - 96, 1280 - 128, thickness);
-	createBorder(64, 96, thickness, 720 - 192);
-	createBorder(1280 - 96, 96, thickness, 720 - 192);
+	createBorder(new TransformComponent(Vec2f(64, 64), Vec2f(1280 - 64, 96), Vec2f(640 - 32, 16)));
+	createBorder(new TransformComponent(Vec2f(64, 720 - 96), Vec2f(1280 - 64, 720 - 64), Vec2f(640 - 32, 16)));
+	createBorder(new TransformComponent(Vec2f(64, 96), Vec2f(96, 720 - 96), Vec2f(16, 640 - 32)));
+	createBorder(new TransformComponent(Vec2f(1280 - 96, 96), Vec2f(1280 - 64, 720 - 96), Vec2f(16, 640 - 32)));
 
 	//koala
 	for (int i = 0; i < 30; i++)
@@ -74,10 +73,10 @@ void CameraScene::loadObjects()
 	}
 }
 
-void CameraScene::createBorder(float x, float y, float w, float h)
+void CameraScene::createBorder(TransformComponent* transform)
 {
 	GameObject* obj = new GameObject("border");
-	obj->add(new TransformComponent(Vec2f(x, y), Vec2f(w, h)));
+	obj->add(transform);
 	RenderComponent* quad = new RenderComponent();
 	quad->setColor(vg::Color(255, 0, 0));
 	obj->add(quad);
