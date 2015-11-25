@@ -12,6 +12,14 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineDLL|Tegra-Android">
+      <Configuration>EngineDLL</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="EngineDLL|Win32">
+      <Configuration>EngineDLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Tegra-Android">
       <Configuration>Release</Configuration>
       <Platform>Tegra-Android</Platform>
@@ -31,6 +39,11 @@
     <AndroidStlType>gnustl_static</AndroidStlType>
     <NdkToolchainVersion>gcc-4.9</NdkToolchainVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Tegra-Android'" Label="Configuration">
+    <AndroidTargetAPI>android-15</AndroidTargetAPI>
+    <AndroidStlType>gnustl_static</AndroidStlType>
+    <NdkToolchainVersion>gcc-4.9</NdkToolchainVersion>
+  </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
     <AndroidTargetAPI>android-15</AndroidTargetAPI>
     <AndroidStlType>gnustl_static</AndroidStlType>
@@ -43,6 +56,10 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Win32'" Label="Configuration">
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -52,12 +69,39 @@
     <FastDeploy>false</FastDeploy>
     <ExtensionsToDeleteOnClean>*.apk;*.so;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Tegra-Android'">
+    <FastDeploy>false</FastDeploy>
+    <ExtensionsToDeleteOnClean>*.apk;*.so;$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <ClCompile>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <PreprocessorDefinitions>DISABLE_IMPORTGL;OS_ANDROID</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Box2D;$(SolutionDir)Engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>android;EGL;GLESv2;OpenSLES;vgengine;freetype;Box2D</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)/$(Configuration)/;$(OutDir)</AdditionalLibraryDirectories>
+      <Profile>true</Profile>
+    </Link>
+    <AntBuild>
+      <AssetsDirectories>$(ProjectDir)assets/;</AssetsDirectories>
+      <SkipAntStep>False</SkipAntStep>
+    </AntBuild>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>DISABLE_IMPORTGL;OS_ANDROID</PreprocessorDefinitions>
@@ -110,6 +154,30 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <ImageHasSafeExceptionHandlers />
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='EngineDLL|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;..\freetype\include\;$(SolutionDir)Box2D;$(SolutionDir)Engine/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;OS_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glew32d.lib;opengl32.lib;Engine.lib;freetype.lib;Box2D.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+      <ImageHasSafeExceptionHandlers>
+      </ImageHasSafeExceptionHandlers>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>

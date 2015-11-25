@@ -14,7 +14,9 @@
 using namespace vg;
 using namespace vg::core; 
 using namespace vg::graphics; 
+#ifndef CONF_DLL
 extern void mainGame(Game *game);
+#endif
 #define GetCurrentDir _getcwd
 
 Application::Application()
@@ -45,7 +47,9 @@ int main()
 	game->start();
 
 	Application *app = new Application();
+#ifndef CONF_DLL
 	mainGame(game);
+#endif
 	gl::clearColor(Screen::getColor());
 	gl::clear();
 	graphics->swapBuffers();

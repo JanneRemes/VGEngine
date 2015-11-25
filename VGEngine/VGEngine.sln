@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{E497E48B-462A-4C74-812F-932E5D53B835}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -30,6 +30,10 @@ Global
 		Debug|Tegra-Android = Debug|Tegra-Android
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
+		EngineDLL|Mixed Platforms = EngineDLL|Mixed Platforms
+		EngineDLL|Tegra-Android = EngineDLL|Tegra-Android
+		EngineDLL|Win32 = EngineDLL|Win32
+		EngineDLL|x64 = EngineDLL|x64
 		Release Multithreaded|Mixed Platforms = Release Multithreaded|Mixed Platforms
 		Release Multithreaded|Tegra-Android = Release Multithreaded|Tegra-Android
 		Release Multithreaded|Win32 = Release Multithreaded|Win32
@@ -63,6 +67,13 @@ Global
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Debug|Win32.Build.0 = Debug|Win32
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Debug|x64.ActiveCfg = Debug|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Mixed Platforms.ActiveCfg = EngineDLL|Win32
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Mixed Platforms.Build.0 = EngineDLL|Win32
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Tegra-Android.ActiveCfg = EngineDLL|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Tegra-Android.Build.0 = EngineDLL|Tegra-Android
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Win32.ActiveCfg = EngineDLL|Win32
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|Win32.Build.0 = EngineDLL|Win32
+		{E497E48B-462A-4C74-812F-932E5D53B835}.EngineDLL|x64.ActiveCfg = EngineDLL|Win32
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Release Multithreaded|Mixed Platforms.ActiveCfg = Release|Tegra-Android
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Release Multithreaded|Mixed Platforms.Build.0 = Release|Tegra-Android
 		{E497E48B-462A-4C74-812F-932E5D53B835}.Release Multithreaded|Tegra-Android.ActiveCfg = Release|Tegra-Android
@@ -100,6 +111,13 @@ Global
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Debug|Win32.ActiveCfg = Debug|Win32
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Debug|Win32.Build.0 = Debug|Win32
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Debug|x64.ActiveCfg = Debug|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Mixed Platforms.ActiveCfg = EngineDLL|Win32
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Mixed Platforms.Build.0 = EngineDLL|Win32
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Tegra-Android.ActiveCfg = EngineDLL|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Tegra-Android.Build.0 = EngineDLL|Tegra-Android
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Win32.ActiveCfg = EngineDLL|Win32
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|Win32.Build.0 = EngineDLL|Win32
+		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.EngineDLL|x64.ActiveCfg = EngineDLL|Win32
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Release Multithreaded|Mixed Platforms.ActiveCfg = Release|Tegra-Android
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Release Multithreaded|Mixed Platforms.Build.0 = Release|Tegra-Android
 		{32691AED-FF9C-4E80-BA0E-65A9F2B75216}.Release Multithreaded|Tegra-Android.ActiveCfg = Release|Tegra-Android
@@ -137,6 +155,13 @@ Global
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.ActiveCfg = Debug|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.Build.0 = Debug|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|x64.ActiveCfg = Debug|Tegra-Android
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Mixed Platforms.ActiveCfg = EngineDLL|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Mixed Platforms.Build.0 = EngineDLL|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Tegra-Android.ActiveCfg = EngineDLL|Tegra-Android
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Tegra-Android.Build.0 = EngineDLL|Tegra-Android
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Win32.ActiveCfg = EngineDLL|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Win32.Build.0 = EngineDLL|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|x64.ActiveCfg = EngineDLL|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|Mixed Platforms.ActiveCfg = Release Multithreaded|Tegra-Android
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|Mixed Platforms.Build.0 = Release Multithreaded|Tegra-Android
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|Tegra-Android.ActiveCfg = Release Multithreaded|Tegra-Android
@@ -177,6 +202,14 @@ Global
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Debug|Win32.Build.0 = Debug|Win32
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Debug|x64.ActiveCfg = Debug|x64
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Debug|x64.Build.0 = Debug|x64
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Mixed Platforms.ActiveCfg = EngineDLL|Win32
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Mixed Platforms.Build.0 = EngineDLL|Win32
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Tegra-Android.ActiveCfg = EngineDLL|Tegra-Android
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Tegra-Android.Build.0 = EngineDLL|Tegra-Android
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Win32.ActiveCfg = EngineDLL|Win32
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|Win32.Build.0 = EngineDLL|Win32
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|x64.ActiveCfg = EngineDLL|x64
+		{98400D17-43A5-1A40-95BE-C53AC78E7694}.EngineDLL|x64.Build.0 = EngineDLL|x64
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release Multithreaded|Mixed Platforms.ActiveCfg = Release|Win32
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release Multithreaded|Mixed Platforms.Build.0 = Release|Win32
 		{98400D17-43A5-1A40-95BE-C53AC78E7694}.Release Multithreaded|Tegra-Android.ActiveCfg = Release|Win32
