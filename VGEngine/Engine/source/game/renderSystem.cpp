@@ -13,6 +13,7 @@
 #include "engine/graphics/screen.h"
 #include "engine/graphics/camera.h"
 #include "engine/graphics/texture.h"
+#include "engine/graphics/font.h"
 
 #include "../external/glm/gtc/matrix_transform.hpp"
 
@@ -81,32 +82,39 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			TextComponent* text = (*it)->getComponent<TextComponent>();
 			if (text != nullptr)
 			{
+				core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+				Font* font = assetManager->get<Font>("arial.ttf");
+				font->bind();
+
 				shader->setUniform("unifFontTexture", true);
 				shader->setUniform("unifLayer", transform->getLayer());
-				text->bindTexture();
-				string textString = text->getText();
-				FT_GlyphSlot* glyph = text->getGlyph();
+				//text->bindTexture();
+				string str = text->getText();
+				//FT_GlyphSlot* glyph = text->getGlyph();
 				float x = transform->getWorldPosition().x;
-				float y = transform->getWorldPosition().y + 3 * text->getFontSize();
-				float base = y;
-
-				for (int i = 0; i < textString.size(); i++)
+				float y = transform->getWorldPosition().y;//+ 3 * text->getFontSize();
+				//float base = y;
+				
+				for (int i = 0; i < str.size(); i++)
 				{
-					FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
-					FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
-					FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
-					gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
+					//FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
+					//FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
+					//FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
+					//gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
 
-					y = base - (*glyph)->bitmap_top;
-					shader->setUniform("unifModel", modelTransform(Vec2f(x, y), transform->getOrigin(),
-						Vec2f((*glyph)->bitmap.width, (*glyph)->bitmap.rows), 0.0f));
-					x += ((*glyph)->advance.x >> 6);
+					//y = base - font->getHeight(str[i]);
+					Vec2f offset = font->getOffset(str[i]);
+					shader->setUniform("unifModel", modelTransform(Vec2f(x + offset.x, y + offset.y), transform->getOrigin(),
+						font->getSize(str[i]), 0.0f));
+					x += font->getAdvance(str[i]);
 
+					text->setTexCoords(font->getTexCoord1(str[i]), font->getTexCoord2(str[i]));
 					mVertexBuffer.setData(*text->getVertices());
 					mIndexBuffer.setData(*text->getIndices());
 					Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 				}
-				text->unBindTexture();
+				//text->unBindTexture();
+				font->unbind();
 				shader->setUniform("unifFontTexture", false);
 			}
 		}

@@ -92,6 +92,11 @@ namespace vg
 		*/
 		void setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha = 255);
 
+		/**
+		@param texCoords new texture coordinates
+		*/
+		void setTexCoords(Vec2f leftTop, Vec2f rightBottom);
+
     private:
 
 		/**
@@ -116,6 +121,7 @@ namespace vg
         std::vector<FT_Byte> mCharData;	        ///< <Vector where fontfile is saved>
         std::string mText;				        ///< <String to render>
         FT_Face mFace;					        ///< <Face that includes the loaded font>
+		FT_Library mLibrary;					///< Freetype library
         FT_GlyphSlot mGlyph;			        ///< <Slot where each glyph is saved>
         FT_UInt mFontSize;				        ///< <Fontsize for text>
     };

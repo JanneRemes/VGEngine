@@ -222,6 +222,12 @@
     <ClInclude Include="include\engine\utility\string.h">
       <Filter>include\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\graphics\character.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\engine\graphics\font.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -382,6 +388,12 @@
     </ClCompile>
     <ClCompile Include="source\utility\string.cpp">
       <Filter>source\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\character.cpp">
+      <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\font.cpp">
+      <Filter>source\graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -57,6 +57,8 @@ TextComponent::TextComponent(string fontPath, unsigned int fontSize, string text
 
 TextComponent::~TextComponent()
 {
+	FT_Done_Face(mFace);
+	FT_Done_FreeType(mLibrary);
 }
 
 void TextComponent::setText(string text)
@@ -113,11 +115,10 @@ std::vector<unsigned short>* TextComponent::getIndices()
 void TextComponent::initializeFace()
 {
 	FT_Error error;
-	FT_Library library;
-	error = FT_Init_FreeType(&library);
+	error = FT_Init_FreeType(&mLibrary);
 
 	// New face
-	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &mFace);
+	error = FT_New_Memory_Face(mLibrary, &mCharData[0], mCharData.size(), 0, &mFace);
 	mGlyph = mFace->glyph;
 	FT_Set_Char_Size(mFace,	/* handle to face object */
 		0,					/* char_width in 1/64th of points */
@@ -148,3 +149,18 @@ void TextComponent::setColor(unsigned int red, unsigned int green, unsigned int 
 		mVertices[i + 3] = alpha / 255.0f;
 	}
 }
+
+void TextComponent::setTexCoords(Vec2f leftTop, Vec2f rightBottom)
+{
+	glm::vec2 tc[4];
+	tc[0] = glm::vec2(leftTop.x, leftTop.y);
+	tc[1] = glm::vec2(leftTop.x, rightBottom.y);
+	tc[2] = glm::vec2(rightBottom.x, rightBottom.y);
+	tc[3] = glm::vec2(rightBottom.x, leftTop.y);
+	for (int i = 0; i < 4; i++)
+	{
+		mVertices[i * 8 + 6] = tc[i].x;
+		mVertices[i * 8 + 7] = tc[i].y;
+	}
+}
+

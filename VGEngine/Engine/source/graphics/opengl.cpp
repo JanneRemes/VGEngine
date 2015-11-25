@@ -102,6 +102,18 @@ void gl::texImage2DAlpha(unsigned int width, unsigned int height, const unsigned
 	checkError();
 }
 
+void gl::texImage2DLuminanceAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels)
+{
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, pixels.data());
+	checkError();
+}
+
+void gl::texImage2DLuminanceAlpha(unsigned int width, unsigned int height, const unsigned char* pixels)
+{
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, pixels);
+	checkError();
+}
+
 void gl::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

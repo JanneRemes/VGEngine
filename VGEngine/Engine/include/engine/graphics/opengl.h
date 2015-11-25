@@ -36,6 +36,8 @@ namespace vg
 			void texImage2DRGBA(unsigned int width, unsigned int height, const unsigned char* pixels);
 			void texImage2DAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
 			void texImage2DAlpha(unsigned int width, unsigned int height, const unsigned char* pixels);
+			void texImage2DLuminanceAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
+			void texImage2DLuminanceAlpha(unsigned int width, unsigned int height, const unsigned char* pixels);
 			void texParameteri(unsigned int pname, int parameter);
 
 
