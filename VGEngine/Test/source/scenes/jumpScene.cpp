@@ -49,13 +49,12 @@ void JumpScene::loadObjects()
 
 	addGameObject(physicsTest2);
 	
-
 	// custom physics shape
 	std::vector<Vec2f> listOfCustomPoints;
 
 	int hillSizeModifier = 5;
-	float hill[] = {
-		1, 1,
+	float hill[18] = {
+		0, 100,
 		400, 500,
 		415, 510,
 		425, 515,
@@ -68,19 +67,19 @@ void JumpScene::loadObjects()
 	// Create hill from array
 	for (int i = 0; i < 18; i+=2)
 	{
-		listOfCustomPoints.push_back(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier));
-		std::cout << hill[i] * hillSizeModifier << " " << hill[i + 1] * hillSizeModifier << std::endl;
+		listOfCustomPoints.push_back(Vec2f(hill[i], hill[i + 1]));
+		std::cout << hill[i]  << " " << hill[i + 1] << std::endl;
 
 		float distance = sqrt((hill[i] - hill[i + 2])*(hill[i] - hill[i + 2]) +
 				(hill[i + 1] - hill[i + 3])*(hill[i + 1] - hill[i + 3]));
 
-		float deltaY = hill[i + 1] - hill[i + 3];
-		float deltaX = hill[i] - hill[i + 2];
+		float deltaY = hill[i + 3] - hill[i + 1];
+		float deltaX = hill[i + 2] - hill[i];
 		float angleInDegrees = atan2(deltaY, deltaX) * 180 / 3.1415;
 
-		// hill parts
-		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier),
-			Vec2f(distance * hillSizeModifier, 10), angleInDegrees);
+		// hill texturing parts
+		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(hill[i], hill[i+1]),
+			Vec2f(distance, 10), angleInDegrees);
 
 		GameObject *hillPartObjectNew = new GameObject("hillPart");
 		RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
@@ -89,7 +88,6 @@ void JumpScene::loadObjects()
 		hillPartObjectNew->addComponent(hillPartQuadNew);
 
 		addGameObject(hillPartObjectNew);
-
 	}
 
 	/*
@@ -101,8 +99,8 @@ void JumpScene::loadObjects()
 	}
 	*/
 
-	TransformComponent *hillTransform = new TransformComponent(Vec2f(600, 600),
-		Vec2f(200, 64));
+	TransformComponent *hillTransform = new TransformComponent(Vec2f(0, 0),
+		Vec2f(0, 0));
 
 	GameObject *hillObject = new GameObject("hillObject");
 
