@@ -82,15 +82,12 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			TextComponent* text = (*it)->getComponent<TextComponent>();
 			if (text != nullptr)
 			{
-				core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
-				Font* font = assetManager->get<Font>("arial.ttf");
+				Font* font = text->getFont();
 				font->bind();
 
 				shader->setUniform("unifFontTexture", true);
 				shader->setUniform("unifLayer", transform->getLayer());
-				//text->bindTexture();
 				string str = text->getText();
-				//FT_GlyphSlot* glyph = text->getGlyph();
 				float x = transform->getWorldPosition().x;
 				float y = transform->getWorldPosition().y;//+ 3 * text->getFontSize();
 				//float base = y;
@@ -113,7 +110,6 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 					mIndexBuffer.setData(*text->getIndices());
 					Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 				}
-				//text->unBindTexture();
 				font->unbind();
 				shader->setUniform("unifFontTexture", false);
 			}

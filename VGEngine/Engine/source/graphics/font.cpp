@@ -3,14 +3,15 @@
 #include "engine/assets/fileManager.h"
 #include "engine/graphics/opengl.h"
 #include "engine/utility/logger.h"
+#include "engine/utility/string.h"
 
 using namespace vg;
 using namespace vg::graphics;
+using namespace std;
 
 Font::Font(const std::string& path)
-: Asset(path)
+	: Asset(path), mFontSize(toInt(path))
 {
-	mFontSize = 12;
 }
 
 Font::~Font()
@@ -20,9 +21,8 @@ Font::~Font()
 
 bool Font::load(core::FileManager* fileManager)
 {
-	//http://www.qnx.com/developers/docs/660/index.jsp?topic=%2Fcom.qnx.doc.screen%2Ftopic%2Fmanual%2Fcscreen_rendering_text_sample.html
-	//http://stackoverflow.com/questions/27469321/render-freetype-text-with-flipped-ortho-difference-between-top-and-baseline-of
-	fileManager->readAsset(mPath, mCharData);
+	string str = removeDigits(mPath);
+	fileManager->readAsset(removeDigits(mPath), mCharData);
 	gl::genTextures(&mTexture);
 	FT_Error error;
 	FT_Face face;					        

@@ -23,7 +23,6 @@ void mainGame(Game* game)
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	assetManager->load<sound::Sound>("muumitechno.mp3");
 	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
-	assetManager->load<graphics::Font>("arial.ttf");
 
 	//TODO clean up
 	RenderComponent("papparunSmall2.png");
