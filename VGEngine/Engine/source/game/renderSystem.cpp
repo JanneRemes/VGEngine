@@ -84,22 +84,15 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			{
 				Font* font = text->getFont();
 				font->bind();
-
 				shader->setUniform("unifFontTexture", true);
 				shader->setUniform("unifLayer", transform->getLayer());
+				
 				string str = text->getText();
 				float x = transform->getWorldPosition().x;
-				float y = transform->getWorldPosition().y;//+ 3 * text->getFontSize();
-				//float base = y;
-				
+				float y = transform->getWorldPosition().y +3 * font->getFontSize();
+
 				for (int i = 0; i < str.size(); i++)
 				{
-					//FT_UInt index = FT_Get_Char_Index((*glyph)->face, textString[i]);
-					//FT_Load_Glyph(*text->getFace(), index, FT_RENDER_MODE_NORMAL);
-					//FT_Render_Glyph(*glyph, FT_RENDER_MODE_NORMAL);
-					//gl::texImage2DAlpha((*glyph)->bitmap.width, (*glyph)->bitmap.rows, (*glyph)->bitmap.buffer);
-
-					//y = base - font->getHeight(str[i]);
 					Vec2f offset = font->getOffset(str[i]);
 					shader->setUniform("unifModel", modelTransform(Vec2f(x + offset.x, y + offset.y), transform->getOrigin(),
 						font->getSize(str[i]), 0.0f));

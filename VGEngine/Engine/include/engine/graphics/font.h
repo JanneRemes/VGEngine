@@ -45,6 +45,11 @@ namespace vg
 			*/
 			Vec2f getTexCoord2(char character);
 
+			/**
+			@return fontSize
+			*/
+			unsigned int getFontSize();
+
 			Vec2f getSize(char character);
 			float getWidth(char character);
 			float getHeight(char character);

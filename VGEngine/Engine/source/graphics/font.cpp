@@ -99,11 +99,6 @@ bool Font::load(core::FileManager* fileManager)
 			}
 		}
 
-		float x2 = slot->bitmap_left;
-		int y2 = slot->bitmap_top;
-		float w = slot->bitmap.width;
-		float h = slot->bitmap.rows;
-
 		advance[c] = (float)(slot->advance.x >> 6);
 		tex_x1[c] = (float)bitmap_offset_x / (float)font_tex_width;
 		tex_x2[c] = (float)(bitmap_offset_x + bmp.width) / (float)font_tex_width;
@@ -112,7 +107,8 @@ bool Font::load(core::FileManager* fileManager)
 		width[c] = bmp.width;
 		height[c] = bmp.rows;
 		offset_x[c] = (float)slot->bitmap_left;
-		offset_y[c] = (float)((slot->metrics.horiBearingY - face->glyph->metrics.height) >> 6);
+		int offy = ((-1 * face->glyph->metrics.height) >> 6) + slot->bitmap.rows - slot->bitmap_top;
+		offset_y[c] = static_cast<float>(offy);
 	}
 
 	gl::bindTexture(mTexture);
@@ -140,6 +136,11 @@ Vec2f Font::getTexCoord1(char character)
 Vec2f Font::getTexCoord2(char character)
 {
 	return Vec2f(tex_x2[character], tex_y2[character]);
+}
+
+unsigned int Font::getFontSize()
+{
+	return mFontSize;
 }
 
 Vec2f Font::getSize(char character)
