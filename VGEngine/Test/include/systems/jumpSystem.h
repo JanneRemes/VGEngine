@@ -21,4 +21,5 @@ private:
 	vg::PhysicsSystem *system;
 	vg::GameObject *physicsTest;
 	vg::GameObject *muumiObject;
+	vg::Joint *muumiJoint;
 };

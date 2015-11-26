@@ -58,12 +58,11 @@ JumpSystem::JumpSystem(Scene *scene)
 
 	scene->addGameObject(muumiObject);
 	
-	Joint muumiJoint(muumiPhysics, physicsComponent);
-
-	muumiJoint.setAnchorA(Vec2f(0, 35));
-	muumiJoint.enableLimit(true);
-
-	muumiJoint.createRevoluteJoint();
+	muumiJoint = new Joint(muumiPhysics, physicsComponent);
+	muumiJoint->createRevoluteJoint();
+	
+	muumiJoint->setAnchorA(Vec2f(0, 35));
+	muumiJoint->enableLimit(true);
 }
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
@@ -104,6 +103,7 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		physicsTest->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
 		physicsTest->getComponent<PhysicsComponent>()->setRotation(0);
 		physicsTest->getComponent<PhysicsComponent>()->wake(true);
+
 	}
 #endif
 

@@ -18,7 +18,7 @@ namespace vg
 		void enableLimit(bool b);
 		void setAnchorA(Vec2f pos);
 		void setAnchorB(Vec2f pos);
-
+		void removeJoint();
 		private:
 		vg::PhysicsSystem *system;
 
@@ -26,6 +26,6 @@ namespace vg
 		b2Body *mBodyB;
 
 		b2RevoluteJointDef revoluteDef;
-		b2RevoluteJoint* revoluteJoint;
+		b2RevoluteJoint *revoluteJoint;
 	};
 }
