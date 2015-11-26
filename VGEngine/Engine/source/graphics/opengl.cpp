@@ -67,9 +67,9 @@ void gl::activeTexture(unsigned int textureIndex = GL_TEXTURE0)
 	checkError();
 }
 
-void gl::deleteTextures(int n, const unsigned int* textures)
+void gl::deleteTextures(const unsigned int* textures, int amount)
 {
-	glDeleteTextures(n, textures);
+	glDeleteTextures(amount, textures);
 	checkError();
 }
 void gl::texParameteri(unsigned int pname, int parameter)

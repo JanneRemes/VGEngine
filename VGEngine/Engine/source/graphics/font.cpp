@@ -16,21 +16,20 @@ Font::Font(const std::string& path)
 
 Font::~Font()
 {
-
 }
 
 bool Font::load(core::FileManager* fileManager)
 {
 	string str = removeDigits(mPath);
-	fileManager->readAsset(removeDigits(mPath), mCharData);
+	std::vector<FT_Byte> fileBuffer;
+	fileManager->readAsset(removeDigits(mPath), fileBuffer);
 	gl::genTextures(&mTexture);
 	FT_Error error;
 	FT_Face face;					        
 	FT_Library library;					
 	error = FT_Init_FreeType(&library);
 
-	error = FT_New_Memory_Face(library, &mCharData[0], mCharData.size(), 0, &face);
-	mGlyph = face->glyph;
+	error = FT_New_Memory_Face(library, &fileBuffer[0], fileBuffer.size(), 0, &face);
 	FT_Set_Char_Size(face,	/* handle to face object */
 		mFontSize * 64,		/* char_width in 1/64th of points */
 		mFontSize * 64,		/* char_height in 1/64th of points */
@@ -99,16 +98,16 @@ bool Font::load(core::FileManager* fileManager)
 			}
 		}
 
-		advance[c] = (float)(slot->advance.x >> 6);
-		tex_x1[c] = (float)bitmap_offset_x / (float)font_tex_width;
-		tex_x2[c] = (float)(bitmap_offset_x + bmp.width) / (float)font_tex_width;
-		tex_y1[c] = (float)bitmap_offset_y / (float)font_tex_height;
-		tex_y2[c] = (float)(bitmap_offset_y + bmp.rows) / (float)font_tex_height;
-		width[c] = bmp.width;
-		height[c] = bmp.rows;
-		offset_x[c] = (float)slot->bitmap_left;
+		mAdvance[c] = (float)(slot->advance.x >> 6);
+		mTex_x1[c] = (float)bitmap_offset_x / (float)font_tex_width;
+		mTex_x2[c] = (float)(bitmap_offset_x + bmp.width) / (float)font_tex_width;
+		mTex_y1[c] = (float)bitmap_offset_y / (float)font_tex_height;
+		mTex_y2[c] = (float)(bitmap_offset_y + bmp.rows) / (float)font_tex_height;
+		mWidth[c] = bmp.width;
+		mHeight[c] = bmp.rows;
+		mOffset_x[c] = (float)slot->bitmap_left;
 		int offy = ((-1 * face->glyph->metrics.height) >> 6) + slot->bitmap.rows - slot->bitmap_top;
-		offset_y[c] = static_cast<float>(offy);
+		mOffset_y[c] = static_cast<float>(offy);
 	}
 
 	gl::bindTexture(mTexture);
@@ -120,22 +119,16 @@ bool Font::load(core::FileManager* fileManager)
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
 
+	mIsLoaded = true;
 	return true;
 }
 
 bool Font::unload()
 {
+	if (mTexture != 0)
+		gl::deleteTextures(&mTexture);
+	mIsLoaded = false;
 	return true;
-}
-
-Vec2f Font::getTexCoord1(char character)
-{
-	return Vec2f(tex_x1[character], tex_y1[character]);
-}
-
-Vec2f Font::getTexCoord2(char character)
-{
-	return Vec2f(tex_x2[character], tex_y2[character]);
 }
 
 unsigned int Font::getFontSize()
@@ -143,29 +136,39 @@ unsigned int Font::getFontSize()
 	return mFontSize;
 }
 
+Vec2f Font::getTexCoord1(char character)
+{
+	return Vec2f(mTex_x1[character], mTex_y1[character]);
+}
+
+Vec2f Font::getTexCoord2(char character)
+{
+	return Vec2f(mTex_x2[character], mTex_y2[character]);
+}
+
 Vec2f Font::getSize(char character)
 {
-	return Vec2f(width[character], height[character]);
+	return Vec2f(mWidth[character], mHeight[character]);
 }
 
 float Font::getWidth(char character)
 {
-	return width[character];
+	return mWidth[character];
 }
 
 float Font::getHeight(char character)
 {
-	return height[character];
+	return mHeight[character];
 }
 
 float Font::getAdvance(char character)
 {
-	return advance[character];
+	return mAdvance[character];
 }
 
 Vec2f Font::getOffset(char character)
 {
-	return Vec2f(offset_x[character], offset_y[character]);
+	return Vec2f(mOffset_x[character], mOffset_y[character]);
 }
 
 void Font::bind()

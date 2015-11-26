@@ -79,7 +79,7 @@ bool Texture::unload()
 {
 	if (mId != 0)
 	{
-		gl::deleteTextures(1, &mId);
+		gl::deleteTextures(&mId);
 	}
 
 	mIsLoaded = false;

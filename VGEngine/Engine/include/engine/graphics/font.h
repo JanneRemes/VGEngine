@@ -21,18 +21,22 @@ namespace vg
 			~Font();
 
 			/**
-			<description>
-			@param fileManager <description>
-			@return <description>
+			@param fileManager used for reading assets
+			@return result
 			*/
 			bool load(core::FileManager *fileManager);
 
 			/**
 			Deletes the loaded texture
-			@return <description>
+			@return result
 			*/
 			bool unload();
 
+			/**
+			@return fontSize
+			*/
+			unsigned int getFontSize();
+			
 			/**
 			@param character in the font texture
 			@return upper left corner texture coordinates
@@ -46,14 +50,33 @@ namespace vg
 			Vec2f getTexCoord2(char character);
 
 			/**
-			@return fontSize
+			@param character in the font texture
+			@return character size
 			*/
-			unsigned int getFontSize();
-
 			Vec2f getSize(char character);
+
+			/**
+			@param character in the font texture
+			@return character width
+			*/
 			float getWidth(char character);
+
+			/**
+			@param character in the font texture
+			@return character height
+			*/
 			float getHeight(char character);
+
+			/**
+			@param character in the font texture
+			@return horizontal advance to next character
+			*/
 			float getAdvance(char character);
+			
+			/**
+			@param character in the font texture
+			@return character offset
+			*/
 			Vec2f getOffset(char character);
 
 			/**
@@ -69,20 +92,18 @@ namespace vg
 		private:
 			static inline int nextp2(int x);
 
-			unsigned int mTexture;
-			float advance[128];
-			float width[128];
-			float height[128];
-			float tex_x1[128];
-			float tex_x2[128];
-			float tex_y1[128];
-			float tex_y2[128];
-			float offset_x[128];
-			float offset_y[128];
+			float mAdvance[128];		///< horizontal advance for each character 
+			float mWidth[128];			///< for each character
+			float mHeight[128];			///< for each character
+			float mTex_x1[128];			///< for each character
+			float mTex_x2[128];			///< for each character
+			float mTex_y1[128];			///< for each character
+			float mTex_y2[128];			///< for each character	
+			float mOffset_x[128];		///< for each character
+			float mOffset_y[128];		///< for each character
 
-			std::vector<FT_Byte> mCharData;	        ///< <Vector where fontfile is saved>
-			FT_GlyphSlot mGlyph;			        ///< <Slot where each glyph is saved>
-			FT_UInt mFontSize;				        ///< <Fontsize for text>
+			unsigned int mTexture;		///< texture id
+			unsigned int mFontSize;		///< <Fontsize for text>
 		};
 	}
 }

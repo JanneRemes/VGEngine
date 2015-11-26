@@ -67,6 +67,8 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (updateButton((*it)))
 				if (selectedScene != --sceneNames.end())
 					selectedScene++;
+				else
+					selectedScene = sceneNames.begin();
 		}
 		else if ((*it)->getName() == "mmButtonPlay")
 		{

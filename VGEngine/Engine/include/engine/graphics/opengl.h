@@ -31,7 +31,7 @@ namespace vg
 			void bindTexture(unsigned int textureId);
 			void activeTexture();
 			void activeTexture(unsigned int textureIndex);
-			void deleteTextures(int n, const unsigned int* textures);
+			void deleteTextures(const unsigned int* textures, int amount = 1);
 			void texImage2DRGBA(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
 			void texImage2DRGBA(unsigned int width, unsigned int height, const unsigned char* pixels);
 			void texImage2DAlpha(unsigned int width, unsigned int height, const std::vector<unsigned char>& pixels);
