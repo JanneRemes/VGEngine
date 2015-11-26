@@ -173,6 +173,16 @@ void PhysicsComponent::setDensity(float density)
 	mBody->CreateFixture(&mFixDef);
 }
 
+void PhysicsComponent::setAngularDamping(float damping)
+{
+	mBody->SetAngularDamping(damping);
+}
+
+void PhysicsComponent::setLinearDamping(float damping)
+{
+	mBody->SetLinearDamping(damping);
+}
+
 void PhysicsComponent::setFriction(float friction)
 {
 	mFixDef.friction = friction;

@@ -31,9 +31,11 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	android->addComponent(quadre);
 	android->addComponent(new PhysicsComponent(androidTransform, PhysicsComponent::DYNAMIC, 0));
 
-	android->getComponent<PhysicsComponent>()->setFriction(300);
+	android->getComponent<PhysicsComponent>()->setFriction(100);
 	android->getComponent<PhysicsComponent>()->setRestitution(0.60);
 	android->getComponent<PhysicsComponent>()->setDensity(100);
+	//android->getComponent<PhysicsComponent>()->setMass(40);
+	android->getComponent<PhysicsComponent>()->setAngularDamping(0.2);
 	scene->addGameObject(android);
 
 	/*
@@ -72,7 +74,7 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	*/
 
 	GameObject* textObject = new GameObject("Distance");
-	TransformComponent* textTransform = new TransformComponent(Vec2f(20, 20), Vec2f(0, 0), 0.0f, Vec2f(0,0), TransformComponent::TOP, false);
+	TransformComponent* textTransform = new TransformComponent(Vec2f(0, 50), Vec2f(0, 0), 0.0f, Vec2f(0,0), TransformComponent::TOP, false);
 	TextComponent* text = new TextComponent("arial.ttf", 12, "Distance");
 	text->setColor(255, 0, 0);
 	textObject->addComponent(text);
@@ -83,7 +85,23 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	/*
 		Game status init
 	*/
-	physicSystem->createBorders(0, Screen::getY() * 3, Screen::getX() * 100, Screen::getY());
+
+	std::vector<Vec2f> physicBorders;
+	physicBorders.push_back(Vec2f(0, Screen::getY()));
+	physicBorders.push_back(Vec2f(Screen::getX() * 100, Screen::getY()));
+
+	TransformComponent *borderTransform = new TransformComponent(Vec2f(0, 0),
+		Vec2f(200, 64));
+
+	GameObject* physicBorder = new GameObject("borders");
+	PhysicsComponent* borderPhysComponent = new PhysicsComponent(borderTransform, physicBorders);
+	physicBorder->addComponent(borderPhysComponent);
+	physicBorder->addComponent(borderTransform);
+
+	scene->addGameObject(physicBorder);
+
+	borderPhysComponent->setFriction(50);
+	//physicSystem->createBorders(0, Screen::getY() * 3, Screen::getX() * 100, Screen::getY());
 
 	bState = INCREASING;
 	bgState = BACKGROUND1;
@@ -224,6 +242,8 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 
 			vg::Vec2f velocity = vg::Vec2f(normalizedVec.x * barYIncrement * speed, normalizedVec.y * barYIncrement * speed);
 			android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(velocity.x, -velocity.y));
+
+			android->getComponent<PhysicsComponent>()->wake(true);
 		}
 	}
 
