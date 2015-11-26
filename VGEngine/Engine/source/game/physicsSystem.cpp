@@ -90,26 +90,3 @@ void PhysicsSystem::setGravity(Vec2f gravity)
 {
 	world->SetGravity(b2Vec2(gravity.x, gravity.y));
 }
-
-void PhysicsSystem::createRevoluteJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
-{
-	b2RevoluteJointDef jointDef;
-	
-	jointDef.bodyA = bodyA->mBody;
-	jointDef.bodyB = bodyB->mBody;
-	jointDef.localAnchorA = b2Vec2(bodyA->mBody->GetLocalCenter().x + 64 / scale, bodyA->mBody->GetLocalCenter().y + 64 / -scale);
-	jointDef.localAnchorB = bodyB->mBody->GetLocalCenter();
-
-	b2RevoluteJoint* joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
-}
-
-void PhysicsSystem::createRopeJoint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
-{
-	b2RopeJointDef jointDef;
-
-	jointDef.bodyA = bodyA->mBody;
-	jointDef.bodyB = bodyB->mBody;
-	jointDef.maxLength = 10;
-
-	b2RopeJoint* joint = (b2RopeJoint*)world->CreateJoint(&jointDef);
-} 

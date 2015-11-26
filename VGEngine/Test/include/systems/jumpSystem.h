@@ -5,6 +5,7 @@
 #include "engine/utility/timer.h"
 #include "engine/game/scene.h"
 #include "engine/game/physicsSystem.h"
+#include "engine\game\physicsJoint.h"
 #include "engine/utility/vec2f.h"
 
 #include <vector>
@@ -18,6 +19,6 @@ public:
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
-
 	vg::GameObject *physicsTest;
+	vg::GameObject *muumiObject;
 };

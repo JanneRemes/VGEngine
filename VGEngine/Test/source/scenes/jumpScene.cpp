@@ -35,8 +35,8 @@ void JumpScene::loadObjects()
 	addGameObject(background);
 	
 	// koala platform
-	TransformComponent *physicsTransform2 = new TransformComponent(Vec2f(1000, 400),
-		Vec2f(500, 200));
+	TransformComponent *physicsTransform2 = new TransformComponent(Vec2f(1000, 300),
+		Vec2f(500, 100));
 
 	GameObject *physicsTest2 = new GameObject("physicsTest2");
 	RenderComponent *physicsRender2 = new RenderComponent("koala.png");
@@ -54,7 +54,7 @@ void JumpScene::loadObjects()
 
 	int hillSizeModifier = 5;
 	float hill[18] = {
-		0, 100,
+		0, 0,
 		400, 500,
 		415, 510,
 		425, 515,
@@ -108,7 +108,7 @@ void JumpScene::loadObjects()
 
 	hillObject->addComponent(hillPhysics);
 	hillObject->addComponent(hillTransform);
-	hillObject->getComponent<PhysicsComponent>()->setFriction(0.8);
+	hillObject->getComponent<PhysicsComponent>()->setFriction(0.1);
 
 	addGameObject(hillObject);
 

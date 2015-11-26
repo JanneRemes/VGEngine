@@ -1,6 +1,5 @@
 
 #include "systems/PhysicsTestSystem.h"
-
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
 #include "engine\input\keyboard.h"
@@ -84,8 +83,9 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	physicsTest3->getComponent<PhysicsComponent>()->setRestitution(0);
 
 	scene->addGameObject(physicsTest3);
-
-	system->createRevoluteJoint(physicsTest2->getComponent<PhysicsComponent>(), physicsTest->getComponent<PhysicsComponent>());
+	
+	Joint joint(physicsPolyComponent2, physicsPolyComponent1);
+	joint.createRevoluteJoint();
 
 	//// Two physics objects with same collision masks wont collide
 	physicsTest3->getComponent<PhysicsComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);
@@ -165,10 +165,10 @@ void PhysicsTestSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		vg::Vec2f pos = vg::input::Mouse::getPos();
-		physicsTest3->getComponent<PhysicsComponent>()->setPosition(pos);
-		physicsTest3->getComponent<PhysicsComponent>()->setAngularVelocity(0);
-		physicsTest3->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
-		physicsTest3->getComponent<PhysicsComponent>()->setRotation(0);
+		physicsTest->getComponent<PhysicsComponent>()->setPosition(pos);
+		physicsTest->getComponent<PhysicsComponent>()->setAngularVelocity(0);
+		physicsTest->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
+		physicsTest->getComponent<PhysicsComponent>()->setRotation(0);
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::R) == vg::input::Keyboard::KeyState::PRESSED)

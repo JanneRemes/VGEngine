@@ -30,7 +30,7 @@ JumpSystem::JumpSystem(Scene *scene)
 	// Snowboard
 	physicsTest = new GameObject("physicsTest1");
 
-	TransformComponent *physicsTransform = new TransformComponent(Vec2f(0, -100),
+	TransformComponent *physicsTransform = new TransformComponent(Vec2f(10, -10),
 		Vec2f(64, 8), -45.0f);
 
 	RenderComponent *physicsObject = new RenderComponent("koala.png");
@@ -39,25 +39,31 @@ JumpSystem::JumpSystem(Scene *scene)
 	physicsTest->addComponent(physicsComponent);
 	physicsTest->addComponent(physicsTransform);
 	physicsTest->addComponent(physicsObject);
-	//physicsTest->getComponent<PhysicsComponent>()->setFriction(0.8);
+	physicsTest->getComponent<PhysicsComponent>()->setFriction(0.1);
 
 	scene->addGameObject(physicsTest);
 	
 	// Jumping muumi
-	TransformComponent *muumiTransform = new TransformComponent(Vec2f(1000, 300),
-		Vec2f(64, 64), 0.0f, Vec2f(-25, 45));
+	TransformComponent *muumiTransform = new TransformComponent(Vec2f(10, -10),
+		Vec2f(64, 64), -45.0f);
 
-	GameObject *muumiObject = new GameObject("muumiObject");
+	muumiObject = new GameObject("muumiObject");
 	muumiObject->addComponent(muumiTransform);
-	muumiObject->addComponent(new PhysicsComponent(muumiTransform, PhysicsComponent::DYNAMIC, 54));
+	PhysicsComponent *muumiPhysics = new PhysicsComponent(muumiTransform, PhysicsComponent::DYNAMIC, 54);
 	RenderComponent *muumiAnimation = new RenderComponent("papparunSmall2.png");
 
 	muumiObject->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 	muumiObject->addComponent(muumiAnimation);
+	muumiObject->addComponent(muumiPhysics);
 
 	scene->addGameObject(muumiObject);
+	
+	Joint muumiJoint(muumiPhysics, physicsComponent);
 
-	muumiObject->setParent(physicsTest);
+	muumiJoint.setAnchorA(Vec2f(0, 35));
+	muumiJoint.enableLimit(true);
+
+	muumiJoint.createRevoluteJoint();
 }
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
@@ -75,7 +81,13 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 					phys->setPosition(Vec2f(10, -10));
 					phys->setAngularVelocity(0);
 					phys->setVelocity(Vec2f(0, 0));
-					phys->setRotation(0);
+					phys->setRotation(-45);
+
+					muumiObject->getComponent<PhysicsComponent>()->setPosition(Vec2f(10, -10));
+					muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(0);
+					muumiObject->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
+					muumiObject->getComponent<PhysicsComponent>()->setRotation(-45);
+					muumiObject->getComponent<PhysicsComponent>()->wake(true);
 				}
 			}
 		}

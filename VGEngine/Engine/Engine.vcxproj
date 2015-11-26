@@ -151,6 +151,7 @@
     <ClInclude Include="include\engine\game\game.h" />
     <ClInclude Include="include\engine\game\gameObject.h" />
     <ClInclude Include="include\engine\game\physicsComponent.h" />
+    <ClInclude Include="include\engine\game\physicsJoint.h" />
     <ClInclude Include="include\engine\game\physicsSystem.h" />
     <ClInclude Include="include\engine\game\renderComponent.h" />
     <ClInclude Include="include\engine\game\renderSystem.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\gameObject.cpp" />
     <ClCompile Include="source\game\physicsComponent.cpp" />
+    <ClCompile Include="source\game\physicsJoint.cpp" />
     <ClCompile Include="source\game\physicsSystem.cpp" />
     <ClCompile Include="source\game\renderComponent.cpp" />
     <ClCompile Include="source\game\renderSystem.cpp" />

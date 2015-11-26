@@ -14,7 +14,7 @@ namespace vg
 
 	class PhysicsComponent : public Component
 	{
-		friend class PhysicsSystem;
+		friend class Joint;
 	public:
 		enum BODYSHAPE { BOX, CIRCLE, CUSTOM };	///< physicsComponents body shape
 		enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };	///< physicsComponents body type
