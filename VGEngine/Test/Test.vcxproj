@@ -188,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="include\Scenes\AndroidLaunchGame.h" />
     <ClInclude Include="include\Scenes\cameraScene.h" />
+    <ClInclude Include="include\Scenes\DogeScene.h" />
     <ClInclude Include="include\Scenes\jumpScene.h" />
     <ClInclude Include="include\Scenes\MainScene.h" />
     <ClInclude Include="include\Scenes\pappaScene.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\scenes\AndroidLaunchGame.cpp" />
     <ClCompile Include="source\scenes\cameraScene.cpp" />
+    <ClCompile Include="source\scenes\DogeScene.cpp" />
     <ClCompile Include="source\scenes\jumpScene.cpp" />
     <ClCompile Include="source\scenes\mainScene.cpp" />
     <ClCompile Include="source\scenes\pappaScene.cpp" />

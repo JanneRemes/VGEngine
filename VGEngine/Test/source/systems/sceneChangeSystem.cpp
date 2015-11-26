@@ -15,6 +15,7 @@
 #include "engine/game/renderComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/utility/string.h"
+#include "Scenes/DogeScene.h"
 
 using namespace vg;
 using namespace vg::input;
@@ -82,6 +83,10 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 	if (Keyboard::getKeyState(Keyboard::Num6) == Keyboard::KeyState::PRESSED)
 	{
 		Game::getInstance()->getSceneManager()->changeScene("jumpScene");
+	}
+	if (Keyboard::getKeyState(Keyboard::Num0) == Keyboard::KeyState::PRESSED)
+	{
+		Game::getInstance()->getSceneManager()->changeScene("Doges");
 	}
 
 #endif

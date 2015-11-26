@@ -24,6 +24,7 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	sceneNames.push_back("Android");
 	sceneNames.push_back("rockThrowScene");
 	sceneNames.push_back("jumpScene");
+	sceneNames.push_back("doge");
 	selectedScene = sceneNames.begin();
 }
 
@@ -58,6 +59,8 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (updateButton((*it)))
 				if (selectedScene != sceneNames.begin())
 					selectedScene--;
+				else
+					selectedScene = sceneNames.end() - 1;
 		}
 		else if ((*it)->getName() == "mmButtonDown")
 		{
