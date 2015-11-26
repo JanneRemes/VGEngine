@@ -73,11 +73,6 @@ namespace vg
 		~TransformComponent();
 
 		/**
-		@return Position taking possible parent's position into account
-		*/
-		vg::Vec2f getPosition();
-
-		/**
 		@return local position (only taking into account this component´s position not parent´s position)
 		*/
 		Vec2f getLocalPosition();

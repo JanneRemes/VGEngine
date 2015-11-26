@@ -3,25 +3,48 @@
 
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
-using namespace std;
-
-string vg::toStringi(int value, int width)
+std::string vg::toStringi(int value, int width)
 {
-	ostringstream ss;
+	std::ostringstream ss;
 	if (width > 0)
-		ss << setfill('0') << setw(width);
+		ss << std::setfill('0') << std::setw(width);
 	ss << value;
 	return ss.str();
 }
 
-string vg::toStringf(float value, int decimals, int width)
+std::string vg::toStringf(float value, int decimals, int width)
 {
-	ostringstream ss;
+	std::ostringstream ss;
 	if (decimals > 0)
 		ss.precision(decimals);
 	if (width > 0)
-		ss << setfill('0') << setw(width);
-	ss << fixed << value;
+		ss << std::setfill('0') << std::setw(width);
+	ss << std::fixed << value;
 	return ss.str();
+}
+
+std::string vg::removeDigits(std::string str)
+{
+	int firstLetter = 0;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (isalpha(str[i]))
+		{
+			firstLetter = i;
+			break;
+		}
+	}
+	str.erase(str.begin(), str.begin() + firstLetter);
+	return str;
+}
+
+int vg::toInt(std::string str)
+{
+	std::remove_if(str.begin(), str.end(), &isalpha);
+	std::istringstream iss(str);
+	int i;
+	iss >> i;
+	return i;
 }

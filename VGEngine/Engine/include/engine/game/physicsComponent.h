@@ -89,6 +89,16 @@ namespace vg
 		void setDensity(float density);
 
 		/**
+		Sets angular damping for the physicsComponent
+		*/
+		void setAngularDamping(float damping);
+		
+		/**
+		Sets linear damping for the physicsComponent
+		*/
+		void setLinearDamping(float damping);
+
+		/**
 		Sets friction for the physicsComponent
 		*/
 		void setFriction(float friction);

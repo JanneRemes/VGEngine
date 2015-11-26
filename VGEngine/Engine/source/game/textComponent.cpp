@@ -1,18 +1,26 @@
 
 #include "engine/game/textComponent.h"
 #include "engine/game/game.h"
-#include "engine/assets/fileManager.h"
+#include "engine/assets/assetManager.h"
 #include "engine/graphics/opengl.h"
-#include "engine/graphics/screen.h"
+#include "engine/graphics/font.h"
+#include "engine/utility/string.h"
 
 using namespace vg;
 using namespace vg::graphics;
 using namespace std;
 
 TextComponent::TextComponent(string fontPath, unsigned int fontSize, string text)
-	: Component(), mText(text), mFontSize(fontSize)
+	: Component(), mText(text)
 {
-	core::FileManager* fm = Game::getInstance()->getFileManager();
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+	mFont = assetManager->get<Font>(toStringi(fontSize) + fontPath);
+	if (mFont == nullptr)
+	{
+		assetManager->load<Font>(toStringi(fontSize) + fontPath);
+		mFont = assetManager->get<Font>(toStringi(fontSize) + fontPath);
+	}
+
 	float defaultVerticesArray[] =
 	{
 		// Position Vec2
@@ -51,14 +59,10 @@ TextComponent::TextComponent(string fontPath, unsigned int fontSize, string text
 
 	mVertices = defaultVertices;
 	mIndices = defaultIndices;
-    fm->readAsset(fontPath, mCharData);
-	initializeFace();
 }
 
 TextComponent::~TextComponent()
 {
-	FT_Done_Face(mFace);
-	FT_Done_FreeType(mLibrary);
 }
 
 void TextComponent::setText(string text)
@@ -73,33 +77,16 @@ string TextComponent::getText()
 
 void TextComponent::setFontSize(unsigned int fontSize)
 {
-    mFontSize = fontSize;
-	initializeFace();
-}
+	string oldPath = mFont->getPath();
+	string newPath = toStringi(fontSize) + removeDigits(oldPath);
 
-unsigned int TextComponent::getFontSize()
-{
-	return mFontSize;
-}
-
-void TextComponent::bindTexture()
-{
-	gl::bindTexture(mTexture);
-}
-
-void TextComponent::unBindTexture()
-{
-	gl::bindTexture(0u);
-}
-
-FT_GlyphSlot*  TextComponent::getGlyph()
-{
-	return &mGlyph;
-}
-
-FT_Face* TextComponent::getFace()
-{
-	return &mFace;
+	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
+	mFont = assetManager->get<Font>(newPath);
+	if (mFont == nullptr)
+	{
+		assetManager->load<Font>(newPath);
+		mFont = assetManager->get<Font>(newPath);
+	}
 }
 
 std::vector<float>* TextComponent::getVertices()
@@ -112,31 +99,9 @@ std::vector<unsigned short>* TextComponent::getIndices()
 	return &mIndices;
 }
 
-void TextComponent::initializeFace()
+graphics::Font* TextComponent::getFont()
 {
-	FT_Error error;
-	error = FT_Init_FreeType(&mLibrary);
-
-	// New face
-	error = FT_New_Memory_Face(mLibrary, &mCharData[0], mCharData.size(), 0, &mFace);
-	mGlyph = mFace->glyph;
-	FT_Set_Char_Size(mFace,	/* handle to face object */
-		0,					/* char_width in 1/64th of points */
-		mFontSize * 64,		/* char_height in 1/64th of points */
-		300,				/* horizontal device resolution in dpi */
-		300);				/* vertical device resolution in dpi */
-
-	gl::genTextures(&mTexture);
-
-	gl::activeTexture();
-	gl::bindTexture(mTexture);
-
-	gl::texParameteri(gl::getGL_TEXTURE_WRAP_S(), gl::getGL_CLAMP_TO_EDGE());
-	gl::texParameteri(gl::getGL_TEXTURE_WRAP_T(), gl::getGL_CLAMP_TO_EDGE());
-	gl::texParameteri(gl::getGL_TEXTURE_MIN_FILTER(), gl::getGL_LINEAR());
-	gl::texParameteri(gl::getGL_TEXTURE_MAG_FILTER(), gl::getGL_LINEAR());
-
-	gl::bindTexture(0);
+	return mFont;
 }
 
 void TextComponent::setColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha)
