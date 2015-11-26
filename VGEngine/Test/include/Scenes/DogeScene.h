@@ -7,5 +7,6 @@ public:
 	~DogeScene();
 	void loadObjects();
 private:
+
 };
 

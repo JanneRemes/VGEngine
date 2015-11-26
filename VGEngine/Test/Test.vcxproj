@@ -196,6 +196,7 @@
     <ClInclude Include="include\Scenes\testScene.h" />
     <ClInclude Include="include\systems\androidLaunchSystem.h" />
     <ClInclude Include="include\Systems\cameraSystem.h" />
+    <ClInclude Include="include\systems\DogeSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
     <ClInclude Include="include\systems\jumpSystem.h" />
     <ClInclude Include="include\systems\mainMenuSystem.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="source\scenes\testScene.cpp" />
     <ClCompile Include="source\systems\androidLaunchSystem.cpp" />
     <ClCompile Include="source\systems\cameraSystem.cpp" />
+    <ClCompile Include="source\systems\DogeSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />
     <ClCompile Include="source\systems\jumpSystem.cpp" />
     <ClCompile Include="source\systems\mainMenuSystem.cpp" />

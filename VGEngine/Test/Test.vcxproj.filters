@@ -93,6 +93,9 @@
     <ClInclude Include="include\Scenes\DogeScene.h">
       <Filter>include\scenes</Filter>
     </ClInclude>
+    <ClInclude Include="include\systems\DogeSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -151,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="source\scenes\DogeScene.cpp">
       <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\DogeSystem.cpp">
+      <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
