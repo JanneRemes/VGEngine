@@ -27,11 +27,11 @@ JumpSystem::JumpSystem(Scene *scene)
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	
-	// Player
+	// Snowboard
 	physicsTest = new GameObject("physicsTest1");
 
-	TransformComponent *physicsTransform = new TransformComponent(Vec2f(10, 10),
-		Vec2f(128, 32), -45.0f);
+	TransformComponent *physicsTransform = new TransformComponent(Vec2f(0, -100),
+		Vec2f(64, 8), -45.0f);
 
 	RenderComponent *physicsObject = new RenderComponent("koala.png");
 	PhysicsComponent *physicsComponent = new PhysicsComponent(physicsTransform, PhysicsComponent::DYNAMIC);
@@ -42,12 +42,47 @@ JumpSystem::JumpSystem(Scene *scene)
 	//physicsTest->getComponent<PhysicsComponent>()->setFriction(0.8);
 
 	scene->addGameObject(physicsTest);
+	
+	// Jumping muumi
+	TransformComponent *muumiTransform = new TransformComponent(Vec2f(1000, 300),
+		Vec2f(64, 64), 0.0f, Vec2f(-25, 45));
 
+	GameObject *muumiObject = new GameObject("muumiObject");
+	muumiObject->addComponent(muumiTransform);
+	muumiObject->addComponent(new PhysicsComponent(muumiTransform, PhysicsComponent::DYNAMIC, 54));
+	RenderComponent *muumiAnimation = new RenderComponent("papparunSmall2.png");
+
+	muumiObject->addComponent(new AnimationComponent(0.04, 3, 8, 24));
+	muumiObject->addComponent(muumiAnimation);
+
+	scene->addGameObject(muumiObject);
+
+	muumiObject->setParent(physicsTest);
 }
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
-	Camera::setPosition(Vec2f(physicsTest->getComponent<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.5, physicsTest->getComponent<TransformComponent>()->getWorldPosition().y - Screen::getY() * 0.5));
+	//Camera::setPosition(Vec2f(physicsTest->getComponent<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.5, physicsTest->getComponent<TransformComponent>()->getWorldPosition().y - Screen::getY() * 0.5));
 
+	if (physicsTest->getComponent<TransformComponent>()->getWorldPosition().y >= Screen::getY())
+	{
+		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+		{
+			if ((*it)->getName().find("physicsTest1") != -1)
+			{
+				PhysicsComponent* phys = (*it)->get<PhysicsComponent>();
+				if (phys != nullptr)
+				{
+					phys->setPosition(Vec2f(10, -10));
+					phys->setAngularVelocity(0);
+					phys->setVelocity(Vec2f(0, 0));
+					phys->setRotation(0);
+				}
+			}
+		}
+				
+	
+	}
+	
 #ifdef OS_WINDOWS
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
