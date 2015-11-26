@@ -231,6 +231,7 @@
     <ClInclude Include="include\engine\game\physicsJoint.h">
       <Filter>include\game</Filter>
     </ClInclude>
+    <ClInclude Include="DllTest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -401,5 +402,6 @@
     <ClCompile Include="source\game\physicsJoint.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+    <ClCompile Include="DllTest.cpp" />
   </ItemGroup>
 </Project>

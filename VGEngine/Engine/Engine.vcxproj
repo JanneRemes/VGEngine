@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DllTest.h" />
     <ClInclude Include="external\glew.h" />
     <ClInclude Include="external\OpenSLES.h" />
     <ClInclude Include="external\OpenSLES_Platform.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="include\engine\utility\vec2f.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DllTest.cpp" />
     <ClCompile Include="external\lodepng\lodepng.cpp" />
     <ClCompile Include="source\assets\asset.cpp" />
     <ClCompile Include="source\assets\assetManager.cpp" />
