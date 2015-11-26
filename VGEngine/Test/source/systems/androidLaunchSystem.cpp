@@ -35,7 +35,8 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	android->getComponent<PhysicsComponent>()->setRestitution(0.60);
 	android->getComponent<PhysicsComponent>()->setDensity(100);
 	//android->getComponent<PhysicsComponent>()->setMass(40);
-	android->getComponent<PhysicsComponent>()->setAngularDamping(0.2);
+	android->getComponent<PhysicsComponent>()->setAngularDamping(0.3);
+	android->getComponent<PhysicsComponent>()->setLinearDamping(0.1);
 	scene->addGameObject(android);
 
 	/*
@@ -101,7 +102,6 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	scene->addGameObject(physicBorder);
 
 	borderPhysComponent->setFriction(50);
-	//physicSystem->createBorders(0, Screen::getY() * 3, Screen::getX() * 100, Screen::getY());
 
 	bState = INCREASING;
 	bgState = BACKGROUND1;
@@ -241,13 +241,16 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			normalizedVec = normalize(tempVec);
 
 			vg::Vec2f velocity = vg::Vec2f(normalizedVec.x * barYIncrement * speed, normalizedVec.y * barYIncrement * speed);
+
+			if (velocity.x < 0)
+				velocity.x = 0;
 			android->getComponent<PhysicsComponent>()->setVelocity(vg::Vec2f(velocity.x, -velocity.y));
 
-			android->getComponent<PhysicsComponent>()->wake(true);
+			
 		}
 	}
 
-	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x / 150.0f);
+	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x * 0.0025f);
 	std::stringstream stream;
 	stream << "Distance: "  << distance << "m";
 	textObject->getComponent<TextComponent>()->setText(stream.str());
@@ -279,6 +282,8 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 			background2->getComponent<TransformComponent>()->setPosition(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0));
 
 			bgState = Background::RESET;
+
+			android->getComponent<PhysicsComponent>()->wake(true);
 
 			distance = 0;
 		}
