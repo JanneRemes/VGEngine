@@ -8,6 +8,7 @@ using namespace vg;
 
 Joint::Joint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
 {
+	connected = false;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	mBodyA = bodyA->mBody;
 	mBodyB = bodyB->mBody;
@@ -18,6 +19,7 @@ void Joint::createRevoluteJoint()
 	revoluteDef.bodyA = mBodyA;
 	revoluteDef.bodyB = mBodyB;
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
+	connected = true;
 }
 
 void Joint::setAnchorA(Vec2f pos)
@@ -48,13 +50,19 @@ void Joint::enableLimit(bool b)
 
 void Joint::reCreate()
 {
+	connected = false;
 	system->world->DestroyJoint(revoluteJoint);
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
+	connected = true;
 }
 
 void Joint::removeJoint()
 {
-	system->world->DestroyJoint(revoluteJoint);
+	if (!system->world->IsLocked())
+	{
+		connected = false;
+		system->world->DestroyJoint(revoluteJoint);
+	}
 }
 
 Joint::~Joint()

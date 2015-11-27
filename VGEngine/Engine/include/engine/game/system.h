@@ -31,7 +31,7 @@ namespace vg
 		@param deltaTime how many seconds last update took
 		*/
 		virtual void update(std::vector<GameObject*>* gameObjects, float deltaTime);
-
+		virtual void onHit(GameObject *object1, GameObject *object2){};
 		/**
 		Fetches system's update priority.
 		@return system´s update priority

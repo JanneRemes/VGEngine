@@ -17,6 +17,7 @@ public:
 	PhysicsTestSystem(vg::Scene *scene);
 	~PhysicsTestSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
+	void onHit(vg::GameObject *other, vg::GameObject *other2);
 	void createPapis(vg::Vec2f pos);
 private:
 	vg::Scene *scene;

@@ -21,7 +21,8 @@ namespace vg
 		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
 		void addSystem(System *system);
 		void clearSystems();
-		
+		std::vector<System*> *getAllSystems() { return &systems; };
+
 		/**
 		@return system with template type from system list.
 		*/

@@ -24,15 +24,6 @@ JumpScene::~JumpScene()
 void JumpScene::loadObjects()
 {
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
-
-	// Background
-	GameObject *background = new GameObject("background");
-	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
-		Vec2f(1280, 720), 0.0f);
-	background->addComponent(backgroundTransform);
-	RenderComponent *quadrBackground = new RenderComponent("muumiBG.png");
-	background->addComponent(quadrBackground);
-	addGameObject(background);
 	
 	// koala platform
 	TransformComponent *physicsTransform2 = new TransformComponent(Vec2f(1000, 300),

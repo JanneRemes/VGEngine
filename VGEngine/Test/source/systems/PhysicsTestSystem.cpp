@@ -245,3 +245,8 @@ void PhysicsTestSystem::createPapis(Vec2f pos)
 		scene->addGameObject(physicsTest);
 	}
 }
+
+void PhysicsTestSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
+{
+	std::cout << "Doge" << std::endl;
+}

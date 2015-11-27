@@ -6,6 +6,11 @@
 #include "engine\game\physicsComponent.h"
 namespace vg
 {
+	class ContactListener : public b2ContactListener
+	{
+		void BeginContact(b2Contact *contact);
+	};
+
 	class PhysicsSystem : public System
 	{
 		friend class PhysicsComponent;

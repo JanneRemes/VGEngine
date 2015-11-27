@@ -28,11 +28,21 @@ JumpSystem::JumpSystem(Scene *scene)
 {
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-
+	
 	launchPower = 0;
 	jumpDistance = 0;
 	jumpPosition = 0;
 	launched = false;
+	
+	// Background
+	background = new GameObject("background");
+	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
+		Vec2f(1280, 720), 0.0f, Vec2f(0, 0), TransformComponent::BOTTOM);
+
+	background->addComponent(backgroundTransform);
+	RenderComponent *quadrBackground = new RenderComponent("muumiBG.png");
+	background->addComponent(quadrBackground);
+	scene->addGameObject(background);
 
 	// Distance text
 	textObject = new GameObject("Distance");
@@ -121,7 +131,7 @@ JumpSystem::JumpSystem(Scene *scene)
 	TransformComponent *landTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(0, 0));
 
-	GameObject *landingZone = new GameObject("hillObject");
+	landingZone = new GameObject("landingZone");
 
 	PhysicsComponent *landPhysics = new PhysicsComponent(landTransform, listOfCustomPoints);
 
@@ -132,12 +142,20 @@ JumpSystem::JumpSystem(Scene *scene)
 	scene->addGameObject(landingZone);
 }
 
-
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
 	Camera::setPosition(Vec2f(muumiObject->getComponent<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.5,
 		muumiObject->getComponent<TransformComponent>()->getWorldPosition().y - Screen::getY() * 0.5));
 
+	background->getComponent<TransformComponent>()->setPosition(Camera::getPosition());
+
+	//// Collision checking with land
+	//if (muumiObject->getComponent<PhysicsComponent>()->isHitting(landingZone))
+	//{
+	//	if (muumiJoint->connected)
+	//	muumiJoint->removeJoint();
+	//}
+	
 #ifdef OS_WINDOWS
 	if (snowboard->getComponent<TransformComponent>()->getWorldPosition().y >= 528 * 5 + 1000 ||
 		vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
@@ -159,13 +177,15 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 					muumiObject->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
 					muumiObject->getComponent<PhysicsComponent>()->setRotation(-45);
 					muumiObject->getComponent<PhysicsComponent>()->wake(true);
-
 					launchPower = 0;
 					jumpDistance = 0;
 					jumpPosition = 0;
 					launched = false;
 					textObject->getComponent<TextComponent>()->setText("");
 					powerTextObject->getComponent<TextComponent>()->setText("");
+
+					if (!muumiJoint->connected)
+						muumiJoint->createRevoluteJoint();
 				}
 			}
 		}
@@ -218,4 +238,17 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 #ifdef OS_ANDROID
 	
 #endif
+}
+void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
+{
+	if (other->getName() == "muumiObject" && other2->getName() == "landingZone" ||
+		other2->getName() == "muumiObject" && other->getName() == "landingZone")
+	{
+		if (muumiJoint->connected)
+		{
+		std::cout << "Doge" << std::endl;
+		muumiJoint->removeJoint();
+		}
+	}
+
 }

@@ -19,6 +19,8 @@ namespace vg
 		void setAnchorA(Vec2f pos);
 		void setAnchorB(Vec2f pos);
 		void removeJoint();
+
+		bool connected;
 	private:
 		void reCreate();
 		vg::PhysicsSystem *system;

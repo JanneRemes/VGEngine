@@ -8,7 +8,7 @@
 using namespace vg;
 float PhysicsComponent::scale = 30.0f;
 
-PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, Vec2f size)
+PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, Vec2f size): Component()
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 
@@ -52,6 +52,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBodyDef.angle = 0.0f;
 
 	mBody = system->getWorld()->CreateBody(&mBodyDef);
+	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(5);
 	mBody->SetTransform(mBody->GetPosition(), component->getWorldRotation() * (3.14 / 180));
 	mBody->CreateFixture(&mFixDef);
@@ -95,6 +96,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 
 
 	mBody = system->getWorld()->CreateBody(&mBodyDef);
+	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(2);
 	mBody->CreateFixture(&mFixDef);
 }
@@ -115,11 +117,11 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 	mFixDef.shape = &mChainShape;
 
 	mBody = system->world->CreateBody(&mBodyDef);
+	mBody->SetUserData(static_cast<void*>(this));
 	mBody->CreateFixture(&mFixDef);
 
 	delete vs;
 }
-
 
 PhysicsComponent::~PhysicsComponent()
 {

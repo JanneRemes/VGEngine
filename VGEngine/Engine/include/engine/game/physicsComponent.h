@@ -65,11 +65,9 @@ namespace vg
 		Sets velocity for the physicsComponent that it will move with
 		*/
 		void setVelocity(Vec2f velocity);
-
 		Vec2f getVelocity();
-
 		void wake(bool sleep);
-
+		
 		/**
 		Sets angular velocity
 		*/
@@ -134,7 +132,6 @@ namespace vg
 		Set collision filter
 		*/
 		void setCollisionFilter(FILTER filter);
-
 	protected:
 		b2Body* mBody;				///< PhysicsComponents Box2D body
 		b2BodyDef mBodyDef;			///< PhysicsComponents Box2D bodyDef

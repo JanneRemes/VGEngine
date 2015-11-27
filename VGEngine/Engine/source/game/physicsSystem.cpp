@@ -4,15 +4,34 @@
 #include <typeinfo>
 #include <vector>
 
+#include "engine\game\game.h"
+#include "engine\game\scene.h"
+
 using namespace vg;
 
 const float scale = PhysicsComponent::scale;
+
+void ContactListener::BeginContact(b2Contact *contact)
+{
+	//std::cout << "Contacts are happening" << std::endl;
+	PhysicsComponent *component = static_cast<PhysicsComponent*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	PhysicsComponent *component2 = static_cast<PhysicsComponent*>(contact->GetFixtureB()->GetBody()->GetUserData());
+	if (component != nullptr && component2 != nullptr)
+	{
+		auto *systemList = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getAllSystems();
+		for (auto it = systemList->begin(); it != systemList->end(); it++)
+		{
+			(*it)->onHit(component->getGameObject(), component2->getGameObject());
+		}
+	}
+}
 
 PhysicsSystem::PhysicsSystem(float gravityX, float gravityY)
 {
 	b2Vec2 *b2Gravity = new b2Vec2(gravityX, gravityY);
 	world = new b2World(*b2Gravity);
 	world->SetGravity(*b2Gravity);
+	world->SetContactListener(new ContactListener());
 }
 
 PhysicsSystem::~PhysicsSystem()
