@@ -154,10 +154,11 @@ mat4 RenderSystem::modelTransform(Vec2f position, Vec2f origin, Vec2f size, floa
 
 	mat4 model = mat4();
 	model = translate(model, vec3(position2, 0.0f));
-	model = translate(model, vec3(0.5f * size2.x, 0.5f * size2.y, 0.0f));
+	model = translate(model, vec3(origin.x, origin.y, 0.0f));
 	model = rotate(model, rotation, vec3(0.0f, 0.0f, 1.0f));
-	model = translate(model, vec3(-0.5f * size2.x, -0.5f * size2.y, 0.0f));
+	model = translate(model, vec3(-origin.x, -origin.y, 0.0f));
 	model = scale(model, vec3(size2, 1.0f));
+
 	return model;
 }
 

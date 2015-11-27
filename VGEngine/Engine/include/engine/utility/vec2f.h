@@ -37,6 +37,11 @@ namespace vg
 		float length();
 
 		/**
+		@return length of the vector
+		*/
+		static float length(const Vec2f& vec);
+
+		/**
 		Converts the vector to a unit vector
 		*/
 		void normalize();
@@ -44,12 +49,17 @@ namespace vg
 		/**
 		@return unit vector copy
 		*/
-		static Vec2f normalize(Vec2f vec);
+		static Vec2f normalize(const Vec2f& vec);
 
 		/**
 		@return dot product
 		*/
-		static Vec2f dot(Vec2f a, Vec2f b);
+		static float dot(const Vec2f& a, const Vec2f& b);
+
+		/**
+		@return angle between vectors
+		*/
+		static float angle(const Vec2f& a, const Vec2f& b);
 
 		Vec2f operator + (const Vec2f& right);
 		Vec2f operator - (const Vec2f& right);

@@ -61,7 +61,7 @@ TransformComponent::TransformComponent(Vec2f leftTop, float height, Vec2f rightT
 	mOrigin = Vec2f(0, 0);
 	mPosition = leftTop;
 	mSize = Vec2f(leftTop.distance(rightTop), height);
-	mRotation = 0; //TODO fix
+	mRotation = Vec2f::angle(leftTop, rightTop);
 	setLayer(mLayerGroup);
 }
 

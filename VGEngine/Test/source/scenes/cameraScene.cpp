@@ -58,6 +58,17 @@ void CameraScene::loadObjects()
 		obj->add(quad);
 		addGameObject(obj);
 	}
+	// origin test
+	{
+		GameObject* obj = new GameObject("origin test");
+		TransformComponent* transform = new TransformComponent(
+			Vec2f(640, 360), Vec2f(15, 15), 0.0f, Vec2f(0, 0), TransformComponent::HIGH);
+		RenderComponent* quad = new RenderComponent();
+		quad->setColor(vg::Color(200, 150, 100));
+		obj->add(transform);
+		obj->add(quad);
+		addGameObject(obj);
+	}
 
 	//text
 	string str = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
@@ -77,7 +88,7 @@ void CameraScene::loadObjects()
 	//angled rectangle
 	{
 		GameObject* obj = new GameObject("asdasd");
-		obj->add(new TransformComponent(Vec2f(0, 0), 50, Vec2f(640, 360), TransformComponent::TOP));
+		obj->add(new TransformComponent(Vec2f(650, 360), 20, Vec2f(700, 100), TransformComponent::TOP));
 		RenderComponent* quad = new RenderComponent();
 		quad->setColor(vg::Color(128, 255, 128));
 		obj->add(quad);

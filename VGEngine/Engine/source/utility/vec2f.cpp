@@ -42,21 +42,32 @@ float Vec2f::length()
 	return sqrt(pow(x, 2) + pow(y, 2));
 }
 
+float Vec2f::length(const Vec2f& vec)
+{
+	return sqrt(pow(vec.x, 2) + pow(vec.y, 2));
+}
+
 void Vec2f::normalize()
 {
 	x /= length();
 	y /= length();
 }
 
-Vec2f Vec2f::normalize(Vec2f vec)
+Vec2f Vec2f::normalize(const Vec2f& vec)
 {
-	vec.normalize();
-	return vec;
+	Vec2f result(vec);
+	result.normalize();
+	return result;
 }
 
-static Vec2f dot(Vec2f a, Vec2f b)
+float Vec2f::dot(const Vec2f& a, const Vec2f& b)
 {
 	return a.x * b.x + a.y * b.y;
+}
+
+float Vec2f::angle(const Vec2f& a, const Vec2f& b)
+{
+	return Math::radianToDegrees(acos(dot(a, b) / (length(a) * length(b))));
 }
 
 //operators
