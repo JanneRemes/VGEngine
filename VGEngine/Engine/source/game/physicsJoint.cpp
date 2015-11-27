@@ -23,20 +23,31 @@ void Joint::createRevoluteJoint()
 void Joint::setAnchorA(Vec2f pos)
 {
 	revoluteDef.localAnchorA = b2Vec2(pos.x / PhysicsComponent::scale, pos.y / -PhysicsComponent::scale);
-	system->world->DestroyJoint(revoluteJoint);
-	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
+	reCreate();
 }
 
 void Joint::setAnchorB(Vec2f pos)
 {
 	revoluteDef.localAnchorB = b2Vec2(pos.x / PhysicsComponent::scale, pos.y / -PhysicsComponent::scale);
-	system->world->DestroyJoint(revoluteJoint);
-	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
+	reCreate();
+}
+
+void Joint::enableLimits(float lowerLimit, float upperLimit, bool b)
+{
+	revoluteDef.enableLimit = b;
+	revoluteDef.lowerAngle = lowerLimit * 3.145 / 360;
+	revoluteDef.upperAngle = upperLimit * 3.145 / 360;
+	reCreate();
 }
 
 void Joint::enableLimit(bool b)
 {
 	revoluteDef.enableLimit = b;
+	reCreate();
+}
+
+void Joint::reCreate()
+{
 	system->world->DestroyJoint(revoluteJoint);
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
 }

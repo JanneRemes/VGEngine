@@ -142,6 +142,11 @@ void PhysicsComponent::setAngularVelocity(float velocity)
 	mBody->SetAngularVelocity(velocity);
 }
 
+float PhysicsComponent::getAngularVelocity()
+{
+	return mBody->GetAngularVelocity();
+}
+
 void PhysicsComponent::applyForce(Vec2f force)
 {
 	mBody->ApplyForce(b2Vec2(force.x, force.y), mBody->GetWorldCenter(), true);

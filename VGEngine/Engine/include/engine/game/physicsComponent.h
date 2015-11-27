@@ -76,6 +76,11 @@ namespace vg
 		void setAngularVelocity(float velocity);
 
 		/**
+		Get angular velocity
+		*/
+		float getAngularVelocity();
+
+		/**
 		Applies force for the physicsComponent
 		*/
 		void applyForce(Vec2f force);

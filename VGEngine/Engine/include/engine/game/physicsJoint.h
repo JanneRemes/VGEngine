@@ -10,16 +10,17 @@ namespace vg
 	class Joint : public System
 	{
 	public:
-
 		Joint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);
 		~Joint();
 
 		void createRevoluteJoint();
+		void enableLimits(float lowerLimit, float upperLimit, bool b);
 		void enableLimit(bool b);
 		void setAnchorA(Vec2f pos);
 		void setAnchorB(Vec2f pos);
 		void removeJoint();
-		private:
+	private:
+		void reCreate();
 		vg::PhysicsSystem *system;
 
 		b2Body *mBodyA;
