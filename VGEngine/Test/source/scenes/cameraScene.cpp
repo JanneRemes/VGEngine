@@ -73,6 +73,16 @@ void CameraScene::loadObjects()
 		obj->add(text);
 		addGameObject(obj);
 	}
+
+	//angled rectangle
+	{
+		GameObject* obj = new GameObject("asdasd");
+		obj->add(new TransformComponent(Vec2f(0, 0), 50, Vec2f(640, 360), TransformComponent::TOP));
+		RenderComponent* quad = new RenderComponent();
+		quad->setColor(vg::Color(128, 255, 128));
+		obj->add(quad);
+		addGameObject(obj);
+	}
 }
 
 void CameraScene::createBorder(TransformComponent* transform)

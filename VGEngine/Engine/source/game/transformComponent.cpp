@@ -55,6 +55,16 @@ TransformComponent::TransformComponent(Vec2f leftTop, Vec2f rightBottom, Vec2f o
 	mSize = Vec2f(rightBottom.x - leftTop.x, rightBottom.y - leftTop.y);
 }
 
+TransformComponent::TransformComponent(Vec2f leftTop, float height, Vec2f rightTop, LayerGroup layerGroup, bool useCamera)
+	:mLayerGroup(layerGroup), mUsingCamera(useCamera)
+{
+	mOrigin = Vec2f(0, 0);
+	mPosition = leftTop;
+	mSize = Vec2f(leftTop.distance(rightTop), height);
+	mRotation = 0; //TODO fix
+	setLayer(mLayerGroup);
+}
+
 TransformComponent::~TransformComponent()
 {
 }

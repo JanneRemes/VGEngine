@@ -1,5 +1,6 @@
 
 #include "engine/utility/vec2f.h"
+#include "engine/utility/math.h"
 
 #include <math.h>
 
@@ -18,6 +19,12 @@ Vec2f::Vec2f(float _x, float _y)
 Vec2f::Vec2f(float both)
 {
 	x = y = both;
+}
+
+Vec2f::Vec2f(const Vec2f& other)
+{
+	x = other.x;
+	y = other.y;
 }
 
 float Vec2f::distance(Vec2f other)
@@ -39,6 +46,17 @@ void Vec2f::normalize()
 {
 	x /= length();
 	y /= length();
+}
+
+Vec2f Vec2f::normalize(Vec2f vec)
+{
+	vec.normalize();
+	return vec;
+}
+
+static Vec2f dot(Vec2f a, Vec2f b)
+{
+	return a.x * b.x + a.y * b.y;
 }
 
 //operators

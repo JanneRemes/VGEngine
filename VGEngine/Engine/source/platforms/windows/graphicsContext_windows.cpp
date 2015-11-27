@@ -218,6 +218,10 @@ void GraphicsContext::initializeOpenGL()
 	// font
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	gl::checkError();
+
+	GLint texSize = 0;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+	Log("vgengine", "Max texture size: %d", texSize);
 }
 
 unsigned int GraphicsContext::getProgramId()

@@ -15,6 +15,7 @@ namespace vg
 		Vec2f();
 		Vec2f(float _x, float _y);
 		Vec2f(float both);
+		Vec2f(const Vec2f& other);
 
 		~Vec2f() = default;
 
@@ -39,6 +40,16 @@ namespace vg
 		Converts the vector to a unit vector
 		*/
 		void normalize();
+
+		/**
+		@return unit vector copy
+		*/
+		static Vec2f normalize(Vec2f vec);
+
+		/**
+		@return dot product
+		*/
+		static Vec2f dot(Vec2f a, Vec2f b);
 
 		Vec2f operator + (const Vec2f& right);
 		Vec2f operator - (const Vec2f& right);

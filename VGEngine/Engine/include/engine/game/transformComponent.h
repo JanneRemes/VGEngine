@@ -70,6 +70,15 @@ namespace vg
 		*/
 		TransformComponent(Vec2f leftTop, Vec2f rightBottom, Vec2f origin, LayerGroup layerGroup = MIDDLE, bool useCamera = true);
 
+		/**
+		@param leftTop corner of rectangle
+		@param height of rectangle counted down from top 
+		@param rightTop corner of rectangle
+		@param layerGroup higher layers are drawn over lower ones
+		@param useCamera true if the position is affected by camera
+		*/
+		TransformComponent(Vec2f leftTop, float height, Vec2f rightTop, LayerGroup layerGroup = MIDDLE, bool useCamera = true);
+
 		~TransformComponent();
 
 		/**
