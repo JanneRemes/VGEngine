@@ -22,6 +22,7 @@
 #include "engine/graphics/screen.h"
 #include "engine/game/physicsSystem.h"
 #include "engine\graphics\camera.h"
+#include "engine/utility/string.h"
 
 #include <vector>
 
@@ -31,9 +32,28 @@ using namespace vg::input;
 
 rockSystem::rockSystem(Scene *scene)
 {
+	timer.restart();
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	system->createBorders(0, 10000, 10000, Screen::getY());
+	system->createBorders(0, 10000, 10000000000, Screen::getY());
+
+	//BACKGROUND
+	background1 = new GameObject("BG1");
+	background2 = new GameObject("BG2");
+
+	TransformComponent* bgTransform1 = new TransformComponent(Vec2f(0 - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM);
+	TransformComponent* bgTransform2 = new TransformComponent(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM);
+
+	RenderComponent* bgRender1 = new RenderComponent("desertBG.png");
+	RenderComponent* bgRender2 = new RenderComponent("desertBG.png");
+
+	background1->addComponent(bgTransform1);
+	background1->addComponent(bgRender1);
+	background2->addComponent(bgTransform2);
+	background2->addComponent(bgRender2);
+
+	scene->addGameObject(background1);
+	scene->addGameObject(background2);
 
 	//ROCK
 	rock = new GameObject("rock");
@@ -46,7 +66,7 @@ rockSystem::rockSystem(Scene *scene)
 	rock->addComponent(quadre);
 	rock->addComponent(rockPhysicsComponent);
 
-	rock->getComponent<PhysicsComponent>()->setFriction(0.90);
+	rock->getComponent<PhysicsComponent>()->setFriction(0.50);
 	rock->getComponent<PhysicsComponent>()->setDensity(100);
 	rock->getComponent<PhysicsComponent>()->setRestitution(0.60);
 
@@ -114,13 +134,23 @@ rockSystem::rockSystem(Scene *scene)
 	powerDown = false;
 
 	shot = false;
-	
+	bgState = BACKGROUND1;
+	i = 0;
+
 }
 
 rockSystem::~rockSystem()
 {
 }
 void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
+{
+	updateBars();
+	updateInputs();
+	updateView();
+	updateExplosives(2, gameObjects);
+}
+
+void rockSystem::updateBars()
 {
 	//Indicator on heightbar
 	if (!heightLock)
@@ -168,7 +198,12 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		indicator2->getComponent<TransformComponent>()->setPosition(Vec2f(100, power));
 
 	}
+}
 
+void rockSystem::updateInputs()
+{
+
+	//INPUT FOR WINDOWS
 #ifdef OS_WINDOWS
 	if (vg::input::Mouse::isKeyPressed(vg::input::LEFT))
 	{
@@ -188,6 +223,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 	}
 #endif
 
+	//INPUT FOR ANDROID
 #ifdef OS_ANDROID
 	if (Touch::getIsReleased())
 	{
@@ -195,6 +231,7 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		{
 			powerLock = true;
 			rock->getComponent<PhysicsComponent>()->setVelocity(Vec2f(power, maxHeight - height));
+			shot = true;
 		}
 
 		if (!heightLock)
@@ -205,9 +242,78 @@ void rockSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 
 	}
 #endif
+}
+
+void rockSystem::updateView()
+{
 	if (shot)
 	{
-		Camera::setPosition(Vec2f(rock->get<TransformComponent>()->getWorldPosition().x, Camera::getPosition().y));
+		//MOVING CAMERA
+		Camera::setPosition(Vec2f(rock->get<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.10, Camera::getPosition().y));
+
+		//SCROLLING BACKGROUND
+		switch (bgState)
+		{
+		case Background::BACKGROUND1:
+
+			currentBackground = background1->getComponent<TransformComponent>();
+
+			if (rock->getComponent<TransformComponent>()->getWorldPosition().x >= currentBackground->getWorldPosition().x + Screen::getX() + Screen::getX() * 0.10)
+			{
+				currentBackground->setPosition(Vec2f(currentBackground->getWorldPosition().x + (2 * Screen::getX()), 0));
+				bgState = Background::BACKGROUND2;
+			}
+			break;
+
+		case Background::BACKGROUND2:
+
+			currentBackground = background2->getComponent<TransformComponent>();
+
+			if (rock->getComponent<TransformComponent>()->getWorldPosition().x >= currentBackground->getWorldPosition().x + Screen::getX() + Screen::getX() * 0.10)
+			{
+				currentBackground->setPosition(Vec2f(currentBackground->getWorldPosition().x + (2 * Screen::getX()), 0));
+				bgState = Background::BACKGROUND1;
+			}
+			break;
+
+		case Background::RESET:
+
+			bgState = BACKGROUND1;
+			break;
+		}
 	}
 }
 
+void rockSystem::updateExplosives(int amount, std::vector<vg::GameObject*> *gameObjects) //TODO
+{
+	//EXPLOSIVE
+	//if (timer.getCurrentTimeSeconds() > amount)
+	//{
+	//	explosive = new GameObject("explosive " + toStringi(i, 2));
+	//	i++;
+	//	TransformComponent *explosiveTransform = new TransformComponent(Vec2f(rock->getComponent<TransformComponent>()->getWorldPosition().x + 100, 600), Vec2f(100,100));
+	//	RenderComponent *explosiveRender = new RenderComponent("android.png");
+
+	//	explosive->addComponent(explosiveTransform);
+	//	explosive->addComponent(explosiveRender);
+
+	//	scene->addGameObject(explosive);
+	//	timer.restart();
+	//}
+
+	////UPDATE
+	//for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+	//{
+	//	if ((*it)->getName().find("explosive") != -1)
+	//	{
+	//		TransformComponent* trans = (*it)->get<TransformComponent>();
+	//		if (trans != nullptr)
+	//		{
+	//			if (trans->getWorldPosition() == rock->getComponent<TransformComponent>()->getWorldPosition())
+	//			{
+	//				rock->getComponent<PhysicsComponent>()->applyForce(Vec2f(120, 120));
+	//			}
+	//		}
+	//	}
+	//}
+}

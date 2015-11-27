@@ -10,5 +10,6 @@ public:
 	void loadObjects();
 
 private:
-
+	int hillSizeModifier;
+	float lowestPoint;
 };

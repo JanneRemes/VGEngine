@@ -88,7 +88,7 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 				shader->setUniform("unifLayer", transform->getLayer());
 				
 				string str = text->getText();
-				float x = transform->getWorldPosition().x;
+				float x = transform->getWorldPosition().x - font->getOffset(str[0]).x;
 				float y = transform->getWorldPosition().y +3 * font->getFontSize();
 
 				for (int i = 0; i < str.size(); i++)

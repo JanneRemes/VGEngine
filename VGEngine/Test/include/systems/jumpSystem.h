@@ -19,7 +19,14 @@ public:
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
-	vg::GameObject *physicsTest;
+	vg::GameObject *snowboard;
 	vg::GameObject *muumiObject;
 	vg::Joint *muumiJoint;
+	vg::GameObject* textObject;
+	vg::GameObject* powerTextObject;
+
+	float jumpDistance;
+	float jumpPosition;
+	int launchPower;
+	bool launched;
 };

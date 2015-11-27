@@ -51,9 +51,8 @@ void JumpScene::loadObjects()
 	
 	// custom physics shape
 	std::vector<Vec2f> listOfCustomPoints;
-
-	int hillSizeModifier = 5;
-	float hill[18] = {
+	const int hillSize = 18;
+	float hill[hillSize] = {
 		0, 0,
 		400, 500,
 		415, 510,
@@ -64,11 +63,14 @@ void JumpScene::loadObjects()
 		500, 530,
 		520, 528 };
 
+	hillSizeModifier = 5;
+	lowestPoint = hill[hillSize] * hillSizeModifier;
+
 	// Create hill from array
-	for (int i = 0; i < 18; i+=2)
+	for (int i = 0; i < hillSize; i += 2)
 	{
-		listOfCustomPoints.push_back(Vec2f(hill[i], hill[i + 1]));
-		std::cout << hill[i]  << " " << hill[i + 1] << std::endl;
+		listOfCustomPoints.push_back(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier));
+		std::cout << hill[i] * hillSizeModifier << " " << hill[i + 1] * hillSizeModifier << std::endl;
 
 		float distance = sqrt((hill[i] - hill[i + 2])*(hill[i] - hill[i + 2]) +
 				(hill[i + 1] - hill[i + 3])*(hill[i + 1] - hill[i + 3]));
@@ -78,8 +80,8 @@ void JumpScene::loadObjects()
 		float angleInDegrees = atan2(deltaY, deltaX) * 180 / 3.1415;
 
 		// hill texturing parts
-		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(hill[i], hill[i+1]),
-			Vec2f(distance, 10), angleInDegrees);
+		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier),
+			Vec2f(distance * hillSizeModifier, 10), angleInDegrees);
 
 		GameObject *hillPartObjectNew = new GameObject("hillPart");
 		RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
