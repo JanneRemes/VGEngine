@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{E497E48B-462A-4C74-812F-932E5D53B835}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -179,8 +179,7 @@ Global
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Tegra-Android.Build.0 = Debug|Tegra-Android
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.ActiveCfg = Debug|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|Win32.Build.0 = Debug|Win32
-		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|x64.ActiveCfg = Debug|x64
-		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|x64.Build.0 = Debug|x64
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug|x64.ActiveCfg = Debug|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Any CPU.ActiveCfg = EngineDLL|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Mixed Platforms.ActiveCfg = EngineDLL|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.EngineDLL|Mixed Platforms.Build.0 = EngineDLL|Win32
