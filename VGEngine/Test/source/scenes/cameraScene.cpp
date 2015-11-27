@@ -60,14 +60,16 @@ void CameraScene::loadObjects()
 	}
 
 	//text
+	string str = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
 	for (int i = 0; i < 5; i++)
 	{
-		TextComponent* text = new TextComponent("arial.ttf", 16 + 4*i);
-		text->setText("aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ");
+		reverse(str.begin(), str.end());
+		int size = 36 + 4 * i;
+		TextComponent* text = new TextComponent("arial.ttf", size);
+		text->setText(str);
 		text->setColor(i * 32, i * 32, i * 32);
 		GameObject* obj = new GameObject("koalatext");
-		obj->add(new TransformComponent(Vec2f(0, 100 * i),
-			Vec2f(0, 0), 0.0f));
+		obj->add(new TransformComponent(Vec2f(-1000, 2.5f * size * i), TransformComponent::LOW));
 		obj->add(text);
 		addGameObject(obj);
 	}

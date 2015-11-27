@@ -93,17 +93,17 @@ namespace vg
 			static inline int nextp2(int x);
 
 			float mAdvance[128];		///< horizontal advance for each character 
-			float mWidth[128];			///< for each character
-			float mHeight[128];			///< for each character
-			float mTex_x1[128];			///< for each character
-			float mTex_x2[128];			///< for each character
-			float mTex_y1[128];			///< for each character
-			float mTex_y2[128];			///< for each character	
-			float mOffset_x[128];		///< for each character
-			float mOffset_y[128];		///< for each character
+			float mWidth[128];			///< total width for each character
+			float mHeight[128];			///< total height for each character
+			float mTex_x1[128];			///< upper left corner texture coordinate for each character
+			float mTex_x2[128];			///< bottom right corner texture coordinate for each character
+			float mTex_y1[128];			///< upper left corner texture coordinatefor each character
+			float mTex_y2[128];			///< bottom right corner texture coordinate for each character
+			float mOffset_x[128];		///< horizontal offset for each character
+			float mOffset_y[128];		///< vertical offset for each character
 
 			unsigned int mTexture;		///< texture id
-			unsigned int mFontSize;		///< <Fontsize for text>
+			unsigned int mFontSize;		///< fontsize for text
 		};
 	}
 }

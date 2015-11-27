@@ -24,17 +24,35 @@ bool Font::load(core::FileManager* fileManager)
 	std::vector<FT_Byte> fileBuffer;
 	fileManager->readAsset(removeDigits(mPath), fileBuffer);
 	gl::genTextures(&mTexture);
-	FT_Error error;
+	FT_Error error = 0;
 	FT_Face face;					        
 	FT_Library library;					
+	
 	error = FT_Init_FreeType(&library);
+	if (error)
+	{
+		Log("vgengine", "Freetype error: %d", error);
+		return false;
+	}
 
 	error = FT_New_Memory_Face(library, &fileBuffer[0], fileBuffer.size(), 0, &face);
-	FT_Set_Char_Size(face,	/* handle to face object */
-		mFontSize * 64,		/* char_width in 1/64th of points */
-		mFontSize * 64,		/* char_height in 1/64th of points */
-		300,				/* horizontal device resolution in dpi */
-		300);				/* vertical device resolution in dpi */
+	if (error)
+	{
+		Log("vgengine", "Freetype error: %d", error);
+		return false;
+	}
+
+	error = FT_Set_Char_Size(
+		face,			/* handle to face object */
+		mFontSize * 64,	/* char_width in 1/64th of points */
+		mFontSize * 64,	/* char_height in 1/64th of points */
+		300,			/* horizontal device resolution in dpi */
+		300);			/* vertical device resolution in dpi */
+	if (error)
+	{
+		Log("vgengine", "Freetype error: %d", error);
+		return false;
+	}
 
 	int segment_size_x = 0, segment_size_y = 0;
 	int num_segments_x = 16;
@@ -42,13 +60,18 @@ bool Font::load(core::FileManager* fileManager)
 	FT_GlyphSlot slot;
 	FT_Bitmap bmp;
 	int glyph_width, glyph_height;
-
 	int c, j, i;
+
+	// calculate the max width and height of a character in a passed font
 	for (c = 0; c < 128; c++)
 	{
 		error = FT_Load_Char(face, c, FT_LOAD_RENDER);
 		if (error)
+		{
 			Log("vgengine", "Freetype error: %d", error);
+			return false;
+		}
+			
 
 		slot = face->glyph;
 		bmp = slot->bitmap;
@@ -71,11 +94,16 @@ bool Font::load(core::FileManager* fileManager)
 	unsigned char* font_texture_data = (unsigned char*)malloc(sizeof(unsigned char)* 2 * font_tex_width * font_tex_height);
 	memset((void*)font_texture_data, 0, sizeof(unsigned char)* 2 * font_tex_width * font_tex_height);
 
+	// Fill font texture bitmap with individual bmp data and record values for every glyph
 	for (c = 0; c < 128; c++) 
 	{
 		error = FT_Load_Char(face, c, FT_LOAD_RENDER);
 		if (error)
+		{
 			Log("vgengine", "Freetype error: %d", error);
+			free(font_texture_data);
+			return false;
+		}
 
 		slot = face->glyph;
 		bmp = slot->bitmap;
@@ -110,11 +138,13 @@ bool Font::load(core::FileManager* fileManager)
 		mOffset_y[c] = static_cast<float>(offy);
 	}
 
+	// texture
 	gl::bindTexture(mTexture);
 	gl::texParameteri(gl::getGL_TEXTURE_MIN_FILTER(), gl::getGL_LINEAR());
 	gl::texParameteri(gl::getGL_TEXTURE_MAG_FILTER(), gl::getGL_LINEAR());
 	gl::texImage2DLuminanceAlpha(font_tex_width, font_tex_height, font_texture_data);
 	
+	// free memory
 	free(font_texture_data);
 	FT_Done_Face(face);
 	FT_Done_FreeType(library);
