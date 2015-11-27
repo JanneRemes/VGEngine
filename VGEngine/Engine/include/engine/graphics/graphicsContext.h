@@ -1,6 +1,6 @@
 
 #pragma once
-
+#include "../DllTest.h"
 namespace vg
 {
 	namespace graphics
@@ -8,6 +8,7 @@ namespace vg
 		/**
 		Initializes EGL and openGL, swaps buffers
 		*/
+		
 		class GraphicsContext
 		{
 		public:
@@ -44,6 +45,7 @@ namespace vg
 			*/
 			void* getWindowHandle();
 
+			void* mWindowHandle;	///< HWND pointer to a window
 		private:
 			/**
 			Initializes EGL context for current device
@@ -60,14 +62,13 @@ namespace vg
 			links shaders, creates buffers
 			*/
 			void initializeOpenGL();
-
 			/**
 			Checks and prints possible EGL errors
 			*/
 			void checkError();
 
 
-			void* mWindowHandle;	///< HWND pointer to a window
+
 		};
 	}
 }

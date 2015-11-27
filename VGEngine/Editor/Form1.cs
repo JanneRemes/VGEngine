@@ -28,7 +28,7 @@ namespace Editor
         public static extern void Add(int value);
 
         [DllImport(@"..\..\..\Win32\EngineDLL\Engine.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void MakeGame();
+        public unsafe static extern void MakeGame(void *data);
         [DllImport(@"..\..\..\Win32\EngineDLL\Engine.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Update();
         [DllImport(@"..\..\..\Win32\EngineDLL\Engine.dll")]
@@ -47,7 +47,7 @@ namespace Editor
             unsafe
             {
          
-                MakeGame();
+                MakeGame(ptr.ToPointer());
                 while (true)
                 {
                     Update();

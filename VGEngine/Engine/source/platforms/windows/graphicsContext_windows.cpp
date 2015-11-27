@@ -49,6 +49,7 @@ LRESULT CALLBACK WindowProc(HWND handle, UINT uMsg, WPARAM wParam, LPARAM lParam
 }
 GraphicsContext::GraphicsContext()
 {
+	mWindowHandle = nullptr;
 }
 
 GraphicsContext::~GraphicsContext()
@@ -58,7 +59,7 @@ GraphicsContext::~GraphicsContext()
 
 void GraphicsContext::initialize()
 {
-
+	if (mWindowHandle == nullptr)
 	initializeGraphicsContext();
 	initializeOpenGL();
 }
@@ -103,8 +104,16 @@ void GraphicsContext::initializeGraphicsContext()
 
 	}
 
+}
+void GraphicsContext::createGLProgram()
+{
+	mProgramId = gl::createProgram();
+	gl::checkError();
+	
+}
 
-
+void GraphicsContext::initializeOpenGL()
+{
 	//OPENGL
 
 	PIXELFORMATDESCRIPTOR pfd =
@@ -156,7 +165,7 @@ void GraphicsContext::initializeGraphicsContext()
 	int  pixelFormat;
 	pixelFormat = ChoosePixelFormat(windowHandle, &pfd);
 	checkError(); //ERROR CHECK
-	Log("vgengine", "Pixelformat: %d",pixelFormat);
+	Log("vgengine", "Pixelformat: %d", pixelFormat);
 	if (!SetPixelFormat(windowHandle, pixelFormat, &pfd))
 	{
 		Log("vgengine", "Failed to set pixel format");
@@ -177,17 +186,10 @@ void GraphicsContext::initializeGraphicsContext()
 
 	hdcHandle = GetDC(windowHandle2);
 
-}
 
-void GraphicsContext::createGLProgram()
-{
-	mProgramId = gl::createProgram();
-	gl::checkError();
-	
-}
 
-void GraphicsContext::initializeOpenGL()
-{
+
+
 	glewInit();
 	const GLubyte* glVersion = glGetString(GL_VERSION);
 	Log("vgengine", "OpenGL ES version: %s", glVersion);

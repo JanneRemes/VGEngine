@@ -13,7 +13,6 @@
 #include "engine/utility/logger.h"
 #include "engine/game/transformComponent.h"
 #include "engine/game/renderComponent.h"
-
 #include <direct.h>
 using namespace vg;
 using namespace vg::core;
@@ -34,10 +33,11 @@ extern "C" __declspec(dllexport) void __cdecl Add(int value)
 {
 	std::cout << value*value << std::endl;
 }
-extern "C"__declspec(dllexport) void __cdecl MakeGame()
+extern "C"__declspec(dllexport) void __cdecl MakeGame(void *data)
 {
 	Game* game = Game::getInstance();
 	Graphics *graphics = new Graphics();
+	graphics->getContext()->mWindowHandle = data;
 	graphics->initialize();
 	game->setFileManager();
 	game->setGraphics(graphics);
@@ -50,12 +50,14 @@ extern "C"__declspec(dllexport) void __cdecl MakeGame()
 	graphics->swapBuffers();
 	Scene *scene = new Scene();
 	GameObject *gg = new GameObject("GG");
-	gg->addComponent(new TransformComponent(Vec2f(50, 50)));
+	gg->addComponent(new TransformComponent(Vec2f(0, 0),
+		Vec2f(1280, 720), 0.0f));
 	gg->addComponent(new RenderComponent("doge.png"));
 	scene->addGameObject(gg);
+
 	game->getSceneManager()->addTemplateScene("scene", scene);
 	game->getSceneManager()->changeScene("scene");
-	Screen::setColor(vg::Color(255, 0, 0));
+	Screen::setColor(vg::Color(100, 100, 50));
 
 }
 extern "C"__declspec(dllexport) void __cdecl Update()
