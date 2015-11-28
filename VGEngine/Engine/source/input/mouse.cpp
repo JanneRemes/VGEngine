@@ -33,7 +33,7 @@ Vec2f Mouse::getPos(bool relativeToCamera)
 	if (relativeToCamera)
 		return Screen::toWorld(pt.x, pt.y);
 	else 
-		return Vec2f(pt.x, pt.y);
+		return Screen::realToVirtual(Vec2f(pt.x, pt.y));
 }
 
 Vec2f Mouse::fromCenter()

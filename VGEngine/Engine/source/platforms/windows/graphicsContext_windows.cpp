@@ -81,6 +81,7 @@ void GraphicsContext::initializeGraphicsContext()
 	char* CLASS_NAME = "asd";
 	std::string windowName = "VG Engine";
 	//RECT winRect = { 0, 0, 640, 360};
+	//RECT winRect = { 0, 0, 800, 480 };
 	RECT winRect = {0, 0, 1280, 720};
 	//RECT winRect = { 0, 0, 1920, 1080};
 

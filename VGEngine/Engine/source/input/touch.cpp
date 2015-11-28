@@ -16,7 +16,7 @@ Vec2f Touch::getPos(bool relativeToCamera)
 	if (relativeToCamera)
 		return Screen::toWorld(mPos);
 	else
-		return mPos;
+		return Screen::realToVirtual(mPos);
 }
 
 void Touch::setPos(Vec2f value)
