@@ -55,7 +55,6 @@ Vec2f Touch::fromCenter()
 	Vec2f result(0.5f * Screen::getSize().x, 0.5f * Screen::getSize().y);
 	Vec2f input = getPos(false);
 	result -= input;
-	result.normalize();
 	result *= -1.0f;
 	return result;
 }

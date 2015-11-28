@@ -26,7 +26,7 @@ CameraScene::~CameraScene()
 
 void CameraScene::loadObjects()
 {
-	Screen::setColor(vg::Color(0, 0, 127));
+	Screen::setColor(vg::Color(50, 50, 150));
 
 	CameraSystem* camSys = new CameraSystem();
 	Game::getInstance()->addComponentSystem(this, camSys);
@@ -59,6 +59,7 @@ void CameraScene::loadObjects()
 		addGameObject(obj);
 	}
 	// origin test
+	/*
 	{
 		GameObject* obj = new GameObject("origin test");
 		TransformComponent* transform = new TransformComponent(
@@ -69,6 +70,7 @@ void CameraScene::loadObjects()
 		obj->add(quad);
 		addGameObject(obj);
 	}
+	*/
 
 	//text
 	string str = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVxXyYzZ";
@@ -86,6 +88,7 @@ void CameraScene::loadObjects()
 	}
 
 	//angled rectangle
+	/*
 	{
 		GameObject* obj = new GameObject("asdasd");
 		obj->add(new TransformComponent(Vec2f(-200, 200), 50, Vec2f(-100, -1500), TransformComponent::TOP));
@@ -94,6 +97,7 @@ void CameraScene::loadObjects()
 		obj->add(quad);
 		addGameObject(obj);
 	}
+	*/
 }
 
 void CameraScene::createBorder(TransformComponent* transform)
@@ -101,7 +105,7 @@ void CameraScene::createBorder(TransformComponent* transform)
 	GameObject* obj = new GameObject("border");
 	obj->add(transform);
 	RenderComponent* quad = new RenderComponent();
-	quad->setColor(vg::Color(255, 0, 0));
+	quad->setColor(vg::Color(100, 0, 0));
 	obj->add(quad);
 	addGameObject(obj);
 }

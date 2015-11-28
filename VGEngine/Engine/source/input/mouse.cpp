@@ -40,7 +40,6 @@ Vec2f Mouse::fromCenter()
 {
 	Vec2f result(0.5f * Screen::getSize().x, 0.5f * Screen::getSize().y);
 	result -= getPos(false);
-	result.normalize();
 	result *= -1.0f;
 	return result;
 }
