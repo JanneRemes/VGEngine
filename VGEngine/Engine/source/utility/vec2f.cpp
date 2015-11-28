@@ -67,7 +67,8 @@ float Vec2f::dot(const Vec2f& a, const Vec2f& b)
 
 float Vec2f::angle(const Vec2f& a, const Vec2f& b)
 {
-	return Math::radianToDegrees(acos(dot(a, b) / (length(a) * length(b))));
+	Vec2f c(b.x - a.x, b.y - a.y);
+	return Math::radianToDegrees(atan2(c.y, c.x));
 }
 
 //operators
