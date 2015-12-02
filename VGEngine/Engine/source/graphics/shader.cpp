@@ -48,17 +48,23 @@ bool Shader::load(vg::core::FileManager& fileManager, const std::string& vertexP
         initialize();
 
     // compile shaders
-    std::string buffer;
-    fileManager.readAsset(FOLDER + vertexPath, buffer);
-    if (!compileShaderSource(mVertexId, buffer))
+    std::string vertexSource;
+	fileManager.readAsset(FOLDER + vertexPath, vertexSource);
+	if (!compileShaderSource(mVertexId, vertexSource))
     {
         Log("vgengine", "Vertex shader compile error!", "");
         printErrorLog(mVertexId);
         return false;
     }
 
-    fileManager.readAsset(FOLDER + fragmentPath, buffer);
-	if (!compileShaderSource(mFragmentId, buffer))
+	std::string fragmentDefs = "";
+#ifdef OS_ANDROID
+	fragmentDefs += "precision mediump float;\n";
+#endif
+
+	std::string fragmentSource;
+	fileManager.readAsset(FOLDER + fragmentPath, fragmentSource);
+	if (!compileShaderSource(mFragmentId, fragmentDefs + fragmentSource))
     {
         Log("vgengine", "Fragment shader compile error!", "");
         printErrorLog(mFragmentId);
@@ -198,17 +204,9 @@ void Shader::setUniform(std::string name, float x, float y, float z, float w)
 }
 const std::string Shader::getDefaultVertexPath()
 {
-#ifdef OS_WINDOWS
-	return "win_vertex.glsl";
-#else
-	return "android_vertex.glsl";
-#endif
+	return "default_vertex.glsl";
 }
 const std::string Shader::getDefaultFragmentPath()
 {
-#ifdef OS_WINDOWS
-	return "win_fragment.glsl";
-#else
-	return "android_fragment.glsl";
-#endif
+	return "default_fragment.glsl";
 }

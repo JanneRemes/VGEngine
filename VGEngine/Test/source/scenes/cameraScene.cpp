@@ -50,12 +50,20 @@ void CameraScene::loadObjects()
 		TransformComponent* transform = new TransformComponent(
 			Vec2f(Random::nexti(500, 750), Random::nexti(300, 400)), Vec2f(64, 64),
 			0.0f, Vec2f(32, 32));
-		RenderComponent* quad = new RenderComponent("koala.png");
-		quad->setColor(vg::Color::random());
+		RenderComponent* render;
+		if (i % 2)
+			render = new RenderComponent("koala.png");
+		else
+		{
+			render = new RenderComponent("skype_monkey2.png");
+			obj->add(new AnimationComponent(Random::nextf(0.001f, 0.1f), 5, 10, 50));
+		}
 
+		render->setColor(vg::Color::random());
+		
 		obj->add(transform);
 		obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC));
-		obj->add(quad);
+		obj->add(render);
 		addGameObject(obj);
 	}
 	// origin test
