@@ -8,6 +8,7 @@
 #include "engine\utility\logger.h"
 #include "engine/graphics/screen.h"
 #include "engine/graphics/camera.h"
+#include "engine/utility/string.h"
 
 using namespace vg;
 using namespace graphics;
@@ -34,9 +35,9 @@ AndroidLaunchSystem::AndroidLaunchSystem(Scene *scene)
 	android->getComponent<PhysicsComponent>()->setFriction(100);
 	android->getComponent<PhysicsComponent>()->setRestitution(0.60);
 	android->getComponent<PhysicsComponent>()->setDensity(100);
-	//android->getComponent<PhysicsComponent>()->setMass(40);
 	android->getComponent<PhysicsComponent>()->setAngularDamping(0.3);
 	android->getComponent<PhysicsComponent>()->setLinearDamping(0.1);
+
 	scene->addGameObject(android);
 
 	/*
@@ -252,7 +253,7 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 
 	distance += (android->getComponent<PhysicsComponent>()->getVelocity().x * 0.0025f);
 	std::stringstream stream;
-	stream << "Distance: "  << distance << "m";
+	stream << "Distance: " << toStringf(static_cast<float>(distance), 1, 1) << "m";
 	textObject->getComponent<TextComponent>()->setText(stream.str());
 
 	backgroundUpdate(gameObjects);

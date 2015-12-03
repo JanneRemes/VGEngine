@@ -1,9 +1,11 @@
 
 #pragma once
 
-#include "engine/assets/asset.h"
-
+#include <vector>
 #include <stdint.h>
+#include "engine/assets/asset.h"
+#include "../external/glm/vec2.hpp"
+
 namespace vg
 {
 	namespace graphics
@@ -11,6 +13,15 @@ namespace vg
 		class Texture : public core::Asset
 		{
 		public:
+
+			inline bool operator<(Texture &tex)
+			{
+				if (pixels.size() < tex.pixels.size())
+				{
+					return true;
+				}
+				return false;
+			}
 			/**
 				Constructor
 				@param path Filepath for the texture, must be .png
@@ -62,12 +73,20 @@ namespace vg
 				@return Returns texture height
 				*/
 			uint32_t getHeight() const;
-		private:
-			void init();
 
-			uint32_t mWidth = 0;	///< Texture width
-			uint32_t mHeight = 0;	///< Texture height
-			uint32_t mId = 0;		///< Texture id
+			/**
+				@return Returns vector containing the pixel data of a texture
+				*/
+			std::vector<unsigned char> getDataVector() const;
+
+		private:
+
+			void init();
+			uint32_t mWidth = 0;				///< Texture width
+			uint32_t mHeight = 0;				///< Texture height
+			uint32_t mId = 0;					///< Texture id
+			std::vector<unsigned char>pixels;	///< Texture pixel data vector
+			glm::vec2 textureRegion[4];			///< Texture Region(Coordinates for the texture in its texture atlas)
 		};
 	}
 }
