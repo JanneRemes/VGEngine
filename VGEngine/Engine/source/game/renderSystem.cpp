@@ -60,8 +60,8 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 			// sprite rendering
 			if (render != nullptr)
 			{
-				mVertexBuffer.setData(*render->getVertices());
-				mIndexBuffer.setData(*render->getIndices());
+				mVertexBuffer.setData(render->getVertices());
+				mIndexBuffer.setData(render->getIndices());
 
 				Texture* texture = render->getTexture();
 				if (texture != nullptr)
@@ -99,8 +99,8 @@ void RenderSystem::update(std::vector<GameObject*> *gameObjects,float deltaTime)
 					x += font->getAdvance(str[i]);
 
 					text->setTexCoords(font->getTexCoord1(str[i]), font->getTexCoord2(str[i]));
-					mVertexBuffer.setData(*text->getVertices());
-					mIndexBuffer.setData(*text->getIndices());
+					mVertexBuffer.setData(text->getVertices());
+					mIndexBuffer.setData(text->getIndices());
 					Graphics::draw(shader, &mVertexBuffer, &mIndexBuffer);
 				}
 				font->unbind();

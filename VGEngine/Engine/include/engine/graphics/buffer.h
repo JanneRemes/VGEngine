@@ -60,12 +60,12 @@ namespace vg
 			Creates and initializes a buffer object's data store
 			@param data Specifies a pointer to data that will be copied into the data store for initialization
 			*/
-			void setData(const std::vector<T>& data)
+			void setData(const std::vector<T> *data)
 			{
 				gl::bindBuffer(mTarget, mId);
-				gl::bufferData(mTarget, data.size() * sizeof(T), &data[0], mUsage);
+				gl::bufferData(mTarget, data->size() * sizeof(T), &data->at(0), mUsage);
 				gl::bindBuffer(mTarget, 0);
-				mSize = data.size();
+				mSize = data->size();
 			}
 
 			/**
@@ -73,10 +73,10 @@ namespace vg
 			@param offset Specifies the offset into the buffer object's data store where data replacement will begin, measured in bytes
 			@param data Specifies a pointer to the new data that will be copied into the data store
 			*/
-			void setData(size_t offset, const std::vector<T>& data)
+			void setData(size_t offset, const std::vector<T> *data)
 			{
 				gl::bindBuffer(mTarget, mId);
-				gl::bufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data[0]);
+				gl::bufferSubData(mTarget, offset * sizeof(T), data.size() * sizeof(T), &data->at(0));
 				gl::bindBuffer(mTarget, 0);
 			}
 
