@@ -57,7 +57,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBody = system->getWorld()->CreateBody(&mBodyDef);
 	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(5);
-	mBody->SetTransform(mBody->GetPosition(), component->getWorldRotation() * (3.14 / 180));
+	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(-component->getWorldRotation()));
 	mBody->CreateFixture(&mFixDef);
 }
 
@@ -172,12 +172,12 @@ Vec2f PhysicsComponent::getPosition()
 
 float PhysicsComponent::getRotation()
 {
-	return (Math::radianToDegrees(mBody->GetAngle()));
+	return -(Math::radianToDegrees(mBody->GetAngle()));
 }
 
 void PhysicsComponent::setRotation(float rotation)
 {
-	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(rotation));
+	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(-rotation));
 }
 
 void PhysicsComponent::setDensity(float density)

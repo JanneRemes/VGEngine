@@ -1,13 +1,8 @@
 
 #pragma once
 
-#include "engine\game\scene.h"
-
-//forward declaration
-namespace vg
-{
-	class TransformComponent;
-}
+#include "engine/game/scene.h"
+#include "engine/utility/vec2f.h"
 
 class CameraScene : public vg::Scene
 {
@@ -17,6 +12,6 @@ public:
 	void loadObjects();
 
 private:
-	void createBorder(vg::TransformComponent* transform);
+	void createBorder(vg::Vec2f lt, vg::Vec2f rt);
 
 };

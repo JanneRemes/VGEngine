@@ -58,10 +58,15 @@ TransformComponent::TransformComponent(Vec2f leftTop, Vec2f rightBottom, Vec2f o
 TransformComponent::TransformComponent(Vec2f leftTop, float height, Vec2f rightTop, LayerGroup layerGroup, bool useCamera)
 	:mLayerGroup(layerGroup), mUsingCamera(useCamera)
 {
-	mOrigin = Vec2f(0, 0);
-	mPosition = leftTop;
-	mSize = Vec2f(leftTop.distance(rightTop), height);
+	float distance = leftTop.distance(rightTop);
+	mSize = Vec2f(distance, height);
+	Vec2f origin = mSize;
+	origin *= 0.5f;
 	mRotation = Vec2f::angle(leftTop, rightTop);
+	distance *= 0.5f;
+	mPosition = leftTop + Vec2f(cos(Math::degreesToRadians(mRotation)) * distance, 
+		sin(Math::degreesToRadians(mRotation)) * distance);
+	mOrigin = origin;
 	setLayer(mLayerGroup);
 }
 

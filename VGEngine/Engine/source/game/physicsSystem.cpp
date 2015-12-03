@@ -102,7 +102,7 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 		 if (physComponent != nullptr && transform != nullptr)
 		 {
 			 transform->setPosition(Vec2f(physComponent->getPosition().x, -physComponent->getPosition().y));
-			 transform->setRotation(-1.0f * physComponent->getRotation());
+			 transform->setRotation(physComponent->getRotation());
 		 }
 	 }
 }

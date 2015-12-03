@@ -1,11 +1,13 @@
 
 #include "systems/cameraSystem.h"
 
-#include "engine\game\physicsComponent.h"
+#include "engine/game/physicsComponent.h"
+#include "engine/game/transformComponent.h"
+#include "engine/game/textComponent.h"
 #include "engine/graphics/camera.h"
 #include "engine/graphics/screen.h"
-#include "engine/game/transformComponent.h"
 #include "engine/utility/random.h"
+#include "engine/utility/string.h"
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
@@ -49,10 +51,16 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		Camera::move(input);
 	}
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
+	{
 		if ((*it)->getName() == "origin test")
 			(*it)->get<TransformComponent>()->rotate(2);
+		else if ((*it)->getName() == "spinner")
+			(*it)->get<PhysicsComponent>()->setAngularVelocity(25.0f);
+		else if ((*it)->getName() == "timer text")
+			(*it)->get<TextComponent>()->setText(toStringi(5 - static_cast<int>(timer.getCurrentTimeSeconds())));
+	}
 
-	if (timer.getCurrentTimeSeconds() > 3)
+	if (timer.getCurrentTimeSeconds() > 5)
 	{
 		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		{
@@ -60,7 +68,7 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 			{
 				PhysicsComponent* phys = (*it)->get<PhysicsComponent>();
 				if (phys != nullptr)
-					phys->setVelocity(Vec2f(Random::nexti(-50, 50), Random::nexti(0, 50)));
+					phys->setVelocity(Vec2f(Random::nexti(-50, 50), Random::nexti(0, 75)));
 			}
 		}
 		timer.restart();

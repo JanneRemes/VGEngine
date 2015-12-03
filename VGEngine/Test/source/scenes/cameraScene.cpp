@@ -34,30 +34,6 @@ void CameraScene::loadObjects()
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
-	//PhysicsSystem* physics = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	{
-		std::vector<Vec2f> borderCorners;
-		
-		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, 96));
-		borderCorners.push_back(Vec2f(96, 96));
-		borderCorners.push_back(Vec2f(96, graphics::Screen::getY() - 96));
-		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, graphics::Screen::getY() - 96));
-		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, 96));
-
-		GameObject* obj = new GameObject("borders");
-		TransformComponent* transform = new TransformComponent(Vec2f(600, 600),
-			Vec2f(200, 64));//Vec2f(0, 0), Vec2f(0, 0), Vec2f(0, 0));
-		obj->add(transform);
-		obj->add(new PhysicsComponent(transform, borderCorners));
-		add(obj);
-	}
-
-	//borders
-	createBorder(new TransformComponent(Vec2f(64, 64), Vec2f(1280 - 64, 96), Vec2f(640 - 32, 16)));
-	createBorder(new TransformComponent(Vec2f(64, 720 - 96), Vec2f(1280 - 64, 720 - 64), Vec2f(640 - 32, 16)));
-	createBorder(new TransformComponent(Vec2f(64, 96), Vec2f(96, 720 - 96), Vec2f(16, 640 - 32)));
-	createBorder(new TransformComponent(Vec2f(1280 - 96, 96), Vec2f(1280 - 64, 720 - 96), Vec2f(16, 640 - 32)));
-
 	//koala
 	for (int i = 0; i < 30; i++)
 	{
@@ -86,7 +62,7 @@ void CameraScene::loadObjects()
 	{
 		GameObject* obj = new GameObject("origin test");
 		TransformComponent* transform = new TransformComponent(
-			Vec2f(1300, 360), Vec2f(15, 15), 0.0f, Vec2f(0, 0), TransformComponent::HIGH);
+			Vec2f(900, 650), Vec2f(15, 15), 0.0f, Vec2f(0, 0), TransformComponent::HIGH);
 		RenderComponent* quad = new RenderComponent();
 		quad->setColor(vg::Color(200, 150, 100));
 		obj->add(transform);
@@ -109,23 +85,60 @@ void CameraScene::loadObjects()
 		addGameObject(obj);
 	}
 
-	//angled rectangle
+	//timer text
 	{
-		GameObject* obj = new GameObject("asdasd");
-		obj->add(new TransformComponent(Vec2f(-200, 200), 50, Vec2f(-100, -1500), TransformComponent::TOP));
+		TextComponent* text = new TextComponent("arial.ttf", 46);
+		text->setText("1");
+		text->setColor(0, 255, 0);
+		GameObject* obj = new GameObject("timer text");
+		obj->add(new TransformComponent(Vec2f(600, 0), TransformComponent::TOP, false));
+		obj->add(text);
+		addGameObject(obj);
+	}
+
+	//border
+	//left
+	createBorder(Vec2f(-200, -1000), Vec2f(0, 500));
+	createBorder(Vec2f(0, 500), Vec2f(640, 720 - 64));
+	//right
+	createBorder(Vec2f(640, 720 - 64), Vec2f(1280, 500));
+	createBorder(Vec2f(1280, 500), Vec2f(1480, -1000));
+	//top
+	createBorder(Vec2f(-200, -1000), Vec2f(1480, -1000));
+
+	//spinner
+	{
+		GameObject* obj = new GameObject("spinner");
+		TransformComponent* transform = new TransformComponent(Vec2f(640 - 150, 400), 8, Vec2f(640 + 150, 400));
+		obj->add(transform);
+		PhysicsComponent* physics =	new PhysicsComponent(transform, PhysicsComponent::DYNAMIC);
+		obj->add(physics);
 		RenderComponent* quad = new RenderComponent();
 		quad->setColor(vg::Color(128, 255, 128));
 		obj->add(quad);
 		addGameObject(obj);
+
+		GameObject* obj2 = new GameObject("spinner middle");
+		TransformComponent* transform2 = new TransformComponent(Vec2f(640, 400), TransformComponent::BOTTOM);
+		obj2->add(transform2);
+		PhysicsComponent* physics2 = new PhysicsComponent(transform2, PhysicsComponent::STATIC);
+		obj2->add(physics2);
+		add(obj2);
+
+		Joint *joint;
+		joint = new Joint(physics, physics2);
+		joint->createRevoluteJoint();
 	}
 }
 
-void CameraScene::createBorder(TransformComponent* transform)
+void CameraScene::createBorder(Vec2f lt, Vec2f rt)
 {
 	GameObject* obj = new GameObject("border");
+	TransformComponent* transform = new TransformComponent(lt, 8, rt);
 	obj->add(transform);
+	obj->add(new PhysicsComponent(transform, PhysicsComponent::STATIC));
 	RenderComponent* quad = new RenderComponent();
-	quad->setColor(vg::Color(100, 0, 0));
+	quad->setColor(vg::Color(128, 255, 128));
 	obj->add(quad);
 	addGameObject(obj);
 }
