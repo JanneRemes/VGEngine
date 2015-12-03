@@ -31,6 +31,7 @@ namespace vg
 		*/
 		void update(std::vector<GameObject*> *gameObjects, float deltaTime);
 		void removeBody(b2Body *body);
+		void removeJoint(b2Joint *joint);
 		/**
 		Creates borders for chainable objects
 		*/
@@ -63,5 +64,6 @@ namespace vg
 	protected:
 		b2World* world;		///< Physics world
 		std::vector<b2Body*> bodyRemovalList;
+		std::vector<b2Joint*> jointRemovalList;
 	};
 }

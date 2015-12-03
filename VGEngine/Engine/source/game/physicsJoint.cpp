@@ -51,21 +51,24 @@ void Joint::enableLimit(bool b)
 void Joint::reCreate()
 {
 	connected = false;
-	system->world->DestroyJoint(revoluteJoint);
+	removeJoint();
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
 	connected = true;
 }
 
 void Joint::removeJoint()
 {
-	if (!system->world->IsLocked())
-	{
-		connected = false;
-		system->world->DestroyJoint(revoluteJoint);
-	}
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	system->removeJoint(revoluteJoint);
+
+	connected = false;
 }
 
 Joint::~Joint()
 {
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	system->removeJoint(revoluteJoint);
 
+	connected = false;
+	system->world->DestroyJoint(revoluteJoint);
 }

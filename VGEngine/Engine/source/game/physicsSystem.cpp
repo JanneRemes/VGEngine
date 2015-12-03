@@ -44,6 +44,10 @@ void PhysicsSystem::removeBody(b2Body *body)
 	bodyRemovalList.push_back(body);
 }
 
+void PhysicsSystem::removeJoint(b2Joint *joint)
+{
+	jointRemovalList.push_back(joint);
+}
 
 void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTime)
 {
@@ -59,6 +63,18 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 			 i = bodyRemovalList.erase(i);
 			 if (bodyRemovalList.size() == 0)
 				break;
+		 }
+	 }
+
+	 // delete marked physic bodies
+	 for (auto i = jointRemovalList.begin(); i != jointRemovalList.end(); i++)
+	 {
+		 if (!world->IsLocked())
+		 {
+			 world->DestroyJoint(*i);
+			 i = jointRemovalList.erase(i);
+			 if (jointRemovalList.size() == 0)
+				 break;
 		 }
 	 }
 
