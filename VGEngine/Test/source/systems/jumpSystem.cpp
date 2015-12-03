@@ -23,6 +23,7 @@
 
 using namespace vg;
 using namespace vg::graphics;
+using namespace vg::input;
 
 JumpSystem::JumpSystem(Scene *scene)
 {
@@ -142,47 +143,11 @@ JumpSystem::JumpSystem(Scene *scene)
 }
 
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
-{
+{	
 	Camera::setPosition(Vec2f(muumiObject->getComponent<TransformComponent>()->getWorldPosition().x - Screen::getX() * 0.5,
 		muumiObject->getComponent<TransformComponent>()->getWorldPosition().y - Screen::getY() * 0.5));
 
 	background->getComponent<TransformComponent>()->setPosition(Camera::getPosition());
-
-	//// Collision checking with land
-	//if (muumiObject->getComponent<PhysicsComponent>()->isHitting(landingZone))
-	//{
-	//	if (muumiJoint->connected)
-	//	muumiJoint->removeJoint();
-	//}
-	
-#ifdef OS_WINDOWS
-	if (snowboard->getComponent<TransformComponent>()->getWorldPosition().y >= 528 * 5 + 1000 ||
-		vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
-	{
-		reset();
-	}
-
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
-	{
-		if (launchPower < 50)
-		{
-			launchPower++;
-			std::cout << launchPower << std::endl;
-
-			// launch power
-			std::stringstream stream;
-			stream << "Power: " << launchPower << " big boy watts";
-			powerTextObject->getComponent<TextComponent>()->setText(stream.str());
-		}
-	}
-	else if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::UP || launchPower >= 100 && muumiJoint->connected)
-	{
-		snowboard->getComponent<PhysicsComponent>()->setVelocity(Vec2f(snowboard->getComponent<PhysicsComponent>()->getVelocity().x + launchPower,
-			snowboard->getComponent<PhysicsComponent>()->getVelocity().y + launchPower));
-		jumpPosition = snowboard->getComponent<TransformComponent>()->getWorldPosition().x;
-		launchPower = 0;
-		launched = true;
-	}
 
 	if (launched)
 	{
@@ -193,21 +158,58 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		textObject->getComponent<TextComponent>()->setText(stream.str());
 	}
 
+	if (snowboard->getComponent<TransformComponent>()->getWorldPosition().y >= 528 * 5 + 1000)
+		reset();
+#ifdef OS_WINDOWS
+
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		reset();
+	}
+
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected && !launched)
+	{
+		prepareLaunch();
+	}
+	else if ((vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::UP && muumiJoint->connected && !launched) || launchPower >= 50)
+	{
+		Launch();
+	}
+
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
 	{
-		muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 2.5);
-		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 0.5);
+		tiltLeft();
 	}
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::D) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
 	{
-		muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 2.5);
-		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 0.5);
+		tiltRight();
 	}
 
 #endif
 
 #ifdef OS_ANDROID
-	
+
+	if (Touch::getIsTouched() && muumiJoint->connected && !launched)
+	{
+		prepareLaunch();
+	}
+
+	else if ((Touch::getIsReleased() && muumiJoint->connected && !launched) || launchPower >= 50 )
+	{
+		Launch();
+	}
+
+	if (Touch::getIsTouched() && launched)
+	{
+		if (Touch::getPos(false).x > Screen::getX() / 2)
+		{
+			tiltRight();
+		}
+		else if (Touch::getPos(false).x < Screen::getX() / 2)
+		{
+			tiltLeft();
+		}
+	}
 #endif
 }
 
@@ -222,6 +224,41 @@ void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
 		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(100);
 		}
 	}
+}
+
+void JumpSystem::prepareLaunch()
+{
+	if (launchPower < 50)
+	{
+		launchPower++;
+		std::cout << launchPower << std::endl;
+
+		// launch power
+		std::stringstream stream;
+		stream << "Power: " << launchPower << " big boy watts";
+		powerTextObject->getComponent<TextComponent>()->setText(stream.str());
+	}
+}
+
+void JumpSystem::Launch()
+{
+	snowboard->getComponent<PhysicsComponent>()->setVelocity(Vec2f(snowboard->getComponent<PhysicsComponent>()->getVelocity().x + launchPower,
+		snowboard->getComponent<PhysicsComponent>()->getVelocity().y + launchPower));
+	jumpPosition = snowboard->getComponent<TransformComponent>()->getWorldPosition().x;
+	launchPower = 0;
+	launched = true;
+}
+
+void JumpSystem::tiltLeft()
+{
+	muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 2.5);
+	snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 0.5);
+}
+
+void JumpSystem::tiltRight()
+{
+	muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 2.5);
+	snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 0.5);
 }
 
 void JumpSystem::reset()

@@ -34,9 +34,23 @@ PhysicsSystem::PhysicsSystem(float gravityX, float gravityY)
 	world->SetContactListener(new ContactListener());
 }
 
+void PhysicsSystem::addJoint(Joint *joint)
+{
+	jointList.push_back(joint);
+}
+
 PhysicsSystem::~PhysicsSystem()
 {
-
+	// delete joints
+	for (auto i = jointList.begin(); i != jointList.end(); i++)
+	{
+		if (!world->IsLocked())
+		{
+			i = jointList.erase(i);
+			if (jointList.size() == 0)
+				break;
+		}
+	}
 }
 
 void PhysicsSystem::removeBody(b2Body *body)
@@ -54,7 +68,7 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 	 int velocityIterations = 8;
 	 int positionIterations = 3;
 
-	 // delete marked physic bodies
+	 // delete marked physic bodies from world
 	 for (auto i = bodyRemovalList.begin(); i != bodyRemovalList.end(); i++)
 	 {
 		 if (!world->IsLocked())
@@ -66,7 +80,7 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 		 }
 	 }
 
-	 // delete marked physic bodies
+	 // delete marked physic joints from world
 	 for (auto i = jointRemovalList.begin(); i != jointRemovalList.end(); i++)
 	 {
 		 if (!world->IsLocked())
@@ -77,7 +91,7 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 				 break;
 		 }
 	 }
-
+	 
 	 world->Step(deltaTime, velocityIterations, positionIterations);
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)

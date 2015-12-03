@@ -18,6 +18,10 @@ public:
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
 	void onHit(vg::GameObject *other, vg::GameObject *other2);
 	void reset();
+	void tiltLeft();
+	void tiltRight();
+	void prepareLaunch();
+	void Launch();
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;

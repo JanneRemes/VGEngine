@@ -84,8 +84,9 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 
 	scene->addGameObject(physicsTest3);
 	
-	Joint joint(physicsPolyComponent2, physicsPolyComponent1);
-	joint.createRevoluteJoint();
+	Joint *joint;
+	joint = new Joint(physicsPolyComponent2, physicsPolyComponent1);
+	joint->createRevoluteJoint();
 
 	//// Two physics objects with same collision masks wont collide
 	physicsTest3->getComponent<PhysicsComponent>()->setCollisionFilter(PhysicsComponent::FILTER::MIDDLE);

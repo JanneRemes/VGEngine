@@ -1,21 +1,25 @@
 #include "engine/game/physicsJoint.h"
+#include "engine/game/physicsSystem.h"
 #include "engine/game/scene.h"
 #include "engine/game/game.h"
 #include <typeinfo>
 #include <vector>
+
 
 using namespace vg;
 
 Joint::Joint(PhysicsComponent *bodyA, PhysicsComponent *bodyB)
 {
 	connected = false;
-	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	mBodyA = bodyA->mBody;
 	mBodyB = bodyB->mBody;
+	system->addJoint(this);
 }
 
 void Joint::createRevoluteJoint()
 {
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	revoluteDef.bodyA = mBodyA;
 	revoluteDef.bodyB = mBodyB;
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
@@ -50,6 +54,7 @@ void Joint::enableLimit(bool b)
 
 void Joint::reCreate()
 {
+	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	connected = false;
 	removeJoint();
 	revoluteJoint = (b2RevoluteJoint*)system->world->CreateJoint(&revoluteDef);
@@ -68,7 +73,5 @@ Joint::~Joint()
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	system->removeJoint(revoluteJoint);
-
 	connected = false;
-	system->world->DestroyJoint(revoluteJoint);
 }

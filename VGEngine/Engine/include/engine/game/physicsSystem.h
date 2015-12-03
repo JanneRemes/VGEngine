@@ -4,6 +4,7 @@
 #include "engine/utility/vec2f.h"
 #include "engine\game\transformComponent.h"
 #include "engine\game\physicsComponent.h"
+#include "engine/game/physicsJoint.h"
 namespace vg
 {
 	class ContactListener : public b2ContactListener
@@ -62,8 +63,10 @@ namespace vg
 		b2World* getWorld() { return world; };
 
 	protected:
+		void addJoint(Joint *joint);
 		b2World* world;		///< Physics world
 		std::vector<b2Body*> bodyRemovalList;
 		std::vector<b2Joint*> jointRemovalList;
+		std::vector<Joint*> jointList;
 	};
 }

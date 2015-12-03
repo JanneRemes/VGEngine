@@ -3,7 +3,6 @@
 #include "engine/game/system.h"
 #include "engine/utility/vec2f.h"
 #include "engine/game/physicsComponent.h"
-#include "engine/game/physicsSystem.h"
 
 namespace vg
 {
@@ -23,7 +22,6 @@ namespace vg
 		bool connected;
 	private:
 		void reCreate();
-		vg::PhysicsSystem *system;
 
 		b2Body *mBodyA;
 		b2Body *mBodyB;
