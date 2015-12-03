@@ -94,8 +94,7 @@ JumpSystem::JumpSystem(Scene *scene)
 	muumiObject->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 	muumiObject->addComponent(muumiAnimation);
 	muumiObject->addComponent(muumiPhysics);
-	//muumiObject->getComponent<PhysicsComponent>()->setFriction(0.7);
-	//muumiObject->getComponent<PhysicsComponent>()->setDensity(100);
+	muumiObject->getComponent<PhysicsComponent>()->setFriction(300);
 	muumiObject->getComponent<PhysicsComponent>()->setAngularDamping(5);
 
 	scene->addGameObject(muumiObject);
@@ -160,38 +159,10 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 	if (snowboard->getComponent<TransformComponent>()->getWorldPosition().y >= 528 * 5 + 1000 ||
 		vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
-		for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
-		{
-			if ((*it)->getName().find("physicsTest1") != -1)
-			{
-				PhysicsComponent* phys = (*it)->get<PhysicsComponent>();
-				if (phys != nullptr)
-				{
-					phys->setPosition(Vec2f(10, -10));
-					phys->setAngularVelocity(0);
-					phys->setVelocity(Vec2f(0, 0));
-					phys->setRotation(-45);
-
-					muumiObject->getComponent<PhysicsComponent>()->setPosition(Vec2f(10, -10));
-					muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(0);
-					muumiObject->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
-					muumiObject->getComponent<PhysicsComponent>()->setRotation(-45);
-					muumiObject->getComponent<PhysicsComponent>()->wake(true);
-					launchPower = 0;
-					jumpDistance = 0;
-					jumpPosition = 0;
-					launched = false;
-					textObject->getComponent<TextComponent>()->setText("");
-					powerTextObject->getComponent<TextComponent>()->setText("");
-
-					if (!muumiJoint->connected)
-						muumiJoint->createRevoluteJoint();
-				}
-			}
-		}
+		reset();
 	}
 
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED)
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
 	{
 		if (launchPower < 50)
 		{
@@ -204,7 +175,7 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 			powerTextObject->getComponent<TextComponent>()->setText(stream.str());
 		}
 	}
-	else if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::UP || launchPower >= 100)
+	else if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::UP || launchPower >= 100 && muumiJoint->connected)
 	{
 		snowboard->getComponent<PhysicsComponent>()->setVelocity(Vec2f(snowboard->getComponent<PhysicsComponent>()->getVelocity().x + launchPower,
 			snowboard->getComponent<PhysicsComponent>()->getVelocity().y + launchPower));
@@ -222,12 +193,12 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		textObject->getComponent<TextComponent>()->setText(stream.str());
 	}
 
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED)
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
 	{
 		muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 2.5);
 		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() + 0.5);
 	}
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::D) == vg::input::Keyboard::KeyState::PRESSED)
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::D) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
 	{
 		muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 2.5);
 		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(snowboard->getComponent<PhysicsComponent>()->getAngularVelocity() - 0.5);
@@ -239,6 +210,7 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 	
 #endif
 }
+
 void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
 {
 	if (other->getName() == "muumiObject" && other2->getName() == "landingZone" ||
@@ -247,6 +219,30 @@ void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
 		if (muumiJoint->connected)
 		{
 		muumiJoint->removeJoint();
+		snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(100);
 		}
 	}
+}
+
+void JumpSystem::reset()
+{
+	snowboard->getComponent<PhysicsComponent>()->setPosition(Vec2f(10, -10));
+	snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(0);
+	snowboard->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
+	snowboard->getComponent<PhysicsComponent>()->setRotation(-45);
+
+	muumiObject->getComponent<PhysicsComponent>()->setPosition(Vec2f(10, -10));
+	muumiObject->getComponent<PhysicsComponent>()->setAngularVelocity(0);
+	muumiObject->getComponent<PhysicsComponent>()->setVelocity(Vec2f(0, 0));
+	muumiObject->getComponent<PhysicsComponent>()->setRotation(-45);
+	muumiObject->getComponent<PhysicsComponent>()->wake(true);
+	launchPower = 0;
+	jumpDistance = 0;
+	jumpPosition = 0;
+	launched = false;
+	textObject->getComponent<TextComponent>()->setText("");
+	powerTextObject->getComponent<TextComponent>()->setText("");
+
+	if (!muumiJoint->connected)
+		muumiJoint->createRevoluteJoint();
 }

@@ -52,13 +52,14 @@ void JumpScene::loadObjects()
 		460, 525,
 		480, 530,
 		500, 530,
-		520, 528 };
+		520, 528
+		};
 
 	hillSizeModifier = 5;
 	lowestPoint = hill[hillSize] * hillSizeModifier;
 
 	// Create hill from array
-	for (int i = 0; i < hillSize; i += 2)
+	for (int i = 0; i < hillSize -2; i += 2)
 	{
 		listOfCustomPoints.push_back(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier));
 		std::cout << hill[i] * hillSizeModifier << " " << hill[i + 1] * hillSizeModifier << std::endl;

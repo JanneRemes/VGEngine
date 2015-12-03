@@ -17,6 +17,7 @@ public:
 	~JumpSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
 	void onHit(vg::GameObject *other, vg::GameObject *other2);
+	void reset();
 private:
 	vg::Scene *scene;
 	vg::PhysicsSystem *system;
