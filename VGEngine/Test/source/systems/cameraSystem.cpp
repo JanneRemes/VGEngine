@@ -11,6 +11,7 @@
 
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
+#include "engine/input/keyboard.h"
 #endif
 #ifdef OS_ANDROID
 #include "engine/input/touch.h"
@@ -38,6 +39,10 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 	#ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
 		input = Mouse::fromCenter();
+	if (Keyboard::getKeyState(Keyboard::W) == Keyboard::PRESSED)
+		Camera::zoom(-1.0f * deltaTime);
+	else if (Keyboard::getKeyState(Keyboard::S) == Keyboard::PRESSED)
+		Camera::zoom(1.0f * deltaTime);
 	#endif
 	
 	#ifdef OS_ANDROID
@@ -49,13 +54,25 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 	{
 		input *= deltaTime * cameraSpeed;
 		Camera::move(input);
+
+		Vec2f pos = Camera::getPosition();
+		if (pos.y > 500)
+			Camera::setY(500);
+		else if (pos.y < -1200)
+			Camera::setY(-1200);
+
+		if (pos.x > 1000)
+			Camera::setX(1000);
+		else if (pos.x < -600)
+			Camera::setX(-600);
 	}
+
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	{
 		if ((*it)->getName() == "origin test")
 			(*it)->get<TransformComponent>()->rotate(2);
 		else if ((*it)->getName() == "spinner")
-			(*it)->get<PhysicsComponent>()->setAngularVelocity(25.0f);
+			(*it)->get<PhysicsComponent>()->setAngularVelocity(20.0f);
 		else if ((*it)->getName() == "timer text")
 			(*it)->get<TextComponent>()->setText(toStringi(5 - static_cast<int>(timer.getCurrentTimeSeconds())));
 	}

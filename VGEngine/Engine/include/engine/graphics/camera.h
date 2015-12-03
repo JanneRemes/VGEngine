@@ -36,6 +36,16 @@ namespace vg
 			static void setPosition(Vec2f position);
 
 			/**
+			@param x new horizontal position
+			*/
+			static void setX(float x);
+
+			/**
+			@param y new vertical position
+			*/
+			static void setY(float y);
+
+			/**
 			Move camera focus position
 			@param x position in pixels
 			@param y position in pixels

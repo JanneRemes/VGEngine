@@ -29,6 +29,16 @@ void Camera::setPosition(Vec2f position)
 	mPosition = position;
 }
 
+void Camera::setX(float x)
+{
+	mPosition.x = x;
+}
+
+void Camera::setY(float y)
+{
+	mPosition.y = y;
+}
+
 void Camera::move(Vec2f change)
 {
 	mPosition += change;

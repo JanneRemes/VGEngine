@@ -80,7 +80,7 @@ void CameraScene::loadObjects()
 		text->setText(str);
 		text->setColor(255 - i * 64, 255 - i * 96, 255 - i * 128);
 		GameObject* obj = new GameObject("koalatext");
-		obj->add(new TransformComponent(Vec2f(-750, 660 + 2.5f * size * i), TransformComponent::LOW));
+		obj->add(new TransformComponent(Vec2f(-500, 660 + 2.5f * size * i), TransformComponent::LOW));
 		obj->add(text);
 		addGameObject(obj);
 	}
@@ -112,6 +112,7 @@ void CameraScene::loadObjects()
 		TransformComponent* transform = new TransformComponent(Vec2f(640 - 150, 400), 8, Vec2f(640 + 150, 400));
 		obj->add(transform);
 		PhysicsComponent* physics =	new PhysicsComponent(transform, PhysicsComponent::DYNAMIC);
+		physics->setFriction(1000);
 		obj->add(physics);
 		RenderComponent* quad = new RenderComponent();
 		quad->setColor(vg::Color(128, 255, 128));
