@@ -235,6 +235,9 @@
     <ClInclude Include="include\engine\graphics\texture.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\engine\game\network.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\game\scene.cpp">
@@ -408,6 +411,9 @@
     </ClCompile>
     <ClCompile Include="source\graphics\texture.cpp">
       <Filter>source\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\network.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
