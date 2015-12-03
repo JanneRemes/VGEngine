@@ -51,6 +51,8 @@ namespace vg
 		@param gravity Vector2 gravity for the world
 		*/
 		void setGravity(Vec2f gravity);
+		void setTimeStep(float step);
+		float getTimeStep();
 
 		/**
 		@return Returns worlds gravity value
@@ -63,6 +65,7 @@ namespace vg
 		b2World* getWorld() { return world; };
 
 	protected:
+		float timeStep;
 		void addJoint(Joint *joint);
 		b2World* world;		///< Physics world
 		std::vector<b2Body*> bodyRemovalList;

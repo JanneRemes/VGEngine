@@ -172,7 +172,7 @@ Vec2f PhysicsComponent::getPosition()
 
 float PhysicsComponent::getRotation()
 {
-	return -(Math::radianToDegrees(mBody->GetAngle()));
+	return -(Math::radianToDegrees(mBody->GetTransform().q.GetAngle()));
 }
 
 void PhysicsComponent::setRotation(float rotation)

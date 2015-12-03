@@ -59,29 +59,24 @@ void JumpScene::loadObjects()
 	lowestPoint = hill[hillSize] * hillSizeModifier;
 
 	// Create hill from array
-	for (int i = 0; i < hillSize -2; i += 2)
+	for (int i = 0; i < hillSize ; i += 2)
 	{
 		listOfCustomPoints.push_back(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier));
-		std::cout << hill[i] * hillSizeModifier << " " << hill[i + 1] * hillSizeModifier << std::endl;
-
-		float distance = sqrt((hill[i] - hill[i + 2])*(hill[i] - hill[i + 2]) +
-				(hill[i + 1] - hill[i + 3])*(hill[i + 1] - hill[i + 3]));
-
-		float deltaY = hill[i + 3] - hill[i + 1];
-		float deltaX = hill[i + 2] - hill[i];
-		float angleInDegrees = atan2(deltaY, deltaX) * 180 / 3.1415;
-
 		// hill texturing parts
-		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier),
-			Vec2f(distance * hillSizeModifier, 10), angleInDegrees);
+		TransformComponent *hillPartTransformNew;
+		if (i < 16)
+		{
+			hillPartTransformNew = new TransformComponent(Vec2f(hill[i] * hillSizeModifier, hill[i + 1] * hillSizeModifier), 10,
+				Vec2f(hill[i + 2] * hillSizeModifier, hill[i + 3] * hillSizeModifier));
 
-		GameObject *hillPartObjectNew = new GameObject("hillPart");
-		RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
+			GameObject *hillPartObjectNew3 = new GameObject("hillPart");
+			RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
+			hillPartQuadNew->setColor(Color(0, 0, 0));
+			hillPartObjectNew3->addComponent(hillPartTransformNew);
+			hillPartObjectNew3->addComponent(hillPartQuadNew);
 
-		hillPartObjectNew->addComponent(hillPartTransformNew);
-		hillPartObjectNew->addComponent(hillPartQuadNew);
-
-		addGameObject(hillPartObjectNew);
+			addGameObject(hillPartObjectNew3);
+		}
 	}
 
 	/*

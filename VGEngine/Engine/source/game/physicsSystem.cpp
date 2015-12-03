@@ -32,6 +32,7 @@ PhysicsSystem::PhysicsSystem(float gravityX, float gravityY)
 	world = new b2World(*b2Gravity);
 	world->SetGravity(*b2Gravity);
 	world->SetContactListener(new ContactListener());
+	timeStep = 1.0f / 60.0f;
 }
 
 void PhysicsSystem::addJoint(Joint *joint)
@@ -91,8 +92,8 @@ void PhysicsSystem::update(std::vector<GameObject*> *gameObjects, float deltaTim
 				 break;
 		 }
 	 }
-	 
-	 world->Step(deltaTime, velocityIterations, positionIterations);
+
+	 world->Step(timeStep, velocityIterations, positionIterations);
 
 	 for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 	 {
@@ -137,4 +138,14 @@ Vec2f PhysicsSystem::getGravity()
 void PhysicsSystem::setGravity(Vec2f gravity)
 {
 	world->SetGravity(b2Vec2(gravity.x, gravity.y));
+}
+
+void PhysicsSystem::setTimeStep(float step)
+{
+	timeStep = step;
+}
+
+float PhysicsSystem::getTimeStep()
+{
+	return timeStep;
 }

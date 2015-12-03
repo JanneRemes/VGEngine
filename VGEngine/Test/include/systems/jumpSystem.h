@@ -33,6 +33,8 @@ private:
 	vg::GameObject *background;
 	vg::GameObject *landingZone;
 
+	// Landing zone
+	std::vector<vg::Vec2f> listOfCustomPoints;
 
 	float jumpDistance;
 	float jumpPosition;
