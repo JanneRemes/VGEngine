@@ -26,8 +26,8 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 		_height = component->getSize().y;
 	}
 
-	float x = component->getWorldPosition().x - component->getOrigin().x;
-	float y = component->getWorldPosition().y - component->getOrigin().y;
+	float x = component->getWorldPosition().x;
+	float y = component->getWorldPosition().y;
 
 
 	if (type == DYNAMIC)
@@ -43,6 +43,9 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 		mBodyDef.type = b2BodyType::b2_staticBody;
 	}
 
+	Vec2f origin = component->getSize();
+	origin *= 0.5f;
+	component->setOrigin(origin);
 	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
 
 	mFixDef.density = 1.0f;
@@ -61,6 +64,9 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius)
 {
 	PhysicsSystem *system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	Vec2f origin = component->getSize();
+	origin *= 0.5f;
+	component->setOrigin(origin);
 
 	float _radius = 0;
 	if (radius != 0)

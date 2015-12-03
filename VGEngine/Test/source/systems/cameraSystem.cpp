@@ -48,11 +48,9 @@ void CameraSystem::update(std::vector<vg::GameObject*> *gameObjects, float delta
 		input *= deltaTime * cameraSpeed;
 		Camera::move(input);
 	}
-	/*
 	for (auto it = gameObjects->begin(); it != gameObjects->end(); it++)
 		if ((*it)->getName() == "origin test")
 			(*it)->get<TransformComponent>()->rotate(2);
-			*/
 
 	if (timer.getCurrentTimeSeconds() > 3)
 	{
