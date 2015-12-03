@@ -34,8 +34,23 @@ void CameraScene::loadObjects()
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
-	PhysicsSystem* physics = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
-	physics->createBorders(128, 128, Screen::getX() - 64, Screen::getY() - 64);
+	//PhysicsSystem* physics = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
+	{
+		std::vector<Vec2f> borderCorners;
+		
+		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, 96));
+		borderCorners.push_back(Vec2f(96, 96));
+		borderCorners.push_back(Vec2f(96, graphics::Screen::getY() - 96));
+		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, graphics::Screen::getY() - 96));
+		borderCorners.push_back(Vec2f(graphics::Screen::getX() - 96, 96));
+
+		GameObject* obj = new GameObject("borders");
+		TransformComponent* transform = new TransformComponent(Vec2f(600, 600),
+			Vec2f(200, 64));//Vec2f(0, 0), Vec2f(0, 0), Vec2f(0, 0));
+		obj->add(transform);
+		obj->add(new PhysicsComponent(transform, borderCorners));
+		add(obj);
+	}
 
 	//borders
 	createBorder(new TransformComponent(Vec2f(64, 64), Vec2f(1280 - 64, 96), Vec2f(640 - 32, 16)));
@@ -52,17 +67,18 @@ void CameraScene::loadObjects()
 			0.0f, Vec2f(32, 32));
 		RenderComponent* render;
 		if (i % 2)
+		{
 			render = new RenderComponent("koala.png");
+			obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC));
+		}	
 		else
 		{
 			render = new RenderComponent("skype_monkey2.png");
+			obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC, 60));
 			obj->add(new AnimationComponent(Random::nextf(0.001f, 0.1f), 5, 10, 50));
 		}
-
 		render->setColor(vg::Color::random());
-		
 		obj->add(transform);
-		obj->add(new PhysicsComponent(transform, PhysicsComponent::DYNAMIC));
 		obj->add(render);
 		addGameObject(obj);
 	}
