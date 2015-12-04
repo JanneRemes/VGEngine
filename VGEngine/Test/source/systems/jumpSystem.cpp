@@ -147,7 +147,7 @@ JumpSystem::JumpSystem(Scene *scene)
 		TransformComponent* MuumiDistanceTransform = new TransformComponent((Vec2f(i, lowY + 225 + 3*8 + 10)));
 		
 		std::stringstream stream;
-		stream <<  i / 100 << " m";
+		stream << i / 100 - listOfCustomPoints[1].x / 100 + 100 << " m";
 		MuumiDistanceText->setText(stream.str());
 
 		MuumiDistanceText->setColor(255, 255, 255);
@@ -170,15 +170,11 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		// Jump distance
 		jumpDistance = muumiObject->getComponent<TransformComponent>()->getWorldPosition().x + (listOfCustomPoints[1].x - listOfCustomPoints[0].x);
 		std::stringstream stream;
-		stream << "Distance: " << jumpDistance / 100 - 100 << "m";
+		float distance = jumpDistance / 100 - listOfCustomPoints[1].x / 100;
+		if (distance < 0)
+			distance = 0;
+		stream << "Distance: " << distance << "m";
 		textObject->getComponent<TextComponent>()->setText(stream.str());
-		
-		if (!muumiJoint->connected)
-		{
-			//muumiObject->getComponent<PhysicsComponent>()->setAngularDamping(1000);
-			//muumiObject->getComponent<PhysicsComponent>()->setDensity(1000);
-			//snowboard->getComponent<PhysicsComponent>()->setAngularVelocity(100);
-		}
 	}
 #ifdef OS_WINDOWS
 
@@ -228,7 +224,7 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		Launch();
 	}
 
-	if (Touch::getIsTouched() && launched)
+	if (Touch::getIsTouched() && muumiJoint->connected)
 	{
 		if (Touch::getPos(false).x > Screen::getX() / 2)
 		{
@@ -237,6 +233,13 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		else if (Touch::getPos(false).x < Screen::getX() / 2)
 		{
 			tiltLeft();
+		}
+	}
+	if (Touch::getIsTouched() && launched)
+	{
+		if (Touch::getPos(false).y < 100)
+		{
+			reset();
 		}
 	}
 #endif
@@ -306,6 +309,7 @@ void JumpSystem::reset()
 	muumiObject->getComponent<PhysicsComponent>()->setAngularDamping(5);
 	muumiObject->getComponent<PhysicsComponent>()->setDensity(1);
 	muumiObject->getComponent<PhysicsComponent>()->wake(true);
+
 	launchPower = 0;
 	jumpDistance = 0;
 	jumpPosition = 0;

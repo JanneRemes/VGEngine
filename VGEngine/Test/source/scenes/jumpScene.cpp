@@ -108,4 +108,10 @@ void JumpScene::loadObjects()
 	// Scene change system
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
+
+	// sound
+	Game::getInstance()->getAudioManager()->addSound("music",
+		*assetManager->get<sound::Sound>("muumitechno.mp3"));
+	Game::getInstance()->getAudioManager()->play("music");
+	Game::getInstance()->getAudioManager()->loopEnabled("music", true);
 }

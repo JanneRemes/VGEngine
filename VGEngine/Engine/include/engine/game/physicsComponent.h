@@ -145,6 +145,7 @@ namespace vg
 		static float scale;			///< Scale of the object
 
 		b2Body* mBody;				///< PhysicsComponents Box2D body
+		b2Fixture *mFixture;		///< PhysicsComponents Box2D fixture
 		b2BodyDef mBodyDef;			///< PhysicsComponents Box2D bodyDef
 		b2FixtureDef mFixDef;		///< PhysicsComponents Box2D fixDef
 		b2PolygonShape mBoxShape;	///< PhysicsComponents Box2D bodyDef

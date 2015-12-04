@@ -58,7 +58,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(5);
 	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(-component->getWorldRotation()));
-	mBody->CreateFixture(&mFixDef);
+	mFixture = mBody->CreateFixture(&mFixDef);
 
 	mBodyShape = BODYSHAPE::BOX;
 }
@@ -106,7 +106,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBody = system->getWorld()->CreateBody(&mBodyDef);
 	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(2);
-	mBody->CreateFixture(&mFixDef);
+	mFixture = mBody->CreateFixture(&mFixDef);
 
 	mBodyShape = BODYSHAPE::CIRCLE;
 }
@@ -128,7 +128,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 
 	mBody = system->world->CreateBody(&mBodyDef);
 	mBody->SetUserData(static_cast<void*>(this));
-	mBody->CreateFixture(&mFixDef);
+	mFixture = mBody->CreateFixture(&mFixDef);
 
 	delete vs;
 	mBodyShape = BODYSHAPE::CUSTOM;
@@ -187,8 +187,29 @@ void PhysicsComponent::setRotation(float rotation)
 
 void PhysicsComponent::setDensity(float density)
 {
+	//mFixture->SetDensity(density);
+	//mFixture = mBody->CreateFixture(&mFixDef);
 	mFixDef.density = density;
-	mBody->CreateFixture(&mFixDef);
+	mBody->DestroyFixture(mFixture);
+	mFixture = mBody->CreateFixture(&mFixDef);
+}
+
+void PhysicsComponent::setFriction(float friction)
+{
+	//mFixture->SetFriction(friction);
+	//mFixture = mBody->CreateFixture(&mFixDef);
+	mFixDef.friction = friction;
+	mBody->DestroyFixture(mFixture);
+	mFixture = mBody->CreateFixture(&mFixDef);
+}
+
+void PhysicsComponent::setRestitution(float restitution)
+{
+	//mFixture->SetRestitution(restitution);
+	//mFixture = mBody->CreateFixture(&mFixDef);
+	mFixDef.restitution = restitution;
+	mBody->DestroyFixture(mFixture);
+	mFixture = mBody->CreateFixture(&mFixDef);
 }
 
 void PhysicsComponent::setAngularDamping(float damping)
@@ -199,18 +220,6 @@ void PhysicsComponent::setAngularDamping(float damping)
 void PhysicsComponent::setLinearDamping(float damping)
 {
 	mBody->SetLinearDamping(damping);
-}
-
-void PhysicsComponent::setFriction(float friction)
-{
-	mFixDef.friction = friction;
-	mBody->CreateFixture(&mFixDef);
-}
-
-void PhysicsComponent::setRestitution(float restitution)
-{
-	mFixDef.restitution = restitution;
-	mBody->CreateFixture(&mFixDef);
 }
 
 void PhysicsComponent::setMass(float mass)
