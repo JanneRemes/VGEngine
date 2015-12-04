@@ -63,3 +63,7 @@ VGEngine/Test/assetsshaders/*
 VGEngine/Test/*.png
 VGEngine/Test/*.ttf
 VGEngine/Test/*.mp3
+*.pdb
+*.timestamp
+*.idb
+*.exp
