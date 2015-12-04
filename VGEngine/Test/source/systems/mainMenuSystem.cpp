@@ -25,6 +25,7 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	sceneNames.push_back("rockThrowScene");
 	sceneNames.push_back("jumpScene");
 	sceneNames.push_back("doge");
+	sceneNames.push_back("highscorescene");
 	selectedScene = sceneNames.begin();
 }
 

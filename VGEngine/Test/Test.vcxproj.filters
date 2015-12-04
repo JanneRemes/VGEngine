@@ -96,6 +96,12 @@
     <ClInclude Include="include\systems\DogeSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\Scenes\HighScoreScene.h">
+      <Filter>include\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\systems\HighScoreSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -156,6 +162,12 @@
       <Filter>source\scenes</Filter>
     </ClCompile>
     <ClCompile Include="source\systems\DogeSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scenes\HighScoreScene.cpp">
+      <Filter>source\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\systems\HighScoreSystem.cpp">
       <Filter>source\systems</Filter>
     </ClCompile>
   </ItemGroup>

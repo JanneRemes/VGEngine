@@ -189,6 +189,7 @@
     <ClInclude Include="include\Scenes\AndroidLaunchGame.h" />
     <ClInclude Include="include\Scenes\cameraScene.h" />
     <ClInclude Include="include\Scenes\DogeScene.h" />
+    <ClInclude Include="include\Scenes\HighScoreScene.h" />
     <ClInclude Include="include\Scenes\jumpScene.h" />
     <ClInclude Include="include\Scenes\MainScene.h" />
     <ClInclude Include="include\Scenes\pappaScene.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\DogeSystem.h" />
     <ClInclude Include="include\systems\enemySystem.h" />
+    <ClInclude Include="include\systems\HighScoreSystem.h" />
     <ClInclude Include="include\systems\jumpSystem.h" />
     <ClInclude Include="include\systems\mainMenuSystem.h" />
     <ClInclude Include="include\systems\PhysicsTestSystem.h" />
@@ -212,6 +214,7 @@
     <ClCompile Include="source\scenes\AndroidLaunchGame.cpp" />
     <ClCompile Include="source\scenes\cameraScene.cpp" />
     <ClCompile Include="source\scenes\DogeScene.cpp" />
+    <ClCompile Include="source\scenes\HighScoreScene.cpp" />
     <ClCompile Include="source\scenes\jumpScene.cpp" />
     <ClCompile Include="source\scenes\mainScene.cpp" />
     <ClCompile Include="source\scenes\pappaScene.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\DogeSystem.cpp" />
     <ClCompile Include="source\systems\enemySystem.cpp" />
+    <ClCompile Include="source\systems\HighScoreSystem.cpp" />
     <ClCompile Include="source\systems\jumpSystem.cpp" />
     <ClCompile Include="source\systems\mainMenuSystem.cpp" />
     <ClCompile Include="source\systems\PhysicsTestSystem.cpp" />

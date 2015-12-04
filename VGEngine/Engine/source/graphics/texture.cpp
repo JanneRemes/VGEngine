@@ -120,3 +120,7 @@ uint32_t Texture::getHeight() const
 {
 	return mHeight;
 }
+std::vector<unsigned char> Texture::getDataVector() const
+{
+	return pixels;
+}

@@ -13,6 +13,7 @@
 #include "scenes\jumpScene.h"
 #include "engine/game/renderComponent.h"
 #include "scenes/DogeScene.h"
+#include "scenes/HighScoreScene.h"
 using namespace vg;
 
 void mainGame(Game* game)
@@ -49,5 +50,8 @@ void mainGame(Game* game)
 
 	DogeScene* doge = new DogeScene();
 	game->getSceneManager()->addTemplateScene("doge", doge);
+
+	HighScoreScene* highscoreScene = new HighScoreScene();
+	game->getSceneManager()->addTemplateScene("highscorescene", highscoreScene);
 	
 }
