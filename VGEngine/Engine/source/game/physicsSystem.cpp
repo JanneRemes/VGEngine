@@ -9,7 +9,7 @@
 
 using namespace vg;
 
-const float scale = PhysicsComponent::scale;
+const float scale = PhysicsComponent::getScale();
 
 void ContactListener::BeginContact(b2Contact *contact)
 {

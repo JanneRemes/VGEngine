@@ -20,8 +20,6 @@ namespace vg
 		enum BODYTYPE { STATIC, DYNAMIC, KINEMATIC };	///< physicsComponents body type
 		enum FILTER : short { LOW = 0x0001, MIDDLE = 0x0002, HIGH = 0x0004, TOP = 0x0008 };
 		
-		static float scale;		///< Scale of the object
-		
 		/**
 		Constructor for creating PhysicsComponent
 		@param component Desired TransformComponent that you wish to add physicsComponent with
@@ -132,7 +130,20 @@ namespace vg
 		Set collision filter
 		*/
 		void setCollisionFilter(FILTER filter);
+
+		/**
+		@return bodyshape: circle, box etc.
+		*/
+		BODYSHAPE getBodyShape();
+
+		/**
+		@return value used to scale values between vgengine and box2d world 
+		*/
+		static float getScale();
+
 	protected:
+		static float scale;			///< Scale of the object
+
 		b2Body* mBody;				///< PhysicsComponents Box2D body
 		b2BodyDef mBodyDef;			///< PhysicsComponents Box2D bodyDef
 		b2FixtureDef mFixDef;		///< PhysicsComponents Box2D fixDef
@@ -140,5 +151,6 @@ namespace vg
 		b2CircleShape mCircleShape;	///< PhysicsComponents Box2D bodyDef
 		b2ChainShape mChainShape;	///< PhysicsComponents Box2D bodyDef
 		b2MassData mMass;			///< PhysicsComponents Mass data
+		BODYSHAPE mBodyShape;		///< box2d shape
 	};
 }

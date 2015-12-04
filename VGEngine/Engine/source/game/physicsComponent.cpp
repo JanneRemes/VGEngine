@@ -59,6 +59,8 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBody->SetGravityScale(5);
 	mBody->SetTransform(mBody->GetPosition(), Math::degreesToRadians(-component->getWorldRotation()));
 	mBody->CreateFixture(&mFixDef);
+
+	mBodyShape = BODYSHAPE::BOX;
 }
 
 PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type, float radius)
@@ -105,6 +107,8 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 	mBody->SetUserData(static_cast<void*>(this));
 	mBody->SetGravityScale(2);
 	mBody->CreateFixture(&mFixDef);
+
+	mBodyShape = BODYSHAPE::CIRCLE;
 }
 
 PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg::Vec2f> ListOfPoints)
@@ -127,6 +131,7 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, std::vector<vg
 	mBody->CreateFixture(&mFixDef);
 
 	delete vs;
+	mBodyShape = BODYSHAPE::CUSTOM;
 }
 
 PhysicsComponent::~PhysicsComponent()
@@ -241,4 +246,14 @@ void PhysicsComponent::setCollisionFilter(FILTER filter)
 void PhysicsComponent::wake(bool sleep)
 {
 	mBody->SetAwake(sleep);
+}
+
+PhysicsComponent::BODYSHAPE PhysicsComponent::getBodyShape()
+{
+	return mBodyShape;
+}
+
+float PhysicsComponent::getScale()
+{
+	return scale;
 }
