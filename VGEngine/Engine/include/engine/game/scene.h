@@ -14,6 +14,7 @@ namespace vg
 	*/
 	class Scene
 	{
+		friend class GameObject;
 	public:
 		/**
 		Default constructor

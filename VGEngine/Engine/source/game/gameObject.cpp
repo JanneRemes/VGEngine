@@ -5,16 +5,17 @@
 #include "engine/game/transformComponent.h"
 #include "engine/graphics/texture.h"
 #include "engine/utility/logger.h"
-
+#include "engine/game/scene.h"
 #include <algorithm>
 
 using namespace vg;
 using namespace vg::graphics;
-
+int GameObject::currentId = 0;
 GameObject::GameObject(std::string name)
 	: BaseClass("gameObject"), mName(name), mMarkedForDelete(false)
 {
 	mParent = nullptr;
+	mId = currentId++;
 }
 
 GameObject::~GameObject()
@@ -76,4 +77,24 @@ void GameObject::setParent(GameObject *parent)
 GameObject *GameObject::getParent()
 {
 	return mParent;
+}
+int GameObject::getId()
+{
+	return mId;
+}
+GameObject *GameObject::getGameObject(int id)
+{
+	
+	auto vector = &Game::getInstance()->getSceneManager()->getActiveScene()->mActivePool;
+	for (auto it = vector->begin(); it != vector->end(); it++)
+	{
+		if ((*it)->mId == id)
+			return (*it);
+	}
+	return nullptr;
+}
+std::vector<GameObject*> *GameObject::getGameObjects()
+{
+	auto vector = &Game::getInstance()->getSceneManager()->getActiveScene()->mActivePool;
+	return vector;
 }

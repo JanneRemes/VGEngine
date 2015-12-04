@@ -100,8 +100,17 @@ namespace vg
 		@return GameObject that is parent of this GameObject
 		*/
 		GameObject *getParent();
+		/*
+		@returns GameObject's id
+		*/
+		int getId();
+
+		static GameObject *getGameObject(int id);
+
+		static std::vector<GameObject*> *getGameObjects();
 	private:
-		
+		int mId;
+		static int currentId;
 		GameObject *mParent;///< this gameobject´s parent gameobject
 		
 		ComponentMap mComponents;	///< ComponentMap used by the gameObject
