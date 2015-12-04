@@ -6,7 +6,7 @@
 
 namespace vg
 {
-	class Joint : public System
+	class Joint
 	{
 	public:
 		Joint(PhysicsComponent *bodyA, PhysicsComponent *bodyB);

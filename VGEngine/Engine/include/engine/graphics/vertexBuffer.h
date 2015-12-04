@@ -12,8 +12,7 @@ namespace vg
 		/**
 			Default constructor that uses default type format
 			*/
-		class VertexBuffer :
-			public Buffer<float>
+		class VertexBuffer : public Buffer<float>
 		{
 		public:
 			/**
@@ -44,12 +43,11 @@ namespace vg
 				Binds raw vertex data into buffer using format and stride
 				*/
 			void bind() override;
-		private:
-			const uint32_t mStride; ///< Stride used in bind. Calculated in constructor from format
-			const std::vector<VertexElement> mFormat;///< Vector that has format currently in use
-			static const std::vector<VertexElement>& gDefaultFormat; ///< Default vertexElement format
 
-			//const size_t mFormatSize; ///< Size of current formats
+		private:
+			const uint32_t mStride;									///< Stride used in bind. Calculated in constructor from format
+			const std::vector<VertexElement> mFormat;				///< Vector that has format currently in use
+			static const std::vector<VertexElement>& mDefaultFormat;///< Default vertexElement format
 		};
 	}
 }

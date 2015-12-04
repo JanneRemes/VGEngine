@@ -4,7 +4,7 @@
 
 using namespace vg::graphics;
 
-const std::vector<VertexElement>& VertexBuffer::gDefaultFormat 
+const std::vector<VertexElement>& VertexBuffer::mDefaultFormat 
 {
 	{ Position, Vec2 },
 	{ Color, Vec4 },
@@ -23,7 +23,7 @@ static uint32_t countStride(const std::vector<VertexElement>& format)
 }
 
 VertexBuffer::VertexBuffer()
-	: VertexBuffer(gDefaultFormat)
+	: VertexBuffer(mDefaultFormat)
 {
 }
 
@@ -35,7 +35,7 @@ VertexBuffer::VertexBuffer(const std::vector<VertexElement>& format)
 }
 
 VertexBuffer::VertexBuffer(const std::vector<float>& data)
-	: VertexBuffer(data, gDefaultFormat)
+	: VertexBuffer(data, mDefaultFormat)
 {
 }
 
