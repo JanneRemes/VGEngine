@@ -8,7 +8,6 @@
 #include "../external/glm/gtx/transform.hpp"
 #include "../external/glm/gtc/type_ptr.hpp"
 
-
 #include <string>
 #include <map>
 #include <vector>

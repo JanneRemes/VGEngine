@@ -36,7 +36,7 @@ namespace vg
 		};
 
 		/**
-		<description>
+		Contains usage and type for vertex element
 		*/
 		struct VertexElement
 		{

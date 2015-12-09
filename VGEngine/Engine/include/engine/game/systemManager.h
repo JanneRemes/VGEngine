@@ -1,7 +1,11 @@
+
 #pragma once
+
 #include "engine/game/gameObject.h"
 #include "engine/game/system.h"
+
 #include <vector>
+
 namespace vg
 {
 	/**
@@ -19,8 +23,20 @@ namespace vg
 		@param gameObject The gameObject that is going to be updated inside the componentSystems
 		*/
 		void update(std::vector<GameObject*> *gameObjects,float deltaTime);
+
+		/**
+		@param system to be added
+		*/
 		void addSystem(System *system);
+		
+		/**
+		Deletes all systems
+		*/
 		void clearSystems();
+		
+		/**
+		@return list of all current systems
+		*/
 		std::vector<System*> *getAllSystems() { return &systems; };
 
 		/**
@@ -38,8 +54,10 @@ namespace vg
 			return nullptr;
 		}
 	private:
-		std::vector<System*> systems;
+
 		void addDefaultSystems();
+
+		std::vector<System*> systems;	///< current systems
 	};
 
 }

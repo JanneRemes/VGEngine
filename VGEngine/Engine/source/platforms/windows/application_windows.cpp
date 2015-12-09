@@ -23,18 +23,25 @@ Application::Application()
 {
 
 }
+
+/*
 void Application::initContext()
 {
 
 }
+*/
+
 void Application::drawFrame()
 {
 
 }
+
+/*
 void Application::mmessageCheck()
 {
 
 }
+*/
 
 int main()
 {

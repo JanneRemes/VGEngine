@@ -79,14 +79,7 @@ namespace vg
 
     private:
 
-        /**
-        Default vertices
-        */
 		std::vector<float> defaultVertices;
-
-        /**
-        Default indices
-        */
 		std::vector<unsigned short> defaultIndices;
 
 		std::vector<float> mVertices;			///< vertices for drawing

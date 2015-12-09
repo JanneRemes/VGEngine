@@ -77,9 +77,9 @@ namespace vg
 		std::vector<float> getDefaultVertices();
 		std::vector<unsigned short> getDefaultIndices();
 
-		Shape mShape;							///< 
-		vg::graphics::Texture *mTexture;		///< 
-		std::vector<float> mVertices;			///<
-		std::vector<unsigned short> mIndices;	///<
+		Shape mShape;							///< shape to be rendered
+		vg::graphics::Texture *mTexture;		///< pointer to texture
+		std::vector<float> mVertices;			///< vertex data
+		std::vector<unsigned short> mIndices;	///< index data
 	};
 }

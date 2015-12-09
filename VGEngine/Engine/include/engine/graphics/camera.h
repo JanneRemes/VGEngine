@@ -87,13 +87,13 @@ namespace vg
 			//static void rotate(float change);
 
 		private:
-			static Vec2f mPosition;		///< camera focus position in pixels
+			static Vec2f mPosition;				///< camera focus position in pixels
 			static float mZoom;					///< camera zoom level
 			static float mLeft;					///< left border of screen
 			static float mTop;					///< top border of screen
 			static float mRight;				///< right border of screen
 			static float mBottom;				///< bottom border of screen
-			//static float mRotation;				///< camera rotation in degrees
+			/*static float mRotation;			///< camera rotation in degrees*/
 		};
 	}
 }

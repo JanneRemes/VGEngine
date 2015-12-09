@@ -87,6 +87,7 @@ void HighScoreSystem::update(std::vector<vg::GameObject*> *gameObjects, float de
 }
 void HighScoreSystem::loadData()
 {
+#ifdef OS_WINDOWS
 	std::string fileContents; 
 
 	Game::getInstance()->getFileManager()->readFile(vg::core::FileManager::DataPath::File, filePath, fileContents);
@@ -103,16 +104,21 @@ void HighScoreSystem::loadData()
 		addScore(tokens[i], toInt(tokens[i + 1]));
 	}
 	Log("vgengine", "File read");
+#endif
 }
+
 void HighScoreSystem::saveData()
 {
+#ifdef OS_WINDOWS
 	std::string fileContents;
 	for (int i = 0; i < scores.size(); i++)
 	{
 		fileContents = fileContents + scores[i].name + " " + toStringi(scores[i].score) + "\n";
 	}
 	Game::getInstance()->getFileManager()->writeFile(vg::core::FileManager::DataPath::File, filePath, fileContents);
+#endif
 }
+
 void HighScoreSystem::addScore(std::string name, int score)
 {
 	Score doge;

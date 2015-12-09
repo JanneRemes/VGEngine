@@ -9,6 +9,9 @@ namespace vg
 {
 	namespace graphics
 	{
+		/**
+		Contains values needed for rendering a character.
+		*/
 		class Character
 		{
 		public:
@@ -16,10 +19,10 @@ namespace vg
 			~Character();
 
 		private:
-			std::vector<float> mVertices;
-			Vec2f mTexCoords;
-			float mWidth;
-			float mHeight;
+			std::vector<float> mVertices;	///< vertices for two triangles
+			Vec2f mTexCoords;				///< upper left corner in the Font texture
+			float mWidth;					///< width in texture coordinates
+			float mHeight;					///< height in texture coordinates
 		};
 	}
 }

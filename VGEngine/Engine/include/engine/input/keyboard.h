@@ -1,11 +1,12 @@
 
 #pragma once
+
 #include<map>
+
 namespace vg
 {
 	namespace input
 	{
-
 		/**
 		Class used to control the keyboard for windows
 		*/
@@ -139,11 +140,11 @@ namespace vg
 			/**
 			@return Returns the state of the key if its pressed
 			*/
-			static KeyState getKeyState(Key key); 
-			private:
-			static std::map<Key, KeyState> keyStates;
-			static bool isKeyPressed(Key key); ///< Returns whether the key is being pressed
-		};
+			static KeyState getKeyState(Key key);
 
+		private:
+			static std::map<Key, KeyState> keyStates;	///< Key states on last update
+			static bool isKeyPressed(Key key);			///< Returns whether the key is being pressed
+		};
 	}
 }

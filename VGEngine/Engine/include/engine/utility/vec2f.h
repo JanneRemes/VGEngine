@@ -6,7 +6,7 @@
 namespace vg
 {
 	/**
-	2D float vector, simple alternative to Vector2<T>
+	2D float vector
 	*/
 	class Vec2f
 	{

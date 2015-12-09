@@ -111,11 +111,12 @@ namespace vg
 			{
 				return mId;
 			}
+
 		protected:
-			size_t mSize = 0;		///< Size of the pointer to data that will be copied into the data store for initialization
+			size_t mSize = 0;				///< Size of the pointer to data that will be copied into the data store for initialization
 			unsigned int mId = 0;			///< An array in which the generated buffer object names are stored
-			const unsigned int mTarget;	///< Target to which the buffer object is bound
-			const unsigned int mUsage;	///< Usage pattern of the data store
+			const unsigned int mTarget;		///< Target to which the buffer object is bound
+			const unsigned int mUsage;		///< Usage pattern of the data store
 		};
 	}
 }

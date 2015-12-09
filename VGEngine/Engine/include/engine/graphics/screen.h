@@ -97,8 +97,8 @@ namespace vg
 			*/
 			static void setRealSize(int x, int y);
 
-			static Vec2f mSize;		///< Virtual resolution that is used to make rendering independent of resolution.
-			static Vec2f mRealSize;	///< Screen resolution in pixels
+			static Vec2f mSize;					///< Virtual resolution that is used to make rendering independent of resolution.
+			static Vec2f mRealSize;				///< Screen resolution in pixels
 			static vg::Color mColor;			///< color used for glClearScreen
 		};
 	}

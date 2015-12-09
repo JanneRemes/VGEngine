@@ -67,10 +67,14 @@ Application::Application()
 {
 
 }
+
+/*
 void Application::initContext()
 {
 
 }
+*/
+
 void Application::update()
 {
 	//Log("fm", "%f %f %f SENSOR", vg::Input::getSensorX(), vg::Input::getSensorY(), vg::Input::getSensorZ());
@@ -239,7 +243,7 @@ void handleCommand(struct android_app* app, int32_t cmd)
 				engine->state.game->initSceneManager();
 				engine->state.game->setFileManager();
 				mainGame(engine->state.game);
-				Application::getInstance()->drawFrame();
+				//Application::getInstance()->drawFrame();
 			}
 			break;
 

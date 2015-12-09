@@ -12,6 +12,9 @@ namespace vg
 {
 	namespace graphics
 	{
+		/**
+		Contains character offset values and a texture with all character.
+		*/
 		class Font : public core::Asset
 		{
 		public:
@@ -22,7 +25,7 @@ namespace vg
 
 			/**
 			@param fileManager used for reading assets
-			@return result
+			@return result of loading
 			*/
 			bool load(core::FileManager *fileManager);
 

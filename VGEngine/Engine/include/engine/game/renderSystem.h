@@ -58,8 +58,8 @@ namespace vg
 		static void updateProjection(graphics::Shader* shader, bool useCamera = true);
 
 
-		vg::graphics::VertexBuffer mVertexBuffer;
-		vg::graphics::IndexBuffer mIndexBuffer;
+		vg::graphics::VertexBuffer mVertexBuffer;	///< contains vertex data
+		vg::graphics::IndexBuffer mIndexBuffer;		///< contains index data
 	};
 
 }

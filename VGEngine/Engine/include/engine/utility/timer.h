@@ -31,6 +31,6 @@ namespace vg
 
 	private:
 		
-		clock_t mStartTime;
+		clock_t mStartTime;	///< tells when the Timer started
 	};
 }

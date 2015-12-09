@@ -12,6 +12,7 @@ namespace vg
 {
 	namespace graphics
 	{
+		// forward declaration
 		class IndexBuffer;
 		class VertexBuffer;
 
