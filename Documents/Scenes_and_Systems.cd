@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="vg::Scene">
+    <Position X="8.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAgAAAAAAgAIAAAAQYAAAAAAAAECggAAGYAA=</HashCode>
+      <FileName>include\engine\game\scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::System">
+    <Position X="0.5" Y="7.25" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="vg::System::Priority" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\engine\game\system.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAIAAAAAAAAAAAAAABAAAgAAEAAAAQAAEAAA=</HashCode>
+      <FileName>include\engine\game\system.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::SystemManager">
+    <Position X="5.75" Y="7.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAABAAAAAAAAAQAABAAAAAAMAAAAAEgBA=</HashCode>
+      <FileName>include\engine\game\systemmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::PhysicsSystem">
+    <Position X="0.5" Y="11.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAAEAAAgAAACBAAQAEAAAQAgAGIAAEAEAgEAAA=</HashCode>
+      <FileName>include\engine\game\physicssystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::SceneManager">
+    <Position X="12.25" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAEAAQAIAAAAAgAACAAAAAABCAAAEAAQ=</HashCode>
+      <FileName>include\engine\game\scenemanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Game">
+    <Position X="0.5" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>SIAQIAgAAEAACABhAICACQAEAAigAAQAAiAAAAAGABA=</HashCode>
+      <FileName>include\engine\game\game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::AnimationSystem">
+    <Position X="6.25" Y="11.75" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>include\engine\game\animationsystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::DeleteSystem">
+    <Position X="5.25" Y="14.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAAAAAAACAEAAg=</HashCode>
+      <FileName>include\engine\game\deleteSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::RenderSystem">
+    <Position X="10.25" Y="14.25" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAABAAAAIAAACAAAUAAg=</HashCode>
+      <FileName>include\engine\game\renderSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::core::Application">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAQAAAAACAAQAAAAAIAAEAAA=</HashCode>
+      <FileName>include\engine\application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

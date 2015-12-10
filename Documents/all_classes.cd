@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="vg::GameObject" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BhAAEAAAAEAAAAGECgAAQgAAAAAACAACAAwEAAJCAAA=</HashCode>
+      <FileName>include\engine\game\gameobject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Scene" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAgAAAAAAgAIAAAAQYAAAAAAAAECggAAGYAA=</HashCode>
+      <FileName>include\engine\game\scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Component" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAIAAAAAAAAAAAAAAAAAACACAAABAAAAAAAA=</HashCode>
+      <FileName>include\engine\game\component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::System" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAIAAAAAAAAAAAAAABAAAgAAEAAAAQAAEAAA=</HashCode>
+      <FileName>include\engine\game\system.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::SystemManager" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAABAAAAAAAAAQAABAAAAAAMAAAAAEgBA=</HashCode>
+      <FileName>include\engine\game\systemmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::PhysicsComponent" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQMpAAGIAwBBgBABAAAQESCEIkAAAQAAhAAAUAABg=</HashCode>
+      <FileName>include\engine\game\physicscomponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Joint" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABCAAAAAAAAAAAAAAAAAGAEAgoAABCAAAgAAAA=</HashCode>
+      <FileName>include\engine\game\physicsjoint.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::ContactListener" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\game\physicssystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::PhysicsSystem" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAAEAAAgAAACBAAQAEAAAQAgAGIAAEAEAgEAAA=</HashCode>
+      <FileName>include\engine\game\physicssystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Timer" Collapsed="true">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAIAEAAA=</HashCode>
+      <FileName>include\engine\utility\timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Vec2f" Collapsed="true">
+    <Position X="23.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAQAAAACEAIAQAAAEAAAAAAAABgAABAAAA=</HashCode>
+      <FileName>include\engine\utility\vec2f.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::SceneManager" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAEAAQAIAAAAAgAACAAAAAABCAAAEAAQ=</HashCode>
+      <FileName>include\engine\game\scenemanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Game" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SIAQIAgAAEAACABhAICACQAEAAigAAQAAiAAAAAGABA=</HashCode>
+      <FileName>include\engine\game\game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::RenderComponent" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAIBAgBAAgAAAAAABAIQAAAgAAAAAAAIgAA=</HashCode>
+      <FileName>include\engine\game\rendercomponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::TextComponent" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIEAAAABAgAAAAAACACCBAKAAAAoAiAACAAIAAA=</HashCode>
+      <FileName>include\engine\game\textcomponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::AnimationComponent" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAIAAAAAAAAAAAQAAAABAAAgIAIkAIAAAAAgAAQ=</HashCode>
+      <FileName>include\engine\game\animationcomponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::AnimationSystem" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>include\engine\game\animationsystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Random" Collapsed="true">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>include\engine\utility\random.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::BaseClass" Collapsed="true">
+    <Position X="1.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAoAAAAAAACAAAAAABAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\game\baseclass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Color" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAQQgAAAAgA=</HashCode>
+      <FileName>include\engine\utility\color.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::FileManager" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\assets\filemanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::AssetManager" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\assets\assetmanager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::DeleteSystem" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAAAAAAACAEAAg=</HashCode>
+      <FileName>include\engine\game\deleteSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::TransformComponent" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="vg::TransformComponent::LayerGroup" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\engine\game\renderSystem.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AJABAMAABNgCgAiBAAgWAAECCQAEAMgAAACAAAQAQgA=</HashCode>
+      <FileName>include\engine\game\renderSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::RenderSystem" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAABAAAAIAAACAAAUAAg=</HashCode>
+      <FileName>include\engine\game\renderSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Math" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>include\engine\utility\math.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::core::Application" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAQAAAAACAAQAAAAAIAAEAAA=</HashCode>
+      <FileName>include\engine\application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::core::FileManager" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAEACAAAAAAAAAAAAABAg=</HashCode>
+      <FileName>include\engine\assets\asset.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::core::Asset" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAIAAAAAAAAAICAICAAAAIABAAAAgAAAAAAA=</HashCode>
+      <FileName>include\engine\assets\asset.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::core::AssetManager" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SIAAAAAQAMAAAAAAAAAAQAAAABAAAAAACCAAAQAAAAA=</HashCode>
+      <FileName>include\engine\assets\asset.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Texture" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YoAAEAAAAIAAhAEAAAAAAAAAAgAAQAIAAAJgAAAABAI=</HashCode>
+      <FileName>include\engine\game\renderComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Shader" Collapsed="true">
+    <Position X="23.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAJAAAAIKgKAYABAAMBKgAAAAAAAAAMBIAAAAAgAgA=</HashCode>
+      <FileName>include\engine\game\renderSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Font" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QKAAAAAACICABQBAAAAAAAAAAAIAQAAAAIAAIAADBQM=</HashCode>
+      <FileName>include\engine\game\textComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Buffer&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoEAEAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAABAQRAA=</HashCode>
+      <FileName>include\engine\graphics\buffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Camera" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAoAAUCAABAACAAAAGABACAAAAAAAAAAAAAAAAAwA=</HashCode>
+      <FileName>include\engine\graphics\camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Screen" Collapsed="true">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAACAAAAIAAAAgAAEAAAAAAAAgAAAAAAAAAgGAIAgA=</HashCode>
+      <FileName>include\engine\graphics\camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Character" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAQAAAAKAI=</HashCode>
+      <FileName>include\engine\graphics\character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::IndexBuffer" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\graphics\graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::VertexBuffer" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAEAAAQAAAAEAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>include\engine\graphics\graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::Graphics" Collapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAiAAAAAAAAAAAAAMAAAAAKAAQAAAEAAAgAAAgQgE=</HashCode>
+      <FileName>include\engine\graphics\graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::GraphicsContext" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAKAAAQAAAABAAAAGAEEAAACAAAgAIAAAgAAAAAAA=</HashCode>
+      <FileName>include\engine\graphics\graphicsContext.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::graphics::TextureAtlas" Collapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAKAAhAAAAEBAAAAAAAABACgAAEBAAABABAI=</HashCode>
+      <FileName>include\engine\graphics\textureAtlas.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::sound::SFXMapping" Collapsed="true">
+    <Position X="21.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\sound\audioManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::sound::AudioManager" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIIAAAAAQEAIAAAAAAAAACoACgAgAAAgUgAQCEIAA=</HashCode>
+      <FileName>include\engine\sound\audioManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::sound::Sound" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAIAAAAAAAAAAAEAAAAAAAAAABAAQAAAAAAA=</HashCode>
+      <FileName>include\engine\sound\sound.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::sound::SoundEffect" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgIAAAiEAECgAAGAAgAEBCgACgAAACBgAAEAAgKAA=</HashCode>
+      <FileName>include\engine\sound\soundEffect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::input::Keyboard" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAEAAA=</HashCode>
+      <FileName>include\engine\input\keyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::input::Mouse" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAIIABAAAAAAABEAAA=</HashCode>
+      <FileName>include\engine\input\mouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::input::Sensor" Collapsed="true">
+    <Position X="20" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DgACACAABAABAAABAAAAAAAAAAAANAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\input\sensor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::input::Touch" Collapsed="true">
+    <Position X="21.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAICAAAAAAAAAEAAAAAgABAgIAAAAAAAAACBEAAI=</HashCode>
+      <FileName>include\engine\input\touch.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="vg::graphics::VertexElement" Collapsed="true">
+    <Position X="16.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\graphics\vertexBufferElement.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="vg::sound::SoundEffectData" Collapsed="true">
+    <Position X="14.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>include\engine\sound\sound.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="vg::graphics::VariableNames" Collapsed="true">
+    <Position X="14.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\graphics\shader.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="vg::graphics::VertexElementUsage" Collapsed="true">
+    <Position X="18.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAgAAIAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>include\engine\graphics\vertexBufferElement.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vg::graphics::VertexElementType" Collapsed="true">
+    <Position X="16.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAADAAQAAAAAAAAAAAAAEAAAAAAAAAAAAggEgAAA=</HashCode>
+      <FileName>include\engine\graphics\vertexBufferElement.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="vg::input::MOUSE_KEY" Collapsed="true">
+    <Position X="14.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAABAgAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\input\mouse.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
