@@ -60,7 +60,8 @@ bool FileManager::readFile(DataPath dataPath, const std::string& path, std::stri
 {
 	const std::string absolutePath = getDataPath(dataPath) + path;
 	FILE* file = fopen(absolutePath.c_str(), "r");
-
+	if (file == nullptr)
+		return false;
 	Log("vgengine", "open? %s", ferror(file) == 0 ? "true" : "false");
 
 	if (file)

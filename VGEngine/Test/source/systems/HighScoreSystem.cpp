@@ -87,10 +87,17 @@ void HighScoreSystem::update(std::vector<vg::GameObject*> *gameObjects, float de
 }
 void HighScoreSystem::loadData()
 {
-#ifdef OS_WINDOWS
+
 	std::string fileContents; 
 
-	Game::getInstance()->getFileManager()->readFile(vg::core::FileManager::DataPath::File, filePath, fileContents);
+	Game::getInstance()->getFileManager()->readFile(
+#ifdef OS_WINDOWS
+		vg::core::FileManager::DataPath::File
+#else
+		vg::core::FileManager::DataPath::Internal
+#endif
+		
+		, filePath, fileContents);
 	string buf; // Have a buffer string
 	stringstream ss(fileContents); // Insert the string into a stream
 
@@ -104,19 +111,25 @@ void HighScoreSystem::loadData()
 		addScore(tokens[i], toInt(tokens[i + 1]));
 	}
 	Log("vgengine", "File read");
-#endif
+
 }
 
 void HighScoreSystem::saveData()
 {
-#ifdef OS_WINDOWS
+
 	std::string fileContents;
 	for (int i = 0; i < scores.size(); i++)
 	{
 		fileContents = fileContents + scores[i].name + " " + toStringi(scores[i].score) + "\n";
 	}
-	Game::getInstance()->getFileManager()->writeFile(vg::core::FileManager::DataPath::File, filePath, fileContents);
+	Game::getInstance()->getFileManager()->writeFile(
+#ifdef OS_WINDOWS
+		vg::core::FileManager::DataPath::File
+#else
+		vg::core::FileManager::DataPath::Internal
 #endif
+		, filePath, fileContents);
+
 }
 
 void HighScoreSystem::addScore(std::string name, int score)
