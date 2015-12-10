@@ -52,8 +52,8 @@ void SoundEffect::setPosition(float pos)
 
 float SoundEffect::getPosition()
 {
-	mySound->getPlayPosition();
-	return 0;
+	
+	return mySound->getPlayPosition();
 }
 
 float SoundEffect::getLength()
