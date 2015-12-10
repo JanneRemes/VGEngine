@@ -102,7 +102,7 @@ JumpSystem::JumpSystem(Scene *scene)
 	muumiJoint = new Joint(muumiPhysics, physicsComponent);
 	muumiJoint->createRevoluteJoint();
 	
-	muumiJoint->setAnchorA(Vec2f(0, 35));
+	muumiJoint->setAnchorA(Vec2f(0, 36));
 	muumiJoint->enableLimits(-50, 50, true);
 
 	// 520, 528 * 5

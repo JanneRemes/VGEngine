@@ -127,7 +127,7 @@ namespace vg
 		void setRotationLock(bool lock);
 
 		/**
-		Set collision filter
+		Two physics objects with same collision masks wont collide
 		*/
 		void setCollisionFilter(FILTER filter);
 

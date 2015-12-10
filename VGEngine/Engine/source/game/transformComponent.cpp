@@ -42,8 +42,15 @@ TransformComponent::TransformComponent(Vec2f position, LayerGroup layerGroup, bo
 
 TransformComponent::TransformComponent(vg::Vec2f position, vg::Vec2f size,
 	float rotation, vg::Vec2f origin, LayerGroup layerGroup, bool useCamera)
-	:Component(), mPosition(position), mSize(size), mRotation(rotation), mOrigin(origin), mLayerGroup(layerGroup), mUsingCamera(useCamera)
+	:Component(), mPosition(position), mSize(size), mRotation(rotation), mLayerGroup(layerGroup), mUsingCamera(useCamera)
 {
+	if (origin == Vec2f(-1, -1))
+	{
+		mOrigin = Vec2f(size.x / 2.0f, size.y / 2.0f);
+	}
+	else
+		mOrigin = origin;
+
 	setLayer(layerGroup);
 }
 

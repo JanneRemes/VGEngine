@@ -29,7 +29,7 @@ PhysicsTestSystem::PhysicsTestSystem(Scene *scene)
 	RenderComponent *animationComponent = new RenderComponent("papparunSmall2.png");
 	animationTest->addComponent(animationComponent);
 
-	TransformComponent *animationTransform = new TransformComponent(Vec2f(720, graphics::Screen::getY() - 512), Vec2f(512, 512), 0.0f);
+	TransformComponent *animationTransform = new TransformComponent(Vec2f(720, graphics::Screen::getY() - 512), Vec2f(512, 512), 0.0f, Vec2f(0,0));
 	animationTest->addComponent(animationTransform);
 	animationTest->addComponent(new AnimationComponent(0.04, 3, 8, 24));
 

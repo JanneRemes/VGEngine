@@ -49,7 +49,7 @@ namespace vg
 		@param useCamera true if the position is affected by camera
 		*/
 		TransformComponent(Vec2f position, LayerGroup layerGroup = MIDDLE, bool useCamera = true);
-		
+
 		/**
 		@param position position of upper left corner
 		@param size width and lenght of the sprite
@@ -59,7 +59,7 @@ namespace vg
 		@param useCamera true if the position is affected by camera
 		*/
 		TransformComponent(vg::Vec2f position, vg::Vec2f size, float rotation = 0.0f, 
-			vg::Vec2f origin = vg::Vec2f(), LayerGroup layerGroup = MIDDLE, bool useCamera = true);
+			vg::Vec2f origin = Vec2f(-1, -1), LayerGroup layerGroup = MIDDLE, bool useCamera = true);
 
 		/**
 		@param leftTop corner of rectangle

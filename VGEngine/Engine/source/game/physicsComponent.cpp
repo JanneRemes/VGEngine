@@ -43,10 +43,9 @@ PhysicsComponent::PhysicsComponent(TransformComponent *component, BODYTYPE type,
 		mBodyDef.type = b2BodyType::b2_staticBody;
 	}
 
-	Vec2f origin = component->getSize();
-	origin *= 0.5f;
-	component->setOrigin(origin);
-	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f);
+
+	const b2Vec2 boxOrigin = b2Vec2((component->getSize().x / 2 - component->getOrigin().x) / scale, (component->getSize().y / 2 - component->getOrigin().y) / -scale);
+	mBoxShape.SetAsBox(_width / scale / 2.0f, _height / scale / 2.0f, boxOrigin, 0);
 
 	mFixDef.density = 1.0f;
 	mFixDef.shape = &mBoxShape;

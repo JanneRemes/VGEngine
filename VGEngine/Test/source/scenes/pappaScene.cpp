@@ -28,7 +28,7 @@ void PappaScene::loadObjects()
 	// Background
 	GameObject *background = new GameObject("background");
 	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
-		Vec2f(1280, 720), 0.0f);
+		Vec2f(1280, 720), 0.0f, Vec2f(0,0));
 	background->addComponent(backgroundTransform);
 	RenderComponent *quadrBackground = new RenderComponent("muumiBG.png");
 	background->addComponent(quadrBackground);
