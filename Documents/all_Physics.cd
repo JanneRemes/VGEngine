@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="vg::Component" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAIAAAAAAAAAAAAAAAAAACACAAABAAAAAAAA=</HashCode>
+      <FileName>include\engine\game\component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::System" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAIAAAAAAAAAAAAAABAAAgAAEAAAAQAAEAAA=</HashCode>
+      <FileName>include\engine\game\system.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::PhysicsComponent">
+    <Position X="0.5" Y="1.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="vg::PhysicsComponent::BODYSHAPE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\engine\game\physicscomponent.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="vg::PhysicsComponent::BODYTYPE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\engine\game\physicscomponent.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="vg::PhysicsComponent::FILTER" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>include\engine\game\physicscomponent.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAQMpAAGIAwBBgBABAAAQESCEIkAAAQAAhAAAUAABg=</HashCode>
+      <FileName>include\engine\game\physicscomponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::Joint">
+    <Position X="3.5" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABCAAAAAAAAAAAAAAAAAGAEAgoAABCAAAgAAAA=</HashCode>
+      <FileName>include\engine\game\physicsjoint.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::ContactListener">
+    <Position X="3.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\engine\game\physicssystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="vg::PhysicsSystem">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAEAAAEAAAgAAACBAAQAEAAAQAgAGIAAEAEAgEAAA=</HashCode>
+      <FileName>include\engine\game\physicssystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
