@@ -75,7 +75,7 @@ rockSystem::rockSystem(Scene *scene)
 	//HEIGHTBAR
 	bar1 = new GameObject("bar1");
 	TransformComponent *transformBar1 = new TransformComponent(Vec2f(20, 10),
-		Vec2f(50, 170), 0.0f);
+		Vec2f(50, 170), 0.0f,Vec2f(0,0));
 	RenderComponent *quadreBar1 = new RenderComponent("bar.png");
 
 	bar1->addComponent(transformBar1);
@@ -86,7 +86,7 @@ rockSystem::rockSystem(Scene *scene)
 	//INDICATOR FOR HEIGHTBAR
 	indicator1 = new GameObject("indicator1");
 	TransformComponent *transformIndicator1 = new TransformComponent(Vec2f(0, 170),
-		Vec2f(100, 10), 0.0f);
+		Vec2f(100, 10), 0.0f, Vec2f(0, 0));
 	RenderComponent *quadreIndicator1 = new RenderComponent("indicator.png");
 
 	indicator1->addComponent(transformIndicator1);
@@ -97,7 +97,7 @@ rockSystem::rockSystem(Scene *scene)
 	//POWERBAR
 	bar2 = new GameObject("bar2");
 	TransformComponent *transformBar2 = new TransformComponent(Vec2f(120, 10),
-		Vec2f(50, 170), 0.0f);
+		Vec2f(50, 170), 0.0f,Vec2f(0, 0));
 	RenderComponent *quadreBar2 = new RenderComponent("bar.png");
 
 	bar2->addComponent(transformBar2);
@@ -108,7 +108,7 @@ rockSystem::rockSystem(Scene *scene)
 	//INDICATOR FOR POWERBAR
 	indicator2 = new GameObject("indicator2");
 	TransformComponent *transformIndicator2 = new TransformComponent(Vec2f(100, 170),
-		Vec2f(100, 10), 0.0f);
+		Vec2f(100, 10), 0.0f, Vec2f(0, 0));
 	RenderComponent *quadreIndicator2 = new RenderComponent("indicator.png");
 
 	indicator2->addComponent(transformIndicator2);
