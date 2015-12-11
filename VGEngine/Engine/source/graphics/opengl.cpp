@@ -288,6 +288,11 @@ unsigned int gl::getGL_NEAREST()
 	return GL_NEAREST;
 }
 
+unsigned int gl::getGL_REPEAT()
+{
+	return GL_REPEAT;
+}
+
 unsigned int gl::getGL_CLAMP_TO_EDGE()
 {
 	return GL_CLAMP_TO_EDGE;

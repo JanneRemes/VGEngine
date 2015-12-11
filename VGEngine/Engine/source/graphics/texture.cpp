@@ -60,14 +60,12 @@ bool Texture::load(FileManager *fileManager)
 	gl::activeTexture();
 	gl::bindTexture(mId);
 	gl::texImage2DRGBA(mWidth, mHeight, pixels);
-	//gl::texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//gl::texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
 	gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
 	gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
 	gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_LINEAR());
 	gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_LINEAR());
-	//gl::texParameteri(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	//gl::texParameteri(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//gl::texParameteri(getGL_TEXTURE_MAG_FILTER(), getGL_NEAREST());
+	//gl::texParameteri(getGL_TEXTURE_MIN_FILTER(), getGL_NEAREST());
 	gl::bindTexture(0);
 
 	mIsLoaded = true;
@@ -120,7 +118,25 @@ uint32_t Texture::getHeight() const
 {
 	return mHeight;
 }
+
 std::vector<unsigned char> Texture::getDataVector() const
 {
 	return pixels;
+}
+
+void Texture::setRepeat(bool value)
+{
+	gl::activeTexture();
+	gl::bindTexture(mId);
+	if (value)
+	{
+		gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_REPEAT());
+		gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_REPEAT());
+	}
+	else
+	{
+		gl::texParameteri(getGL_TEXTURE_WRAP_S(), getGL_CLAMP_TO_EDGE());
+		gl::texParameteri(getGL_TEXTURE_WRAP_T(), getGL_CLAMP_TO_EDGE());
+	}
+	gl::bindTexture(0u);
 }
