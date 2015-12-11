@@ -110,8 +110,10 @@ void JumpScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
 	// sound
-	Game::getInstance()->getAudioManager()->addSound("music",
-		*assetManager->get<sound::Sound>("muumitechno.mp3"));
-	Game::getInstance()->getAudioManager()->play("music");
-	Game::getInstance()->getAudioManager()->loopEnabled("music", true);
+
+	Game::getInstance()->getAssetManager()->load<sound::Sound>("Muumimusiikkia 39.mp3");
+	Game::getInstance()->getAudioManager()->addSound("talvimusic",
+		*assetManager->get<sound::Sound>("Muumimusiikkia 39.mp3"));
+	Game::getInstance()->getAudioManager()->play("talvimusic");
+	Game::getInstance()->getAudioManager()->loopEnabled("talvimusic", true);
 }

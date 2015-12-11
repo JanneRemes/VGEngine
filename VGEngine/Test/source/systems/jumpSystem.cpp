@@ -27,6 +27,7 @@ using namespace vg::input;
 
 JumpSystem::JumpSystem(Scene *scene)
 {
+	slomo_state = NO_SLOMO;
 	this->scene = scene;
 	system = Game::getInstance()->getSceneManager()->getActiveScene()->getComponentSystemManager()->getSystem<PhysicsSystem>();
 	
@@ -109,22 +110,24 @@ JumpSystem::JumpSystem(Scene *scene)
 	float lowX = 520 * 5;
 	float lowY = 528 * 5;
 	
-	float steep = 1; // Hill landing steepness modifier
-	listOfCustomPoints.push_back(Vec2f(lowX, lowY + 250));
-	listOfCustomPoints.push_back(Vec2f(lowX + 10000, lowY + 250 * steep));
-	
+	listOfCustomPoints.push_back(Vec2f(lowX, lowY + 500));
+	listOfCustomPoints.push_back(Vec2f(lowX + 10000, lowY + 500));
+	listOfCustomPoints.push_back(Vec2f(listOfCustomPoints[1].x, listOfCustomPoints[1].y - 1000));
+
 	// land texture
-	TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(listOfCustomPoints[0].x, listOfCustomPoints[0].y), 10,
-		Vec2f(listOfCustomPoints[1].x, listOfCustomPoints[1].y));
+	for (int i = 0; i < listOfCustomPoints.size()-1; i++)
+	{
+		TransformComponent *hillPartTransformNew = new TransformComponent(Vec2f(listOfCustomPoints[i].x, listOfCustomPoints[i].y), 10,
+			Vec2f(listOfCustomPoints[i + 1].x, listOfCustomPoints[i+1].y));
 
-	GameObject *hillPartObjectNew = new GameObject("hillPart1");
-	RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
-	hillPartQuadNew->setColor(vg::Color(0, 0, 0));
-	hillPartObjectNew->addComponent(hillPartTransformNew);
-	hillPartObjectNew->addComponent(hillPartQuadNew);
+		GameObject *hillPartObjectNew = new GameObject("hillPart1");
+		RenderComponent *hillPartQuadNew = new RenderComponent("koala.png");
+		hillPartQuadNew->setColor(vg::Color(0, 0, 0));
+		hillPartObjectNew->addComponent(hillPartTransformNew);
+		hillPartObjectNew->addComponent(hillPartQuadNew);
 
-	scene->addGameObject(hillPartObjectNew);
-
+		scene->addGameObject(hillPartObjectNew);
+	}
 	TransformComponent *landTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(0, 0));
 
@@ -139,12 +142,12 @@ JumpSystem::JumpSystem(Scene *scene)
 	scene->addGameObject(landingZone);
 	
 	// Create scenery
-	for (int i = listOfCustomPoints.at(0).x; i < listOfCustomPoints.at(1).x; i += 500)
+	for (int i = listOfCustomPoints.at(0).x; i <= listOfCustomPoints.at(1).x; i += 500)
 	{
 		// Muumi distance text
 		GameObject *muumiDistanceTextObject = new GameObject("MuumiDistance");
 		TextComponent* MuumiDistanceText = new TextComponent("arial.ttf", 8);
-		TransformComponent* MuumiDistanceTransform = new TransformComponent((Vec2f(i, lowY + 225 + 3*8 + 10)));
+		TransformComponent* MuumiDistanceTransform = new TransformComponent((Vec2f(i, listOfCustomPoints.at(0).y)));
 		
 		std::stringstream stream;
 		stream << i / 100 - listOfCustomPoints[1].x / 100 + 100 << " m";
@@ -156,6 +159,37 @@ JumpSystem::JumpSystem(Scene *scene)
 
 		scene->addGameObject(muumiDistanceTextObject);
 	}
+	core::AssetManager *assetManager = Game::getInstance()->getAssetManager();
+	/*assetManager->load<sound::Sound>("shoot.mp3");
+	assetManager->load<sound::Sound>("NOMORESLOMO.mp3");
+	sound::Sound slomoSound = *assetManager->get<sound::Sound>("Raise your Kappa!.mp3");
+	Game::getInstance()->getAudioManager()->addSound("slomo", slomoSound);
+
+	sound::Sound noslomoSound = *assetManager->get<sound::Sound>("NOMORESLOMO.mp3");
+	Game::getInstance()->getAudioManager()->addSound("noslomo", noslomoSound);*/
+	Game::getInstance()->getAssetManager()->load<sound::Sound>("SLOMO.mp3");
+	Game::getInstance()->getAssetManager()->load<sound::Sound>("NOMORESLOMO.mp3");
+
+	Game::getInstance()->getAudioManager()->addSound("nomoreslomo",
+		*assetManager->get<sound::Sound>("NOMORESLOMO.mp3"));
+
+
+
+	GameObject* background1 = new GameObject("BG1");
+	GameObject* background2 = new GameObject("BG2");
+	TransformComponent* bgTransform1 = new TransformComponent(Vec2f(0 - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM,false);
+	TransformComponent* bgTransform2 = new TransformComponent(Vec2f(Screen::getX() - Screen::getX() * 0.10, 0), Screen::getSize(), 0, Vec2f(0, 0), vg::TransformComponent::LayerGroup::BOTTOM,false);
+	RenderComponent* bgRender1 = new RenderComponent("winter_scrolling.png");
+	RenderComponent* bgRender2 = new RenderComponent("winter_scrolling.png");
+
+	background1->addComponent(bgTransform1);
+	background1->addComponent(bgRender1);
+	background2->addComponent(bgTransform2);
+	background2->addComponent(bgRender2);
+
+	scene->addGameObject(background1);
+	scene->addGameObject(background2);
+	slomo_acceleration = 1.0f;
 }
 
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
@@ -175,6 +209,53 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 			distance = 0;
 		stream << "Distance: " << distance << "m";
 		textObject->getComponent<TextComponent>()->setText(stream.str());
+	}
+
+	float snowboardY = snowboard->getComponent<TransformComponent>()->getWorldPosition().y;
+	float groundY = listOfCustomPoints[0].y;
+	if (sqrt(pow(snowboardY - groundY, 2)) < 400.0f && slomo_state == NO_SLOMO)
+	{
+		slomo_state = SLOMO;
+		core::AssetManager *assetManager = Game::getInstance()->getAssetManager();
+		Game::getInstance()->getAudioManager()->addSound("slomo",
+			*assetManager->get<sound::Sound>("SLOMO.mp3"));
+		Game::getInstance()->getAudioManager()->play("slomo");
+		Game::getInstance()->getAudioManager()->loopEnabled("slomo", false);
+	}
+	else if (slomo_state == SLOMO)
+	{
+		if (system->getTimeStep() > SLOMO_TIME_STEP)
+		{
+			float stepbefore = SLOMO_TIME_STEP_INCREASE;
+			float step = system->getTimeStep() -  (stepbefore * slomo_acceleration);
+			slomo_acceleration += 0.1f;
+			system->setTimeStep(step);
+		}
+		else
+			system->setTimeStep(SLOMO_TIME_STEP);
+	}
+	else if (slomo_state == SLOMO_ENDING)
+	{
+		if (slomoTimer.getCurrentTimeSeconds() >= ( SLOMO_TIME - 0.5f ))
+		{
+			slomo_state = SLOMO_MUSIC_STARTED;
+			core::AssetManager *assetManager = Game::getInstance()->getAssetManager();
+			Game::getInstance()->getAudioManager()->addSound("nomoreslomo",
+				*assetManager->get<sound::Sound>("NOMORESLOMO.mp3"));
+			Game::getInstance()->getAudioManager()->loopEnabled("nomoreslomo", false);
+			Game::getInstance()->getAudioManager()->play("nomoreslomo");
+
+		}
+	}
+	else if (slomo_state == SLOMO_MUSIC_STARTED)
+	{
+		if (slomoTimer.getCurrentTimeSeconds() >= SLOMO_TIME)
+		{
+			slomo_state = SLOMO_DONE;
+			system->setTimeStep(DEFAULT_TIME_STEP);
+
+		}
+	
 	}
 #ifdef OS_WINDOWS
 
@@ -208,6 +289,11 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Numpad2) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		system->setTimeStep(system->getTimeStep() + 0.0005);
+	}
+	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Numpad3) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		snowboard->getComponent<PhysicsComponent>()->setVelocity(Vec2f(snowboard->getComponent<PhysicsComponent>()->getVelocity().x + 1000,
+			snowboard->getComponent<PhysicsComponent>()->getVelocity().y ));
 	}
 
 #endif
@@ -243,6 +329,8 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		}
 	}
 #endif
+
+	backgroundUpdate(gameObjects);
 }
 
 void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
@@ -258,6 +346,32 @@ void JumpSystem::onHit(vg::GameObject *other, vg::GameObject *other2)
 			{	
 				muumiJoint->removeJoint();
 			}
+		}
+		if (slomo_state == SLOMO)
+		{
+			slomo_state = SLOMO_ENDING;
+			slomoTimer.restart();
+		}
+	}
+
+
+	if (other->getName() == "physicsTest1" && other2->getName() == "landingZone" ||
+		other2->getName() == "physicsTest1" && other->getName() == "landingZone")
+	{
+
+		if (muumiJoint->connected)
+		{
+			// check if muumi is standing up
+			if (snowboard->getComponent<PhysicsComponent>()->getRotation() > 15 ||
+				snowboard->getComponent<PhysicsComponent>()->getRotation() < -15)
+			{
+				muumiJoint->removeJoint();
+			}
+		}
+		if (slomo_state == SLOMO)
+		{
+			slomo_state = SLOMO_ENDING;
+			slomoTimer.restart();
 		}
 	}
 }
@@ -317,7 +431,55 @@ void JumpSystem::reset()
 	textObject->getComponent<TextComponent>()->setText("");
 	powerTextObject->getComponent<TextComponent>()->setText("");
 	system->setTimeStep(1.0f / 60.0f); // Default timestep
-
+	slomo_state = NO_SLOMO;
+	slomo_acceleration = 1.0f;
 	if (!muumiJoint->connected)
 		muumiJoint->createRevoluteJoint();
+}
+void JumpSystem::backgroundUpdate(std::vector<vg::GameObject*> *gameObjects)
+{
+	GameObject* background1;
+	GameObject* background2;
+	string objectName;
+
+	TransformComponent* background1Trans;
+	TransformComponent* background2Trans;
+
+	for (auto it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		objectName = (*it)->getName();
+
+		if (objectName == "BG1")
+		{
+			background1 = (*it);
+			background1Trans = (*it)->getComponent<TransformComponent>();
+		}
+
+		if (objectName == "BG2")
+		{
+			background2 = (*it);
+			background2Trans = (*it)->getComponent<TransformComponent>();
+		}
+
+	}
+
+
+		vg::Vec2f back1Vec = vg::Vec2f(-Camera::getPosition().x, 0);
+
+
+		if (back1Vec.x < -background1Trans->getSize().x)
+		{
+			int verymage = floor(sqrt(pow(back1Vec.x, 2.0f)) / background1Trans->getSize().x);
+			back1Vec.x += verymage * background1Trans->getSize().x;
+		}
+		else if (back1Vec.x > 0)
+		{
+			back1Vec.x -= background1Trans->getSize().x;
+		}
+		background1Trans->setPosition(back1Vec);
+		vg::Vec2f back2Vec = vg::Vec2f(background1Trans->getWorldPosition().x + background1Trans->getSize().x, 0);
+
+		background2Trans->setPosition(back2Vec);
+	
+	
 }

@@ -31,7 +31,7 @@ void mainGame(Game* game)
 
 	MainScene *scene = new MainScene();
 	game->getSceneManager()->addTemplateScene("scene", scene);
-	game->getSceneManager()->changeScene("scene");
+
 
 	CameraScene* cameraScene = new CameraScene();
 	game->getSceneManager()->addTemplateScene("cameraScene", cameraScene);
@@ -53,5 +53,7 @@ void mainGame(Game* game)
 
 	HighScoreScene* highscoreScene = new HighScoreScene();
 	game->getSceneManager()->addTemplateScene("highscorescene", highscoreScene);
+
+	game->getSceneManager()->changeScene("scene");
 	
 }

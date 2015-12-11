@@ -14,6 +14,7 @@ ISound *mySound = nullptr;
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
 	Sound doge = soundFile;
+	
 	mSoundPath = "assets/"+doge.getPath();
 }
 
@@ -22,7 +23,7 @@ void SoundEffect::play()
 	ISoundEngine* engine = createIrrKlangDevice();
 	char *cstr = new char[mSoundPath.length() + 1];
 	strcpy(cstr, mSoundPath.c_str());
-	mySound = engine->play2D(cstr,true,false,true);
+	mySound = engine->play2D(cstr,false,false,true);
 }
 bool SoundEffect::isFinishedPlaying()
 {
