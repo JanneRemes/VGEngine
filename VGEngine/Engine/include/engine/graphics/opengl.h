@@ -87,6 +87,7 @@ namespace vg
 			unsigned int getGL_TEXTURE_WRAP_S();
 			unsigned int getGL_TEXTURE_WRAP_T();
 			unsigned int getGL_NEAREST();
+			unsigned int getGL_REPEAT();
 
 			unsigned int getGL_ELEMENT_ARRAY_BUFFER();
 			unsigned int getGL_ARRAY_BUFFER();

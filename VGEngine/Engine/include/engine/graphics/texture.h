@@ -79,6 +79,12 @@ namespace vg
 				*/
 			std::vector<unsigned char> getDataVector() const;
 
+			/**
+			Repeating textures can be used for tiled backgrounds
+			@param value enable or disable texture repeating
+			*/
+			void setRepeat(bool value);
+
 		private:
 
 			void init();
