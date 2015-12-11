@@ -19,7 +19,7 @@ void DogeScene::loadObjects()
 {
 	GameObject *background = new GameObject("background");
 	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
-		Vec2f(1280, 720), 0.0f);
+		Vec2f(1280, 720), 0.0f, Vec2f(0, 0));
 	background->addComponent(backgroundTransform);
 	RenderComponent *quadrBackground = new RenderComponent("followyourdreams.png");
 	background->addComponent(quadrBackground);
@@ -27,7 +27,7 @@ void DogeScene::loadObjects()
 
 	GameObject *doge = new GameObject("doge");
 	TransformComponent *dogetransform = new TransformComponent(Vec2f(1280/2 +50, 720/2 -50),
-		Vec2f(320, 320), 0.0f,Vec2f(160.0f));
+		Vec2f(320, 320), 0.0f, Vec2f(160.0f));
 	doge->addComponent(dogetransform);
 	RenderComponent *dogerender = new RenderComponent("doge.png");
 	doge->addComponent(dogerender);
