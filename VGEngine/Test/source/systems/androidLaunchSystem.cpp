@@ -179,8 +179,6 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 #ifdef OS_WINDOWS
 		if (input::Mouse::isKeyDown(vg::input::RIGHT))
 		{
-			if (clickInit == false)
-			{
 				clickPos = vg::input::Mouse::getPos();
 
 #endif
@@ -188,11 +186,10 @@ void AndroidLaunchSystem::update(std::vector<vg::GameObject*> *gameObjects, floa
 #ifdef OS_ANDROID
 		if(input::Touch::getIsTouched())
 		{
-			if (clickInit == false)
-			{ 
 				clickPos = input::Touch::getPos();
 #endif
-
+				if (clickInit == false)
+				{
 				ballPos = android->getComponent<TransformComponent>()->getWorldPosition();
 				barTexCoords[0] = glm::vec2(0, 0);
 				barTexCoords[1] = glm::vec2(0, 0);

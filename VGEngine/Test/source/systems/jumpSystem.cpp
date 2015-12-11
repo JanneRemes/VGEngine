@@ -190,6 +190,21 @@ JumpSystem::JumpSystem(Scene *scene)
 	scene->addGameObject(background1);
 	scene->addGameObject(background2);
 	slomo_acceleration = 1.0f;
+
+	/*
+	Power bar initialization
+	*/
+	powerbar = new GameObject("PowerBar");
+	TransformComponent *barTransform = new TransformComponent(Vec2f(-1000, 30),
+		Vec2f(32, 126), 0.0f, Vec2f(0, 0));
+	powerbar->addComponent(barTransform);
+	RenderComponent* powerRender = new RenderComponent("bar.png");
+	powerbar->addComponent(powerRender);
+	bState = INCREASING;
+	powerbarOn = false;
+	jumped = false;
+	barYIncrement = 0.0f;
+	scene->addGameObject(powerbar);
 }
 
 void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
@@ -257,20 +272,86 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		}
 	
 	}
+	vg::Vec2f clickPos;
+	vg::Vec2f ballPos = muumiObject->getComponent<TransformComponent>()->getWorldPosition();
+
+	bool isInputDown = false;
+#ifdef OS_WINDOWS
+	if (input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED)
+	{
+		clickPos = vg::input::Mouse::getPos();
+		isInputDown = true;
+	}
+
+#endif
+
+#ifdef OS_ANDROID
+		if (input::Touch::getIsTouched())
+		{
+			clickPos = input::Touch::getPos();
+			isInputDown = true;
+		}
+#endif
+		if (!jumped)
+		{
+			if (isInputDown)
+			{
+				if (!powerbarOn)
+				{
+					barTexCoords[0] = glm::vec2(0, 0);
+					barTexCoords[1] = glm::vec2(0, 0);
+					barTexCoords[2] = glm::vec2(1, 0);
+					barTexCoords[3] = glm::vec2(1, 0);
+					powerbar->getComponent<RenderComponent>()->setTexCoords(barTexCoords);
+				}
+				powerbarOn = true;
+
+				if (bState == BarState::INCREASING)
+				{
+					barYIncrement += 0.03f;
+
+					if (barYIncrement >= 1.0f)
+					{
+						bState = DECREASING;
+					}
+				}
+
+				if (bState == BarState::DECREASING)
+				{
+					barYIncrement -= 0.03f;
+
+					if (barYIncrement <= 0.0f)
+					{
+						bState = INCREASING;
+					}
+				}
+
+
+				barTexCoords[0] = glm::vec2(0, barYIncrement);
+				barTexCoords[1] = glm::vec2(0, 0);
+				barTexCoords[2] = glm::vec2(1, 0);
+				barTexCoords[3] = glm::vec2(1, barYIncrement);
+				powerbar->getComponent<TransformComponent>()->setSize(vg::Vec2f(32, 126 * barYIncrement));
+				powerbar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(ballPos.x, ballPos.y - (126 * barYIncrement) - 50));
+				powerbar->getComponent<RenderComponent>()->setTexCoords(barTexCoords);
+			}
+			else if(powerbarOn)
+			{
+				launchPower = barYIncrement * 50;
+				Launch();
+				jumped = true;
+				powerbarOn = false;
+			}
+			//powerbar->getComponent<TransformComponent>()->setPosition(vg::Vec2f(ballPos.x, ballPos.y - (126 * barYIncrement) - 50));
+		}
+	
+
+
 #ifdef OS_WINDOWS
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::S) == vg::input::Keyboard::KeyState::PRESSED)
 	{
 		reset();
-	}
-
-	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected && !launched)
-	{
-		prepareLaunch();
-	}
-	else if ((vg::input::Keyboard::getKeyState(vg::input::Keyboard::Space) == vg::input::Keyboard::KeyState::UP && muumiJoint->connected && !launched) || launchPower >= 50)
-	{
-		Launch();
 	}
 
 	if (vg::input::Keyboard::getKeyState(vg::input::Keyboard::A) == vg::input::Keyboard::KeyState::PRESSED && muumiJoint->connected)
@@ -435,6 +516,13 @@ void JumpSystem::reset()
 	slomo_acceleration = 1.0f;
 	if (!muumiJoint->connected)
 		muumiJoint->createRevoluteJoint();
+
+	jumped = false;
+	powerbar->getComponent<TransformComponent>()->setPosition(Vec2f(-1000, 30));
+
+	bState = INCREASING;
+	barYIncrement = 0.0f;
+	
 }
 void JumpSystem::backgroundUpdate(std::vector<vg::GameObject*> *gameObjects)
 {

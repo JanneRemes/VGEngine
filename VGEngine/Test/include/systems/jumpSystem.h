@@ -7,7 +7,7 @@
 #include "engine/game/physicsSystem.h"
 #include "engine\game\physicsJoint.h"
 #include "engine/utility/vec2f.h"
-
+#include "../external/glm/glm.hpp"
 #include <vector>
 #define SLOMO_TIME_STEP 0.0011f
 #define DEFAULT_TIME_STEP 0.016666f
@@ -26,6 +26,7 @@ public:
 		SLOMO_MUSIC_STARTED,
 		SLOMO_DONE
 	};
+	enum BarState { INCREASING, DECREASING };
 	JumpSystem(vg::Scene *scene);
 	~JumpSystem();
 	void update(std::vector<vg::GameObject*> *gameObjects, float deltaTime);
@@ -36,6 +37,11 @@ public:
 	void prepareLaunch();
 	void Launch();
 private:
+	glm::vec2 barTexCoords[4];
+	float barYIncrement;
+	BarState bState;
+	bool jumped;
+	bool powerbarOn;
 	float slomo_acceleration;
 	void backgroundUpdate(std::vector<vg::GameObject*> *gameObjects);
 	vg::Timer slomoTimer;
@@ -49,7 +55,7 @@ private:
 	vg::GameObject* powerTextObject;
 	vg::GameObject *background;
 	vg::GameObject *landingZone;
-
+	vg::GameObject *powerbar;
 	// Landing zone
 	std::vector<vg::Vec2f> listOfCustomPoints;
 
