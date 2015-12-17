@@ -6,6 +6,9 @@
 #include "engine/game/textComponent.h"
 #include "engine/game/renderComponent.h"
 #include "engine/game/animationComponent.h"
+#include "engine/utility/random.h"
+
+
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
 #endif
@@ -47,7 +50,7 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 			if (currentLightCount >= lightMaxCount)
 				break;
 			GameObject *valo = new GameObject("valo");
-			TransformComponent *valoTransform = new TransformComponent(Vec2f(920 + rand() % 255, 440 + rand() % 255),
+			TransformComponent *valoTransform = new TransformComponent(Vec2f(920 + Random::nexti(0, 255), 440 + Random::nexti(0, 255)),
 				Vec2f(28, 28), 0.0f, Vec2f(-1, -1), vg::TransformComponent::BOTTOM);
 			valo->addComponent(valoTransform);
 			RenderComponent *quadrvalo = new RenderComponent("valo.png");

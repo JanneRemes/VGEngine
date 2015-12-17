@@ -56,7 +56,7 @@ int main()
 	Application *app = new Application();
 	vg::Timer updateTimer;
 	updateTimer.restart();
-	float updateRate =  1.0f/75.0f;
+	float updateRate =  1.0f/100.0f;
 #ifndef CONF_DLL
 	mainGame(game);
 #endif
@@ -71,7 +71,7 @@ int main()
 			
 		float currentTime = updateTimer.getCurrentTimeSeconds();
 		float microTime = ((updateRate - currentTime) * 1000.0f * 1000.0f);
-		std::cout << microTime << std::endl;
+		//std::cout << microTime << std::endl;
 		if (updateRate > currentTime)
 			std::this_thread::sleep_for(std::chrono::microseconds((int)microTime));
 		updateTimer.restart();
