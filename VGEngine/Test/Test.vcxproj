@@ -216,6 +216,7 @@
     <ClInclude Include="include\Scenes\pappaScene.h" />
     <ClInclude Include="include\Scenes\rockThrowScene.h" />
     <ClInclude Include="include\Scenes\testScene.h" />
+    <ClInclude Include="include\SnowComponent.h" />
     <ClInclude Include="include\systems\androidLaunchSystem.h" />
     <ClInclude Include="include\Systems\cameraSystem.h" />
     <ClInclude Include="include\systems\DogeSystem.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="include\systems\rockSystem.h" />
     <ClInclude Include="include\systems\sceneChangeSystem.h" />
     <ClInclude Include="include\systems\shipSystem.h" />
+    <ClInclude Include="include\systems\snowSystem.h" />
     <ClInclude Include="include\test.h" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +243,7 @@
     <ClCompile Include="source\scenes\pappaScene.cpp" />
     <ClCompile Include="source\scenes\rockThrowScene.cpp" />
     <ClCompile Include="source\scenes\testScene.cpp" />
+    <ClCompile Include="source\SnowComponent.cpp" />
     <ClCompile Include="source\systems\androidLaunchSystem.cpp" />
     <ClCompile Include="source\systems\cameraSystem.cpp" />
     <ClCompile Include="source\systems\DogeSystem.cpp" />
@@ -252,6 +255,7 @@
     <ClCompile Include="source\systems\rockSystem.cpp" />
     <ClCompile Include="source\systems\sceneChangeSystem.cpp" />
     <ClCompile Include="source\systems\shipSystem.cpp" />
+    <ClCompile Include="source\systems\snowSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl" />

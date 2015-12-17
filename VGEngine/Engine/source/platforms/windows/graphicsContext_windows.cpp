@@ -225,6 +225,7 @@ void GraphicsContext::initializeOpenGL()
 	GLint texSize = 0;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
 	Log("vgengine", "Max texture size: %d", texSize);
+
 }
 
 unsigned int GraphicsContext::getProgramId()

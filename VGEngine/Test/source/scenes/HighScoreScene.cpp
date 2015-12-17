@@ -6,6 +6,8 @@
 #include <engine/graphics/font.h>
 #include "systems/HighScoreSystem.h"
 #include <engine/game/renderComponent.h>
+#include "systems/sceneChangeSystem.h"
+#include "engine/game/game.h"
 using namespace vg;
 HighScoreScene::HighScoreScene()
 {
@@ -17,7 +19,8 @@ HighScoreScene::~HighScoreScene()
 }
 void HighScoreScene::loadObjects()
 {
-	
+	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
+	Game::getInstance()->addComponentSystem(this, sceneChange);
 	GameObject* titleText = new GameObject("title");
 	titleText->addComponent(new TextComponent("arial.ttf", 12, "Highscores:"));
 	titleText->addComponent(new TransformComponent(Vec2f(1280 / 2 - 200, 60), Vec2f(0, 0), 0.0f, Vec2f(0, 0), TransformComponent::TOP, false));

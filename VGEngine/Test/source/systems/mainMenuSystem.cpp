@@ -5,7 +5,7 @@
 #include "engine/game/transformComponent.h"
 #include "engine/game/textComponent.h"
 #include "engine/game/renderComponent.h"
-
+#include "engine/game/animationComponent.h"
 #ifdef OS_WINDOWS
 #include "engine/input/mouse.h"
 #endif
@@ -27,12 +27,40 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	sceneNames.push_back("doge");
 	sceneNames.push_back("highscorescene");
 	selectedScene = sceneNames.begin();
+	lightSpawnTimer = Timer();
+	lightDelay = 0.12f;
+	lightMaxCount = 40;
+	lightSpawnAtOnce = 2;
+	currentLightCount = 0;
 }
 
 void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTime)
 {
 	inputDown = Vec2f(0, 0);
 	inputRelease = Vec2f(0, 0);
+
+
+	if (lightSpawnTimer.getCurrentTimeSeconds() >= lightDelay && currentLightCount < lightMaxCount)
+	{
+		for (int i = 0; i < lightSpawnAtOnce; i++)
+		{
+			if (currentLightCount >= lightMaxCount)
+				break;
+			GameObject *valo = new GameObject("valo");
+			TransformComponent *valoTransform = new TransformComponent(Vec2f(920 + rand() % 255, 440 + rand() % 255),
+				Vec2f(28, 28), 0.0f, Vec2f(-1, -1), vg::TransformComponent::BOTTOM);
+			valo->addComponent(valoTransform);
+			RenderComponent *quadrvalo = new RenderComponent("valo.png");
+			quadrvalo->setColor(vg::Color(rand() % 255, rand() % 255, rand() % 255, 255));
+			valo->addComponent(quadrvalo);
+
+			valo->addComponent(new AnimationComponent(0.12, 3, 6, 17));
+			mScene->addGameObject(valo);
+			currentLightCount++;
+		}
+		
+		lightSpawnTimer.restart();
+	}
 
 #ifdef OS_WINDOWS
 	if (Mouse::isKeyDown(LEFT))
@@ -93,7 +121,7 @@ bool MainMenuSystem::updateButton(vg::GameObject* obj)
 		else if (transform->contains(inputDown))
 			render->setColor(vg::Color(0, 255, 64));
 		else
-			render->setColor(vg::Color(0, 64, 255));
+			render->setColor(vg::Color(255, 0, 0));
 	}
 	return false;
 }

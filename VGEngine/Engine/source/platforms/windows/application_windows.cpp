@@ -8,9 +8,9 @@
 #include "engine/input/keyboard.h"
 #include "engine/graphics/screen.h"
 #include "engine/input/mouse.h"
-
+#include "engine/utility/timer.h"
 #include <Windows.h>
-
+#include <thread>
 using namespace vg;
 using namespace vg::core; 
 using namespace vg::graphics; 
@@ -54,15 +54,27 @@ int main()
 	game->start();
 
 	Application *app = new Application();
+	vg::Timer updateTimer;
+	updateTimer.restart();
+	float updateRate =  1.0f/75.0f;
 #ifndef CONF_DLL
 	mainGame(game);
 #endif
 	gl::clearColor(Screen::getColor());
 	gl::clear();
 	graphics->swapBuffers();
+	
 	while (game->isRunning())
 	{
-		app->update();
+		
+			app->update();
+			
+		float currentTime = updateTimer.getCurrentTimeSeconds();
+		float microTime = ((updateRate - currentTime) * 1000.0f * 1000.0f);
+		std::cout << microTime << std::endl;
+		if (updateRate > currentTime)
+			std::this_thread::sleep_for(std::chrono::microseconds((int)microTime));
+		updateTimer.restart();
 	}
 }
 

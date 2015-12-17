@@ -10,6 +10,7 @@
 #include "engine/game/game.h"
 
 #include "systems\jumpSystem.h"
+#include "systems\snowSystem.h"
 
 using namespace vg;
 
@@ -109,8 +110,11 @@ void JumpScene::loadObjects()
 	sceneChangeSystem *sceneChange = new sceneChangeSystem(this);
 	Game::getInstance()->addComponentSystem(this, sceneChange);
 
-	// sound
+	// snow system
+	snowSystem *snowsystem = new snowSystem(this);
+	Game::getInstance()->addComponentSystem(this, snowsystem);
 
+	// sound
 	Game::getInstance()->getAssetManager()->load<sound::Sound>("Muumimusiikkia 39.mp3");
 	Game::getInstance()->getAudioManager()->addSound("talvimusic",
 		*assetManager->get<sound::Sound>("Muumimusiikkia 39.mp3"));

@@ -2,7 +2,7 @@
 #include "engine/game/system.h"
 #include "engine/game/scene.h"
 #include "engine/utility/vec2f.h"
-
+#include "engine/utility/timer.h"
 // forward declaration
 namespace vg
 {
@@ -18,7 +18,11 @@ public:
 
 private:
 	bool updateButton(vg::GameObject* obj);
-
+	vg::Timer lightSpawnTimer;
+	float lightDelay;
+	int lightMaxCount;
+	int lightSpawnAtOnce;
+	int currentLightCount;
 	vg::Scene* mScene;
 	std::vector<std::string> sceneNames;
 	std::vector<std::string>::iterator selectedScene;

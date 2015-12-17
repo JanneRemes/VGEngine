@@ -102,6 +102,10 @@
     <ClInclude Include="include\systems\HighScoreSystem.h">
       <Filter>include\systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\systems\snowSystem.h">
+      <Filter>include\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SnowComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dummy.cpp">
@@ -170,6 +174,10 @@
     <ClCompile Include="source\systems\HighScoreSystem.cpp">
       <Filter>source\systems</Filter>
     </ClCompile>
+    <ClCompile Include="source\systems\snowSystem.cpp">
+      <Filter>source\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SnowComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\default_fragment.glsl">
