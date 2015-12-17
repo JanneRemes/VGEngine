@@ -235,7 +235,12 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		Game::getInstance()->getAudioManager()->addSound("slomo",
 			*assetManager->get<sound::Sound>("SLOMO.mp3"));
 		Game::getInstance()->getAudioManager()->play("slomo");
-		Game::getInstance()->getAudioManager()->loopEnabled("slomo", false);
+		Game::getInstance()->getAudioManager()->loopEnabled("slomo", false); 
+		if (snowboard->getComponent<PhysicsComponent>()->getVelocity().y <= -60.0f)
+		{
+			slomo_acceleration = 5.0f;
+		}
+		std::cout << "Velocity: " << snowboard->getComponent<PhysicsComponent>()->getVelocity().y<< std::endl;
 	}
 	else if (slomo_state == SLOMO)
 	{
