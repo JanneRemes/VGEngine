@@ -20,6 +20,8 @@ JumpScene::JumpScene()
 
 JumpScene::~JumpScene()
 {
+
+	Game::getInstance()->getAudioManager()->stop("talvimusic");
 }
 
 void JumpScene::loadObjects()

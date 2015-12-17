@@ -23,7 +23,7 @@ void mainGame(Game* game)
 	// preloading large assets
 	core::AssetManager* assetManager = Game::getInstance()->getAssetManager();
 	assetManager->load<sound::Sound>("muumitechno.mp3");
-	assetManager->load<sound::Sound>("Raise your Kappa!.mp3");
+	assetManager->load<sound::Sound>("christmasremix.mp3");
 
 	//TODO clean up
 	RenderComponent("papparunSmall2.png");

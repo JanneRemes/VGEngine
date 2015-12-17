@@ -513,7 +513,7 @@ void JumpSystem::reset()
 	powerTextObject->getComponent<TextComponent>()->setText("");
 	system->setTimeStep(1.0f / 60.0f); // Default timestep
 	slomo_state = NO_SLOMO;
-	slomo_acceleration = 1.0f;
+	slomo_acceleration = 0.1f;
 	if (!muumiJoint->connected)
 		muumiJoint->createRevoluteJoint();
 

@@ -29,10 +29,10 @@ void MainScene::loadObjects()
 	Game::getInstance()->addComponentSystem(this, new MainMenuSystem(this));
 
 	// sound
-	/*Game::getInstance()->getAudioManager()->addSound("music1",
-		*assetManager->get<sound::Sound>("Raise your Kappa!.mp3"));
+	Game::getInstance()->getAudioManager()->addSound("music1",
+		*assetManager->get<sound::Sound>("christmasremix.mp3"));
 	Game::getInstance()->getAudioManager()->play("music1");
-	Game::getInstance()->getAudioManager()->loopEnabled("music1", true);*/
+	Game::getInstance()->getAudioManager()->loopEnabled("music1", true);
 
 	//buttons
 	float middle = 360;
