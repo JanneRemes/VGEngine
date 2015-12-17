@@ -240,7 +240,7 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 		{
 			slomo_acceleration = 5.0f;
 		}
-		std::cout << "Velocity: " << snowboard->getComponent<PhysicsComponent>()->getVelocity().y<< std::endl;
+		//std::cout << "Velocity: " << snowboard->getComponent<PhysicsComponent>()->getVelocity().y<< std::endl;
 	}
 	else if (slomo_state == SLOMO)
 	{

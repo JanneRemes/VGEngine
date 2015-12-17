@@ -33,8 +33,8 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	selectedScene = sceneNames.begin();
 	lightSpawnTimer = Timer();
 	lightDelay = 0.25f;
-	lightMaxCount = 60;
-	lightSpawnAtOnce = 5;
+	lightMaxCount = 20;
+	lightSpawnAtOnce = 2;
 	currentLightCount = 0;
 }
 
