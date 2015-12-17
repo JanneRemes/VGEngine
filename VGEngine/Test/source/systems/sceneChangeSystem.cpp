@@ -131,6 +131,7 @@ void sceneChangeSystem::update(std::vector<vg::GameObject*> *gameObjects, float 
 				{
 					if (transform->contains(input))
 					{
+						Game::getInstance()->getAudioManager()->pauseAll();
 						Game::getInstance()->getSceneManager()->changeScene("scene");
 						return;
 					}

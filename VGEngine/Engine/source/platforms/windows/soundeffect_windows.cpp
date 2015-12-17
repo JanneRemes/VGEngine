@@ -16,6 +16,7 @@ SoundEffect::SoundEffect(const Sound& soundFile)
 	Sound doge = soundFile;
 	
 	mSoundPath = "assets/"+doge.getPath();
+	mySound = nullptr;
 }
 
 void SoundEffect::play()
@@ -64,6 +65,7 @@ float SoundEffect::getLength()
 
 void SoundEffect::stop()
 {
+	if (mySound != nullptr)
 	mySound->stop();
 }
 
