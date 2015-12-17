@@ -86,7 +86,8 @@ namespace vg
             bool isStartedPlaying();
 
         private:
-
+			void *data;
+			void *player;
 			bool mIsFinished;				///< <description>
 			bool mIsStarted;				///< <description>
             // Engine

@@ -27,8 +27,7 @@ void mainGame(Game* game)
 
 	assetManager->load<sound::Sound>("christmasremix.mp3");
 	assetManager->load<sound::Sound>("Muumimusiikkia 39.mp3");
-	Game::getInstance()->getAudioManager()->addSound("talvimusic",
-		*assetManager->get<sound::Sound>("Muumimusiikkia 39.mp3"));
+
 	//TODO clean up
 	RenderComponent("papparunSmall2.png");
 	RenderComponent("muumiBG.png");

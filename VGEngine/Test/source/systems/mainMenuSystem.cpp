@@ -19,6 +19,7 @@
 using namespace vg;
 using namespace vg::input;
 
+
 MainMenuSystem::MainMenuSystem(Scene* scene)
 :mScene(scene)
 {
@@ -31,9 +32,9 @@ MainMenuSystem::MainMenuSystem(Scene* scene)
 	sceneNames.push_back("highscorescene");
 	selectedScene = sceneNames.begin();
 	lightSpawnTimer = Timer();
-	lightDelay = 0.12f;
-	lightMaxCount = 40;
-	lightSpawnAtOnce = 2;
+	lightDelay = 0.25f;
+	lightMaxCount = 60;
+	lightSpawnAtOnce = 5;
 	currentLightCount = 0;
 }
 
@@ -45,12 +46,32 @@ void MainMenuSystem::update(std::vector<vg::GameObject*> *gameObjects, float del
 
 	if (lightSpawnTimer.getCurrentTimeSeconds() >= lightDelay && currentLightCount < lightMaxCount)
 	{
+		//top, left right
+		vg::Vec2f spawnareas[][3] = { 
+				//top
+				{ vg::Vec2f(1060, 300),vg::Vec2f(935,450),vg::Vec2f(1160,450)} ,
+				//middle
+				{ vg::Vec2f(1060, 400), vg::Vec2f(880, 575), vg::Vec2f(1220, 575)},
+				//bottom
+				{ vg::Vec2f(1060, 500), vg::Vec2f(850, 700), vg::Vec2f(1230, 700)}
+		};
 		for (int i = 0; i < lightSpawnAtOnce; i++)
 		{
 			if (currentLightCount >= lightMaxCount)
 				break;
 			GameObject *valo = new GameObject("valo");
-			TransformComponent *valoTransform = new TransformComponent(Vec2f(920 + Random::nexti(0, 255), 440 + Random::nexti(0, 255)),
+			int randomIndex = Random::nexti(0, sizeof(spawnareas) / sizeof(spawnareas[0]) -1 );
+			vg::Vec2f topCorner = spawnareas[randomIndex][0];
+			vg::Vec2f leftCorner = spawnareas[randomIndex][1];
+			vg::Vec2f rightrCorner = spawnareas[randomIndex][02];
+			vg::Vec2f pos;
+			bool isInsideTriangle = false;
+			while (!isInsideTriangle)
+			{
+				pos = Vec2f(leftCorner.x + Random::nexti(0, rightrCorner.x - leftCorner.x), topCorner.y + Random::nexti(0, leftCorner.y - topCorner.y));
+				isInsideTriangle = Vec2f::hasTrianglePoint(glm::vec2(pos.x, pos.y), glm::vec2(topCorner.x, topCorner.y), glm::vec2(leftCorner.x, leftCorner.y), glm::vec2(rightrCorner.x, rightrCorner.y));
+			}
+			TransformComponent *valoTransform = new TransformComponent(pos,
 				Vec2f(28, 28), 0.0f, Vec2f(-1, -1), vg::TransformComponent::BOTTOM);
 			valo->addComponent(valoTransform);
 			RenderComponent *quadrvalo = new RenderComponent("valo.png");

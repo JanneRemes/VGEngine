@@ -52,14 +52,14 @@ void MainScene::loadObjects()
 	TransformComponent *backgroundTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(1280, 720), 0.0f, Vec2f(0, 0),vg::TransformComponent::BOTTOM);
 	background->addComponent(backgroundTransform);
-	RenderComponent *quadrBackground = new RenderComponent("perfect_doge.png");
+	RenderComponent *quadrBackground = new RenderComponent("christmasbackground2.png");
 	background->addComponent(quadrBackground);
 	addGameObject(background);
 
 	//Minion
 	GameObject *minion = new GameObject("minion");
-	TransformComponent *minionTransform = new TransformComponent(Vec2f(0, 0),
-		Vec2f(90, 134), 0.0f, Vec2f(0, 0), vg::TransformComponent::MIDDLE);
+	TransformComponent *minionTransform = new TransformComponent(Vec2f(100, 100),
+		Vec2f(90, 162), 0.0f, Vec2f(45, 81), vg::TransformComponent::MIDDLE);
 	minion->addComponent(minionTransform);
 	PhysicsComponent *physicsMinion = new PhysicsComponent(minionTransform, PhysicsComponent::DYNAMIC);
 	physicsMinion->setRestitution(1.0f);
@@ -84,7 +84,7 @@ void MainScene::loadObjects()
 	koala->addComponent(quadrKoala);
 	addGameObject(koala);
 
-
+	//mursu
 	GameObject *mursu = new GameObject("mursu");
 	TransformComponent *mursuTransform = new TransformComponent(Vec2f(0, 0),
 		Vec2f(134, 134), 0.0f, Vec2f(0, 0), vg::TransformComponent::MIDDLE);
@@ -98,10 +98,24 @@ void MainScene::loadObjects()
 	mursu->addComponent(quadrMursu);
 	addGameObject(mursu);
 
+	//
+	GameObject *doge = new GameObject("doge");
+	TransformComponent *dogeTransform = new TransformComponent(Vec2f(150, 150),
+		Vec2f(120, 120), 0.0f, Vec2f(60, 60), vg::TransformComponent::MIDDLE);
+	doge->addComponent(dogeTransform);
+	PhysicsComponent *physicsDoge = new PhysicsComponent(dogeTransform, PhysicsComponent::DYNAMIC,120);
+	physicsDoge->setRestitution(1.0f);
+	physicsDoge->setAngularVelocity(20.0f);
+	physicsDoge->setVelocity(Vec2f(100.0f, 150.0f));
+	//physicsMursu->setAngularVelocity(20.0f);
+	doge->addComponent(physicsDoge);
+	RenderComponent *quadrDoge = new RenderComponent("doge.png");
+	doge->addComponent(quadrDoge);
+	addGameObject(doge);
 
 	GameObject *muumi = new GameObject("muumi");
-	TransformComponent *muumiTransform = new TransformComponent(Vec2f(0, 0),
-		Vec2f(75, 134), 0.0f, Vec2f(0, 0), vg::TransformComponent::MIDDLE);
+	TransformComponent *muumiTransform = new TransformComponent(Vec2f(100, 100),
+		Vec2f(75, 134), 0.0f, Vec2f(47, 72), vg::TransformComponent::MIDDLE);
 	muumi->addComponent(muumiTransform);
 	PhysicsComponent *physicsmuumi = new PhysicsComponent(muumiTransform, PhysicsComponent::DYNAMIC);
 	physicsmuumi->setRestitution(1.0f);

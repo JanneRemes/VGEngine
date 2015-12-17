@@ -257,8 +257,9 @@ void JumpSystem::update(std::vector<vg::GameObject*> *gameObjects, float deltaTi
 			core::AssetManager *assetManager = Game::getInstance()->getAssetManager();
 			Game::getInstance()->getAudioManager()->addSound("nomoreslomo",
 				*assetManager->get<sound::Sound>("NOMORESLOMO.mp3"));
-			Game::getInstance()->getAudioManager()->loopEnabled("nomoreslomo", false);
+
 			Game::getInstance()->getAudioManager()->play("nomoreslomo");
+			Game::getInstance()->getAudioManager()->loopEnabled("nomoreslomo", false);
 
 		}
 	}

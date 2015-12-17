@@ -11,7 +11,7 @@
 #include <vector>
 #define SLOMO_TIME_STEP 0.0011f
 #define DEFAULT_TIME_STEP 0.016666f
-#define SLOMO_TIME 4.0f
+#define SLOMO_TIME 2.5f
 #define SLOMO_TIME_STEP_INCREASE 0.001f;
 void doge(vg::GameObject *other);
 class JumpSystem : public vg::System

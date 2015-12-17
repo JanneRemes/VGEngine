@@ -120,3 +120,20 @@ bool Vec2f::operator != (const Vec2f& right)
 	return x != right.x || y != right.y;
 }
 
+bool  Vec2f::hasTrianglePoint(glm::vec2 p, glm::vec2 a, glm::vec2 b, glm::vec2 c)
+{
+	float u;
+	float v;
+	float w;
+	glm::vec2 v0 = b - a, v1 = c - a, v2 = p - a;
+	float d00 = glm::dot(v0, v0);
+	float d01 = glm::dot(v0, v1);
+	float d11 = glm::dot(v1, v1);
+	float d20 = glm::dot(v2, v0);
+	float d21 = glm::dot(v2, v1);
+	float denom = d00 * d11 - d01 * d01;
+	v = (d11 * d20 - d01 * d21) / denom;
+	w = (d00 * d21 - d01 * d20) / denom;
+	u = 1.0f - v - w;
+	return (u >= 0) && (v >= 0) && (u + v < 1);
+}

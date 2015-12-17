@@ -9,64 +9,69 @@
 using namespace vg::sound;
 using namespace irrklang;
 
-ISound *mySound = nullptr;
 
 SoundEffect::SoundEffect(const Sound& soundFile)
 {
 	Sound doge = soundFile;
 	
 	mSoundPath = "assets/"+doge.getPath();
-	mySound = nullptr;
+	data = nullptr;
+	player = createIrrKlangDevice();
 }
 
 void SoundEffect::play()
 {
-	ISoundEngine* engine = createIrrKlangDevice();
+	
 	char *cstr = new char[mSoundPath.length() + 1];
 	strcpy(cstr, mSoundPath.c_str());
-	mySound = engine->play2D(cstr,false,false,true);
+	ISound *sound = ((ISoundEngine*)player)->play2D(cstr, false, false, true);
+	data = static_cast<void *>(sound);
 }
 bool SoundEffect::isFinishedPlaying()
 {
-	return mySound->isFinished();
+	if (data == nullptr)
+		return false;
+	return ((ISound *)data)->isFinished();
 }
 
 bool SoundEffect::isStartedPlaying()
 {
-	mySound->setIsPaused();
+	((ISound *)data)->setIsPaused();
 	return false;
 }
 
 void SoundEffect::pause()
 {
-	mySound->setIsPaused(true);
+	if (data == nullptr)
+		return;
+	((ISound *)data)->setIsPaused(true);
 }
 
 void SoundEffect::setLoop(bool b)
 {
-	mySound->setIsLooped(b);
+	((ISound *)data)->setIsLooped(b);
 }
 
 void SoundEffect::setPosition(float pos)
 {
-	mySound->setPlayPosition(pos);
+	((ISound *)data)->setPlayPosition(pos);
 }
 
 float SoundEffect::getPosition()
 {
 	
-	return mySound->getPlayPosition();
+	return ((ISound *)data)->getPlayPosition();
 }
 
 float SoundEffect::getLength()
 {
-	return mySound->getPlayLength();
+	return ((ISound *)data)->getPlayLength();
 }
 
 void SoundEffect::stop()
 {
-	if (mySound != nullptr)
-	mySound->stop();
+	if (((ISound *)data) != nullptr)
+		((ISound *)data)->stop();
 }
 
 void SoundEffect::destroy()
@@ -75,6 +80,6 @@ void SoundEffect::destroy()
 
 SoundEffect::~SoundEffect()
 {
-	delete mySound;
+	delete ((ISound *)data);
 }
 #endif

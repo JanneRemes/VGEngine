@@ -2,7 +2,7 @@
 #pragma once
 
 #include "engine/utility/vec2f.h"
-
+#include "../external/glm/glm.hpp"
 namespace vg
 {
 	/**
@@ -72,5 +72,9 @@ namespace vg
 
 		float x;	///< x-axis value
 		float y;	///< y-axis value
+		/*
+		Returns if triangle has point inside
+		*/
+		static bool  hasTrianglePoint(glm::vec2 p, glm::vec2 a, glm::vec2 b, glm::vec2 c);
 	};
 }
